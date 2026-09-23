@@ -1,0 +1,6 @@
+pnpm typecheck || {
+  echo 'Type checking failed. Commit aborted.'
+  exit 1
+}
+
+pnpm lint-staged

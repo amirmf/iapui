@@ -1,0 +1,94 @@
+/*
+ * IPOS color system
+ *
+ * Values are comma-separated RGB channels so Tailwind can inject opacity with
+ * rgba(var(--color-*), <alpha-value>). The explicit .dark selector keeps theme
+ * switching independent from the operating-system preference.
+ */
+
+:root,
+.light {
+  color-scheme: light;
+
+  /* Brand scale */
+  --color-brand-50: 236, 248, 248;
+  --color-brand-100: 212, 238, 238;
+  --color-brand-200: 172, 221, 223;
+  --color-brand-300: 117, 197, 202;
+  --color-brand-400: 57, 167, 174;
+  --color-brand-500: 24, 132, 142;
+  --color-brand-600: 15, 106, 116;
+  --color-brand-700: 17, 87, 97;
+  --color-brand-800: 18, 60, 68;
+  --color-brand-900: 7, 39, 45;
+
+  /* Foundations */
+  --color-background: 242, 244, 243;
+  --color-foreground: 20, 35, 38;
+  --color-surface: 255, 255, 255;
+  --color-surface-muted: 233, 240, 240;
+  --color-surface-elevated: 255, 255, 255;
+  --color-text-secondary: 70, 91, 96;
+  --color-border: 124, 146, 151;
+  --color-input: 124, 146, 151;
+
+  /* Brand actions */
+  --color-primary: 15, 106, 116;
+  --color-primary-hover: 11, 89, 98;
+  --color-primary-subtle: 216, 238, 238;
+  --color-primary-foreground: 255, 255, 255;
+  --color-accent: 244, 185, 66;
+  --color-accent-foreground: 20, 35, 38;
+  --color-ring: 15, 106, 116;
+
+  /* Feedback */
+  --color-success: 36, 122, 82;
+  --color-success-foreground: 255, 255, 255;
+  --color-warning: 161, 92, 0;
+  --color-warning-foreground: 255, 255, 255;
+  --color-destructive: 196, 61, 75;
+  --color-destructive-foreground: 255, 255, 255;
+  --color-info: 29, 100, 168;
+  --color-info-foreground: 255, 255, 255;
+
+  /* Common component aliases */
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-foreground);
+  --color-popover: var(--color-surface-elevated);
+  --color-popover-foreground: var(--color-foreground);
+  --color-muted: var(--color-surface-muted);
+  --color-muted-foreground: var(--color-text-secondary);
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* Foundations */
+  --color-background: 11, 18, 20;
+  --color-foreground: 242, 247, 247;
+  --color-surface: 18, 28, 31;
+  --color-surface-muted: 25, 39, 43;
+  --color-surface-elevated: 34, 50, 56;
+  --color-text-secondary: 183, 197, 200;
+  --color-border: 83, 107, 113;
+  --color-input: 83, 107, 113;
+
+  /* Brand actions */
+  --color-primary: 57, 167, 174;
+  --color-primary-hover: 86, 187, 193;
+  --color-primary-subtle: 23, 56, 61;
+  --color-primary-foreground: 7, 21, 23;
+  --color-accent: 244, 185, 66;
+  --color-accent-foreground: 20, 35, 38;
+  --color-ring: 108, 206, 211;
+
+  /* Feedback */
+  --color-success: 66, 180, 123;
+  --color-success-foreground: 7, 21, 14;
+  --color-warning: 244, 185, 66;
+  --color-warning-foreground: 20, 35, 38;
+  --color-destructive: 240, 106, 117;
+  --color-destructive-foreground: 11, 18, 20;
+  --color-info: 97, 168, 234;
+  --color-info-foreground: 11, 18, 20;
+}

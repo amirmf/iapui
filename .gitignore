@@ -1,0 +1,12 @@
+node_modules/
+.worktrees/
+.next/
+dist/
+coverage/
+graphify-out/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.idea
+.vscode

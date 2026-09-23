@@ -1,0 +1,8 @@
+node_modules/
+.agents/
+.next/
+dist/
+coverage/
+*.tsbuildinfo
+docs/
+graphify-out/

@@ -1,0 +1,13 @@
+@layer base {
+  body {
+    @apply font-sans text-foreground;
+
+    min-height: 100vh;
+    margin: 0;
+    background-color: rgb(var(--color-background));
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

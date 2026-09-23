@@ -1,0 +1,30 @@
+{
+  "name": "iap-ui",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.27.1",
+  "scripts": {
+    "dev": "pnpm --parallel --filter iap-app --filter iap-admin dev",
+    "dev:app": "pnpm --filter iap-app dev",
+    "dev:admin": "pnpm --filter iap-admin dev",
+    "build": "pnpm --parallel --filter iap-app --filter iap-admin build",
+    "build:app": "pnpm --filter iap-app build",
+    "build:admin": "pnpm --filter iap-admin build",
+    "test": "pnpm -r --if-present test",
+    "lint": "pnpm -r --if-present lint",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "type-check": "pnpm run typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint-staged": "lint-staged",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@types/node": "^20",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.1",
+    "prettier": "^3.9.8",
+    "prettier-plugin-tailwindcss": "^0.8.1"
+  }
+}

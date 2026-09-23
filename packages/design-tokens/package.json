@@ -1,0 +1,16 @@
+{
+  "name": "@iap/design-tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/theme.test.mjs"
+  },
+  "sideEffects": [
+    "./src/theme.css"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme.css": "./src/theme.css"
+  }
+}

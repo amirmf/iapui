@@ -1,0 +1,24 @@
+{
+  "name": "@iap/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/opacity.test.mjs"
+  },
+  "exports": {
+    "./preset": {
+      "types": "./tailwind.preset.ts",
+      "default": "./tailwind.preset.ts"
+    }
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "dependencies": {
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

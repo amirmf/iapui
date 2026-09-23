@@ -1,0 +1,29 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+allowBuilds:
+  '@parcel/watcher': false
+  '@swc/core': true
+  esbuild: false
+  unrs-resolver: false
+
+minimumReleaseAgeExclude:
+  - '@tanstack/history@1.162.3'
+  - '@tanstack/router-core@1.171.29'
+  - '@tanstack/router-generator@1.167.35'
+  - '@tanstack/router-plugin@1.168.37'
+  - '@tanstack/router-utils@1.162.3'
+  - '@tanstack/react-router@1.170.34'
+  - '@typescript-eslint/eslint-plugin@8.70.1'
+  - '@typescript-eslint/parser@8.70.1'
+  - '@typescript-eslint/project-service@8.70.1'
+  - '@typescript-eslint/scope-manager@8.70.1'
+  - '@typescript-eslint/tsconfig-utils@8.70.1'
+  - '@typescript-eslint/type-utils@8.70.1'
+  - '@typescript-eslint/types@8.70.1'
+  - '@typescript-eslint/typescript-estree@8.70.1'
+  - '@typescript-eslint/utils@8.70.1'
+  - '@typescript-eslint/visitor-keys@8.70.1'
+  - react-i18next@17.0.15
+  - typescript-eslint@8.70.1
