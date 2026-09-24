@@ -1,94 +1,139 @@
 /*
- * IPOS color system
+ * Shared IAP color system
  *
- * Values are comma-separated RGB channels so Tailwind can inject opacity with
- * rgba(var(--color-*), <alpha-value>). The explicit .dark selector keeps theme
- * switching independent from the operating-system preference.
+ * Palette values are migrated from insurance-ui. Values are comma-separated RGB
+ * channels so Tailwind can use opacity through rgba(var(--color-*),
+ * <alpha-value>).
  */
 
 :root,
 .light {
   color-scheme: light;
 
-  /* Brand scale */
-  --color-brand-50: 236, 248, 248;
-  --color-brand-100: 212, 238, 238;
-  --color-brand-200: 172, 221, 223;
-  --color-brand-300: 117, 197, 202;
-  --color-brand-400: 57, 167, 174;
-  --color-brand-500: 24, 132, 142;
-  --color-brand-600: 15, 106, 116;
-  --color-brand-700: 17, 87, 97;
-  --color-brand-800: 18, 60, 68;
-  --color-brand-900: 7, 39, 45;
+  /* Base */
+  --color-base-white: 255, 255, 255;
+  --color-base-black: 0, 0, 0;
 
-  /* Foundations */
-  --color-background: 242, 244, 243;
-  --color-foreground: 20, 35, 38;
+  /* Primary: modern blue */
+  --color-primary-50: 239, 246, 255;
+  --color-primary-100: 219, 234, 254;
+  --color-primary-200: 191, 219, 254;
+  --color-primary-300: 147, 197, 253;
+  --color-primary-400: 96, 165, 250;
+  --color-primary-500: 59, 130, 246;
+  --color-primary-600: 37, 99, 235;
+  --color-primary-700: 29, 78, 216;
+  --color-primary-800: 30, 64, 175;
+  --color-primary-900: 30, 58, 138;
+  --color-primary-950: 23, 37, 84;
+
+  /* Secondary: modern teal */
+  --color-secondary-50: 240, 253, 250;
+  --color-secondary-100: 204, 251, 241;
+  --color-secondary-200: 153, 246, 228;
+  --color-secondary-300: 94, 234, 212;
+  --color-secondary-400: 45, 212, 191;
+  --color-secondary-500: 20, 184, 166;
+  --color-secondary-600: 13, 148, 136;
+  --color-secondary-700: 15, 118, 110;
+  --color-secondary-800: 17, 94, 89;
+  --color-secondary-900: 19, 78, 74;
+  --color-secondary-950: 4, 47, 46;
+
+  /* Neutral */
+  --color-gray-25: 253, 253, 253;
+  --color-gray-50: 250, 250, 250;
+  --color-gray-100: 245, 245, 245;
+  --color-gray-200: 233, 234, 235;
+  --color-gray-300: 213, 215, 218;
+  --color-gray-400: 164, 167, 174;
+  --color-gray-500: 113, 118, 128;
+  --color-gray-600: 83, 88, 98;
+  --color-gray-700: 65, 70, 81;
+  --color-gray-800: 37, 43, 55;
+  --color-gray-900: 24, 29, 39;
+  --color-gray-950: 10, 13, 18;
+
+  /* Supporting palette */
+  --color-violet-500: 139, 92, 246;
+  --color-amber-500: 245, 158, 11;
+  --color-fuchsia-500: 217, 70, 239;
+
+  /* Semantic application tokens */
+  --color-background: 233, 234, 235;
+  --color-foreground: 37, 43, 55;
   --color-surface: 255, 255, 255;
-  --color-surface-muted: 233, 240, 240;
+  --color-surface-muted: 245, 245, 245;
   --color-surface-elevated: 255, 255, 255;
-  --color-text-secondary: 70, 91, 96;
-  --color-border: 124, 146, 151;
-  --color-input: 124, 146, 151;
-
-  /* Brand actions */
-  --color-primary: 15, 106, 116;
-  --color-primary-hover: 11, 89, 98;
-  --color-primary-subtle: 216, 238, 238;
+  --color-text-secondary: 83, 88, 98;
+  --color-border: 113, 118, 128;
+  --color-input: 113, 118, 128;
+  --color-ring: 37, 99, 235;
+  --color-primary: 37, 99, 235;
+  --color-primary-hover: 29, 78, 216;
+  --color-primary-subtle: 219, 234, 254;
   --color-primary-foreground: 255, 255, 255;
-  --color-accent: 244, 185, 66;
-  --color-accent-foreground: 20, 35, 38;
-  --color-ring: 15, 106, 116;
+  --color-accent: 94, 234, 212;
+  --color-accent-foreground: 24, 29, 39;
 
   /* Feedback */
-  --color-success: 36, 122, 82;
+  --color-success: 13, 148, 136;
   --color-success-foreground: 255, 255, 255;
-  --color-warning: 161, 92, 0;
-  --color-warning-foreground: 255, 255, 255;
-  --color-destructive: 196, 61, 75;
+  --color-warning: 245, 158, 11;
+  --color-warning-foreground: 24, 29, 39;
+  --color-destructive: 220, 38, 38;
   --color-destructive-foreground: 255, 255, 255;
-  --color-info: 29, 100, 168;
+  --color-info: 59, 130, 246;
   --color-info-foreground: 255, 255, 255;
 
   /* Common component aliases */
-  --color-card: var(--color-surface);
-  --color-card-foreground: var(--color-foreground);
-  --color-popover: var(--color-surface-elevated);
-  --color-popover-foreground: var(--color-foreground);
-  --color-muted: var(--color-surface-muted);
-  --color-muted-foreground: var(--color-text-secondary);
+  --color-card: 255, 255, 255;
+  --color-card-foreground: 37, 43, 55;
+  --color-popover: 253, 253, 253;
+  --color-popover-foreground: 37, 43, 55;
+  --color-muted: 245, 245, 245;
+  --color-muted-foreground: 113, 118, 128;
+  --color-sidebar: 37, 99, 235;
+  --color-sidebar-foreground: 37, 43, 55;
 }
 
 .dark {
   color-scheme: dark;
 
   /* Foundations */
-  --color-background: 11, 18, 20;
-  --color-foreground: 242, 247, 247;
-  --color-surface: 18, 28, 31;
-  --color-surface-muted: 25, 39, 43;
-  --color-surface-elevated: 34, 50, 56;
-  --color-text-secondary: 183, 197, 200;
-  --color-border: 83, 107, 113;
-  --color-input: 83, 107, 113;
+  --color-background: 24, 29, 39;
+  --color-foreground: 245, 245, 245;
+  --color-surface: 37, 43, 55;
+  --color-surface-muted: 65, 70, 81;
+  --color-surface-elevated: 37, 43, 55;
+  --color-text-secondary: 164, 167, 174;
+  --color-border: 113, 118, 128;
+  --color-input: 113, 118, 128;
 
   /* Brand actions */
-  --color-primary: 57, 167, 174;
-  --color-primary-hover: 86, 187, 193;
-  --color-primary-subtle: 23, 56, 61;
-  --color-primary-foreground: 7, 21, 23;
-  --color-accent: 244, 185, 66;
-  --color-accent-foreground: 20, 35, 38;
-  --color-ring: 108, 206, 211;
+  --color-primary: 29, 78, 216;
+  --color-primary-hover: 30, 64, 175;
+  --color-primary-subtle: 30, 64, 175;
+  --color-primary-foreground: 250, 250, 250;
+  --color-accent: 13, 148, 136;
+  --color-accent-foreground: 250, 250, 250;
+  --color-ring: 96, 165, 250;
 
   /* Feedback */
-  --color-success: 66, 180, 123;
-  --color-success-foreground: 7, 21, 14;
-  --color-warning: 244, 185, 66;
-  --color-warning-foreground: 20, 35, 38;
-  --color-destructive: 240, 106, 117;
-  --color-destructive-foreground: 11, 18, 20;
-  --color-info: 97, 168, 234;
-  --color-info-foreground: 11, 18, 20;
+  --color-success: 45, 212, 191;
+  --color-success-foreground: 24, 29, 39;
+  --color-warning: 245, 158, 11;
+  --color-warning-foreground: 24, 29, 39;
+  --color-destructive: 239, 68, 68;
+  --color-destructive-foreground: 24, 29, 39;
+  --color-info: 96, 165, 250;
+  --color-info-foreground: 24, 29, 39;
+  --color-card: 37, 43, 55;
+  --color-card-foreground: 245, 245, 245;
+  --color-popover: 37, 43, 55;
+  --color-popover-foreground: 245, 245, 245;
+  --color-muted: 65, 70, 81;
+  --color-muted-foreground: 164, 167, 174;
+  --color-sidebar: 24, 29, 39;
+  --color-sidebar-foreground: 245, 245, 245;
 }

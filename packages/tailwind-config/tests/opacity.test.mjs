@@ -26,7 +26,7 @@ test('semantic colors compile with Tailwind slash-opacity modifiers', () => {
   )
   assert.match(
     result.stdout,
-    /background-color:rgba\(var\(--color-brand-600\),\.3\)/
+    /background-color:rgba\(var\(--color-primary-600\),\.3\)/
   )
   assert.match(result.stdout, /color:rgba\(var\(--color-foreground\),\.7\)/)
   assert.match(result.stdout, /border-color:rgba\(var\(--color-border\),\.6\)/)
