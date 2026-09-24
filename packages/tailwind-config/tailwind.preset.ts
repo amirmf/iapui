@@ -1,13 +1,46 @@
 import type { Config } from 'tailwindcss'
 import tailwindcssAnimate from 'tailwindcss-animate'
+import plugin from 'tailwindcss/plugin'
 
 const withOpacity = (token: string) =>
   `rgba(var(--color-${token}), <alpha-value>)`
+
+const iapUtilities = plugin(({ addUtilities }) => {
+  addUtilities({
+    '.dir-ltr': { direction: 'ltr' },
+    '.dir-rtl': { direction: 'rtl' },
+    '.faded-bottom': { position: 'relative' },
+    '.faded-bottom::after': {
+      background:
+        'linear-gradient(180deg, transparent 10%, rgb(var(--color-background)) 70%)',
+      bottom: '0',
+      content: '""',
+      display: 'none',
+      height: '8rem',
+      left: '0',
+      pointerEvents: 'none',
+      position: 'absolute',
+      width: '100%',
+    },
+    '.no-scrollbar': {
+      '-ms-overflow-style': 'none',
+      scrollbarWidth: 'none',
+    },
+    '.no-scrollbar::-webkit-scrollbar': { display: 'none' },
+    '@media (min-width: 768px)': {
+      '.faded-bottom::after': { display: 'block' },
+    },
+  })
+})
 
 const preset: Partial<Config> = {
   darkMode: 'class',
   theme: {
     extend: {
+      animation: {
+        'collapsible-down': 'collapsible-down 300ms ease-out',
+        'collapsible-up': 'collapsible-up 300ms ease-out',
+      },
       colors: {
         accent: {
           DEFAULT: withOpacity('accent'),
@@ -103,9 +136,19 @@ const preset: Partial<Config> = {
       fontFamily: {
         sans: ['IRANSansX FaNum', 'Arial', 'sans-serif'],
       },
+      keyframes: {
+        'collapsible-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-collapsible-content-height)' },
+        },
+        'collapsible-up': {
+          from: { height: 'var(--radix-collapsible-content-height)' },
+          to: { height: '0' },
+        },
+      },
     },
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [tailwindcssAnimate, iapUtilities],
 }
 
 export default preset

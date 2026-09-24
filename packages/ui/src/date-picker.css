@@ -1,0 +1,73 @@
+/* Shared theme for the react-multi-date-picker primitive. */
+.custom-calendar.rmdp-wrapper,
+.custom-calendar .rmdp-month-picker,
+.custom-calendar .rmdp-year-picker {
+  background-color: rgb(var(--color-card));
+}
+
+.custom-calendar .rmdp-header-values,
+.custom-calendar .rmdp-day {
+  color: rgb(var(--color-foreground));
+}
+
+.custom-calendar.rmdp-ep-arrow[direction='top'] {
+  border-bottom-color: rgb(var(--color-card));
+}
+
+.custom-calendar.rmdp-ep-arrow::after {
+  background-color: rgb(var(--color-card));
+}
+
+.custom-calendar.rmdp-shadow {
+  box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+}
+
+.custom-calendar .rmdp-day.rmdp-today span {
+  background-color: rgb(var(--color-primary-100));
+  color: rgb(var(--color-primary));
+}
+
+.custom-calendar .rmdp-day.rmdp-selected span:not(.highlight) {
+  background-color: rgb(var(--color-primary));
+  color: rgb(var(--color-primary-foreground));
+}
+
+.custom-calendar .rmdp-week-day {
+  color: rgb(var(--color-primary));
+}
+
+.custom-calendar .rmdp-arrow {
+  border: solid rgb(var(--color-foreground));
+  border-width: 0 2px 2px 0;
+  margin-top: 0;
+  padding: 3px;
+}
+
+.custom-calendar .rmdp-arrow-container {
+  align-items: center;
+}
+
+.custom-calendar .rmdp-arrow-container:hover {
+  background-color: rgb(var(--color-muted));
+  box-shadow: 0 0 3px rgb(var(--color-muted-foreground) / 20%);
+}
+
+.custom-calendar .rmdp-arrow-container:hover .rmdp-arrow {
+  border-color: rgb(var(--color-primary));
+}
+
+.custom-calendar .rmdp-day:not(.rmdp-disabled) .day-weekend {
+  color: rgb(var(--color-destructive));
+}
+
+.custom-calendar .rmdp-time-picker div input {
+  padding: 3px 2px;
+  width: 25px;
+}
+
+@media (hover: hover) {
+  .custom-calendar .rmdp-day:not(.rmdp-disabled, .rmdp-day-hidden) span:hover {
+    background-color: rgb(var(--color-secondary-500));
+    color: rgb(var(--color-base-white));
+  }
+}

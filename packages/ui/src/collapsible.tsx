@@ -1,11 +1,27 @@
-import type { ComponentPropsWithoutRef } from 'react'
+import type { ComponentPropsWithRef, ComponentPropsWithoutRef } from 'react'
 
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible'
 
 import { cn } from './lib/cn'
 
 export const Collapsible = CollapsiblePrimitive.Root
-export const CollapsibleContent = CollapsiblePrimitive.Content
+
+export function CollapsibleContent(
+  props: ComponentPropsWithRef<typeof CollapsiblePrimitive.Content>
+) {
+  const { className, ref, ...rest } = props
+  return (
+    <CollapsiblePrimitive.Content
+      ref={ref}
+      className={cn(
+        'data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden motion-reduce:animate-none',
+        className
+      )}
+      data-slot='collapsible-content'
+      {...rest}
+    />
+  )
+}
 
 export function CollapsibleTrigger(
   props: ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Trigger>

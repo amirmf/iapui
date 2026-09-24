@@ -1,4 +1,15 @@
 @layer base {
+  *,
+  ::before,
+  ::after {
+    scrollbar-color: rgb(var(--color-border)) transparent;
+    scrollbar-width: thin;
+  }
+
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     @apply font-sans text-foreground;
 
@@ -9,5 +20,32 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  body[data-scroll-locked] {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  /* Avoid focus zoom on mobile browsers. */
+  @media screen and (max-width: 767px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgb(var(--color-surface)) inset !important;
+    -webkit-text-fill-color: rgb(var(--color-foreground));
   }
 }

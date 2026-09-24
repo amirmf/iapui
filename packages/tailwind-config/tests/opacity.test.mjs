@@ -34,4 +34,6 @@ test('semantic colors compile with Tailwind slash-opacity modifiers', () => {
     result.stdout,
     /--tw-ring-color:rgba\(var\(--color-ring\),0?\.4\)/
   )
+  assert.match(result.stdout, /\.dir-rtl\{direction:rtl\}/)
+  assert.match(result.stdout, /\.no-scrollbar\{[^}]*scrollbar-width:none/)
 })

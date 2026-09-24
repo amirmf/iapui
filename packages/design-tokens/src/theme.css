@@ -9,6 +9,7 @@
 :root,
 .light {
   color-scheme: light;
+  --radius: 0.625rem;
 
   /* Base */
   --color-base-white: 255, 255, 255;

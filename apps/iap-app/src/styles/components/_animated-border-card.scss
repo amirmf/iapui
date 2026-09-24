@@ -1,0 +1,52 @@
+@keyframes animated-border-card-rotate {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-border-card {
+  background-color: rgb(var(--color-card));
+  border-radius: calc(var(--radius) + 2px);
+  overflow: hidden;
+  padding: 2px;
+  position: relative;
+}
+
+.animated-border-card::before {
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  animation: animated-border-card-rotate 3s ease infinite;
+  background: linear-gradient(
+    45deg,
+    rgb(var(--color-primary)),
+    rgb(var(--color-secondary)),
+    rgb(var(--color-primary))
+  );
+  background-size: 300% 300%;
+  border-radius: calc(var(--radius) + 2px);
+  content: '';
+  inset: 0;
+  mask-composite: exclude;
+  padding: 2px;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.animated-border-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-border-card::before {
+    animation: none;
+  }
+}

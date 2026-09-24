@@ -4,8 +4,12 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./date-picker.css": "./src/date-picker.css"
   },
+  "sideEffects": [
+    "./src/date-picker.css"
+  ],
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit"

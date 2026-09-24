@@ -2,9 +2,10 @@
 
 ## Decision
 
-`@iap/design-tokens` is the single source of truth for color tokens shared by
-the `iap-app` app and `iap-admin` admin application. Its initial palette is migrated from
-the legacy `insurance-ui` application.
+`@iap/design-tokens` is the single source of truth for color tokens and shared
+visual foundation tokens used by the `iap-app` app and `iap-admin` admin
+application. Its initial palette and radius token are migrated from the legacy
+`insurance-ui` application.
 
 The package exposes:
 
@@ -26,6 +27,9 @@ utilities, including the base, primary, secondary, and gray color scales.
   the same change. Application-local colors remain in the owning application.
 - Token values use comma-separated RGB channels so Tailwind opacity modifiers
   remain available, for example `bg-primary/50`.
+- Shared document-level rules stay in each application's `src/styles` entry.
+  Styles for a presentational primitive are colocated with that primitive in
+  `@iap/ui`; feature and application-layout styles stay with their owner.
 
 ## Theme behavior
 

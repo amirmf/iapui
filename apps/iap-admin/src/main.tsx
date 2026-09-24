@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 
 import { router } from '@app/router'
 import '@iap/design-tokens/theme.css'
+import '@iap/ui/date-picker.css'
 import { i18n, i18nReady } from '@shared/i18n/i18n'
 import '@styles/index.scss'
 import { RouterProvider } from '@tanstack/react-router'
