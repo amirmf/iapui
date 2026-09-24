@@ -3,7 +3,7 @@
 ## Decision
 
 `@iap/design-tokens` is the single source of truth for color tokens shared by
-the Storefront and Admin applications. Its initial palette is migrated from
+the `iap-app` app and `iap-admin` admin application. Its initial palette is migrated from
 the legacy `insurance-ui` application.
 
 The package exposes:

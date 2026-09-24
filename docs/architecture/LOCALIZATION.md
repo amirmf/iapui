@@ -2,7 +2,7 @@
 
 ## Decision
 
-The `iap-app` storefront and `iap-admin` application are Persian-only (`fa`)
+The `iap-app` app and `iap-admin` admin application are Persian-only (`fa`)
 and render right-to-left content.
 
 Each application owns its own i18next configuration and translation resources:

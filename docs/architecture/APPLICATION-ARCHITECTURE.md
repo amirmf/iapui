@@ -8,8 +8,8 @@ This document defines the baseline frontend workspace, module boundaries, depend
 
 This repository contains frontend applications only:
 
-- **Storefront**: the customer-facing application, implemented with React and Vite.
-- **Admin**: the internal operations application, implemented with React and Vite.
+- **iap-app (app)**: the customer-facing application, implemented with React and Vite.
+- **iap-admin (admin)**: the internal operations application, implemented with React and Vite.
 - **Backend**: an independent service that owns authorization, business enforcement, and all third-party integrations.
 
 Both frontend applications consume backend APIs. They must not connect directly to third-party business systems, payment providers, or identity/OTP providers.
@@ -19,14 +19,14 @@ Both frontend applications consume backend APIs. They must not connect directly 
 ```text
 iap-ui/
 ├── apps/
-│   ├── iap-app/                   # React + Vite Storefront
+│   ├── iap-app/                   # React + Vite app
 │   │   └── src/
 │   │       ├── app/               # thin TanStack Router boundary
 │   │       ├── features/
 │   │       ├── modules/
 │   │       ├── shared/
 │   │       └── styles/
-│   └── iap-admin/                 # React + Vite Admin
+│   └── iap-admin/                 # React + Vite admin
 │       └── src/
 │           ├── app/               # thin TanStack Router boundary
 │           ├── features/
