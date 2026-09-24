@@ -33,3 +33,10 @@ React Hook Form context.
 Styles required by a shared primitive are colocated with that primitive in
 `@iap/ui`. Application-global document rules remain in the owning
 application's `src/styles` entry point.
+
+## Table primitives
+
+`@iap/ui` provides semantic table markup only: `Table`, `TableHeader`,
+`TableBody`, `TableFooter`, `TableHead`, `TableRow`, `TableCell`, and
+`TableCaption`. These primitives have no TanStack Table, route, request, or
+product-state dependency.
