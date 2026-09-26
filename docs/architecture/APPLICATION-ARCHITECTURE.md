@@ -101,6 +101,31 @@ Owns one global Sass entry point (`index.scss`) and genuinely document-level sty
 
 Packages expose only deliberate public entry points. Applications never reach into another package's source directory.
 
+### API contract package organization
+
+Domain contracts in `@iap/api-types` use a directory entry point, even when a
+domain initially needs only one source file. For example,
+`packages/api-types/src/dashboard/index.ts` owns the Dashboard public contract
+surface and is re-exported from `packages/api-types/src/index.ts`.
+
+This convention keeps a domain's future request, response, and shared schema
+files colocated without turning `src/` into a flat list. Consumers continue to
+import only from the package public API; they must not import a domain's
+internal files directly.
+
+### Filterable API query parameters
+
+The backend filtering query-parameter contract is application-independent and
+lives in `@iap/shared-lib`. Every filterable API service uses
+`transformApiFilterParams` to serialize array values with the `__in` suffix and
+to serialize the API filters it receives. Services must not remove, interpret,
+or otherwise depend on UI-only state or query parameters (for example, an
+active report tab, pagination control state, or expanded-filter state).
+
+The owning feature removes UI-only state and adapts UI controls before invoking
+the service. UI-specific adapters, such as table-control range-key mapping,
+remain in the owning application and must not redefine the transport contract.
+
 ## Dependency rules
 
 ```text
@@ -118,6 +143,21 @@ workspace packages → no application imports
   and response in `api-types`. API services validate outgoing requests and
   incoming responses with those schemas; TypeScript types are inferred from the
   schemas rather than authored separately.
+- Use the Zod v4 public API (`z` from `zod`) for all schemas. Define strict
+  request-object schemas, use `z.coerce` only where transport input needs
+  coercion, validate at the API boundary with `parse`, and export types with
+  `z.infer` (or `z.input` where a schema transforms input). Do not introduce
+  Zod v3 APIs, compatibility helpers, or hand-authored contract types.
+- When backend responses must retain unknown properties, use Zod v4's
+  `.loose()` object mode. Never use the deprecated `.passthrough()` API.
+- For a response field that accepts both `null` and `undefined`, use Zod v4's
+  `.nullish()` rather than chaining `.nullable().optional()` (or redundantly
+  chaining `.optional()` after `.nullish()`).
+- General-purpose API contract schemas live in `@iap/api-types/src/common/`.
+  Paginated backend responses use its `createPageResponseSchema` factory. Pass
+  only the content-item schema; `content` remains required, while pagination
+  metadata is nullable and optional to tolerate incomplete backend metadata
+  without weakening item validation.
 
 ## State, forms, and UI conventions
 

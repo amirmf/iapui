@@ -80,7 +80,79 @@
   },
   "dashboard": {
     "title": "داشبورد",
+    "download": "دانلود",
+    "refresh": "بروزرسانی",
     "reports": {
+      "tabs": {
+        "reportCountByAssignee": "تعداد بر اساس ارزیاب (جزئیات)",
+        "reportCountByAssigneeSummary": "تعداد بر اساس ارزیاب (خلاصه)",
+        "reportSumByAssignee": "مبلغ بر اساس ارزیاب",
+        "reportDistributionByStatus": "توزیع بر اساس وضعیت",
+        "agreementsWithoutMainAssessmentUser": "قراردادهای بدون ارزیاب ارشد"
+      },
+      "columns": {
+        "status": "وضعیت",
+        "assignedUserDisplayName": "نام ارزیاب",
+        "count": "تعداد",
+        "amount": "مبلغ",
+        "totalSumAmount": "مبلغ تایید شده",
+        "distribution": "توزیع درخواست خسارت",
+        "extContractId": "شناسه قرارداد",
+        "title": "عنوان",
+        "code": "کد",
+        "fromDate": "تاریخ شروع"
+      },
+      "filters": {
+        "extPolicyId": "شماره بیمه‌نامه",
+        "extContractId": "شماره قرارداد",
+        "extPlanCaption": "طرح",
+        "extCustomerId": "شناسه بیمه‌گذار",
+        "extCustomerName": "نام بیمه‌گذار",
+        "extWorkUnitName": "نام شعبه",
+        "extWorkUnitCode": "کد شعبه",
+        "extWorkUnitCityName": "شهر شعبه",
+        "extWorkUnitProvinceName": "استان شعبه",
+        "status": "وضعیت",
+        "latestAssignementUsername": "کدملی ارزیاب",
+        "latestAssignementDisplayName": "نام ارزیاب",
+        "amount": "مبلغ",
+        "createdAt": "تاریخ ثبت",
+        "assessedAt": "تاریخ ارزیابی",
+        "submitDate": "تاریخ هزینه",
+        "totalSumAmount": "مبلغ تایید شده",
+        "docType": "نوع سند",
+        "mainAssignedUserUsername": "کدملی ارزیاب اصلی",
+        "mainAssignedUserDisplayName": "نام ارزیاب اصلی"
+      },
+      "statuses": {
+        "SUBMITTED": "ثبت شده",
+        "IN_REVIEW": "بررسی AI",
+        "IN_ASSESSMENT": "ارزیابی اولیه",
+        "DELEGATED": "در انتظار پاسخ ارجاع",
+        "DEDICATED_TO_USER": "بررسی‌های من",
+        "APPROVED": "تأیید شده در انتظار ارسال به فناوران",
+        "REJECTED": "رد (غیرقابل پرداخت)",
+        "FAILED_FETCH_API": "خطا در دریافت از سرویس",
+        "SENT": "ارسال شده در انتظار پرداخت",
+        "SENT_FAILED": "خطا ارسال",
+        "PAID": "واریز شده",
+        "TERMINATED": "ابطال",
+        "RETURN": "عودت شده در انتظار پاسخ کاربر",
+        "PAYMENT_REJECTED": "رد شده در پرداخت",
+        "PAYMENT_RETURN": "عودت شده از پرداخت",
+        "PAYMENT_RETURN_RESEND": "عودت شده از پرداخت (ارسال مجدد)",
+        "DELETED": "حذف شده"
+      },
+      "agreementStatuses": {
+        "ACTIVE": "فعال",
+        "INACTIVE": "غیرفعال",
+        "DRAFT": "پیش‌نویس",
+        "EXPIRED": "منقضی شده",
+        "TERMINATED": "خاتمه یافته"
+      },
+      "empty": {
+        "agreementsWithoutMainAssessmentUser": "همه قراردادها ارزیاب اصلی دارند."
+      },
       "actions": {
         "showReport": "جهت نمایش گزارش کلیک کنید"
       }
@@ -88,6 +160,16 @@
   },
   "placeholder": {
     "description": "این صفحه در حال پیاده‌سازی است."
+  },
+  "common": {
+    "from": "از",
+    "to": "تا",
+    "showLess": "فیلترهای کمتر",
+    "showMore": "فیلترهای بیشتر",
+    "reset": "بازنشانی",
+    "noRecords": "داده‌ای یافت نشد.",
+    "loading": "در حال بارگذاری...",
+    "total": "مجموع"
   },
   "shell": {
     "closeNavigation": "بستن نوار ناوبری",
