@@ -3,6 +3,7 @@
 import { type ComponentPropsWithoutRef, useContext } from 'react'
 
 import { OTPInput, OTPInputContext } from 'input-otp'
+import { MinusIcon } from 'lucide-react'
 
 import { cn } from './lib/cn'
 
@@ -17,7 +18,7 @@ export function InputOTP(props: InputOTPProps) {
     <OTPInput
       className={cn('disabled:cursor-not-allowed', className)}
       containerClassName={cn(
-        'flex items-center gap-2 disabled:opacity-50',
+        'flex items-center gap-2 has-disabled:opacity-50',
         containerClassName
       )}
       data-slot='input-otp'
@@ -45,22 +46,21 @@ export type InputOTPSlotProps = ComponentPropsWithoutRef<'div'> & {
 export function InputOTPSlot(props: InputOTPSlotProps) {
   const { className, index, ...rest } = props
   const context = useContext(OTPInputContext)
-  const slot = context.slots[index]
-  const isActive = slot?.isActive ?? false
+  const { char, hasFakeCaret, isActive } = context?.slots[index] ?? {}
 
   return (
     <div
       className={cn(
-        'border-input bg-surface text-foreground data-[active=true]:border-ring data-[active=true]:ring-ring/50 aria-[invalid=true]:border-destructive relative flex size-11 items-center justify-center rounded-lg border text-base transition-colors outline-none data-[active=true]:ring-2',
+        'border-input dark:bg-input/30 data-[active=true]:border-ring data-[active=true]:ring-ring/50 aria-invalid:border-destructive data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 dark:data-[active=true]:aria-invalid:ring-destructive/40 relative flex h-9 w-9 items-center justify-center border-y border-r text-sm shadow-sm transition-all outline-none first:rounded-l-md first:border-l last:rounded-r-md data-[active=true]:z-10 data-[active=true]:ring-[3px]',
         className
       )}
       data-active={isActive}
       data-slot='input-otp-slot'
       {...rest}
     >
-      {slot?.char}
-      {slot?.hasFakeCaret ? (
-        <span className='bg-foreground absolute h-5 w-px animate-pulse motion-reduce:animate-none' />
+      {char}
+      {hasFakeCaret ? (
+        <span className='animate-caret-blink bg-foreground absolute h-4 w-px duration-1000' />
       ) : null}
     </div>
   )
@@ -71,15 +71,12 @@ export function InputOTPSeparator(props: ComponentPropsWithoutRef<'div'>) {
 
   return (
     <div
-      className={cn(
-        'text-muted-foreground flex items-center justify-center',
-        className
-      )}
+      className={cn('flex items-center justify-center', className)}
       data-slot='input-otp-separator'
       role='separator'
       {...rest}
     >
-      <span aria-hidden='true'>−</span>
+      <MinusIcon aria-hidden='true' />
     </div>
   )
 }

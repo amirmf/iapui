@@ -12,4 +12,16 @@ describe('Button', () => {
       'submit'
     )
   })
+
+  it('allows a ghost button to override its horizontal padding', () => {
+    render(
+      <Button className='px-0' variant='ghost'>
+        Change number
+      </Button>
+    )
+
+    const button = screen.getByRole('button', { name: 'Change number' })
+    expect(button).toHaveClass('px-0')
+    expect(button).not.toHaveClass('px-4')
+  })
 })

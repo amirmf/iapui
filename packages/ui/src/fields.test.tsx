@@ -23,11 +23,12 @@ describe('form controls', () => {
     )
   })
 
-  it('uses the destructive focus ring for an invalid input', () => {
+  it('uses the reference destructive invalid-state treatment', () => {
     render(<Input aria-invalid='true' />)
 
     expect(screen.getByRole('textbox')).toHaveClass(
-      'aria-[invalid=true]:focus-visible:ring-destructive'
+      'aria-invalid:border-destructive',
+      'aria-invalid:ring-destructive/20'
     )
   })
 
@@ -43,7 +44,7 @@ describe('form controls', () => {
     render(<Input placeholder='Example input' />)
 
     expect(screen.getByPlaceholderText('Example input')).toHaveClass(
-      'placeholder:text-muted-foreground/90'
+      'placeholder:text-muted-foreground'
     )
   })
 

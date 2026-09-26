@@ -4,10 +4,12 @@
   "private": true,
   "packageManager": "pnpm@11.27.1",
   "scripts": {
-    "dev": "pnpm --parallel --filter iap-app --filter iap-admin dev",
+    "prepare:tenant:development": "node tools/prepare-tenant.mjs --mode development",
+    "prepare:tenant:production": "node tools/prepare-tenant.mjs --mode production",
+    "dev": "pnpm prepare:tenant:development && pnpm --parallel --filter iap-app --filter iap-admin dev",
     "dev:app": "pnpm --filter iap-app dev",
     "dev:admin": "pnpm --filter iap-admin dev",
-    "build": "pnpm --parallel --filter iap-app --filter iap-admin build",
+    "build": "pnpm prepare:tenant:production && pnpm --parallel --filter iap-app --filter iap-admin build",
     "build:app": "pnpm --filter iap-app build",
     "build:admin": "pnpm --filter iap-admin build",
     "test": "pnpm -r --if-present test",
@@ -25,6 +27,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.5.1",
     "prettier": "^3.9.8",
-    "prettier-plugin-tailwindcss": "^0.8.1"
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "zod": "^4.6.5"
   }
 }

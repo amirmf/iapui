@@ -14,7 +14,7 @@ export function TabsList(props: TabsListProps) {
   return (
     <TabsPrimitive.List
       className={cn(
-        'border-border bg-surface-muted inline-flex min-h-11 max-w-full items-center gap-1 overflow-x-auto rounded-lg border p-1',
+        'bg-muted text-muted-foreground inline-flex h-9 items-center justify-center rounded-lg p-0.75',
         className
       )}
       data-slot='tabs-list'
@@ -34,7 +34,7 @@ export function TabsTrigger(props: TabsTriggerProps) {
   return (
     <TabsPrimitive.Trigger
       className={cn(
-        'text-muted-foreground hover:bg-surface hover:text-foreground focus-visible:ring-ring focus-visible:ring-offset-background data-[state=active]:bg-surface data-[state=active]:text-foreground inline-flex min-h-11 shrink-0 items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        "text-foreground dark:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 data-[state=active]:bg-background dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 dark:data-[state=active]:text-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       data-slot='tabs-trigger'
@@ -53,7 +53,7 @@ export function TabsContent(props: TabsContentProps) {
 
   return (
     <TabsPrimitive.Content
-      className={cn('mt-4 outline-none', className)}
+      className={cn('flex-1 outline-none', className)}
       data-slot='tabs-content'
       ref={ref}
       {...rest}

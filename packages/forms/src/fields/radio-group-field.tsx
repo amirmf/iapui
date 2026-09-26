@@ -26,6 +26,7 @@ export type RadioGroupFieldProps<
   label: ReactNode
   name: TName
   options: readonly RadioGroupOption[]
+  required?: boolean
 }
 
 function RadioGroupFieldControl(props: {
@@ -38,8 +39,9 @@ function RadioGroupFieldControl(props: {
   }
   label: ReactNode
   options: readonly RadioGroupOption[]
+  required?: boolean
 }) {
-  const { field, label, options } = props
+  const { field, label, options, required } = props
   const { error, formDescriptionId, formItemId, formMessageId, name } =
     useFormField()
   const labelId = `${formItemId}-label`
@@ -47,7 +49,12 @@ function RadioGroupFieldControl(props: {
   return (
     <>
       <span
-        className={cn(error && 'text-destructive', 'text-sm font-medium')}
+        className={cn(
+          error && 'text-destructive',
+          required &&
+            "inline-flex items-center gap-1 after:text-red-600 after:content-['*']",
+          'text-sm font-medium'
+        )}
         id={labelId}
       >
         {label}
@@ -99,7 +106,7 @@ export function RadioGroupField<
   TFieldValues extends FieldValues,
   TName extends FieldPath<TFieldValues>,
 >(props: RadioGroupFieldProps<TFieldValues, TName>) {
-  const { control, description, label, name, options } = props
+  const { control, description, label, name, options, required } = props
 
   return (
     <FormField
@@ -111,6 +118,7 @@ export function RadioGroupField<
             field={field}
             label={label}
             options={options}
+            required={required}
           />
           {description ? (
             <FormDescription>{description}</FormDescription>

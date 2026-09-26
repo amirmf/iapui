@@ -1,3 +1,5 @@
+@import './fonts/fa/font-fa.css';
+
 /*
  * Shared IAP color system
  *
@@ -61,19 +63,23 @@
   --color-fuchsia-500: 217, 70, 239;
 
   /* Semantic application tokens */
-  --color-background: 233, 234, 235;
+  --color-background: 250, 250, 250;
   --color-foreground: 37, 43, 55;
   --color-surface: 255, 255, 255;
   --color-surface-muted: 245, 245, 245;
   --color-surface-elevated: 255, 255, 255;
+  --color-text-primary: 37, 43, 55;
   --color-text-secondary: 83, 88, 98;
-  --color-border: 113, 118, 128;
-  --color-input: 113, 118, 128;
+  --color-border: 233, 234, 235;
+  --color-input: 233, 234, 235;
   --color-ring: 37, 99, 235;
+  --color-dialog-background: 255, 255, 255;
   --color-primary: 37, 99, 235;
   --color-primary-hover: 29, 78, 216;
   --color-primary-subtle: 219, 234, 254;
   --color-primary-foreground: 255, 255, 255;
+  --color-secondary: 20, 184, 166;
+  --color-secondary-foreground: 255, 255, 255;
   --color-accent: 94, 234, 212;
   --color-accent-foreground: 24, 29, 39;
 
@@ -96,6 +102,12 @@
   --color-muted-foreground: 113, 118, 128;
   --color-sidebar: 37, 99, 235;
   --color-sidebar-foreground: 37, 43, 55;
+  --color-sidebar-primary: 37, 99, 235;
+  --color-sidebar-primary-foreground: 239, 246, 255;
+  --color-sidebar-accent: 45, 212, 191;
+  --color-sidebar-accent-foreground: 4, 47, 46;
+  --color-sidebar-border: 233, 234, 235;
+  --color-sidebar-ring: 59, 130, 246;
 }
 
 .dark {
@@ -107,15 +119,19 @@
   --color-surface: 37, 43, 55;
   --color-surface-muted: 65, 70, 81;
   --color-surface-elevated: 37, 43, 55;
+  --color-text-primary: 233, 234, 235;
   --color-text-secondary: 164, 167, 174;
-  --color-border: 113, 118, 128;
-  --color-input: 113, 118, 128;
+  --color-border: 65, 70, 81;
+  --color-input: 65, 70, 81;
+  --color-dialog-background: 37, 43, 55;
 
   /* Brand actions */
   --color-primary: 29, 78, 216;
   --color-primary-hover: 30, 64, 175;
   --color-primary-subtle: 30, 64, 175;
   --color-primary-foreground: 250, 250, 250;
+  --color-secondary: 45, 212, 191;
+  --color-secondary-foreground: 37, 43, 55;
   --color-accent: 13, 148, 136;
   --color-accent-foreground: 250, 250, 250;
   --color-ring: 96, 165, 250;
@@ -137,4 +153,10 @@
   --color-muted-foreground: 164, 167, 174;
   --color-sidebar: 24, 29, 39;
   --color-sidebar-foreground: 245, 245, 245;
+  --color-sidebar-primary: 96, 165, 250;
+  --color-sidebar-primary-foreground: 0, 0, 0;
+  --color-sidebar-accent: 13, 148, 136;
+  --color-sidebar-accent-foreground: 240, 253, 250;
+  --color-sidebar-border: 37, 43, 55;
+  --color-sidebar-ring: 96, 165, 250;
 }

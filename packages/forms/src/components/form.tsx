@@ -81,18 +81,28 @@ export function FormItem(props: ComponentPropsWithoutRef<'div'>) {
   )
 }
 
-export function FormLabel(props: ComponentPropsWithoutRef<typeof Label>) {
-  const { className, ...rest } = props
+export type FormLabelProps = ComponentPropsWithoutRef<typeof Label> & {
+  required?: boolean
+}
+
+export function FormLabel(props: FormLabelProps) {
+  const { children, className, required = false, ...rest } = props
   const { error, formItemId } = useFormField()
 
   return (
     <Label
-      className={cn('data-[error=true]:text-destructive', className)}
+      className={cn(
+        'data-[error=true]:text-destructive',
+        required && "gap-1 after:text-red-600 after:content-['*']",
+        className
+      )}
       data-error={Boolean(error)}
       data-slot='form-label'
       htmlFor={formItemId}
       {...rest}
-    />
+    >
+      {children}
+    </Label>
   )
 }
 

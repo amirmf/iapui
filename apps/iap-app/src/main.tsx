@@ -1,8 +1,10 @@
 import { StrictMode } from 'react'
 
-import { router } from '@app/router'
+import { queryClient, router } from '@app/router'
+import { configureApiClient } from '@iap/api-client'
 import '@iap/design-tokens/theme.css'
-import { i18n, i18nReady } from '@shared/i18n/i18n'
+import { i18nReady } from '@shared/i18n/i18n'
+import { AppProviders } from '@shared/providers/app-providers'
 import '@styles/index.scss'
 import { RouterProvider } from '@tanstack/react-router'
 import { createRoot } from 'react-dom/client'
@@ -14,11 +16,15 @@ if (!rootElement) {
 }
 
 void i18nReady.then(() => {
-  document.title = i18n.t('meta.appTitle')
+  configureApiClient(
+    import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
+  )
 
   createRoot(rootElement).render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <AppProviders queryClient={queryClient}>
+        <RouterProvider router={router} />
+      </AppProviders>
     </StrictMode>
   )
 })

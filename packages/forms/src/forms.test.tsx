@@ -7,7 +7,6 @@ import {
   Form,
   FormControl,
   FormDescription,
-  FormErrorSummary,
   FormField,
   FormItem,
   FormLabel,
@@ -56,6 +55,7 @@ function ContactForm(props: { onSubmit?: (values: ContactValues) => void }) {
       preferredContact: 'phone',
       paperCopy: false,
     },
+    mode: 'all',
   })
 
   return (
@@ -106,62 +106,12 @@ function ContactForm(props: { onSubmit?: (values: ContactValues) => void }) {
 }
 
 describe('React Hook Form bindings', () => {
-  it('focuses a linked error summary after an invalid submission', async () => {
-    function Example() {
-      const form = useForm<{ name: string }>({ defaultValues: { name: '' } })
-
-      return (
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(vi.fn())}>
-            <FormErrorSummary title='Please correct the following errors.' />
-            <FormField
-              control={form.control}
-              name='name'
-              rules={{ required: 'Enter your name.' }}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <button type='submit'>Submit</button>
-          </form>
-        </Form>
-      )
-    }
-
-    const user = userEvent.setup()
-    render(<Example />)
-
-    expect(
-      screen.queryByRole('alert', {
-        name: 'Please correct the following errors.',
-      })
-    ).not.toBeInTheDocument()
-
-    await user.click(screen.getByRole('button', { name: 'Submit' }))
-
-    const summary = await screen.findByRole('alert', {
-      name: 'Please correct the following errors.',
-    })
-    await waitFor(() => expect(summary).toHaveFocus())
-    const errorLink = screen.getByRole('link', { name: 'Enter your name.' })
-    expect(errorLink).toHaveAttribute(
-      'href',
-      `#${screen.getByLabelText('Name').id}`
-    )
-
-    await user.click(errorLink)
-    expect(screen.getByLabelText('Name')).toHaveFocus()
-  })
-
   it('connects a field label, description, and inline error accessibly', () => {
     function Example() {
-      const form = useForm<{ name: string }>({ defaultValues: { name: '' } })
+      const form = useForm<{ name: string }>({
+        defaultValues: { name: '' },
+        mode: 'all',
+      })
 
       return (
         <Form {...form}>
@@ -223,6 +173,7 @@ describe('React Hook Form bindings', () => {
     function Example() {
       const form = useForm<{ mobile: string }>({
         defaultValues: { mobile: '' },
+        mode: 'all',
       })
 
       return (

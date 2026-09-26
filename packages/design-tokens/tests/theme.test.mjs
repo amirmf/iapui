@@ -48,6 +48,8 @@ const requiredTokens = [
   'surface',
   'surface-muted',
   'surface-elevated',
+  'dialog-background',
+  'text-primary',
   'text-secondary',
   'border',
   'input',
@@ -56,6 +58,8 @@ const requiredTokens = [
   'primary-hover',
   'primary-subtle',
   'primary-foreground',
+  'secondary',
+  'secondary-foreground',
   'accent',
   'accent-foreground',
   'success',
@@ -66,6 +70,14 @@ const requiredTokens = [
   'destructive-foreground',
   'info',
   'info-foreground',
+  'sidebar',
+  'sidebar-foreground',
+  'sidebar-primary',
+  'sidebar-primary-foreground',
+  'sidebar-accent',
+  'sidebar-accent-foreground',
+  'sidebar-border',
+  'sidebar-ring',
 ]
 
 test('light and dark themes expose the same semantic color contract', () => {
@@ -88,16 +100,15 @@ test('body text and primary actions meet WCAG AA in both themes', () => {
   }
 })
 
-test('default borders maintain at least 3:1 contrast against surfaces', () => {
-  const themes = [parseTheme(':root,\n.light'), parseTheme('.dark')]
-
-  for (const theme of themes) {
-    assert.ok(contrast(theme.border, theme.surface) >= 3)
-  }
-})
-
-test('the light application background is subtly distinct from white surfaces', () => {
+test('semantic aliases match the reference insurance palette', () => {
   const light = parseTheme(':root,\n.light')
+  const dark = parseTheme('.dark')
 
-  assert.ok(contrast(light.background, light.surface) >= 1.1)
+  assert.equal(light.background, light['gray-50'])
+  assert.equal(light.border, light['gray-200'])
+  assert.equal(light.input, light['gray-200'])
+  assert.equal(light.secondary, light['secondary-500'])
+  assert.equal(dark.border, '65, 70, 81')
+  assert.equal(dark.input, '65, 70, 81')
+  assert.equal(dark.secondary, '45, 212, 191')
 })

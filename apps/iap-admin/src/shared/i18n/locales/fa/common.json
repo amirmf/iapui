@@ -1,5 +1,81 @@
 {
-  "meta": {
-    "appTitle": "مدیریت IAP"
+  "routing": {
+    "actions": {
+      "goHome": "بازگشت به صفحه اصلی"
+    },
+    "error": {
+      "description": "مشکلی در نمایش صفحه پیش آمد. لطفاً دوباره تلاش کنید.",
+      "title": "خطایی رخ داد"
+    },
+    "notFound": {
+      "description": "نشانی مورد نظر پیدا نشد.",
+      "title": "صفحه پیدا نشد"
+    }
+  },
+  "auth": {
+    "login": {
+      "description": "با استفاده از نام کاربری و رمز عبور وارد حساب خود شوید.",
+      "forgotPassword": "بازیابی رمز عبور",
+      "password": "رمز عبور",
+      "register": "ایجاد حساب کاربری",
+      "submit": "ورود",
+      "submitting": "در حال ورود...",
+      "title": "ورود",
+      "tutorial": "مشاهده آموزش ورود / ثبت‌نام",
+      "username": "کد ملی (کد یکتا اتباع)"
+    },
+    "passwordReset": {
+      "backToLogin": "بازگشت به ورود",
+      "changeIdentity": "تغییر شماره",
+      "codeSentTo": "کد بازیابی به {{mobileNumber}} ارسال شد.",
+      "description": "برای بازیابی حساب خود یک رمز یکبار مصرف درخواست کنید.",
+      "mobileNumber": "شماره همراه",
+      "nationalCode": "کد ملی",
+      "otpCode": "کد بازیابی",
+      "password": "رمز عبور جدید",
+      "passwordConfirmation": "تکرار رمز عبور جدید",
+      "requestCode": "ارسال کد بازیابی",
+      "requestingCode": "در حال ارسال کد…",
+      "remembered": "رمز خود را به یاد آوردید؟",
+      "submit": "بازیابی رمز عبور",
+      "submitting": "در حال بازیابی رمز عبور...",
+      "title": "بازیابی رمز عبور",
+      "verifyDescription": "کد دریافت‌شده و رمز جدید را برای تکمیل بازیابی وارد کنید.",
+      "verifyTitle": "کد بازیابی را وارد کنید"
+    },
+    "register": {
+      "backToLogin": "وارد شوید",
+      "changeNumber": "تغییر شماره",
+      "codeSentTo": "کد تأیید به {{mobileNumber}} ارسال شد.",
+      "description": "برای ساخت حساب جدید، اطلاعات خود را وارد کنید.",
+      "foreign": "خارجی",
+      "foreignNationalCode": "کد یکتا",
+      "haveAccount": "قبلاً حساب دارید؟",
+      "iranian": "ایرانی",
+      "mobileNumber": "شماره همراه",
+      "nationalCode": "کد ملی",
+      "nationality": "ملیت",
+      "otpCode": "کد تأیید",
+      "password": "رمز عبور",
+      "passwordConfirmation": "تأیید رمز عبور",
+      "requestCode": "ارسال کد تأیید",
+      "requestingCode": "در حال ارسال کد…",
+      "submit": "ایجاد حساب",
+      "submitting": "در حال ایجاد حساب...",
+      "title": "ایجاد حساب کاربری"
+    },
+    "sso": {
+      "loading": "در حال ورود…"
+    },
+    "validation": {
+      "mobileNumber": "شماره موبایل معتبر وارد کنید.",
+      "nationalCode": "کد ملی باید ۱۰ رقم باشد.",
+      "otpCode": "کد تأیید ارسال‌شده به گوشی را وارد کنید.",
+      "passwordConfirmationRequired": "تأیید رمز عبور الزامی است.",
+      "passwordMinLength": "رمز عبور باید حداقل ۶ کاراکتر باشد.",
+      "passwordRequired": "رمز عبور الزامی است.",
+      "passwordsMatch": "رمز عبور و تأیید آن باید یکسان باشند.",
+      "usernameRequired": "کد ملی الزامی است."
+    }
   }
 }

@@ -24,6 +24,7 @@ export type SelectFieldProps<
   name: TName
   options: readonly TOption[]
   placeholder?: ReactNode
+  required?: boolean
   showSearch?: boolean
   searchKey?: string
   searchPlaceholder?: string
@@ -43,6 +44,7 @@ function SelectFieldControl<TOption extends SelectOption>(props: {
   labelKey: string
   options: readonly TOption[]
   placeholder?: ReactNode
+  required?: boolean
   showSearch?: boolean
   searchKey?: string
   searchPlaceholder?: string
@@ -55,6 +57,7 @@ function SelectFieldControl<TOption extends SelectOption>(props: {
     labelKey,
     options,
     placeholder,
+    required,
     showSearch,
     searchKey,
     searchPlaceholder,
@@ -67,7 +70,12 @@ function SelectFieldControl<TOption extends SelectOption>(props: {
   return (
     <>
       <span
-        className={cn(error && 'text-destructive', 'text-sm font-medium')}
+        className={cn(
+          error && 'text-destructive',
+          required &&
+            "inline-flex items-center gap-1 after:text-red-600 after:content-['*']",
+          'text-sm font-medium'
+        )}
         id={labelId}
       >
         {label}
@@ -112,6 +120,7 @@ export function SelectField<
     name,
     options,
     placeholder,
+    required,
     showSearch,
     searchKey,
     searchPlaceholder,
@@ -131,6 +140,7 @@ export function SelectField<
             labelKey={labelKey}
             options={options}
             placeholder={placeholder}
+            required={required}
             showSearch={showSearch}
             searchKey={searchKey}
             searchPlaceholder={searchPlaceholder}

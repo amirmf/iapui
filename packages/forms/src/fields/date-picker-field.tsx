@@ -20,13 +20,15 @@ export type DatePickerFieldProps<
   description?: ReactNode
   label: ReactNode
   name: TName
+  required?: boolean
 }
 
 export function DatePickerField<
   TFieldValues extends FieldValues,
   TName extends FieldPath<TFieldValues>,
 >(props: DatePickerFieldProps<TFieldValues, TName>) {
-  const { control, description, label, name, ...datePickerProps } = props
+  const { control, description, label, name, required, ...datePickerProps } =
+    props
 
   return (
     <FormField
@@ -34,7 +36,7 @@ export function DatePickerField<
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel required={required}>{label}</FormLabel>
           <FormControl>
             <DatePicker
               {...datePickerProps}

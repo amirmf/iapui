@@ -28,10 +28,11 @@ describe('Tabs', () => {
     const overviewTab = screen.getByRole('tab', { name: 'Overview' })
 
     expect(screen.getByRole('tablist', { name: 'Policy details' })).toHaveClass(
-      'overflow-x-auto'
+      'bg-muted',
+      'h-9'
     )
     expect(overviewTab).toHaveAttribute('aria-selected', 'true')
-    expect(overviewTab).toHaveClass('data-[state=active]:bg-surface')
+    expect(overviewTab).toHaveClass('data-[state=active]:bg-background')
     expect(screen.getByRole('tabpanel')).toHaveTextContent('Overview panel')
   })
 
@@ -54,7 +55,7 @@ describe('Tabs', () => {
 
     expect(screen.getByRole('tab', { name: 'History' })).toBeDisabled()
     expect(screen.getByRole('tab', { name: 'Documents' })).toHaveClass(
-      'focus-visible:ring-2',
+      'focus-visible:ring-[3px]',
       'disabled:opacity-50'
     )
   })

@@ -19,6 +19,7 @@ function DateFieldsForm(props: { onSubmit: (values: Values) => void }) {
       appointment: new Date('2025-01-15T00:00:00'),
       period: {},
     },
+    mode: 'all',
   })
 
   return (

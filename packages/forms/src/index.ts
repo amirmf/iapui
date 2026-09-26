@@ -1,6 +1,5 @@
 /** Generic React Hook Form bindings built on @iap/ui primitives. */
 export * from './components/form'
-export * from './components/form-error-summary'
 export * from './components/form-section'
 export * from './fields/date-picker-field'
 export * from './fields/date-range-picker-field'

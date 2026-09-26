@@ -44,6 +44,8 @@ export const colorTokenNames = [
   'surface',
   'surface-muted',
   'surface-elevated',
+  'dialog-background',
+  'text-primary',
   'text-secondary',
   'border',
   'input',
@@ -52,6 +54,8 @@ export const colorTokenNames = [
   'primary-hover',
   'primary-subtle',
   'primary-foreground',
+  'secondary',
+  'secondary-foreground',
   'accent',
   'accent-foreground',
   'success',
@@ -70,6 +74,12 @@ export const colorTokenNames = [
   'muted-foreground',
   'sidebar',
   'sidebar-foreground',
+  'sidebar-primary',
+  'sidebar-primary-foreground',
+  'sidebar-accent',
+  'sidebar-accent-foreground',
+  'sidebar-border',
+  'sidebar-ring',
 ] as const
 
 export type ColorTokenName = (typeof colorTokenNames)[number]

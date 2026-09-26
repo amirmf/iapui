@@ -14,6 +14,13 @@ This repository contains frontend applications only:
 
 Both frontend applications consume backend APIs. They must not connect directly to third-party business systems, payment providers, or identity/OTP providers.
 
+Tenant selection is build-time configuration. `TENANT` selects a descriptor in
+`tenants/<tenant>/`; the tenant preparation tool generates each application's
+public API and login-brand environment values before development or production
+builds. Tenant descriptors also own metadata translation keys; the preparation
+tool resolves those keys from the tenant's Persian locale and injects the
+resulting document metadata into both applications at build time.
+
 ## Workspace shape
 
 ```text
@@ -104,10 +111,19 @@ workspace packages → no application imports
 - `shared` must not contain product-specific business behavior.
 - `ui`, `forms`, and the remaining packages must not import application code.
 - Backend contracts live in `api-types`; transport behavior lives in `api-client`.
+- Every backend endpoint contract must expose Zod v4 schemas for both its request
+  and response in `api-types`. API services validate outgoing requests and
+  incoming responses with those schemas; TypeScript types are inferred from the
+  schemas rather than authored separately.
 
 ## State, forms, and UI conventions
 
 - Keep server state in a query layer and local UI state close to its owner.
+- Standard mutation failures are reported through the global TanStack Query
+  error handler and `toastError`. Do not add a mutation-level `onError` only
+  to display an error; reserve it for behavior that is specific to that
+  mutation, such as rollback, targeted field errors, session cleanup, or
+  navigation.
 - Use schemas as the canonical validation contract for forms.
 - Use `@iap/ui` primitives before creating application-specific duplicates.
 - Build conditional CSS classes with the public `cn` helper from `@iap/ui`.

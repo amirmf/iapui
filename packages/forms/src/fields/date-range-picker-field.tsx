@@ -19,6 +19,7 @@ export type DateRangePickerFieldProps<
   description?: ReactNode
   label: ReactNode
   name: TName
+  required?: boolean
 }
 
 function DateRangePickerFieldControl(props: {
@@ -30,19 +31,25 @@ function DateRangePickerFieldControl(props: {
     value: unknown
   }
   label: ReactNode
+  required?: boolean
   pickerProps: Omit<
     DateRangePickerProps,
     'onBlur' | 'onChange' | 'ref' | 'value'
   >
 }) {
-  const { field, label, pickerProps } = props
+  const { field, label, pickerProps, required } = props
   const { error, formDescriptionId, formItemId, formMessageId, name } =
     useFormField()
 
   return (
     <>
       <span
-        className={cn(error && 'text-destructive', 'text-sm font-medium')}
+        className={cn(
+          error && 'text-destructive',
+          required &&
+            "inline-flex items-center gap-1 after:text-red-600 after:content-['*']",
+          'text-sm font-medium'
+        )}
         id={`${formItemId}-label`}
       >
         {label}
@@ -69,7 +76,7 @@ export function DateRangePickerField<
   TFieldValues extends FieldValues,
   TName extends FieldPath<TFieldValues>,
 >(props: DateRangePickerFieldProps<TFieldValues, TName>) {
-  const { control, description, label, name, ...pickerProps } = props
+  const { control, description, label, name, required, ...pickerProps } = props
 
   return (
     <FormField
@@ -81,6 +88,7 @@ export function DateRangePickerField<
             field={field}
             label={label}
             pickerProps={pickerProps}
+            required={required}
           />
           {description ? (
             <FormDescription>{description}</FormDescription>

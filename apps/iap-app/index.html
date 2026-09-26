@@ -2,10 +2,47 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/images/favicon.svg"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/images/favicon_light.svg"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon.png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon_light.png"
+      media="(prefers-color-scheme: dark)"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IAP</title>
+    <title>%VITE_META_TITLE%</title>
+    <meta name="title" content="%VITE_META_META_TITLE%" />
+    <meta name="description" content="%VITE_META_DESCRIPTION%" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="%VITE_META_TITLE%" />
+    <meta property="og:description" content="%VITE_META_DESCRIPTION%" />
+    <meta property="twitter:card" content="%VITE_META_TWITTER_CARD%" />
+    <meta property="twitter:title" content="%VITE_META_TWITTER_TITLE%" />
+    <meta
+      property="twitter:description"
+      content="%VITE_META_TWITTER_DESCRIPTION%"
+    />
+    <link rel="stylesheet" href="/fonts/fa/fontFa.css" />
+    <meta name="theme-color" content="#2563eb" />
   </head>
-  <body>
+  <body class="group/body">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

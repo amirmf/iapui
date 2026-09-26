@@ -5,6 +5,7 @@ const config: Config = {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
+    '../../packages/auth/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/forms/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/ui/src/**/*.{js,ts,jsx,tsx}',
   ],

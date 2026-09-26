@@ -25,6 +25,7 @@ export type MultiSelectFieldProps<
   name: TName
   options: readonly TOption[]
   placeholder?: ReactNode
+  required?: boolean
   searchKey?: string
   searchPlaceholder?: string
   valueKey: string
@@ -44,6 +45,7 @@ function MultiSelectFieldControl<TOption extends SelectOption>(props: {
   maxVisibleItems?: number
   options: readonly TOption[]
   placeholder?: ReactNode
+  required?: boolean
   searchKey?: string
   searchPlaceholder?: string
   valueKey: string
@@ -56,6 +58,7 @@ function MultiSelectFieldControl<TOption extends SelectOption>(props: {
     maxVisibleItems,
     options,
     placeholder,
+    required,
     searchKey,
     searchPlaceholder,
     valueKey,
@@ -67,7 +70,12 @@ function MultiSelectFieldControl<TOption extends SelectOption>(props: {
   return (
     <>
       <span
-        className={cn(error && 'text-destructive', 'text-sm font-medium')}
+        className={cn(
+          error && 'text-destructive',
+          required &&
+            "inline-flex items-center gap-1 after:text-red-600 after:content-['*']",
+          'text-sm font-medium'
+        )}
         id={labelId}
       >
         {label}
@@ -113,6 +121,7 @@ export function MultiSelectField<
     name,
     options,
     placeholder,
+    required,
     searchKey,
     searchPlaceholder,
     valueKey,
@@ -132,6 +141,7 @@ export function MultiSelectField<
             maxVisibleItems={maxVisibleItems}
             options={options}
             placeholder={placeholder}
+            required={required}
             searchKey={searchKey}
             searchPlaceholder={searchPlaceholder}
             valueKey={valueKey}

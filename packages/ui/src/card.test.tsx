@@ -10,11 +10,13 @@ describe('Card', () => {
     expect(screen.getByText('Content')).toHaveClass(
       'rounded-xl',
       'border',
-      'border-border/35',
       'bg-card',
       'text-card-foreground',
-      'shadow-sm',
-      'shadow-primary/5'
+      'flex',
+      'flex-col',
+      'gap-6',
+      'py-6',
+      'shadow-sm'
     )
   })
 

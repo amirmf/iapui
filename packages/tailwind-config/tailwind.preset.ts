@@ -34,8 +34,9 @@ const iapUtilities = plugin(({ addUtilities }) => {
 })
 
 const preset: Partial<Config> = {
-  darkMode: 'class',
+  darkMode: 'selector',
   theme: {
+    container: { center: true, padding: '2rem' },
     extend: {
       animation: {
         'collapsible-down': 'collapsible-down 300ms ease-out',
@@ -49,6 +50,7 @@ const preset: Partial<Config> = {
         background: withOpacity('background'),
         base: {
           black: withOpacity('base-black'),
+          transparent: 'transparent',
           white: withOpacity('base-white'),
         },
         gray: {
@@ -73,6 +75,9 @@ const preset: Partial<Config> = {
         destructive: {
           DEFAULT: withOpacity('destructive'),
           foreground: withOpacity('destructive-foreground'),
+        },
+        dialog: {
+          background: withOpacity('dialog-background'),
         },
         foreground: withOpacity('foreground'),
         info: {
@@ -117,6 +122,18 @@ const preset: Partial<Config> = {
           800: withOpacity('secondary-800'),
           900: withOpacity('secondary-900'),
           950: withOpacity('secondary-950'),
+          DEFAULT: withOpacity('secondary'),
+          foreground: withOpacity('secondary-foreground'),
+        },
+        sidebar: {
+          DEFAULT: withOpacity('sidebar'),
+          accent: withOpacity('sidebar-accent'),
+          'accent-foreground': withOpacity('sidebar-accent-foreground'),
+          border: withOpacity('sidebar-border'),
+          foreground: withOpacity('sidebar-foreground'),
+          primary: withOpacity('sidebar-primary'),
+          'primary-foreground': withOpacity('sidebar-primary-foreground'),
+          ring: withOpacity('sidebar-ring'),
         },
         ring: withOpacity('ring'),
         success: {
@@ -128,13 +145,21 @@ const preset: Partial<Config> = {
           elevated: withOpacity('surface-elevated'),
           muted: withOpacity('surface-muted'),
         },
+        text: {
+          primary: withOpacity('text-primary'),
+        },
         warning: {
           DEFAULT: withOpacity('warning'),
           foreground: withOpacity('warning-foreground'),
         },
       },
       fontFamily: {
-        sans: ['IRANSansX FaNum', 'Arial', 'sans-serif'],
+        byekan: ['Vazirmatn', 'sans-serif'],
+        inter: ['Vazirmatn', 'sans-serif'],
+        manrope: ['Vazirmatn', 'sans-serif'],
+        sans: ['Vazirmatn', 'sans-serif'],
+        system: ['Vazirmatn', 'sans-serif'],
+        vazirmatn: ['Vazirmatn', 'sans-serif'],
       },
       keyframes: {
         'collapsible-down': {
@@ -145,6 +170,28 @@ const preset: Partial<Config> = {
           from: { height: 'var(--radix-collapsible-content-height)' },
           to: { height: '0' },
         },
+      },
+      spacing: {
+        '0.75': '0.1875rem',
+        '17.5': '4.375rem',
+        22: '5.5rem',
+        26: '6.5rem',
+        30: '7.5rem',
+        '37.5': '9.375rem',
+        46: '11.5rem',
+        50: '12.5rem',
+        55: '13.75rem',
+        '62.5': '15.625rem',
+        70: '17.5rem',
+        75: '18.75rem',
+        85: '21.25rem',
+        90: '22.5rem',
+        100: '25rem',
+        120: '30rem',
+        130: '32.5rem',
+        140: '35rem',
+        150: '37.5rem',
+        200: '50rem',
       },
     },
   },

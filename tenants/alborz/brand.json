@@ -1,0 +1,27 @@
+{
+  "environment": {
+    "development": {
+      "VITE_API_BASE_URL": "https://iapapi.ostaadx.ai/api/"
+    },
+    "production": {
+      "VITE_API_BASE_URL": "https://iapapi.ostaadx.ai/api/"
+    }
+  },
+  "assets": {
+    "loginLogo": "/images/logo/alborz/alborz-login-logo.svg"
+  },
+  "identity": {
+    "loginTitle": "سامانه جامع ارزیابی خسارت",
+    "loginCompany": "بیمه البرز"
+  },
+  "metadata": {
+    "translationKeys": {
+      "title": "meta.title",
+      "metaTitle": "meta.metaTitle",
+      "description": "meta.description",
+      "twitterCard": "meta.twitterCard",
+      "twitterTitle": "meta.twitterTitle",
+      "twitterDescription": "meta.twitterDescription"
+    }
+  }
+}

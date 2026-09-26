@@ -19,6 +19,7 @@ export type SwitchFieldProps<
   description?: ReactNode
   label: ReactNode
   name: TName
+  required?: boolean
 }
 
 function SwitchFieldControl(props: {
@@ -30,8 +31,9 @@ function SwitchFieldControl(props: {
     value: boolean
   }
   label: ReactNode
+  required?: boolean
 }) {
-  const { field, label } = props
+  const { field, label, required } = props
   const { error, formDescriptionId, formItemId, formMessageId, name } =
     useFormField()
   const labelId = `${formItemId}-label`
@@ -39,7 +41,12 @@ function SwitchFieldControl(props: {
   return (
     <div className='flex min-h-11 items-center justify-between gap-3'>
       <span
-        className={cn(error && 'text-destructive', 'text-sm font-medium')}
+        className={cn(
+          error && 'text-destructive',
+          required &&
+            "inline-flex items-center gap-1 after:text-red-600 after:content-['*']",
+          'text-sm font-medium'
+        )}
         id={labelId}
       >
         {label}
@@ -66,7 +73,7 @@ export function SwitchField<
   TFieldValues extends FieldValues,
   TName extends FieldPath<TFieldValues>,
 >(props: SwitchFieldProps<TFieldValues, TName>) {
-  const { control, description, label, name } = props
+  const { control, description, label, name, required } = props
 
   return (
     <FormField
@@ -74,7 +81,7 @@ export function SwitchField<
       name={name}
       render={({ field }) => (
         <FormItem>
-          <SwitchFieldControl field={field} label={label} />
+          <SwitchFieldControl field={field} label={label} required={required} />
           {description ? (
             <FormDescription>{description}</FormDescription>
           ) : null}

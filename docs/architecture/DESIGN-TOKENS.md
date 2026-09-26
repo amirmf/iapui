@@ -12,6 +12,8 @@ The package exposes:
 - `@iap/design-tokens/theme.css` for the light and dark CSS custom properties.
 - `@iap/design-tokens` for the supported token-name and theme-class TypeScript
   contract.
+- The Vazirmatn font files and `@font-face` declarations migrated from the
+  reference application.
 
 `@iap/tailwind-config/preset` maps the approved CSS variables to Tailwind
 utilities, including the base, primary, secondary, and gray color scales.
@@ -19,7 +21,8 @@ utilities, including the base, primary, secondary, and gray color scales.
 ## Conventions
 
 - Applications import `@iap/design-tokens/theme.css` once from their entry
-  point. They must not copy shared color declarations into application styles.
+  point. This also loads the shared Vazirmatn font; applications must not copy
+  shared color declarations or font-face declarations into application styles.
 - Components use semantic Tailwind utilities such as `bg-primary`,
   `text-foreground`, and `border-border` by default. Palette utilities such as
   `bg-primary-600` are reserved for intentional visual choices.
