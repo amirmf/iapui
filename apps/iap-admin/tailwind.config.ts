@@ -7,6 +7,7 @@ const config: Config = {
     './src/**/*.{js,ts,jsx,tsx}',
     '../../packages/auth/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/forms/src/**/*.{js,ts,jsx,tsx}',
+    '../../packages/panel-switcher/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/ui/src/**/*.{js,ts,jsx,tsx}',
   ],
   presets: [sharedPreset],

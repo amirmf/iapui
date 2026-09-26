@@ -44,6 +44,8 @@ const isMonitoringRole = (roles: PartyRole[]) =>
 export const isPublicRole = (roles: PartyRole[]) =>
   roles.includes('ROLE_PUBLIC_USER')
 
+export const canAccessAppPanel = (roles: PartyRole[]) => isPublicRole(roles)
+
 const isDoctorRole = (roles: PartyRole[]) => roles.includes('ROLE_DOCTOR_USER')
 
 const isMainAssessmentRole = (roles: PartyRole[]) =>
@@ -134,6 +136,9 @@ export const canAccessPathByRole = (roles: PartyRole[], pathname: string) => {
 
   return isAdminRole(roles)
 }
+
+export const canAccessAdminPanel = (roles: PartyRole[]) =>
+  canAccessPathByRole(roles, '/') && !canNotAccessPathByRole(roles, '/')
 
 export const getAfterLoginDestination = (
   roles: PartyRole[],

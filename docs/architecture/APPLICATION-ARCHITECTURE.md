@@ -95,6 +95,9 @@ Owns one global Sass entry point (`index.scss`) and genuinely document-level sty
 | `@iap/api-client` | HTTP client configuration, interceptors, and transport helpers. |
 | `@iap/api-types` | Backend contract types and generated API types when introduced. |
 | `@iap/design-tokens` | Semantic design tokens and theme CSS. |
+| `@iap/theme` | Shared light/dark theme state, persistence, and icon-only switcher. |
+| `@iap/panel-switcher` | Shared panel-selection presentation for cross-application navigation. |
+| `@iap/support` | Shared support-flow UI and client capability. |
 | `@iap/tailwind-config` | Shared Tailwind preset and plugin configuration. |
 | `@iap/eslint-config` | Shared lint presets. |
 | `@iap/typescript-config` | Shared TypeScript base configurations. |

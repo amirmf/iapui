@@ -49,6 +49,9 @@ importers:
       '@iap/forms':
         specifier: workspace:*
         version: link:../../packages/forms
+      '@iap/panel-switcher':
+        specifier: workspace:*
+        version: link:../../packages/panel-switcher
       '@iap/shared-lib':
         specifier: workspace:*
         version: link:../../packages/shared-lib
@@ -191,6 +194,9 @@ importers:
       '@iap/api-client':
         specifier: workspace:*
         version: link:../../packages/api-client
+      '@iap/api-types':
+        specifier: workspace:*
+        version: link:../../packages/api-types
       '@iap/auth':
         specifier: workspace:*
         version: link:../../packages/auth
@@ -200,9 +206,18 @@ importers:
       '@iap/forms':
         specifier: workspace:*
         version: link:../../packages/forms
+      '@iap/panel-switcher':
+        specifier: workspace:*
+        version: link:../../packages/panel-switcher
       '@iap/shared-lib':
         specifier: workspace:*
         version: link:../../packages/shared-lib
+      '@iap/support':
+        specifier: workspace:*
+        version: link:../../packages/support
+      '@iap/theme':
+        specifier: workspace:*
+        version: link:../../packages/theme
       '@iap/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -230,6 +245,9 @@ importers:
       js-cookie:
         specifier: ^3.0.8
         version: 3.0.8
+      lucide-react:
+        specifier: ^0.468.0
+        version: 0.468.0(react@19.3.0)
       react:
         specifier: 19.3.0
         version: 19.3.0
@@ -454,6 +472,81 @@ importers:
       vitest:
         specifier: ^3.2.7
         version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(sass@1.104.1)(supports-color@7.2.0)(yaml@2.9.1)
+
+  packages/panel-switcher:
+    dependencies:
+      '@iap/ui':
+        specifier: workspace:*
+        version: link:../ui
+      lucide-react:
+        specifier: ^0.468.0
+        version: 0.468.0(react@19.3.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+    devDependencies:
+      '@types/react':
+        specifier: ^19.3.0
+        version: 19.3.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  packages/support:
+    dependencies:
+      '@iap/api-client':
+        specifier: workspace:*
+        version: link:../api-client
+      '@iap/api-types':
+        specifier: workspace:*
+        version: link:../api-types
+      '@iap/ui':
+        specifier: workspace:*
+        version: link:../ui
+      i18next:
+        specifier: ^26.0.0
+        version: 26.4.2(typescript@5.9.3)
+      lucide-react:
+        specifier: ^0.468.0
+        version: 0.468.0(react@19.3.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      react-i18next:
+        specifier: ^17.0.0
+        version: 17.0.15(i18next@26.4.2(typescript@5.9.3))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@5.9.3)
+      zustand:
+        specifier: ^5.0.15
+        version: 5.0.15(@types/react@19.3.0)(immer@11.1.18)(react@19.3.0)(use-sync-external-store@1.7.0(react@19.3.0))
+    devDependencies:
+      '@types/react':
+        specifier: ^19.3.0
+        version: 19.3.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  packages/theme:
+    dependencies:
+      '@iap/ui':
+        specifier: workspace:*
+        version: link:../ui
+      lucide-react:
+        specifier: ^0.468.0
+        version: 0.468.0(react@19.3.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      zustand:
+        specifier: ^5.0.15
+        version: 5.0.15(@types/react@19.3.0)(immer@11.1.18)(react@19.3.0)(use-sync-external-store@1.7.0(react@19.3.0))
+    devDependencies:
+      '@types/react':
+        specifier: ^19.3.0
+        version: 19.3.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   packages/shared-lib:
     dependencies:
