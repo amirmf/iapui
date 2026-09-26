@@ -17,6 +17,7 @@
     "@iap/shared-lib": "workspace:*",
     "@iap/ui": "workspace:*",
     "@tanstack/react-query": "^5.103.2",
+    "@tanstack/react-router": "^1.170.38",
     "immer": "^11.1.18",
     "lucide-react": "^0.468.0",
     "react-hook-form": "^7.88.0",

@@ -10,16 +10,42 @@ import { Route as AuthLoginIndexRouteImport } from './routes/_auth/login/index'
 import { Route as AuthPasswordResetIndexRouteImport } from './routes/_auth/password-reset/index'
 import { Route as AuthRegisterIndexRouteImport } from './routes/_auth/register/index'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedAgreementsIndexRouteImport } from './routes/_authenticated/agreements/index'
+import { Route as AuthenticatedAiAssessmentRulesIndexRouteImport } from './routes/_authenticated/ai-assessment-rules/index'
+import { Route as AuthenticatedAssessmentPromptsIndexRouteImport } from './routes/_authenticated/assessment-prompts/index'
+import { Route as AuthenticatedAssignementRulesIndexRouteImport } from './routes/_authenticated/assignement-rules/index'
+import { Route as AuthenticatedBankAccountIndexRouteImport } from './routes/_authenticated/bank-account/index'
+import { Route as AuthenticatedBranchesIndexRouteImport } from './routes/_authenticated/branches/index'
+import { Route as AuthenticatedClaimReportsIndexRouteImport } from './routes/_authenticated/claim-reports/index'
+import { Route as AuthenticatedClaimRequestsIndexRouteImport } from './routes/_authenticated/claim-requests/index'
+import { Route as AuthenticatedCoveragesIndexRouteImport } from './routes/_authenticated/coverages/index'
+import { Route as AuthenticatedDamageCodesIndexRouteImport } from './routes/_authenticated/damage-codes/index'
+import { Route as AuthenticatedDocTypesIndexRouteImport } from './routes/_authenticated/doc-types/index'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedMedicalCenterIndexRouteImport } from './routes/_authenticated/medical-center/index'
+import { Route as AuthenticatedOtpIndexRouteImport } from './routes/_authenticated/otp/index'
+import { Route as AuthenticatedOutpatientDocAcceptancesIndexRouteImport } from './routes/_authenticated/outpatient-doc-acceptances/index'
+import { Route as AuthenticatedPersonSpecialDiseasesIndexRouteImport } from './routes/_authenticated/person-special-diseases/index'
+import { Route as AuthenticatedPipelinesIndexRouteImport } from './routes/_authenticated/pipelines/index'
+import { Route as AuthenticatedRepetitiveResponsesIndexRouteImport } from './routes/_authenticated/repetitive-responses/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthenticatedSubUsersIndexRouteImport } from './routes/_authenticated/sub-users/index'
+import { Route as AuthenticatedSupportQuestionsIndexRouteImport } from './routes/_authenticated/support-questions/index'
+import { Route as AuthenticatedTicketsIndexRouteImport } from './routes/_authenticated/tickets/index'
+import { Route as AuthenticatedUserAccountIndexRouteImport } from './routes/_authenticated/user-account/index'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/_auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthAuthSsoRoute = AuthAuthSsoRouteImport.update({
   id: '/auth/sso',
@@ -41,65 +67,335 @@ const AuthRegisterIndexRoute = AuthRegisterIndexRouteImport.update({
   path: '/register/',
   getParentRoute: () => AuthRouteRoute,
 } as any)
+const AuthenticatedAgreementsIndexRoute =
+  AuthenticatedAgreementsIndexRouteImport.update({
+    id: '/agreements/',
+    path: '/agreements/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAiAssessmentRulesIndexRoute =
+  AuthenticatedAiAssessmentRulesIndexRouteImport.update({
+    id: '/ai-assessment-rules/',
+    path: '/ai-assessment-rules/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAssessmentPromptsIndexRoute =
+  AuthenticatedAssessmentPromptsIndexRouteImport.update({
+    id: '/assessment-prompts/',
+    path: '/assessment-prompts/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAssignementRulesIndexRoute =
+  AuthenticatedAssignementRulesIndexRouteImport.update({
+    id: '/assignement-rules/',
+    path: '/assignement-rules/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedBankAccountIndexRoute =
+  AuthenticatedBankAccountIndexRouteImport.update({
+    id: '/bank-account/',
+    path: '/bank-account/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedBranchesIndexRoute =
+  AuthenticatedBranchesIndexRouteImport.update({
+    id: '/branches/',
+    path: '/branches/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedClaimReportsIndexRoute =
+  AuthenticatedClaimReportsIndexRouteImport.update({
+    id: '/claim-reports/',
+    path: '/claim-reports/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedClaimRequestsIndexRoute =
+  AuthenticatedClaimRequestsIndexRouteImport.update({
+    id: '/claim-requests/',
+    path: '/claim-requests/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCoveragesIndexRoute =
+  AuthenticatedCoveragesIndexRouteImport.update({
+    id: '/coverages/',
+    path: '/coverages/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDamageCodesIndexRoute =
+  AuthenticatedDamageCodesIndexRouteImport.update({
+    id: '/damage-codes/',
+    path: '/damage-codes/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDocTypesIndexRoute =
+  AuthenticatedDocTypesIndexRouteImport.update({
+    id: '/doc-types/',
+    path: '/doc-types/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedMedicalCenterIndexRoute =
+  AuthenticatedMedicalCenterIndexRouteImport.update({
+    id: '/medical-center/',
+    path: '/medical-center/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedOtpIndexRoute = AuthenticatedOtpIndexRouteImport.update({
+  id: '/otp/',
+  path: '/otp/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedOutpatientDocAcceptancesIndexRoute =
+  AuthenticatedOutpatientDocAcceptancesIndexRouteImport.update({
+    id: '/outpatient-doc-acceptances/',
+    path: '/outpatient-doc-acceptances/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPersonSpecialDiseasesIndexRoute =
+  AuthenticatedPersonSpecialDiseasesIndexRouteImport.update({
+    id: '/person-special-diseases/',
+    path: '/person-special-diseases/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPipelinesIndexRoute =
+  AuthenticatedPipelinesIndexRouteImport.update({
+    id: '/pipelines/',
+    path: '/pipelines/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedRepetitiveResponsesIndexRoute =
+  AuthenticatedRepetitiveResponsesIndexRouteImport.update({
+    id: '/repetitive-responses/',
+    path: '/repetitive-responses/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSubUsersIndexRoute =
+  AuthenticatedSubUsersIndexRouteImport.update({
+    id: '/sub-users/',
+    path: '/sub-users/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSupportQuestionsIndexRoute =
+  AuthenticatedSupportQuestionsIndexRouteImport.update({
+    id: '/support-questions/',
+    path: '/support-questions/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTicketsIndexRoute =
+  AuthenticatedTicketsIndexRouteImport.update({
+    id: '/tickets/',
+    path: '/tickets/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUserAccountIndexRoute =
+  AuthenticatedUserAccountIndexRouteImport.update({
+    id: '/user-account/',
+    path: '/user-account/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AuthenticatedIndexRoute
   '/auth/sso': typeof AuthAuthSsoRoute
   '/login/': typeof AuthLoginIndexRoute
   '/password-reset/': typeof AuthPasswordResetIndexRoute
   '/register/': typeof AuthRegisterIndexRoute
+  '/agreements/': typeof AuthenticatedAgreementsIndexRoute
+  '/ai-assessment-rules/': typeof AuthenticatedAiAssessmentRulesIndexRoute
+  '/assessment-prompts/': typeof AuthenticatedAssessmentPromptsIndexRoute
+  '/assignement-rules/': typeof AuthenticatedAssignementRulesIndexRoute
+  '/bank-account/': typeof AuthenticatedBankAccountIndexRoute
+  '/branches/': typeof AuthenticatedBranchesIndexRoute
+  '/claim-reports/': typeof AuthenticatedClaimReportsIndexRoute
+  '/claim-requests/': typeof AuthenticatedClaimRequestsIndexRoute
+  '/coverages/': typeof AuthenticatedCoveragesIndexRoute
+  '/damage-codes/': typeof AuthenticatedDamageCodesIndexRoute
+  '/doc-types/': typeof AuthenticatedDocTypesIndexRoute
+  '/medical-center/': typeof AuthenticatedMedicalCenterIndexRoute
+  '/otp/': typeof AuthenticatedOtpIndexRoute
+  '/outpatient-doc-acceptances/': typeof AuthenticatedOutpatientDocAcceptancesIndexRoute
+  '/person-special-diseases/': typeof AuthenticatedPersonSpecialDiseasesIndexRoute
+  '/pipelines/': typeof AuthenticatedPipelinesIndexRoute
+  '/repetitive-responses/': typeof AuthenticatedRepetitiveResponsesIndexRoute
+  '/sub-users/': typeof AuthenticatedSubUsersIndexRoute
+  '/support-questions/': typeof AuthenticatedSupportQuestionsIndexRoute
+  '/tickets/': typeof AuthenticatedTicketsIndexRoute
+  '/user-account/': typeof AuthenticatedUserAccountIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof AuthenticatedIndexRoute
   '/auth/sso': typeof AuthAuthSsoRoute
   '/login': typeof AuthLoginIndexRoute
   '/password-reset': typeof AuthPasswordResetIndexRoute
   '/register': typeof AuthRegisterIndexRoute
+  '/agreements': typeof AuthenticatedAgreementsIndexRoute
+  '/ai-assessment-rules': typeof AuthenticatedAiAssessmentRulesIndexRoute
+  '/assessment-prompts': typeof AuthenticatedAssessmentPromptsIndexRoute
+  '/assignement-rules': typeof AuthenticatedAssignementRulesIndexRoute
+  '/bank-account': typeof AuthenticatedBankAccountIndexRoute
+  '/branches': typeof AuthenticatedBranchesIndexRoute
+  '/claim-reports': typeof AuthenticatedClaimReportsIndexRoute
+  '/claim-requests': typeof AuthenticatedClaimRequestsIndexRoute
+  '/coverages': typeof AuthenticatedCoveragesIndexRoute
+  '/damage-codes': typeof AuthenticatedDamageCodesIndexRoute
+  '/doc-types': typeof AuthenticatedDocTypesIndexRoute
+  '/medical-center': typeof AuthenticatedMedicalCenterIndexRoute
+  '/otp': typeof AuthenticatedOtpIndexRoute
+  '/outpatient-doc-acceptances': typeof AuthenticatedOutpatientDocAcceptancesIndexRoute
+  '/person-special-diseases': typeof AuthenticatedPersonSpecialDiseasesIndexRoute
+  '/pipelines': typeof AuthenticatedPipelinesIndexRoute
+  '/repetitive-responses': typeof AuthenticatedRepetitiveResponsesIndexRoute
+  '/sub-users': typeof AuthenticatedSubUsersIndexRoute
+  '/support-questions': typeof AuthenticatedSupportQuestionsIndexRoute
+  '/tickets': typeof AuthenticatedTicketsIndexRoute
+  '/user-account': typeof AuthenticatedUserAccountIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/_auth': typeof AuthRouteRouteWithChildren
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_auth/auth/sso': typeof AuthAuthSsoRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
   '/_auth/password-reset/': typeof AuthPasswordResetIndexRoute
   '/_auth/register/': typeof AuthRegisterIndexRoute
+  '/_authenticated/agreements/': typeof AuthenticatedAgreementsIndexRoute
+  '/_authenticated/ai-assessment-rules/': typeof AuthenticatedAiAssessmentRulesIndexRoute
+  '/_authenticated/assessment-prompts/': typeof AuthenticatedAssessmentPromptsIndexRoute
+  '/_authenticated/assignement-rules/': typeof AuthenticatedAssignementRulesIndexRoute
+  '/_authenticated/bank-account/': typeof AuthenticatedBankAccountIndexRoute
+  '/_authenticated/branches/': typeof AuthenticatedBranchesIndexRoute
+  '/_authenticated/claim-reports/': typeof AuthenticatedClaimReportsIndexRoute
+  '/_authenticated/claim-requests/': typeof AuthenticatedClaimRequestsIndexRoute
+  '/_authenticated/coverages/': typeof AuthenticatedCoveragesIndexRoute
+  '/_authenticated/damage-codes/': typeof AuthenticatedDamageCodesIndexRoute
+  '/_authenticated/doc-types/': typeof AuthenticatedDocTypesIndexRoute
+  '/_authenticated/medical-center/': typeof AuthenticatedMedicalCenterIndexRoute
+  '/_authenticated/otp/': typeof AuthenticatedOtpIndexRoute
+  '/_authenticated/outpatient-doc-acceptances/': typeof AuthenticatedOutpatientDocAcceptancesIndexRoute
+  '/_authenticated/person-special-diseases/': typeof AuthenticatedPersonSpecialDiseasesIndexRoute
+  '/_authenticated/pipelines/': typeof AuthenticatedPipelinesIndexRoute
+  '/_authenticated/repetitive-responses/': typeof AuthenticatedRepetitiveResponsesIndexRoute
+  '/_authenticated/sub-users/': typeof AuthenticatedSubUsersIndexRoute
+  '/_authenticated/support-questions/': typeof AuthenticatedSupportQuestionsIndexRoute
+  '/_authenticated/tickets/': typeof AuthenticatedTicketsIndexRoute
+  '/_authenticated/user-account/': typeof AuthenticatedUserAccountIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth/sso' | '/login/' | '/password-reset/' | '/register/'
+  fullPaths:
+    | '/'
+    | '/auth/sso'
+    | '/login/'
+    | '/password-reset/'
+    | '/register/'
+    | '/agreements/'
+    | '/ai-assessment-rules/'
+    | '/assessment-prompts/'
+    | '/assignement-rules/'
+    | '/bank-account/'
+    | '/branches/'
+    | '/claim-reports/'
+    | '/claim-requests/'
+    | '/coverages/'
+    | '/damage-codes/'
+    | '/doc-types/'
+    | '/medical-center/'
+    | '/otp/'
+    | '/outpatient-doc-acceptances/'
+    | '/person-special-diseases/'
+    | '/pipelines/'
+    | '/repetitive-responses/'
+    | '/sub-users/'
+    | '/support-questions/'
+    | '/tickets/'
+    | '/user-account/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/sso' | '/login' | '/password-reset' | '/register'
+  to:
+    | '/'
+    | '/auth/sso'
+    | '/login'
+    | '/password-reset'
+    | '/register'
+    | '/agreements'
+    | '/ai-assessment-rules'
+    | '/assessment-prompts'
+    | '/assignement-rules'
+    | '/bank-account'
+    | '/branches'
+    | '/claim-reports'
+    | '/claim-requests'
+    | '/coverages'
+    | '/damage-codes'
+    | '/doc-types'
+    | '/medical-center'
+    | '/otp'
+    | '/outpatient-doc-acceptances'
+    | '/person-special-diseases'
+    | '/pipelines'
+    | '/repetitive-responses'
+    | '/sub-users'
+    | '/support-questions'
+    | '/tickets'
+    | '/user-account'
   id:
     | '__root__'
-    | '/'
     | '/_auth'
+    | '/_authenticated'
+    | '/_authenticated/'
     | '/_auth/auth/sso'
     | '/_auth/login/'
     | '/_auth/password-reset/'
     | '/_auth/register/'
+    | '/_authenticated/agreements/'
+    | '/_authenticated/ai-assessment-rules/'
+    | '/_authenticated/assessment-prompts/'
+    | '/_authenticated/assignement-rules/'
+    | '/_authenticated/bank-account/'
+    | '/_authenticated/branches/'
+    | '/_authenticated/claim-reports/'
+    | '/_authenticated/claim-requests/'
+    | '/_authenticated/coverages/'
+    | '/_authenticated/damage-codes/'
+    | '/_authenticated/doc-types/'
+    | '/_authenticated/medical-center/'
+    | '/_authenticated/otp/'
+    | '/_authenticated/outpatient-doc-acceptances/'
+    | '/_authenticated/person-special-diseases/'
+    | '/_authenticated/pipelines/'
+    | '/_authenticated/repetitive-responses/'
+    | '/_authenticated/sub-users/'
+    | '/_authenticated/support-questions/'
+    | '/_authenticated/tickets/'
+    | '/_authenticated/user-account/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_auth': {
       id: '/_auth'
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/': {
+      id: '/_authenticated/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_auth/auth/sso': {
       id: '/_auth/auth/sso'
@@ -129,6 +425,153 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }
+    '/_authenticated/agreements/': {
+      id: '/_authenticated/agreements/'
+      path: '/agreements'
+      fullPath: '/agreements/'
+      preLoaderRoute: typeof AuthenticatedAgreementsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ai-assessment-rules/': {
+      id: '/_authenticated/ai-assessment-rules/'
+      path: '/ai-assessment-rules'
+      fullPath: '/ai-assessment-rules/'
+      preLoaderRoute: typeof AuthenticatedAiAssessmentRulesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/assessment-prompts/': {
+      id: '/_authenticated/assessment-prompts/'
+      path: '/assessment-prompts'
+      fullPath: '/assessment-prompts/'
+      preLoaderRoute: typeof AuthenticatedAssessmentPromptsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/assignement-rules/': {
+      id: '/_authenticated/assignement-rules/'
+      path: '/assignement-rules'
+      fullPath: '/assignement-rules/'
+      preLoaderRoute: typeof AuthenticatedAssignementRulesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/bank-account/': {
+      id: '/_authenticated/bank-account/'
+      path: '/bank-account'
+      fullPath: '/bank-account/'
+      preLoaderRoute: typeof AuthenticatedBankAccountIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/branches/': {
+      id: '/_authenticated/branches/'
+      path: '/branches'
+      fullPath: '/branches/'
+      preLoaderRoute: typeof AuthenticatedBranchesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/claim-reports/': {
+      id: '/_authenticated/claim-reports/'
+      path: '/claim-reports'
+      fullPath: '/claim-reports/'
+      preLoaderRoute: typeof AuthenticatedClaimReportsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/claim-requests/': {
+      id: '/_authenticated/claim-requests/'
+      path: '/claim-requests'
+      fullPath: '/claim-requests/'
+      preLoaderRoute: typeof AuthenticatedClaimRequestsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/coverages/': {
+      id: '/_authenticated/coverages/'
+      path: '/coverages'
+      fullPath: '/coverages/'
+      preLoaderRoute: typeof AuthenticatedCoveragesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/damage-codes/': {
+      id: '/_authenticated/damage-codes/'
+      path: '/damage-codes'
+      fullPath: '/damage-codes/'
+      preLoaderRoute: typeof AuthenticatedDamageCodesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/doc-types/': {
+      id: '/_authenticated/doc-types/'
+      path: '/doc-types'
+      fullPath: '/doc-types/'
+      preLoaderRoute: typeof AuthenticatedDocTypesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/medical-center/': {
+      id: '/_authenticated/medical-center/'
+      path: '/medical-center'
+      fullPath: '/medical-center/'
+      preLoaderRoute: typeof AuthenticatedMedicalCenterIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/otp/': {
+      id: '/_authenticated/otp/'
+      path: '/otp'
+      fullPath: '/otp/'
+      preLoaderRoute: typeof AuthenticatedOtpIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/outpatient-doc-acceptances/': {
+      id: '/_authenticated/outpatient-doc-acceptances/'
+      path: '/outpatient-doc-acceptances'
+      fullPath: '/outpatient-doc-acceptances/'
+      preLoaderRoute: typeof AuthenticatedOutpatientDocAcceptancesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/person-special-diseases/': {
+      id: '/_authenticated/person-special-diseases/'
+      path: '/person-special-diseases'
+      fullPath: '/person-special-diseases/'
+      preLoaderRoute: typeof AuthenticatedPersonSpecialDiseasesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/pipelines/': {
+      id: '/_authenticated/pipelines/'
+      path: '/pipelines'
+      fullPath: '/pipelines/'
+      preLoaderRoute: typeof AuthenticatedPipelinesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/repetitive-responses/': {
+      id: '/_authenticated/repetitive-responses/'
+      path: '/repetitive-responses'
+      fullPath: '/repetitive-responses/'
+      preLoaderRoute: typeof AuthenticatedRepetitiveResponsesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sub-users/': {
+      id: '/_authenticated/sub-users/'
+      path: '/sub-users'
+      fullPath: '/sub-users/'
+      preLoaderRoute: typeof AuthenticatedSubUsersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/support-questions/': {
+      id: '/_authenticated/support-questions/'
+      path: '/support-questions'
+      fullPath: '/support-questions/'
+      preLoaderRoute: typeof AuthenticatedSupportQuestionsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tickets/': {
+      id: '/_authenticated/tickets/'
+      path: '/tickets'
+      fullPath: '/tickets/'
+      preLoaderRoute: typeof AuthenticatedTicketsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/user-account/': {
+      id: '/_authenticated/user-account/'
+      path: '/user-account'
+      fullPath: '/user-account/'
+      preLoaderRoute: typeof AuthenticatedUserAccountIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -150,9 +593,69 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren
 )
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedAgreementsIndexRoute: typeof AuthenticatedAgreementsIndexRoute
+  AuthenticatedAiAssessmentRulesIndexRoute: typeof AuthenticatedAiAssessmentRulesIndexRoute
+  AuthenticatedAssessmentPromptsIndexRoute: typeof AuthenticatedAssessmentPromptsIndexRoute
+  AuthenticatedAssignementRulesIndexRoute: typeof AuthenticatedAssignementRulesIndexRoute
+  AuthenticatedBankAccountIndexRoute: typeof AuthenticatedBankAccountIndexRoute
+  AuthenticatedBranchesIndexRoute: typeof AuthenticatedBranchesIndexRoute
+  AuthenticatedClaimReportsIndexRoute: typeof AuthenticatedClaimReportsIndexRoute
+  AuthenticatedClaimRequestsIndexRoute: typeof AuthenticatedClaimRequestsIndexRoute
+  AuthenticatedCoveragesIndexRoute: typeof AuthenticatedCoveragesIndexRoute
+  AuthenticatedDamageCodesIndexRoute: typeof AuthenticatedDamageCodesIndexRoute
+  AuthenticatedDocTypesIndexRoute: typeof AuthenticatedDocTypesIndexRoute
+  AuthenticatedMedicalCenterIndexRoute: typeof AuthenticatedMedicalCenterIndexRoute
+  AuthenticatedOtpIndexRoute: typeof AuthenticatedOtpIndexRoute
+  AuthenticatedOutpatientDocAcceptancesIndexRoute: typeof AuthenticatedOutpatientDocAcceptancesIndexRoute
+  AuthenticatedPersonSpecialDiseasesIndexRoute: typeof AuthenticatedPersonSpecialDiseasesIndexRoute
+  AuthenticatedPipelinesIndexRoute: typeof AuthenticatedPipelinesIndexRoute
+  AuthenticatedRepetitiveResponsesIndexRoute: typeof AuthenticatedRepetitiveResponsesIndexRoute
+  AuthenticatedSubUsersIndexRoute: typeof AuthenticatedSubUsersIndexRoute
+  AuthenticatedSupportQuestionsIndexRoute: typeof AuthenticatedSupportQuestionsIndexRoute
+  AuthenticatedTicketsIndexRoute: typeof AuthenticatedTicketsIndexRoute
+  AuthenticatedUserAccountIndexRoute: typeof AuthenticatedUserAccountIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedAgreementsIndexRoute: AuthenticatedAgreementsIndexRoute,
+  AuthenticatedAiAssessmentRulesIndexRoute:
+    AuthenticatedAiAssessmentRulesIndexRoute,
+  AuthenticatedAssessmentPromptsIndexRoute:
+    AuthenticatedAssessmentPromptsIndexRoute,
+  AuthenticatedAssignementRulesIndexRoute:
+    AuthenticatedAssignementRulesIndexRoute,
+  AuthenticatedBankAccountIndexRoute: AuthenticatedBankAccountIndexRoute,
+  AuthenticatedBranchesIndexRoute: AuthenticatedBranchesIndexRoute,
+  AuthenticatedClaimReportsIndexRoute: AuthenticatedClaimReportsIndexRoute,
+  AuthenticatedClaimRequestsIndexRoute: AuthenticatedClaimRequestsIndexRoute,
+  AuthenticatedCoveragesIndexRoute: AuthenticatedCoveragesIndexRoute,
+  AuthenticatedDamageCodesIndexRoute: AuthenticatedDamageCodesIndexRoute,
+  AuthenticatedDocTypesIndexRoute: AuthenticatedDocTypesIndexRoute,
+  AuthenticatedMedicalCenterIndexRoute: AuthenticatedMedicalCenterIndexRoute,
+  AuthenticatedOtpIndexRoute: AuthenticatedOtpIndexRoute,
+  AuthenticatedOutpatientDocAcceptancesIndexRoute:
+    AuthenticatedOutpatientDocAcceptancesIndexRoute,
+  AuthenticatedPersonSpecialDiseasesIndexRoute:
+    AuthenticatedPersonSpecialDiseasesIndexRoute,
+  AuthenticatedPipelinesIndexRoute: AuthenticatedPipelinesIndexRoute,
+  AuthenticatedRepetitiveResponsesIndexRoute:
+    AuthenticatedRepetitiveResponsesIndexRoute,
+  AuthenticatedSubUsersIndexRoute: AuthenticatedSubUsersIndexRoute,
+  AuthenticatedSupportQuestionsIndexRoute:
+    AuthenticatedSupportQuestionsIndexRoute,
+  AuthenticatedTicketsIndexRoute: AuthenticatedTicketsIndexRoute,
+  AuthenticatedUserAccountIndexRoute: AuthenticatedUserAccountIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRouteWithChildren,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

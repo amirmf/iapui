@@ -28,6 +28,10 @@ const parseEmptyResponse = (data: unknown): void => {
 }
 
 export const authService = {
+  async getCurrentUser() {
+    const response = await getApiClient().get('/auth/me', config)
+    return authUserSchema.parse(response.data)
+  },
   async login(payload: LoginRequest) {
     const response = await getApiClient().post(
       '/auth/login',

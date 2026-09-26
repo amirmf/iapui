@@ -1,12 +1,12 @@
 import { StrictMode } from 'react'
 
-import { queryClient, router } from '@app/router'
+import { queryClient } from '@app/router'
 import { configureApiClient } from '@iap/api-client'
 import '@iap/design-tokens/theme.css'
 import { i18nReady } from '@shared/i18n/i18n'
 import { AppProviders } from '@shared/providers/app-providers'
+import { AuthenticatedRouterProvider } from '@shared/router/authenticated-router-provider'
 import '@styles/index.scss'
-import { RouterProvider } from '@tanstack/react-router'
 import { createRoot } from 'react-dom/client'
 
 const rootElement = document.getElementById('root')
@@ -23,7 +23,7 @@ void i18nReady.then(() => {
   createRoot(rootElement).render(
     <StrictMode>
       <AppProviders queryClient={queryClient}>
-        <RouterProvider router={router} />
+        <AuthenticatedRouterProvider />
       </AppProviders>
     </StrictMode>
   )

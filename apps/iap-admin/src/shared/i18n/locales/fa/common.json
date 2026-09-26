@@ -77,5 +77,65 @@
       "passwordsMatch": "رمز عبور و تأیید آن باید یکسان باشند.",
       "usernameRequired": "کد ملی الزامی است."
     }
+  },
+  "dashboard": {
+    "title": "داشبورد",
+    "reports": {
+      "actions": {
+        "showReport": "جهت نمایش گزارش کلیک کنید"
+      }
+    }
+  },
+  "placeholder": {
+    "description": "این صفحه در حال پیاده‌سازی است."
+  },
+  "shell": {
+    "closeNavigation": "بستن نوار ناوبری",
+    "collapseNavigation": "جمع کردن نوار ناوبری",
+    "expandNavigation": "باز کردن نوار ناوبری",
+    "loading": "در حال بررسی نشست...",
+    "logout": "خروج",
+    "navigation": "ناوبری اصلی",
+    "openNavigation": "باز کردن نوار ناوبری"
+  },
+  "sidebar": {
+    "general": "عمومی",
+    "dashboard": "داشبورد",
+    "parties": "اشخاص",
+    "assessmentPrompts": "دستورات ارزیابی",
+    "aiAssessmentRules": "قوانین ارزیابی هوشمند",
+    "repetitiveResponses": "پاسخ‌های تکراری",
+    "branches": "شعب",
+    "coverages-maxa": " پوشش ها",
+    "agreements": "قرارداد",
+    "docTypes": "نوع سند",
+    "claimRequests": "درخواست‌های خسارت",
+    "claimRequestsAgent": "درخواست‌های من",
+    "createClaimRequests": "ثبت درخواست خسارت",
+    "damageCodes": "کد خسارت",
+    "tasks": "کار",
+    "apps": "اپلیکیشن",
+    "chats": "نمودار",
+    "users": "کاربر",
+    "myiap": "نرم‌افزار کاربران",
+    "otp": "رمز یکبار مصرف",
+    "other": {
+      "title": "سیستم",
+      "setting": "تنظیمات ",
+      "helpCenter": "راهنما"
+    },
+    "coverageDamageCodeAppls": "نگاشت پوشش و کد",
+    "coverageGroupCategories": "دسته‌های گروه پوشش",
+    "coverageGroupCategoryAppls": "نگاشت‌های دسته گروه پوشش",
+    "outpatientDocAcceptances": "مالی و پرداخت",
+    "subUsers": "قرارداد - کاربران",
+    "personSpecialDiseases": "بیماری‌های خاص افراد",
+    "bankAccounts": "حساب‌های بانکی",
+    "claimReports": "پذیرش و پرونده‌ها",
+    "pipelines": "خطوط پردازش",
+    "assignementRules": "قوانین ارجاع",
+    "tickets": "تیکت‌ها",
+    "supportQuestions": "سوالات پشتیبانی",
+    "medicalCenter": "مراکز درمانی"
   }
 }

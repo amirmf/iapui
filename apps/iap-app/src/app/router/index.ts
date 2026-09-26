@@ -14,7 +14,7 @@ export const queryClient = createAppQueryClient({
 })
 
 export const router = createRouter({
-  context: { queryClient },
+  context: { auth: undefined!, queryClient },
   defaultPreload: false,
   defaultPreloadStaleTime: 0,
   routeTree,

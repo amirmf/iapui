@@ -68,7 +68,10 @@ When implementation begins:
 
 ### `src/features`
 
-Owns product- and screen-specific behavior. Folders should mirror stable customer or admin journeys. A feature may contain `api`, `model`, `queries`, `schemas`, `ui`, and a public `index.ts` as needed.
+Owns product- and screen-specific behavior. Folders should mirror stable customer or admin journeys. A feature may contain `services`, `model`, `queries`, `schemas`, `ui`, and a public `index.ts` as needed.
+
+Use `services/` for backend-facing feature or package services. Service files use the
+`<domain>-service.ts` naming convention, for example `auth-service.ts`.
 
 ### `src/modules`
 

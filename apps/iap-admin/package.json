@@ -14,6 +14,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
     "@iap/api-client": "workspace:*",
+    "@iap/api-types": "workspace:*",
     "@iap/auth": "workspace:*",
     "@iap/design-tokens": "workspace:*",
     "@iap/forms": "workspace:*",
@@ -28,6 +29,7 @@
     "i18next-resources-to-backend": "^1.2.3",
     "immer": "^11.1.18",
     "js-cookie": "^3.0.8",
+    "lucide-react": "^0.468.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-hook-form": "^7.88.0",

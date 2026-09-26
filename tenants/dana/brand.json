@@ -4,6 +4,10 @@
     "production": { "VITE_API_BASE_URL": "https://daiapi.ostaadx.ai/api/" }
   },
   "assets": { "loginLogo": "/images/logo/dana/dana-logo.svg" },
+  "domain_url": {
+    "app": "http://localhost:5173",
+    "admin": "http://localhost:5174"
+  },
   "identity": {
     "loginTitle": "سامانه جامع ارزیابی خسارت",
     "loginCompany": "بیمه دانا"

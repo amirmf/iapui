@@ -18,7 +18,6 @@ import { BookOpen } from 'lucide-react'
 import { useForm, useWatch } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import { authService } from '../api/auth-api'
 import {
   type PasswordFormValues,
   type RegistrationIdentityFormValues,
@@ -26,6 +25,7 @@ import {
   createRegistrationIdentitySchema,
   toRegistrationIdentity,
 } from '../model/auth-schemas'
+import { authService } from '../services/auth-service'
 import { AuthCard } from './auth-card'
 import type { AuthPageProps } from './auth-page.types'
 import { PasswordFields } from './password-fields'

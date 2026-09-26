@@ -175,6 +175,7 @@ export const resetPasswordRequestSchema = passwordResetIdentitySchema.extend({
 export const emptyAuthResponseSchema = z.undefined()
 
 export type AuthUser = z.infer<typeof authUserSchema>
+export type PartyRole = z.infer<typeof partyRoleSchema>
 export type LoginRequest = z.infer<typeof loginRequestSchema>
 export type LoginResponse = z.infer<typeof loginResponseSchema>
 export type SsoLoginRequest = z.infer<typeof ssoLoginRequestSchema>

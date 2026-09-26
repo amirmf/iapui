@@ -1,4 +1,8 @@
 export * from './model/auth-store'
+export * from './model/auth-session'
+export * from './model/auth-page-access'
+export * from './model/access-control'
+export type { AuthUser } from '@iap/api-types'
 export * from './ui/auth-page.types'
 export * from './ui/login-page'
 export * from './ui/password-reset-page'

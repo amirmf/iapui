@@ -4,12 +4,16 @@ import { useMutation } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { authService } from '../api/auth-api'
 import { useAuthStore } from '../model/auth-store'
+import { authService } from '../services/auth-service'
 import type { AuthPageProps } from './auth-page.types'
 
-export function SsoPage(props: AuthPageProps) {
-  const { onNavigate } = props
+type SsoPageProps = AuthPageProps & {
+  onPendingChange?: (isPending: boolean) => void
+}
+
+export function SsoPage(props: SsoPageProps) {
+  const { onNavigate, onPendingChange } = props
   const { t } = useTranslation()
   const attempted = useRef(false)
   const setSession = useAuthStore((state) => state.setSession)
@@ -22,9 +26,12 @@ export function SsoPage(props: AuthPageProps) {
     },
     onSuccess: ({ token, user }) => {
       setSession({ accessToken: token, user })
-      onNavigate('home')
     },
   })
+
+  useEffect(() => {
+    onPendingChange?.(ssoLogin.isPending)
+  }, [onPendingChange, ssoLogin.isPending])
 
   useEffect(() => {
     if (attempted.current) {

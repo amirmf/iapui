@@ -18,11 +18,26 @@ export const useAuthSessionStore = create<AuthSessionState>()(
       user: null,
     }),
     {
+      migrate: (persistedState) => {
+        const persisted = persistedState as { accessToken?: unknown }
+
+        return {
+          accessToken:
+            typeof persisted.accessToken === 'string'
+              ? persisted.accessToken
+              : null,
+          user: null,
+        }
+      },
       name: 'iap-auth-session',
       partialize: (state) => ({
         accessToken: state.accessToken,
-        user: state.user,
+        // The access token is the durable session credential. The user is
+        // intentionally refreshed from /auth/me after a page reload so roles
+        // and account access cannot become stale in local storage.
+        user: null,
       }),
+      version: 1,
     }
   )
 )
