@@ -23,6 +23,10 @@ const timeout = 60_000
 
 const config = { timeout, withCredentials: true }
 
+const parseEmptyResponse = (data: unknown): void => {
+  emptyAuthResponseSchema.parse(data === '' ? undefined : data)
+}
+
 export const authService = {
   async login(payload: LoginRequest) {
     const response = await getApiClient().post(
@@ -38,7 +42,7 @@ export const authService = {
       passwordResetIdentitySchema.parse(payload),
       config
     )
-    emptyAuthResponseSchema.parse(response.data)
+    parseEmptyResponse(response.data)
   },
   async requestSignupOtp(payload: RegistrationIdentity) {
     const response = await getApiClient().post(
@@ -46,7 +50,7 @@ export const authService = {
       registrationIdentitySchema.parse(payload),
       config
     )
-    emptyAuthResponseSchema.parse(response.data)
+    parseEmptyResponse(response.data)
   },
   async resetPassword(payload: ResetPasswordRequest) {
     const response = await getApiClient().post(
@@ -54,7 +58,7 @@ export const authService = {
       resetPasswordRequestSchema.parse(payload),
       config
     )
-    emptyAuthResponseSchema.parse(response.data)
+    parseEmptyResponse(response.data)
   },
   async ssoLogin(payload: SsoLoginRequest) {
     const response = await getApiClient().post(

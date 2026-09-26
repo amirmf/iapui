@@ -3,12 +3,11 @@ import type {
   PasswordResetIdentity,
   RegistrationIdentity,
 } from '@iap/api-types'
+import { iranianNationalCodeRegex, mobilePhoneRegex } from '@iap/shared-lib'
 import { z } from 'zod'
 
 type Translate = (key: string) => string
 
-const mobileNumber = /^09\d{9}$/
-const nationalCode = /^\d{10}$/
 const otpCode = /^\d{4,9}$/
 
 export function createLoginSchema(t: Translate) {
@@ -23,18 +22,21 @@ export function createRegistrationIdentitySchema(t: Translate) {
     z.object({
       nationalCode: z
         .string()
-        .regex(nationalCode, t('auth.validation.nationalCode')),
+        .trim()
+        .regex(iranianNationalCodeRegex, t('auth.validation.nationalCode')),
       nationalityType: z.literal('IR'),
       phoneNumber: z
         .string()
-        .regex(mobileNumber, t('auth.validation.mobileNumber')),
+        .trim()
+        .regex(mobilePhoneRegex, t('auth.validation.mobileNumber')),
     }),
     z.object({
-      nationalCode: z.string().min(1, t('auth.validation.nationalCode')),
+      nationalCode: z.string().trim(),
       nationalityType: z.literal('FOREIGN'),
       phoneNumber: z
         .string()
-        .regex(mobileNumber, t('auth.validation.mobileNumber')),
+        .trim()
+        .regex(mobilePhoneRegex, t('auth.validation.mobileNumber')),
     }),
   ])
 }
@@ -42,7 +44,7 @@ export function createRegistrationIdentitySchema(t: Translate) {
 export function createPasswordSchema(t: Translate) {
   return z
     .object({
-      otpCode: z.string().regex(otpCode, t('auth.validation.otpCode')),
+      otpCode: z.string().trim().regex(otpCode, t('auth.validation.otpCode')),
       password: z.string().min(6, t('auth.validation.passwordMinLength')),
       verifyPassword: z
         .string()
@@ -58,10 +60,12 @@ export function createPasswordResetIdentitySchema(t: Translate) {
   return z.object({
     mobileNumber: z
       .string()
-      .regex(mobileNumber, t('auth.validation.mobileNumber')),
+      .trim()
+      .regex(mobilePhoneRegex, t('auth.validation.mobileNumber')),
     nationalCode: z
       .string()
-      .regex(nationalCode, t('auth.validation.nationalCode')),
+      .trim()
+      .regex(iranianNationalCodeRegex, t('auth.validation.nationalCode')),
   })
 }
 

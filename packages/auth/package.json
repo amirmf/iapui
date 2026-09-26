@@ -14,6 +14,7 @@
     "@iap/api-client": "workspace:*",
     "@iap/api-types": "workspace:*",
     "@iap/forms": "workspace:*",
+    "@iap/shared-lib": "workspace:*",
     "@iap/ui": "workspace:*",
     "@tanstack/react-query": "^5.103.2",
     "immer": "^11.1.18",

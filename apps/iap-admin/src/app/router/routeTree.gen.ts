@@ -6,7 +6,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthAuthSsoRouteImport } from './routes/_auth/auth/sso'
-import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AuthLoginIndexRouteImport } from './routes/_auth/login/index'
 import { Route as AuthPasswordResetIndexRouteImport } from './routes/_auth/password-reset/index'
 import { Route as AuthRegisterIndexRouteImport } from './routes/_auth/register/index'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
@@ -21,14 +21,14 @@ const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/_auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => AuthRouteRoute,
-} as any)
 const AuthAuthSsoRoute = AuthAuthSsoRouteImport.update({
   id: '/auth/sso',
   path: '/auth/sso',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
+  id: '/login/',
+  path: '/login/',
   getParentRoute: () => AuthRouteRoute,
 } as any)
 const AuthPasswordResetIndexRoute = AuthPasswordResetIndexRouteImport.update({
@@ -44,15 +44,15 @@ const AuthRegisterIndexRoute = AuthRegisterIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/login': typeof AuthLoginRoute
   '/auth/sso': typeof AuthAuthSsoRoute
+  '/login/': typeof AuthLoginIndexRoute
   '/password-reset/': typeof AuthPasswordResetIndexRoute
   '/register/': typeof AuthRegisterIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/login': typeof AuthLoginRoute
   '/auth/sso': typeof AuthAuthSsoRoute
+  '/login': typeof AuthLoginIndexRoute
   '/password-reset': typeof AuthPasswordResetIndexRoute
   '/register': typeof AuthRegisterIndexRoute
 }
@@ -60,22 +60,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteRouteWithChildren
-  '/_auth/login': typeof AuthLoginRoute
   '/_auth/auth/sso': typeof AuthAuthSsoRoute
+  '/_auth/login/': typeof AuthLoginIndexRoute
   '/_auth/password-reset/': typeof AuthPasswordResetIndexRoute
   '/_auth/register/': typeof AuthRegisterIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/auth/sso' | '/password-reset/' | '/register/'
+  fullPaths: '/' | '/auth/sso' | '/login/' | '/password-reset/' | '/register/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/auth/sso' | '/password-reset' | '/register'
+  to: '/' | '/auth/sso' | '/login' | '/password-reset' | '/register'
   id:
     | '__root__'
     | '/'
     | '/_auth'
-    | '/_auth/login'
     | '/_auth/auth/sso'
+    | '/_auth/login/'
     | '/_auth/password-reset/'
     | '/_auth/register/'
   fileRoutesById: FileRoutesById
@@ -101,18 +101,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/login': {
-      id: '/_auth/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof AuthLoginRouteImport
-      parentRoute: typeof AuthRouteRoute
-    }
     '/_auth/auth/sso': {
       id: '/_auth/auth/sso'
       path: '/auth/sso'
       fullPath: '/auth/sso'
       preLoaderRoute: typeof AuthAuthSsoRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
+    '/_auth/login/': {
+      id: '/_auth/login/'
+      path: '/login'
+      fullPath: '/login/'
+      preLoaderRoute: typeof AuthLoginIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }
     '/_auth/password-reset/': {
@@ -133,15 +133,15 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthRouteRouteChildren {
-  AuthLoginRoute: typeof AuthLoginRoute
   AuthAuthSsoRoute: typeof AuthAuthSsoRoute
+  AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthPasswordResetIndexRoute: typeof AuthPasswordResetIndexRoute
   AuthRegisterIndexRoute: typeof AuthRegisterIndexRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
-  AuthLoginRoute: AuthLoginRoute,
   AuthAuthSsoRoute: AuthAuthSsoRoute,
+  AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthPasswordResetIndexRoute: AuthPasswordResetIndexRoute,
   AuthRegisterIndexRoute: AuthRegisterIndexRoute,
 }

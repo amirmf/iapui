@@ -336,6 +336,9 @@ importers:
 
   packages/api-types:
     dependencies:
+      '@iap/shared-lib':
+        specifier: workspace:*
+        version: link:../shared-lib
       zod:
         specifier: ^4.6.5
         version: 4.6.5
@@ -358,6 +361,9 @@ importers:
       '@iap/forms':
         specifier: workspace:*
         version: link:../forms
+      '@iap/shared-lib':
+        specifier: workspace:*
+        version: link:../shared-lib
       '@iap/ui':
         specifier: workspace:*
         version: link:../ui
@@ -448,6 +454,10 @@ importers:
       date-fns-jalali:
         specifier: 4.4.0-0
         version: 4.4.0-0
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   packages/tailwind-config:
     dependencies:

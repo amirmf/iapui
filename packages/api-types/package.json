@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@iap/shared-lib": "workspace:*",
     "zod": "^4.6.5"
   },
   "devDependencies": {
