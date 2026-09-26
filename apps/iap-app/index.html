@@ -39,6 +39,20 @@
       property="twitter:description"
       content="%VITE_META_TWITTER_DESCRIPTION%"
     />
+    <script>
+      ;(() => {
+        try {
+          const storedTheme = JSON.parse(
+            localStorage.getItem('iap-theme') || '{}'
+          )
+          const theme = storedTheme?.state?.theme === 'dark' ? 'dark' : 'light'
+          document.documentElement.classList.add(theme)
+          document.documentElement.style.colorScheme = theme
+        } catch {
+          document.documentElement.classList.add('light')
+        }
+      })()
+    </script>
     <link rel="stylesheet" href="/fonts/fa/fontFa.css" />
     <meta name="theme-color" content="#2563eb" />
   </head>

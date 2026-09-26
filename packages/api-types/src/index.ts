@@ -2,3 +2,6 @@
 export * from './auth'
 export * from './common'
 export * from './dashboard'
+export * from './insurance-policy'
+export * from './support'
+export * from './support-ticket'

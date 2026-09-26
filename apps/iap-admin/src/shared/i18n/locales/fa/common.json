@@ -171,6 +171,14 @@
     "loading": "در حال بارگذاری...",
     "total": "مجموع"
   },
+  "panelSwitcher": {
+    "switch": "تغییر پنل: {{panel}}",
+    "current": "{{panel}} — پنل فعلی",
+    "panels": {
+      "evaluation": "پنل ارزیابی",
+      "customer": "سامانه مشتریان"
+    }
+  },
   "shell": {
     "closeNavigation": "بستن نوار ناوبری",
     "collapseNavigation": "جمع کردن نوار ناوبری",

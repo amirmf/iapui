@@ -2,6 +2,8 @@ import type { AuthUser } from '@iap/api-types'
 import { Menu, UserRound } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+import { AdminPanelSwitcher } from './admin-panel-switcher'
+
 type AdminHeaderProps = {
   onOpenNavigation: () => void
   onLogout: () => void
@@ -33,6 +35,7 @@ export function AdminHeader({
       <p className='hidden text-sm text-muted-foreground sm:block'>
         {formatter.format(new Date())}
       </p>
+      <AdminPanelSwitcher />
       <div className='mr-auto flex items-center gap-2'>
         <div className='hidden text-right sm:block'>
           <p className='text-sm font-semibold'>{name}</p>
