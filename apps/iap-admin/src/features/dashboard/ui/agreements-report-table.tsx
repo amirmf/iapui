@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
 import type { AgreementWithoutMainAssessmentUser } from '@iap/api-types'
-import { DataTable, TwoLineCell } from '@shared/tables'
+import { SimpleDataTable, TwoLineCell } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
 import {
   createColumnHelper,
@@ -85,7 +85,7 @@ export function AgreementsReportTable() {
         isFetching={query.isFetching}
         onRefresh={() => void query.refetch()}
       />
-      <DataTable
+      <SimpleDataTable
         isLoading={query.isLoading}
         labels={{
           empty: t(

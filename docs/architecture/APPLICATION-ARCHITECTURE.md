@@ -141,6 +141,10 @@ workspace packages → no application imports
 - Modules may use shared code and packages, but must not depend on a specific feature.
 - `shared` must not contain product-specific business behavior.
 - `ui`, `forms`, and the remaining packages must not import application code.
+- Use absolute imports for application source code. Use the configured aliases
+  (for example, `@shared/tables` or `@/features/...`) rather than relative
+  paths such as `../../shared/tables`, including between files in the same
+  module.
 - Backend contracts live in `api-types`; transport behavior lives in `api-client`.
 - Every backend endpoint contract must expose Zod v4 schemas for both its request
   and response in `api-types`. API services validate outgoing requests and

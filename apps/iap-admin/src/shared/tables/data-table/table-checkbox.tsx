@@ -1,30 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import { cn } from '@iap/ui'
+import { Checkbox, cn } from '@iap/ui'
 import type { ColumnDef, Row, Table } from '@tanstack/react-table'
-
-type CheckboxProps = {
-  checked: boolean | 'indeterminate'
-  className?: string
-  label: string
-  onCheckedChange: (checked: boolean) => void
-}
-
-function SelectionCheckbox(props: CheckboxProps) {
-  const { checked, className, label, onCheckedChange } = props
-
-  return (
-    <input
-      aria-label={label}
-      checked={checked === true}
-      className={cn('size-4 accent-primary', className)}
-      onChange={(event) => onCheckedChange(event.target.checked)}
-      ref={(element) => {
-        if (element) element.indeterminate = checked === 'indeterminate'
-      }}
-      type='checkbox'
-    />
-  )
-}
 
 export function TableHeaderCheckbox<TData>(props: {
   ariaLabel: string
@@ -34,14 +10,16 @@ export function TableHeaderCheckbox<TData>(props: {
   const { ariaLabel, className, table } = props
 
   return (
-    <SelectionCheckbox
+    <Checkbox
+      aria-label={ariaLabel}
       checked={
         table.getIsAllPageRowsSelected() ||
         (table.getIsSomePageRowsSelected() && 'indeterminate')
       }
-      className={className}
-      label={ariaLabel}
-      onCheckedChange={(checked) => table.toggleAllPageRowsSelected(checked)}
+      className={cn('translate-y-0.5', className)}
+      onCheckedChange={(checked) =>
+        table.toggleAllPageRowsSelected(Boolean(checked))
+      }
     />
   )
 }
@@ -54,11 +32,11 @@ export function TableRowCheckbox<TData>(props: {
   const { ariaLabel, className, row } = props
 
   return (
-    <SelectionCheckbox
+    <Checkbox
+      aria-label={ariaLabel}
       checked={row.getIsSelected()}
-      className={className}
-      label={ariaLabel}
-      onCheckedChange={(checked) => row.toggleSelected(checked)}
+      className={cn('translate-y-0.5', className)}
+      onCheckedChange={(checked) => row.toggleSelected(Boolean(checked))}
     />
   )
 }

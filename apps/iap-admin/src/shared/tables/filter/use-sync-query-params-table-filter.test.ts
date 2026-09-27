@@ -1,14 +1,13 @@
+import { toServerTableParams } from '@shared/tables/data-table/server-table-state'
+import {
+  parseTableFilterSearch,
+  toTableFilterSearch,
+} from '@shared/tables/filter/use-sync-query-params-table-filter'
 import { describe, expect, it } from 'vitest'
 
-import {
-  parseServerTableSearch,
-  toServerTableSearch,
-} from './server-table-search'
-import { toServerTableParams } from './server-table-state'
-
-describe('server table state', () => {
+describe('table filter search state', () => {
   it('keeps feature filters separate from pagination and sorting search keys', () => {
-    const state = parseServerTableSearch({
+    const state = parseTableFilterSearch({
       page: '3',
       pageSize: '50',
       sort: 'createdAt',
@@ -28,7 +27,7 @@ describe('server table state', () => {
       sortDirection: 'desc',
       status: 'pending',
     })
-    expect(toServerTableSearch(state)).toMatchObject({
+    expect(toTableFilterSearch(state)).toMatchObject({
       page: '3',
       pageSize: '50',
     })
@@ -36,7 +35,7 @@ describe('server table state', () => {
 
   it('uses safe defaults for malformed values', () => {
     expect(
-      parseServerTableSearch({ page: '-1', pageSize: 'many' })
+      parseTableFilterSearch({ page: '-1', pageSize: 'many' })
     ).toMatchObject({
       pagination: { pageIndex: 0, pageSize: 20 },
       sorting: [],

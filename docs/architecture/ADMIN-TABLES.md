@@ -11,15 +11,24 @@ Features own column definitions, API request functions, query keys, route
 search validation, filter identifiers, permissions, and product-specific empty
 states. They import only the public `@shared/tables` entry point.
 
+`shared/tables/index.ts` is deliberately the only public entry point.
+Implementation is organized by capability: `data-table/` owns base table
+composition and server state, `filter/` owns URL/filter adapters, and
+`pivot-table/` owns local aggregation/export behavior. This keeps table-only
+concerns out of the application `shared` root while retaining a stable feature
+import.
+
 ## Components
 
-- `DataTable` renders a caller-owned TanStack Table instance, including loading,
-  empty, no-result, selection, and two-column row states.
-- `DataTablePagination`, `DataTableColumnHeader`, `DataTableViewOptions`,
-  `TableActions`, `TableActionButton`, and selection helpers are reusable admin
-  composition utilities.
-- `TableFilters` is controlled. A feature supplies its values and connects its
-  updater to `useServerTableState` or a validated route search state.
+- `SimpleDataTable` renders a caller-owned TanStack Table instance, including
+  loading, empty, no-result, selection, and two-column row states.
+- `PaginatedDataTable` owns TanStack Table composition for controlled,
+  server-driven pagination, sorting, selection, and column visibility.
+- `DataTablePagination`, `DataTableColumnHeader`, `TableActions`,
+  `TableActionButton`, and selection helpers are reusable admin composition
+  utilities.
+- `TableFilterState` is controlled. `TableFilterQueryParams` is the optional
+  route-search adapter; a feature supplies its values or validated route state.
 - `PivotTable` aggregates client-provided rows and supports browser CSV and PDF
   export. Feature code still owns report-specific fonts and export
   authorization when those requirements exceed the generic export.
@@ -32,5 +41,6 @@ manual pagination, filtering, and sorting enabled. Do not apply client-side
 filtering to an incomplete server page.
 
 At a TanStack Router boundary, validate search parameters first. Then use
-`parseServerTableSearch` and `toServerTableSearch` to convert only the standard
-table keys. Feature filter names pass through unchanged.
+`parseTableFilterSearch` and `toTableFilterSearch` from the filter module to
+convert only the standard table keys. Feature filter names pass through
+unchanged.
