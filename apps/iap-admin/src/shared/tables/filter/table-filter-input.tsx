@@ -15,6 +15,7 @@ export function TableFilterInput(
     debounceMs = 400,
     id,
     onValueChange,
+    queryKey,
     value = '',
     wrapperClassName,
     ...inputProps
@@ -24,11 +25,11 @@ export function TableFilterInput(
   useEffect(() => setText(value), [value])
   useEffect(() => {
     const timeout = window.setTimeout(
-      () => onValueChange(id, text.trim() || undefined),
+      () => onValueChange(queryKey ?? id, text.trim() || undefined),
       debounceMs
     )
     return () => window.clearTimeout(timeout)
-  }, [debounceMs, id, onValueChange, text])
+  }, [debounceMs, onValueChange, queryKey, id, text])
 
   return (
     <div className={cn('relative', wrapperClassName)}>

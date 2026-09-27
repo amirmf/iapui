@@ -1,4 +1,22 @@
+import { pageFiltersSchema } from '@iap/shared-lib'
 import { z } from 'zod'
+
+/**
+ * Creates the common request contract for filterable paginated endpoints.
+ *
+ * A domain can narrow `filterValueSchema` when its endpoint supports a more
+ * restrictive filter shape. The output always contains page, size, and an
+ * object of filters, while callers may omit them and rely on the defaults.
+ */
+export function createPageRequestSchema() {
+  return z
+    .object({
+      filters: pageFiltersSchema.default({}),
+      page: z.number().int().nonnegative().default(0),
+      size: z.number().int().positive().default(20),
+    })
+    .strict()
+}
 
 /**
  * Creates the common backend page response contract.

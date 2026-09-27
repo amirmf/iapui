@@ -1,6 +1,9 @@
 import { z } from 'zod'
 
+import { createPageRequestSchema, createPageResponseSchema } from '../common'
+
 const uuidSchema = z.uuid()
+
 export const ticketStatusSchema = z.enum([
   'OPEN',
   'ASSIGNED',
@@ -50,37 +53,20 @@ export const supportTicketSchema = z
     updatedAt: z.string().nullable().optional(),
   })
   .loose()
-export const pageSupportTicketSchema = z
-  .object({
-    content: z.array(supportTicketSchema).nullable().optional(),
-    empty: z.boolean().nullable().optional(),
-    first: z.boolean().nullable().optional(),
-    last: z.boolean().nullable().optional(),
-    number: z.number().nullable().optional(),
-    size: z.number().nullable().optional(),
-    totalElements: z.number().nullable().optional(),
-    totalPages: z.number().nullable().optional(),
-  })
-  .loose()
-export const pageSupportTicketMessageSchema = pageSupportTicketSchema.extend({
-  content: z.array(supportTicketMessageSchema).nullable().optional(),
-})
+export const pageSupportTicketSchema =
+  createPageResponseSchema(supportTicketSchema)
+export const pageSupportTicketMessageSchema = createPageResponseSchema(
+  supportTicketMessageSchema
+)
 export const findMyIapTicketByIdRequestSchema = z.object({
   path: z.object({ ticketId: uuidSchema }),
 })
 export const findMyIapTicketMessagesRequestSchema = z.object({
   path: z.object({ ticketId: uuidSchema }),
-  query: z.object({
-    page: z.number().int().optional(),
-    size: z.number().int().optional(),
-  }),
+  query: createPageRequestSchema(),
 })
 export const findMyIapTicketsRequestSchema = z.object({
-  query: z.object({
-    filters: z.record(z.string(), z.string()),
-    page: z.number().int().optional(),
-    size: z.number().int().optional(),
-  }),
+  query: createPageRequestSchema(),
 })
 export type FindMyIapTicketByIdRequest = z.infer<
   typeof findMyIapTicketByIdRequestSchema

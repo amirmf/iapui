@@ -1,31 +1,12 @@
 import { z } from 'zod'
 
+import { claimRequestStatusSchema } from '../claim-request'
 import { createPageResponseSchema } from '../common'
 
 export const dashboardFiltersSchema = z.record(
   z.string(),
   z.union([z.string(), z.number(), z.array(z.string()), z.undefined()])
 )
-
-const claimRequestStatusSchema = z.enum([
-  'SUBMITTED',
-  'IN_REVIEW',
-  'IN_ASSESSMENT',
-  'DELEGATED',
-  'DEDICATED_TO_USER',
-  'RETURN',
-  'REJECTED',
-  'APPROVED',
-  'SENT',
-  'SENT_FAILED',
-  'FAILED_FETCH_API',
-  'TERMINATED',
-  'PAID',
-  'PAYMENT_REJECTED',
-  'PAYMENT_RETURN',
-  'PAYMENT_RETURN_RESEND',
-  'DELETED',
-])
 
 export const docTypeSchema = z
   .object({

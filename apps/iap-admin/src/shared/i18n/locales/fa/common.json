@@ -162,6 +162,11 @@
     "description": "این صفحه در حال پیاده‌سازی است."
   },
   "common": {
+    "all": "همه",
+    "cancel": "انصراف",
+    "confirm": "تأیید",
+    "yes": "بله",
+    "no": "خیر",
     "from": "از",
     "to": "تا",
     "showLess": "فیلترهای کمتر",
@@ -170,6 +175,153 @@
     "noRecords": "داده‌ای یافت نشد.",
     "loading": "در حال بارگذاری...",
     "total": "مجموع"
+  },
+  "claimRequests": {
+    "title": "درخواست‌های خسارت",
+    "description": "مدیریت درخواست‌های خسارت بیمه.",
+    "refresh": "بروزرسانی",
+    "columns": {
+      "amount": "مبلغ درخواستی",
+      "totalSumAmount": "مبلغ تایید شده",
+      "corePaidAmount": "مبلغ فناوران",
+      "corePaidAmountPercent": "درصد اختلاف",
+      "extPaymentDate": "تاریخ پرداخت",
+      "ibanStatus": "وضعیت شبا",
+      "status": "وضعیت",
+      "aiStatus": "وضعیت AI",
+      "submitDate": "تاریخ هزینه",
+      "docType": "انواع مدارک",
+      "extPolicyId": "شماره بیمه‌نامه",
+      "extContractId": "شماره قرارداد",
+      "extNationalCode": "کد ملی",
+      "extMainNationalCode": "کد ملی بیمه شده اصلی",
+      "extDisplayName": "نام بیمه‌شده",
+      "extCustomerName": "نام بیمه‌گذار",
+      "createdAt": "تاریخ ثبت",
+      "assessedAt": "تاریخ ارزیابی",
+      "extPlanCaption": "طرح",
+      "businessKey": "کد پذیرش",
+      "latestAssignementDisplayName": "نام ارزیاب",
+      "extWorkUnitName": "نام شعبه",
+      "isReturn": "عودتی"
+    },
+    "filters": {
+      "latestAssignementDisplayName": "نام ارزیاب",
+      "extPolicyId": "شماره بیمه‌نامه",
+      "extContractId": "شماره قرارداد",
+      "extNationalCode": "کد ملی",
+      "extMainNationalCode": "کد ملی بیمه‌شده اصلی",
+      "extDisplayName": "نام بیمه‌شده",
+      "extCustomerName": "نام بیمه‌گذار",
+      "extWorkUnitName": "نام شعبه",
+      "businessKey": "کد پذیرش",
+      "amountFrom": "مبلغ از",
+      "amountTo": "مبلغ تا",
+      "totalSumAmountFrom": "مبلغ تایید شده از",
+      "totalSumAmountTo": "مبلغ تایید شده تا",
+      "submitDateFrom": "تاریخ هزینه از",
+      "submitDateTo": "تاریخ هزینه تا",
+      "createdAtFrom": "تاریخ ثبت از",
+      "createdAtTo": "تاریخ ثبت تا",
+      "assessedAtFrom": "تاریخ ارزیابی از",
+      "assessedAtTo": "تاریخ ارزیابی تا",
+      "isReturn": "عودتی"
+    },
+    "ibanStatusValues": {
+      "has": "دارد",
+      "doesNotHave": "ندارد"
+    },
+    "status": {
+      "submitted": "ثبت شده",
+      "inReview": "بررسی AI",
+      "inAssessment": "ارزیابی اولیه",
+      "delegated": "در انتظار پاسخ ارجاع",
+      "dedicatedToUser": "بررسی‌های من",
+      "approved": "تأیید شده در انتظار ارسال به فناوران",
+      "rejected": "رد (غیرقابل پرداخت)",
+      "failed_fetch_api": "خطا در دریافت از سرویس",
+      "sent": "ارسال شده در انتظار پرداخت",
+      "sent_failed": "خطا ارسال",
+      "paid": "واریز شده",
+      "sentToBank": "ارسال شده به بانک",
+      "needsReassessment": "نیاز به ارزیابی مجدد",
+      "terminated": "ابطال",
+      "return": "عودت شده در انتظار پاسخ کاربر",
+      "paymentRejected": "رد شده در پرداخت",
+      "paymentReturn": "عودت شده از پرداخت",
+      "paymentReturnResend": "عودت شده از پرداخت (ارسال مجدد)",
+      "deleted": "حذف شده"
+    },
+    "requestType": {
+      "main": "اصلی",
+      "adjustment": "متمم"
+    },
+    "aiStatus": {
+      "approved": "تأیید شده",
+      "return": "عودت داده شده",
+      "reviewRequired": "نیاز به بررسی",
+      "reject": "رد شده",
+      "reviewRequiredSubmitInfoDuplicated": "نیاز به بررسی (اطلاعات تکراری)",
+      "reviewRequiredImageDuplicated": "نیاز به بررسی (تصویر تکراری)",
+      "reviewRequiredImageDigitallyEdited": "نیاز به بررسی (تصویر ویرایش‌شده دیجیتالی)",
+      "returnNoCoverage": "عودت داده شده (بدون پوشش)",
+      "returnMaxCeiling": "عودت داده شده (تکمیل سقف)"
+    },
+    "actions": {
+      "bulkDelete": "حذف گروهی",
+      "downloadExcel": "دانلود اکسل",
+      "generateAndSend": "ایجاد و ارسال گروهی",
+      "inquiryFanavaran": "استعلام فناوران"
+    },
+    "bulk": {
+      "delete": {
+        "title": "حذف گروهی درخواست‌ها",
+        "description": "آیا از حذف {{count}} درخواست انتخاب‌شده مطمئن هستید؟"
+      },
+      "generateAndSend": {
+        "title": "ایجاد و ارسال گروهی",
+        "description": "آیا از ایجاد و ارسال {{count}} درخواست انتخاب‌شده مطمئن هستید؟"
+      },
+      "inquiry": {
+        "title": "استعلام فناوران",
+        "description": "آیا از ارسال استعلام برای {{count}} درخواست انتخاب‌شده مطمئن هستید؟"
+      }
+    },
+    "dialog": {
+      "fields": {
+        "description": "توضیحات",
+        "isCheat": "درخواست به عنوان تقلب ثبت شود.",
+        "objectionStatus": "تعیین وضعیت"
+      }
+    },
+    "validation": {
+      "status": "لطفاً وضعیت را انتخاب کنید."
+    },
+    "bulkDataExtraction": {
+      "button": "آغاز فرآیند Core AI",
+      "title": "آغاز فرآیند داده Core AI",
+      "description": "این عملیات فرایند استخراج داده Core AI را برای {{count}} درخواست انتخاب‌شده آغاز می‌کند.",
+      "selectionInfo": "{{count}} درخواست انتخاب شده",
+      "confirm": "آغاز فرایند",
+      "submitting": "در حال آغاز...",
+      "success": "فرایند استخراج داده Core AI برای {{count}} درخواست انتخاب‌شده آغاز شد.",
+      "error": "آغاز فرایند استخراج داده Core AI ناموفق بود.",
+      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
+    },
+    "bulkStatusChange": {
+      "button": "تغییر گروهی وضعیت",
+      "title": "تغییر گروهی وضعیت",
+      "description": "برای {{count}} درخواست انتخاب‌شده یک وضعیت انتخاب کنید.",
+      "statusPlaceholder": "انتخاب وضعیت",
+      "confirm": "تغییر وضعیت",
+      "submitting": "در حال تغییر...",
+      "success": "وضعیت {{count}} درخواست انتخاب‌شده با موفقیت تغییر کرد.",
+      "error": "تغییر وضعیت درخواست‌های انتخاب‌شده ناموفق بود.",
+      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید.",
+      "defaultDescription": "تغییر گروهی وضعیت",
+      "descriptionPlaceholder": "توضیحات تغییر گروهی وضعیت را وارد کنید"
+    },
+    "fetchNewRequests": "دریافت درخواست‌های جدید"
   },
   "panelSwitcher": {
     "switch": "تغییر پنل: {{panel}}",

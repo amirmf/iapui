@@ -165,6 +165,11 @@ workspace packages → no application imports
   only the content-item schema; `content` remains required, while pagination
   metadata is nullable and optional to tolerate incomplete backend metadata
   without weakening item validation.
+- Filterable paginated request contracts use `createPageRequestSchema` from
+  `@iap/api-types/src/common/`. Its `filters` field uses the shared
+  `pageFiltersSchema` from `@iap/shared-lib`, which is also the input contract
+  for `transformApiFilterParams`; `direction` and `sort` belong to that filter
+  contract. Do not redefine these fields in individual feature services.
 
 ## State, forms, and UI conventions
 

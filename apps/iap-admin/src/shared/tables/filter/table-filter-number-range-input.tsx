@@ -14,33 +14,41 @@ export function TableFilterNumberRangeInput(
   const {
     className,
     fromPlaceholder = 'From',
+    fromKey,
     id,
     numberWithComma,
     onValueChange,
     toPlaceholder = 'To',
+    toKey,
     values,
     wrapperClassName,
   } = props
-  const fromKey = tableFilterKeys.numberFrom(id)
-  const toKey = tableFilterKeys.numberTo(id)
+  const resolvedFromKey = fromKey ?? tableFilterKeys.numberFrom(id)
+  const resolvedToKey = toKey ?? tableFilterKeys.numberTo(id)
 
   return (
     <div className={cn('flex gap-2', wrapperClassName, className)}>
       <Input
         numberWithComma={numberWithComma}
         onChange={(event) =>
-          onValueChange(fromKey, event.target.value || undefined)
+          onValueChange(resolvedFromKey, event.target.value || undefined)
         }
         placeholder={fromPlaceholder}
-        value={typeof values[fromKey] === 'string' ? values[fromKey] : ''}
+        value={
+          typeof values[resolvedFromKey] === 'string'
+            ? values[resolvedFromKey]
+            : ''
+        }
       />
       <Input
         numberWithComma={numberWithComma}
         onChange={(event) =>
-          onValueChange(toKey, event.target.value || undefined)
+          onValueChange(resolvedToKey, event.target.value || undefined)
         }
         placeholder={toPlaceholder}
-        value={typeof values[toKey] === 'string' ? values[toKey] : ''}
+        value={
+          typeof values[resolvedToKey] === 'string' ? values[resolvedToKey] : ''
+        }
       />
     </div>
   )

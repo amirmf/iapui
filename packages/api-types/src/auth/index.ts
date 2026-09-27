@@ -1,6 +1,8 @@
 import { iranianNationalCodeRegex, mobilePhoneRegex } from '@iap/shared-lib'
 import { z } from 'zod'
 
+import { claimRequestIbanStatusSchema } from '../claim-request'
+
 const mobilePhoneSchema = z.string().regex(mobilePhoneRegex)
 const iranianNationalCodeSchema = z.string().regex(iranianNationalCodeRegex)
 const otpCodeSchema = z.string().regex(/^\d{4,9}$/)
@@ -32,8 +34,6 @@ export const personSpecialDiseaseEnumSchema = z.enum([
   'SPECIAL_DISEASES',
   'SACRIFICE',
 ])
-
-export const claimRequestYesNoSchema = z.enum(['Y', 'N'])
 
 export const branchLocationSchema = z
   .object({
@@ -99,7 +99,7 @@ export const authUserSchema = z
     fname: z.string().nullable().optional(),
     hasAccessToAllBranch: z.boolean().optional(),
     id: z.uuid(),
-    isCheat: claimRequestYesNoSchema.nullable().optional(),
+    isCheat: claimRequestIbanStatusSchema.nullish(),
     lname: z.string().nullable().optional(),
     mobileNumber: z.string().nullable().optional(),
     nationalityType: nationalityTypeSchema.nullable().optional(),

@@ -18,16 +18,18 @@ export function TableFilterDateRangeFilter(
   const {
     className,
     fromPlaceholder = 'From',
+    fromKey,
     id,
     locale,
     mode = 'date',
     onValueChange,
     toPlaceholder = 'To',
+    toKey,
     values,
     wrapperClassName,
   } = props
-  const fromKey = tableFilterKeys.dateFrom(id)
-  const toKey = tableFilterKeys.dateTo(id)
+  const resolvedFromKey = fromKey ?? tableFilterKeys.dateFrom(id)
+  const resolvedToKey = toKey ?? tableFilterKeys.dateTo(id)
 
   return (
     <DateRangePicker
@@ -36,13 +38,13 @@ export function TableFilterDateRangeFilter(
       locale={locale}
       mode={mode}
       onChange={(range) => {
-        onValueChange(fromKey, toTableFilterDate(range.from, mode))
-        onValueChange(toKey, toTableFilterDate(range.to, mode))
+        onValueChange(resolvedFromKey, toTableFilterDate(range.from, mode))
+        onValueChange(resolvedToKey, toTableFilterDate(range.to, mode))
       }}
       toPlaceholder={toPlaceholder}
       value={{
-        from: parseTableFilterDate(values[fromKey]),
-        to: parseTableFilterDate(values[toKey]),
+        from: parseTableFilterDate(values[resolvedFromKey]),
+        to: parseTableFilterDate(values[resolvedToKey]),
       }}
     />
   )

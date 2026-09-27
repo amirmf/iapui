@@ -14,18 +14,23 @@ export type TextTableFilterConfig = BaseConfig & {
   inputMode?: ComponentProps<typeof Input>['inputMode']
   numerical?: boolean
   placeholder?: string
+  queryKey?: string
 }
 
 export type NumberRangeTableFilterConfig = BaseConfig & {
+  fromKey?: string
   fromPlaceholder?: string
   numberWithComma?: boolean
+  toKey?: string
   toPlaceholder?: string
 }
 
 export type DateRangeTableFilterConfig = BaseConfig & {
+  fromKey?: string
   fromPlaceholder?: string
   locale?: DatePickerLocale
   mode?: 'date' | 'date-time'
+  toKey?: string
   toPlaceholder?: string
 }
 

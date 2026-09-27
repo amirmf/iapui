@@ -1,7 +1,9 @@
 import { z } from 'zod'
 
+import { createPageResponseSchema } from '../common'
+
 const supportParametersContextValueSchema = z.union([
-  z.object({}).passthrough(),
+  z.object({}).loose(),
   z.string(),
   z.array(z.string()),
 ])
@@ -34,14 +36,8 @@ export const supportOptionSchema = z.object({
   title: z.string().nullable().optional(),
 })
 
-export const supportOptionsPageSchema = z.object({
-  content: z.array(supportOptionSchema).optional(),
-  last: z.boolean().optional(),
-  number: z.number().int().optional(),
-  size: z.number().int().optional(),
-  totalElements: z.number().int().optional(),
-  totalPages: z.number().int().optional(),
-})
+export const supportOptionsPageSchema =
+  createPageResponseSchema(supportOptionSchema)
 
 export const supportRequiredParamInputDisplaySchema = z.enum(['LIST', 'TEXT'])
 

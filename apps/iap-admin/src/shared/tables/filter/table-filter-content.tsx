@@ -74,13 +74,17 @@ export function TableFilterContent(
         const filterValue = values[config.id]
         const stringValue =
           typeof filterValue === 'string' ? filterValue : undefined
+        const queryValue =
+          kind === 'text' ? values[config.queryKey ?? config.id] : undefined
+        const stringQueryValue =
+          typeof queryValue === 'string' ? queryValue : stringValue
         if (kind === 'text')
           return (
             <TableFilterInput
               {...config}
               key={config.id}
               onValueChange={onValueChange}
-              value={stringValue}
+              value={stringQueryValue}
             />
           )
         if (kind === 'number')

@@ -46,7 +46,8 @@ export const isPublicRole = (roles: PartyRole[]) =>
 
 export const canAccessAppPanel = (roles: PartyRole[]) => isPublicRole(roles)
 
-const isDoctorRole = (roles: PartyRole[]) => roles.includes('ROLE_DOCTOR_USER')
+export const isDoctorRole = (roles: PartyRole[]) =>
+  roles.includes('ROLE_DOCTOR_USER')
 
 const isMainAssessmentRole = (roles: PartyRole[]) =>
   roles.includes('ROLE_MAIN_ASSESSMENT_USER')

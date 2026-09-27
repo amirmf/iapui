@@ -1,5 +1,3 @@
-import '@shared/tables/data-table/tanstack-table'
-
 export * from '@shared/tables/data-table/data-table-layout'
 export * from '@shared/tables/data-table/data-table-pagination'
 export * from '@shared/tables/data-table/data-table-column-header'
