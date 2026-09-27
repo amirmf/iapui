@@ -1,6 +1,6 @@
 import { isAdminRole, isSuperAdminRole, useAuthSession } from '@iap/auth'
 import type { ApiFilterParams } from '@iap/shared-lib'
-import { Button } from '@iap/ui'
+import { Button, Permission } from '@iap/ui'
 import { Download, RefreshCw, Send, Trash2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
@@ -33,49 +33,45 @@ export function ClaimRequestHeaderActions(props: {
 
   return (
     <div className='flex flex-wrap gap-2'>
-      {canSuperAdmin ? (
-        <>
-          <Button
-            disabled={!hasSelection}
-            onClick={() => setOpenDialog('bulkDataExtraction')}
-          >
-            {t('claimRequests.bulkDataExtraction.button')}
-          </Button>
-          <Button
-            disabled={!hasSelection}
-            onClick={() => setOpenDialog('bulkStatusChange')}
-            variant='destructive'
-          >
-            {t('claimRequests.bulkStatusChange.button')}
-          </Button>
-          <Button
-            disabled={!hasSelection}
-            onClick={() => setOpenDialog('bulkDelete')}
-            variant='destructive'
-          >
-            <Trash2 aria-hidden='true' />
-            {t('claimRequests.actions.bulkDelete')}
-          </Button>
-        </>
-      ) : null}
-      {canAdmin ? (
-        <>
-          <Button
-            disabled={!hasSelection}
-            onClick={() => setOpenDialog('bulkGenerateAndSend')}
-            variant='secondary'
-          >
-            <Send aria-hidden='true' />
-            {t('claimRequests.actions.generateAndSend')}
-          </Button>
-          <Button
-            disabled={!hasSelection}
-            onClick={() => setOpenDialog('bulkInquiryFanavaran')}
-          >
-            {t('claimRequests.actions.inquiryFanavaran')}
-          </Button>
-        </>
-      ) : null}
+      <Permission hasPermission={canSuperAdmin}>
+        <Button
+          disabled={!hasSelection}
+          onClick={() => setOpenDialog('bulkDataExtraction')}
+        >
+          {t('claimRequests.bulkDataExtraction.button')}
+        </Button>
+        <Button
+          disabled={!hasSelection}
+          onClick={() => setOpenDialog('bulkStatusChange')}
+          variant='destructive'
+        >
+          {t('claimRequests.bulkStatusChange.button')}
+        </Button>
+        <Button
+          disabled={!hasSelection}
+          onClick={() => setOpenDialog('bulkDelete')}
+          variant='destructive'
+        >
+          <Trash2 aria-hidden='true' />
+          {t('claimRequests.actions.bulkDelete')}
+        </Button>
+      </Permission>
+      <Permission hasPermission={canAdmin}>
+        <Button
+          disabled={!hasSelection}
+          onClick={() => setOpenDialog('bulkGenerateAndSend')}
+          variant='secondary'
+        >
+          <Send aria-hidden='true' />
+          {t('claimRequests.actions.generateAndSend')}
+        </Button>
+        <Button
+          disabled={!hasSelection}
+          onClick={() => setOpenDialog('bulkInquiryFanavaran')}
+        >
+          {t('claimRequests.actions.inquiryFanavaran')}
+        </Button>
+      </Permission>
       <Button onClick={() => void download()} variant='outline'>
         <Download aria-hidden='true' />
         {t('claimRequests.actions.downloadExcel')}

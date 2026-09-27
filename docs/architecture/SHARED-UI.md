@@ -34,6 +34,30 @@ Styles required by a shared primitive are colocated with that primitive in
 `@iap/ui`. Application-global document rules remain in the owning
 application's `src/styles` entry point.
 
+## Conditional visibility
+
+`@iap/ui` provides the `Permission` component for conditionally rendering UI.
+It renders its children when `hasPermission` is `true`; otherwise it renders
+nothing. Despite its name, the component is deliberately independent of
+authentication, roles, policies, and feature state. The calling component owns
+the condition and passes its resolved boolean to `Permission`.
+
+Use `Permission` instead of inline conditional rendering when a condition
+controls whether a component or a group of related components is visible. This
+keeps JSX focused on the visible UI and makes the visibility rule easy to find.
+
+```tsx
+import { Button, Permission } from '@iap/ui'
+
+<Permission hasPermission={canEditClaimRequest}>
+  <Button onClick={openEditDialog}>Edit claim request</Button>
+</Permission>
+```
+
+For unrelated conditions or when a branch must render an alternative UI, use
+normal conditional rendering. `Permission` is only a presentation helper and
+does not replace backend authorization or route access control.
+
 ## Table primitives
 
 `@iap/ui` provides semantic table markup only: `Table`, `TableHeader`,
