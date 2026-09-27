@@ -43,6 +43,36 @@
       "verifyDescription": "کد دریافت‌شده و رمز جدید را برای تکمیل بازیابی وارد کنید.",
       "verifyTitle": "کد بازیابی را وارد کنید"
     },
+    "passwordChange": {
+      "title": "تغییر رمز عبور",
+      "description": "رمز عبور شما منقضی شده است. برای ادامه استفاده از برنامه آن را تغییر دهید یا از حساب خارج شوید.",
+      "currentPassword": "رمز عبور فعلی",
+      "newPassword": "رمز عبور جدید",
+      "confirmNewPassword": "تکرار رمز عبور جدید",
+      "submit": "تغییر رمز عبور",
+      "submitting": "در حال تغییر رمز عبور...",
+      "success": "رمز عبور شما با موفقیت تغییر کرد.",
+      "actions": {
+        "showPassword": "نمایش رمز عبور",
+        "hidePassword": "پنهان کردن رمز عبور"
+      },
+      "requirements": {
+        "label": "شرایط رمز عبور جدید",
+        "minimumLength": "حداقل ۱۲ کاراکتر",
+        "uppercaseLetter": "حداقل یک حرف بزرگ انگلیسی",
+        "lowercaseLetter": "حداقل یک حرف کوچک انگلیسی",
+        "symbol": "حداقل یک کاراکتر نماد",
+        "number": "حداقل یک عدد"
+      },
+      "validation": {
+        "currentPasswordRequired": "رمز عبور فعلی را وارد کنید.",
+        "newPasswordRequired": "رمز عبور جدید را وارد کنید.",
+        "newPasswordMaxLength": "رمز عبور نمی‌تواند بیشتر از ۲۵۵ کاراکتر باشد.",
+        "confirmNewPasswordRequired": "تکرار رمز عبور جدید را وارد کنید.",
+        "passwordRequirements": "رمز عبور جدید همه شرایط را ندارد.",
+        "passwordsMatch": "رمز عبور جدید و تکرار آن باید یکسان باشند."
+      }
+    },
     "register": {
       "backToLogin": "وارد شوید",
       "changeNumber": "تغییر شماره",
@@ -174,7 +204,41 @@
     "reset": "بازنشانی",
     "noRecords": "داده‌ای یافت نشد.",
     "loading": "در حال بارگذاری...",
-    "total": "مجموع"
+    "total": "مجموع",
+    "signOut": "خروج",
+    "username": "نام کاربری",
+    "displayName": "نام",
+    "createdAt": "ایجاد شده در",
+    "updatedAt": "به‌روزرسانی شده در",
+    "delete": "حذف",
+    "softDelete": "حذف نرم",
+    "deleteConfirm": "آیا از حذف مطمئن هستید؟",
+    "softDeleteConfirm": "این مورد غیرفعال می‌شود.",
+    "deleteMethodDescription": "نحوه حذف این مورد را انتخاب کنید",
+    "thruDate": "تاریخ پایان",
+    "back": "بازگشت",
+    "dialog": {
+      "confirm": "ادامه",
+      "cancel": "لغو",
+      "deleteDialog": {
+        "permanentTitle": "حذف دایمی ردیف اطلاعاتی",
+        "confirmMessage": "آیا مطمئن هستید که می‌خواهید این ردیف را به طور دائم حذف کنید؟",
+        "typeToConfirm": "شناسه رو جهت حذف وارد کنید",
+        "enterToConfirm": "شناسه رو جهت حذف وارد کنید",
+        "deleteWarning": "هشدار",
+        "cannotUndo": "این عملیات این ردیف را به طور دائم از سیستم حذف می‌کند و قابل بازگشت نیست",
+        "permanentWarning": "هشدار"
+      }
+    },
+    "auditInfo": {
+      "action": "اطلاعات ثبت کننده",
+      "title": "اطلاعات ثبت کننده",
+      "createdSection": "اطلاعات ایجاد",
+      "updatedSection": "اطلاعات آخرین به‌روزرسانی",
+      "createdBy": "ایجادکننده",
+      "updatedBy": "آخرین به‌روزرسانی توسط",
+      "userLoadError": "اطلاعات کاربر در دسترس نیست"
+    }
   },
   "claimRequests": {
     "title": "درخواست‌های خسارت",

@@ -1,6 +1,10 @@
 import { useState } from 'react'
 
-import { useAuthSession } from '@iap/auth'
+import {
+  AuditInformationDialog,
+  ForcePasswordChangeDialog,
+  useAuthSession,
+} from '@iap/auth'
 import { cn } from '@iap/ui'
 import { Outlet } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
@@ -52,6 +56,8 @@ export function AuthenticatedLayout() {
         >
           <Outlet />
         </main>
+        <ForcePasswordChangeDialog />
+        <AuditInformationDialog />
       </div>
     </div>
   )

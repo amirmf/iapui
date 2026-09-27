@@ -16,6 +16,8 @@ import {
 
 import { cn } from './lib/cn'
 
+export { toast }
+
 export type ToasterProps = SonnerToasterProps
 
 type DocumentTheme = 'dark' | 'light'

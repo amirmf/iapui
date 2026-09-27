@@ -1,5 +1,6 @@
 import { getApiClient } from '@iap/api-client'
 import type {
+  ChangePasswordRequest,
   LoginRequest,
   PasswordResetIdentity,
   RegistrationIdentity,
@@ -9,13 +10,17 @@ import type {
 } from '@iap/api-types'
 import {
   authUserSchema,
+  changePasswordRequestSchema,
   emptyAuthResponseSchema,
+  getCurrentUserRequestSchema,
+  getUserByIdRequestSchema,
   loginRequestSchema,
   loginResponseSchema,
   passwordResetIdentitySchema,
   registrationIdentitySchema,
   resetPasswordRequestSchema,
   ssoLoginRequestSchema,
+  userAccountSchema,
   verifyRegistrationRequestSchema,
 } from '@iap/api-types'
 
@@ -28,9 +33,28 @@ const parseEmptyResponse = (data: unknown): void => {
 }
 
 export const authService = {
+  async changePassword(payload: ChangePasswordRequest) {
+    const response = await getApiClient().post(
+      '/auth/change-password',
+      changePasswordRequestSchema.parse(payload),
+      config
+    )
+    return loginResponseSchema.parse(response.data)
+  },
   async getCurrentUser() {
+    getCurrentUserRequestSchema.parse({})
     const response = await getApiClient().get('/auth/me', config)
     return authUserSchema.parse(response.data)
+  },
+  async getUserById(id: string, signal?: AbortSignal) {
+    const request = getUserByIdRequestSchema.parse({ path: { id } })
+    const response = await getApiClient().get(
+      `/auth/users/${request.path.id}`,
+      {
+        signal,
+      }
+    )
+    return userAccountSchema.parse(response.data)
   },
   async login(payload: LoginRequest) {
     const response = await getApiClient().post(

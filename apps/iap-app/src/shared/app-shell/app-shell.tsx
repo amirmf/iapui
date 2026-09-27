@@ -1,4 +1,8 @@
-import { useAuthSession } from '@iap/auth'
+import {
+  AuditInformationDialog,
+  ForcePasswordChangeDialog,
+  useAuthSession,
+} from '@iap/auth'
 import { SupportWidget } from '@iap/support'
 import { Spinner } from '@iap/ui'
 import { Outlet, useRouterState } from '@tanstack/react-router'
@@ -47,6 +51,8 @@ export function AppShell() {
               : pathname.replace(/^\/+|\/+$/g, '').replaceAll('/', '__'),
         }}
       />
+      <ForcePasswordChangeDialog />
+      <AuditInformationDialog />
     </div>
   )
 }

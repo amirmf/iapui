@@ -100,6 +100,7 @@ export const authUserSchema = z
     hasAccessToAllBranch: z.boolean().optional(),
     id: z.uuid(),
     isCheat: claimRequestIbanStatusSchema.nullish(),
+    isPasswordChangeForced: z.string().nullable().optional(),
     lname: z.string().nullable().optional(),
     mobileNumber: z.string().nullable().optional(),
     nationalityType: nationalityTypeSchema.nullable().optional(),
@@ -172,6 +173,47 @@ export const resetPasswordRequestSchema = passwordResetIdentitySchema.extend({
   password: passwordSchema,
 })
 
+export const changePasswordRequestSchema = z.object({
+  currentPassword: z.string(),
+  newPassword: passwordSchema,
+})
+
+export const getUserByIdRequestSchema = z.object({
+  path: z.object({ id: z.uuid() }),
+})
+
+export const getCurrentUserRequestSchema = z.object({}).strict()
+
+export const userAccountSchema = z
+  .object({
+    accountNonExpired: z.boolean().optional(),
+    accountNonLocked: z.boolean().optional(),
+    branchLocations: z.array(branchLocationSchema).optional(),
+    createdAt: z.string().nullable().optional(),
+    createdBy: z.string().nullable().optional(),
+    credentialsNonExpired: z.boolean().optional(),
+    displayName: z.string().nullable().optional(),
+    docTypeCodes: z.array(z.string()).optional(),
+    email: z.string().nullable().optional(),
+    enabled: z.boolean().optional(),
+    extContractId: z.number().nullable().optional(),
+    extId: z.string().nullable().optional(),
+    fname: z.string().nullable().optional(),
+    hasAccessToAllBranch: z.boolean().nullable().optional(),
+    id: z.uuid(),
+    isPasswordChangeForced: z.string().nullable().optional(),
+    lname: z.string().nullable().optional(),
+    mobileNumber: z.string().nullable().optional(),
+    nationalityType: nationalityTypeSchema.nullable().optional(),
+    parentUserAccountId: z.uuid().nullable().optional(),
+    roles: z.array(partyRoleSchema).optional(),
+    specialDiseases: z.array(personSpecialDiseaseEnumSchema).optional(),
+    updatedAt: z.string().nullable().optional(),
+    updatedBy: z.string().nullable().optional(),
+    username: z.string(),
+  })
+  .loose()
+
 export const emptyAuthResponseSchema = z.undefined()
 
 export type AuthUser = z.infer<typeof authUserSchema>
@@ -185,3 +227,5 @@ export type VerifyRegistrationRequest = z.infer<
 >
 export type PasswordResetIdentity = z.infer<typeof passwordResetIdentitySchema>
 export type ResetPasswordRequest = z.infer<typeof resetPasswordRequestSchema>
+export type ChangePasswordRequest = z.infer<typeof changePasswordRequestSchema>
+export type UserAccount = z.infer<typeof userAccountSchema>

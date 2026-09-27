@@ -32,10 +32,18 @@ export type DialogContentProps = ComponentPropsWithRef<
   typeof DialogPrimitive.Content
 > & {
   closeLabel?: string
+  showCloseButton?: boolean
 }
 
 export function DialogContent(props: DialogContentProps) {
-  const { children, className, closeLabel = 'Close', ref, ...rest } = props
+  const {
+    children,
+    className,
+    closeLabel = 'Close',
+    ref,
+    showCloseButton = true,
+    ...rest
+  } = props
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -48,13 +56,15 @@ export function DialogContent(props: DialogContentProps) {
         {...rest}
       >
         {children}
-        <DialogPrimitive.Close
-          aria-label={closeLabel}
-          className='text-muted-foreground hover:bg-surface-muted hover:text-foreground focus-visible:ring-ring focus-visible:ring-offset-background absolute top-3 left-3 inline-flex size-11 items-center justify-center rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'
-          type='button'
-        >
-          <span aria-hidden='true'>×</span>
-        </DialogPrimitive.Close>
+        {showCloseButton ? (
+          <DialogPrimitive.Close
+            aria-label={closeLabel}
+            className='text-muted-foreground hover:bg-surface-muted hover:text-foreground focus-visible:ring-ring focus-visible:ring-offset-background absolute top-3 left-3 inline-flex size-11 items-center justify-center rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'
+            type='button'
+          >
+            <span aria-hidden='true'>×</span>
+          </DialogPrimitive.Close>
+        ) : null}
       </DialogPrimitive.Content>
     </DialogPortal>
   )

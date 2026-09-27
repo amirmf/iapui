@@ -10,6 +10,23 @@ features, configuration, or localization runtime.
 form state, field registration, labels, descriptions, errors, and focus
 behavior without changing the UI primitive's controlled API.
 
+## Dialog compositions
+
+`@iap/dialogs` owns reusable dialog compositions built from `@iap/ui`
+primitives. It contains common confirmation variants and the soft/hard-delete
+selection flow. These components may use the host application's i18next
+runtime, but do not own translation resources: the applications continue to
+own their Persian `common` namespace entries.
+
+Dialog compositions must remain independent of application services, query
+keys, toasts, routing, and feature stores. The owning feature supplies an
+operation callback and handles invalidation or feature-specific feedback.
+
+Cross-application dialogs that require authentication contracts belong in
+`@iap/auth`, alongside their Zod API contracts and services. The forced
+password-change and audit-information dialogs follow this rule. A dialog that
+is meaningful only to one product journey remains colocated in that feature.
+
 ## Date picker contract
 
 The shared date picker API consists of two controlled primitives:
