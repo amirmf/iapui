@@ -32,11 +32,15 @@ export type MultiSelectProps<TOption extends SelectOption> =
     getOptionDisabled?: (option: TOption) => boolean
     labelKey: string
     maxVisibleItems?: number
+    isLoading?: boolean
+    loadingText?: ReactNode
+    onSearch?: (value: string) => void
     onValueChange?: (value: TOption[]) => void
     options: readonly TOption[]
     placeholder?: ReactNode
     searchKey?: string
     searchPlaceholder?: string
+    shouldFilter?: boolean
     triggerClassName?: string
     value?: readonly TOption[]
     valueKey: string
@@ -72,16 +76,20 @@ export function MultiSelect<TOption extends SelectOption>(
     emptyText = 'No results found.',
     getOptionDisabled,
     id,
+    isLoading = false,
     labelKey,
+    loadingText = 'Loading…',
     maxVisibleItems = 3,
     name,
     onBlur,
+    onSearch,
     onValueChange,
     options,
     placeholder = 'Select options',
     ref,
     searchKey = labelKey,
     searchPlaceholder = 'Search…',
+    shouldFilter = true,
     triggerClassName,
     value,
     valueKey,
@@ -240,19 +248,33 @@ export function MultiSelect<TOption extends SelectOption>(
           'w-[var(--radix-popover-trigger-width)] max-w-[calc(100vw-2rem)] p-0',
           contentClassName
         )}
+        onWheel={(event) => {
+          event.stopPropagation()
+        }}
       >
-        <Command className='overflow-hidden rounded-xl' label='Options'>
+        <Command
+          className='overflow-hidden rounded-xl'
+          label='Options'
+          shouldFilter={shouldFilter}
+        >
           <div className='border-border border-b p-2'>
             <Command.Input
               autoFocus
               className='bg-surface text-foreground placeholder:text-muted-foreground focus-visible:ring-ring h-10 w-full rounded-md px-3 text-sm outline-none focus-visible:ring-2'
+              onValueChange={onSearch}
               placeholder={searchPlaceholder}
             />
           </div>
           <Command.List className='max-h-64 overflow-y-auto p-1'>
-            <Command.Empty className='text-muted-foreground px-3 py-6 text-center text-sm'>
-              {emptyText}
-            </Command.Empty>
+            {isLoading ? (
+              <p className='text-muted-foreground px-3 py-6 text-center text-sm'>
+                {loadingText}
+              </p>
+            ) : (
+              <Command.Empty className='text-muted-foreground px-3 py-6 text-center text-sm'>
+                {emptyText}
+              </Command.Empty>
+            )}
             {options.map((option) => {
               const selected = selectedValueSet.has(
                 getOptionProperty(option, valueKey)

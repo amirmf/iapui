@@ -2,38 +2,18 @@ import { iranianNationalCodeRegex, mobilePhoneRegex } from '@iap/shared-lib'
 import { z } from 'zod'
 
 import { claimRequestIbanStatusSchema } from '../claim-request'
+import { partyRoleSchema } from '../party/enums'
+import { personSpecialDiseaseEnumSchema } from '../person-special-disease/enums'
+import { nationalityTypeSchema } from '../user-account/enums'
 
 const mobilePhoneSchema = z.string().regex(mobilePhoneRegex)
 const iranianNationalCodeSchema = z.string().regex(iranianNationalCodeRegex)
 const otpCodeSchema = z.string().regex(/^\d{4,9}$/)
 const passwordSchema = z.string().min(6).max(255)
 
-export const nationalityTypeSchema = z.enum(['IR', 'FOREIGN'])
-
-export const partyRoleSchema = z.enum([
-  'ROLE_PUBLIC_USER',
-  'ROLE_MONITORING_USER',
-  'ROLE_ASSESSMENT_USER',
-  'ROLE_MAIN_ASSESSMENT_USER',
-  'ROLE_HQ_USER',
-  'ROLE_ADMIN_USER',
-  'ROLE_SUPER_ADMIN',
-  'ROLE_SUPER_ADMIN_USER',
-  'ROLE_DOCTOR_USER',
-  'ROLE_REQUEST_REGISTERY_AGENT',
-  'ROLE_MAIN_REQUEST_REGISTERY_AGENT',
-  'ROLE_BRANCH_USER',
-  'ROLE_CUSTOMER_USER',
-  'ROLE_TICKET_AGENT',
-])
-
-export const personSpecialDiseaseEnumSchema = z.enum([
-  'VIP',
-  'LEVEL_ONE',
-  'LEVEL_TWO',
-  'SPECIAL_DISEASES',
-  'SACRIFICE',
-])
+export { partyRoleSchema } from '../party/enums'
+export { personSpecialDiseaseEnumSchema } from '../person-special-disease/enums'
+export { nationalityTypeSchema } from '../user-account/enums'
 
 export const branchLocationSchema = z
   .object({
@@ -184,40 +164,10 @@ export const getUserByIdRequestSchema = z.object({
 
 export const getCurrentUserRequestSchema = z.object({}).strict()
 
-export const userAccountSchema = z
-  .object({
-    accountNonExpired: z.boolean().optional(),
-    accountNonLocked: z.boolean().optional(),
-    branchLocations: z.array(branchLocationSchema).optional(),
-    createdAt: z.string().nullable().optional(),
-    createdBy: z.string().nullable().optional(),
-    credentialsNonExpired: z.boolean().optional(),
-    displayName: z.string().nullable().optional(),
-    docTypeCodes: z.array(z.string()).optional(),
-    email: z.string().nullable().optional(),
-    enabled: z.boolean().optional(),
-    extContractId: z.number().nullable().optional(),
-    extId: z.string().nullable().optional(),
-    fname: z.string().nullable().optional(),
-    hasAccessToAllBranch: z.boolean().nullable().optional(),
-    id: z.uuid(),
-    isPasswordChangeForced: z.string().nullable().optional(),
-    lname: z.string().nullable().optional(),
-    mobileNumber: z.string().nullable().optional(),
-    nationalityType: nationalityTypeSchema.nullable().optional(),
-    parentUserAccountId: z.uuid().nullable().optional(),
-    roles: z.array(partyRoleSchema).optional(),
-    specialDiseases: z.array(personSpecialDiseaseEnumSchema).optional(),
-    updatedAt: z.string().nullable().optional(),
-    updatedBy: z.string().nullable().optional(),
-    username: z.string(),
-  })
-  .loose()
-
 export const emptyAuthResponseSchema = z.undefined()
 
 export type AuthUser = z.infer<typeof authUserSchema>
-export type PartyRole = z.infer<typeof partyRoleSchema>
+export type { PartyRole } from '../party/enums'
 export type LoginRequest = z.infer<typeof loginRequestSchema>
 export type LoginResponse = z.infer<typeof loginResponseSchema>
 export type SsoLoginRequest = z.infer<typeof ssoLoginRequestSchema>
@@ -228,4 +178,3 @@ export type VerifyRegistrationRequest = z.infer<
 export type PasswordResetIdentity = z.infer<typeof passwordResetIdentitySchema>
 export type ResetPasswordRequest = z.infer<typeof resetPasswordRequestSchema>
 export type ChangePasswordRequest = z.infer<typeof changePasswordRequestSchema>
-export type UserAccount = z.infer<typeof userAccountSchema>

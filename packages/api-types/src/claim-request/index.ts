@@ -35,6 +35,7 @@ export const claimRequestAiStatusSchema = z.enum([
 ])
 
 export const claimRequestIbanStatusSchema = z.enum(['Y', 'N'])
+export const claimRequestYesNoSchema = z.enum(['Y', 'N'])
 
 const claimRequestDocumentSchema = z
   .object({
@@ -115,7 +116,7 @@ export const coreAiDataExtractionResponseSchema = z
 export type ClaimRequest = z.infer<typeof claimRequestSchema>
 export type ClaimRequestAiStatus = z.infer<typeof claimRequestAiStatusSchema>
 export type ClaimRequestStatus = z.infer<typeof claimRequestStatusSchema>
-export type ClaimRequestYesNo = z.infer<typeof claimRequestIbanStatusSchema>
+export type ClaimRequestYesNo = z.infer<typeof claimRequestYesNoSchema>
 export type PageClaimRequest = z.infer<typeof pageClaimRequestSchema>
 export type PageClaimRequestRequest = z.input<
   typeof pageClaimRequestRequestSchema

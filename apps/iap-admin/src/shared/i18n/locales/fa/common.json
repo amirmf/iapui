@@ -99,6 +99,7 @@
     },
     "validation": {
       "mobileNumber": "شماره موبایل معتبر وارد کنید.",
+      "mobileNumberPattern": "شماره موبایل باید با فرمت ۰۹xxxxxxxxx یا +۹۸٩xxxxxxxxx باشد.",
       "nationalCode": "کد ملی باید ۱۰ رقم باشد.",
       "otpCode": "کد تأیید ارسال‌شده به گوشی را وارد کنید.",
       "passwordConfirmationRequired": "تأیید رمز عبور الزامی است.",
@@ -191,8 +192,29 @@
   "placeholder": {
     "description": "این صفحه در حال پیاده‌سازی است."
   },
+  "form": {
+    "submit": "ثبت",
+    "creating": "در حال ثبت",
+    "updating": "در حال ویرایش",
+    "uploading": "در حال بارگذاری...",
+    "update": "ویرایش",
+    "updateParty": "ویرایش شخص",
+    "enterTitle": "عنوان را وارد کنید",
+    "enterCode": "کد را وارد کنید",
+    "enterMaxCoverage": "حداکثر پوشش را وارد کنید",
+    "enterCodeType": "نوع کد را وارد کنید",
+    "enterDescription": "توضیحات را وارد کنید",
+    "enterDocType": "نوع سند را وارد کنید",
+    "selectStatus": "وضعیت را انتخاب کنید",
+    "selectType": "نوع را انتخاب کنید",
+    "selectPartyType": "نوع شخص را انتخاب کنید"
+  },
   "common": {
     "all": "همه",
+    "passwordRequirements": {
+      "label": "الزامات رمز عبور",
+      "description": "رمز عبور باید حداقل شامل یک حرف بزرگ، یک حرف کوچک و یک عدد باشد."
+    },
     "cancel": "انصراف",
     "confirm": "تأیید",
     "yes": "بله",
@@ -202,6 +224,7 @@
     "showLess": "فیلترهای کمتر",
     "showMore": "فیلترهای بیشتر",
     "reset": "بازنشانی",
+    "save": "ذخیره",
     "noRecords": "داده‌ای یافت نشد.",
     "loading": "در حال بارگذاری...",
     "total": "مجموع",
@@ -403,6 +426,411 @@
     "logout": "خروج",
     "navigation": "ناوبری اصلی",
     "openNavigation": "باز کردن نوار ناوبری"
+  },
+  "userAccounts": {
+    "title": "حساب‌های کاربری",
+    "createTitle": "ایجاد حساب کاربری",
+    "editTitle": "ویرایش حساب کاربری",
+    "viewTitle": "جزئیات حساب کاربری",
+    "formDescription": "اطلاعات حساب و سطح دسترسی را تکمیل کنید.",
+    "actions": {
+      "create": "ایجاد حساب",
+      "delete": "حذف",
+      "deleting": "در حال حذف…",
+      "edit": "ویرایش",
+      "refresh": "بروزرسانی",
+      "resetPassword": "بازنشانی رمز عبور",
+      "resettingPassword": "در حال بازنشانی…",
+      "save": "ذخیره تغییرات",
+      "saving": "در حال ذخیره…",
+      "view": "مشاهده جزئیات"
+    },
+    "columns": {
+      "branchLocations": "شعب",
+      "displayName": "نام نمایشی",
+      "branchLocations": "شعب",
+      "email": "ایمیل",
+      "externalId": "شناسه خارجی",
+      "mobileNumber": "شماره همراه",
+      "roles": "نقش‌ها",
+      "status": "وضعیت",
+      "username": "نام کاربری"
+    },
+    "fields": {
+      "branchLocations": "شعب",
+      "displayName": "نام نمایشی",
+      "email": "ایمیل",
+      "enabled": "حساب فعال است",
+      "externalId": "شناسه خارجی",
+      "firstName": "نام",
+      "lastName": "نام خانوادگی",
+      "mobileNumber": "شماره همراه",
+      "confirmPassword": "تکرار رمز عبور",
+      "password": "رمز عبور",
+      "roles": "نقش‌ها",
+      "specialDiseases": "بیماری‌های خاص",
+      "username": "نام کاربری"
+    },
+    "filters": {
+      "displayName": "جستجوی نام نمایشی",
+      "mobileNumber": "جستجوی شماره همراه",
+      "username": "جستجوی نام کاربری"
+    },
+    "messages": {
+      "created": "حساب کاربری با موفقیت ایجاد شد.",
+      "deleted": "حساب کاربری با موفقیت حذف شد.",
+      "passwordReset": "رمز عبور با موفقیت بازنشانی شد.",
+      "updated": "حساب کاربری با موفقیت به‌روزرسانی شد."
+    },
+    "validation": {
+      "email": "یک ایمیل معتبر وارد کنید.",
+      "extId": "شناسه خارجی برای ارزیاب ارشد الزامی است.",
+      "firstName": "نام الزامی است.",
+      "lastName": "نام خانوادگی الزامی است.",
+      "password": "رمز عبور باید حداقل ۶ کاراکتر باشد.",
+      "passwordsMatch": "رمز عبور و تکرار آن باید یکسان باشند."
+    },
+    "status": { "disabled": "غیرفعال", "enabled": "فعال" },
+    "delete": {
+      "title": "حذف حساب کاربری",
+      "description": "با حذف این حساب، دسترسی شخص به سامانه قطع می‌شود."
+    },
+    "resetPassword": {
+      "title": "بازنشانی رمز عبور",
+      "description": "یک رمز عبور جدید برای این حساب تعیین کنید."
+    },
+    "specialDiseases": {
+      "VIP": "خدمات ویژه",
+      "LEVEL_ONE": "سطح یک",
+      "LEVEL_TWO": "سطح دو",
+      "SPECIAL_DISEASES": "بیماری‌های خاص",
+      "SACRIFICE": "ایثارگر"
+    },
+    "roles": {
+      "publicUser": "کاربر عمومی",
+      "monitoringUser": "کاربر نظارت",
+      "assessmentUser": "ارزیاب",
+      "mainAssessmentUser": "ارزیاب ارشد",
+      "hqUser": "کاربر ستاد",
+      "adminUser": "مدیر",
+      "superAdmin": "مدیر کل",
+      "superAdminUser": "مدیر کل",
+      "doctorUser": "پزشک",
+      "requestRegistryAgent": "ثبت‌کننده درخواست",
+      "mainRequestRegistryAgent": "ثبت‌کننده ارشد درخواست",
+      "branchUser": "کاربر شعبه",
+      "customerUser": "کاربر مشتری",
+      "ticketAgent": "کارشناس تیکت"
+    }
+  },
+  "parties": {
+    "title": "مدیریت اشخاص",
+    "description": "مدیریت ذی‌نفعان موجود در سیستم.",
+    "filterPlaceholder": "جستجوط  ",
+    "create": "ایجاد کاربر جدید",
+    "refresh": "بروزرسانی",
+    "noParties": "هیچ کاربری یافت نشد.",
+    "columns": {
+      "identifier": "نام کاربری",
+      "fullName": "نام کامل",
+      "username": "نام کاربری",
+      "displayName": "نام نمایشی",
+      "mobileNumber": "شماره موبایل",
+      "customerName": "نام مشتری",
+      "firstName": "نام",
+      "lastName": "نام خانوادگی",
+      "partyType": "نوع",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "created": "ایجاد شده",
+      "createdAt": "تاریخ ایجاد",
+      "branchLocations": "شعبه‌ها",
+      "userAccount": "حساب کاربری",
+      "nationalityType": "ملیت",
+      "roles": "نقش‌ها"
+    },
+    "type": {
+      "individual": "شخص",
+      "organization": "سازمان",
+      "government": "دولتی",
+      "insuranceCompany": "شرکت بیمه",
+      "insurancecompany": "شرکت بیمه"
+    },
+    "nationality": {
+      "ir": "ایرانی",
+      "foreign": "خارجی"
+    },
+    "role": {
+      "publicUser": "کاربر عمومی",
+      "monitoringUser": "کاربر پایش",
+      "assessmentUser": "کاربر ارزیابی",
+      "mainAssessmentUser": "کاربر ارزیابی ارشد",
+      "hqUser": "کاربر ستاد مرکزی",
+      "adminUser": "کاربر مدیر",
+      "superAdmin": "کاربر مدیر ارشد (قدیم)",
+      "superAdminUser": "کاربر مدیر ارشد",
+      "doctorUser": "کاربر پزشک",
+      "requestRegisteryAgent": "کاربر نماینده ثبت",
+      "mainRequestRegisteryAgent": "کاربر نماینده ثبت ارشد",
+      "branchUser": "کاربر شعبه",
+      "customerUser": "بیمه‌گذار",
+      "ticketAgent": "کارشناس تیکت"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "suspended": "تعلیق شده",
+      "pending": "در انتظار",
+      "enabled": "فعال",
+      "disabled": "غیرفعال"
+    },
+    "filters": {
+      "thruDateFrom": "تاریخ پایان از",
+      "thruDateTo": "تاریخ پایان تا"
+    },
+    "dialog": {
+      "create": "ایجاد کاربر جدید",
+      "edit": "ویرایش {{name}}",
+      "delete": "حذف {{name}}",
+      "softDelete": "حذف نرم طرف",
+      "createDesc": "طرف جدید را با پر کردن فرم زیر ایجاد کنید.",
+      "editDesc": "اطلاعات طرف را در زیر به‌روزرسانی کنید.",
+      "deleteDesc": "آیا مطمئن هستید که می‌خواهید این طرف را حذف کنید؟",
+      "softDeleteDesc": "حذف نرم تاریخ پایان این طرف را تنظیم می‌کند و آن را به عنوان غیرفعال علامت‌گذاری می‌کند بدون اینکه به طور دائم حذف شود.",
+      "fields": {
+        "identifier": "شناسه",
+        "extId": "شناسه خارجی کاربر",
+        "partyType": "نوع کاربر",
+        "firstName": "نام",
+        "lastName": "نام خانوادگی",
+        "fullName": "نام کامل",
+        "status": "وضعیت",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان"
+      }
+    },
+    "view": {
+      "title": "جزئیات شخص",
+      "sections": {
+        "personal": "اطلاعات شخصی",
+        "status": "اطلاعات وضعیت",
+        "dates": "اطلاعات تاریخ"
+      },
+      "fields": {
+        "firstName": "نام",
+        "lastName": "نام خانوادگی",
+        "fullName": "نام کامل",
+        "type": "نوع",
+        "status": "وضعیت",
+        "active": "فعال",
+        "identifier": "شناسه",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان",
+        "notSet": "تنظیم نشده",
+        "duration": "مدت زمان",
+        "ongoing": "جاری",
+        "days": "{{count}} روز"
+      }
+    },
+    "actions": {
+      "viewDetails": "مشاهده جزئیات",
+      "edit": "ویرایش",
+      "softDelete": "حذف نرم",
+      "permanentDelete": "حذف دائمی",
+      "delete": "حذف",
+      "manageUserAccount": "مدیریت حساب کاربری",
+      "specialDiseases": "بیماری‌های خاص",
+      "fanavaranInquery": "استعلام فناوران"
+    },
+    "messages": {
+      "created": "شخص با موفقیت ایجاد شد",
+      "createError": "ایجاد شخص با خطا مواجه شد",
+      "updated": "اطلاعات شخص به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی شخص با خطا مواجه شد",
+      "permanentDeleted": "شخص به طور دائم حذف شد",
+      "deleteError": "حذف شخص ناموفق بود",
+      "softDeleted": "شخص به صورت نرم حذف شد",
+      "softDeleteError": "حذف نرم شخص ناموفق بود"
+    },
+    "delete": {
+      "softTitle": "حذف نرم شخص",
+      "softDescription": "حذف نرم تاریخ پایان را تنظیم می‌کند و شخص را بدون حذف دائم غیرفعال می‌کند.",
+      "dateNote": "تاریخ پایان را برای غیرفعال کردن شخص انتخاب کنید.",
+      "softNote": "امکان فعال‌سازی مجدد این شخص در آینده وجود دارد.",
+      "confirmError": "برای حذف شناسه را وارد کنید."
+    },
+    "bulkDelete": {
+      "title": "حذف اشخاص انتخاب‌شده",
+      "description": "این عملیات {{count}} شخص انتخاب‌شده را به صورت دائمی حذف می‌کند و قابل بازگشت نیست.",
+      "listTitle": "پیش‌نمایش رکوردهای انتخاب‌شده",
+      "more": "+{{count}} مورد دیگر"
+    },
+    "userAccount": {
+      "linked": "متصل",
+      "notLinked": "بدون حساب",
+      "manageTitle": "مدیریت حساب کاربری برای {{name}}",
+      "createTitle": "ایجاد حساب کاربری برای {{name}}",
+      "manageDescription": "اطلاعات ورود، نقش‌ها و وضعیت امنیتی این حساب کاربری را به‌روزرسانی کنید.",
+      "createDescription": "برای این شخص یک حساب کاربری جهت دسترسی به سامانه بسازید.",
+      "partySummary": "شناسه: {{identifier}} • نام: {{name}}",
+      "fields": {
+        "username": "نام کاربری",
+        "extContractId": "شماره قرارداد",
+        "email": "ایمیل",
+        "displayName": "نام نمایشی",
+        "mobileNumber": "شماره موبایل",
+        "nationalityType": "ملیت",
+        "customerName": "نام مشتری",
+        "roles": "نقش‌ها",
+        "docTypes": "انواع اسناد",
+        "branchLocations": "شعبه‌ها",
+        "hasAccessToAllBranch": "دسترسی به همه شعبه‌ها",
+        "password": "کلمه عبور",
+        "passwordOptional": "کلمه عبور (اختیاری)",
+        "confirmPassword": "تکرار کلمه عبور",
+        "enabled": "فعال",
+        "accountNonExpired": "حساب منقضی نشده",
+        "credentialsNonExpired": "اطلاعات ورود منقضی نشده",
+        "accountNonLocked": "حساب قفل نشده",
+        "newPassword": "کلمه عبور جدید",
+        "parentUserAccount": "حساب کاربری ارزیاب ارشد",
+        "docTypeCodes": "انواع اسناد",
+        "specialDiseases": "بیماری‌های خاص"
+      },
+      "filters": {
+        "username": "نام کاربری",
+        "displayName": "نام نمایشی",
+        "mobileNumber": "شماره موبایل (9121234567)",
+        "extContractId": "شماره قرارداد",
+        "nationalityType": "ملیت",
+        "roles": "نقش‌ها"
+      },
+      "placeholders": {
+        "roles": "نقش‌ها را انتخاب کنید",
+        "docTypes": "یک یا چند نوع سند را انتخاب کنید",
+        "branchLocations": "یک یا چند شعبه را انتخاب کنید",
+        "parentUserAccount": "جستجوی حساب کاربری",
+        "nationalityType": "انتخاب ملیت",
+        "docTypeCodes": "یک یا چند نوع سند را انتخاب کنید",
+        "specialDiseases": "یک یا چند بیماری خاص را انتخاب کنید"
+      },
+      "helpers": {
+        "enabled": "اجازه ورود به حساب.",
+        "hasAccessToAllBranch": "اجازه دسترسی به همه شعبه‌ها.",
+        "accountNonExpired": "برای منقضی کردن حساب غیرفعال کنید.",
+        "credentialsNonExpired": "برای اجبار به تغییر رمز عبور غیرفعال کنید.",
+        "accountNonLocked": "برای قفل کردن حساب غیرفعال کنید."
+      },
+      "buttons": {
+        "create": "ایجاد حساب",
+        "creating": "در حال ایجاد...",
+        "save": "ذخیره تغییرات",
+        "saving": "در حال ذخیره...",
+        "delete": "حذف حساب",
+        "resetPassword": "بازنشانی کلمه عبور",
+        "resetting": "در حال بازنشانی...",
+        "retry": "تلاش دوباره"
+      },
+      "messages": {
+        "created": "حساب کاربری ایجاد شد",
+        "updated": "حساب کاربری به‌روزرسانی شد",
+        "deleted": "حساب کاربری حذف شد",
+        "passwordReset": "کلمه عبور با موفقیت بازنشانی شد",
+        "loadError": "دریافت اطلاعات حساب کاربری انجام نشد. لطفاً دوباره تلاش کنید.",
+        "missingPartyId": "شناسه شخص مشخص نیست.",
+        "missingUserAccount": "حساب کاربری یافت نشد",
+        "fanavaranInquerySuccess": "استعلام فناوران با موفقیت انجام شد"
+      },
+      "validation": {
+        "username": "نام کاربری باید حداقل ۳ کاراکتر باشد.",
+        "email": "یک ایمیل معتبر وارد کنید.",
+        "displayName": "نام نمایشی باید حداکثر ۲۵۵ کاراکتر باشد.",
+        "extId": "شناسه خارجی برای کاربران ارزیابی ارشد الزامی است.",
+        "password": "کلمه عبور باید حداقل ۶ کاراکتر باشد.",
+        "confirmPassword": "تکرار کلمه عبور الزامی است.",
+        "passwordsMatch": "کلمه‌های عبور باید یکسان باشند.",
+        "rolesRequired": "حداقل یک نقش باید انتخاب شود.",
+        "docTypeCodesRequired": "حداقل یک نوع سند باید انتخاب شود."
+      },
+      "reset": {
+        "title": "بازنشانی کلمه عبور",
+        "description": "یک کلمه عبور جدید برای این حساب تعیین کنید."
+      },
+      "delete": {
+        "title": "حذف حساب کاربری",
+        "description": "با حذف حساب، دسترسی این شخص به سامانه قطع می‌شود.",
+        "confirm": "حذف حساب"
+      }
+    },
+    "validation": {
+      "identifier": "شناسه الزامی است",
+      "extId": "شناسه خارجی الزامی است",
+      "partyType": "نوع کاربر الزامی است",
+      "firstName": "نام الزامی است",
+      "lastName": "نام خانوادگی الزامی است",
+      "status": "وضعیت الزامی است",
+      "fromDate": "تاریخ شروع الزامی است"
+    },
+    "userAccountView": {
+      "sections": {
+        "account": "حساب کاربری",
+        "contact": "اطلاعات تماس",
+        "audit": "اطلاعات ثبت"
+      },
+      "fields": {
+        "username": "نام کاربری",
+        "displayName": "نام نمایشی",
+        "externalId": "شناسه خارجی",
+        "email": "ایمیل",
+        "mobile": "موبایل",
+        "createdAt": "تاریخ ایجاد",
+        "updatedAt": "تاریخ بروزرسانی"
+      }
+    }
+  },
+  "personSpecialDiseases": {
+    "title": "بیماری‌های خاص اشخاص",
+    "entityName": "بیماری خاص شخص",
+    "refresh": "بروزرسانی",
+    "actions": {
+      "create": "ایجاد",
+      "save": "ذخیره",
+      "edit": "ویرایش",
+      "delete": "حذف"
+    },
+    "fields": {
+      "nationalCode": "کد ملی",
+      "specialDiseases": "بیماری‌های خاص",
+      "createdAt": "تاریخ ایجاد"
+    },
+    "dialog": {
+      "createTitle": "ایجاد بیماری خاص شخص",
+      "editTitle": "ویرایش بیماری خاص شخص",
+      "fields": {
+        "nationalCode": "کاربر",
+        "specialDiseases": "بیماری‌های خاص"
+      }
+    },
+    "deleteDialog": {
+      "title": "حذف بیماری خاص شخص",
+      "description": "آیا از حذف این مورد اطمینان دارید؟ این عمل قابل بازگشت نیست."
+    },
+    "errors": {
+      "noRowsSelected": "هیچ ردیفی انتخاب نشده است"
+    },
+    "emptyState": "رکوردی یافت نشد.",
+    "options": {
+      "vip": "خدمات ویژه",
+      "levelOne": "سطح یک",
+      "levelTwo": "سطح دو",
+      "specialDiseases": "بیماری‌های خاص",
+      "sacrifice": "ایثارگر"
+    },
+    "validation": {
+      "nationalCodeRequired": "انتخاب کاربر الزامی است.",
+      "specialDiseasesRequired": "انتخاب حداقل یک بیماری خاص الزامی است."
+    }
   },
   "sidebar": {
     "general": "عمومی",
