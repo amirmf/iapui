@@ -5,6 +5,7 @@
  * application features, forms, orders, or other product-specific code.
  */
 export * from './alert-dialog'
+export * from './badge'
 export * from './bottom-sheet'
 export * from './button'
 export * from './checkbox'

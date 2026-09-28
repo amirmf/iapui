@@ -1,0 +1,113 @@
+import { useEffect, useMemo, useState } from 'react'
+
+import type { PartyRole } from '@iap/api-types'
+import { Select } from '@iap/ui'
+import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
+
+import { userAccountSelectionService } from './services/user-account-selection-service'
+
+type UserAccountSearchSelectProps = {
+  branchLocationsId?: string | null
+  disabled?: boolean
+  excludeUserAccountId?: string | null
+  onChange: (value: string | undefined) => void
+  parentUserAccountId?: string | null
+  placeholder?: string
+  roles?: PartyRole | null
+  value?: string | null
+}
+
+function useDebouncedValue(value: string, delay = 700) {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => setDebouncedValue(value), delay)
+    return () => window.clearTimeout(timeoutId)
+  }, [delay, value])
+
+  return debouncedValue
+}
+
+export function UserAccountSearchSelect(props: UserAccountSearchSelectProps) {
+  const {
+    branchLocationsId,
+    disabled,
+    excludeUserAccountId,
+    onChange,
+    parentUserAccountId,
+    placeholder,
+    roles,
+    value,
+  } = props
+  const { t } = useTranslation()
+  const [searchValue, setSearchValue] = useState('')
+  const text = useDebouncedValue(searchValue.trim())
+  const usersQuery = useQuery({
+    enabled: !disabled,
+    queryFn: ({ signal }) =>
+      userAccountSelectionService.list(
+        {
+          branchLocations__in: branchLocationsId ?? undefined,
+          excludeUserAccountId: excludeUserAccountId ?? undefined,
+          parentUserAccountId: parentUserAccountId ?? undefined,
+          roles: roles ?? undefined,
+          text,
+        },
+        signal
+      ),
+    queryKey: [
+      'user-accounts',
+      'search-user',
+      text,
+      roles,
+      excludeUserAccountId,
+      branchLocationsId,
+      parentUserAccountId,
+    ],
+  })
+  const options = useMemo(
+    () =>
+      (usersQuery.data ?? []).map((user) => ({
+        label: user.displayName ?? user.username,
+        value: user.id,
+      })),
+    [usersQuery.data]
+  )
+  const selectedUserQuery = useQuery({
+    enabled:
+      !disabled &&
+      Boolean(value) &&
+      !options.some((item) => item.value === value),
+    queryFn: ({ signal }) =>
+      userAccountSelectionService.getById(value ?? '', signal),
+    queryKey: ['user-account', 'by-id', value],
+    staleTime: 30_000,
+    gcTime: 30_000,
+  })
+  const selected = useMemo(() => {
+    const user = selectedUserQuery.data
+    return user?.id
+      ? { label: user.displayName ?? user.username, value: user.id }
+      : options.find((option) => option.value === value)
+  }, [options, selectedUserQuery.data, value])
+
+  return (
+    <Select
+      clearable
+      disabled={disabled}
+      isLoading={usersQuery.isFetching}
+      labelKey='label'
+      loadingText={t('common.loading')}
+      onSearch={setSearchValue}
+      onValueChange={(option) => onChange(option?.value as string | undefined)}
+      options={options}
+      placeholder={placeholder}
+      searchPlaceholder={placeholder}
+      shouldFilter={false}
+      showSearch
+      value={selected}
+      valueKey='value'
+    />
+  )
+}

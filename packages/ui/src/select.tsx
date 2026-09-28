@@ -29,11 +29,15 @@ export type SelectProps<TOption extends SelectOption> = SelectTriggerProps & {
   disabled?: boolean
   emptyText?: ReactNode
   getOptionDisabled?: (option: TOption) => boolean
+  isLoading?: boolean
   labelKey: string
+  loadingText?: ReactNode
   onValueChange?: (value: TOption | undefined) => void
+  onSearch?: (value: string) => void
   options: readonly TOption[]
   placeholder?: ReactNode
   showSearch?: boolean
+  shouldFilter?: boolean
   searchKey?: string
   searchPlaceholder?: string
   triggerClassName?: string
@@ -102,9 +106,12 @@ export function Select<TOption extends SelectOption>(
     emptyText = 'No results found.',
     getOptionDisabled,
     id,
+    isLoading = false,
     labelKey,
+    loadingText = 'Loading…',
     name,
     onBlur,
+    onSearch,
     onValueChange,
     options,
     placeholder = 'Select an option',
@@ -112,6 +119,7 @@ export function Select<TOption extends SelectOption>(
     searchKey = labelKey,
     searchPlaceholder = 'Search…',
     showSearch = false,
+    shouldFilter = true,
     triggerClassName,
     value,
     valueKey,
@@ -200,21 +208,35 @@ export function Select<TOption extends SelectOption>(
           'w-[var(--radix-popover-trigger-width)] p-0',
           contentClassName
         )}
+        onWheel={(event) => {
+          event.stopPropagation()
+        }}
       >
-        <Command className='overflow-hidden rounded-xl' label='Options'>
+        <Command
+          className='overflow-hidden rounded-xl'
+          label='Options'
+          shouldFilter={shouldFilter}
+        >
           {showSearch ? (
             <div className='border-border border-b p-2'>
               <Command.Input
                 autoFocus
                 className='bg-surface text-foreground placeholder:text-muted-foreground focus-visible:ring-ring h-10 w-full rounded-md px-3 text-sm outline-none focus-visible:ring-2'
+                onValueChange={onSearch}
                 placeholder={searchPlaceholder}
               />
             </div>
           ) : null}
           <Command.List className='max-h-64 overflow-y-auto p-1'>
-            <Command.Empty className='text-muted-foreground px-3 py-6 text-center text-sm'>
-              {emptyText}
-            </Command.Empty>
+            {isLoading ? (
+              <p className='text-muted-foreground px-3 py-6 text-center text-sm'>
+                {loadingText}
+              </p>
+            ) : (
+              <Command.Empty className='text-muted-foreground px-3 py-6 text-center text-sm'>
+                {emptyText}
+              </Command.Empty>
+            )}
             {options.map((option) => {
               const selected = isSameOption(option, selectedValue, valueKey)
               const optionDisabled = getOptionDisabled?.(option) ?? false
