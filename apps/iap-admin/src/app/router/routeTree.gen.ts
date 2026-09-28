@@ -17,6 +17,7 @@ import { Route as AuthenticatedAssignementRulesIndexRouteImport } from './routes
 import { Route as AuthenticatedBankAccountIndexRouteImport } from './routes/_authenticated/bank-account/index'
 import { Route as AuthenticatedBranchesIndexRouteImport } from './routes/_authenticated/branches/index'
 import { Route as AuthenticatedClaimReportsIndexRouteImport } from './routes/_authenticated/claim-reports/index'
+import { Route as AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport } from './routes/_authenticated/claim-requests/$claimRequestId/claim-request-management/index'
 import { Route as AuthenticatedClaimRequestsIndexRouteImport } from './routes/_authenticated/claim-requests/index'
 import { Route as AuthenticatedCoveragesIndexRouteImport } from './routes/_authenticated/coverages/index'
 import { Route as AuthenticatedDamageCodesIndexRouteImport } from './routes/_authenticated/damage-codes/index'
@@ -192,6 +193,14 @@ const AuthenticatedUserAccountIndexRoute =
     path: '/user-account/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute =
+  AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport.update(
+    {
+      id: '/claim-requests/$claimRequestId/claim-request-management/',
+      path: '/claim-requests/$claimRequestId/claim-request-management/',
+      getParentRoute: () => AuthenticatedRouteRoute,
+    } as any
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
@@ -220,6 +229,7 @@ export interface FileRoutesByFullPath {
   '/support-questions/': typeof AuthenticatedSupportQuestionsIndexRoute
   '/tickets/': typeof AuthenticatedTicketsIndexRoute
   '/user-account/': typeof AuthenticatedUserAccountIndexRoute
+  '/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
@@ -248,6 +258,7 @@ export interface FileRoutesByTo {
   '/support-questions': typeof AuthenticatedSupportQuestionsIndexRoute
   '/tickets': typeof AuthenticatedTicketsIndexRoute
   '/user-account': typeof AuthenticatedUserAccountIndexRoute
+  '/claim-requests/$claimRequestId/claim-request-management': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -279,6 +290,7 @@ export interface FileRoutesById {
   '/_authenticated/support-questions/': typeof AuthenticatedSupportQuestionsIndexRoute
   '/_authenticated/tickets/': typeof AuthenticatedTicketsIndexRoute
   '/_authenticated/user-account/': typeof AuthenticatedUserAccountIndexRoute
+  '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -309,6 +321,7 @@ export interface FileRouteTypes {
     | '/support-questions/'
     | '/tickets/'
     | '/user-account/'
+    | '/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -337,6 +350,7 @@ export interface FileRouteTypes {
     | '/support-questions'
     | '/tickets'
     | '/user-account'
+    | '/claim-requests/$claimRequestId/claim-request-management'
   id:
     | '__root__'
     | '/_auth'
@@ -367,6 +381,7 @@ export interface FileRouteTypes {
     | '/_authenticated/support-questions/'
     | '/_authenticated/tickets/'
     | '/_authenticated/user-account/'
+    | '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -572,6 +587,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUserAccountIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': {
+      id: '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
+      path: '/claim-requests/$claimRequestId/claim-request-management'
+      fullPath: '/claim-requests/$claimRequestId/claim-request-management/'
+      preLoaderRoute: typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -616,6 +638,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSupportQuestionsIndexRoute: typeof AuthenticatedSupportQuestionsIndexRoute
   AuthenticatedTicketsIndexRoute: typeof AuthenticatedTicketsIndexRoute
   AuthenticatedUserAccountIndexRoute: typeof AuthenticatedUserAccountIndexRoute
+  AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute: typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -648,6 +671,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedSupportQuestionsIndexRoute,
   AuthenticatedTicketsIndexRoute: AuthenticatedTicketsIndexRoute,
   AuthenticatedUserAccountIndexRoute: AuthenticatedUserAccountIndexRoute,
+  AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute:
+    AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

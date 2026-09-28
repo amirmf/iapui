@@ -15,10 +15,13 @@ import type {
   SortingState,
   Updater,
 } from '@tanstack/react-table'
+import { produce } from 'immer'
 import { useTranslation } from 'react-i18next'
 
 import {
   CLAIM_REQUEST_FEATURES,
+  CLAIM_REQUEST_FEATURE_QUERY_KEY,
+  CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS,
   getClaimRequestFeature,
 } from '../model/claim-request-feature'
 import {
@@ -27,13 +30,15 @@ import {
 } from '../model/claim-request-filters'
 import { useClaimRequestStore } from '../model/claim-request-store'
 import { claimRequestService } from '../services/claim-request-service'
-import { ClaimRequestBulkActionDialogs } from './claim-request-bulk-action-dialogs'
 import { ClaimRequestBulkCoreAiDialog } from './claim-request-bulk-core-ai-dialog'
+import { ClaimRequestBulkDeleteDialog } from './claim-request-bulk-delete-dialog'
 import { ClaimRequestBulkStatusChangeDialog } from './claim-request-bulk-status-change-dialog'
 import { useClaimRequestColumns } from './claim-request-columns'
 import { ClaimRequestFetchNewEmptyState } from './claim-request-fetch-new-empty-state'
+import { ClaimRequestGenerateAndSendBulkDialog } from './claim-request-generate-and-send-bulk-dialog'
 import { ClaimRequestHeaderActions } from './claim-request-header-actions'
 import { ClaimRequestProvider } from './claim-request-provider'
+import { ClaimRequestRowActionDialogs } from './claim-request-row-action-dialogs'
 import { ClaimRequestToolbar } from './claim-request-toolbar'
 import { ClaimRequestsTicketsPlaceholder } from './claim-requests-tickets-placeholder'
 
@@ -45,7 +50,12 @@ function resolveUpdater<T>(updater: Updater<T>, previous: T) {
 
 function toSearchRecord(value: Record<string, unknown>): TableFilterSearch {
   return Object.fromEntries(
-    Object.entries(value).filter(([, item]) => typeof item === 'string')
+    Object.entries(value).filter(
+      ([, item]) =>
+        typeof item === 'string' ||
+        (Array.isArray(item) &&
+          item.every((entry) => typeof entry === 'string'))
+    )
   ) as TableFilterSearch
 }
 
@@ -139,11 +149,24 @@ function ClaimRequestsContent() {
     (nextQuickStatus: typeof quickStatus) => {
       router.navigate({
         replace: true,
-        search: {
-          ...toTableFilterSearch({ ...tableState, sorting }),
-          page: '1',
-          quickStatus: nextQuickStatus,
-        } as never,
+        search: produce(
+          toTableFilterSearch({ ...tableState, sorting }),
+          (search) => {
+            if (nextQuickStatus === CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS) {
+              return {
+                [CLAIM_REQUEST_FEATURE_QUERY_KEY]:
+                  CLAIM_REQUEST_FEATURES.tickets,
+              }
+            }
+
+            delete search[CLAIM_REQUEST_FEATURE_QUERY_KEY]
+            delete search.status
+            delete search.extPaymentDate
+            delete search.extPaymentDate__neq
+            delete search.page
+            search.quickStatus = nextQuickStatus
+          }
+        ) as never,
         to: './',
       })
     },
@@ -210,7 +233,11 @@ function ClaimRequestsContent() {
           />
         </div>
       </div>
-      <ClaimRequestBulkActionDialogs
+      <ClaimRequestBulkDeleteDialog
+        claimRequestIds={selectedIds}
+        onSuccess={() => void query.refetch()}
+      />
+      <ClaimRequestGenerateAndSendBulkDialog
         claimRequestIds={selectedIds}
         onSuccess={() => void query.refetch()}
       />
@@ -222,6 +249,7 @@ function ClaimRequestsContent() {
         claimRequestIds={selectedIds}
         onSuccess={() => void query.refetch()}
       />
+      <ClaimRequestRowActionDialogs onSuccess={() => void query.refetch()} />
     </>
   )
 }

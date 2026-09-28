@@ -46,6 +46,9 @@ importers:
       '@iap/design-tokens':
         specifier: workspace:*
         version: link:../../packages/design-tokens
+      '@iap/dialogs':
+        specifier: workspace:*
+        version: link:../../packages/dialogs
       '@iap/forms':
         specifier: workspace:*
         version: link:../../packages/forms

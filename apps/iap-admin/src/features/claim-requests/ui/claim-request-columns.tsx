@@ -3,7 +3,8 @@ import { useMemo } from 'react'
 import type { ClaimRequest } from '@iap/api-types'
 import { cn, formatDate, formatDateTime } from '@iap/ui'
 import { TwoLineCell, TwoLineHeader } from '@shared/tables'
-import { type ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import { Link } from '@tanstack/react-router'
+import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -17,6 +18,7 @@ import {
   getClaimRequestDisplayStatusColor,
   sentToBankStatus,
 } from '../model/claim-request-display-status'
+import { ClaimRequestRowActions } from './claim-request-row-actions'
 
 const columnHelper = createColumnHelper<ClaimRequest>()
 function formatNumber(value: number | null | undefined) {
@@ -25,18 +27,33 @@ function formatNumber(value: number | null | undefined) {
     : value.toLocaleString('en-US')
 }
 
-export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
+export function useClaimRequestColumns() {
   const { t } = useTranslation()
 
-  return useMemo<ColumnDef<ClaimRequest>[]>(
+  return useMemo(
     () => [
       columnHelper.accessor('extNationalCode', {
-        cell: (context) => (
-          <TwoLineCell
-            primary={context.getValue()}
-            secondary={context.row.original.extMainNationalCode}
-          />
-        ),
+        cell: (context) => {
+          const claimRequestId = context.row.original.id
+          const cell = (
+            <TwoLineCell
+              primary={context.getValue()}
+              secondary={context.row.original.extMainNationalCode}
+            />
+          )
+
+          return claimRequestId ? (
+            <Link
+              className='w-32 truncate text-sm text-primary underline'
+              params={{ claimRequestId }}
+              to='/claim-requests/$claimRequestId/claim-request-management/'
+            >
+              {cell}
+            </Link>
+          ) : (
+            cell
+          )
+        },
         header: ({ column }) => (
           <TwoLineHeader
             column={column}
@@ -44,6 +61,7 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             secondary={t('claimRequests.columns.extMainNationalCode')}
           />
         ),
+        meta: { className: 'max-w-40' },
       }),
       columnHelper.accessor('extDisplayName', {
         cell: (context) => (
@@ -60,6 +78,7 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             secondary={t('claimRequests.columns.extCustomerName')}
           />
         ),
+        meta: { className: 'max-w-40' },
       }),
       columnHelper.accessor('businessKey', {
         cell: (context) => (
@@ -80,28 +99,40 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             primary={t('claimRequests.columns.businessKey')}
           />
         ),
+        meta: { className: 'max-w-40' },
       }),
-      columnHelper.display({
-        cell: (context) => (
-          <TwoLineCell
-            longText
-            primary={context.row.original.documents
+      columnHelper.accessor(
+        (row) => {
+          if (row.docType?.docType) return row.docType.docType
+
+          return (
+            row.documents
               ?.map((document) => document.documentType)
               .filter(Boolean)
-              .join(', ')}
-            secondary={context.row.original.extPlanCaption}
-          />
-        ),
-        header: () => (
-          <div className='flex flex-col gap-1 text-sm'>
-            <span>{t('claimRequests.columns.docType')}</span>
-            <span className='text-xs font-normal text-muted-foreground'>
-              {t('claimRequests.columns.extPlanCaption')}
-            </span>
-          </div>
-        ),
-        id: 'docType',
-      }),
+              .join(', ') ?? ''
+          )
+        },
+        {
+          cell: (context) => (
+            <TwoLineCell
+              longText
+              primary={context.getValue()}
+              secondary={context.row.original.extPlanCaption}
+              primaryClassName='max-w-60'
+              secondaryClassName='max-w-60 text-xs'
+            />
+          ),
+          header: ({ column }) => (
+            <TwoLineHeader
+              column={column}
+              primary={t('claimRequests.columns.docType')}
+              secondary={t('claimRequests.columns.extPlanCaption')}
+            />
+          ),
+          id: 'docType.id',
+          meta: { className: 'max-w-40' },
+        }
+      ),
       columnHelper.accessor('amount', {
         cell: (context) => (
           <div className='flex min-w-0 flex-col gap-1 text-sm'>
@@ -127,6 +158,7 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             secondary={t('claimRequests.columns.totalSumAmount')}
           />
         ),
+        meta: { className: 'max-w-30' },
       }),
       columnHelper.accessor('status', {
         cell: (context) => {
@@ -173,6 +205,7 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             secondary={t('claimRequests.columns.aiStatus')}
           />
         ),
+        meta: { className: 'max-w-52' },
       }),
       columnHelper.accessor('submitDate', {
         cell: (context) => (
@@ -188,6 +221,7 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             secondary={t('claimRequests.columns.createdAt')}
           />
         ),
+        meta: { className: 'max-w-48' },
       }),
       columnHelper.accessor('latestAssignementDisplayName', {
         cell: (context) => (
@@ -204,6 +238,7 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             secondary={t('claimRequests.columns.assessedAt')}
           />
         ),
+        meta: { className: 'max-w-48' },
       }),
       columnHelper.accessor('extPolicyId', {
         cell: (context) => (
@@ -219,6 +254,7 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             secondary={t('claimRequests.columns.extContractId')}
           />
         ),
+        meta: { className: 'max-w-40' },
       }),
       columnHelper.accessor('corePaidAmount', {
         cell: (context) => (
@@ -240,6 +276,7 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             secondary={t('claimRequests.columns.ibanStatus')}
           />
         ),
+        meta: { className: 'max-w-40' },
       }),
       columnHelper.accessor('corePaidAmountPercent', {
         cell: (context) => (
@@ -259,6 +296,7 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             secondary={t('claimRequests.columns.extPaymentDate')}
           />
         ),
+        meta: { className: 'max-w-32' },
       }),
       columnHelper.accessor('extWorkUnitName', {
         cell: (context) => (
@@ -281,6 +319,13 @@ export function useClaimRequestColumns(): ColumnDef<ClaimRequest>[] {
             secondary={t('claimRequests.columns.isReturn')}
           />
         ),
+        meta: { className: 'max-w-48' },
+      }),
+      columnHelper.display({
+        cell: ({ row }) => <ClaimRequestRowActions row={row} />,
+        enableSorting: false,
+        id: 'actions',
+        meta: { className: 'sticky left-0 bg-background' },
       }),
     ],
     [t]

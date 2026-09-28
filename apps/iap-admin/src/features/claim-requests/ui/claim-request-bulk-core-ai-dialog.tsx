@@ -51,6 +51,7 @@ export function ClaimRequestBulkCoreAiDialog(props: {
       setRowSelection({})
       onSuccess()
     },
+    onError: () => toast.error(t('claimRequests.bulkDataExtraction.error')),
   })
   const isOpen = openDialog === 'bulkDataExtraction'
 

@@ -12,7 +12,7 @@ const RESERVED_SEARCH_KEYS = new Set([
   directionQueryParamKey,
 ])
 
-export type TableFilterSearch = Record<string, string | undefined>
+export type TableFilterSearch = Record<string, string | string[] | undefined>
 
 export type ParsedTableFilterSearch = {
   filters: TableFilterSearch
@@ -25,7 +25,8 @@ export type TableFilterSearchState = {
   sorting: SortingState
 }
 
-function parsePositiveInteger(value: string | undefined, fallback: number) {
+function parsePositiveInteger(value: unknown, fallback: number) {
+  if (typeof value !== 'string') return fallback
   const parsed = Number(value)
 
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback
@@ -43,6 +44,7 @@ export function parseTableFilterSearch(
   }
 
   const sortDirection = search[directionQueryParamKey]
+  const sortId = search[sortQueryParamKey]
 
   return {
     filters,
@@ -54,9 +56,9 @@ export function parseTableFilterSearch(
       ),
     },
     sorting:
-      search[sortQueryParamKey] &&
+      typeof sortId === 'string' &&
       (sortDirection === 'asc' || sortDirection === 'desc')
-        ? [{ desc: sortDirection === 'desc', id: search[sortQueryParamKey] }]
+        ? [{ desc: sortDirection === 'desc', id: sortId }]
         : [],
   }
 }

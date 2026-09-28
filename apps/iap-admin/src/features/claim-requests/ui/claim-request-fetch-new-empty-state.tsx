@@ -21,20 +21,26 @@ export function ClaimRequestFetchNewEmptyState(props: { onFetch: () => void }) {
   })
 
   return (
-    <div className='flex flex-col items-center gap-3 py-12'>
+    <div className='flex flex-col items-center justify-center gap-4 py-12'>
       <Input
-        inputMode='numeric'
+        className='max-w-52'
         onChange={(event) => setExtContractId(event.target.value)}
-        placeholder={t('claimRequests.filters.extContractId')}
+        numerical
+        placeholder={t('claimRequests.extContractIdPlaceholder')}
         value={extContractId}
       />
       <Input
-        inputMode='numeric'
+        className='max-w-52'
         onChange={(event) => setExtPolicyId(event.target.value)}
-        placeholder={t('claimRequests.filters.extPolicyId')}
+        numerical
+        placeholder={t('claimRequests.extPolicyIdPlaceholder')}
         value={extPolicyId}
       />
-      <Button disabled={mutation.isPending} onClick={() => mutation.mutate()}>
+      <Button
+        disabled={mutation.isPending}
+        onClick={() => mutation.mutate()}
+        size='sm'
+      >
         {mutation.isPending
           ? t('common.loading')
           : t('claimRequests.fetchNewRequests')}

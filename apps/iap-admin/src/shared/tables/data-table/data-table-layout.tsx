@@ -63,7 +63,10 @@ export function DataTableLayout<TData>(props: {
                               : 'none'
                           : undefined
                       }
-                      className={header.column.columnDef.meta?.headerClassName}
+                      className={
+                        header.column.columnDef.meta?.className ??
+                        header.column.columnDef.meta?.headerClassName
+                      }
                       colSpan={header.colSpan}
                       key={header.id}
                     >

@@ -42,10 +42,18 @@ const claimRequestDocumentSchema = z
   })
   .loose()
 
+const claimRequestDocTypeSchema = z
+  .object({
+    docType: z.string().nullish(),
+    id: z.string().nullish(),
+  })
+  .loose()
+
 export const claimRequestSchema = z
   .object({
     aiStatus: claimRequestAiStatusSchema.nullish(),
     amount: z.number().nullish(),
+    assignedUserUsername: z.string().nullish(),
     assessedAt: z.string().nullish(),
     baseClaimRequestId: z.string().nullish(),
     businessKey: z.number().nullish(),
@@ -53,6 +61,7 @@ export const claimRequestSchema = z
     corePaidAmountPercent: z.number().nullish(),
     createdAt: z.string().nullish(),
     documents: z.array(claimRequestDocumentSchema).nullish(),
+    docType: claimRequestDocTypeSchema.nullish(),
     extContractId: z.number().nullish(),
     extCustomerName: z.string().nullish(),
     extDisplayName: z.string().nullish(),
@@ -79,6 +88,7 @@ export const pageClaimRequestSchema =
 export const pageClaimRequestRequestSchema = createPageRequestSchema()
 
 export const claimRequestIdsSchema = z.array(z.string().trim().min(1)).min(1)
+export const claimRequestIdSchema = z.string().trim().min(1)
 
 export const assignNewClaimRequestsRequestSchema = z
   .object({
@@ -112,6 +122,20 @@ export const coreAiDataExtractionResponseSchema = z
   })
   .loose()
 
+export const assignClaimRequestToMeStatusRequestSchema = z
+  .object({
+    claimRequestStatus: claimRequestStatusSchema.optional(),
+    description: z.string().trim().optional(),
+  })
+  .strict()
+
+export const updateClaimRequestDocTypeRequestSchema = z
+  .object({
+    claimRequestId: claimRequestIdSchema,
+    newDocType: z.string().trim().min(1),
+  })
+  .strict()
+
 export type ClaimRequest = z.infer<typeof claimRequestSchema>
 export type ClaimRequestAiStatus = z.infer<typeof claimRequestAiStatusSchema>
 export type ClaimRequestStatus = z.infer<typeof claimRequestStatusSchema>
@@ -128,4 +152,10 @@ export type CoreAiDataExtractionRequest = z.input<
 >
 export type CoreAiDataExtractionResponse = z.infer<
   typeof coreAiDataExtractionResponseSchema
+>
+export type AssignClaimRequestToMeStatusRequest = z.input<
+  typeof assignClaimRequestToMeStatusRequestSchema
+>
+export type UpdateClaimRequestDocTypeRequest = z.input<
+  typeof updateClaimRequestDocTypeRequestSchema
 >

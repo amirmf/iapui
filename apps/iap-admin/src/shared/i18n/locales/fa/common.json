@@ -267,6 +267,7 @@
       "businessKey": "کد پذیرش",
       "latestAssignementDisplayName": "نام ارزیاب",
       "extWorkUnitName": "نام شعبه",
+      "requestType": "نوع درخواست",
       "isReturn": "عودتی"
     },
     "filters": {
@@ -277,19 +278,36 @@
       "extMainNationalCode": "کد ملی بیمه‌شده اصلی",
       "extDisplayName": "نام بیمه‌شده",
       "extCustomerName": "نام بیمه‌گذار",
+      "extCustomerCompanyCode": "کد شرکت بیمه‌گذار",
+      "extCustomerNationalCode": "کد ملی بیمه‌گذار",
+      "extCustomerCityName": "شهر بیمه‌گذار",
       "extWorkUnitName": "نام شعبه",
+      "extWorkUnitCode": "کد شعبه",
+      "extWorkUnitCityName": "شهر شعبه",
+      "extWorkUnitProvinceName": "استان شعبه",
+      "extPlanCaption": "طرح",
       "businessKey": "کد پذیرش",
       "amountFrom": "مبلغ از",
       "amountTo": "مبلغ تا",
       "totalSumAmountFrom": "مبلغ تایید شده از",
       "totalSumAmountTo": "مبلغ تایید شده تا",
+      "corePaidAmountFrom": "مبلغ فناوران از",
+      "corePaidAmountTo": "مبلغ فناوران تا",
+      "corePaidAmountPercentFrom": "درصد اختلاف از",
+      "corePaidAmountPercentTo": "درصد اختلاف تا",
       "submitDateFrom": "تاریخ هزینه از",
       "submitDateTo": "تاریخ هزینه تا",
       "createdAtFrom": "تاریخ ثبت از",
       "createdAtTo": "تاریخ ثبت تا",
       "assessedAtFrom": "تاریخ ارزیابی از",
       "assessedAtTo": "تاریخ ارزیابی تا",
-      "isReturn": "عودتی"
+      "isReturn": "عودتی",
+      "ibanStatus": "وضعیت شبا",
+      "latestAssignementUsername": "کدملی ارزیاب",
+      "mainAssignedUserUsername": "کدملی ارزیاب اصلی",
+      "mainAssignedUserDisplayName": "نام ارزیاب اصلی",
+      "seenBy": "فیلد",
+      "outpatientDocAcceptanceExtId": "شماره پذیرش فناوران"
     },
     "ibanStatusValues": {
       "has": "دارد",
@@ -335,7 +353,13 @@
       "bulkDelete": "حذف گروهی",
       "downloadExcel": "دانلود اکسل",
       "generateAndSend": "ایجاد و ارسال گروهی",
-      "inquiryFanavaran": "استعلام فناوران"
+      "inquiryFanavaran": "استعلام فناوران",
+      "assignToMe": "تخصیص به من و ارزیابی",
+      "removeMyAssessment": "خارج کردن از کارتابل",
+      "sendStatusChangeNotification": "ارسال اعلان تغییر وضعیت",
+      "delete": "حذف",
+      "view": "مشاهده جزئیات",
+      "viewDetails": "مشاهده جزئیات"
     },
     "bulk": {
       "delete": {
@@ -372,6 +396,56 @@
       "error": "آغاز فرایند استخراج داده Core AI ناموفق بود.",
       "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
     },
+    "generateAndSendBulk": {
+      "button": "ارسال گروهی به فناوران",
+      "title": "ارسال گروهی به فناوران",
+      "description": "این عملیات پذیرش اسناد سرپایی را تولید می‌کند و {{count}} درخواست انتخاب‌شده را به فناوران ارسال می‌کند.",
+      "selectionInfo": "{{count}} درخواست انتخاب شده",
+      "confirm": "ارسال به فناوران",
+      "submitting": "در حال ارسال...",
+      "success": "درخواست‌های انتخاب‌شده با موفقیت به فناوران ارسال شدند.",
+      "error": "ارسال درخواست‌های انتخاب‌شده به فناوران ناموفق بود.",
+      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
+    },
+    "bulkDelete": {
+      "button": "حذف انتخاب‌ها",
+      "title": "حذف درخواست‌های خسارت",
+      "description": "این عملیات {{count}} درخواست انتخاب‌شده را برای همیشه حذف می‌کند و قابل بازگشت نیست.",
+      "selectionInfo": "{{count}} درخواست انتخاب شده",
+      "confirm": "حذف",
+      "submitting": "در حال حذف...",
+      "success": "درخواست‌های انتخاب‌شده با موفقیت حذف شدند.",
+      "error": "حذف درخواست‌های انتخاب‌شده ناموفق بود.",
+      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
+    },
+    "messages": {
+      "deleted": "درخواست خسارت حذف شد",
+      "claimIdMissing": "شناسه درخواست وجود ندارد.",
+      "docTypeUpdateFailed": "به‌روزرسانی نوع سند انجام نشد.",
+      "removeMyAssessmentSuccess": "خارج کردن از کارتابل با موفقیت انجام شد.",
+      "statusChangeNotificationSent": "اعلان تغییر وضعیت با موفقیت ارسال شد.",
+      "inquiryFanavaranSuccess": "استعلام فناوران با موفقیت ارسال شد.",
+      "inquiryFanavaranError": "ارسال استعلام فناوران ناموفق بود.",
+      "excelDownloaded": "فایل اکسل دانلود شد",
+      "excelDownloadFailed": "دانلود اکسل ناموفق بود"
+    },
+    "confirmations": {
+      "inquiryFanavaran": {
+        "title": "استعلام فناوران",
+        "description": "آیا از ارسال استعلام جزئیات بیمه‌نامه به فناوران مطمئن هستید؟"
+      },
+      "assignToMe": {
+        "title": "اختصاص درخواست خسارت به من",
+        "description": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را به خودتان اختصاص دهید؟"
+      },
+      "removeMyAssessment": {
+        "title": "خارج کردن از کارتابل من",
+        "description": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را از کارتابل خود خارج کنید؟"
+      }
+    },
+    "management": {
+      "title": "مدیریت درخواست خسارت"
+    },
     "bulkStatusChange": {
       "button": "تغییر گروهی وضعیت",
       "title": "تغییر گروهی وضعیت",
@@ -385,7 +459,9 @@
       "defaultDescription": "تغییر گروهی وضعیت",
       "descriptionPlaceholder": "توضیحات تغییر گروهی وضعیت را وارد کنید"
     },
-    "fetchNewRequests": "دریافت درخواست‌های جدید"
+    "extContractIdPlaceholder": "شماره قرارداد",
+    "extPolicyIdPlaceholder": "کد رایانه بیمه نامه",
+    "fetchNewRequests": "کلیک جهت مشاهده درخواست‌ها"
   },
   "panelSwitcher": {
     "switch": "تغییر پنل: {{panel}}",

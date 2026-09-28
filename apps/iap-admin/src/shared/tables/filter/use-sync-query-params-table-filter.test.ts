@@ -41,4 +41,19 @@ describe('table filter search state', () => {
       sorting: [],
     })
   })
+
+  it('preserves multi-select values for API filter serialization', () => {
+    const state = parseTableFilterSearch({
+      aiStatus: ['APPROVED', 'REVIEW_REQUIRED'],
+      page: '1',
+    })
+
+    expect(state.filters).toEqual({
+      aiStatus: ['APPROVED', 'REVIEW_REQUIRED'],
+    })
+    expect(toTableFilterSearch(state).aiStatus).toEqual([
+      'APPROVED',
+      'REVIEW_REQUIRED',
+    ])
+  })
 })

@@ -1,21 +1,45 @@
 import { getApiClient } from '@iap/api-client'
 import {
+  type AssignClaimRequestToMeStatusRequest,
   type ClaimRequestBulkStatusChangeRequest,
   type CoreAiDataExtractionRequest,
   type PageClaimRequestRequest,
+  type UpdateClaimRequestDocTypeRequest,
+  assignClaimRequestToMeStatusRequestSchema,
   assignNewClaimRequestsRequestSchema,
   claimRequestBulkStatusChangeRequestSchema,
+  claimRequestIdSchema,
   claimRequestIdsSchema,
   claimRequestSchema,
   coreAiDataExtractionRequestSchema,
   coreAiDataExtractionResponseSchema,
   pageClaimRequestRequestSchema,
   pageClaimRequestSchema,
+  updateClaimRequestDocTypeRequestSchema,
 } from '@iap/api-types'
 import { type ApiFilterParams, transformApiFilterParams } from '@iap/shared-lib'
 import { z } from 'zod'
 
 export const claimRequestService = {
+  assignToMe: async (id: string) => {
+    const claimRequestId = claimRequestIdSchema.parse(id)
+    const response = await getApiClient().post(
+      `/claim-requests/${claimRequestId}/assignments/me`
+    )
+    return claimRequestSchema.parse(response.data)
+  },
+  assignToMeWithStatus: async (
+    id: string,
+    payload: AssignClaimRequestToMeStatusRequest
+  ) => {
+    const claimRequestId = claimRequestIdSchema.parse(id)
+    const request = assignClaimRequestToMeStatusRequestSchema.parse(payload)
+    const response = await getApiClient().post(
+      `/claim-requests/${claimRequestId}/assignments/me/status`,
+      request
+    )
+    return claimRequestSchema.parse(response.data)
+  },
   findPage: async (
     options: PageClaimRequestRequest & { signal?: AbortSignal }
   ) => {
@@ -46,6 +70,10 @@ export const claimRequestService = {
     await getApiClient().delete('/claim-requests/bulk-delete', {
       data: request,
     })
+  },
+  delete: async (id: string) => {
+    const claimRequestId = claimRequestIdSchema.parse(id)
+    await getApiClient().delete(`/claim-requests/${claimRequestId}`)
   },
   exportPageLiteExcel: async (filters: ApiFilterParams) => {
     const response = await getApiClient().get(
@@ -94,5 +122,19 @@ export const claimRequestService = {
     )
 
     return z.array(coreAiDataExtractionResponseSchema).parse(response.data)
+  },
+  sendStatusChangeNotification: async (id: string) => {
+    const claimRequestId = claimRequestIdSchema.parse(id)
+    await getApiClient().post(
+      `/claim-requests/${claimRequestId}/status-change-notifications`
+    )
+  },
+  updateDocType: async (payload: UpdateClaimRequestDocTypeRequest) => {
+    const request = updateClaimRequestDocTypeRequestSchema.parse(payload)
+    const response = await getApiClient().post(
+      '/claim-requests/doc-type',
+      request
+    )
+    return claimRequestSchema.parse(response.data)
   },
 }

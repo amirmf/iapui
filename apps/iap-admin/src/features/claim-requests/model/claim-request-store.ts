@@ -6,8 +6,10 @@ export type ClaimRequestDialog =
   | 'bulkDataExtraction'
   | 'bulkDelete'
   | 'bulkGenerateAndSend'
-  | 'bulkInquiryFanavaran'
   | 'bulkStatusChange'
+  | 'delete'
+  | 'assignToMe'
+  | 'removeMyAssessment'
   | null
 
 type ClaimRequestStore = {

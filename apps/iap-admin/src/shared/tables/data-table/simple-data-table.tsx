@@ -123,7 +123,10 @@ export function SimpleDataTable<TData>(props: {
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
-                    className={cell.column.columnDef.meta?.cellClassName}
+                    className={
+                      cell.column.columnDef.meta?.className ??
+                      cell.column.columnDef.meta?.cellClassName
+                    }
                     key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

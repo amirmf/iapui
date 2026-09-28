@@ -4,6 +4,8 @@ import { produce } from 'immer'
 
 import { CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS } from './claim-request-feature'
 
+export const claimRequestSentToBankQuickStatus = 'SENT_TO_BANK' as const
+
 export const claimRequestQuickStatuses = [
   'ALL',
   'IN_ASSESSMENT',
@@ -15,15 +17,22 @@ export const claimRequestQuickStatuses = [
   'RETURN',
   'DELETED',
   'REJECTED',
+  claimRequestSentToBankQuickStatus,
   'PAID',
   CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS,
 ] as const satisfies readonly (
-  'ALL' | ClaimRequestStatus | typeof CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS
+  | 'ALL'
+  | ClaimRequestStatus
+  | typeof claimRequestSentToBankQuickStatus
+  | typeof CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS
 )[]
 
 export type ClaimRequestQuickStatus = (typeof claimRequestQuickStatuses)[number]
 
-export const doctorClaimRequestQuickStatuses = ['DELEGATED'] as const
+export const doctorClaimRequestQuickStatuses = [
+  'DELEGATED',
+  CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS,
+] as const
 export const doctorClaimRequestDefaultQuickStatus = 'DELEGATED'
 export const skipCurrentUserQuickStatuses = new Set([
   'APPROVED',
@@ -34,13 +43,20 @@ export const skipCurrentUserQuickStatuses = new Set([
   'RETURN',
   'SENT',
   'SENT_FAILED',
+  claimRequestSentToBankQuickStatus,
 ])
 
 export function getClaimRequestQuickStatus(
   filters: TableFilterSearch,
   isDoctor = false
 ): ClaimRequestQuickStatus {
-  const quickStatus = filters.quickStatus
+  const quickStatusValue = filters.quickStatus
+  const quickStatus =
+    typeof quickStatusValue === 'string'
+      ? quickStatusValue
+      : Array.isArray(quickStatusValue) && quickStatusValue.length === 1
+        ? quickStatusValue[0]
+        : undefined
 
   if (
     isDoctor &&
@@ -66,11 +82,21 @@ export function toClaimRequestApiFilters(
 
   return produce(filters, (draft) => {
     delete draft.quickStatus
+    delete draft.extPaymentDate
+    delete draft.extPaymentDate__neq
     if (!draft.sort) draft.sort = 'createdAt'
     if (!draft.direction) draft.direction = 'asc'
     if (!skipCurrentUserQuickStatuses.has(quickStatus)) {
       draft.skipCurrentUserFilter = 'Y'
     }
-    if (quickStatus !== 'ALL') draft.status = quickStatus
+    if (quickStatus === claimRequestSentToBankQuickStatus) {
+      draft.status = 'PAID'
+      draft.extPaymentDate = 'null'
+    } else if (quickStatus === 'PAID') {
+      draft.status = 'PAID'
+      draft.extPaymentDate__neq = 'null'
+    } else if (quickStatus !== 'ALL') {
+      draft.status = quickStatus
+    }
   })
 }

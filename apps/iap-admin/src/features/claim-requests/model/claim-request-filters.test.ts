@@ -26,6 +26,7 @@ describe('claim request filters', () => {
       extNationalCode: '1234567890',
       sort: 'createdAt',
       direction: 'asc',
+      extPaymentDate__neq: 'null',
       status: 'PAID',
     })
   })
@@ -33,6 +34,16 @@ describe('claim request filters', () => {
   it('applies a selected quick status as the API status filter', () => {
     expect(toClaimRequestApiFilters({ quickStatus: 'PAID' })).toEqual({
       direction: 'asc',
+      extPaymentDate__neq: 'null',
+      sort: 'createdAt',
+      status: 'PAID',
+    })
+  })
+
+  it('uses the reference sent-to-bank payment filter', () => {
+    expect(toClaimRequestApiFilters({ quickStatus: 'SENT_TO_BANK' })).toEqual({
+      direction: 'asc',
+      extPaymentDate: 'null',
       sort: 'createdAt',
       status: 'PAID',
     })

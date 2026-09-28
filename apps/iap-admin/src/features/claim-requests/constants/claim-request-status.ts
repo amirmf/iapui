@@ -49,7 +49,23 @@ export const claimRequestAiStatusColors: Record<ClaimRequestAiStatus, string> =
 
 export const claimRequestStatusTranslationKeys: Record<
   ClaimRequestStatus,
-  `claimRequests.status.${string}`
+  | 'claimRequests.status.approved'
+  | 'claimRequests.status.dedicatedToUser'
+  | 'claimRequests.status.delegated'
+  | 'claimRequests.status.deleted'
+  | 'claimRequests.status.failed_fetch_api'
+  | 'claimRequests.status.inAssessment'
+  | 'claimRequests.status.inReview'
+  | 'claimRequests.status.paid'
+  | 'claimRequests.status.paymentRejected'
+  | 'claimRequests.status.paymentReturn'
+  | 'claimRequests.status.paymentReturnResend'
+  | 'claimRequests.status.rejected'
+  | 'claimRequests.status.return'
+  | 'claimRequests.status.sent'
+  | 'claimRequests.status.sent_failed'
+  | 'claimRequests.status.submitted'
+  | 'claimRequests.status.terminated'
 > = {
   APPROVED: 'claimRequests.status.approved',
   DEDICATED_TO_USER: 'claimRequests.status.dedicatedToUser',
@@ -72,7 +88,15 @@ export const claimRequestStatusTranslationKeys: Record<
 
 export const claimRequestAiStatusTranslationKeys: Record<
   ClaimRequestAiStatus,
-  `claimRequests.aiStatus.${string}`
+  | 'claimRequests.aiStatus.approved'
+  | 'claimRequests.aiStatus.reject'
+  | 'claimRequests.aiStatus.return'
+  | 'claimRequests.aiStatus.returnMaxCeiling'
+  | 'claimRequests.aiStatus.returnNoCoverage'
+  | 'claimRequests.aiStatus.reviewRequired'
+  | 'claimRequests.aiStatus.reviewRequiredImageDigitallyEdited'
+  | 'claimRequests.aiStatus.reviewRequiredImageDuplicated'
+  | 'claimRequests.aiStatus.reviewRequiredSubmitInfoDuplicated'
 > = {
   APPROVED: 'claimRequests.aiStatus.approved',
   REJECT: 'claimRequests.aiStatus.reject',
