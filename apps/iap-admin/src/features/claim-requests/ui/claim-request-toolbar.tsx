@@ -14,12 +14,8 @@ import {
 } from '../constants/claim-request-status'
 import type { ClaimRequestQuickStatus } from '../model/claim-request-filters'
 import { docTypeOptionsService } from '../services/doc-type-options-service'
-import { ClaimRequestQuickStatusFilter } from './claim-request-quick-status-filter'
 
 type ClaimRequestToolbarProps = {
-  count?: number
-  isFetching: boolean
-  onQuickStatusChange: (status: ClaimRequestQuickStatus) => void
   quickStatus: ClaimRequestQuickStatus
 }
 
@@ -63,7 +59,7 @@ const docTypeFilterRoles = new Set([
 ])
 
 export function ClaimRequestToolbar(props: ClaimRequestToolbarProps) {
-  const { count, isFetching, onQuickStatusChange, quickStatus } = props
+  const { quickStatus } = props
   const { t } = useTranslation()
   const roles = useAuthSession().user?.roles ?? []
   const canSeeDocTypeFilter = roles.some((role) => docTypeFilterRoles.has(role))
@@ -240,22 +236,14 @@ export function ClaimRequestToolbar(props: ClaimRequestToolbarProps) {
   }, [canSeeDocTypeFilter, docTypes, quickStatus, t])
 
   return (
-    <div className='mb-4'>
-      <TableFilterQueryParams
-        dateRangeFilters={dateRangeFilters}
-        dateTimeRangeFilters={dateTimeRangeFilters}
-        facetedFilters={facetedFilters}
-        ignoreQueryParams={['quickStatus', 'features']}
-        numberRangeFilters={numberRangeFilters}
-        showReset
-        textFilters={textFilters}
-      />
-      <ClaimRequestQuickStatusFilter
-        count={count}
-        isFetching={isFetching}
-        onStatusChange={onQuickStatusChange}
-        selectedStatus={quickStatus}
-      />
-    </div>
+    <TableFilterQueryParams
+      dateRangeFilters={dateRangeFilters}
+      dateTimeRangeFilters={dateTimeRangeFilters}
+      facetedFilters={facetedFilters}
+      ignoreQueryParams={['quickStatus', 'features']}
+      numberRangeFilters={numberRangeFilters}
+      showReset
+      textFilters={textFilters}
+    />
   )
 }

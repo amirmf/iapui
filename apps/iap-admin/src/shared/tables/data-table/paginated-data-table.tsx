@@ -27,12 +27,18 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { useTranslation } from 'react-i18next'
+
+type AnyValueColumnDef<TData> = ColumnDef<TData, never>
 
 export function PaginatedDataTable<TData>(props: {
   caption?: ReactNode
   className?: string
   columnFilters?: ColumnFiltersState
-  columns: readonly ColumnDef<TData, unknown>[]
+  // A table can combine accessors with different value types. `ColumnDef` is
+  // invariant in that value type, so `unknown` would reject valid columns such
+  // as string, number, and display-only columns when a feature passes them in.
+  columns: readonly AnyValueColumnDef<TData>[]
   data: readonly TData[]
   emptyContent?: ReactNode
   /** Alias for reference-project usage. */
@@ -107,6 +113,7 @@ export function PaginatedDataTable<TData>(props: {
     totalCount,
     columnVisibility,
   } = props
+  const { t } = useTranslation()
   const [internalColumnVisibility, setInternalColumnVisibility] =
     useState<VisibilityState>({})
   const [internalRowSelection, setInternalRowSelection] =
@@ -115,6 +122,11 @@ export function PaginatedDataTable<TData>(props: {
   const resolvedColumnVisibility = columnVisibility ?? internalColumnVisibility
   const resolvedRowSelection = rowSelection ?? internalRowSelection
   const resolvedSorting = sorting ?? internalSorting
+  const resolvedLabels: DataTableLabels = {
+    empty: t('common.noRecords'),
+    loading: t('common.loading'),
+    ...labels,
+  }
   const selectColumn = useMemo(
     () =>
       hasCheckboxes
@@ -122,7 +134,7 @@ export function PaginatedDataTable<TData>(props: {
         : undefined,
     [hasCheckboxes, selectAllLabel, selectRowLabel]
   )
-  const resolvedColumns = useMemo<ColumnDef<TData, unknown>[]>(
+  const resolvedColumns = useMemo<AnyValueColumnDef<TData>[]>(
     () => (selectColumn ? [selectColumn, ...columns] : [...columns]),
     [columns, selectColumn]
   )
@@ -162,7 +174,7 @@ export function PaginatedDataTable<TData>(props: {
       emptyContent={emptyContent ?? emptyStateText}
       hasActiveFilters={hasActiveFilters}
       isLoading={isLoading}
-      labels={labels}
+      labels={resolvedLabels}
       noResultsContent={noResultsContent}
       renderPagination={(currentTable) => (
         <DataTablePagination

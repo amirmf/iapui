@@ -6,7 +6,7 @@ import { Button, Permission } from '@iap/ui'
 import { RefreshCw } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { useClaimRequestStore } from '../model/claim-request-store'
+import { useClaimRequestStore } from '../model/store/claim-request-store'
 import { ClaimRequestExportExcelButton } from './claim-request-export-excel-button'
 import { ClaimRequestInquiryFanavaranButton } from './claim-request-inquiry-fanavaran-button'
 

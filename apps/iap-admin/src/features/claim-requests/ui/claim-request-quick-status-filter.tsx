@@ -1,30 +1,27 @@
 import { useLayoutEffect, useMemo } from 'react'
 
-import { isDoctorRole, useAuthSession } from '@iap/auth'
 import { cn } from '@iap/ui'
 import { useTranslation } from 'react-i18next'
 
 import { claimRequestStatusTranslationKeys } from '../constants/claim-request-status'
 import { CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS } from '../model/claim-request-feature'
 import {
-  type ClaimRequestQuickStatus,
   claimRequestQuickStatuses,
   claimRequestSentToBankQuickStatus,
   doctorClaimRequestQuickStatuses,
 } from '../model/claim-request-filters'
+import { useClaimRequestTableSearch } from '../model/use-claim-request-table-search'
 
 const statusCounts = new Map<string, number>()
 
 export function ClaimRequestQuickStatusFilter(props: {
   count?: number
   isFetching: boolean
-  onStatusChange: (status: ClaimRequestQuickStatus) => void
-  selectedStatus: ClaimRequestQuickStatus
 }) {
-  const { count, isFetching, onStatusChange, selectedStatus } = props
+  const { count, isFetching } = props
   const { t } = useTranslation()
-  const { user } = useAuthSession()
-  const isDoctor = isDoctorRole(user?.roles ?? [])
+  const { isDoctor, onQuickStatusChange, quickStatus } =
+    useClaimRequestTableSearch()
   const visibleQuickStatuses = useMemo(
     () =>
       isDoctor
@@ -37,7 +34,7 @@ export function ClaimRequestQuickStatusFilter(props: {
     statusCounts.clear()
   }, [])
 
-  statusCounts.set(selectedStatus, count ?? 0)
+  statusCounts.set(quickStatus, count ?? 0)
 
   return (
     <div className='grid grid-cols-8'>
@@ -46,7 +43,7 @@ export function ClaimRequestQuickStatusFilter(props: {
         const displayedCount =
           status === CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS
             ? '-'
-            : selectedStatus === status
+            : quickStatus === status
               ? isFetching
                 ? savedCount
                 : count || 0
@@ -54,14 +51,14 @@ export function ClaimRequestQuickStatusFilter(props: {
 
         return (
           <button
-            aria-pressed={selectedStatus === status}
+            aria-pressed={quickStatus === status}
             className={cn(
               'rounded bg-muted px-1 py-2 text-[0.8rem]',
-              selectedStatus === status &&
+              quickStatus === status &&
                 'bg-primary font-medium text-muted shadow'
             )}
             key={status}
-            onClick={() => onStatusChange(status)}
+            onClick={() => onQuickStatusChange(status)}
             type='button'
           >
             <p>

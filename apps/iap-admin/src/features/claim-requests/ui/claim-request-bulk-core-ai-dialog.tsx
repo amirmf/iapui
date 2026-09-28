@@ -15,7 +15,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
-import { useClaimRequestStore } from '../model/claim-request-store'
+import { useClaimRequestStore } from '../model/store/claim-request-store'
 import { claimRequestService } from '../services/claim-request-service'
 
 export function ClaimRequestBulkCoreAiDialog(props: {

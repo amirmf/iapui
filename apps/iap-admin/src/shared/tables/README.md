@@ -10,7 +10,9 @@ request, query key, filter names, route validation, and product empty states.
 - Use `SimpleDataTable` with a caller-owned TanStack Table instance.
 - Use `PaginatedDataTable` for server-driven result pages. It receives controlled
   pagination, sort, selection, and column visibility state from the feature; it
-  does not own API calls or route state.
+  does not own API calls or route state. Its default empty and loading labels
+  use `common.noRecords` and `common.loading`; pass `labels` only to override
+  those defaults for a specific table.
 - Use `useServerTableState` for server-driven pagination, sorting, and filters.
 - At a typed route boundary, use `parseTableFilterSearch` and
   `toTableFilterSearch`; validate the route search before parsing it.

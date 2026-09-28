@@ -1,13 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
-import { isDoctorRole, useAuthSession } from '@iap/auth'
 import type { ApiFilterParams } from '@iap/shared-lib'
-import {
-  PaginatedDataTable,
-  type TableFilterSearch,
-  parseTableFilterSearch,
-  toTableFilterSearch,
-} from '@shared/tables'
+import { PaginatedDataTable, toTableFilterSearch } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
 import { useLocation, useRouter } from '@tanstack/react-router'
 import type {
@@ -15,20 +9,15 @@ import type {
   SortingState,
   Updater,
 } from '@tanstack/react-table'
-import { produce } from 'immer'
 import { useTranslation } from 'react-i18next'
 
 import {
   CLAIM_REQUEST_FEATURES,
-  CLAIM_REQUEST_FEATURE_QUERY_KEY,
-  CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS,
   getClaimRequestFeature,
 } from '../model/claim-request-feature'
-import {
-  getClaimRequestQuickStatus,
-  toClaimRequestApiFilters,
-} from '../model/claim-request-filters'
-import { useClaimRequestStore } from '../model/claim-request-store'
+import { toClaimRequestApiFilters } from '../model/claim-request-filters'
+import { useClaimRequestStore } from '../model/store/claim-request-store'
+import { useClaimRequestTableSearch } from '../model/use-claim-request-table-search'
 import { claimRequestService } from '../services/claim-request-service'
 import { ClaimRequestBulkCoreAiDialog } from './claim-request-bulk-core-ai-dialog'
 import { ClaimRequestBulkDeleteDialog } from './claim-request-bulk-delete-dialog'
@@ -38,6 +27,7 @@ import { ClaimRequestFetchNewEmptyState } from './claim-request-fetch-new-empty-
 import { ClaimRequestGenerateAndSendBulkDialog } from './claim-request-generate-and-send-bulk-dialog'
 import { ClaimRequestHeaderActions } from './claim-request-header-actions'
 import { ClaimRequestProvider } from './claim-request-provider'
+import { ClaimRequestQuickStatusFilter } from './claim-request-quick-status-filter'
 import { ClaimRequestRowActionDialogs } from './claim-request-row-action-dialogs'
 import { ClaimRequestToolbar } from './claim-request-toolbar'
 import { ClaimRequestsTicketsPlaceholder } from './claim-requests-tickets-placeholder'
@@ -48,34 +38,11 @@ function resolveUpdater<T>(updater: Updater<T>, previous: T) {
     : updater
 }
 
-function toSearchRecord(value: Record<string, unknown>): TableFilterSearch {
-  return Object.fromEntries(
-    Object.entries(value).filter(
-      ([, item]) =>
-        typeof item === 'string' ||
-        (Array.isArray(item) &&
-          item.every((entry) => typeof entry === 'string'))
-    )
-  ) as TableFilterSearch
-}
-
 function ClaimRequestsContent() {
   const { t } = useTranslation()
-  const { user } = useAuthSession()
   const router = useRouter()
-  const search = toSearchRecord(
-    router.state.location.search as Record<string, unknown>
-  )
-  const tableState = parseTableFilterSearch(search)
-  const sorting = useMemo(
-    () =>
-      tableState.sorting.length
-        ? tableState.sorting
-        : [{ desc: false, id: 'createdAt' }],
-    [tableState.sorting]
-  )
-  const isDoctor = isDoctorRole(user?.roles ?? [])
-  const quickStatus = getClaimRequestQuickStatus(tableState.filters, isDoctor)
+  const { isDoctor, quickStatus, sorting, tableState } =
+    useClaimRequestTableSearch()
   const apiFilters = useMemo(
     () => toClaimRequestApiFilters(tableState.filters, isDoctor),
     [isDoctor, tableState.filters]
@@ -145,33 +112,6 @@ function ClaimRequestsContent() {
       updateTableState(tableState.pagination, resolveUpdater(updater, sorting)),
     [sorting, tableState.pagination, updateTableState]
   )
-  const onQuickStatusChange = useCallback(
-    (nextQuickStatus: typeof quickStatus) => {
-      router.navigate({
-        replace: true,
-        search: produce(
-          toTableFilterSearch({ ...tableState, sorting }),
-          (search) => {
-            if (nextQuickStatus === CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS) {
-              return {
-                [CLAIM_REQUEST_FEATURE_QUERY_KEY]:
-                  CLAIM_REQUEST_FEATURES.tickets,
-              }
-            }
-
-            delete search[CLAIM_REQUEST_FEATURE_QUERY_KEY]
-            delete search.status
-            delete search.extPaymentDate
-            delete search.extPaymentDate__neq
-            delete search.page
-            search.quickStatus = nextQuickStatus
-          }
-        ) as never,
-        to: './',
-      })
-    },
-    [router, sorting, tableState]
-  )
 
   return (
     <>
@@ -194,12 +134,13 @@ function ClaimRequestsContent() {
           />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
-          <ClaimRequestToolbar
-            count={query.data?.totalElements ?? 0}
-            isFetching={query.isLoading || query.isFetching}
-            onQuickStatusChange={onQuickStatusChange}
-            quickStatus={quickStatus}
-          />
+          <div className='mb-4'>
+            <ClaimRequestToolbar quickStatus={quickStatus} />
+            <ClaimRequestQuickStatusFilter
+              count={query.data?.totalElements ?? 0}
+              isFetching={query.isLoading || query.isFetching}
+            />
+          </div>
           <PaginatedDataTable
             columns={columns}
             data={claimRequests}
@@ -215,10 +156,6 @@ function ClaimRequestsContent() {
               (key) => key !== 'quickStatus'
             )}
             isLoading={query.isLoading}
-            labels={{
-              empty: t('common.noRecords'),
-              loading: t('common.loading'),
-            }}
             manualSorting
             onPaginationChange={onPaginationChange}
             onRowSelectionChange={setRowSelection}

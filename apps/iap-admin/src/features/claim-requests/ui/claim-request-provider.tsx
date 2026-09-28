@@ -1,11 +1,16 @@
 import { type ReactNode, useEffect } from 'react'
 
-import { useClaimRequestStore } from '../model/claim-request-store'
+import { useClaimRequestStore } from '../model/store/claim-request-store'
 
-export function ClaimRequestProvider(props: { children: ReactNode }) {
+type ClaimRequestProviderProps = {
+  children: ReactNode
+}
+
+export function ClaimRequestProvider(props: ClaimRequestProviderProps) {
+  const { children } = props
   const reset = useClaimRequestStore((state) => state.reset)
 
   useEffect(() => reset, [reset])
 
-  return props.children
+  return children
 }

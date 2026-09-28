@@ -70,6 +70,12 @@ When implementation begins:
 
 Owns product- and screen-specific behavior. Folders should mirror stable customer or admin journeys. A feature may contain `services`, `model`, `queries`, `schemas`, `ui`, and a public `index.ts` as needed.
 
+Feature-local client state is organized under `model/`:
+
+- `model/store/` owns Zustand stores for feature-scoped UI state shared by multiple feature components, such as selection, dialog state, and temporary local workflows. It must not hold server state, API results, or route state.
+- `model/context/` owns React contexts only when state or actions must be shared across deeply nested or separately composed feature UI. Do not create a context merely to avoid a direct, meaningful prop.
+- Do not create empty `store/` or `context/` folders preemptively. Create each folder when it has an owning implementation, and keep its files feature-local unless a reusable application capability genuinely emerges.
+
 Use `services/` for backend-facing feature or package services. Service files use the
 `<domain>-service.ts` naming convention, for example `auth-service.ts`.
 

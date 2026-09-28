@@ -32,7 +32,7 @@ import {
   type ClaimRequestBulkStatusChangeForm,
   createClaimRequestBulkStatusChangeSchema,
 } from '../model/claim-request-bulk-status-change-schema'
-import { useClaimRequestStore } from '../model/claim-request-store'
+import { useClaimRequestStore } from '../model/store/claim-request-store'
 import { claimRequestService } from '../services/claim-request-service'
 
 type StatusOption = { label: string; value: ClaimRequestStatus }
