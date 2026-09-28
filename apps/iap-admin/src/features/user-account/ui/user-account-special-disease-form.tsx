@@ -1,15 +1,14 @@
 import { useEffect, useMemo } from 'react'
 
+import { getSpecialDiseaseOptions } from '@features/user-account/constants/special-disease-options'
 import type { InsuredPerson, PersonSpecialDiseasesEnum } from '@iap/api-types'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@iap/forms'
 import { Button, MultiSelect } from '@iap/ui'
 import { personSpecialDiseaseService } from '@modules/person-special-diseases'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-
-import { getSpecialDiseaseOptions } from '../constants/special-disease-options'
 
 type FormValues = { specialDiseases: PersonSpecialDiseasesEnum[] }
 
@@ -19,7 +18,7 @@ export function UserAccountSpecialDiseaseForm(props: {
   person: InsuredPerson
 }) {
   const { onBack, onSuccess, person } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const queryClient = useQueryClient()
   const form = useForm<FormValues>({ defaultValues: { specialDiseases: [] } })
   const diseaseQuery = useQuery({

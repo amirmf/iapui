@@ -1,5 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
 
+import {
+  getNationalityTypeOptions,
+  getPartyRoleOptions,
+} from '@features/user-account/constants/user-account-options'
+import {
+  type ParsedUpdateUserAccountFormValues,
+  type UpdateUserAccountFormValues,
+  updateUserAccountSchema,
+} from '@features/user-account/model/user-account-form-schema'
+import { userAccountService } from '@features/user-account/services/user-account-service'
+import { BranchLocationsForm } from '@features/user-account/ui/branch-locations-form'
+import { ResetPasswordDialog } from '@features/user-account/ui/reset-password-dialog'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { UpdateWithPartyPayload, UserAccount } from '@iap/api-types'
 import { isAdminRole, useAuthSession } from '@iap/auth'
@@ -14,26 +26,13 @@ import {
   FormMessage,
   TextField,
 } from '@iap/forms'
-import { Button, Checkbox, MultiSelect, Select } from '@iap/ui'
+import { Button, Checkbox, MultiSelect, Permission, Select } from '@iap/ui'
 import { docTypeService } from '@modules/doc-types'
 import { UserAccountSearchSelect } from '@modules/user-account-selection'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-
-import {
-  getNationalityTypeOptions,
-  getPartyRoleOptions,
-} from '../constants/user-account-options'
-import {
-  type ParsedUpdateUserAccountFormValues,
-  type UpdateUserAccountFormValues,
-  updateUserAccountSchema,
-} from '../model/user-account-form-schema'
-import { userAccountService } from '../services/user-account-service'
-import { BranchLocationsForm } from './branch-locations-form'
-import { ResetPasswordDialog } from './reset-password-dialog'
 
 function defaults(userAccount: UserAccount): UpdateUserAccountFormValues {
   return {
@@ -96,7 +95,7 @@ export function UpdateUserAccountForm(props: {
   userAccount: UserAccount
 }) {
   const { onSuccess, userAccount } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const { user } = useAuthSession()
   const queryClient = useQueryClient()
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
@@ -275,7 +274,7 @@ export function UpdateUserAccountForm(props: {
               )}
             />
           </div>
-          {canManagePrivileges ? (
+          <Permission hasPermission={canManagePrivileges}>
             <>
               <FormField
                 control={form.control}
@@ -336,7 +335,7 @@ export function UpdateUserAccountForm(props: {
               />
               <BranchLocationsForm />
             </>
-          ) : null}
+          </Permission>
           <div>
             <TextField
               autoComplete='new-password'
@@ -393,7 +392,7 @@ export function UpdateUserAccountForm(props: {
               >
                 {t('parties.userAccount.buttons.resetPassword')}
               </Button>
-              {isAdminRole(user?.roles ?? []) ? (
+              <Permission hasPermission={isAdminRole(user?.roles ?? [])}>
                 <Button
                   onClick={() => setDeleteDialogOpen(true)}
                   type='button'
@@ -401,7 +400,7 @@ export function UpdateUserAccountForm(props: {
                 >
                   {t('parties.userAccount.buttons.delete')}
                 </Button>
-              ) : null}
+              </Permission>
             </div>
             <Button disabled={updateMutation.isPending} type='submit'>
               {updateMutation.isPending

@@ -1,18 +1,18 @@
+import { useUserAccountStore } from '@features/user-account/model/user-account-store'
+import { userAccountService } from '@features/user-account/services/user-account-service'
 import type { UserAccount } from '@iap/api-types'
 import { isAdminRole, useAuthSession } from '@iap/auth'
+import { Permission } from '@iap/ui'
 import { AuditInformationRowAction } from '@shared/dialogs/audit-information'
+import { useTranslate } from '@shared/i18n/i18n'
 import { TableActionButton, TableActions } from '@shared/tables'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Eye, List, Pencil, RefreshCw, Trash2 } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-
-import { useUserAccountStore } from '../model/user-account-store'
-import { userAccountService } from '../services/user-account-service'
 
 export function UserAccountRowActions(props: { user: UserAccount }) {
   const { user } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const { user: authenticatedUser } = useAuthSession()
   const openDialog = useUserAccountStore((state) => state.openDialog)
   const queryClient = useQueryClient()
@@ -50,7 +50,7 @@ export function UserAccountRowActions(props: { user: UserAccount }) {
         onClick={() => refreshSnapshotMutation.mutate()}
         tooltipText={t('parties.actions.fanavaranInquery')}
       />
-      {isAdminRole(authenticatedUser?.roles ?? []) ? (
+      <Permission hasPermission={isAdminRole(authenticatedUser?.roles ?? [])}>
         <TableActionButton
           icon={<Trash2 aria-hidden='true' className='size-4' />}
           label={t('parties.actions.delete')}
@@ -58,7 +58,7 @@ export function UserAccountRowActions(props: { user: UserAccount }) {
           tooltipText={t('parties.actions.delete')}
           variant='destructive'
         />
-      ) : null}
+      </Permission>
       <AuditInformationRowAction row={user} />
     </TableActions>
   )

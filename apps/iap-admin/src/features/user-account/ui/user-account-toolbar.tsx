@@ -1,20 +1,19 @@
 import { useMemo } from 'react'
 
+import {
+  getNationalityTypeOptions,
+  getPartyRoleOptions,
+} from '@features/user-account/constants/user-account-options'
 import { UserAccountSearchSelect } from '@modules/user-account-selection'
+import { useTranslate } from '@shared/i18n/i18n'
 import {
   type TableFilterBaseProps,
   TableFilterQueryParams,
 } from '@shared/tables'
 import { useLocation, useRouter } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
-
-import {
-  getNationalityTypeOptions,
-  getPartyRoleOptions,
-} from '../constants/user-account-options'
 
 export function UserAccountToolbar() {
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const textFilters = useMemo<TableFilterBaseProps['textFilters']>(
     () => [
       {
@@ -75,7 +74,7 @@ export function UserAccountToolbar() {
 }
 
 function ParentUserAccountFilter() {
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const location = useLocation()
   const router = useRouter()
   const value = (location.search as Record<string, unknown>).parentUserAccountId

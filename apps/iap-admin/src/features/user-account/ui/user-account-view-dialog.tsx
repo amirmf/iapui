@@ -1,5 +1,7 @@
 import { type ReactNode, useCallback } from 'react'
 
+import { userAccountStatusClasses } from '@features/user-account/constants/user-account-options'
+import { useUserAccountStore } from '@features/user-account/model/user-account-store'
 import {
   Dialog,
   DialogContent,
@@ -8,6 +10,7 @@ import {
   cn,
   formatDateTime,
 } from '@iap/ui'
+import { useTranslate } from '@shared/i18n/i18n'
 import { ReadonlyItems } from '@shared/ui/readonly-items'
 import {
   AtSign,
@@ -19,10 +22,6 @@ import {
   UserCheck,
   UserX,
 } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
-
-import { userAccountStatusClasses } from '../constants/user-account-options'
-import { useUserAccountStore } from '../model/user-account-store'
 
 function DetailItem(props: { title: string; value: ReactNode }) {
   const { title, value } = props
@@ -38,8 +37,10 @@ function DetailItem(props: { title: string; value: ReactNode }) {
 }
 
 export function UserAccountViewDialog() {
-  const { t } = useTranslation()
-  const { closeDialog, currentUser, dialog } = useUserAccountStore()
+  const { t } = useTranslate()
+  const closeDialog = useUserAccountStore((state) => state.closeDialog)
+  const currentUser = useUserAccountStore((state) => state.currentUser)
+  const dialog = useUserAccountStore((state) => state.dialog)
   const isOpen = dialog === 'view'
   const status = currentUser?.enabled ? 'enabled' : 'disabled'
   const handleOpenChange = useCallback(() => closeDialog(), [closeDialog])

@@ -1,5 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
 
+import { useUserAccountStore } from '@features/user-account/model/user-account-store'
+import { UserAccountSpecialDiseaseForm } from '@features/user-account/ui/user-account-special-disease-form'
+import { UserAccountSpecialDiseasePersonList } from '@features/user-account/ui/user-account-special-disease-person-list'
 import { type InsuredPerson } from '@iap/api-types'
 import {
   Dialog,
@@ -9,16 +12,14 @@ import {
   DialogTitle,
 } from '@iap/ui'
 import { personSpecialDiseaseService } from '@modules/person-special-diseases'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
-
-import { useUserAccountStore } from '../model/user-account-store'
-import { UserAccountSpecialDiseaseForm } from './user-account-special-disease-form'
-import { UserAccountSpecialDiseasePersonList } from './user-account-special-disease-person-list'
 
 export function UserAccountSpecialDiseaseDialog() {
-  const { t } = useTranslation()
-  const { closeDialog, currentUser, dialog } = useUserAccountStore()
+  const { t } = useTranslate()
+  const closeDialog = useUserAccountStore((state) => state.closeDialog)
+  const currentUser = useUserAccountStore((state) => state.currentUser)
+  const dialog = useUserAccountStore((state) => state.dialog)
   const [selectedPerson, setSelectedPerson] = useState<InsuredPerson | null>(
     null
   )

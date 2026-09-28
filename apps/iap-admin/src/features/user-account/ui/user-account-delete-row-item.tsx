@@ -1,15 +1,16 @@
+import { useUserAccountStore } from '@features/user-account/model/user-account-store'
+import { userAccountService } from '@features/user-account/services/user-account-service'
 import { ConfirmDialog } from '@iap/dialogs'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useMutation } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-
-import { useUserAccountStore } from '../model/user-account-store'
-import { userAccountService } from '../services/user-account-service'
 
 export function UserAccountDeleteRowItem(props: { onSuccess: () => void }) {
   const { onSuccess } = props
-  const { t } = useTranslation()
-  const { closeDialog, currentUser, dialog } = useUserAccountStore()
+  const { t } = useTranslate()
+  const closeDialog = useUserAccountStore((state) => state.closeDialog)
+  const currentUser = useUserAccountStore((state) => state.currentUser)
+  const dialog = useUserAccountStore((state) => state.dialog)
   const mutation = useMutation({
     mutationFn: () =>
       currentUser?.id

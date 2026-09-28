@@ -1,5 +1,8 @@
 import { useCallback } from 'react'
 
+import { useUserAccountStore } from '@features/user-account/model/user-account-store'
+import { userAccountService } from '@features/user-account/services/user-account-service'
+import { UpdateUserAccountForm } from '@features/user-account/ui/update-user-account-form'
 import {
   Button,
   Dialog,
@@ -8,17 +11,15 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@iap/ui'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
-
-import { useUserAccountStore } from '../model/user-account-store'
-import { userAccountService } from '../services/user-account-service'
-import { UpdateUserAccountForm } from './update-user-account-form'
 
 export function PartyUserAccountDialog(props: { onSuccess: () => void }) {
   const { onSuccess } = props
-  const { t } = useTranslation()
-  const { closeDialog, currentUser, dialog } = useUserAccountStore()
+  const { t } = useTranslate()
+  const closeDialog = useUserAccountStore((state) => state.closeDialog)
+  const currentUser = useUserAccountStore((state) => state.currentUser)
+  const dialog = useUserAccountStore((state) => state.dialog)
   const isOpen = dialog === 'userAccount'
   const userAccountId = currentUser?.id
   const userAccountQuery = useQuery({

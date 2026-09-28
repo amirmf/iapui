@@ -10,9 +10,9 @@ import {
 } from '@iap/forms'
 import { MultiSelect } from '@iap/ui'
 import { branchService } from '@modules/branches'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useQuery } from '@tanstack/react-query'
 import { useFormContext } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 
 type BranchLocationsFormValues = {
   branchLocations: BranchLocation[]
@@ -31,7 +31,7 @@ function useDebouncedValue(value: string, delay = 700) {
 
 export function BranchLocationsForm(props: { isOpen?: boolean }) {
   const { isOpen = true } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const { control } = useFormContext<BranchLocationsFormValues>()
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebouncedValue(search.trim())

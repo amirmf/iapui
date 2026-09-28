@@ -40,7 +40,9 @@ same pagination and sorting state to both its query and TanStack Table with
 manual pagination, filtering, and sorting enabled. Do not apply client-side
 filtering to an incomplete server page.
 
-At a TanStack Router boundary, validate search parameters first. Then use
-`parseTableFilterSearch` and `toTableFilterSearch` from the filter module to
-convert only the standard table keys. Feature filter names pass through
-unchanged.
+At a TanStack Router boundary, validate search parameters first with a strict,
+feature-owned schema that declares its pagination, sorting, and filter keys.
+Then use `parseTableFilterSearch` and `toTableFilterSearch` from the filter
+module to convert only the standard table keys. Feature filter names pass
+through unchanged. Read URL-synced search through `useRouterState`; do not read
+`router.state` directly, so the feature subscribes explicitly to navigation.

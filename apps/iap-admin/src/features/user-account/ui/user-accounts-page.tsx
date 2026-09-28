@@ -1,7 +1,17 @@
 import { useCallback, useMemo } from 'react'
 
+import { useUserAccountStore } from '@features/user-account/model/user-account-store'
+import { userAccountService } from '@features/user-account/services/user-account-service'
+import { PartyFormDialog } from '@features/user-account/ui/party-form-dialog'
+import { PartyUserAccountDialog } from '@features/user-account/ui/party-user-account-dialog'
+import { useUserAccountColumns } from '@features/user-account/ui/user-account-columns'
+import { UserAccountDialogs } from '@features/user-account/ui/user-account-dialogs'
+import { UserAccountProvider } from '@features/user-account/ui/user-account-provider'
+import { UserAccountToolbar } from '@features/user-account/ui/user-account-toolbar'
+import type { UserAccount } from '@iap/api-types'
 import { isAdminRole, useAuthSession } from '@iap/auth'
-import { Button, cn } from '@iap/ui'
+import { Button, Permission, cn } from '@iap/ui'
+import { useTranslate } from '@shared/i18n/i18n'
 import {
   PaginatedDataTable,
   type TableFilterSearch,
@@ -9,19 +19,11 @@ import {
   toTableFilterSearch,
 } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
-import { useRouter } from '@tanstack/react-router'
+import { useRouter, useRouterState } from '@tanstack/react-router'
 import type { PaginationState, Updater } from '@tanstack/react-table'
 import { Plus, RefreshCw } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
 
-import { useUserAccountStore } from '../model/user-account-store'
-import { userAccountService } from '../services/user-account-service'
-import { PartyFormDialog } from './party-form-dialog'
-import { PartyUserAccountDialog } from './party-user-account-dialog'
-import { useUserAccountColumns } from './user-account-columns'
-import { UserAccountDialogs } from './user-account-dialogs'
-import { UserAccountProvider } from './user-account-provider'
-import { UserAccountToolbar } from './user-account-toolbar'
+const EMPTY_USER_ACCOUNTS: UserAccount[] = []
 
 function resolveUpdater<T>(updater: Updater<T>, previous: T): T {
   return typeof updater === 'function'
@@ -29,22 +31,15 @@ function resolveUpdater<T>(updater: Updater<T>, previous: T): T {
     : updater
 }
 
-function toSearchRecord(value: Record<string, unknown>): TableFilterSearch {
-  return Object.fromEntries(
-    Object.entries(value).filter(
-      ([, item]) => typeof item === 'string' || Array.isArray(item)
-    )
-  ) as TableFilterSearch
-}
-
 function UserAccountsContent() {
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const { user } = useAuthSession()
   const router = useRouter()
+  const search = useRouterState({
+    select: (state) => state.location.search as TableFilterSearch,
+  })
   const openDialog = useUserAccountStore((state) => state.openDialog)
-  const tableState = parseTableFilterSearch(
-    toSearchRecord(router.state.location.search as Record<string, unknown>)
-  )
+  const tableState = useMemo(() => parseTableFilterSearch(search), [search])
   const query = useQuery({
     queryFn: ({ signal }) =>
       userAccountService.getPageFull({
@@ -62,7 +57,8 @@ function UserAccountsContent() {
     staleTime: 30_000,
   })
   const columns = useUserAccountColumns()
-  const users = useMemo(() => query.data?.content ?? [], [query.data])
+  const users = query.data?.content ?? EMPTY_USER_ACCOUNTS
+  const { refetch } = query
   const changePage = useCallback(
     (updater: Updater<PaginationState>) => {
       const pagination = resolveUpdater(updater, tableState.pagination)
@@ -74,7 +70,7 @@ function UserAccountsContent() {
     },
     [router, tableState]
   )
-  const refresh = useCallback(() => void query.refetch(), [query])
+  const refresh = useCallback(() => void refetch(), [refetch])
   const canManage = isAdminRole(user?.roles ?? [])
 
   return (
@@ -96,12 +92,12 @@ function UserAccountsContent() {
               />
               {t('parties.refresh')}
             </Button>
-            {canManage ? (
+            <Permission hasPermission={canManage}>
               <Button onClick={() => openDialog('create')}>
                 <Plus aria-hidden='true' className='size-4' />
                 {t('parties.create')}
               </Button>
-            ) : null}
+            </Permission>
           </div>
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>

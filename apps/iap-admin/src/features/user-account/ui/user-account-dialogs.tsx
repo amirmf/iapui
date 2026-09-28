@@ -1,6 +1,6 @@
-import { UserAccountDeleteRowItem } from './user-account-delete-row-item'
-import { UserAccountSpecialDiseaseDialog } from './user-account-special-disease-dialog'
-import { UserAccountViewDialog } from './user-account-view-dialog'
+import { UserAccountDeleteRowItem } from '@features/user-account/ui/user-account-delete-row-item'
+import { UserAccountSpecialDiseaseDialog } from '@features/user-account/ui/user-account-special-disease-dialog'
+import { UserAccountViewDialog } from '@features/user-account/ui/user-account-view-dialog'
 
 export function UserAccountDialogs(props: { onSuccess: () => void }) {
   const { onSuccess } = props

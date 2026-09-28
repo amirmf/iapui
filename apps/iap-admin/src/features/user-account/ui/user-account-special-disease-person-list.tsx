@@ -1,13 +1,12 @@
-import type { InsuredPerson } from '@iap/api-types'
-import { Badge, Button } from '@iap/ui'
-import { personSpecialDiseaseService } from '@modules/person-special-diseases'
-import { useQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
-
 import {
   specialDiseaseColors,
   specialDiseaseTranslationKeys,
-} from '../constants/special-disease-options'
+} from '@features/user-account/constants/special-disease-options'
+import type { InsuredPerson } from '@iap/api-types'
+import { Badge, Button } from '@iap/ui'
+import { personSpecialDiseaseService } from '@modules/person-special-diseases'
+import { useTranslate } from '@shared/i18n/i18n'
+import { useQuery } from '@tanstack/react-query'
 
 type Props = {
   onSelect: (person: InsuredPerson) => void
@@ -36,7 +35,7 @@ function PersonCard(props: {
   person: InsuredPerson
 }) {
   const { onSelect, person } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const diseaseQuery = useQuery({
     enabled: Boolean(person.nationalCode),
     queryFn: ({ signal }) =>

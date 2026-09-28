@@ -1,27 +1,26 @@
 import { useMemo } from 'react'
 
-import type { PartyRole, UserAccount } from '@iap/api-types'
-import { Badge, LongText, cn, formatDateTime } from '@iap/ui'
-import {
-  DataTableColumnHeader,
-  TwoLineCell,
-  TwoLineHeader,
-} from '@shared/tables'
-import type { ColumnDef } from '@tanstack/react-table'
-import { useTranslation } from 'react-i18next'
-
 import {
   NATIONALITY_TYPE_TRANSLATION_KEYS,
   PARTY_ROLE_TRANSLATION_KEYS,
   USER_ACCOUNT_STATUS_TRANSLATION_KEYS,
   partyRoleColors,
   userAccountStatusClasses,
-} from '../constants/user-account-options'
-import { UserAccountRowActions } from './user-account-row-actions'
+} from '@features/user-account/constants/user-account-options'
+import { UserAccountRowActions } from '@features/user-account/ui/user-account-row-actions'
+import type { PartyRole, UserAccount } from '@iap/api-types'
+import { Badge, LongText, cn, formatDateTime } from '@iap/ui'
+import { useTranslate } from '@shared/i18n/i18n'
+import {
+  DataTableColumnHeader,
+  TwoLineCell,
+  TwoLineHeader,
+} from '@shared/tables'
+import type { ColumnDef } from '@tanstack/react-table'
 
 // eslint-disable-next-line react-refresh/only-export-components
 function RoleList({ roles }: { roles: PartyRole[] }) {
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   if (!roles.length)
     return <div className='text-sm text-muted-foreground'>-</div>
   return (
@@ -40,7 +39,7 @@ function RoleList({ roles }: { roles: PartyRole[] }) {
 }
 
 export function useUserAccountColumns(): ColumnDef<UserAccount>[] {
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   return useMemo(
     () => [
       {

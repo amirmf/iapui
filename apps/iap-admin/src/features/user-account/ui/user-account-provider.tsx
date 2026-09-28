@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { useEffect } from 'react'
 
-import { useUserAccountStore } from '../model/user-account-store'
+import { useUserAccountStore } from '@features/user-account/model/user-account-store'
 
 export function UserAccountProvider(props: { children: ReactNode }) {
   const { children } = props

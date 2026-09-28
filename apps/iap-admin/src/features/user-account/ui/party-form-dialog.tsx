@@ -1,5 +1,16 @@
 import { useEffect, useMemo } from 'react'
 
+import {
+  getNationalityTypeOptions,
+  getPartyRoleOptions,
+} from '@features/user-account/constants/user-account-options'
+import {
+  type PartyUserAccountDialogForm,
+  createPartyUserAccountDialogSchema,
+} from '@features/user-account/model/user-account-form-schema'
+import { useUserAccountStore } from '@features/user-account/model/user-account-store'
+import { userAccountService } from '@features/user-account/services/user-account-service'
+import { BranchLocationsForm } from '@features/user-account/ui/branch-locations-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { RegisterWithPartyPayload } from '@iap/api-types'
 import {
@@ -24,22 +35,10 @@ import {
 } from '@iap/ui'
 import { docTypeService } from '@modules/doc-types'
 import { UserAccountSearchSelect } from '@modules/user-account-selection'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-
-import {
-  getNationalityTypeOptions,
-  getPartyRoleOptions,
-} from '../constants/user-account-options'
-import {
-  type PartyUserAccountDialogForm,
-  createPartyUserAccountDialogSchema,
-} from '../model/user-account-form-schema'
-import { useUserAccountStore } from '../model/user-account-store'
-import { userAccountService } from '../services/user-account-service'
-import { BranchLocationsForm } from './branch-locations-form'
 
 const defaultValues: PartyUserAccountDialogForm = {
   branchLocations: [],
@@ -60,8 +59,9 @@ const defaultValues: PartyUserAccountDialogForm = {
 
 export function PartyFormDialog(props: { onSuccess: () => void }) {
   const { onSuccess } = props
-  const { t } = useTranslation()
-  const { closeDialog, dialog } = useUserAccountStore()
+  const { t } = useTranslate()
+  const closeDialog = useUserAccountStore((state) => state.closeDialog)
+  const dialog = useUserAccountStore((state) => state.dialog)
   const isOpen = dialog === 'create'
   const schema = useMemo(() => createPartyUserAccountDialogSchema(t), [t])
   const form = useForm<PartyUserAccountDialogForm>({

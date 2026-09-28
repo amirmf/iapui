@@ -1,5 +1,10 @@
 import { useEffect, useMemo } from 'react'
 
+import {
+  type ResetPasswordFormValues,
+  resetPasswordSchema,
+} from '@features/user-account/model/user-account-form-schema'
+import { userAccountService } from '@features/user-account/services/user-account-service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormDescription, TextField } from '@iap/forms'
 import {
@@ -10,16 +15,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@iap/ui'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-
-import {
-  type ResetPasswordFormValues,
-  resetPasswordSchema,
-} from '../model/user-account-form-schema'
-import { userAccountService } from '../services/user-account-service'
 
 export function ResetPasswordDialog(props: {
   onOpenChange: (open: boolean) => void
@@ -27,7 +26,7 @@ export function ResetPasswordDialog(props: {
   userAccountId: string
 }) {
   const { onOpenChange, open, userAccountId } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const schema = useMemo(() => resetPasswordSchema(t), [t])
   const form = useForm<ResetPasswordFormValues>({
     defaultValues: { confirmPassword: '', password: '' },
