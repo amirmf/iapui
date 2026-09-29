@@ -8,7 +8,7 @@ import { claimRequestService } from '../services/claim-request-service'
 
 type ClaimRequestBulkDeleteDialogProps = {
   claimRequestIds: string[]
-  onSuccess: () => void
+  onSuccess: () => Promise<unknown> | void
 }
 
 export function ClaimRequestBulkDeleteDialog({
@@ -21,11 +21,11 @@ export function ClaimRequestBulkDeleteDialog({
   const setRowSelection = useClaimRequestStore((state) => state.setRowSelection)
   const mutation = useMutation({
     mutationFn: () => claimRequestService.bulkDelete(claimRequestIds),
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success(t('claimRequests.bulkDelete.success'))
+      await onSuccess()
       setOpenDialog(null)
       setRowSelection({})
-      onSuccess()
     },
   })
 

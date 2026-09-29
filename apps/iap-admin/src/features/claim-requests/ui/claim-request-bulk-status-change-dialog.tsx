@@ -45,7 +45,7 @@ const defaultValues: ClaimRequestBulkStatusChangeForm = {
 
 export function ClaimRequestBulkStatusChangeDialog(props: {
   claimRequestIds: string[]
-  onSuccess: () => void
+  onSuccess: () => Promise<unknown> | void
 }) {
   const { claimRequestIds, onSuccess } = props
   const { t } = useTranslation()
@@ -73,13 +73,13 @@ export function ClaimRequestBulkStatusChangeDialog(props: {
         description: values.description?.trim() || undefined,
         isCheat: values.isCheat ?? 'N',
       }),
-    onSuccess: (responses) => {
+    onSuccess: async (responses) => {
       toast.success(
         t('claimRequests.bulkStatusChange.success', { count: responses.length })
       )
+      await onSuccess()
       setOpenDialog(null)
       setRowSelection({})
-      onSuccess()
     },
   })
   const isOpen = openDialog === 'bulkStatusChange'

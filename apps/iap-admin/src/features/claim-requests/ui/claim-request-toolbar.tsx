@@ -43,8 +43,10 @@ const textFilterConfigs = [
   { id: 'latestAssignementUsername', numerical: true },
   { id: 'mainAssignedUserUsername', numerical: true },
   { id: 'mainAssignedUserDisplayName', asLike: true },
-  { id: 'seenBy', asLike: true },
+  { id: 'registeredByAgentUsername', numerical: true },
+  { id: 'registeredByAgentDisplayName', asLike: true },
   { id: 'outpatientDocAcceptanceExtId', numerical: true },
+  { id: 'seenBy', asLike: true },
 ] as const
 
 const docTypeFilterRoles = new Set([

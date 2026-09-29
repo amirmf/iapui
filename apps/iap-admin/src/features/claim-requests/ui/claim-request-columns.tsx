@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
 import type { ClaimRequest } from '@iap/api-types'
-import { cn, formatDate, formatDateTime } from '@iap/ui'
+import { Badge, cn, formatDate, formatDateTime } from '@iap/ui'
 import { TwoLineCell, TwoLineHeader } from '@shared/tables'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
@@ -103,7 +103,7 @@ export function useClaimRequestColumns() {
       }),
       columnHelper.accessor(
         (row) => {
-          if (row.docType?.docType) return row.docType.docType
+          if (row.docType) return row.docType.docType
 
           return (
             row.documents
@@ -144,9 +144,12 @@ export function useClaimRequestColumns() {
                 {formatNumber(context.row.original.totalSumAmount) ?? '–'}
               </span>
               {context.row.original.baseClaimRequestId ? (
-                <span className='rounded border border-red-300 bg-red-100 px-1 text-[10px] leading-4 text-red-700'>
+                <Badge
+                  className='border-red-300 bg-red-100 px-1 text-[10px] leading-4 text-red-700'
+                  variant='outline'
+                >
                   {t('claimRequests.requestType.adjustment')}
-                </span>
+                </Badge>
               ) : null}
             </div>
           </div>
@@ -168,32 +171,34 @@ export function useClaimRequestColumns() {
 
           return (
             <div className='flex flex-col gap-1 text-sm'>
-              {status && statusColor ? (
-                <span
-                  className={cn(
-                    'w-fit rounded-md border px-2 py-0.5 text-xs',
-                    claimRequestStatusColors[statusColor]
-                  )}
-                >
-                  {status === sentToBankStatus
-                    ? t('claimRequests.status.sentToBank')
-                    : t(
-                        claimRequestStatusTranslationKeys[statusColor] as never
-                      )}
-                </span>
-              ) : (
-                '–'
-              )}
+              <Badge
+                className={cn(
+                  'w-fit capitalize',
+                  statusColor
+                    ? claimRequestStatusColors[statusColor]
+                    : undefined
+                )}
+                variant='outline'
+              >
+                {status === sentToBankStatus
+                  ? t('claimRequests.status.sentToBank')
+                  : statusColor
+                    ? t(claimRequestStatusTranslationKeys[statusColor] as never)
+                    : status?.replace('_', ' ')}
+              </Badge>
               {aiStatus ? (
-                <span
+                <Badge
                   className={cn(
-                    'w-fit rounded-md border px-2 py-0.5 text-xs',
+                    'w-fit capitalize',
                     claimRequestAiStatusColors[aiStatus]
                   )}
+                  variant='outline'
                 >
                   {t(claimRequestAiStatusTranslationKeys[aiStatus] as never)}
-                </span>
-              ) : null}
+                </Badge>
+              ) : (
+                <div className='text-sm text-muted-foreground'>-</div>
+              )}
             </div>
           )
         },

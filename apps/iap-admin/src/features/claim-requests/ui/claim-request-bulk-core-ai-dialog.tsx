@@ -20,7 +20,7 @@ import { claimRequestService } from '../services/claim-request-service'
 
 export function ClaimRequestBulkCoreAiDialog(props: {
   claimRequestIds: string[]
-  onSuccess: () => void
+  onSuccess: () => Promise<unknown> | void
 }) {
   const { claimRequestIds, onSuccess } = props
   const { t } = useTranslation()
@@ -29,7 +29,7 @@ export function ClaimRequestBulkCoreAiDialog(props: {
   const setOpenDialog = useClaimRequestStore((state) => state.setOpenDialog)
   const setRowSelection = useClaimRequestStore((state) => state.setRowSelection)
   const initiatedBy = useMemo(
-    () => user?.id.trim() || user?.username.trim() || 'system',
+    () => user?.id?.trim() || user?.username?.trim() || 'system',
     [user]
   )
   const mutation = useMutation({
@@ -41,15 +41,15 @@ export function ClaimRequestBulkCoreAiDialog(props: {
           workflowId: claimRequestId,
         }))
       ),
-    onSuccess: (responses) => {
+    onSuccess: async (responses) => {
       toast.success(
         t('claimRequests.bulkDataExtraction.success', {
           count: responses.length,
         })
       )
+      await onSuccess()
       setOpenDialog(null)
       setRowSelection({})
-      onSuccess()
     },
     onError: () => toast.error(t('claimRequests.bulkDataExtraction.error')),
   })
@@ -65,10 +65,19 @@ export function ClaimRequestBulkCoreAiDialog(props: {
           <AlertDialogTitle>
             {t('claimRequests.bulkDataExtraction.title')}
           </AlertDialogTitle>
-          <AlertDialogDescription>
-            {t('claimRequests.bulkDataExtraction.description', {
-              count: claimRequestIds.length,
-            })}
+          <AlertDialogDescription asChild>
+            <div className='space-y-2'>
+              <p>
+                {t('claimRequests.bulkDataExtraction.description', {
+                  count: claimRequestIds.length,
+                })}
+              </p>
+              <p className='text-sm text-muted-foreground'>
+                {t('claimRequests.bulkDataExtraction.selectionInfo', {
+                  count: claimRequestIds.length,
+                })}
+              </p>
+            </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
