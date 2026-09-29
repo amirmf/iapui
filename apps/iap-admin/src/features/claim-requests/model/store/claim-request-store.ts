@@ -13,6 +13,7 @@ export type ClaimRequestDialog =
   | null
 
 type ClaimRequestStore = {
+  clearRowSelection: () => void
   currentRow: ClaimRequest | null
   openDialog: ClaimRequestDialog
   rowSelection: RowSelectionState
@@ -23,6 +24,7 @@ type ClaimRequestStore = {
 }
 
 export const useClaimRequestStore = create<ClaimRequestStore>((set) => ({
+  clearRowSelection: () => set({ rowSelection: {} }),
   currentRow: null,
   openDialog: null,
   reset: () => set({ currentRow: null, openDialog: null, rowSelection: {} }),

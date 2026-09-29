@@ -11,7 +11,7 @@ import { claimRequestService } from '../services/claim-request-service'
 
 type ClaimRequestInquiryFanavaranButtonProps = {
   claimRequestIds: string[]
-  onSuccess: () => void
+  onSuccess?: () => Promise<unknown> | void
 }
 
 export function ClaimRequestInquiryFanavaranButton({
@@ -23,11 +23,11 @@ export function ClaimRequestInquiryFanavaranButton({
   const setRowSelection = useClaimRequestStore((state) => state.setRowSelection)
   const inquiryMutation = useMutation({
     mutationFn: () => claimRequestService.inquiryFanavaranBulk(claimRequestIds),
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success(t('claimRequests.messages.inquiryFanavaranSuccess'))
       setOpen(false)
       setRowSelection({})
-      onSuccess()
+      await onSuccess?.()
     },
     onError: () =>
       toast.error(t('claimRequests.messages.inquiryFanavaranError')),

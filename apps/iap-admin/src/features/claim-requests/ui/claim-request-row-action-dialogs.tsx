@@ -96,7 +96,7 @@ export function ClaimRequestRowActionDialogs({
         onConfirm={() => {
           const id = requireClaimRequestId()
           if (!id || !currentRow?.docType?.id) {
-            if (id) toast.error(t('claimRequests.messages.docTypeUpdateFailed'))
+            if (id) toast.error(t('claimRequests.messages.docTypeUpdateError'))
             return
           }
           removeAssessmentMutation.mutate(id)

@@ -13,7 +13,7 @@ import { ClaimRequestInquiryFanavaranButton } from './claim-request-inquiry-fana
 export function ClaimRequestHeaderActions(props: {
   filters: ApiFilterParams
   isFetching: boolean
-  onRefresh: () => void
+  onRefresh: () => Promise<unknown> | void
   selectedIds: string[]
 }) {
   const { filters, isFetching, onRefresh, selectedIds } = props

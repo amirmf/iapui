@@ -8,7 +8,7 @@ import { claimRequestService } from '../services/claim-request-service'
 
 type ClaimRequestGenerateAndSendBulkDialogProps = {
   claimRequestIds: string[]
-  onSuccess: () => void
+  onSuccess: () => Promise<unknown> | void
 }
 
 export function ClaimRequestGenerateAndSendBulkDialog({
@@ -21,11 +21,11 @@ export function ClaimRequestGenerateAndSendBulkDialog({
   const setRowSelection = useClaimRequestStore((state) => state.setRowSelection)
   const mutation = useMutation({
     mutationFn: () => claimRequestService.generateAndSendBulk(claimRequestIds),
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success(t('claimRequests.generateAndSendBulk.success'))
+      await onSuccess()
       setOpenDialog(null)
       setRowSelection({})
-      onSuccess()
     },
   })
 
