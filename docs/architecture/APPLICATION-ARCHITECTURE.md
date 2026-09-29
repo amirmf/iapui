@@ -65,10 +65,48 @@ iap-ui/
 When implementation begins:
 
 - Both applications use TanStack Router file-based routes. Route files remain thin and compose public exports from other owners. Generated route trees are not edited manually.
+- Each navigable web-page URL has a dedicated directory for its static page
+  segments in `src/app/router/routes`; the directory's `index.tsx` is the
+  file-route entry. For example, `/doc-types` and `/doc-types/create` are
+  represented by `doc-types/index.tsx` and `doc-types/create/index.tsx`.
+  Dynamic parameters are data, not pages: do not create a directory solely for
+  `$docTypeId`. Preserve the URL with a flat TanStack file route such as
+  `doc-types/$docTypeId.edit.tsx`. This convention keeps page ownership and
+  route-local configuration readable without introducing parameter-only
+  directories.
+- A route directory is a routing boundary only. Its entry may contain route
+  configuration such as validation, loaders, and a composition import, but it
+  must not contain page business behavior, UI components, state, API calls, or
+  feature utilities. Those remain in the route's owner under `features` (or in
+  `modules` / `shared` when the existing ownership rules apply). A feature may
+  use a matching page directory for page-specific UI when that improves
+  discoverability; it must not duplicate reusable route logic.
 
 ### `src/features`
 
 Owns product- and screen-specific behavior. Folders should mirror stable customer or admin journeys. A feature may contain `services`, `model`, `queries`, `schemas`, `ui`, and a public `index.ts` as needed.
+
+Every navigable page owned by a feature has a matching directory under that
+feature's `pages/` directory. The directory mirrors the static page kind below
+the feature root and contains the page component: `pages/index/` for the
+feature root URL, `pages/create/` for `/create`, and `pages/edit/` for a page
+such as `/$entityId/edit`. Dynamic identifiers are route input and must not
+create a `$entityId` feature directory. This gives each URL one clear feature
+owner without moving behavior into `src/app`. Code shared only by sibling page
+directories belongs in the nearest `shared/` directory; reusable capability
+must still follow the normal `modules` or application-wide `shared` ownership
+rules.
+
+Do not create a directory for every component mechanically. Keep a small,
+single-file page component next to its peers when no further categorization is
+needed. Create a lowercase-kebab-case component directory only when it owns
+colocated tests, hooks, styles, private helpers, or a group of smaller related
+components and the directory makes that group easier to navigate. A
+page-exclusive component or component group belongs under
+`pages/<page>/components/`; a component reused by multiple pages of the feature
+belongs under `ui/`. Do not create a feature-wide `components/` dumping ground,
+and do not place a component in `ui/` merely because it is visually reusable
+when it is owned by one page.
 
 Feature-local client state is organized under `model/`:
 

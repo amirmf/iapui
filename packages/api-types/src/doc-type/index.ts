@@ -1,10 +1,15 @@
 import { z } from 'zod'
 
+import { createPageRequestSchema, createPageResponseSchema } from '../common'
+
+export const docTypeCodeSchema = z.string()
+export const docTypeCodesSchema = z.array(docTypeCodeSchema)
+
 export const docTypeResponseSchema = z
   .object({
     id: z.string().nullable().optional(),
     docType: z.string().nullable().optional(),
-    docTypeCode: z.string().nullable().optional(),
+    docTypeCode: docTypeCodeSchema.nullable().optional(),
     prompt: z.string().nullable().optional(),
     documentGuide: z.string().nullable().optional(),
     dataJsonSchema: z.string().nullable().optional(),
@@ -54,7 +59,7 @@ export const docTypeFormSchema = z.object({
       }
     }, 'Invalid JSON format'),
   docType: z.string().min(1, 'Doc type is required'),
-  docTypeCode: z.string().min(1, 'Doc type code is required'),
+  docTypeCode: docTypeCodeSchema.min(1, 'Doc type code is required'),
   documentGuide: z.string().optional(),
   maxThreshold: optionalNumberField('Max threshold must be a number'),
   maxThresholdCountItem: optionalNumberField(
@@ -72,29 +77,11 @@ export const docTypeInlineFormSchema = docTypeFormSchema.extend({
   dataSubmissionExample: z.string().optional(),
 })
 export type DocTypeInlineForm = z.infer<typeof docTypeInlineFormSchema>
-export const pageDocTypeSchema = z
-  .object({
-    content: z.array(docTypeSchema),
-    totalElements: z.number(),
-    totalPages: z.number(),
-    size: z.number(),
-    number: z.number(),
-    first: z.boolean(),
-    last: z.boolean(),
-    numberOfElements: z.number(),
-    empty: z.boolean(),
-  })
-  .loose()
+export const pageDocTypeSchema = createPageResponseSchema(docTypeSchema)
 export type PageDocType = z.infer<typeof pageDocTypeSchema>
 
 export const docTypePageSchema = pageDocTypeSchema
-export const docTypePageRequestSchema = z.object({
-  filters: z
-    .record(z.string(), z.union([z.string(), z.number(), z.array(z.string())]))
-    .default({}),
-  page: z.number().int().optional(),
-  size: z.number().int().optional(),
-})
+export const docTypePageRequestSchema = createPageRequestSchema()
 const docTypeIdPathSchema = z.object({ id: z.string() }).strict()
 const optionalThruDateQuerySchema = z
   .object({ thruDate: z.string().optional() })
@@ -102,9 +89,12 @@ const optionalThruDateQuerySchema = z
 export const getDocTypeRequestSchema = z
   .object({ path: docTypeIdPathSchema })
   .strict()
+const docTypeMutationPayloadSchema = docTypeRequestSchema.extend({
+  id: z.string(),
+})
 export const createDocTypeRequestSchema = docTypeRequestSchema
 export const updateDocTypeRequestSchema = z
-  .object({ body: docTypeRequestSchema, path: docTypeIdPathSchema })
+  .object({ body: docTypeMutationPayloadSchema, path: docTypeIdPathSchema })
   .strict()
 export const updateDocTypeInlineRequestSchema = updateDocTypeRequestSchema
 export const updateDocTypeSchemaRequestSchema = z

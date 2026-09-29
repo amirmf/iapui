@@ -21,6 +21,10 @@ import { Route as AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagement
 import { Route as AuthenticatedClaimRequestsIndexRouteImport } from './routes/_authenticated/claim-requests/index'
 import { Route as AuthenticatedCoveragesIndexRouteImport } from './routes/_authenticated/coverages/index'
 import { Route as AuthenticatedDamageCodesIndexRouteImport } from './routes/_authenticated/damage-codes/index'
+import { Route as AuthenticatedDocTypesDocTypeIdEditRouteImport } from './routes/_authenticated/doc-types/$docTypeId.edit'
+import { Route as AuthenticatedDocTypesDocTypeIdFormBuilderRouteImport } from './routes/_authenticated/doc-types/$docTypeId.form-builder'
+import { Route as AuthenticatedDocTypesDocTypeIdSubmissionExampleRouteImport } from './routes/_authenticated/doc-types/$docTypeId.submission-example'
+import { Route as AuthenticatedDocTypesCreateIndexRouteImport } from './routes/_authenticated/doc-types/create/index'
 import { Route as AuthenticatedDocTypesIndexRouteImport } from './routes/_authenticated/doc-types/index'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedMedicalCenterIndexRouteImport } from './routes/_authenticated/medical-center/index'
@@ -193,6 +197,30 @@ const AuthenticatedUserAccountIndexRoute =
     path: '/user-account/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDocTypesDocTypeIdEditRoute =
+  AuthenticatedDocTypesDocTypeIdEditRouteImport.update({
+    id: '/doc-types/$docTypeId/edit',
+    path: '/doc-types/$docTypeId/edit',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDocTypesDocTypeIdFormBuilderRoute =
+  AuthenticatedDocTypesDocTypeIdFormBuilderRouteImport.update({
+    id: '/doc-types/$docTypeId/form-builder',
+    path: '/doc-types/$docTypeId/form-builder',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute =
+  AuthenticatedDocTypesDocTypeIdSubmissionExampleRouteImport.update({
+    id: '/doc-types/$docTypeId/submission-example',
+    path: '/doc-types/$docTypeId/submission-example',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDocTypesCreateIndexRoute =
+  AuthenticatedDocTypesCreateIndexRouteImport.update({
+    id: '/doc-types/create/',
+    path: '/doc-types/create/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute =
   AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport.update(
     {
@@ -229,6 +257,10 @@ export interface FileRoutesByFullPath {
   '/support-questions/': typeof AuthenticatedSupportQuestionsIndexRoute
   '/tickets/': typeof AuthenticatedTicketsIndexRoute
   '/user-account/': typeof AuthenticatedUserAccountIndexRoute
+  '/doc-types/$docTypeId/edit': typeof AuthenticatedDocTypesDocTypeIdEditRoute
+  '/doc-types/$docTypeId/form-builder': typeof AuthenticatedDocTypesDocTypeIdFormBuilderRoute
+  '/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
+  '/doc-types/create/': typeof AuthenticatedDocTypesCreateIndexRoute
   '/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRoutesByTo {
@@ -258,6 +290,10 @@ export interface FileRoutesByTo {
   '/support-questions': typeof AuthenticatedSupportQuestionsIndexRoute
   '/tickets': typeof AuthenticatedTicketsIndexRoute
   '/user-account': typeof AuthenticatedUserAccountIndexRoute
+  '/doc-types/$docTypeId/edit': typeof AuthenticatedDocTypesDocTypeIdEditRoute
+  '/doc-types/$docTypeId/form-builder': typeof AuthenticatedDocTypesDocTypeIdFormBuilderRoute
+  '/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
+  '/doc-types/create': typeof AuthenticatedDocTypesCreateIndexRoute
   '/claim-requests/$claimRequestId/claim-request-management': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRoutesById {
@@ -290,6 +326,10 @@ export interface FileRoutesById {
   '/_authenticated/support-questions/': typeof AuthenticatedSupportQuestionsIndexRoute
   '/_authenticated/tickets/': typeof AuthenticatedTicketsIndexRoute
   '/_authenticated/user-account/': typeof AuthenticatedUserAccountIndexRoute
+  '/_authenticated/doc-types/$docTypeId/edit': typeof AuthenticatedDocTypesDocTypeIdEditRoute
+  '/_authenticated/doc-types/$docTypeId/form-builder': typeof AuthenticatedDocTypesDocTypeIdFormBuilderRoute
+  '/_authenticated/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
+  '/_authenticated/doc-types/create/': typeof AuthenticatedDocTypesCreateIndexRoute
   '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRouteTypes {
@@ -321,6 +361,10 @@ export interface FileRouteTypes {
     | '/support-questions/'
     | '/tickets/'
     | '/user-account/'
+    | '/doc-types/$docTypeId/edit'
+    | '/doc-types/$docTypeId/form-builder'
+    | '/doc-types/$docTypeId/submission-example'
+    | '/doc-types/create/'
     | '/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -350,6 +394,10 @@ export interface FileRouteTypes {
     | '/support-questions'
     | '/tickets'
     | '/user-account'
+    | '/doc-types/$docTypeId/edit'
+    | '/doc-types/$docTypeId/form-builder'
+    | '/doc-types/$docTypeId/submission-example'
+    | '/doc-types/create'
     | '/claim-requests/$claimRequestId/claim-request-management'
   id:
     | '__root__'
@@ -381,6 +429,10 @@ export interface FileRouteTypes {
     | '/_authenticated/support-questions/'
     | '/_authenticated/tickets/'
     | '/_authenticated/user-account/'
+    | '/_authenticated/doc-types/$docTypeId/edit'
+    | '/_authenticated/doc-types/$docTypeId/form-builder'
+    | '/_authenticated/doc-types/$docTypeId/submission-example'
+    | '/_authenticated/doc-types/create/'
     | '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesById: FileRoutesById
 }
@@ -587,6 +639,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUserAccountIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/doc-types/$docTypeId/edit': {
+      id: '/_authenticated/doc-types/$docTypeId/edit'
+      path: '/doc-types/$docTypeId/edit'
+      fullPath: '/doc-types/$docTypeId/edit'
+      preLoaderRoute: typeof AuthenticatedDocTypesDocTypeIdEditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/doc-types/$docTypeId/form-builder': {
+      id: '/_authenticated/doc-types/$docTypeId/form-builder'
+      path: '/doc-types/$docTypeId/form-builder'
+      fullPath: '/doc-types/$docTypeId/form-builder'
+      preLoaderRoute: typeof AuthenticatedDocTypesDocTypeIdFormBuilderRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/doc-types/$docTypeId/submission-example': {
+      id: '/_authenticated/doc-types/$docTypeId/submission-example'
+      path: '/doc-types/$docTypeId/submission-example'
+      fullPath: '/doc-types/$docTypeId/submission-example'
+      preLoaderRoute: typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/doc-types/create/': {
+      id: '/_authenticated/doc-types/create/'
+      path: '/doc-types/create'
+      fullPath: '/doc-types/create/'
+      preLoaderRoute: typeof AuthenticatedDocTypesCreateIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': {
       id: '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
       path: '/claim-requests/$claimRequestId/claim-request-management'
@@ -638,6 +718,10 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSupportQuestionsIndexRoute: typeof AuthenticatedSupportQuestionsIndexRoute
   AuthenticatedTicketsIndexRoute: typeof AuthenticatedTicketsIndexRoute
   AuthenticatedUserAccountIndexRoute: typeof AuthenticatedUserAccountIndexRoute
+  AuthenticatedDocTypesDocTypeIdEditRoute: typeof AuthenticatedDocTypesDocTypeIdEditRoute
+  AuthenticatedDocTypesDocTypeIdFormBuilderRoute: typeof AuthenticatedDocTypesDocTypeIdFormBuilderRoute
+  AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute: typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
+  AuthenticatedDocTypesCreateIndexRoute: typeof AuthenticatedDocTypesCreateIndexRoute
   AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute: typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 
@@ -671,6 +755,13 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedSupportQuestionsIndexRoute,
   AuthenticatedTicketsIndexRoute: AuthenticatedTicketsIndexRoute,
   AuthenticatedUserAccountIndexRoute: AuthenticatedUserAccountIndexRoute,
+  AuthenticatedDocTypesDocTypeIdEditRoute:
+    AuthenticatedDocTypesDocTypeIdEditRoute,
+  AuthenticatedDocTypesDocTypeIdFormBuilderRoute:
+    AuthenticatedDocTypesDocTypeIdFormBuilderRoute,
+  AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute:
+    AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute,
+  AuthenticatedDocTypesCreateIndexRoute: AuthenticatedDocTypesCreateIndexRoute,
   AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute:
     AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute,
 }

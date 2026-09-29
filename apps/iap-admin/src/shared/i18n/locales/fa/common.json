@@ -226,6 +226,9 @@
     "reset": "بازنشانی",
     "save": "ذخیره",
     "noRecords": "داده‌ای یافت نشد.",
+    "notAvailable": "در دسترس نیست",
+    "openInNewTab": "باز کردن در زبانه جدید",
+    "openMenu": "باز کردن منو",
     "loading": "در حال بارگذاری...",
     "total": "مجموع",
     "signOut": "خروج",
@@ -240,6 +243,7 @@
     "deleteMethodDescription": "نحوه حذف این مورد را انتخاب کنید",
     "thruDate": "تاریخ پایان",
     "back": "بازگشت",
+    "goBack": "بازگشت",
     "dialog": {
       "confirm": "ادامه",
       "cancel": "لغو",
@@ -906,6 +910,92 @@
     "validation": {
       "nationalCodeRequired": "انتخاب کاربر الزامی است.",
       "specialDiseasesRequired": "انتخاب حداقل یک بیماری خاص الزامی است."
+    }
+  },
+  "docTypes": {
+    "title": "مدیریت انواع سند",
+    "description": "مدیریت همه انواع اسناد در سیستم شما.",
+    "create": "تعریف سند جدید ",
+    "refresh": "بروزرسانی",
+    "noDocTypes": "هیچ نوع سندی یافت نشد.",
+    "columns": {
+      "docType": "نوع سند",
+      "docTypeCode": "کد نوع سند",
+      "sequence": "ترتیب",
+      "minThreshold": "حداقل آستانه",
+      "maxThreshold": "حداکثر آستانه",
+      "prompt": "دستور",
+      "created": "ایجاد شده"
+    },
+    "filters": {
+      "docType": "نوع سند",
+      "docTypeCode": "کد نوع سند",
+      "sequence": "ترتیب",
+      "minThreshold": "حداقل آستانه",
+      "maxThreshold": "حداکثر آستانه",
+      "prompt": "دستور",
+      "created": "تاریخ ایجاد"
+    },
+    "actions": {
+      "viewDetails": "مشاهده جزئیات",
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "buildForm": "ساخت فرم",
+      "sampleSubmission": "ثبت نمونه ارسال",
+      "inlineEdit": "ویرایش سریع",
+      "saveInline": "ذخیره تغییرات",
+      "saveSchema": "ذخیره طرحواره",
+      "saveSubmission": "ذخیره نمونه ارسال"
+    },
+    "bulkDelete": {
+      "button": "حذف انتخاب‌ها",
+      "title": "حذف انواع سند",
+      "description": "این عملیات {{count}} نوع سند انتخاب‌شده را به‌صورت دائمی حذف می‌کند و قابل بازگشت نیست.",
+      "selectionInfo": "{{count}} نوع سند انتخاب شد",
+      "confirm": "حذف",
+      "submitting": "در حال حذف...",
+      "success": "انواع سند با موفقیت حذف شدند.",
+      "error": "حذف انواع سند انتخاب‌شده انجام نشد.",
+      "noSelection": "لطفاً حداقل یک نوع سند را برای حذف انتخاب کنید."
+    },
+    "dialog": {
+      "create": "ایجاد نوع سند",
+      "edit": "ویرایش نوع سند",
+      "createDesc": "جزئیات نوع سند جدید را پر کنید.",
+      "editDesc": "اطلاعات نوع سند را به‌روزرسانی کنید.",
+      "details": "جزئیات نوع سند",
+      "fields": {
+        "docType": "نوع سند",
+        "docTypeCode": "کد نوع سند",
+        "documentGuide": "راهنمای سند",
+        "minThreshold": "حداقل آستانه",
+        "maxThreshold": "حداکثر آستانه",
+        "maxThresholdItem": "حداکثر آستانه آیتم",
+        "maxThresholdCountItem": "حداکثر تعداد آیتم",
+        "sequence": "ترتیب",
+        "prompt": "دستور",
+        "dataJsonSchema": "طرحواره JSON داده",
+        "dataSubmissionExample": "نمونه داده ارسال",
+        "ceilingControlDamageCode": "کنترل سقف پوشش",
+        "ceilingControlErrorDescription": "توضیح خطای کنترل سقف پوشش",
+        "noCoverageErrorDescription": "توضیح خطای عدم پوشش"
+      },
+      "builderTitle": "سازنده فرم",
+      "submissionTitle": "نمونه ارسال",
+      "missingSchemaTitle": "طرحواره فرم لازم است",
+      "missingSchemaDescription": "پیش از ثبت نمونه ارسال، ابتدا طرحواره فرم را ایجاد و ذخیره کنید."
+    },
+    "messages": {
+      "created": "نوع سند با موفقیت ایجاد شد",
+      "createError": "ایجاد نوع سند ناموفق بود",
+      "updated": "نوع سند با موفقیت به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی نوع سند ناموفق بود",
+      "deleted": "نوع سند حذف شد",
+      "deleteError": "حذف نوع سند ناموفق بود",
+      "schemaUpdated": "طرحواره فرم ذخیره شد",
+      "schemaUpdateError": "ذخیره طرحواره فرم انجام نشد",
+      "submissionSaved": "نمونه ارسال ذخیره شد",
+      "submissionSaveError": "ذخیره نمونه ارسال انجام نشد"
     }
   },
   "sidebar": {

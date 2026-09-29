@@ -8,6 +8,8 @@ export {
   bulkDeleteDocTypesRequestSchema,
   createDocTypeRequestSchema,
   deleteDocTypeRequestSchema,
+  docTypeCodeSchema,
+  docTypeCodesSchema,
   docTypePageRequestSchema,
   docTypePageSchema,
   docTypeFormSchema,

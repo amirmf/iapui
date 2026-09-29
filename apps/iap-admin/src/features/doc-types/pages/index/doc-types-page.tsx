@@ -1,0 +1,214 @@
+import { useCallback, useEffect, useMemo } from 'react'
+
+import { useDocTypeStore } from '@features/doc-types/model/doc-type-store'
+import { DocTypeBulkDeleteDialog } from '@features/doc-types/pages/index/components/doc-type-bulk-delete-dialog'
+import { useDocTypeColumns } from '@features/doc-types/pages/index/components/doc-type-columns'
+import { DocTypeDeleteDialog } from '@features/doc-types/pages/index/components/doc-type-delete-dialog'
+import { DocTypeDetailsDialog } from '@features/doc-types/pages/index/components/doc-type-details-dialog'
+import { DocTypeInlineEditRow } from '@features/doc-types/pages/index/components/doc-type-inline-edit-row'
+import { DocTypeToolbar } from '@features/doc-types/pages/index/components/doc-type-toolbar'
+import type { AdminDocType } from '@iap/api-types'
+import { isSuperAdminRole, useAuthSession } from '@iap/auth'
+import { Button, Permission, cn } from '@iap/ui'
+import { docTypeService } from '@modules/doc-types'
+import {
+  PaginatedDataTable,
+  type TableFilterSearch,
+  parseTableFilterSearch,
+  toTableFilterSearch,
+} from '@shared/tables'
+import { useQuery } from '@tanstack/react-query'
+import { useRouter, useRouterState } from '@tanstack/react-router'
+import type {
+  PaginationState,
+  Row,
+  SortingState,
+  Updater,
+} from '@tanstack/react-table'
+import { Plus, RefreshCw, Trash2 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+
+const EMPTY_DOC_TYPES: AdminDocType[] = []
+
+function resolveUpdater<T>(updater: Updater<T>, previous: T): T {
+  return typeof updater === 'function'
+    ? (updater as (value: T) => T)(previous)
+    : updater
+}
+
+function DocTypesContent() {
+  const { t } = useTranslation()
+  const { user } = useAuthSession()
+  const router = useRouter()
+  const search = useRouterState({
+    select: (state) => state.location.search as TableFilterSearch,
+  })
+  const tableState = useMemo(() => parseTableFilterSearch(search), [search])
+  const columns = useDocTypeColumns()
+  const currentRow = useDocTypeStore((state) => state.currentRow)
+  const editingRowId = useDocTypeStore((state) => state.editingRowId)
+  const openDialog = useDocTypeStore((state) => state.openDialog)
+  const rowSelection = useDocTypeStore((state) => state.rowSelection)
+  const setEditingRowId = useDocTypeStore((state) => state.setEditingRowId)
+  const setCurrentRow = useDocTypeStore((state) => state.setCurrentRow)
+  const setOpenDialog = useDocTypeStore((state) => state.setOpenDialog)
+  const setRowSelection = useDocTypeStore((state) => state.setRowSelection)
+  const canManage = isSuperAdminRole(user?.roles ?? [])
+  const query = useQuery({
+    gcTime: 30_000,
+    queryFn: ({ signal }) =>
+      docTypeService.getPage({
+        filters: Object.fromEntries(
+          Object.entries(tableState.filters).filter(
+            ([, value]) => value !== undefined
+          )
+        ) as Record<string, string | string[]>,
+        page: tableState.pagination.pageIndex,
+        signal,
+        size: tableState.pagination.pageSize,
+      }),
+    queryKey: ['doc-types', 'page', tableState.pagination, tableState.filters],
+    refetchOnWindowFocus: false,
+    staleTime: 30_000,
+  })
+  const { refetch } = query
+  const docTypes = query.data?.content ?? EMPTY_DOC_TYPES
+  const selectedDocTypeIds = useMemo(
+    () =>
+      Object.entries(rowSelection)
+        .filter(([, selected]) => selected)
+        .map(([rowId]) => docTypes[Number(rowId)]?.id)
+        .filter((id): id is string => Boolean(id)),
+    [docTypes, rowSelection]
+  )
+
+  useEffect(() => {
+    setRowSelection({})
+  }, [
+    setRowSelection,
+    tableState.pagination.pageIndex,
+    tableState.pagination.pageSize,
+  ])
+
+  const onPaginationChange = useCallback(
+    (updater: Updater<PaginationState>) => {
+      const pagination = resolveUpdater(updater, tableState.pagination)
+      router.navigate({
+        replace: true,
+        search: toTableFilterSearch({ ...tableState, pagination }) as never,
+        to: './',
+      })
+    },
+    [router, tableState]
+  )
+  const onSortingChange = useCallback(
+    (updater: Updater<SortingState>) => {
+      const sorting = resolveUpdater(updater, tableState.sorting)
+      router.navigate({
+        replace: true,
+        search: toTableFilterSearch({ ...tableState, sorting }) as never,
+        to: './',
+      })
+    },
+    [router, tableState]
+  )
+  const renderRow = useCallback(
+    (row: Row<AdminDocType>) =>
+      editingRowId === row.original.id ? (
+        <DocTypeInlineEditRow
+          onCancel={() => setEditingRowId(null)}
+          onSuccess={() => {
+            setEditingRowId(null)
+            void refetch()
+          }}
+          row={row}
+        />
+      ) : null,
+    [editingRowId, refetch, setEditingRowId]
+  )
+
+  return (
+    <>
+      <div className='pb-4'>
+        <div className='mb-6 flex flex-wrap items-center justify-between gap-4'>
+          <h2 className='text-xl font-bold tracking-tight'>
+            {t('docTypes.title')}
+          </h2>
+          <div className='flex gap-2'>
+            <Permission hasPermission={canManage}>
+              <Button
+                disabled={!selectedDocTypeIds.length}
+                onClick={() => setOpenDialog('bulkDelete')}
+                variant='destructive'
+              >
+                <Trash2 aria-hidden='true' className='size-4' />
+                {t('docTypes.bulkDelete.button')}
+              </Button>
+            </Permission>
+            <Button
+              disabled={query.isLoading}
+              onClick={() => void refetch()}
+              variant='outline'
+            >
+              <RefreshCw
+                aria-hidden='true'
+                className={cn('size-4', query.isLoading && 'animate-spin')}
+              />
+              {t('docTypes.refresh')}
+            </Button>
+            <Button
+              onClick={() => router.navigate({ to: '/doc-types/create/' })}
+            >
+              <Plus aria-hidden='true' className='size-4' />
+              {t('docTypes.create')}
+            </Button>
+          </div>
+        </div>
+        <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
+          <DocTypeToolbar />
+          <PaginatedDataTable
+            columns={columns}
+            data={docTypes}
+            emptyStateText={t('docTypes.noDocTypes')}
+            enableSorting
+            hasActiveFilters={Object.keys(tableState.filters).length > 0}
+            hasCheckboxes={canManage}
+            isLoading={query.isLoading}
+            manualSorting
+            onPaginationChange={onPaginationChange}
+            onRowSelectionChange={setRowSelection}
+            onSortingChange={onSortingChange}
+            pageCount={query.data?.totalPages ?? 0}
+            pagination={tableState.pagination}
+            renderRow={renderRow}
+            rowSelection={rowSelection}
+            sorting={tableState.sorting}
+            tableWrapperClassName='max-h-140'
+            totalCount={query.data?.totalElements ?? 0}
+          />
+        </div>
+      </div>
+      <DocTypeBulkDeleteDialog
+        docTypeIds={selectedDocTypeIds}
+        onSuccess={() => void refetch()}
+      />
+      <DocTypeDeleteDialog onSuccess={() => void refetch()} />
+      {currentRow ? (
+        <DocTypeDetailsDialog
+          docType={currentRow}
+          onOpenChange={(open) => {
+            if (!open) {
+              setOpenDialog(null)
+              setTimeout(() => setCurrentRow(null), 500)
+            }
+          }}
+          open={openDialog === 'details'}
+        />
+      ) : null}
+    </>
+  )
+}
+
+export function DocTypesPage() {
+  return <DocTypesContent />
+}

@@ -77,7 +77,7 @@ export const docTypeService = {
   },
   async update(id: string, input: DocTypeForm) {
     const request = updateDocTypeRequestSchema.parse({
-      body: input,
+      body: { ...input, id },
       path: { id },
     })
     const response = await getApiClient().patch(
@@ -88,7 +88,7 @@ export const docTypeService = {
   },
   async updateInline(id: string, input: DocTypeInlineForm) {
     const request = updateDocTypeInlineRequestSchema.parse({
-      body: input,
+      body: { ...input, id },
       path: { id },
     })
     const response = await getApiClient().patch(

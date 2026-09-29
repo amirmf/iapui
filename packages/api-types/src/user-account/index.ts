@@ -2,6 +2,7 @@ import { z } from 'zod'
 
 import { branchLocationSchema } from '../auth'
 import { claimRequestYesNoSchema } from '../claim-request'
+import { docTypeCodesSchema } from '../doc-type'
 import { partyRoleSchema } from '../party'
 import { personSpecialDiseaseEnumSchema } from '../person-special-disease'
 import { nationalityTypeSchema } from './enums'
@@ -20,7 +21,7 @@ export const updateUserAccountPayloadSchema = z.object({
     .optional(),
   parentUserAccountId: z.uuid().nullable().optional(),
   roles: z.array(z.string()).optional(),
-  docTypeCodes: z.array(z.string()).optional(),
+  docTypeCodes: docTypeCodesSchema.optional(),
   branchLocations: z.array(branchLocationSchema).optional(),
   hasAccessToAllBranch: z.boolean().nullable().optional(),
   enabled: z.boolean().optional(),
@@ -47,7 +48,7 @@ export const updateWithPartyPayloadSchema = z.object({
     .nullable()
     .optional(),
   extId: z.string().nullable().optional(),
-  docTypeCodes: z.array(z.string()).optional(),
+  docTypeCodes: docTypeCodesSchema.optional(),
   specialDiseases: z.array(personSpecialDiseaseEnumSchema).optional(),
   branchLocations: z.array(branchLocationSchema).optional(),
   hasAccessToAllBranch: z.boolean().nullable().optional(),
@@ -74,7 +75,7 @@ export const registerWithPartyPayloadSchema = z.object({
     .nullable()
     .optional(),
   extId: z.string().nullable().optional(),
-  docTypeCodes: z.array(z.string()).optional(),
+  docTypeCodes: docTypeCodesSchema.optional(),
   specialDiseases: z.array(personSpecialDiseaseEnumSchema).optional(),
   branchLocations: z.array(branchLocationSchema).optional(),
   hasAccessToAllBranch: z.boolean().nullable().optional(),
@@ -100,7 +101,7 @@ export type RegisterWithPartyPayload = z.infer<
 const uuidPathSchema = z.object({ id: z.uuid() })
 export const listUserAccountsRequestSchema = z.object({
   textFilter: z.string().optional(),
-  docTypeCodes: z.array(z.string()).optional(),
+  docTypeCodes: docTypeCodesSchema.optional(),
   roles: z.string().optional(),
   branchLocations__in: z.string().optional(),
   parentUserAccountId: z.uuid().optional(),
@@ -156,7 +157,7 @@ export const userAccountSchema = z
     hasAccessToAllBranch: z.boolean().nullable().optional(),
     parentUserAccountId: z.uuid().nullable().optional(),
     roles: z.array(partyRoleSchema).optional(),
-    docTypeCodes: z.array(z.string()).optional(),
+    docTypeCodes: docTypeCodesSchema.optional(),
     specialDiseases: z.array(personSpecialDiseaseEnumSchema).optional(),
     branchLocations: z.array(branchLocationSchema).optional(),
     enabled: z.boolean().optional(),
