@@ -1,6 +1,8 @@
-import { PlaceholderPage } from '@features/placeholder'
+import { DocTypesPage, docTypeRouteSearchSchema } from '@features/doc-types'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/doc-types/')({
-  component: () => <PlaceholderPage titleKey='sidebar.docTypes' />,
+  component: DocTypesPage,
+  loader: () => ({ crumb: 'doctype' }),
+  validateSearch: docTypeRouteSearchSchema,
 })

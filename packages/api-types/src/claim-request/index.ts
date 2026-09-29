@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { createPageRequestSchema, createPageResponseSchema } from '../common'
+import { docTypeSchema } from '../doc-type'
 
 export const claimRequestStatusSchema = z.enum([
   'SUBMITTED',
@@ -56,12 +57,10 @@ const claimRequestDocumentSchema = z
   })
   .loose()
 
-const claimRequestDocTypeSchema = z
-  .object({
-    docType: z.string().nullish(),
-    id: z.string().nullish(),
-  })
-  .loose()
+const claimRequestDocTypeSchema = docTypeSchema.pick({
+  docType: true,
+  id: true,
+})
 
 const claimRequestAssignmentSchema = z
   .object({

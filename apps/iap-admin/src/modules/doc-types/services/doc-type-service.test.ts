@@ -38,12 +38,25 @@ describe('docTypeService', () => {
       signal: undefined,
     })
     expect(apiClient.post).toHaveBeenCalledWith('/doc-types', form)
-    expect(apiClient.patch).toHaveBeenCalledWith('/doc-types/doc-1', form)
-    expect(apiClient.patch).toHaveBeenCalledWith('/doc-types/doc-1', {
+    const updatePayload = {
+      ...form,
+      id: 'doc-1',
+    }
+    expect(apiClient.patch).toHaveBeenNthCalledWith(
+      1,
+      '/doc-types/doc-1',
+      updatePayload
+    )
+    expect(apiClient.patch).toHaveBeenNthCalledWith(
+      2,
+      '/doc-types/doc-1',
+      updatePayload
+    )
+    expect(apiClient.patch).toHaveBeenNthCalledWith(3, '/doc-types/doc-1', {
       dataJsonSchema: '{"type":"object"}',
       id: 'doc-1',
     })
-    expect(apiClient.patch).toHaveBeenCalledWith('/doc-types/doc-1', {
+    expect(apiClient.patch).toHaveBeenNthCalledWith(4, '/doc-types/doc-1', {
       dataSubmissionExample: '{"ok":true}',
       id: 'doc-1',
     })

@@ -2,35 +2,14 @@ import { z } from 'zod'
 
 import { claimRequestStatusSchema } from '../claim-request'
 import { createPageResponseSchema } from '../common'
+import { docTypeSchema as docTypesDocTypeSchema } from '../doc-type'
 
 export const dashboardFiltersSchema = z.record(
   z.string(),
   z.union([z.string(), z.number(), z.array(z.string()), z.undefined()])
 )
 
-export const docTypeSchema = z
-  .object({
-    id: z.string().nullish(),
-    docType: z.string().nullish(),
-    docTypeCode: z.string().nullish(),
-    prompt: z.string().nullish(),
-    documentGuide: z.string().nullish(),
-    dataJsonSchema: z.string().nullish(),
-    dataSubmissionExample: z.string().nullish(),
-    agreementCode: z.string().nullish(),
-    minThreshold: z.number().nullish(),
-    maxThreshold: z.number().nullish(),
-    maxThresholdItem: z.number().nullish(),
-    maxThresholdCountItem: z.number().nullish(),
-    sequence: z.number().int().nullish(),
-    deleteDate: z.string().nullish(),
-    createdAt: z.string().nullish(),
-    updatedAt: z.string().nullish(),
-    ceilingControlDamageCode: z.string().nullish(),
-    ceilingControlErrorDescription: z.string().nullish(),
-    noCoverageErrorDescription: z.string().nullish(),
-  })
-  .loose()
+export const docTypeSchema = docTypesDocTypeSchema
 
 export const pageDocTypeSchema = createPageResponseSchema(docTypeSchema)
 

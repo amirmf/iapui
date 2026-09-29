@@ -2,6 +2,7 @@ import { iranianNationalCodeRegex, mobilePhoneRegex } from '@iap/shared-lib'
 import { z } from 'zod'
 
 import { claimRequestIbanStatusSchema } from '../claim-request'
+import { docTypeCodesSchema } from '../doc-type'
 import { partyRoleSchema } from '../party/enums'
 import { personSpecialDiseaseEnumSchema } from '../person-special-disease/enums'
 import { nationalityTypeSchema } from '../user-account/enums'
@@ -71,7 +72,7 @@ export const authUserSchema = z
     createdBy: z.string().nullable().optional(),
     credentialsNonExpired: z.boolean().nullable().optional(),
     displayName: z.string().nullable().optional(),
-    docTypeCodes: z.array(z.string()).optional(),
+    docTypeCodes: docTypeCodesSchema.optional(),
     email: z.string().nullable().optional(),
     enabled: z.boolean().nullable().optional(),
     extContractId: z.number().nullable().optional(),
