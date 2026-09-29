@@ -379,15 +379,12 @@
       "returnMaxCeiling": "عودت داده شده (تمکیل سقف)"
     },
     "actions": {
-      "bulkDelete": "حذف گروهی",
       "downloadExcel": "دانلود اکسل",
-      "generateAndSend": "ایجاد و ارسال گروهی",
       "inquiryFanavaran": "استعلام فناوران",
       "assignToMe": "تخصیص به من و ارزیابی",
       "removeMyAssessment": "خارج کردن از کارتابل",
       "sendStatusChangeNotification": "ارسال اعلان تغییر وضعیت",
       "delete": "حذف",
-      "view": "مشاهده جزئیات",
       "viewDetails": "مشاهده جزئیات"
     },
     "bulk": {
@@ -450,7 +447,6 @@
     "messages": {
       "deleted": "درخواست خسارت حذف شد",
       "claimIdMissing": "شناسه درخواست وجود ندارد.",
-      "docTypeUpdateFailed": "به‌روزرسانی نوع سند انجام نشد.",
       "removeMyAssessmentSuccess": "خارج کردن از کارتابل با موفقیت انجام شد.",
       "statusChangeNotificationSent": "اعلان تغییر وضعیت با موفقیت ارسال شد.",
       "inquiryFanavaranSuccess": "استعلام فناوران با موفقیت ارسال شد.",
