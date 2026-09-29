@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { claimRequestStatusTranslationKeys } from '../constants/claim-request-status'
 import { CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS } from '../model/claim-request-feature'
 import {
+  type ClaimRequestQuickStatus,
   claimRequestQuickStatuses,
   claimRequestSentToBankQuickStatus,
   doctorClaimRequestQuickStatuses,
@@ -14,14 +15,26 @@ import { useClaimRequestTableSearch } from '../model/use-claim-request-table-sea
 
 const statusCounts = new Map<string, number>()
 
-export function ClaimRequestQuickStatusFilter(props: {
+type ClaimRequestQuickStatusFilterProps = {
   count?: number
   isFetching: boolean
-}) {
-  const { count, isFetching } = props
+  onQuickStatusChange?: (status: ClaimRequestQuickStatus) => void
+  quickStatus?: ClaimRequestQuickStatus
+}
+
+export function ClaimRequestQuickStatusFilter(
+  props: ClaimRequestQuickStatusFilterProps
+) {
+  const { count, isFetching, onQuickStatusChange, quickStatus } = props
   const { t } = useTranslation()
-  const { isDoctor, onQuickStatusChange, quickStatus } =
-    useClaimRequestTableSearch()
+  const {
+    isDoctor,
+    onQuickStatusChange: onSearchQuickStatusChange,
+    quickStatus: searchQuickStatus,
+  } = useClaimRequestTableSearch()
+  const resolvedQuickStatus = quickStatus ?? searchQuickStatus
+  const handleQuickStatusChange =
+    onQuickStatusChange ?? onSearchQuickStatusChange
   const visibleQuickStatuses = useMemo(
     () =>
       isDoctor
@@ -34,16 +47,16 @@ export function ClaimRequestQuickStatusFilter(props: {
     statusCounts.clear()
   }, [])
 
-  statusCounts.set(quickStatus, count ?? 0)
+  statusCounts.set(resolvedQuickStatus, count ?? 0)
 
   return (
-    <div className='grid grid-cols-8'>
+    <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8'>
       {visibleQuickStatuses.map((status) => {
         const savedCount = statusCounts.get(status) ?? '-'
         const displayedCount =
           status === CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS
             ? '-'
-            : quickStatus === status
+            : resolvedQuickStatus === status
               ? isFetching
                 ? savedCount
                 : count || 0
@@ -51,14 +64,14 @@ export function ClaimRequestQuickStatusFilter(props: {
 
         return (
           <button
-            aria-pressed={quickStatus === status}
+            aria-pressed={resolvedQuickStatus === status}
             className={cn(
-              'rounded bg-muted px-1 py-2 text-[0.8rem]',
-              quickStatus === status &&
+              'min-h-11 rounded bg-muted px-1 py-2 text-[0.8rem]',
+              resolvedQuickStatus === status &&
                 'bg-primary font-medium text-muted shadow'
             )}
             key={status}
-            onClick={() => onQuickStatusChange(status)}
+            onClick={() => handleQuickStatusChange(status)}
             type='button'
           >
             <p>

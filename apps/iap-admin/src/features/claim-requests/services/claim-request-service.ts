@@ -21,6 +21,17 @@ import { type ApiFilterParams, transformApiFilterParams } from '@iap/shared-lib'
 import { z } from 'zod'
 
 export const claimRequestService = {
+  findById: async (id: string, signal?: AbortSignal) => {
+    const claimRequestId = claimRequestIdSchema.parse(id)
+    const response = await getApiClient().get(
+      `/claim-requests/${claimRequestId}`,
+      {
+        signal,
+      }
+    )
+
+    return claimRequestSchema.parse(response.data)
+  },
   assignToMe: async (id: string) => {
     const claimRequestId = claimRequestIdSchema.parse(id)
     const response = await getApiClient().post(

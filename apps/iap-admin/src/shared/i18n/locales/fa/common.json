@@ -334,7 +334,9 @@
       "mainAssignedUserUsername": "کدملی ارزیاب اصلی",
       "mainAssignedUserDisplayName": "نام ارزیاب اصلی",
       "seenBy": "فیلد",
-      "outpatientDocAcceptanceExtId": "شماره پذیرش فناوران"
+      "outpatientDocAcceptanceExtId": "شماره پذیرش فناوران",
+      "registeredByAgentUsername": "نام کاربری نماینده ثبت",
+      "registeredByAgentDisplayName": "نام نماینده ثبت"
     },
     "ibanStatusValues": {
       "has": "دارد",
@@ -374,7 +376,7 @@
       "reviewRequiredImageDuplicated": "نیاز به بررسی (تصویر تکراری)",
       "reviewRequiredImageDigitallyEdited": "نیاز به بررسی (تصویر ویرایش‌شده دیجیتالی)",
       "returnNoCoverage": "عودت داده شده (بدون پوشش)",
-      "returnMaxCeiling": "عودت داده شده (تکمیل سقف)"
+      "returnMaxCeiling": "عودت داده شده (تمکیل سقف)"
     },
     "actions": {
       "bulkDelete": "حذف گروهی",
@@ -410,7 +412,7 @@
       }
     },
     "validation": {
-      "status": "لطفاً وضعیت را انتخاب کنید."
+      "status": "وضعیت الزامی است"
     },
     "bulkDataExtraction": {
       "button": "آغاز فرآیند Core AI",
@@ -454,7 +456,8 @@
       "inquiryFanavaranSuccess": "استعلام فناوران با موفقیت ارسال شد.",
       "inquiryFanavaranError": "ارسال استعلام فناوران ناموفق بود.",
       "excelDownloaded": "فایل اکسل دانلود شد",
-      "excelDownloadFailed": "دانلود اکسل ناموفق بود"
+      "excelDownloadFailed": "دانلود اکسل ناموفق بود",
+      "docTypeUpdateError": "به‌روزرسانی نوع سند انجام نشد."
     },
     "confirmations": {
       "inquiryFanavaran": {
@@ -528,7 +531,6 @@
     "columns": {
       "branchLocations": "شعب",
       "displayName": "نام نمایشی",
-      "branchLocations": "شعب",
       "email": "ایمیل",
       "externalId": "شناسه خارجی",
       "mobileNumber": "شماره همراه",
@@ -570,7 +572,10 @@
       "password": "رمز عبور باید حداقل ۶ کاراکتر باشد.",
       "passwordsMatch": "رمز عبور و تکرار آن باید یکسان باشند."
     },
-    "status": { "disabled": "غیرفعال", "enabled": "فعال" },
+    "status": {
+      "disabled": "غیرفعال",
+      "enabled": "فعال"
+    },
     "delete": {
       "title": "حذف حساب کاربری",
       "description": "با حذف این حساب، دسترسی شخص به سامانه قطع می‌شود."
@@ -1037,5 +1042,120 @@
     "tickets": "تیکت‌ها",
     "supportQuestions": "سوالات پشتیبانی",
     "medicalCenter": "مراکز درمانی"
+  },
+  "assessmentItems": {
+    "empty": "مورد ارزیابی وجود ندارد.",
+    "quantitySuffix": "عدد",
+    "dialog": {
+      "fields": {
+        "estimatedAmount": "مبلغ ارزیابی",
+        "franchizeDeductionAmount": "فرانشیز",
+        "remainCoverageAmount": "مانده پوشش",
+        "amountPaid": "تایید شده",
+        "toothNumbers": "شماره دندان",
+        "description": "توضیحات"
+      }
+    }
+  },
+  "tickets": {
+    "title": "تیکت‌ها",
+    "description": "تیکت‌های پشتیبانی را بررسی کنید و به پیام‌ها پاسخ دهید.",
+    "refresh": "به‌روزرسانی",
+    "empty": "تیکتی یافت نشد.",
+    "error": "امکان دریافت تیکت‌ها وجود ندارد.",
+    "columns": {
+      "ticketNumber": "شماره تیکت",
+      "claimRequestId": "شماره درخواست",
+      "subject": "موضوع",
+      "category": "دسته‌بندی",
+      "ownerUsername": "نام کاربری بیمه شده",
+      "assignedUsername": "ارجاع شده به",
+      "ownerDisplayName": "نام بیمه شده",
+      "assignedUserDisplayName": "نام ارجاع‌شده",
+      "status": "وضعیت",
+      "priority": "اولویت",
+      "lastMessageAt": "آخرین پیام",
+      "createdAt": "ایجاد شده"
+    },
+    "status": {
+      "OPEN": "باز",
+      "ASSIGNED": "ارجاع شده",
+      "WAITING_FOR_USER": "در انتظار کاربر",
+      "WAITING_FOR_SUPPORT": "در انتظار پشتیبانی",
+      "ANSWERED": "پاسخ داده شده",
+      "CLOSED": "بسته شده"
+    },
+    "priority": {
+      "LOW": "کم",
+      "NORMAL": "عادی",
+      "HIGH": "زیاد",
+      "URGENT": "فوری"
+    },
+    "category": {
+      "PAYMENT": "پرداخت",
+      "CLAIM_ISSUE": "مشکل خسارت",
+      "INFO_ISSUE": "مشکل اطلاعات"
+    },
+    "visibility": {
+      "PUBLIC": "عمومی",
+      "INTERNAL": "داخلی"
+    },
+    "statusHistory": {
+      "title": "تاریخچه وضعیت",
+      "description": "خط زمانی همه تغییرات وضعیت تیکت همراه با زمان به‌روزرسانی و کاربر.",
+      "open": "مشاهده تاریخچه وضعیت تیکت",
+      "user": "به‌روزرسانی توسط {{userId}}",
+      "transition": "{{from}} به {{to}}"
+    },
+    "confirmations": {
+      "assignToLatestAssessmentUser": {
+        "title": "تیکت به ارزیاب ارجاع شود؟",
+        "description": "این تیکت به آخرین کاربر ارزیابی ارجاع داده می‌شود."
+      }
+    },
+    "detail": {
+      "title": "جزئیات تیکت",
+      "description": "اطلاعات تیکت و تاریخچه گفتگو.",
+      "loading": "در حال دریافت جزئیات تیکت...",
+      "error": "امکان دریافت جزئیات تیکت وجود ندارد.",
+      "close": "بستن",
+      "cancel": "انصراف",
+      "openClaimRequest": "مشاهده درخواست خسارت",
+      "assignToLatestAssessmentUser": "ارجاع به ارزیاب",
+      "assigningToLatestAssessmentUser": "در حال ارجاع به ارزیاب...",
+      "closeTicket": "بستن تیکت",
+      "closingTicket": "در حال بستن تیکت...",
+      "ownerDisplayName": "نام بیمه شده",
+      "assignedUserDisplayName": "نام ارجاع‌شده"
+    },
+    "relatedClaimRequest": {
+      "title": "درخواست خسارت مرتبط",
+      "unavailable": "درخواست خسارت مرتبطی برای این تیکت وجود ندارد.",
+      "loading": "در حال دریافت درخواست خسارت مرتبط...",
+      "error": "امکان دریافت درخواست خسارت مرتبط وجود ندارد.",
+      "empty": "درخواست خسارت مرتبط در دسترس نیست.",
+      "assessmentItems": "اقلام ارزیابی",
+      "assessmentItemsUnavailable": "اقلام ارزیابی در دسترس نیستند.",
+      "assessmentItemsError": "امکان دریافت اقلام ارزیابی وجود ندارد."
+    },
+    "messages": {
+      "title": "پیام‌ها",
+      "loading": "در حال دریافت پیام‌ها...",
+      "empty": "پیامی یافت نشد.",
+      "error": "امکان دریافت پیام‌ها وجود ندارد.",
+      "unknownSender": "فرستنده نامشخص",
+      "placeholder": "پاسخ خود را بنویسید...",
+      "send": "ارسال پاسخ",
+      "sending": "در حال ارسال...",
+      "assignToLatestAssessmentUserSuccess": "تیکت با موفقیت به ارزیاب ارجاع شد.",
+      "ticketIdMissing": "شناسه تیکت در دسترس نیست."
+    },
+    "filters": {
+      "myTickets": "تیکت‌های من"
+    },
+    "actions": {
+      "view": "مشاهده",
+      "viewDetails": "مشاهده جزئیات تیکت"
+    }
   }
 }

@@ -41,9 +41,17 @@ export function ClaimRequestFetchNewEmptyState(props: { onFetch: () => void }) {
         onClick={() => mutation.mutate()}
         size='sm'
       >
-        {mutation.isPending
-          ? t('common.loading')
-          : t('claimRequests.fetchNewRequests')}
+        {mutation.isPending ? (
+          <>
+            <span
+              aria-hidden='true'
+              className='mr-2 inline-block size-4 animate-spin rounded-full border-2 border-current border-t-transparent'
+            />
+            {t('common.loading')}
+          </>
+        ) : (
+          t('claimRequests.fetchNewRequests')
+        )}
       </Button>
     </div>
   )

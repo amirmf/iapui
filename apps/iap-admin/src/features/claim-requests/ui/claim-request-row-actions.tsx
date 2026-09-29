@@ -66,7 +66,7 @@ export function ClaimRequestRowActions({ row }: ClaimRequestRowActionsProps) {
       return
     }
     if (!claimRequest.docType?.id) {
-      toast.error(t('claimRequests.messages.docTypeUpdateFailed'))
+      toast.error(t('claimRequests.messages.docTypeUpdateError'))
       return
     }
 
@@ -82,7 +82,7 @@ export function ClaimRequestRowActions({ row }: ClaimRequestRowActionsProps) {
         >
           <TableActionButton
             icon={<Eye aria-hidden='true' className='size-5' />}
-            label={t('claimRequests.actions.view')}
+            label={t('claimRequests.actions.viewDetails')}
             tooltipText={t('claimRequests.actions.viewDetails')}
           />
         </Link>

@@ -10,6 +10,14 @@ describe('claim request filters', () => {
     expect(getClaimRequestQuickStatus({})).toBe('IN_ASSESSMENT')
   })
 
+  it('does not apply the current-user filter to the reference default status', () => {
+    expect(toClaimRequestApiFilters({})).toEqual({
+      direction: 'asc',
+      sort: 'createdAt',
+      status: 'IN_ASSESSMENT',
+    })
+  })
+
   it('keeps helper-produced API keys and adds the selected quick status', () => {
     expect(
       toClaimRequestApiFilters({
@@ -51,5 +59,26 @@ describe('claim request filters', () => {
 
   it('uses the doctor-specific default status', () => {
     expect(getClaimRequestQuickStatus({}, true)).toBe('DELEGATED')
+  })
+
+  it('preserves the explicit ALL state without injecting a status filter', () => {
+    expect(toClaimRequestApiFilters({ quickStatus: 'ALL' })).toEqual({
+      direction: 'asc',
+      skipCurrentUserFilter: 'Y',
+      sort: 'createdAt',
+    })
+  })
+
+  it('normalizes an unsupported doctor URL status to the reference default', () => {
+    expect(getClaimRequestQuickStatus({ quickStatus: 'APPROVED' }, true)).toBe(
+      'DELEGATED'
+    )
+    expect(toClaimRequestApiFilters({ quickStatus: 'APPROVED' }, true)).toEqual(
+      {
+        direction: 'asc',
+        sort: 'createdAt',
+        status: 'DELEGATED',
+      }
+    )
   })
 })

@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
+import { ClaimRequestTicketsPage } from '@features/tickets'
 import type { ApiFilterParams } from '@iap/shared-lib'
-import { PaginatedDataTable, toTableFilterSearch } from '@shared/tables'
+import { PaginatedDataTable } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
 import { useLocation, useRouter } from '@tanstack/react-router'
 import type {
@@ -16,6 +17,7 @@ import {
   getClaimRequestFeature,
 } from '../model/claim-request-feature'
 import { toClaimRequestApiFilters } from '../model/claim-request-filters'
+import { toClaimRequestTableSearch } from '../model/claim-request-table-state'
 import { useClaimRequestStore } from '../model/store/claim-request-store'
 import { useClaimRequestTableSearch } from '../model/use-claim-request-table-search'
 import { claimRequestService } from '../services/claim-request-service'
@@ -30,7 +32,6 @@ import { ClaimRequestProvider } from './claim-request-provider'
 import { ClaimRequestQuickStatusFilter } from './claim-request-quick-status-filter'
 import { ClaimRequestRowActionDialogs } from './claim-request-row-action-dialogs'
 import { ClaimRequestToolbar } from './claim-request-toolbar'
-import { ClaimRequestsTicketsPlaceholder } from './claim-requests-tickets-placeholder'
 
 function resolveUpdater<T>(updater: Updater<T>, previous: T) {
   return typeof updater === 'function'
@@ -70,6 +71,9 @@ function ClaimRequestsContent() {
   })
   const columns = useClaimRequestColumns()
   const rowSelection = useClaimRequestStore((state) => state.rowSelection)
+  const clearRowSelection = useClaimRequestStore(
+    (state) => state.clearRowSelection
+  )
   const setRowSelection = useClaimRequestStore((state) => state.setRowSelection)
   const claimRequests = useMemo(() => query.data?.content ?? [], [query.data])
   const selectedIds = useMemo(
@@ -82,9 +86,9 @@ function ClaimRequestsContent() {
   )
 
   useEffect(() => {
-    setRowSelection({})
+    clearRowSelection()
   }, [
-    setRowSelection,
+    clearRowSelection,
     tableState.pagination.pageIndex,
     tableState.pagination.pageSize,
   ])
@@ -92,7 +96,7 @@ function ClaimRequestsContent() {
     (nextPagination: PaginationState, nextSorting: SortingState) => {
       router.navigate({
         replace: true,
-        search: toTableFilterSearch({
+        search: toClaimRequestTableSearch({
           filters: tableState.filters,
           pagination: nextPagination,
           sorting: nextSorting,
@@ -129,7 +133,7 @@ function ClaimRequestsContent() {
               size: tableState.pagination.pageSize,
             }}
             isFetching={query.isLoading || query.isFetching}
-            onRefresh={() => void query.refetch()}
+            onRefresh={() => query.refetch()}
             selectedIds={selectedIds}
           />
         </div>
@@ -172,21 +176,21 @@ function ClaimRequestsContent() {
       </div>
       <ClaimRequestBulkDeleteDialog
         claimRequestIds={selectedIds}
-        onSuccess={() => void query.refetch()}
+        onSuccess={() => query.refetch()}
       />
       <ClaimRequestGenerateAndSendBulkDialog
         claimRequestIds={selectedIds}
-        onSuccess={() => void query.refetch()}
+        onSuccess={() => query.refetch()}
       />
       <ClaimRequestBulkCoreAiDialog
         claimRequestIds={selectedIds}
-        onSuccess={() => void query.refetch()}
+        onSuccess={() => query.refetch()}
       />
       <ClaimRequestBulkStatusChangeDialog
         claimRequestIds={selectedIds}
-        onSuccess={() => void query.refetch()}
+        onSuccess={() => query.refetch()}
       />
-      <ClaimRequestRowActionDialogs onSuccess={() => void query.refetch()} />
+      <ClaimRequestRowActionDialogs onSuccess={() => query.refetch()} />
     </>
   )
 }
@@ -196,7 +200,7 @@ export function ClaimRequestsPage() {
   const feature = getClaimRequestFeature(location.search)
 
   if (feature === CLAIM_REQUEST_FEATURES.tickets) {
-    return <ClaimRequestsTicketsPlaceholder />
+    return <ClaimRequestTicketsPage />
   }
 
   return (

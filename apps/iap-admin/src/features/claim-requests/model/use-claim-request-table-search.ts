@@ -1,11 +1,7 @@
 import { useCallback, useMemo } from 'react'
 
 import { isDoctorRole, useAuthSession } from '@iap/auth'
-import {
-  type TableFilterSearch,
-  parseTableFilterSearch,
-  toTableFilterSearch,
-} from '@shared/tables'
+import { type TableFilterSearch } from '@shared/tables'
 import { useRouter } from '@tanstack/react-router'
 import { produce } from 'immer'
 
@@ -18,6 +14,10 @@ import {
   type ClaimRequestQuickStatus,
   getClaimRequestQuickStatus,
 } from './claim-request-filters'
+import {
+  parseClaimRequestTableSearch,
+  toClaimRequestTableSearch,
+} from './claim-request-table-state'
 
 function toSearchRecord(value: Record<string, unknown>): TableFilterSearch {
   return Object.fromEntries(
@@ -36,7 +36,7 @@ export function useClaimRequestTableSearch() {
   const search = toSearchRecord(
     router.state.location.search as Record<string, unknown>
   )
-  const tableState = parseTableFilterSearch(search)
+  const tableState = parseClaimRequestTableSearch(search)
   const sorting = useMemo(
     () =>
       tableState.sorting.length
@@ -51,7 +51,7 @@ export function useClaimRequestTableSearch() {
       router.navigate({
         replace: true,
         search: produce(
-          toTableFilterSearch({ ...tableState, sorting }),
+          toClaimRequestTableSearch({ ...tableState, sorting }),
           (nextSearch) => {
             if (nextQuickStatus === CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS) {
               return {
