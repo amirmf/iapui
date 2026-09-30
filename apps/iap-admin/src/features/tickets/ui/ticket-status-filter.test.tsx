@@ -37,16 +37,15 @@ describe('TicketStatusFilter', () => {
       screen.getByRole('button', { name: /tickets.status.CLOSED/ })
     )
 
-    expect(router.navigate).toHaveBeenCalledWith({
-      replace: true,
-      search: {
-        features: 'tickets',
-        page: undefined,
-        priority: 'HIGH',
-        size: '40',
-        status: 'CLOSED',
-      },
-      to: '/claim-requests/',
+    const navigation = router.navigate.mock.calls[0]?.[0]
+
+    expect(navigation).toMatchObject({ replace: true, to: './' })
+    expect(navigation?.search(location.search)).toEqual({
+      features: 'tickets',
+      page: undefined,
+      priority: 'HIGH',
+      size: '40',
+      status: 'CLOSED',
     })
   })
 
@@ -62,5 +61,24 @@ describe('TicketStatusFilter', () => {
     expect(
       screen.queryByRole('button', { name: /tickets.status.OPEN/ })
     ).toBeNull()
+  })
+
+  it('navigates relative to the active tickets route', () => {
+    render(<TicketStatusFilter count={12} />)
+
+    fireEvent.click(
+      screen.getByRole('button', { name: /tickets.status.CLOSED/ })
+    )
+
+    const navigation = router.navigate.mock.calls[0]?.[0]
+
+    expect(navigation).toMatchObject({ replace: true, to: './' })
+    expect(navigation?.search(location.search)).toEqual({
+      features: 'tickets',
+      page: undefined,
+      priority: 'HIGH',
+      size: '40',
+      status: 'CLOSED',
+    })
   })
 })

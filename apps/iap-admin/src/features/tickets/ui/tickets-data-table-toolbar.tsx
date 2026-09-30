@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { type ReactNode, useMemo } from 'react'
 
 import {
   type TableFilterBaseProps,
@@ -6,18 +6,25 @@ import {
 } from '@shared/tables'
 import { useTranslation } from 'react-i18next'
 
+import {
+  getTicketCategoryOptions,
+  getTicketPriorityOptions,
+} from '../model/ticket-presentation'
 import { TicketStatusFilter } from './ticket-status-filter'
 
 const filterInputClassName = 'lg:w-full'
 const filterWrapperClassName = 'w-full sm:w-1/4 xl:w-1/5 px-1'
 
-type TicketToolbarProps = {
+type TicketsDataTableToolbarProps = {
+  beforeStatusFilter?: ReactNode
   count?: number
-  isFetching?: boolean
+  isLoading?: boolean
+  ticketStatusFilterVariant?: 'claim-request-context' | 'default'
 }
 
-export function TicketToolbar(props: TicketToolbarProps) {
-  const { count, isFetching } = props
+export function TicketsDataTableToolbar(props: TicketsDataTableToolbarProps) {
+  const { beforeStatusFilter, count, isLoading, ticketStatusFilterVariant } =
+    props
   const { t } = useTranslation()
   const textFilters = useMemo<TableFilterBaseProps['textFilters']>(
     () => [
@@ -49,18 +56,12 @@ export function TicketToolbar(props: TicketToolbarProps) {
     () => [
       {
         id: 'priority',
-        options: ['LOW', 'NORMAL', 'HIGH', 'URGENT'].map((value) => ({
-          label: t(`tickets.priority.${value}` as never),
-          value,
-        })),
+        options: getTicketPriorityOptions(t),
         placeholder: t('tickets.columns.priority'),
       },
       {
         id: 'category',
-        options: ['PAYMENT', 'CLAIM_ISSUE', 'INFO_ISSUE'].map((value) => ({
-          label: t(`tickets.category.${value}` as never),
-          value,
-        })),
+        options: getTicketCategoryOptions(t),
         placeholder: t('tickets.columns.category'),
       },
     ],
@@ -74,7 +75,12 @@ export function TicketToolbar(props: TicketToolbarProps) {
         showReset
         textFilters={textFilters}
       />
-      <TicketStatusFilter count={count} isFetching={isFetching} />
+      {beforeStatusFilter}
+      <TicketStatusFilter
+        count={count}
+        isLoading={isLoading}
+        variant={ticketStatusFilterVariant}
+      />
     </div>
   )
 }

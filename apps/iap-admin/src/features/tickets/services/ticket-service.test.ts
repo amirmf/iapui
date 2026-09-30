@@ -89,4 +89,28 @@ describe('ticketService', () => {
     expect(apiClient.get).not.toHaveBeenCalled()
     expect(apiClient.post).not.toHaveBeenCalled()
   })
+
+  it('applies the reference defaults for omitted page requests', async () => {
+    apiClient.get.mockResolvedValue({ data: { content: [] } })
+
+    await ticketService.findPage({ query: {} })
+    await ticketService.findMessages({ path: { ticketId }, query: {} })
+
+    expect(apiClient.get).toHaveBeenNthCalledWith(
+      1,
+      '/support/tickets/page-full',
+      {
+        params: { page: 0, size: 30 },
+        signal: undefined,
+      }
+    )
+    expect(apiClient.get).toHaveBeenNthCalledWith(
+      2,
+      `/support/tickets/${ticketId}/messages`,
+      {
+        params: { page: 0, size: 20 },
+        signal: undefined,
+      }
+    )
+  })
 })

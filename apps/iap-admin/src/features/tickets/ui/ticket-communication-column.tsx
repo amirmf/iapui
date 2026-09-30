@@ -77,9 +77,7 @@ export function TicketCommunicationColumn(
         </label>
         <Textarea
           aria-busy={isSendingMessage}
-          disabled={
-            ticket?.status === 'CLOSED' || isClosingTicket || isSendingMessage
-          }
+          disabled={ticket?.status === 'CLOSED'}
           id='ticket-message-body'
           maxLength={4000}
           onChange={(event) => onBodyChange(event.target.value)}

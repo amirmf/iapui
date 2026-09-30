@@ -1,1 +1,2 @@
-export { ClaimRequestTicketsPage } from './ui/claim-request-tickets-page'
+export { ClaimRequestsTicketsPage } from './ui/claim-requests-tickets-page'
+export { TicketsPage } from './pages/index/tickets-page'
