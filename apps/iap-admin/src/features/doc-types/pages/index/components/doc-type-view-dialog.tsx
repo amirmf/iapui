@@ -21,13 +21,13 @@ function JsonValue(props: { value: string | null | undefined }) {
   }
 }
 
-type DocTypeDetailsDialogProps = {
+type DocTypeViewDialogProps = {
   docType: AdminDocType
   onOpenChange: (open: boolean) => void
   open: boolean
 }
 
-export function DocTypeDetailsDialog(props: DocTypeDetailsDialogProps) {
+export function DocTypeViewDialog(props: DocTypeViewDialogProps) {
   const { docType, onOpenChange, open } = props
   const { t } = useTranslation()
   const fields: Array<[keyof AdminDocType, string]> = [

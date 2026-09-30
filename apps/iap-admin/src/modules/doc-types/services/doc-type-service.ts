@@ -15,7 +15,7 @@ import {
   updateDocTypeSchemaRequestSchema,
   updateDocTypeSubmissionExampleRequestSchema,
 } from '@iap/api-types'
-import { transformApiFilterParams } from '@iap/shared-lib'
+import { type ApiFilterParams, transformApiFilterParams } from '@iap/shared-lib'
 
 export const docTypeService = {
   async bulkDelete(ids: string[]) {
@@ -39,7 +39,7 @@ export const docTypeService = {
     return adminDocTypeSchema.parse(response.data)
   },
   async getPage(input: {
-    filters?: Record<string, string | number | string[]>
+    filters?: ApiFilterParams
     page?: number
     signal?: AbortSignal
     size?: number

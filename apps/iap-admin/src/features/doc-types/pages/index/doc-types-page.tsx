@@ -1,22 +1,23 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
 import { useDocTypeStore } from '@features/doc-types/model/doc-type-store'
+import {
+  parseDocTypeTableSearch,
+  toDocTypeApiFilters,
+  toDocTypeTableSearch,
+} from '@features/doc-types/model/doc-type-table-state'
 import { DocTypeBulkDeleteDialog } from '@features/doc-types/pages/index/components/doc-type-bulk-delete-dialog'
 import { useDocTypeColumns } from '@features/doc-types/pages/index/components/doc-type-columns'
+import { DocTypeDataTableToolbar } from '@features/doc-types/pages/index/components/doc-type-data-table-toolbar'
 import { DocTypeDeleteDialog } from '@features/doc-types/pages/index/components/doc-type-delete-dialog'
-import { DocTypeDetailsDialog } from '@features/doc-types/pages/index/components/doc-type-details-dialog'
 import { DocTypeInlineEditRow } from '@features/doc-types/pages/index/components/doc-type-inline-edit-row'
-import { DocTypeToolbar } from '@features/doc-types/pages/index/components/doc-type-toolbar'
+import { DocTypeViewDialog } from '@features/doc-types/pages/index/components/doc-type-view-dialog'
 import type { AdminDocType } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'
+import type { ApiFilterParams } from '@iap/shared-lib'
 import { Button, Permission, cn } from '@iap/ui'
 import { docTypeService } from '@modules/doc-types'
-import {
-  PaginatedDataTable,
-  type TableFilterSearch,
-  parseTableFilterSearch,
-  toTableFilterSearch,
-} from '@shared/tables'
+import { PaginatedDataTable, type TableFilterSearch } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter, useRouterState } from '@tanstack/react-router'
 import type {
@@ -43,7 +44,7 @@ function DocTypesContent() {
   const search = useRouterState({
     select: (state) => state.location.search as TableFilterSearch,
   })
-  const tableState = useMemo(() => parseTableFilterSearch(search), [search])
+  const tableState = useMemo(() => parseDocTypeTableSearch(search), [search])
   const columns = useDocTypeColumns()
   const currentRow = useDocTypeStore((state) => state.currentRow)
   const editingRowId = useDocTypeStore((state) => state.editingRowId)
@@ -54,20 +55,20 @@ function DocTypesContent() {
   const setOpenDialog = useDocTypeStore((state) => state.setOpenDialog)
   const setRowSelection = useDocTypeStore((state) => state.setRowSelection)
   const canManage = isSuperAdminRole(user?.roles ?? [])
+  const effectiveFilters = useMemo<ApiFilterParams>(
+    () => toDocTypeApiFilters(tableState.filters, tableState.sorting),
+    [tableState.filters, tableState.sorting]
+  )
   const query = useQuery({
     gcTime: 30_000,
     queryFn: ({ signal }) =>
       docTypeService.getPage({
-        filters: Object.fromEntries(
-          Object.entries(tableState.filters).filter(
-            ([, value]) => value !== undefined
-          )
-        ) as Record<string, string | string[]>,
+        filters: effectiveFilters,
         page: tableState.pagination.pageIndex,
         signal,
         size: tableState.pagination.pageSize,
       }),
-    queryKey: ['doc-types', 'page', tableState.pagination, tableState.filters],
+    queryKey: ['doc-types', 'page', tableState.pagination, effectiveFilters],
     refetchOnWindowFocus: false,
     staleTime: 30_000,
   })
@@ -90,27 +91,49 @@ function DocTypesContent() {
     tableState.pagination.pageSize,
   ])
 
-  const onPaginationChange = useCallback(
-    (updater: Updater<PaginationState>) => {
-      const pagination = resolveUpdater(updater, tableState.pagination)
+  const updateTableState = useCallback(
+    (
+      pagination: PaginationState,
+      sorting: SortingState,
+      filters = tableState.filters
+    ) => {
       router.navigate({
         replace: true,
-        search: toTableFilterSearch({ ...tableState, pagination }) as never,
+        search: toDocTypeTableSearch({ filters, pagination, sorting }) as never,
         to: './',
       })
     },
-    [router, tableState]
+    [router, tableState.filters]
+  )
+  const onPaginationChange = useCallback(
+    (updater: Updater<PaginationState>) =>
+      updateTableState(
+        resolveUpdater(updater, tableState.pagination),
+        tableState.sorting
+      ),
+    [tableState.pagination, tableState.sorting, updateTableState]
   )
   const onSortingChange = useCallback(
-    (updater: Updater<SortingState>) => {
-      const sorting = resolveUpdater(updater, tableState.sorting)
-      router.navigate({
-        replace: true,
-        search: toTableFilterSearch({ ...tableState, sorting }) as never,
-        to: './',
-      })
-    },
-    [router, tableState]
+    (updater: Updater<SortingState>) =>
+      updateTableState(
+        tableState.pagination,
+        resolveUpdater(updater, tableState.sorting)
+      ),
+    [tableState.pagination, tableState.sorting, updateTableState]
+  )
+  const onFilterValuesChange = useCallback(
+    (updater: (previous: TableFilterSearch) => TableFilterSearch) =>
+      updateTableState(
+        { ...tableState.pagination, pageIndex: 0 },
+        tableState.sorting,
+        updater(tableState.filters)
+      ),
+    [
+      tableState.filters,
+      tableState.pagination,
+      tableState.sorting,
+      updateTableState,
+    ]
   )
   const renderRow = useCallback(
     (row: Row<AdminDocType>) =>
@@ -165,7 +188,10 @@ function DocTypesContent() {
           </div>
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
-          <DocTypeToolbar />
+          <DocTypeDataTableToolbar
+            onValuesChange={onFilterValuesChange}
+            values={tableState.filters}
+          />
           <PaginatedDataTable<AdminDocType>
             columns={columns}
             data={docTypes}
@@ -194,7 +220,7 @@ function DocTypesContent() {
       />
       <DocTypeDeleteDialog onSuccess={() => void refetch()} />
       {currentRow ? (
-        <DocTypeDetailsDialog
+        <DocTypeViewDialog
           docType={currentRow}
           onOpenChange={(open) => {
             if (!open) {

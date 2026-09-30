@@ -3,14 +3,14 @@ import { describe, expect, it } from 'vitest'
 import { docTypeRouteSearchSchema } from './doc-type-route-search-schema'
 
 describe('docTypeRouteSearchSchema', () => {
-  it('accepts the shared table URL state and rejects unknown search fields', () => {
+  it('accepts the reference table URL state and rejects unknown search fields', () => {
     expect(
       docTypeRouteSearchSchema.parse({
         docType: 'Invoice',
         page: '1',
-        pageSize: '20',
+        size: '40',
         sort: 'docType',
-        sortDirection: 'asc',
+        direction: 'asc',
       })
     ).toMatchObject({ docType: 'Invoice', sort: 'docType' })
     expect(

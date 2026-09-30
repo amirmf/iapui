@@ -1,5 +1,10 @@
 # Doc Types reference-parity implementation tasks
 
+> **Status:** Superseded for the `/doc-types` index page by
+> [`iap-admin-doc-types-page-reference-parity.md`](./iap-admin-doc-types-page-reference-parity.md).
+> That document is the current source of truth for the page's verified
+> discrepancies, implementation status, component names, and test evidence.
+
 ## Scope
 
 Implement the authenticated `/doc-types` list page in `iap-admin`, using
