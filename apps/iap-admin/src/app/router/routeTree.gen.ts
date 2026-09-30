@@ -38,6 +38,8 @@ import { Route as AuthenticatedSubUsersIndexRouteImport } from './routes/_authen
 import { Route as AuthenticatedSupportQuestionsIndexRouteImport } from './routes/_authenticated/support-questions/index'
 import { Route as AuthenticatedTicketsIndexRouteImport } from './routes/_authenticated/tickets/index'
 import { Route as AuthenticatedUserAccountIndexRouteImport } from './routes/_authenticated/user-account/index'
+import { Route as FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRouteImport } from './routes/formio/claim-requests/$claimRequestId.documents.$documentId'
+import { Route as FormioClaimRequestsRouteRouteImport } from './routes/formio/claim-requests/route'
 import { Route as FormioDocTypesDocTypeIdSubmissionExampleRouteImport } from './routes/formio/doc-types/$docTypeId.submission-example'
 import { Route as FormioDocTypesDocTypeIdBuilderRouteImport } from './routes/formio/doc-types/$docTypeId/builder'
 import { Route as FormioDocTypesRouteRouteImport } from './routes/formio/doc-types/route'
@@ -61,6 +63,12 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const FormioClaimRequestsRouteRoute =
+  FormioClaimRequestsRouteRouteImport.update({
+    id: '/claim-requests',
+    path: '/claim-requests',
+    getParentRoute: () => FormioRouteRoute,
+  } as any)
 const FormioDocTypesRouteRoute = FormioDocTypesRouteRouteImport.update({
   id: '/doc-types',
   path: '/doc-types',
@@ -255,10 +263,17 @@ const AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute =
       getParentRoute: () => AuthenticatedRouteRoute,
     } as any
   )
+const FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute =
+  FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRouteImport.update({
+    id: '/$claimRequestId/documents/$documentId',
+    path: '/$claimRequestId/documents/$documentId',
+    getParentRoute: () => FormioClaimRequestsRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/formio': typeof FormioRouteRouteWithChildren
+  '/formio/claim-requests': typeof FormioClaimRequestsRouteRouteWithChildren
   '/formio/doc-types': typeof FormioDocTypesRouteRouteWithChildren
   '/auth/sso': typeof AuthAuthSsoRoute
   '/login/': typeof AuthLoginIndexRoute
@@ -291,11 +306,13 @@ export interface FileRoutesByFullPath {
   '/formio/doc-types/$docTypeId/builder': typeof FormioDocTypesDocTypeIdBuilderRoute
   '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
   '/doc-types/create/': typeof AuthenticatedDocTypesCreateIndexRoute
+  '/formio/claim-requests/$claimRequestId/documents/$documentId': typeof FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute
   '/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
   '/formio': typeof FormioRouteRouteWithChildren
+  '/formio/claim-requests': typeof FormioClaimRequestsRouteRouteWithChildren
   '/formio/doc-types': typeof FormioDocTypesRouteRouteWithChildren
   '/auth/sso': typeof AuthAuthSsoRoute
   '/login': typeof AuthLoginIndexRoute
@@ -328,6 +345,7 @@ export interface FileRoutesByTo {
   '/formio/doc-types/$docTypeId/builder': typeof FormioDocTypesDocTypeIdBuilderRoute
   '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
   '/doc-types/create': typeof AuthenticatedDocTypesCreateIndexRoute
+  '/formio/claim-requests/$claimRequestId/documents/$documentId': typeof FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute
   '/claim-requests/$claimRequestId/claim-request-management': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRoutesById {
@@ -335,6 +353,7 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/formio': typeof FormioRouteRouteWithChildren
+  '/formio/claim-requests': typeof FormioClaimRequestsRouteRouteWithChildren
   '/formio/doc-types': typeof FormioDocTypesRouteRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_auth/auth/sso': typeof AuthAuthSsoRoute
@@ -368,6 +387,7 @@ export interface FileRoutesById {
   '/formio/doc-types/$docTypeId/builder': typeof FormioDocTypesDocTypeIdBuilderRoute
   '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
   '/_authenticated/doc-types/create/': typeof AuthenticatedDocTypesCreateIndexRoute
+  '/formio/claim-requests/$claimRequestId/documents/$documentId': typeof FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute
   '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRouteTypes {
@@ -375,6 +395,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/formio'
+    | '/formio/claim-requests'
     | '/formio/doc-types'
     | '/auth/sso'
     | '/login/'
@@ -407,11 +428,13 @@ export interface FileRouteTypes {
     | '/formio/doc-types/$docTypeId/builder'
     | '/formio/doc-types/$docTypeId/submission-example'
     | '/doc-types/create/'
+    | '/formio/claim-requests/$claimRequestId/documents/$documentId'
     | '/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/formio'
+    | '/formio/claim-requests'
     | '/formio/doc-types'
     | '/auth/sso'
     | '/login'
@@ -444,12 +467,14 @@ export interface FileRouteTypes {
     | '/formio/doc-types/$docTypeId/builder'
     | '/formio/doc-types/$docTypeId/submission-example'
     | '/doc-types/create'
+    | '/formio/claim-requests/$claimRequestId/documents/$documentId'
     | '/claim-requests/$claimRequestId/claim-request-management'
   id:
     | '__root__'
     | '/_auth'
     | '/_authenticated'
     | '/formio'
+    | '/formio/claim-requests'
     | '/formio/doc-types'
     | '/_authenticated/'
     | '/_auth/auth/sso'
@@ -483,6 +508,7 @@ export interface FileRouteTypes {
     | '/formio/doc-types/$docTypeId/builder'
     | '/formio/doc-types/$docTypeId/submission-example'
     | '/_authenticated/doc-types/create/'
+    | '/formio/claim-requests/$claimRequestId/documents/$documentId'
     | '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesById: FileRoutesById
 }
@@ -521,6 +547,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/formio/claim-requests': {
+      id: '/formio/claim-requests'
+      path: '/claim-requests'
+      fullPath: '/formio/claim-requests'
+      preLoaderRoute: typeof FormioClaimRequestsRouteRouteImport
+      parentRoute: typeof FormioRouteRoute
     }
     '/formio/doc-types': {
       id: '/formio/doc-types'
@@ -753,6 +786,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/formio/claim-requests/$claimRequestId/documents/$documentId': {
+      id: '/formio/claim-requests/$claimRequestId/documents/$documentId'
+      path: '/$claimRequestId/documents/$documentId'
+      fullPath: '/formio/claim-requests/$claimRequestId/documents/$documentId'
+      preLoaderRoute: typeof FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRouteImport
+      parentRoute: typeof FormioClaimRequestsRouteRoute
+    }
   }
 }
 
@@ -848,6 +888,21 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface FormioClaimRequestsRouteRouteChildren {
+  FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute: typeof FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute
+}
+
+const FormioClaimRequestsRouteRouteChildren: FormioClaimRequestsRouteRouteChildren =
+  {
+    FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute:
+      FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute,
+  }
+
+const FormioClaimRequestsRouteRouteWithChildren =
+  FormioClaimRequestsRouteRoute._addFileChildren(
+    FormioClaimRequestsRouteRouteChildren
+  )
+
 interface FormioDocTypesRouteRouteChildren {
   FormioDocTypesDocTypeIdBuilderRoute: typeof FormioDocTypesDocTypeIdBuilderRoute
   FormioDocTypesDocTypeIdSubmissionExampleRoute: typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
@@ -863,10 +918,12 @@ const FormioDocTypesRouteRouteWithChildren =
   FormioDocTypesRouteRoute._addFileChildren(FormioDocTypesRouteRouteChildren)
 
 interface FormioRouteRouteChildren {
+  FormioClaimRequestsRouteRoute: typeof FormioClaimRequestsRouteRouteWithChildren
   FormioDocTypesRouteRoute: typeof FormioDocTypesRouteRouteWithChildren
 }
 
 const FormioRouteRouteChildren: FormioRouteRouteChildren = {
+  FormioClaimRequestsRouteRoute: FormioClaimRequestsRouteRouteWithChildren,
   FormioDocTypesRouteRoute: FormioDocTypesRouteRouteWithChildren,
 }
 

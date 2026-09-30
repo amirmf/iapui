@@ -5,6 +5,7 @@ import {
   type CoreAiDataExtractionRequest,
   type PageClaimRequestRequest,
   type UpdateClaimRequestDocTypeRequest,
+  type UpdateClaimRequestDocumentsRequest,
   assignClaimRequestToMeStatusRequestSchema,
   assignNewClaimRequestsRequestSchema,
   claimRequestBulkStatusChangeRequestSchema,
@@ -16,6 +17,7 @@ import {
   pageClaimRequestRequestSchema,
   pageClaimRequestSchema,
   updateClaimRequestDocTypeRequestSchema,
+  updateClaimRequestDocumentsRequestSchema,
 } from '@iap/api-types'
 import { type ApiFilterParams, transformApiFilterParams } from '@iap/shared-lib'
 import { z } from 'zod'
@@ -145,6 +147,14 @@ export const claimRequestService = {
     const response = await getApiClient().post(
       '/claim-requests/doc-type',
       request
+    )
+    return claimRequestSchema.parse(response.data)
+  },
+  updateDocuments: async (payload: UpdateClaimRequestDocumentsRequest) => {
+    const request = updateClaimRequestDocumentsRequestSchema.parse(payload)
+    const response = await getApiClient().patch(
+      `/claim-requests/${request.path.id}`,
+      request.body
     )
     return claimRequestSchema.parse(response.data)
   },

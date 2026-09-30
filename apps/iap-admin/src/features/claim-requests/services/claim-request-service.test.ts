@@ -5,6 +5,7 @@ import { claimRequestService } from './claim-request-service'
 const apiClient = vi.hoisted(() => ({
   delete: vi.fn(),
   get: vi.fn(),
+  patch: vi.fn(),
   post: vi.fn(),
 }))
 
@@ -27,6 +28,7 @@ describe('claimRequestService', () => {
       .mockResolvedValueOnce({ data: {} })
       .mockResolvedValueOnce({ data: {} })
     apiClient.delete.mockResolvedValue({ data: {} })
+    apiClient.patch.mockResolvedValue({ data: {} })
 
     await claimRequestService.findPage({
       filters: { status: 'IN_ASSESSMENT', tags: ['priority'] },
@@ -57,6 +59,12 @@ describe('claimRequestService', () => {
       claimRequestId: 'claim-1',
       newDocType: 'INVOICE',
     })
+    await claimRequestService.updateDocuments({
+      body: {
+        documents: [{ extractedData: { approved: true }, id: 'document-1' }],
+      },
+      path: { id: 'claim-1' },
+    })
 
     expect(apiClient.get).toHaveBeenCalledWith('/claim-requests/page-lite', {
       params: {
@@ -71,6 +79,9 @@ describe('claimRequestService', () => {
       1,
       '/claim-requests/claim-1/assignments/me'
     )
+    expect(apiClient.patch).toHaveBeenCalledWith('/claim-requests/claim-1', {
+      documents: [{ extractedData: { approved: true }, id: 'document-1' }],
+    })
     expect(apiClient.post).toHaveBeenNthCalledWith(
       2,
       '/claim-requests/claim-1/assignments/me/status',
