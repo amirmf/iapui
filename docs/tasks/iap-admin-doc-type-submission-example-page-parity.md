@@ -109,6 +109,34 @@ authenticated page:
 Second-audit verification: the two page-specific test files pass 4 tests;
 the full admin test suite, typecheck, lint, and `git diff --check` all pass.
 
+## Worktree re-verification (2026-09-30)
+
+The requested implementation was already present on `main` before this task's
+dedicated worktree was created. A fresh checkout from `main` confirmed the
+complete source-backed closure without requiring a product-code change:
+
+1. The authenticated sample-submission page composes the same iframe URL,
+   document-type query, navigation, RTL/LTR affordances, and new-tab security
+   arguments as the reference.
+2. The standalone `/formio/doc-types/$docTypeId/submission-example` route
+   resolves to `DocTypeFormRendererFrame`, whose loading, missing-schema,
+   form-change, reset, save, toast, and query-invalidation behavior matches
+   the reference.
+3. The target retains only the documented architecture adaptations: public
+   feature/module imports, the authenticated shell owning the page layout, and
+   Zod v4 `.loose()` response validation.
+4. No enum is rendered by this page. Consequently, the existing enum-label
+   constants remain feature-local and no page-specific constant was added.
+
+Current evidence:
+
+- Focused outer-page and Form.io renderer tests — 4 passed.
+- `pnpm --filter iap-admin typecheck` — passed.
+- `pnpm --filter iap-admin lint` — passed.
+- `git diff --check` — passed.
+- The preceding complete verification remains authoritative for the Vite build
+  and full test suite; this re-verification repeated the page-scoped checks.
+
 ## Reuse assessment
 
 No new skill is needed. The existing `reference-page-parity` skill already
