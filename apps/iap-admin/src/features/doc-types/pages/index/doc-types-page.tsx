@@ -166,7 +166,7 @@ function DocTypesContent() {
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
           <DocTypeToolbar />
-          <PaginatedDataTable
+          <PaginatedDataTable<AdminDocType>
             columns={columns}
             data={docTypes}
             emptyStateText={t('docTypes.noDocTypes')}

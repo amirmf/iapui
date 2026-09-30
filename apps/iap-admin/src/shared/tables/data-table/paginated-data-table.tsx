@@ -11,13 +11,13 @@ import type {
   DataTableRowLayout,
 } from '@shared/tables/data-table/types'
 import {
-  type ColumnDef,
   type ColumnFiltersState,
   type PaginationState,
   type Row,
   type RowSelectionState,
   type SortingState,
   type Table,
+  type TableOptions,
   type Updater,
   type VisibilityState,
   getCoreRowModel,
@@ -29,15 +29,14 @@ import {
 } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 
-type AnyValueColumnDef<TData> = ColumnDef<TData, never>
+type AnyValueColumnDef<TData> = TableOptions<TData>['columns'][number]
 
 export function PaginatedDataTable<TData>(props: {
   caption?: ReactNode
   className?: string
   columnFilters?: ColumnFiltersState
-  // A table can combine accessors with different value types. `ColumnDef` is
-  // invariant in that value type, so `unknown` would reject valid columns such
-  // as string, number, and display-only columns when a feature passes them in.
+  // Use TanStack's own heterogeneous-column contract so accessor columns can
+  // retain their individual value types.
   columns: readonly AnyValueColumnDef<TData>[]
   data: readonly TData[]
   emptyContent?: ReactNode
@@ -138,7 +137,7 @@ export function PaginatedDataTable<TData>(props: {
     () => (selectColumn ? [selectColumn, ...columns] : [...columns]),
     [columns, selectColumn]
   )
-  const table = useReactTable({
+  const table = useReactTable<TData>({
     columns: resolvedColumns,
     data: data as TData[],
     enableRowSelection: hasCheckboxes,

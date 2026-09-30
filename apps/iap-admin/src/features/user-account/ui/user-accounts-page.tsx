@@ -102,7 +102,7 @@ function UserAccountsContent() {
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
           <UserAccountToolbar />
-          <PaginatedDataTable
+          <PaginatedDataTable<UserAccount>
             columns={columns}
             data={users}
             enableSorting={false}

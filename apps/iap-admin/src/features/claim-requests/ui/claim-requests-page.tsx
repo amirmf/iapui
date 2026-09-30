@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
 import { ClaimRequestTicketsPage } from '@features/tickets'
+import type { ClaimRequest } from '@iap/api-types'
 import type { ApiFilterParams } from '@iap/shared-lib'
 import { PaginatedDataTable } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
@@ -145,7 +146,7 @@ function ClaimRequestsContent() {
               isFetching={query.isLoading || query.isFetching}
             />
           </div>
-          <PaginatedDataTable
+          <PaginatedDataTable<ClaimRequest>
             columns={columns}
             data={claimRequests}
             emptyStateText={

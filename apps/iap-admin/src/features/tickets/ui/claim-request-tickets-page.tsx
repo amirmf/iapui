@@ -7,6 +7,7 @@ import {
   type ClaimRequestQuickStatus,
   ClaimRequestQuickStatusFilter,
 } from '@features/claim-requests'
+import type { SupportTicket } from '@iap/api-types'
 import { Button } from '@iap/ui'
 import { PaginatedDataTable } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
@@ -160,7 +161,7 @@ export function ClaimRequestTicketsPage() {
           </p>
         ) : null}
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
-          <PaginatedDataTable
+          <PaginatedDataTable<SupportTicket>
             columns={columns}
             data={tickets}
             emptyStateText={t('tickets.empty')}
