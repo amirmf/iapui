@@ -22,3 +22,5 @@ export function FormioStandaloneLayout(
     </div>
   )
 }
+
+export default FormioStandaloneLayout

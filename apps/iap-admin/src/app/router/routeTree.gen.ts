@@ -38,6 +38,7 @@ import { Route as AuthenticatedSubUsersIndexRouteImport } from './routes/_authen
 import { Route as AuthenticatedSupportQuestionsIndexRouteImport } from './routes/_authenticated/support-questions/index'
 import { Route as AuthenticatedTicketsIndexRouteImport } from './routes/_authenticated/tickets/index'
 import { Route as AuthenticatedUserAccountIndexRouteImport } from './routes/_authenticated/user-account/index'
+import { Route as FormioDocTypesDocTypeIdSubmissionExampleRouteImport } from './routes/formio/doc-types/$docTypeId.submission-example'
 import { Route as FormioDocTypesDocTypeIdBuilderRouteImport } from './routes/formio/doc-types/$docTypeId/builder'
 import { Route as FormioDocTypesRouteRouteImport } from './routes/formio/doc-types/route'
 import { Route as FormioRouteRouteImport } from './routes/formio/route'
@@ -240,6 +241,12 @@ const FormioDocTypesDocTypeIdBuilderRoute =
     path: '/$docTypeId/builder',
     getParentRoute: () => FormioDocTypesRouteRoute,
   } as any)
+const FormioDocTypesDocTypeIdSubmissionExampleRoute =
+  FormioDocTypesDocTypeIdSubmissionExampleRouteImport.update({
+    id: '/$docTypeId/submission-example',
+    path: '/$docTypeId/submission-example',
+    getParentRoute: () => FormioDocTypesRouteRoute,
+  } as any)
 const AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute =
   AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport.update(
     {
@@ -282,6 +289,7 @@ export interface FileRoutesByFullPath {
   '/doc-types/$docTypeId/form-builder': typeof AuthenticatedDocTypesDocTypeIdFormBuilderRoute
   '/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
   '/formio/doc-types/$docTypeId/builder': typeof FormioDocTypesDocTypeIdBuilderRoute
+  '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
   '/doc-types/create/': typeof AuthenticatedDocTypesCreateIndexRoute
   '/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
@@ -318,6 +326,7 @@ export interface FileRoutesByTo {
   '/doc-types/$docTypeId/form-builder': typeof AuthenticatedDocTypesDocTypeIdFormBuilderRoute
   '/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
   '/formio/doc-types/$docTypeId/builder': typeof FormioDocTypesDocTypeIdBuilderRoute
+  '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
   '/doc-types/create': typeof AuthenticatedDocTypesCreateIndexRoute
   '/claim-requests/$claimRequestId/claim-request-management': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
@@ -357,6 +366,7 @@ export interface FileRoutesById {
   '/_authenticated/doc-types/$docTypeId/form-builder': typeof AuthenticatedDocTypesDocTypeIdFormBuilderRoute
   '/_authenticated/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
   '/formio/doc-types/$docTypeId/builder': typeof FormioDocTypesDocTypeIdBuilderRoute
+  '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
   '/_authenticated/doc-types/create/': typeof AuthenticatedDocTypesCreateIndexRoute
   '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
@@ -395,6 +405,7 @@ export interface FileRouteTypes {
     | '/doc-types/$docTypeId/form-builder'
     | '/doc-types/$docTypeId/submission-example'
     | '/formio/doc-types/$docTypeId/builder'
+    | '/formio/doc-types/$docTypeId/submission-example'
     | '/doc-types/create/'
     | '/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesByTo: FileRoutesByTo
@@ -431,6 +442,7 @@ export interface FileRouteTypes {
     | '/doc-types/$docTypeId/form-builder'
     | '/doc-types/$docTypeId/submission-example'
     | '/formio/doc-types/$docTypeId/builder'
+    | '/formio/doc-types/$docTypeId/submission-example'
     | '/doc-types/create'
     | '/claim-requests/$claimRequestId/claim-request-management'
   id:
@@ -469,6 +481,7 @@ export interface FileRouteTypes {
     | '/_authenticated/doc-types/$docTypeId/form-builder'
     | '/_authenticated/doc-types/$docTypeId/submission-example'
     | '/formio/doc-types/$docTypeId/builder'
+    | '/formio/doc-types/$docTypeId/submission-example'
     | '/_authenticated/doc-types/create/'
     | '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesById: FileRoutesById
@@ -726,6 +739,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FormioDocTypesDocTypeIdBuilderRouteImport
       parentRoute: typeof FormioDocTypesRouteRoute
     }
+    '/formio/doc-types/$docTypeId/submission-example': {
+      id: '/formio/doc-types/$docTypeId/submission-example'
+      path: '/$docTypeId/submission-example'
+      fullPath: '/formio/doc-types/$docTypeId/submission-example'
+      preLoaderRoute: typeof FormioDocTypesDocTypeIdSubmissionExampleRouteImport
+      parentRoute: typeof FormioDocTypesRouteRoute
+    }
     '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': {
       id: '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
       path: '/claim-requests/$claimRequestId/claim-request-management'
@@ -830,10 +850,13 @@ const AuthenticatedRouteRouteWithChildren =
 
 interface FormioDocTypesRouteRouteChildren {
   FormioDocTypesDocTypeIdBuilderRoute: typeof FormioDocTypesDocTypeIdBuilderRoute
+  FormioDocTypesDocTypeIdSubmissionExampleRoute: typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
 }
 
 const FormioDocTypesRouteRouteChildren: FormioDocTypesRouteRouteChildren = {
   FormioDocTypesDocTypeIdBuilderRoute: FormioDocTypesDocTypeIdBuilderRoute,
+  FormioDocTypesDocTypeIdSubmissionExampleRoute:
+    FormioDocTypesDocTypeIdSubmissionExampleRoute,
 }
 
 const FormioDocTypesRouteRouteWithChildren =
