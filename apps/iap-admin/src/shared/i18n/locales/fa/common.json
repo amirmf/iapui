@@ -230,6 +230,8 @@
     "openInNewTab": "باز کردن در زبانه جدید",
     "openMenu": "باز کردن منو",
     "loading": "در حال بارگذاری...",
+    "refresh": "بروزرسانی",
+    "exportCsv": "خروجی CSV",
     "total": "مجموع",
     "signOut": "خروج",
     "username": "نام کاربری",
@@ -1047,6 +1049,43 @@
       "code": "کد",
       "unitName": "نام",
       "tel": "تلفن"
+    }
+  },
+  "bankAccounts": {
+    "title": "حساب‌های بانکی",
+    "description": "نمایش {{count}} رکورد حساب بانکی",
+    "columns": {
+      "bankAccountNumber": "شماره حساب",
+      "bankAccountType": "نوع حساب",
+      "phoneNumber": "شماره موبایل",
+      "userId": "شناسه کاربر",
+      "isValid": "معتبر",
+      "createdAt": "تاریخ ایجاد"
+    },
+    "filters": {
+      "bankAccountNumber": "شماره حساب",
+      "phoneNumber": "شماره موبایل",
+      "userId": "شناسه کاربر",
+      "username": "کدملی"
+    },
+    "types": {
+      "IBAN": "شبا",
+      "CARD": "کارت"
+    },
+    "actions": {
+      "delete": "حذف",
+      "bulkDelete": "حذف انتخاب‌شده‌ها"
+    },
+    "messages": {
+      "deleted": "حساب بانکی با موفقیت حذف شد"
+    },
+    "bulkDelete": {
+      "title": "حذف حساب‌های بانکی انتخاب‌شده",
+      "description": "آیا از حذف دائمی {{count}} رکورد حساب بانکی انتخاب‌شده مطمئن هستید؟",
+      "confirm": "حذف انتخاب‌شده‌ها",
+      "submitting": "در حال حذف...",
+      "success": "حساب‌های بانکی انتخاب‌شده با موفقیت حذف شدند",
+      "noSelection": "حداقل یک حساب بانکی انتخاب کنید."
     }
   },
   "sidebar": {
