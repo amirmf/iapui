@@ -109,6 +109,217 @@
       "usernameRequired": "کد ملی الزامی است."
     }
   },
+  "damageCodes": {
+    "title": "مدیریت کدهای خسارت",
+    "description": "مدیریت همه کد خسارت با اطلاعات قیمت‌گذاری.",
+    "create": "ایجاد کد خسارت",
+    "refresh": "بروزرسانی",
+    "noDamageCodes": "هیچ کد خساراتی یافت نشد.",
+    "columns": {
+      "code": "کد",
+      "title": "عنوان",
+      "extId": "شناسه خارجی",
+      "codeType": "نوع کد",
+      "description": "توضیحات",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "created": "ایجاد شده"
+    },
+    "filters": {
+      "code": "کد",
+      "title": "عنوان",
+      "extId": "شناسه خارجی",
+      "codeType": "نوع کد",
+      "description": "توضیحات",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "created": "تاریخ ایجاد",
+      "thruDateFrom": "تاریخ پایان از",
+      "thruDateTo": "تاریخ پایان تا"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "pending": "در انتظار",
+      "deprecated": "منسوخ شده"
+    },
+    "dialog": {
+      "details": "جزئیات",
+      "basicInfo": "اطلاعات اصلی",
+      "dateInfo": "اطلاعات تاریخ",
+      "systemInfo": "اطلاعات سیستمی",
+      "create": "ایجاد کد خسارت جدید",
+      "noStartDate": "بدون تاریخ",
+      "edit": "ویرایش کد خسارت",
+      "delete": "حذف کد خسارت",
+      "deleteDesc": "آیا مطمئن هستید که می‌خواهید این کد خسارت را به طور دائم حذف کنید؟",
+      "deleteWarning": "این عملیات کد خسارت را به طور دائم از سیستم حذف می‌کند و قابل بازگشت نیست.",
+      "createDesc": "کد خسارت جدید را با پر کردن فرم زیر ایجاد کنید.",
+      "editDesc": "اطلاعات کد خسارت را در زیر به‌روزرسانی کنید.",
+      "fields": {
+        "code": "کد",
+        "extId": "شناسه خارجی",
+        "extCode": "کد خارجی",
+        "codeType": "نوع کد",
+        "title": "عنوان",
+        "description": "توضیحات",
+        "status": "وضعیت",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان "
+      }
+    },
+    "softDeleteDesc": "حذف نرم تاریخ پایان را تنظیم کرده و کد خسارت را بدون حذف دائمی غیرفعال می‌کند.",
+    "bulkDelete": {
+      "button": "حذف انتخاب‌شده‌ها",
+      "title": "حذف کدهای خسارت",
+      "description": "این عملیات {{count}} کد خسارت انتخاب‌شده را به طور دائم حذف می‌کند. این عمل قابل بازگشت نیست.",
+      "selectionInfo": "{{count}} کد خسارت انتخاب شد",
+      "confirm": "حذف",
+      "submitting": "در حال حذف...",
+      "success": "کدهای خسارت با موفقیت حذف شدند.",
+      "error": "حذف کدهای خسارت انتخاب‌شده انجام نشد.",
+      "noSelection": "لطفاً قبل از حذف حداقل یک کد خسارت را انتخاب کنید."
+    },
+    "messages": {
+      "created": "کد خسارت ثبت شد",
+      "createError": "ثبت کد خسارت انجام نشد",
+      "updated": "کد خسارت به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی کد خسارت انجام نشد",
+      "deleted": "کد خسارت حذف شد",
+      "deleteError": "حذف کد خسارت انجام نشد",
+      "softDeleted": "کد خسارت نرم‌حذف شد",
+      "softDeleteError": "حذف نرم کد خسارت انجام نشد"
+    },
+    "pricing": {
+      "title": "مدیریت قیمت‌گذاری",
+      "current": "قیمت‌گذاری فعلی",
+      "addPricing": "افزودن قیمت",
+      "editPricing": "ویرایش قیمت",
+      "addNew": "افزودن قیمت جدید",
+      "noPricing": "اطلاعات قیمت‌گذاری موجود نیست",
+      "fields": {
+        "priceType": "نوع قیمت",
+        "selectPriceType": "نوع قیمت را انتخاب کنید",
+        "amount": "مقدار",
+        "unit": "واحد",
+        "unitPlaceholder": "واحد",
+        "fromDate": "تاریخ شروع",
+        "selectFromDate": "تاریخ شروع را انتخاب کنید",
+        "thruDate": "تاریخ پایان",
+        "selectThruDate": "تاریخ پایان را انتخاب کنید"
+      },
+      "types": {
+        "total": "کل",
+        "professional": "حرفه‌ای",
+        "technical": "فنی",
+        "baseanesthesiavalue": "ارزش پایه بیهوشی",
+        "privatesectortariff": "تعرفه بخش خصوصی",
+        "privatesectorsupplementaryinsurance": "تکمیلی بخش خصوصی",
+        "governmentsectortariff": "تعرفه بخش دولتی",
+        "governmentsectorsupplementaryinsurance": "تکمیلی بخش دولتی",
+        "charitysectortariff": "تعرفه بخش خیریه",
+        "charitysectorsupplementaryinsurance": "تکمیلی بخش خیریه",
+        "publicnongovernmentsectortariff": "تعرفه عمومی غیردولتی",
+        "publicnongovernmentsupplementaryinsurance": "تکمیلی عمومی غیردولتی",
+        "basicinsuranceshare": "سهم بیمه پایه",
+        "teethgeneraldoctor": "دندانپزشک عمومی",
+        "teethspecialdoctor": "دندانپزشک متخصص"
+      },
+      "messages": {
+        "created": "قیمت ثبت شد",
+        "createError": "ثبت قیمت انجام نشد",
+        "updated": "قیمت به‌روزرسانی شد",
+        "updateError": "به‌روزرسانی قیمت انجام نشد",
+        "deleted": "قیمت حذف شد",
+        "deleteError": "حذف قیمت انجام نشد",
+        "softDeleted": "قیمت نرم‌حذف شد",
+        "softDeleteError": "حذف نرم قیمت انجام نشد",
+        "deleteConfirm": "آیا از حذف این قیمت مطمئن هستید؟",
+        "softDeleteConfirm": "آیا از حذف نرم این قیمت مطمئن هستید؟"
+      },
+      "ongoing": "جاری",
+      "softDelete": "حذف نرم",
+      "clickToAdd": "برای افزودن کلیک کنید"
+    },
+    "actions": {
+      "viewDetails": "مشاهده جزئیات",
+      "edit": "ویرایش",
+      "managePricing": "مدیریت قیمت‌گذاری",
+      "delete": "حذف",
+      "softDelete": "حذف نرم"
+    }
+  },
+  "damageCodePricings": {
+    "title": "قیمت‌گذاری کد خسارت",
+    "create": "قیمت جدید",
+    "refresh": "بروزرسانی",
+    "noResults": "هیچ رکورد قیمت‌گذاری یافت نشد.",
+    "selectDamageCodeHint": "برای مدیریت قیمت‌گذاری ابتدا یک کد خسارت در بالا انتخاب کنید.",
+    "selectedDamageCode": "نمایش قیمت‌گذاری برای {{label}}",
+    "noDamageCodeSelected": "برای افزودن قیمت ابتدا یک کد خسارت را انتخاب کنید.",
+    "columns": {
+      "damageCode": "کد خسارت",
+      "damageCodeTitle": "عنوان کد خسارت",
+      "priceType": "نوع قیمت",
+      "amount": "مقدار",
+      "unit": "واحد",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "createdAt": "ایجاد شده",
+      "updatedAt": "آخرین بروزرسانی"
+    },
+    "filters": {
+      "thruDateFrom": "تاریخ پایان از",
+      "thruDateTo": "تاریخ پایان تا"
+    },
+    "fields": {
+      "priceType": "نوع قیمت",
+      "amount": "مقدار",
+      "unit": "واحد",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "actions": {
+      "viewDetails": "مشاهده جزئیات",
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "softDelete": "حذف نرم"
+    },
+    "bulkDelete": {
+      "button": "حذف انتخاب‌شده‌ها",
+      "title": "حذف رکوردهای قیمت‌گذاری",
+      "description": "این عملیات {{count}} رکورد قیمت‌گذاری انتخاب‌شده را به طور دائم حذف می‌کند. این عمل قابل بازگشت نیست.",
+      "selectionInfo": "{{count}} رکورد قیمت‌گذاری انتخاب شد",
+      "confirm": "حذف",
+      "submitting": "در حال حذف...",
+      "success": "رکوردهای قیمت‌گذاری با موفقیت حذف شدند.",
+      "error": "حذف رکوردهای قیمت‌گذاری انتخاب‌شده ناموفق بود.",
+      "noSelection": "لطفاً قبل از حذف حداقل یک رکورد قیمت‌گذاری را انتخاب کنید."
+    },
+    "dialog": {
+      "create": "ایجاد قیمت",
+      "edit": "ویرایش قیمت",
+      "createDesc": "یک رکورد قیمت جدید برای کد خسارت انتخاب‌شده ایجاد کنید.",
+      "editDesc": "اطلاعات قیمت را به‌روزرسانی کنید."
+    },
+    "messages": {
+      "created": "قیمت ثبت شد",
+      "createError": "ثبت قیمت انجام نشد",
+      "updated": "قیمت به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی قیمت انجام نشد",
+      "deleted": "قیمت حذف شد",
+      "deleteError": "حذف قیمت انجام نشد",
+      "softDeleted": "قیمت نرم‌حذف شد",
+      "softDeleteError": "حذف نرم قیمت انجام نشد"
+    },
+    "softDeleteDesc": "حذف نرم تاریخ پایان را تنظیم کرده و رکورد قیمت را بدون حذف دائمی مخفی می‌کند.",
+    "view": {
+      "title": "جزئیات قیمت",
+      "description": "اطلاعات کامل این رکورد قیمت را مشاهده کنید."
+    }
+  },
   "dashboard": {
     "title": "داشبورد",
     "download": "دانلود",
@@ -216,6 +427,7 @@
       "description": "رمز عبور باید حداقل شامل یک حرف بزرگ، یک حرف کوچک و یک عدد باشد."
     },
     "cancel": "انصراف",
+    "close": "بستن",
     "confirm": "تأیید",
     "yes": "بله",
     "no": "خیر",
@@ -227,6 +439,7 @@
     "save": "ذخیره",
     "noRecords": "داده‌ای یافت نشد.",
     "notAvailable": "در دسترس نیست",
+    "optional": "اختیاری",
     "openInNewTab": "باز کردن در زبانه جدید",
     "openMenu": "باز کردن منو",
     "loading": "در حال بارگذاری...",
@@ -237,6 +450,7 @@
     "createdAt": "ایجاد شده در",
     "updatedAt": "به‌روزرسانی شده در",
     "delete": "حذف",
+    "edit": "ویرایش",
     "softDelete": "حذف نرم",
     "deleteConfirm": "آیا از حذف مطمئن هستید؟",
     "softDeleteConfirm": "این مورد غیرفعال می‌شود.",

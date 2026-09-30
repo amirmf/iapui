@@ -5,6 +5,7 @@ export * from './branch'
 export * from './common'
 export * from './claim-request'
 export * from './dashboard'
+export * from './damage-code'
 export {
   bulkDeleteDocTypesRequestSchema,
   createDocTypeRequestSchema,
