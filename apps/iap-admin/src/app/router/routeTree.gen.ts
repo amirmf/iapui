@@ -38,6 +38,9 @@ import { Route as AuthenticatedSubUsersIndexRouteImport } from './routes/_authen
 import { Route as AuthenticatedSupportQuestionsIndexRouteImport } from './routes/_authenticated/support-questions/index'
 import { Route as AuthenticatedTicketsIndexRouteImport } from './routes/_authenticated/tickets/index'
 import { Route as AuthenticatedUserAccountIndexRouteImport } from './routes/_authenticated/user-account/index'
+import { Route as FormioDocTypesDocTypeIdSubmissionExampleRouteImport } from './routes/formio/doc-types/$docTypeId.submission-example'
+import { Route as FormioDocTypesRouteRouteImport } from './routes/formio/doc-types/route'
+import { Route as FormioRouteRouteImport } from './routes/formio/route'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/_auth',
@@ -47,10 +50,20 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FormioRouteRoute = FormioRouteRouteImport.update({
+  id: '/formio',
+  path: '/formio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const FormioDocTypesRouteRoute = FormioDocTypesRouteRouteImport.update({
+  id: '/doc-types',
+  path: '/doc-types',
+  getParentRoute: () => FormioRouteRoute,
 } as any)
 const AuthAuthSsoRoute = AuthAuthSsoRouteImport.update({
   id: '/auth/sso',
@@ -221,6 +234,12 @@ const AuthenticatedDocTypesCreateIndexRoute =
     path: '/doc-types/create/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const FormioDocTypesDocTypeIdSubmissionExampleRoute =
+  FormioDocTypesDocTypeIdSubmissionExampleRouteImport.update({
+    id: '/$docTypeId/submission-example',
+    path: '/$docTypeId/submission-example',
+    getParentRoute: () => FormioDocTypesRouteRoute,
+  } as any)
 const AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute =
   AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport.update(
     {
@@ -232,6 +251,8 @@ const AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
+  '/formio': typeof FormioRouteRouteWithChildren
+  '/formio/doc-types': typeof FormioDocTypesRouteRouteWithChildren
   '/auth/sso': typeof AuthAuthSsoRoute
   '/login/': typeof AuthLoginIndexRoute
   '/password-reset/': typeof AuthPasswordResetIndexRoute
@@ -260,11 +281,14 @@ export interface FileRoutesByFullPath {
   '/doc-types/$docTypeId/edit': typeof AuthenticatedDocTypesDocTypeIdEditRoute
   '/doc-types/$docTypeId/form-builder': typeof AuthenticatedDocTypesDocTypeIdFormBuilderRoute
   '/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
+  '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
   '/doc-types/create/': typeof AuthenticatedDocTypesCreateIndexRoute
   '/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
+  '/formio': typeof FormioRouteRouteWithChildren
+  '/formio/doc-types': typeof FormioDocTypesRouteRouteWithChildren
   '/auth/sso': typeof AuthAuthSsoRoute
   '/login': typeof AuthLoginIndexRoute
   '/password-reset': typeof AuthPasswordResetIndexRoute
@@ -293,6 +317,7 @@ export interface FileRoutesByTo {
   '/doc-types/$docTypeId/edit': typeof AuthenticatedDocTypesDocTypeIdEditRoute
   '/doc-types/$docTypeId/form-builder': typeof AuthenticatedDocTypesDocTypeIdFormBuilderRoute
   '/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
+  '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
   '/doc-types/create': typeof AuthenticatedDocTypesCreateIndexRoute
   '/claim-requests/$claimRequestId/claim-request-management': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
@@ -300,6 +325,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/formio': typeof FormioRouteRouteWithChildren
+  '/formio/doc-types': typeof FormioDocTypesRouteRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_auth/auth/sso': typeof AuthAuthSsoRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
@@ -329,6 +356,7 @@ export interface FileRoutesById {
   '/_authenticated/doc-types/$docTypeId/edit': typeof AuthenticatedDocTypesDocTypeIdEditRoute
   '/_authenticated/doc-types/$docTypeId/form-builder': typeof AuthenticatedDocTypesDocTypeIdFormBuilderRoute
   '/_authenticated/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
+  '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
   '/_authenticated/doc-types/create/': typeof AuthenticatedDocTypesCreateIndexRoute
   '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
@@ -336,6 +364,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/formio'
+    | '/formio/doc-types'
     | '/auth/sso'
     | '/login/'
     | '/password-reset/'
@@ -364,11 +394,14 @@ export interface FileRouteTypes {
     | '/doc-types/$docTypeId/edit'
     | '/doc-types/$docTypeId/form-builder'
     | '/doc-types/$docTypeId/submission-example'
+    | '/formio/doc-types/$docTypeId/submission-example'
     | '/doc-types/create/'
     | '/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/formio'
+    | '/formio/doc-types'
     | '/auth/sso'
     | '/login'
     | '/password-reset'
@@ -397,12 +430,15 @@ export interface FileRouteTypes {
     | '/doc-types/$docTypeId/edit'
     | '/doc-types/$docTypeId/form-builder'
     | '/doc-types/$docTypeId/submission-example'
+    | '/formio/doc-types/$docTypeId/submission-example'
     | '/doc-types/create'
     | '/claim-requests/$claimRequestId/claim-request-management'
   id:
     | '__root__'
     | '/_auth'
     | '/_authenticated'
+    | '/formio'
+    | '/formio/doc-types'
     | '/_authenticated/'
     | '/_auth/auth/sso'
     | '/_auth/login/'
@@ -432,6 +468,7 @@ export interface FileRouteTypes {
     | '/_authenticated/doc-types/$docTypeId/edit'
     | '/_authenticated/doc-types/$docTypeId/form-builder'
     | '/_authenticated/doc-types/$docTypeId/submission-example'
+    | '/formio/doc-types/$docTypeId/submission-example'
     | '/_authenticated/doc-types/create/'
     | '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesById: FileRoutesById
@@ -439,6 +476,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  FormioRouteRoute: typeof FormioRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -457,12 +495,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/formio': {
+      id: '/formio'
+      path: '/formio'
+      fullPath: '/formio'
+      preLoaderRoute: typeof FormioRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/': {
       id: '/_authenticated/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/formio/doc-types': {
+      id: '/formio/doc-types'
+      path: '/doc-types'
+      fullPath: '/formio/doc-types'
+      preLoaderRoute: typeof FormioDocTypesRouteRouteImport
+      parentRoute: typeof FormioRouteRoute
     }
     '/_auth/auth/sso': {
       id: '/_auth/auth/sso'
@@ -667,6 +719,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDocTypesCreateIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/formio/doc-types/$docTypeId/submission-example': {
+      id: '/formio/doc-types/$docTypeId/submission-example'
+      path: '/$docTypeId/submission-example'
+      fullPath: '/formio/doc-types/$docTypeId/submission-example'
+      preLoaderRoute: typeof FormioDocTypesDocTypeIdSubmissionExampleRouteImport
+      parentRoute: typeof FormioDocTypesRouteRoute
+    }
     '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': {
       id: '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
       path: '/claim-requests/$claimRequestId/claim-request-management'
@@ -769,9 +828,34 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface FormioDocTypesRouteRouteChildren {
+  FormioDocTypesDocTypeIdSubmissionExampleRoute: typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
+}
+
+const FormioDocTypesRouteRouteChildren: FormioDocTypesRouteRouteChildren = {
+  FormioDocTypesDocTypeIdSubmissionExampleRoute:
+    FormioDocTypesDocTypeIdSubmissionExampleRoute,
+}
+
+const FormioDocTypesRouteRouteWithChildren =
+  FormioDocTypesRouteRoute._addFileChildren(FormioDocTypesRouteRouteChildren)
+
+interface FormioRouteRouteChildren {
+  FormioDocTypesRouteRoute: typeof FormioDocTypesRouteRouteWithChildren
+}
+
+const FormioRouteRouteChildren: FormioRouteRouteChildren = {
+  FormioDocTypesRouteRoute: FormioDocTypesRouteRouteWithChildren,
+}
+
+const FormioRouteRouteWithChildren = FormioRouteRoute._addFileChildren(
+  FormioRouteRouteChildren
+)
+
 const rootRouteChildren: RootRouteChildren = {
   AuthRouteRoute: AuthRouteRouteWithChildren,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  FormioRouteRoute: FormioRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
