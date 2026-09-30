@@ -1017,6 +1017,38 @@
       "submissionSaveError": "ذخیره نمونه ارسال انجام نشد"
     }
   },
+  "branches": {
+    "title": "شعب",
+    "noBranches": "هیچ شعبه‌ای یافت نشد.",
+    "actions": {
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "sync": "همگام‌سازی شعب",
+      "refresh": "بروزرسانی"
+    },
+    "dialog": {
+      "create": "ایجاد شعبه",
+      "edit": "ویرایش شعبه",
+      "delete": "حذف شعبه",
+      "deleteDesc": "آیا از حذف این شعبه مطمئن هستید؟"
+    },
+    "form": {
+      "code": "کد",
+      "title": "عنوان",
+      "status": "وضعیت"
+    },
+    "messages": {
+      "created": "شعبه با موفقیت ایجاد شد",
+      "updated": "شعبه با موفقیت ویرایش شد",
+      "deleted": "شعبه با موفقیت حذف شد",
+      "synced": "شعب با موفقیت همگام‌سازی شد"
+    },
+    "columns": {
+      "code": "کد",
+      "unitName": "نام",
+      "tel": "تلفن"
+    }
+  },
   "sidebar": {
     "general": "عمومی",
     "dashboard": "داشبورد",

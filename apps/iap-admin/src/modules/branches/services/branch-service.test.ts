@@ -40,6 +40,33 @@ describe('branchService', () => {
     expect(apiClient.post).toHaveBeenNthCalledWith(2, '/ext-locations/sync')
   })
 
+  it('uses the reference page endpoint, serializes array filters, and validates the response', async () => {
+    const signal = new AbortController().signal
+    apiClient.get.mockResolvedValue({
+      data: { content: [{ code: 201, unitName: 'مرکز' }] },
+    })
+
+    await expect(
+      branchService.getPage({
+        filters: { code: ['201', '202'], sort: 'code' },
+        page: 2,
+        signal,
+        size: 40,
+      })
+    ).resolves.toMatchObject({ content: [{ code: 201, unitName: 'مرکز' }] })
+
+    expect(apiClient.get).toHaveBeenCalledWith('/ext-locations/page', {
+      params: { code__in: '201,202', page: 2, size: 40, sort: 'code' },
+      signal,
+    })
+  })
+
+  it('rejects a page response without the required content array', async () => {
+    apiClient.get.mockResolvedValue({ data: {} })
+
+    await expect(branchService.getPage({})).rejects.toThrow()
+  })
+
   it('validates branch form input before transport', async () => {
     await expect(
       branchService.create({ code: '', isActive: 2, name: '' })
