@@ -13,10 +13,12 @@ export function DocTypeEditPage() {
     from: '/_authenticated/doc-types/$docTypeId/edit',
   })
   const query = useQuery({
-    queryFn: () => docTypeService.getById(docTypeId),
-    queryKey: ['doc-types', 'detail', docTypeId],
+    enabled: !!docTypeId,
+    queryFn: () => docTypeService.getById(docTypeId!),
+    queryKey: ['doc-types', docTypeId],
   })
   const exit = () => navigate({ to: '/doc-types/' })
+  const isMissingOrError = query.isError || !query.data
 
   return (
     <DocTypePageLayout
@@ -25,7 +27,7 @@ export function DocTypeEditPage() {
     >
       {query.isLoading ? (
         <p className='text-sm text-muted-foreground'>{t('common.loading')}</p>
-      ) : query.data ? (
+      ) : !isMissingOrError ? (
         <DocTypeForm
           docType={query.data}
           mode='edit'
