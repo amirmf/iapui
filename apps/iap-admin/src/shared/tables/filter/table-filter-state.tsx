@@ -15,6 +15,7 @@ import type {
 export function TableFilterState(
   props: TableFilterBaseProps & {
     ignoredFilterIds?: readonly string[]
+    onReset?: () => void
     onValuesChange: (
       updater: (previous: TableFilterValues) => TableFilterValues
     ) => void
@@ -26,6 +27,7 @@ export function TableFilterState(
     defaultVisibleFilterCount = 6,
     ignoredFilterIds,
     labels,
+    onReset,
     onValuesChange,
     values,
     ...filterProps
@@ -47,7 +49,7 @@ export function TableFilterState(
       hasMoreFilters={count > defaultVisibleFilterCount}
       isFiltered={isTableFiltered(values, ignoredFilterIds)}
       onExpandChange={() => setExpanded((current) => !current)}
-      onReset={() => onValuesChange(() => ({}))}
+      onReset={onReset ?? (() => onValuesChange(() => ({})))}
       resetLabel={labels?.reset}
     >
       <TableFilterContent

@@ -27,6 +27,7 @@ export type ConfirmDialogProps = {
   children?: ReactNode
   className?: string
   confirmLabel?: ReactNode
+  confirmVariant?: 'default' | 'destructive'
   description: ReactNode
   disableConfirm?: boolean
   hideCancelButton?: boolean
@@ -61,6 +62,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     children,
     className,
     confirmLabel,
+    confirmVariant,
     description,
     disableConfirm = false,
     hideCancelButton = false,
@@ -114,7 +116,10 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
             disabled={disableConfirm || isLoading}
             onClick={onConfirm}
             type='button'
-            variant={variant === 'error' ? 'destructive' : 'default'}
+            variant={
+              confirmVariant ??
+              (variant === 'error' ? 'destructive' : 'default')
+            }
           >
             {confirmLabel ?? t('common.dialog.confirm')}
           </Button>

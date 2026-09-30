@@ -10,7 +10,7 @@ import {
   syncResultSchema,
   updateBranchRequestSchema,
 } from '@iap/api-types'
-import { transformApiFilterParams } from '@iap/shared-lib'
+import { type ApiFilterParams, transformApiFilterParams } from '@iap/shared-lib'
 
 export const branchService = {
   async create(input: BranchForm) {
@@ -27,7 +27,7 @@ export const branchService = {
     await getApiClient().delete(`/ext-locations/${request.path.id}`)
   },
   async getPage(input: {
-    filters?: Record<string, string | number | string[]>
+    filters?: ApiFilterParams
     page?: number
     signal?: AbortSignal
     size?: number

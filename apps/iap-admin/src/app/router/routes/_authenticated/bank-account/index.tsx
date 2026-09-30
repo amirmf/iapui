@@ -1,6 +1,7 @@
-import { PlaceholderPage } from '@features/placeholder'
+import { BankAccountsPage } from '@features/bank-accounts'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/bank-account/')({
-  component: () => <PlaceholderPage titleKey='sidebar.bankAccounts' />,
+  component: BankAccountsPage,
+  loader: () => ({ crumb: 'bankAccounts' }),
 })
