@@ -411,6 +411,24 @@
     "validation": {
       "status": "وضعیت الزامی است"
     },
+    "documents": {
+      "title": "اسناد خسارت",
+      "docTypeLabel": "نوع سند",
+      "empty": "هیچ سندی برای این درخواست خسارت موجود نیست.",
+      "modalTitle": "فرم سند: {{docType}}",
+      "modalTitleFallback": "فرم سند",
+      "formTitle": "فرم سند: {{docType}}",
+      "formTitleFallback": "فرم سند",
+      "missingDocument": "سند انتخاب‌شده یافت نشد.",
+      "unavailable": "امکان نمایش فرم برای این سند وجود ندارد.",
+      "actions": { "openForm": "مشاهده فرم", "save": "ذخیره تغییرات" },
+      "messages": {
+        "updateSuccess": "اطلاعات سند با موفقیت به‌روزرسانی شد.",
+        "updateError": "به‌روزرسانی اطلاعات سند انجام نشد.",
+        "missingSchemaTitle": "طرح فرم موجود نیست",
+        "missingSchemaDescription": "برای این درخواست خسارت هنوز طرح فرم را تعریف نکرده‌اید."
+      }
+    },
     "bulkDataExtraction": {
       "button": "آغاز فرآیند Core AI",
       "title": "آغاز فرآیند داده Core AI",

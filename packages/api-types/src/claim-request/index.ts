@@ -45,12 +45,12 @@ export const claimRequestDuplicateTypeSchema = z.enum([
   'INFORMATION_EXTERNAL_FANHUB',
 ])
 
-const claimRequestDocumentSchema = z
+export const claimRequestDocumentSchema = z
   .object({
-    dataJsonSchema: z.string().nullish(),
+    dataJsonSchema: z.unknown().nullish(),
     docTypeCode: z.string().nullish(),
     documentType: z.string().nullish(),
-    extractedData: z.record(z.string(), z.unknown()).nullish(),
+    extractedData: z.unknown().nullish(),
     extractionDate: z.string().nullish(),
     extractionModel: z.string().nullish(),
     id: z.string().nullish(),
@@ -368,6 +368,13 @@ export const updateClaimRequestDocTypeRequestSchema = z
   })
   .strict()
 
+export const updateClaimRequestDocumentsRequestSchema = z
+  .object({
+    body: z.object({ documents: z.array(claimRequestDocumentSchema) }).strict(),
+    path: z.object({ id: claimRequestIdSchema }).strict(),
+  })
+  .strict()
+
 export type ClaimRequest = z.infer<typeof claimRequestSchema>
 export type ClaimRequestAiStatus = z.infer<typeof claimRequestAiStatusSchema>
 export type ClaimRequestStatus = z.infer<typeof claimRequestStatusSchema>
@@ -396,4 +403,7 @@ export type AssignClaimRequestToMeStatusRequest = z.input<
 >
 export type UpdateClaimRequestDocTypeRequest = z.input<
   typeof updateClaimRequestDocTypeRequestSchema
+>
+export type UpdateClaimRequestDocumentsRequest = z.input<
+  typeof updateClaimRequestDocumentsRequestSchema
 >
