@@ -3,6 +3,7 @@ import type {
   TicketPriority,
   TicketStatus,
 } from '@iap/api-types'
+import type { TFunction } from 'i18next'
 
 export const ticketStatusTranslationKeys: Record<
   TicketStatus,
@@ -56,4 +57,22 @@ export const ticketCategoryClasses: Record<TicketCategory, string> = {
   CLAIM_ISSUE: 'border-orange-300 bg-orange-50 text-orange-700',
   INFO_ISSUE: 'border-purple-300 bg-purple-50 text-purple-700',
   PAYMENT: 'border-blue-300 bg-blue-50 text-blue-700',
+}
+
+function toOptions<T extends string>(
+  translations: Record<T, string>,
+  t: TFunction
+) {
+  return Object.entries(translations).map(([value, label]) => ({
+    label: t(label as never) as string,
+    value,
+  }))
+}
+
+export function getTicketPriorityOptions(t: TFunction) {
+  return toOptions(ticketPriorityTranslationKeys, t)
+}
+
+export function getTicketCategoryOptions(t: TFunction) {
+  return toOptions(ticketCategoryTranslationKeys, t)
 }

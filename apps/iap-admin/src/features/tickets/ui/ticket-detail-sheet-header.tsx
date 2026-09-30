@@ -12,12 +12,14 @@ export function TicketDetailSheetHeader(props: TicketDetailSheetHeaderProps) {
 
   return (
     <SheetHeader>
-      <SheetTitle className='break-all'>
-        {ticket?.ticketNumber
-          ? `#${ticket.ticketNumber} — ${ticket.subject ?? ''}`
-          : t('tickets.detail.title')}
-      </SheetTitle>
-      <SheetDescription>{t('tickets.detail.description')}</SheetDescription>
+      <div className='space-y-1'>
+        <SheetTitle className='break-all'>
+          {ticket?.ticketNumber
+            ? `#${ticket.ticketNumber} — ${ticket.subject ?? ''}`
+            : t('tickets.detail.title')}
+        </SheetTitle>
+        <SheetDescription>{t('tickets.detail.description')}</SheetDescription>
+      </div>
     </SheetHeader>
   )
 }

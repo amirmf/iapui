@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 import type { SupportTicket } from '@iap/api-types'
-import { Badge, cn, formatDateTime } from '@iap/ui'
+import { Badge, badgeVariants, cn, formatDateTime } from '@iap/ui'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -21,12 +21,12 @@ type TicketReadonlyDetailProps = {
 export function TicketReadonlyDetail(props: TicketReadonlyDetailProps) {
   const { ticket } = props
   const { t } = useTranslation()
-  const ownerDisplayName = ticket?.ownerUserAccount?.displayName?.trim()
-  const ownerUsername = ticket?.ownerUserAccount?.username?.trim()
+  const ownerDisplayName = ticket?.ownerUserAccount?.displayName
+  const ownerUsername = ticket?.ownerUserAccount?.username
   const owner =
     ownerDisplayName && ownerUsername
       ? `${ownerDisplayName} (${ownerUsername})`
-      : ownerDisplayName || ownerUsername || '-'
+      : ownerDisplayName || '-'
 
   return (
     <div className='flex flex-wrap items-center gap-y-1 px-4 text-sm'>
@@ -38,6 +38,7 @@ export function TicketReadonlyDetail(props: TicketReadonlyDetailProps) {
               <button
                 aria-label={t('tickets.statusHistory.open')}
                 className={cn(
+                  badgeVariants({ variant: 'outline' }),
                   'w-fit disabled:cursor-default disabled:opacity-100',
                   ticket.statusHistory?.length &&
                     'cursor-pointer hover:ring-2 hover:ring-ring/20 focus-visible:ring-ring/50',

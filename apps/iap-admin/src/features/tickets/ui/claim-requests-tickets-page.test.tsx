@@ -1,10 +1,10 @@
 // @vitest-environment jsdom
-import type { ComponentProps, PropsWithChildren } from 'react'
+import type { ComponentProps, PropsWithChildren, ReactNode } from 'react'
 
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { ClaimRequestTicketsPage } from './claim-request-tickets-page'
+import { ClaimRequestsTicketsPage } from './claim-requests-tickets-page'
 
 const router = vi.hoisted(() => ({
   navigate: vi.fn(),
@@ -84,8 +84,16 @@ vi.mock('./ticket-provider', () => ({
   TicketProvider: ({ children }: PropsWithChildren) => <>{children}</>,
 }))
 
-vi.mock('./ticket-toolbar', () => ({
-  TicketToolbar: () => null,
+vi.mock('./tickets-data-table-toolbar', () => ({
+  TicketsDataTableToolbar: () => null,
+}))
+
+vi.mock('./tickets-content', () => ({
+  TicketsContent: ({
+    beforeStatusFilter,
+  }: {
+    beforeStatusFilter?: ReactNode
+  }) => <>{beforeStatusFilter}</>,
 }))
 
 afterEach(() => {
@@ -93,9 +101,9 @@ afterEach(() => {
   router.navigate.mockClear()
 })
 
-describe('ClaimRequestTicketsPage', () => {
+describe('ClaimRequestsTicketsPage', () => {
   it('switches back to the reference claim-request feature without retaining ticket table filters', () => {
-    render(<ClaimRequestTicketsPage />)
+    render(<ClaimRequestsTicketsPage />)
 
     fireEvent.click(screen.getByRole('button', { name: 'switch-to-delegated' }))
 
@@ -105,7 +113,7 @@ describe('ClaimRequestTicketsPage', () => {
         features: 'claimRequests',
         quickStatus: 'DELEGATED',
       },
-      to: '/claim-requests/',
+      to: './',
     })
   })
 })

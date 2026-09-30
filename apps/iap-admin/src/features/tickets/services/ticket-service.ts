@@ -68,11 +68,14 @@ export const ticketService = {
   ) => {
     const { signal, ...input } = options
     const request = findSupportTicketsRequestSchema.parse(input)
+    const { filters } = request.query
+    const page = input.query.page ?? 0
+    const size = input.query.size ?? 30
     const response = await getApiClient().get('/support/tickets/page-full', {
       params: {
-        page: request.query.page,
-        size: request.query.size,
-        ...transformApiFilterParams(request.query.filters),
+        page,
+        size,
+        ...transformApiFilterParams(filters),
       },
       signal,
     })
@@ -84,10 +87,11 @@ export const ticketService = {
   ) => {
     const { signal, ...requestInput } = input
     const request = findSupportTicketMessagesRequestSchema.parse(requestInput)
+    const { page = 0, size = 20 } = request.query
     const response = await getApiClient().get(
       `/support/tickets/${request.path.ticketId}/messages`,
       {
-        params: request.query,
+        params: { page, size },
         signal,
       }
     )

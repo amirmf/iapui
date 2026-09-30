@@ -10,11 +10,11 @@ import { TicketDetailSheetHeader } from './ticket-detail-sheet-header'
 import { TicketRelatedClaimRequestColumn } from './ticket-related-claim-request-column'
 
 type TicketDetailSheetProps = {
-  onRefetch: () => Promise<unknown>
+  refetch: () => Promise<unknown>
 }
 
 export function TicketDetailSheet(props: TicketDetailSheetProps) {
-  const { onRefetch } = props
+  const { refetch } = props
   const currentRow = useTicketStore((state) => state.currentRow)
   const open = useTicketStore((state) => state.open)
   const setOpen = useTicketStore((state) => state.setOpen)
@@ -46,14 +46,16 @@ export function TicketDetailSheet(props: TicketDetailSheetProps) {
       }),
     onSuccess: async () => {
       setBody('')
-      await Promise.all([messagesQuery.refetch(), onRefetch()])
+      await messagesQuery.refetch()
+      await refetch()
     },
   })
   const closeTicket = useMutation({
     mutationFn: () => ticketService.close({ path: { ticketId: ticketId! } }),
     onSuccess: async () => {
-      await Promise.all([ticketQuery.refetch(), onRefetch()])
-      setOpen(null)
+      await ticketQuery.refetch()
+      await refetch()
+      handleOpenChange(false)
     },
   })
   const ticket = ticketQuery.data
@@ -90,7 +92,9 @@ export function TicketDetailSheet(props: TicketDetailSheetProps) {
             isTicketLoading={ticketQuery.isLoading}
             messages={messagesQuery.data?.content ?? []}
             onBodyChange={setBody}
-            onCloseTicket={() => closeTicket.mutate()}
+            onCloseTicket={() => {
+              if (ticketId && ticket?.status !== 'CLOSED') closeTicket.mutate()
+            }}
             onSubmit={handleSubmit}
             ticket={ticket}
           />

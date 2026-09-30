@@ -30,7 +30,7 @@ export function TicketDetailSheetActions(props: TicketDetailSheetActionsProps) {
       <Button
         aria-busy={isClosingTicket}
         className='w-full sm:w-auto'
-        disabled={!canCloseTicket || isClosingTicket || isSendingMessage}
+        disabled={!canCloseTicket || isClosingTicket}
         onClick={onCloseTicket}
         type='button'
         variant='destructive'
@@ -45,7 +45,7 @@ export function TicketDetailSheetActions(props: TicketDetailSheetActionsProps) {
       <Button
         aria-busy={isSendingMessage}
         className='w-full sm:w-auto'
-        disabled={!canSendMessage || isClosingTicket || isSendingMessage}
+        disabled={!canSendMessage || isSendingMessage}
         type='submit'
       >
         <Send aria-hidden='true' size={18} />

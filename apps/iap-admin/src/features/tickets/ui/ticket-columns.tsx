@@ -2,14 +2,8 @@ import { useCallback, useMemo } from 'react'
 
 import type { SupportTicket } from '@iap/api-types'
 import { Badge, Button, cn, formatDateTime } from '@iap/ui'
-import {
-  TableActionButton,
-  TableActions,
-  TwoLineCell,
-  TwoLineHeader,
-} from '@shared/tables'
+import { TwoLineCell, TwoLineHeader } from '@shared/tables'
 import { createColumnHelper } from '@tanstack/react-table'
-import { Eye } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -21,13 +15,17 @@ import {
   ticketStatusTranslationKeys,
 } from '../model/ticket-presentation'
 import { useTicketStore } from '../model/ticket-store'
+import { TicketRowActions } from './ticket-row-actions'
 
 const columnHelper = createColumnHelper<SupportTicket>()
 
-export function useTicketColumns() {
+export type TicketColumnsVariant = 'claim-request-context' | 'default'
+
+export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
   const { t } = useTranslation()
   const setCurrentRow = useTicketStore((state) => state.setCurrentRow)
   const setOpen = useTicketStore((state) => state.setOpen)
+  const showClaimRequestId = variant === 'claim-request-context'
 
   const openTicket = useCallback(
     (ticket: SupportTicket) => {
@@ -39,28 +37,39 @@ export function useTicketColumns() {
 
   return useMemo(
     () => [
-      columnHelper.accessor('claimRequestId', {
-        cell: (context) => {
-          const claimRequestId = context.getValue()
+      columnHelper.accessor(
+        showClaimRequestId ? 'claimRequestId' : 'ticketNumber',
+        {
+          cell: (context) => {
+            const identifier = context.getValue()
 
-          return (
-            <Button
-              className='h-auto max-w-44 justify-start p-0 text-start'
-              onClick={() => openTicket(context.row.original)}
-              variant='link'
-            >
-              {claimRequestId ?? '–'}
-            </Button>
-          )
-        },
-        header: ({ column }) => (
-          <TwoLineHeader
-            column={column}
-            primary={t('tickets.columns.claimRequestId')}
-          />
-        ),
-        meta: { className: 'max-w-44' },
-      }),
+            return (
+              <Button
+                className='h-auto max-w-44 justify-start p-0 text-start'
+                onClick={() => openTicket(context.row.original)}
+                variant='link'
+              >
+                {showClaimRequestId
+                  ? (identifier ?? '-')
+                  : identifier
+                    ? `#${identifier}`
+                    : '-'}
+              </Button>
+            )
+          },
+          header: ({ column }) => (
+            <TwoLineHeader
+              column={column}
+              primary={
+                showClaimRequestId
+                  ? t('tickets.columns.claimRequestId')
+                  : t('tickets.columns.ticketNumber')
+              }
+            />
+          ),
+          meta: { className: 'max-w-44' },
+        }
+      ),
       columnHelper.accessor('subject', {
         cell: (context) => {
           const category = context.row.original.category
@@ -175,21 +184,12 @@ export function useTicketColumns() {
         meta: { className: 'max-w-44' },
       }),
       columnHelper.display({
-        cell: (context) => (
-          <TableActions>
-            <TableActionButton
-              icon={<Eye aria-hidden='true' className='size-5' />}
-              label={t('tickets.actions.view')}
-              onClick={() => openTicket(context.row.original)}
-              tooltipText={t('tickets.actions.viewDetails')}
-            />
-          </TableActions>
-        ),
+        cell: (context) => <TicketRowActions row={context.row} />,
         enableSorting: false,
         id: 'actions',
         meta: { className: 'sticky left-0 w-12 max-w-12 bg-background' },
       }),
     ],
-    [openTicket, t]
+    [openTicket, showClaimRequestId, t]
   )
 }

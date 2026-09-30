@@ -1,17 +1,22 @@
-import { useCallback, useMemo } from 'react'
+import { type ReactNode, useCallback, useMemo } from 'react'
 
+import { toTicketApiFilters } from '@features/tickets/model/ticket-filters'
 import {
-  CLAIM_REQUEST_FEATURES,
-  CLAIM_REQUEST_FEATURE_QUERY_KEY,
-  CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS,
-  type ClaimRequestQuickStatus,
-  ClaimRequestQuickStatusFilter,
-} from '@features/claim-requests'
+  parseTicketTableSearch,
+  toTicketTableSearch,
+} from '@features/tickets/model/ticket-table-state'
+import { ticketService } from '@features/tickets/services/ticket-service'
+import {
+  type TicketColumnsVariant,
+  useTicketColumns,
+} from '@features/tickets/ui/ticket-columns'
+import { TicketDetailSheet } from '@features/tickets/ui/ticket-detail-sheet'
+import { TicketsDataTableToolbar } from '@features/tickets/ui/tickets-data-table-toolbar'
 import type { SupportTicket } from '@iap/api-types'
 import { Button } from '@iap/ui'
 import { PaginatedDataTable } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
-import { useRouter } from '@tanstack/react-router'
+import { useLocation, useRouter } from '@tanstack/react-router'
 import type {
   PaginationState,
   SortingState,
@@ -20,17 +25,12 @@ import type {
 import { RefreshCw } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { toTicketApiFilters } from '../model/ticket-filters'
-import { toClaimRequestsSearch } from '../model/ticket-navigation'
-import {
-  parseTicketTableSearch,
-  toTicketTableSearch,
-} from '../model/ticket-table-state'
-import { ticketService } from '../services/ticket-service'
-import { useTicketColumns } from './ticket-columns'
-import { TicketDetailSheet } from './ticket-detail-sheet'
-import { TicketProvider } from './ticket-provider'
-import { TicketToolbar } from './ticket-toolbar'
+type TicketsContentProps = {
+  beforeStatusFilter?: ReactNode
+  ticketColumnsVariant?: TicketColumnsVariant
+  ticketStatusFilterVariant?: 'claim-request-context' | 'default'
+  title?: string
+}
 
 function resolveUpdater<T>(updater: Updater<T>, previous: T) {
   return typeof updater === 'function'
@@ -38,15 +38,21 @@ function resolveUpdater<T>(updater: Updater<T>, previous: T) {
     : updater
 }
 
-export function ClaimRequestTicketsPage() {
+export function TicketsContent(props: TicketsContentProps) {
+  const {
+    beforeStatusFilter,
+    ticketColumnsVariant,
+    ticketStatusFilterVariant,
+    title,
+  } = props
   const { t } = useTranslation()
+  const location = useLocation()
   const router = useRouter()
-  const search = router.state.location.search as Record<string, unknown>
   const tableState = useMemo(
     () =>
       parseTicketTableSearch(
         Object.fromEntries(
-          Object.entries(search).filter(
+          Object.entries(location.search).filter(
             ([, value]) =>
               typeof value === 'string' ||
               (Array.isArray(value) &&
@@ -54,7 +60,7 @@ export function ClaimRequestTicketsPage() {
           )
         ) as Record<string, string | string[] | undefined>
       ),
-    [search]
+    [location.search]
   )
   const sorting = useMemo<SortingState>(
     () =>
@@ -68,7 +74,6 @@ export function ClaimRequestTicketsPage() {
     [sorting, tableState.filters]
   )
   const query = useQuery({
-    gcTime: 30_000,
     queryFn: ({ signal }) =>
       ticketService.findPage({
         query: {
@@ -82,84 +87,67 @@ export function ClaimRequestTicketsPage() {
     refetchOnWindowFocus: false,
     staleTime: 30_000,
   })
-  const columns = useTicketColumns()
+  const columns = useTicketColumns(ticketColumnsVariant)
   const tickets = useMemo(() => query.data?.content ?? [], [query.data])
   const updateTableState = useCallback(
     (nextPagination: PaginationState, nextSorting: SortingState) => {
       router.navigate({
         replace: true,
-        search: {
-          ...toTicketTableSearch({
-            filters: tableState.filters,
-            pagination: nextPagination,
-            sorting: nextSorting,
-          }),
-          [CLAIM_REQUEST_FEATURE_QUERY_KEY]: CLAIM_REQUEST_FEATURES.tickets,
-          quickStatus: CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS,
-        } as never,
-        to: '/claim-requests/',
+        search: toTicketTableSearch({
+          filters: tableState.filters,
+          pagination: nextPagination,
+          sorting: nextSorting,
+        }) as never,
+        to: './',
       })
     },
     [router, tableState.filters]
   )
-  const handlePaginationChange = useCallback(
+  const onPaginationChange = useCallback(
     (updater: Updater<PaginationState>) =>
       updateTableState(resolveUpdater(updater, tableState.pagination), sorting),
     [sorting, tableState.pagination, updateTableState]
   )
-  const handleSortingChange = useCallback(
+  const onSortingChange = useCallback(
     (updater: Updater<SortingState>) =>
       updateTableState(tableState.pagination, resolveUpdater(updater, sorting)),
     [sorting, tableState.pagination, updateTableState]
   )
-  const handleQuickStatusChange = useCallback(
-    (status: ClaimRequestQuickStatus) => {
-      if (status === CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS) return
-
-      router.navigate({
-        replace: true,
-        search: toClaimRequestsSearch(status) as never,
-        to: '/claim-requests/',
-      })
-    },
-    [router]
-  )
 
   return (
-    <TicketProvider>
+    <>
       <section className='pb-4'>
         <div className='mb-6 flex flex-wrap items-center justify-between gap-4'>
-          <h2 className='text-xl font-bold tracking-tight'>
-            {t('claimRequests.status.needsReassessment')}
-          </h2>
-          <Button
-            disabled={query.isLoading || query.isFetching}
-            onClick={() => void query.refetch()}
-            variant='outline'
-          >
-            <RefreshCw
-              aria-hidden='true'
-              className={query.isFetching ? 'animate-spin' : ''}
-            />
-            <span>{t('tickets.refresh')}</span>
-          </Button>
+          <div>
+            <h2 className='text-xl font-bold tracking-tight'>
+              {title ?? t('tickets.title')}
+            </h2>
+          </div>
+          <div className='flex flex-wrap items-center gap-2'>
+            <Button
+              disabled={query.isLoading || query.isFetching}
+              onClick={() => void query.refetch()}
+              variant='outline'
+            >
+              <RefreshCw
+                aria-hidden='true'
+                className={query.isFetching ? 'animate-spin' : ''}
+              />
+              <span>{t('tickets.refresh')}</span>
+            </Button>
+          </div>
         </div>
-        <div className='mb-4'>
-          <ClaimRequestQuickStatusFilter
-            isFetching={false}
-            onQuickStatusChange={handleQuickStatusChange}
-            quickStatus={CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS}
-          />
-        </div>
-        <TicketToolbar
-          count={query.data?.totalElements ?? undefined}
-          isFetching={query.isLoading || query.isFetching}
-        />
         {query.isError ? (
-          <p className='mb-4 text-sm text-destructive' role='alert'>
+          <div className='mb-4 rounded-md border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive'>
             {t('tickets.error')}
-          </p>
+          </div>
         ) : null}
+        <TicketsDataTableToolbar
+          beforeStatusFilter={beforeStatusFilter}
+          count={query.data?.totalElements ?? undefined}
+          isLoading={query.isLoading || query.isFetching}
+          ticketStatusFilterVariant={ticketStatusFilterVariant}
+        />
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
           <PaginatedDataTable<SupportTicket>
             columns={columns}
@@ -168,8 +156,8 @@ export function ClaimRequestTicketsPage() {
             enableSorting
             isLoading={query.isLoading}
             manualSorting
-            onPaginationChange={handlePaginationChange}
-            onSortingChange={handleSortingChange}
+            onPaginationChange={onPaginationChange}
+            onSortingChange={onSortingChange}
             pageCount={query.data?.totalPages ?? 0}
             pagination={tableState.pagination}
             sorting={sorting}
@@ -178,7 +166,7 @@ export function ClaimRequestTicketsPage() {
           />
         </div>
       </section>
-      <TicketDetailSheet onRefetch={query.refetch} />
-    </TicketProvider>
+      <TicketDetailSheet refetch={query.refetch} />
+    </>
   )
 }
