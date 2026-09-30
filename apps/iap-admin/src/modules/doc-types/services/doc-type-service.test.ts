@@ -14,6 +14,27 @@ vi.mock('@iap/api-client', () => ({ getApiClient: () => apiClient }))
 describe('docTypeService', () => {
   beforeEach(() => vi.clearAllMocks())
 
+  it('sends reference page controls and sorting in the page query', async () => {
+    apiClient.get.mockResolvedValue({ data: { content: [] } })
+
+    await docTypeService.getPage({
+      filters: { direction: 'desc', docType: 'Invoice', sort: 'sequence' },
+      page: 2,
+      size: 40,
+    })
+
+    expect(apiClient.get).toHaveBeenCalledWith('/doc-types/page', {
+      params: {
+        direction: 'desc',
+        docType: 'Invoice',
+        page: 2,
+        size: 40,
+        sort: 'sequence',
+      },
+      signal: undefined,
+    })
+  })
+
   it('uses every reference mutation endpoint', async () => {
     apiClient.get.mockResolvedValue({ data: {} })
     apiClient.post.mockResolvedValue({ data: {} })
