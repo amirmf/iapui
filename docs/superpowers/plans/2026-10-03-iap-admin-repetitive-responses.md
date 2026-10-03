@@ -2,6 +2,12 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+> **Completion record (2026-10-03):** All seven implementation tasks and final
+> verification are complete. The unchecked entries below are the preserved
+> original TDD execution checklist, not outstanding work; implementation
+> evidence is recorded in `docs/tasks/iap-admin-repetitive-responses-page-parity.md`
+> and `docs/tasks/iap-admin-repetitive-responses-reference-parity-v2.md`.
+
 **Goal:** Add the iap-admin `/repetitive-responses/` page with reference-identical response-group and repetitive-response management behavior.
 
 **Architecture:** Keep the authenticated route as a composition boundary. Own screen behavior in `features/repetitive-responses`, retain source component export names, validate every API boundary with public Zod contracts in `@iap/api-types`, and use target shared table/dialog/form primitives.
