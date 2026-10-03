@@ -2,8 +2,9 @@
 
 ## Status
 
-Implemented in `codex/iap-admin-repetitive-responses`; final full-suite
-verification remains to be recorded.
+Implemented in `codex/iap-admin-repetitive-responses`; full-suite verification
+is recorded below. The remaining source-parity gaps are tracked explicitly
+under the implementation tasks.
 
 ## Source of truth
 
@@ -51,8 +52,11 @@ differ only to follow the feature and page ownership rules.
   test.
 - [x] Implement the response-group table, filters, actions, dialogs, and
   mutations with focused UI tests.
-- [x] Implement the response table, filters, actions, dialogs, async textarea,
-  and mutations with focused UI tests.
+- [ ] Complete response-textarea suggestion parity: source debounces at 700 ms,
+  searches only at three characters, and displays at most 20 saved responses.
+- [ ] Add focused UI tests for response/group action, dialog, table-filter, and
+  mutation behavior; the current focused coverage is service, state, and locale
+  contracts.
 - [x] Compose the public page and thin authenticated route; register navigation
   only after verifying a matching target navigation location.
 - [x] Run full targeted verification and record the commands/results here.
