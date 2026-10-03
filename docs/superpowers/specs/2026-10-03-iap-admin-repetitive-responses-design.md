@@ -41,12 +41,12 @@ owners. Every page-specific component keeps the exact source component name
 and responsibility; only its directory changes to comply with the target's
 feature ownership rules.
 
-- `pages/index/`: page composition of the group table followed by the response
+- Feature root: page composition of the group table followed by the response
   table.
 - `model/`: route/search state, dialog and selection store, and form schemas.
 - `services/`: response and response-group transports that validate both
   outgoing payloads and responses through `@iap/api-types` schemas.
-- `pages/index/components/`: the source-named page-specific components listed
+- `components/`: the source-named page-specific components listed
   in the task document. Group and response subdirectories make ownership
   discoverable without renaming a component.
 - `constants/`: enum-label mapping only if verified as used by the reference;

@@ -40,7 +40,9 @@ export const repetitiveResponseService = {
     return repetitiveResponseSchema.parse(response.data)
   },
   async delete(id: string) {
-    const request = deleteRepetitiveResponseRequestSchema.parse({ path: { id } })
+    const request = deleteRepetitiveResponseRequestSchema.parse({
+      path: { id },
+    })
     await getApiClient().delete(`/repetitive-responses/${request.path.id}`)
   },
   async getById(id: string, options?: { signal?: AbortSignal }) {
@@ -65,14 +67,17 @@ export const repetitiveResponseService = {
   },
   async getPageFull(input: PageInput) {
     const request = parsePageRequest(input)
-    const response = await getApiClient().get('/repetitive-responses/page-full', {
-      params: {
-        ...transformApiFilterParams(request.filters),
-        page: request.page,
-        size: request.size,
-      },
-      signal: input.signal,
-    })
+    const response = await getApiClient().get(
+      '/repetitive-responses/page-full',
+      {
+        params: {
+          ...transformApiFilterParams(request.filters),
+          page: request.page,
+          size: request.size,
+        },
+        signal: input.signal,
+      }
+    )
     return repetitiveResponsePageSchema.parse(response.data)
   },
   async softDelete(id: string, thruDate?: string) {
@@ -92,7 +97,11 @@ export const repetitiveResponseService = {
     const response = await getApiClient().put(
       '/repetitive-responses/soft-delete',
       request.body,
-      { params: request.query.thruDate ? { thruDate: request.query.thruDate } : {} }
+      {
+        params: request.query.thruDate
+          ? { thruDate: request.query.thruDate }
+          : {},
+      }
     )
     return repetitiveResponseSchema.array().parse(response.data)
   },

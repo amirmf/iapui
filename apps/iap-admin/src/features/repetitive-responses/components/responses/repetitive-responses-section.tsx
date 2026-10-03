@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 
+import { useRepetitiveResponseColumns } from '@features/repetitive-responses/components/responses/repetitive-response-columns'
+import RepetitiveResponseDataTableToolbar from '@features/repetitive-responses/components/responses/repetitive-response-data-table-toolbar'
+import { RepetitiveResponseDeleteMethodDialog } from '@features/repetitive-responses/components/responses/repetitive-response-delete-method-dialog'
+import { RepetitiveResponseFormDialog } from '@features/repetitive-responses/components/responses/repetitive-response-form-dialog'
+import { RepetitiveResponseViewDialog } from '@features/repetitive-responses/components/responses/repetitive-response-view-dialog'
 import {
   useRepetitiveResponse,
   useRepetitiveResponseGroup,
 } from '@features/repetitive-responses/model/repetitive-response-store'
-import { useRepetitiveResponseColumns } from '@features/repetitive-responses/pages/index/components/responses/repetitive-response-columns'
-import RepetitiveResponseDataTableToolbar from '@features/repetitive-responses/pages/index/components/responses/repetitive-response-data-table-toolbar'
-import { RepetitiveResponseDeleteMethodDialog } from '@features/repetitive-responses/pages/index/components/responses/repetitive-response-delete-method-dialog'
-import { RepetitiveResponseFormDialog } from '@features/repetitive-responses/pages/index/components/responses/repetitive-response-form-dialog'
-import { RepetitiveResponseViewDialog } from '@features/repetitive-responses/pages/index/components/responses/repetitive-response-view-dialog'
 import { repetitiveResponseService } from '@features/repetitive-responses/services/repetitive-response-service'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'
 import { Button, Permission, cn } from '@iap/ui'

@@ -20,7 +20,7 @@
 
 - Preserve source component export names and source-backed API method/path/payload behavior.
 - Use application aliases, `@iap/ui` primitives, and `cn`; do not import package internals.
-- Keep route files thin; page-exclusive UI belongs under `features/repetitive-responses/pages/index/components/`.
+- Keep route files thin; page-exclusive UI belongs under `features/repetitive-responses/components/`.
 - Validate strict requests and parsed responses at API boundaries with Zod v4; response objects that retain extra backend properties use `.loose()`.
 - Server state belongs to TanStack Query and only dialog/selection state belongs to the feature Zustand store.
 - Persian text must be copied verbatim from the two mounted reference namespaces; do not translate or invent values.
@@ -83,15 +83,15 @@ component directories. Task 7 integrates the completed public exports.
 **Files:**
 - Create: `apps/iap-admin/src/features/repetitive-responses/model/repetitive-response-store.ts`
 - Create: `apps/iap-admin/src/features/repetitive-responses/model/repetitive-response-form-schema.ts`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/groups/repetitive-response-groups.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/groups/repetitive-response-group-columns.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/groups/repetitive-response-group-data-table-toolbar.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/groups/repetitive-response-group-row-actions.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/groups/repetitive-response-group-form-dialog.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/groups/repetitive-response-group-view-dialog.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/groups/repetitive-response-group-delete-method-dialog.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/groups/repetitive-response-groups.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/groups/repetitive-response-group-columns.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/groups/repetitive-response-group-data-table-toolbar.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/groups/repetitive-response-group-row-actions.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/groups/repetitive-response-group-form-dialog.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/groups/repetitive-response-group-view-dialog.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/groups/repetitive-response-group-delete-method-dialog.tsx`
 - Test: `apps/iap-admin/src/features/repetitive-responses/model/repetitive-response-store.test.ts`
-- Test: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/groups/repetitive-response-group-row-actions.test.tsx`
+- Test: `apps/iap-admin/src/features/repetitive-responses/components/groups/repetitive-response-group-row-actions.test.tsx`
 
 **Interfaces:**
 - Consumes: group schemas/services from Task 1 and translations from Task 2.
@@ -106,16 +106,16 @@ component directories. Task 7 integrates the completed public exports.
 ### Task 4: Response workflow and suggestion textarea
 
 **Files:**
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-responses-section.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-response-columns.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-response-data-table-toolbar.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-response-row-actions.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-response-form-dialog.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-response-textarea.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-response-view-dialog.tsx`
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-response-delete-method-dialog.tsx`
-- Test: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-response-textarea.test.tsx`
-- Test: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-response-row-actions.test.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-responses-section.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-response-columns.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-response-data-table-toolbar.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-response-row-actions.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-response-form-dialog.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-response-textarea.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-response-view-dialog.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-response-delete-method-dialog.tsx`
+- Test: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-response-textarea.test.tsx`
+- Test: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-response-row-actions.test.tsx`
 
 **Interfaces:**
 - Consumes: Task 1 response/group schemas and services, Task 2 translations, and Task 3 store/form schema exports.
@@ -130,8 +130,8 @@ component directories. Task 7 integrates the completed public exports.
 ### Task 5: Response-group parity review and integration test
 
 **Files:**
-- Modify: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/groups/*`
-- Test: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/groups/repetitive-response-groups.test.tsx`
+- Modify: `apps/iap-admin/src/features/repetitive-responses/components/groups/*`
+- Test: `apps/iap-admin/src/features/repetitive-responses/components/groups/repetitive-response-groups.test.tsx`
 
 **Interfaces:**
 - Consumes: Task 3 group components.
@@ -146,8 +146,8 @@ component directories. Task 7 integrates the completed public exports.
 ### Task 6: Response parity review and integration test
 
 **Files:**
-- Modify: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/*`
-- Test: `apps/iap-admin/src/features/repetitive-responses/pages/index/components/responses/repetitive-responses-section.test.tsx`
+- Modify: `apps/iap-admin/src/features/repetitive-responses/components/responses/*`
+- Test: `apps/iap-admin/src/features/repetitive-responses/components/responses/repetitive-responses-section.test.tsx`
 
 **Interfaces:**
 - Consumes: Task 4 response components.
@@ -162,11 +162,11 @@ component directories. Task 7 integrates the completed public exports.
 ### Task 7: Page composition, public API, and final task record
 
 **Files:**
-- Create: `apps/iap-admin/src/features/repetitive-responses/pages/index/repetitive-responses-page.tsx`
+- Create: `apps/iap-admin/src/features/repetitive-responses/repetitive-responses-page.tsx`
 - Create: `apps/iap-admin/src/features/repetitive-responses/index.ts`
 - Modify: `apps/iap-admin/src/app/router/routes/_authenticated/repetitive-responses/index.tsx`
 - Modify: `docs/tasks/iap-admin-repetitive-responses-page-parity.md`
-- Test: `apps/iap-admin/src/features/repetitive-responses/pages/index/repetitive-responses-page.test.tsx`
+- Test: `apps/iap-admin/src/features/repetitive-responses/repetitive-responses-page.test.tsx`
 
 **Interfaces:**
 - Consumes: Tasks 2, 5, and 6 public exports.

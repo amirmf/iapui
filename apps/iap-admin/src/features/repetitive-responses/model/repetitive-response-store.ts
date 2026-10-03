@@ -1,13 +1,12 @@
-import type { RepetitiveResponse, RepetitiveResponseGroup } from '@iap/api-types'
+import type {
+  RepetitiveResponse,
+  RepetitiveResponseGroup,
+} from '@iap/api-types'
 import type { RowSelectionState, Updater } from '@tanstack/react-table'
 import { create } from 'zustand'
 
 export type RepetitiveResponseDialog =
-  | 'create'
-  | 'deleteMethod'
-  | 'edit'
-  | 'view'
-  | null
+  'create' | 'deleteMethod' | 'edit' | 'view' | null
 
 type RepetitiveResponseStore = {
   currentGroupRow: RepetitiveResponseGroup | null
@@ -76,7 +75,9 @@ export const useRepetitiveResponseGroup = () => ({
   currentRow: useRepetitiveResponseStore((state) => state.currentGroupRow),
   open: useRepetitiveResponseStore((state) => state.groupOpen),
   rowSelection: useRepetitiveResponseStore((state) => state.groupRowSelection),
-  setCurrentRow: useRepetitiveResponseStore((state) => state.setCurrentGroupRow),
+  setCurrentRow: useRepetitiveResponseStore(
+    (state) => state.setCurrentGroupRow
+  ),
   setOpen: useRepetitiveResponseStore((state) => state.setGroupOpen),
   setRowSelection: useRepetitiveResponseStore(
     (state) => state.setGroupRowSelection

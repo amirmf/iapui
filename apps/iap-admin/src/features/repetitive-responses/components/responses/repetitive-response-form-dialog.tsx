@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
+import { RepetitiveResponseTextarea } from '@features/repetitive-responses/components/responses/repetitive-response-textarea'
 import {
   type RepetitiveResponseForm,
   createRepetitiveResponseFormSchema,
@@ -8,7 +9,6 @@ import {
   useRepetitiveResponse,
   useRepetitiveResponseGroup,
 } from '@features/repetitive-responses/model/repetitive-response-store'
-import { RepetitiveResponseTextarea } from '@features/repetitive-responses/pages/index/components/responses/repetitive-response-textarea'
 import { repetitiveResponseGroupService } from '@features/repetitive-responses/services/repetitive-response-group-service'
 import { repetitiveResponseService } from '@features/repetitive-responses/services/repetitive-response-service'
 import { zodResolver } from '@hookform/resolvers/zod'

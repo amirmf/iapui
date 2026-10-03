@@ -38,7 +38,9 @@ export const repetitiveResponseGroupService = {
     const request = deleteRepetitiveResponseGroupRequestSchema.parse({
       path: { id },
     })
-    await getApiClient().delete(`/repetitive-response-groups/${request.path.id}`)
+    await getApiClient().delete(
+      `/repetitive-response-groups/${request.path.id}`
+    )
   },
   async getById(id: string, options?: { signal?: AbortSignal }) {
     const request = getRepetitiveResponseGroupRequestSchema.parse({
@@ -56,14 +58,17 @@ export const repetitiveResponseGroupService = {
       page: input.page ?? 0,
       size: input.size ?? 30,
     })
-    const response = await getApiClient().get('/repetitive-response-groups/page', {
-      params: {
-        ...transformApiFilterParams(request.filters),
-        page: request.page,
-        size: request.size,
-      },
-      signal: input.signal,
-    })
+    const response = await getApiClient().get(
+      '/repetitive-response-groups/page',
+      {
+        params: {
+          ...transformApiFilterParams(request.filters),
+          page: request.page,
+          size: request.size,
+        },
+        signal: input.signal,
+      }
+    )
     return repetitiveResponseGroupPageSchema.parse(response.data)
   },
   async softDelete(id: string, thruDate?: string) {
@@ -85,7 +90,11 @@ export const repetitiveResponseGroupService = {
     const response = await getApiClient().put(
       '/repetitive-response-groups/soft-delete',
       request.body,
-      { params: request.query.thruDate ? { thruDate: request.query.thruDate } : {} }
+      {
+        params: request.query.thruDate
+          ? { thruDate: request.query.thruDate }
+          : {},
+      }
     )
     return repetitiveResponseGroupSchema.array().parse(response.data)
   },

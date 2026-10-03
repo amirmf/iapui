@@ -14,11 +14,11 @@ vi.mock(
   })
 )
 vi.mock(
-  '@features/repetitive-responses/pages/index/components/groups/repetitive-response-groups',
+  '@features/repetitive-responses/components/groups/repetitive-response-groups',
   () => ({ default: () => <div data-testid='groups' /> })
 )
 vi.mock(
-  '@features/repetitive-responses/pages/index/components/responses/repetitive-responses-section',
+  '@features/repetitive-responses/components/responses/repetitive-responses-section',
   () => ({ default: () => <div data-testid='responses' /> })
 )
 

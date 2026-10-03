@@ -1,1 +1,1 @@
-export { RepetitiveResponsesPage } from './pages/index/repetitive-responses-page'
+export { RepetitiveResponsesPage } from './repetitive-responses-page'

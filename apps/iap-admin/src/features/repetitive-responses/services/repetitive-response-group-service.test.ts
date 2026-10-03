@@ -45,7 +45,10 @@ describe('repetitiveResponseGroupService', () => {
       .mockResolvedValueOnce({ data: [group] })
 
     await repetitiveResponseGroupService.getById(groupId)
-    await repetitiveResponseGroupService.create({ seqNum: 1, title: 'پشتیبانی' })
+    await repetitiveResponseGroupService.create({
+      seqNum: 1,
+      title: 'پشتیبانی',
+    })
     await repetitiveResponseGroupService.update(groupId, {
       seqNum: 1,
       title: 'پشتیبانی',
@@ -92,8 +95,12 @@ describe('repetitiveResponseGroupService', () => {
   })
 
   it('rejects invalid group requests before transport', async () => {
-    await expect(repetitiveResponseGroupService.getById('invalid')).rejects.toThrow()
-    await expect(repetitiveResponseGroupService.bulkDelete([])).rejects.toThrow()
+    await expect(
+      repetitiveResponseGroupService.getById('invalid')
+    ).rejects.toThrow()
+    await expect(
+      repetitiveResponseGroupService.bulkDelete([])
+    ).rejects.toThrow()
     await expect(
       repetitiveResponseGroupService.create({ unexpected: true } as never)
     ).rejects.toThrow()

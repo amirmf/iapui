@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { RepetitiveResponseRowActions } from '@features/repetitive-responses/pages/index/components/responses/repetitive-response-row-actions'
+import { RepetitiveResponseRowActions } from '@features/repetitive-responses/components/responses/repetitive-response-row-actions'
 import type { RepetitiveResponse } from '@iap/api-types'
 import { LongText } from '@iap/ui'
 import { DataTableColumnHeader } from '@shared/tables'
