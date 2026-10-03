@@ -192,6 +192,152 @@
   "placeholder": {
     "description": "این صفحه در حال پیاده‌سازی است."
   },
+  "coverages": {
+    "title": "مدیریت پوشش‌ها",
+    "description": "مدیریت همه پوشش‌های موجود در سیستم مدیریت ادعاهای شما.",
+    "create": " تعریف پوشش جدید",
+    "refresh": "بروزرسانی",
+    "noCoverages": "هیچ پوشش یافت نشد.",
+    "columns": {
+      "code": "کد",
+      "title": "عنوان",
+      "extId": "شناسه خارجی",
+      "typeIndicator": "شاخص نوع",
+      "type": "نوع",
+      "rootCoverage": "پوشش اصلی",
+      "maxCoverage": "حداکثر پوشش",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "created": "ایجاد شده"
+    },
+    "filters": {
+      "code": "کد",
+      "title": "عنوان",
+      "extId": "شناسه خارجی",
+      "typeIndicator": "شاخص نوع",
+      "rootCoverage": "پوشش اصلی",
+      "type": "نوع",
+      "maxCoverage": "حداکثر پوشش",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "created": "تاریخ ایجاد",
+      "thruDateFrom": "تاریخ پایان از",
+      "thruDateTo": "تاریخ پایان تا"
+    },
+    "type": { "group": "گروهی", "detail": "جزئیات" },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "suspended": "تعلیق شده",
+      "pending": "در انتظار"
+    },
+    "dialog": {
+      "viewDetails": "مشاهده جزئیات",
+      "create": "ایجاد پوشش جدید",
+      "edit": "ویرایش پوشش",
+      "delete": "حذف ",
+      "softDelete": "حذف نرم",
+      "createDesc": "پوشش جدید را با پر کردن فرم زیر ایجاد کنید.",
+      "editDesc": "اطلاعات پوشش را در زیر به‌روزرسانی کنید.",
+      "fields": {
+        "title": "عنوان",
+        "code": "کد",
+        "typeIndicator": "شاخص نوع",
+        "type": "نوع",
+        "maxCoverage": "سقف پوشش",
+        "status": "وضعیت",
+        "rootCoverageId": "شناسه پوشش اصلی ",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان "
+      }
+    },
+    "softDeleteDesc": "حذف نرم تاریخ پایان را تنظیم کرده و پوشش را بدون حذف دائمی غیرفعال می‌کند.",
+    "bulkDelete": {
+      "button": "حذف انتخاب‌شده‌ها",
+      "title": "حذف پوشش‌ها",
+      "description": "این عملیات {{count}} پوشش انتخاب‌شده را به صورت دائمی حذف می‌کند. این عمل قابل بازگشت نیست.",
+      "selectionInfo": "{{count}} پوشش انتخاب‌شده",
+      "confirm": "حذف",
+      "submitting": "در حال حذف...",
+      "success": "پوشش‌ها با موفقیت حذف شدند.",
+      "error": "حذف پوشش‌های انتخاب‌شده ناموفق بود.",
+      "noSelection": "لطفاً حداقل یک پوشش را برای حذف انتخاب کنید."
+    },
+    "messages": {
+      "deleted": "پوشش حذف شد",
+      "deleteError": "حذف پوشش ناموفق بود",
+      "softDeleted": "پوشش به صورت نرم حذف شد",
+      "softDeleteError": "حذف نرم پوشش ناموفق بود"
+    }
+  },
+  "coverageDamageCodeAppls": {
+    "title": "نگاشت پوشش و کد",
+    "description": "مدیریت نگاشت بین پوشش‌ها و کدهای خسارت.",
+    "create": "افزودن نگاشت",
+    "refresh": "بروزرسانی",
+    "columns": {
+      "coverageTitle": "عنوان پوشش",
+      "coverageCode": "کد پوشش",
+      "damageTitle": "عنوان کد خسارت",
+      "damageCode": "کد خسارت",
+      "priority": "اولویت",
+      "status": "وضعیت",
+      "ratio": "نسبت"
+    },
+    "actions": {
+      "view": "نمایش",
+      "edit": "ویرایش",
+      "softDelete": "حذف نرم",
+      "delete": "حذف"
+    },
+    "bulkDelete": {
+      "button": "حذف انتخاب‌شده‌ها",
+      "title": "حذف نگاشت‌های پوشش و کد",
+      "description": "این عملیات {{count}} نگاشت انتخاب‌شده را به صورت دائمی حذف می‌کند. این عمل قابل بازگشت نیست.",
+      "selectionInfo": "{{count}} نگاشت انتخاب‌شده",
+      "confirm": "حذف",
+      "submitting": "در حال حذف...",
+      "success": "نگاشت‌ها با موفقیت حذف شدند.",
+      "error": "حذف نگاشت‌های انتخاب‌شده ناموفق بود.",
+      "noSelection": "لطفاً حداقل یک نگاشت را برای حذف انتخاب کنید."
+    },
+    "dialog": {
+      "create": "ایجاد نگاشت",
+      "edit": "ویرایش نگاشت",
+      "createDesc": "یک نگاشت جدید ایجاد کنید.",
+      "editDesc": "نگاشت را به‌روزرسانی کنید."
+    },
+    "form": {
+      "coverage": "پوشش",
+      "selectCoverage": "انتخاب پوشش",
+      "damageCode": "کد خسارت",
+      "selectDamageCode": "انتخاب کد خسارت",
+      "priority": "اولویت",
+      "status": "وضعیت",
+      "ratio": "نسبت",
+      "device": "دستگاه",
+      "description": "توضیحات",
+      "serviceHeadline": "عنوان خدمت",
+      "serviceGroup": "گروه خدمت",
+      "isRequired": "اجباری است",
+      "ruleDesc": "شرح قانون",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "suspended": "تعلیق شده",
+      "pending": "در انتظار"
+    },
+    "view": { "title": "جزئیات نگاشت", "description": "جزئیات نگاشت" },
+    "delete": {
+      "title": "حذف نگاشت",
+      "description": "آیا از حذف این نگاشت اطمینان دارید؟"
+    }
+  },
   "form": {
     "submit": "ثبت",
     "creating": "در حال ثبت",
@@ -216,6 +362,7 @@
       "description": "رمز عبور باید حداقل شامل یک حرف بزرگ، یک حرف کوچک و یک عدد باشد."
     },
     "cancel": "انصراف",
+    "optional": "اختیاری",
     "confirm": "تأیید",
     "yes": "بله",
     "no": "خیر",

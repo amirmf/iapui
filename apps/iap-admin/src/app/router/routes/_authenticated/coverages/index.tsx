@@ -1,6 +1,9 @@
-import { PlaceholderPage } from '@features/placeholder'
+import { coverageRouteSearchSchema } from '@features/coverages/model/coverage-route-search-schema'
+import { CoveragesPage } from '@features/coverages/pages/index/coverages-page'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/coverages/')({
-  component: () => <PlaceholderPage titleKey='sidebar.coverages-maxa' />,
+  component: CoveragesPage,
+  loader: () => ({ crumb: 'coverage' }),
+  validateSearch: coverageRouteSearchSchema,
 })

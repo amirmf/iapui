@@ -4,6 +4,8 @@ export * from './assessment-item'
 export * from './branch'
 export * from './common'
 export * from './claim-request'
+export * from './coverage'
+export * from './coverage-damage-code-appl'
 export * from './dashboard'
 export {
   bulkDeleteDocTypesRequestSchema,
