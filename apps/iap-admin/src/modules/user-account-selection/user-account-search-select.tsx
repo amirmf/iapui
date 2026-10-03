@@ -16,6 +16,7 @@ type UserAccountSearchSelectProps = {
   placeholder?: string
   roles?: PartyRole | null
   value?: string | null
+  valueMode?: 'id' | 'username'
 }
 
 function useDebouncedValue(value: string, delay = 700) {
@@ -39,6 +40,7 @@ export function UserAccountSearchSelect(props: UserAccountSearchSelectProps) {
     placeholder,
     roles,
     value,
+    valueMode = 'id',
   } = props
   const { t } = useTranslation()
   const [searchValue, setSearchValue] = useState('')
@@ -70,33 +72,38 @@ export function UserAccountSearchSelect(props: UserAccountSearchSelectProps) {
     () =>
       (usersQuery.data ?? []).map((user) => ({
         label: user.displayName ?? user.username,
-        value: user.id,
+        value: user[valueMode],
       })),
-    [usersQuery.data]
+    [usersQuery.data, valueMode]
   )
-  const selectedUserQuery = useQuery({
+  const selectedUserByIdQuery = useQuery({
     enabled:
       !disabled &&
       Boolean(value) &&
       !options.some((item) => item.value === value),
     queryFn: ({ signal }) =>
-      userAccountSelectionService.getById(value ?? '', signal),
+      valueMode === 'username'
+        ? userAccountSelectionService.getByLookupValue(value ?? '', signal)
+        : userAccountSelectionService.getById(value ?? '', signal),
     queryKey: ['user-account', 'by-id', value],
     staleTime: 30_000,
     gcTime: 30_000,
   })
   const selected = useMemo(() => {
-    const user = selectedUserQuery.data
+    const user = selectedUserByIdQuery.data
     return user?.id
-      ? { label: user.displayName ?? user.username, value: user.id }
+      ? {
+          label: user.displayName ?? user.username,
+          value: user[valueMode],
+        }
       : options.find((option) => option.value === value)
-  }, [options, selectedUserQuery.data, value])
+  }, [options, selectedUserByIdQuery.data, value, valueMode])
 
   return (
     <Select
       clearable
       disabled={disabled}
-      isLoading={usersQuery.isFetching}
+      isLoading={usersQuery.isFetching || selectedUserByIdQuery.isFetching}
       labelKey='label'
       loadingText={t('common.loading')}
       onSearch={setSearchValue}

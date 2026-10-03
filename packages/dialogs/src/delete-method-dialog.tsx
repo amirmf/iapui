@@ -43,6 +43,7 @@ export type DeleteMethodDialogProps = {
   onOpenChange: (open: boolean) => void
   open: boolean
   preselectedMethod?: DeleteMethod
+  resetDelay?: number
   showDatePicker?: boolean
 }
 
@@ -57,6 +58,7 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
     onOpenChange,
     open,
     preselectedMethod,
+    resetDelay = 0,
     showDatePicker = true,
   } = props
   const { t } = useTranslation()
@@ -85,11 +87,14 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
 
   useEffect(() => {
     if (!open) {
-      setStage(preselectedMethod ? 'confirm' : 'select-method')
-      setSelectedMethod(preselectedMethod ?? null)
-      setThruDate(new Date())
+      const timeoutId = window.setTimeout(() => {
+        setStage(preselectedMethod ? 'confirm' : 'select-method')
+        setSelectedMethod(preselectedMethod ?? null)
+        setThruDate(new Date())
+      }, resetDelay)
+      return () => window.clearTimeout(timeoutId)
     }
-  }, [open, preselectedMethod])
+  }, [open, preselectedMethod, resetDelay])
 
   const handleOpenChange = (nextOpen: boolean) => {
     if (!isBusy) onOpenChange(nextOpen)

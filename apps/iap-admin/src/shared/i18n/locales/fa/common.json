@@ -601,6 +601,8 @@
     "delete": "حذف",
     "edit": "ویرایش",
     "softDelete": "حذف نرم",
+    "deleteSuccess": "مورد با موفقیت حذف شد",
+    "softDeleteSuccess": "مورد با موفقیت حذف نرم شد",
     "deleteConfirm": "آیا از حذف مطمئن هستید؟",
     "softDeleteConfirm": "این مورد غیرفعال می‌شود.",
     "deleteMethodDescription": "نحوه حذف این مورد را انتخاب کنید",

@@ -1,10 +1,12 @@
 import { useEffect, useMemo } from 'react'
 
-import { getSpecialDiseaseOptions } from '@features/user-account/constants/special-disease-options'
 import type { InsuredPerson, PersonSpecialDiseasesEnum } from '@iap/api-types'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@iap/forms'
 import { Button, MultiSelect } from '@iap/ui'
-import { personSpecialDiseaseService } from '@modules/person-special-diseases'
+import {
+  getSpecialDiseaseOptions,
+  personSpecialDiseaseService,
+} from '@modules/person-special-diseases'
 import { useTranslate } from '@shared/i18n/i18n'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'

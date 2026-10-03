@@ -1,5 +1,6 @@
 import { getApiClient } from '@iap/api-client'
 import {
+  getUserAccountByLookupRequestSchema,
   getUserAccountRequestSchema,
   listUserAccountsRequestSchema,
   userAccountSchema,
@@ -7,6 +8,16 @@ import {
 import { z } from 'zod'
 
 export const userAccountSelectionService = {
+  async getByLookupValue(value: string, signal?: AbortSignal) {
+    const request = getUserAccountByLookupRequestSchema.parse({
+      path: { value },
+    })
+    const response = await getApiClient().get(
+      `/auth/users/${request.path.value}`,
+      { signal }
+    )
+    return userAccountSchema.parse(response.data)
+  },
   async getById(id: string, signal?: AbortSignal) {
     const request = getUserAccountRequestSchema.parse({ path: { id } })
     const response = await getApiClient().get(

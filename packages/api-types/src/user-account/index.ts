@@ -107,6 +107,9 @@ export const listUserAccountsRequestSchema = z.object({
   parentUserAccountId: z.uuid().optional(),
 })
 export const getUserAccountRequestSchema = z.object({ path: uuidPathSchema })
+export const getUserAccountByLookupRequestSchema = z.object({
+  path: z.object({ value: z.string() }),
+})
 export const updateUserAccountRequestSchema = z.object({
   path: uuidPathSchema,
   body: updateUserAccountPayloadSchema,

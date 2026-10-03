@@ -1,10 +1,10 @@
-import {
-  specialDiseaseColors,
-  specialDiseaseTranslationKeys,
-} from '@features/user-account/constants/special-disease-options'
 import type { InsuredPerson } from '@iap/api-types'
 import { Badge, Button } from '@iap/ui'
-import { personSpecialDiseaseService } from '@modules/person-special-diseases'
+import {
+  personSpecialDiseaseService,
+  specialDiseaseColors,
+  specialDiseaseTranslationKeys,
+} from '@modules/person-special-diseases'
 import { useTranslate } from '@shared/i18n/i18n'
 import { useQuery } from '@tanstack/react-query'
 
