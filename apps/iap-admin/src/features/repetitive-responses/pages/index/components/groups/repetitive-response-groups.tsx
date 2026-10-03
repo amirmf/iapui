@@ -8,6 +8,7 @@ import { repetitiveResponseGroupService } from '@features/repetitive-responses/s
 import { Button, cn } from '@iap/ui'
 import { PaginatedDataTable } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
+import { useRouterState } from '@tanstack/react-router'
 import { Plus, RefreshCw, Trash2 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,10 +21,15 @@ export default function RepetitiveResponseGroups() {
   const columns = useRepetitiveResponseGroupColumns()
   const { currentRow, open, rowSelection, setCurrentRow, setOpen, setRowSelection } = useRepetitiveResponseGroup()
   const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: 30 })
+  const search = useRouterState({ select: (state) => state.location.search })
+  const filters = useMemo(
+    () => ({ title: typeof search.title === 'string' ? search.title : undefined }),
+    [search.title]
+  )
   const query = useQuery({
     gcTime: 30_000,
-    queryFn: ({ signal }) => repetitiveResponseGroupService.getPage({ page: pagination.pageIndex, signal, size: pagination.pageSize }),
-    queryKey: ['repetitive-response-groups', 'page', pagination],
+    queryFn: ({ signal }) => repetitiveResponseGroupService.getPage({ filters, page: pagination.pageIndex, signal, size: pagination.pageSize }),
+    queryKey: ['repetitive-response-groups', 'page', pagination, filters],
     refetchOnWindowFocus: false,
     staleTime: 30_000,
   })
