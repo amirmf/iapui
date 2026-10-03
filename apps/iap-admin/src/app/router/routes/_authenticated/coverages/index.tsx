@@ -1,5 +1,4 @@
-import { coverageRouteSearchSchema } from '@features/coverages/model/coverage-route-search-schema'
-import { CoveragesPage } from '@features/coverages/pages/index/coverages-page'
+import { CoveragesPage, coverageRouteSearchSchema } from '@features/coverages'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/coverages/')({

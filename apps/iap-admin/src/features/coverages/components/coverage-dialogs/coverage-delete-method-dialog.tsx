@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { useCoverageStore } from '@features/coverages/model/coverage-store'
+import { useCoverageStore } from '@features/coverages/model/store/coverage-store'
 import { coverageService } from '@features/coverages/services/coverage-service'
 import type { Coverage } from '@iap/api-types'
 import { type DeleteMethod, DeleteMethodDialog } from '@iap/dialogs'

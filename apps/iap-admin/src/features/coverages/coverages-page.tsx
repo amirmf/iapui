@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
 import { CoverageDamageCodeApplsSection } from '@features/coverage-damage-code-appls/ui/coverage-damage-code-appls-section'
-import { useCoverageStore } from '@features/coverages/model/coverage-store'
+import { CoverageDeleteMethodDialog } from '@features/coverages/components/coverage-dialogs/coverage-delete-method-dialog'
+import { CoverageFormDialog } from '@features/coverages/components/coverage-dialogs/coverage-form-dialog'
+import { CoverageViewDialog } from '@features/coverages/components/coverage-dialogs/coverage-view-dialog'
+import { useCoverageColumns } from '@features/coverages/components/coverage-table/coverage-columns'
+import { CoverageDataTableToolbar } from '@features/coverages/components/coverage-table/coverage-data-table-toolbar'
 import {
   parseCoverageTableSearch,
   toCoverageApiFilters,
   toCoverageTableSearch,
 } from '@features/coverages/model/coverage-table-state'
-import { useCoverageColumns } from '@features/coverages/pages/index/components/coverage-columns'
-import { CoverageDataTableToolbar } from '@features/coverages/pages/index/components/coverage-data-table-toolbar'
-import { CoverageDeleteMethodDialog } from '@features/coverages/pages/index/components/coverage-delete-method-dialog'
-import { CoverageFormDialog } from '@features/coverages/pages/index/components/coverage-form-dialog'
-import { CoverageViewDialog } from '@features/coverages/pages/index/components/coverage-view-dialog'
+import { useCoverageStore } from '@features/coverages/model/store/coverage-store'
 import { coverageService } from '@features/coverages/services/coverage-service'
 import type { Coverage } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'

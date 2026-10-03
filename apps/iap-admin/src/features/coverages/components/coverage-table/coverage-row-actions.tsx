@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { useCoverageStore } from '@features/coverages/model/coverage-store'
+import { useCoverageStore } from '@features/coverages/model/store/coverage-store'
 import type { Coverage } from '@iap/api-types'
 import { useTranslate } from '@shared/i18n/i18n'
 import { TableActionButton, TableActions } from '@shared/tables'

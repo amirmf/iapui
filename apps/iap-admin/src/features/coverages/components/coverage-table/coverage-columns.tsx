@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
 
+import { CoverageRowActions } from '@features/coverages/components/coverage-table/coverage-row-actions'
 import {
   coverageStatusBadgeColors,
   coverageStatusTranslationKeys,
   coverageTypeBadgeColors,
   coverageTypeTranslationKeys,
 } from '@features/coverages/constants/coverage-constant'
-import { CoverageRowActions } from '@features/coverages/pages/index/components/coverage-row-actions'
 import type { Coverage } from '@iap/api-types'
 import { Badge, LongText, cn, formatDateTime } from '@iap/ui'
 import { useTranslate } from '@shared/i18n/i18n'
