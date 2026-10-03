@@ -1,6 +1,7 @@
-import { PlaceholderPage } from '@features/placeholder'
+import { OtpPage } from '@features/otp'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/otp/')({
-  component: () => <PlaceholderPage titleKey='sidebar.otp' />,
+  component: OtpPage,
+  loader: () => ({ crumb: 'otp' }),
 })

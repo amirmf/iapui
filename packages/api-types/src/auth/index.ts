@@ -167,6 +167,97 @@ export const getCurrentUserRequestSchema = z.object({}).strict()
 
 export const emptyAuthResponseSchema = z.undefined()
 
+const otpRecordFields = {
+  consumedAt: z.string().nullable().optional(),
+  createdAt: z.string().nullable().optional(),
+  expiresAt: z.string().nullable().optional(),
+  failedAttempts: z.number().nullable().optional(),
+  id: z.string().nullable().optional(),
+  lastRequestedAt: z.string().nullable().optional(),
+  locked: z.boolean().nullable().optional(),
+  nationalCode: z.string().nullable().optional(),
+  otpCreatedAt: z.string().nullable().optional(),
+  otpHash: z.string().nullable().optional(),
+  phoneNumber: z.string().nullable().optional(),
+  requestCount: z.number().nullable().optional(),
+  updatedAt: z.string().nullable().optional(),
+}
+
+export const signupOtpListSchema = z.object(otpRecordFields).loose()
+
+export const passwordResetOtpListSchema = z
+  .object({
+    ...otpRecordFields,
+    userId: z.string().nullable().optional(),
+    username: z.string().nullable().optional(),
+  })
+  .loose()
+
+const otpListFilterValueSchema = z.union([
+  z.string(),
+  z.array(z.string()),
+  z.undefined(),
+])
+
+export const otpListRequestSchema = z.object({
+  direction: z.string().optional(),
+  filters: z.record(z.string(), otpListFilterValueSchema),
+  page: z.number().int().min(0).default(0),
+  size: z.number().int().min(1).default(30),
+  sort: z.string().optional(),
+})
+
+const otpPageSortSchema = z
+  .object({
+    empty: z.boolean().optional(),
+    sorted: z.boolean().optional(),
+    unsorted: z.boolean().optional(),
+  })
+  .optional()
+
+const otpPageableSchema = z
+  .object({
+    offset: z.number().optional(),
+    pageNumber: z.number().int().optional(),
+    pageSize: z.number().int().optional(),
+    paged: z.boolean().optional(),
+    sort: otpPageSortSchema,
+    unpaged: z.boolean().optional(),
+  })
+  .optional()
+
+export const pageSignupOtpListSchema = z
+  .object({
+    content: z.array(signupOtpListSchema),
+    empty: z.boolean(),
+    first: z.boolean(),
+    last: z.boolean(),
+    number: z.number(),
+    numberOfElements: z.number(),
+    pageable: otpPageableSchema,
+    size: z.number(),
+    sort: otpPageSortSchema,
+    totalElements: z.number(),
+    totalPages: z.number(),
+  })
+  .loose()
+
+export const pagePasswordResetOtpListSchema = z
+  .object({
+    content: z.array(passwordResetOtpListSchema),
+    empty: z.boolean(),
+    first: z.boolean(),
+    last: z.boolean(),
+    number: z.number(),
+    numberOfElements: z.number(),
+    pageable: otpPageableSchema,
+    size: z.number(),
+    sort: otpPageSortSchema,
+    totalElements: z.number(),
+    totalPages: z.number(),
+  })
+  .loose()
+
 export type AuthUser = z.infer<typeof authUserSchema>
 export type { PartyRole } from '../party/enums'
 export type LoginRequest = z.infer<typeof loginRequestSchema>
@@ -179,3 +270,10 @@ export type VerifyRegistrationRequest = z.infer<
 export type PasswordResetIdentity = z.infer<typeof passwordResetIdentitySchema>
 export type ResetPasswordRequest = z.infer<typeof resetPasswordRequestSchema>
 export type ChangePasswordRequest = z.infer<typeof changePasswordRequestSchema>
+export type OtpListRequest = z.infer<typeof otpListRequestSchema>
+export type PasswordResetOtpList = z.infer<typeof passwordResetOtpListSchema>
+export type PagePasswordResetOtpList = z.infer<
+  typeof pagePasswordResetOtpListSchema
+>
+export type SignupOtpList = z.infer<typeof signupOtpListSchema>
+export type PageSignupOtpList = z.infer<typeof pageSignupOtpListSchema>

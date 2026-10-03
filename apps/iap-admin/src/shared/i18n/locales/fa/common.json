@@ -503,6 +503,32 @@
   "placeholder": {
     "description": "این صفحه در حال پیاده‌سازی است."
   },
+  "otp": {
+    "sections": {
+      "signupOtp": "OTP ثبت‌نام",
+      "passwordResetOtp": "OTP بازیابی رمز عبور"
+    },
+    "columns": {
+      "username": "نام کاربری",
+      "phoneNumber": "شماره موبایل",
+      "nationalCode": "کد ملی",
+      "requestCount": "تعداد درخواست",
+      "failedAttempts": "تلاش ناموفق",
+      "locked": "قفل شده",
+      "otpCreatedAt": "زمان ایجاد OTP",
+      "expiresAt": "زمان انقضا",
+      "consumedAt": "زمان مصرف",
+      "otpHash": "کد یکبار مصرف"
+    },
+    "filters": {
+      "phoneNumber": "فیلتر بر اساس شماره موبایل",
+      "nationalCode": "فیلتر بر اساس کد ملی"
+    },
+    "empty": {
+      "signupOtp": "رکوردی برای OTP ثبت‌نام یافت نشد.",
+      "passwordResetOtp": "رکوردی برای OTP بازیابی رمز عبور یافت نشد."
+    }
+  },
   "coverages": {
     "title": "مدیریت پوشش‌ها",
     "description": "مدیریت همه پوشش‌های موجود در سیستم مدیریت ادعاهای شما.",
