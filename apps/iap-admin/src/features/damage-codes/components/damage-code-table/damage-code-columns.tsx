@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 
+import { DamageCodeRowActions } from '@features/damage-codes/components/damage-code-table/damage-code-row-actions'
 import {
   damageCodeStatusColors,
   damageCodeStatusTranslationKeys,
 } from '@features/damage-codes/constants/damage-code-options'
-import { DamageCodeRowActions } from '@features/damage-codes/pages/index/components/damage-code-row-actions'
 import type { DamageCode, DamageCodeStatus } from '@iap/api-types'
 import { Badge, LongText, cn, formatDateTime } from '@iap/ui'
 import { DataTableColumnHeader } from '@shared/tables'

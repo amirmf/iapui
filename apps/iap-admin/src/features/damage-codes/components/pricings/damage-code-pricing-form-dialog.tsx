@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
 
+import { getDamageCodePricingFormDefaults } from '@features/damage-codes/components/pricings/damage-code-pricing-form-defaults'
 import { getDamageCodePriceTypeOptions } from '@features/damage-codes/constants/damage-code-options'
-import { getDamageCodePricingFormDefaults } from '@features/damage-codes/pages/index/components/damage-code-pricing-form-defaults'
 import { damageCodePricingService } from '@features/damage-codes/services/damage-code-pricing-service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type {

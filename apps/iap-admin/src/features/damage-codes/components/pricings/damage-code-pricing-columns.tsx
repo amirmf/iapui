@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 
+import { DamageCodePricingRowActions } from '@features/damage-codes/components/pricings/damage-code-pricing-row-actions'
 import {
   damageCodePriceTypeColors,
   damageCodePriceTypeTranslationKeys,
 } from '@features/damage-codes/constants/damage-code-options'
-import { DamageCodePricingRowActions } from '@features/damage-codes/pages/index/components/damage-code-pricing-row-actions'
 import type { DamageCodePricing, PriceType } from '@iap/api-types'
 import { Badge, LongText, cn, formatDateTime } from '@iap/ui'
 import { DataTableColumnHeader } from '@shared/tables'

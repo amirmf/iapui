@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { useDamageCodeStore } from '@features/damage-codes/model/damage-code-store'
+import { DamageCodeDeleteMethodDialog } from '@features/damage-codes/components/damage-code-dialogs/damage-code-delete-method-dialog'
+import { DamageCodeFormDialog } from '@features/damage-codes/components/damage-code-dialogs/damage-code-form-dialog'
+import { DamageCodeViewDialog } from '@features/damage-codes/components/damage-code-dialogs/damage-code-view-dialog'
+import { useDamageCodeColumns } from '@features/damage-codes/components/damage-code-table/damage-code-columns'
+import { DamageCodeDataTableTools } from '@features/damage-codes/components/damage-code-table/damage-code-data-table-tools'
+import { DamageCodePricingDialog } from '@features/damage-codes/components/pricings/damage-code-pricing-dialog'
+import { DamageCodePricingsSection } from '@features/damage-codes/components/pricings/damage-code-pricings-section'
 import {
   parseDamageCodeTableSearch,
   toDamageCodeApiFilters,
   toDamageCodeTableSearch,
 } from '@features/damage-codes/model/damage-code-table-state'
-import { useDamageCodeColumns } from '@features/damage-codes/pages/index/components/damage-code-columns'
-import { DamageCodeDataTableTools } from '@features/damage-codes/pages/index/components/damage-code-data-table-tools'
-import { DamageCodeDeleteMethodDialog } from '@features/damage-codes/pages/index/components/damage-code-delete-method-dialog'
-import { DamageCodeFormDialog } from '@features/damage-codes/pages/index/components/damage-code-form-dialog'
-import { DamageCodePricingDialog } from '@features/damage-codes/pages/index/components/damage-code-pricing-dialog'
-import { DamageCodePricingsSection } from '@features/damage-codes/pages/index/components/damage-code-pricings-section'
-import { DamageCodeViewDialog } from '@features/damage-codes/pages/index/components/damage-code-view-dialog'
+import { useDamageCodeStore } from '@features/damage-codes/model/store/damage-code-store'
 import { damageCodeService } from '@features/damage-codes/services/damage-code-service'
 import type { DamageCode, DamageCodeSummary } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'

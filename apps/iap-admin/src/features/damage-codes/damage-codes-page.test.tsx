@@ -1,4 +1,4 @@
-import { useDamageCodeStore } from '@features/damage-codes/model/damage-code-store'
+import { useDamageCodeStore } from '@features/damage-codes/model/store/damage-code-store'
 import { i18nReady } from '@shared/i18n/i18n'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, screen } from '@testing-library/react'
@@ -11,41 +11,41 @@ const { pricingSection } = vi.hoisted(() => ({
 }))
 
 vi.mock(
-  '@features/damage-codes/pages/index/components/damage-code-pricings-section',
+  '@features/damage-codes/components/pricings/damage-code-pricings-section',
   () => ({ DamageCodePricingsSection: pricingSection })
 )
 vi.mock(
-  '@features/damage-codes/pages/index/components/damage-code-columns',
+  '@features/damage-codes/components/damage-code-table/damage-code-columns',
   () => ({
     useDamageCodeColumns: () => [],
   })
 )
 vi.mock(
-  '@features/damage-codes/pages/index/components/damage-code-data-table-tools',
+  '@features/damage-codes/components/damage-code-table/damage-code-data-table-tools',
   () => ({
     DamageCodeDataTableTools: () => null,
   })
 )
 vi.mock(
-  '@features/damage-codes/pages/index/components/damage-code-delete-method-dialog',
+  '@features/damage-codes/components/damage-code-dialogs/damage-code-delete-method-dialog',
   () => ({
     DamageCodeDeleteMethodDialog: () => null,
   })
 )
 vi.mock(
-  '@features/damage-codes/pages/index/components/damage-code-form-dialog',
+  '@features/damage-codes/components/damage-code-dialogs/damage-code-form-dialog',
   () => ({
     DamageCodeFormDialog: () => null,
   })
 )
 vi.mock(
-  '@features/damage-codes/pages/index/components/damage-code-pricing-dialog',
+  '@features/damage-codes/components/pricings/damage-code-pricing-dialog',
   () => ({
     DamageCodePricingDialog: () => null,
   })
 )
 vi.mock(
-  '@features/damage-codes/pages/index/components/damage-code-view-dialog',
+  '@features/damage-codes/components/damage-code-dialogs/damage-code-view-dialog',
   () => ({
     DamageCodeViewDialog: () => null,
   })
