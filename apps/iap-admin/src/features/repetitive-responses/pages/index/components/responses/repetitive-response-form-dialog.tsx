@@ -1,0 +1,14 @@
+import { useRepetitiveResponse, useRepetitiveResponseGroup } from '@features/repetitive-responses/model/repetitive-response-store'
+import { repetitiveResponseService } from '@features/repetitive-responses/services/repetitive-response-service'
+import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, Textarea } from '@iap/ui'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+export function RepetitiveResponseFormDialog() {
+  const { t } = useTranslation(); const queryClient = useQueryClient(); const response = useRepetitiveResponse(); const group = useRepetitiveResponseGroup()
+  const isEdit = Boolean(response.currentRow?.id); const open = response.open === 'create' || response.open === 'edit'
+  const [title, setTitle] = useState(''); const [description, setDescription] = useState(''); const [seqNum, setSeqNum] = useState(0); const [usageCount, setUsageCount] = useState(0)
+  const mutation = useMutation({ mutationFn: () => { const data = { description, repetitiveResponseGroupId: response.currentRow?.repetitiveResponseGroupId ?? group.currentRow?.id ?? '', seqNum, title, usageCount }; return isEdit && response.currentRow?.id ? repetitiveResponseService.update(response.currentRow.id, data) : repetitiveResponseService.create(data) }, onSuccess: async () => { await queryClient.invalidateQueries({ queryKey: ['repetitive-responses'] }); response.setOpen(null) } })
+  return <Dialog onOpenChange={(next) => !next && response.setOpen(null)} open={open}><DialogContent><DialogHeader><DialogTitle>{t(isEdit ? 'repetitiveResponses.dialog.edit' : 'repetitiveResponses.dialog.create')}</DialogTitle></DialogHeader><form className='space-y-4' onSubmit={(event) => { event.preventDefault(); mutation.mutate() }}><label className='grid gap-2'>{t('repetitiveResponses.dialog.fields.title')}<Input onChange={(event) => setTitle(event.target.value)} required value={title} /></label><label className='grid gap-2'>{t('repetitiveResponses.dialog.fields.response')}<Textarea onChange={(event) => setDescription(event.target.value)} required value={description} /></label><div className='grid grid-cols-2 gap-4'><label className='grid gap-2'>{t('repetitiveResponses.dialog.fields.seqNum')}<Input onChange={(event) => setSeqNum(Number(event.target.value || 0))} type='number' value={seqNum} /></label><label className='grid gap-2'>{t('repetitiveResponses.dialog.fields.usageCount')}<Input onChange={(event) => setUsageCount(Number(event.target.value || 0))} type='number' value={usageCount} /></label></div><DialogFooter><Button disabled={mutation.isPending} type='submit'>{t(isEdit ? 'form.update' : 'form.submit')}</Button></DialogFooter></form></DialogContent></Dialog>
+}
