@@ -109,6 +109,106 @@
       "usernameRequired": "کد ملی الزامی است."
     }
   },
+  "repetitiveResponses": {
+    "title": "مدیریت پاسخ‌های تکراری",
+    "description": "مدیریت پاسخ‌های آماده برای رسیدگی سریع‌تر به خسارت.",
+    "create": "ایجاد پاسخ تکراری",
+    "refresh": "بروزرسانی",
+    "noRepetitiveResponses": "هیچ پاسخ تکراری یافت نشد.",
+    "columns": {
+      "seqNum": "شماره ترتیب",
+      "title": "عنوان",
+      "response": "پاسخ",
+      "usageCount": "تعداد استفاده",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "filters": {
+      "title": "عنوان",
+      "response": "پاسخ",
+      "status": "وضعیت"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "suspended": "تعلیق شده",
+      "pending": "در انتظار"
+    },
+    "dialog": {
+      "viewDetails": "مشاهده جزئیات",
+      "create": "ایجاد پاسخ تکراری",
+      "edit": "ویرایش پاسخ تکراری",
+      "delete": "حذف پاسخ تکراری",
+      "softDelete": "حذف نرم",
+      "fields": {
+        "seqNum": "شماره ترتیب",
+        "title": "عنوان",
+        "response": "پاسخ",
+        "group": "گروه",
+        "usageCount": "تعداد استفاده",
+        "status": "وضعیت",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان"
+      },
+      "placeholders": {
+        "group": "انتخاب گروه"
+      }
+    },
+    "validation": {
+      "titleRequired": "عنوان الزامی است",
+      "responseRequired": "پاسخ الزامی است",
+      "groupRequired": "انتخاب گروه الزامی است"
+    },
+    "softDeleteDesc": "حذف نرم تاریخ پایان را تنظیم کرده و پاسخ را بدون حذف دائمی غیرفعال می‌کند.",
+    "messages": {
+      "created": "پاسخ تکراری ایجاد شد",
+      "createError": "ایجاد پاسخ تکراری ناموفق بود",
+      "updated": "پاسخ تکراری به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی پاسخ تکراری ناموفق بود",
+      "deleted": "پاسخ تکراری حذف شد",
+      "deleteError": "حذف پاسخ تکراری ناموفق بود",
+      "softDeleted": "پاسخ تکراری به صورت نرم حذف شد",
+      "softDeleteError": "حذف نرم پاسخ تکراری ناموفق بود"
+    },
+    "tab": {
+      "responses": "پاسخ‌ها",
+      "groups": "گروه‌ها"
+    }
+  },
+  "repetitiveResponseGroups": {
+    "title": "مدیریت گروه‌های پاسخ تکراری",
+    "create": "ایجاد گروه",
+    "refresh": "بروزرسانی",
+    "noGroups": "هیچ گروه پاسخ تکراری یافت نشد.",
+    "columns": {
+      "title": "عنوان",
+      "seqNum": "شماره ترتیب"
+    },
+    "filters": {
+      "title": "عنوان"
+    },
+    "dialog": {
+      "viewDetails": "مشاهده جزئیات",
+      "create": "ایجاد گروه",
+      "edit": "ویرایش گروه",
+      "fields": {
+        "title": "عنوان",
+        "seqNum": "شماره ترتیب"
+      }
+    },
+    "validation": {
+      "titleRequired": "عنوان الزامی است"
+    },
+    "messages": {
+      "created": "گروه پاسخ تکراری ایجاد شد",
+      "createError": "ایجاد گروه پاسخ تکراری ناموفق بود",
+      "updated": "گروه پاسخ تکراری به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی گروه پاسخ تکراری ناموفق بود",
+      "noSelectionError": "هیچ گروه پاسخ تکراری انتخاب نشده است"
+    },
+    "entityName": "گروه پاسخ تکراری"
+  },
   "damageCodes": {
     "title": "مدیریت کدهای خسارت",
     "description": "مدیریت همه کد خسارت با اطلاعات قیمت‌گذاری.",

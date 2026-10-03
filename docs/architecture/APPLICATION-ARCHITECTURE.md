@@ -86,13 +86,20 @@ When implementation begins:
 
 Owns product- and screen-specific behavior. Folders should mirror stable customer or admin journeys. A feature may contain `services`, `model`, `queries`, `schemas`, `ui`, and a public `index.ts` as needed.
 
-Every navigable page owned by a feature has a matching directory under that
-feature's `pages/` directory. The directory mirrors the static page kind below
-the feature root and contains the page component: `pages/index/` for the
+Every navigable page owned by a feature normally has a matching directory under
+that feature's `pages/` directory. The directory mirrors the static page kind
+below the feature root and contains the page component: `pages/index/` for the
 feature root URL, `pages/create/` for `/create`, and `pages/edit/` for a page
 such as `/$entityId/edit`. Dynamic identifiers are route input and must not
 create a `$entityId` feature directory. This gives each URL one clear feature
-owner without moving behavior into `src/app`. Code shared only by sibling page
+owner without moving behavior into `src/app`.
+
+For a feature that owns only its root route and has no sibling page journeys,
+the page component may live directly in the feature root and its page-exclusive
+component groups may live under `components/`. This avoids a redundant
+`pages/index/` wrapper while retaining the same ownership boundary. If a second
+page journey is introduced later, move the root page and its exclusive UI into
+the corresponding `pages/` directories. Code shared only by sibling page
 directories belongs in the nearest `shared/` directory; reusable capability
 must still follow the normal `modules` or application-wide `shared` ownership
 rules.
@@ -103,10 +110,11 @@ needed. Create a lowercase-kebab-case component directory only when it owns
 colocated tests, hooks, styles, private helpers, or a group of smaller related
 components and the directory makes that group easier to navigate. A
 page-exclusive component or component group belongs under
-`pages/<page>/components/`; a component reused by multiple pages of the feature
-belongs under `ui/`. Do not create a feature-wide `components/` dumping ground,
-and do not place a component in `ui/` merely because it is visually reusable
-when it is owned by one page.
+`pages/<page>/components/` (or under the root `components/` group for the
+single-root-route exception); a component reused by multiple pages of the
+feature belongs under `ui/`. Do not create a feature-wide `components/` dumping
+ground, and do not place a component in `ui/` merely because it is visually
+reusable when it is owned by one page.
 
 Feature-local client state is organized under `model/`:
 

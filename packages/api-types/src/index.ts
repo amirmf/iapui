@@ -40,6 +40,7 @@ export type {
 export * from './insurance-policy'
 export * from './person-special-disease'
 export * from './party'
+export * from './repetitive-responses'
 export * from './support'
 export * from './support-ticket'
 export * from './user-account'
