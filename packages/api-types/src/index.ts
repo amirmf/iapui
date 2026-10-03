@@ -38,6 +38,7 @@ export type {
   UpdateDocTypeRequest,
 } from './doc-type'
 export * from './insurance-policy'
+export * from './outpatient-doc-acceptance'
 export * from './person-special-disease'
 export * from './party'
 export * from './repetitive-responses'

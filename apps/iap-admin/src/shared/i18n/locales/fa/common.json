@@ -1705,5 +1705,66 @@
       "view": "مشاهده",
       "viewDetails": "مشاهده جزئیات تیکت"
     }
+  },
+  "outpatientDocAcceptances": {
+    "status": {
+      "SUBMIT": "ثبت شده",
+      "SENT_TO_SERVER": "ارسال به سرور",
+      "DELETED": "حذف شده",
+      "REJECT": "رد شده",
+      "FAILED": "ناموفق",
+      "SUCCESS": "موفق"
+    },
+    "wsStatus": {
+      "FAILD": "ناموفق",
+      "PROGRESS": "در حال انجام",
+      "DONE": "انجام شد"
+    }
+  },
+  "claimReports": {
+    "title": "پذیرش و پرونده‌ها",
+    "actions": {
+      "refresh": "به‌روزرسانی",
+      "downloadExcel": "دانلود اکسل",
+      "downloadPdf": "دانلود PDF",
+      "openClaimRequests": "مشاهده درخواست‌های خسارت"
+    },
+    "columns": {
+      "exId": "شماره پذیرش فناوران",
+      "deliveryDate": "تاریخ تحویل",
+      "totalAmount": "مبلغ کل",
+      "policyId": "شناسه بیمه‌نامه",
+      "opUnitId": "شناسه واحد عملیاتی",
+      "status": "وضعیت پذیرش",
+      "outpatientClaim": {
+        "claimNo": "شماره پرونده فناوران",
+        "inqueryStatusTitle": "عنوان وضعیت استعلام پرونده",
+        "status": "وضعیت پرونده"
+      },
+      "updatedAt": "آخرین به‌روزرسانی",
+      "claimCount": "تعداد خسارت",
+      "extLocationId": "کد شعبه",
+      "inqueryStatusId": "شناسه وضعیت استعلام"
+    },
+    "filters": {
+      "exId": "شماره پذیرش فناوران",
+      "policyId": "شناسه بیمه‌نامه",
+      "opUnitId": "شناسه واحد عملیاتی",
+      "status": "وضعیت پذیرش",
+      "deliveryDateFrom": "تاریخ تحویل از",
+      "deliveryDateTo": "تاریخ تحویل تا",
+      "outpatientClaim": {
+        "exId": "شماره پرونده فناوران",
+        "claimNo": "شماره پرونده فناوران",
+        "inqueryStatusTitle": "عنوان وضعیت استعلام",
+        "status": "وضعیت پرونده"
+      }
+    },
+    "messages": {
+      "noClaimReports": "گزارش خسارتی یافت نشد",
+      "excelDownloaded": "فایل اکسل دانلود شد",
+      "pdfDownloaded": "فایل PDF دانلود شد",
+      "excelDownloadFailed": "دانلود اکسل ناموفق بود"
+    }
   }
 }

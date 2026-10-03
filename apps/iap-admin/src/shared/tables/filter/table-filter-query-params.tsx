@@ -20,17 +20,30 @@ import {
 } from '@shared/tables/filter/use-sync-query-params-table-filter'
 import { useLocation, useRouter } from '@tanstack/react-router'
 
+const defaultControlQueryParamKeys = [
+  pageNumberQueryParamKey,
+  pageSizeQueryParamKey,
+  sortQueryParamKey,
+  directionQueryParamKey,
+]
+
 export function TableFilterQueryParams(
   props: TableFilterBaseProps & {
+    controlQueryParamKeys?: readonly string[]
     ignoreQueryParams?: readonly string[]
+    pageQueryParamKey?: string
+    resetPageToFirst?: boolean
     showReset?: boolean
   }
 ) {
   const {
     className,
+    controlQueryParamKeys = defaultControlQueryParamKeys,
     defaultVisibleFilterCount = 6,
     ignoreQueryParams = [],
     labels,
+    pageQueryParamKey = pageNumberQueryParamKey,
+    resetPageToFirst = false,
     showReset = true,
     ...filterProps
   } = props
@@ -39,14 +52,8 @@ export function TableFilterQueryParams(
   const [expanded, setExpanded] = useState(false)
   const values = location.search as TableFilterValues
   const ignoredIds = useMemo(
-    () => [
-      pageNumberQueryParamKey,
-      pageSizeQueryParamKey,
-      sortQueryParamKey,
-      directionQueryParamKey,
-      ...ignoreQueryParams,
-    ],
-    [ignoreQueryParams]
+    () => [...controlQueryParamKeys, ...ignoreQueryParams],
+    [controlQueryParamKeys, ignoreQueryParams]
   )
   const onValueChange = useCallback(
     (id: string, value: TableFilterValue) => {
@@ -58,13 +65,23 @@ export function TableFilterQueryParams(
             id,
             value
           )
-          delete next[pageNumberQueryParamKey]
+          const page = next[pageQueryParamKey]
+          if (
+            resetPageToFirst &&
+            typeof page === 'string' &&
+            Number.isFinite(Number(page)) &&
+            Number(page) > 1
+          ) {
+            next[pageQueryParamKey] = '1'
+          } else {
+            delete next[pageQueryParamKey]
+          }
           return next
         },
         to: './',
       } as never)
     },
-    [router]
+    [pageQueryParamKey, resetPageToFirst, router]
   )
   const onReset = useCallback(() => {
     router.navigate({
