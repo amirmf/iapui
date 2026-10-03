@@ -5,6 +5,8 @@ export * from './bank-account'
 export * from './branch'
 export * from './common'
 export * from './claim-request'
+export * from './coverage'
+export * from './coverage-damage-code-appl'
 export * from './dashboard'
 export * from './damage-code'
 export {
