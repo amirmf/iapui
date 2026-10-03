@@ -1,9 +1,10 @@
+import { useMemo } from 'react'
+
 import { RepetitiveResponseGroupRowActions } from '@features/repetitive-responses/pages/index/components/groups/repetitive-response-group-row-actions'
 import type { RepetitiveResponseGroup } from '@iap/api-types'
 import { LongText } from '@iap/ui'
 import { DataTableColumnHeader } from '@shared/tables'
 import { createColumnHelper } from '@tanstack/react-table'
-import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const columnHelper = createColumnHelper<RepetitiveResponseGroup>()
@@ -26,7 +27,9 @@ export function useRepetitiveResponseGroupColumns() {
         ),
       }),
       columnHelper.accessor('seqNum', {
-        cell: (context) => <span className='w-20 text-sm'>{context.getValue() ?? '-'}</span>,
+        cell: (context) => (
+          <div className='w-20 text-sm'>{context.getValue() ?? '-'}</div>
+        ),
         header: ({ column }) => (
           <DataTableColumnHeader
             column={column}
@@ -35,9 +38,11 @@ export function useRepetitiveResponseGroupColumns() {
         ),
       }),
       columnHelper.display({
-        cell: (context) => <RepetitiveResponseGroupRowActions row={context.row} />,
+        cell: (context) => (
+          <RepetitiveResponseGroupRowActions row={context.row} />
+        ),
         id: 'actions',
-        meta: { className: 'sticky left-0 bg-background' },
+        meta: { className: 'sticky left-0 bg-background max-w-22 w-22' },
       }),
     ],
     [t]

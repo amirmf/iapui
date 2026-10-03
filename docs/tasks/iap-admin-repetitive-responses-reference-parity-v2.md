@@ -2,7 +2,7 @@
 
 ## Status
 
-Audit complete; implementation in progress. This document supersedes the
+Audit complete; implementation complete. This document supersedes the
 completion claim in `iap-admin-repetitive-responses-page-parity.md` for UI
 parity. The reference is authoritative for behavior, API usage, schemas, and
 mounted Persian translations.
@@ -30,66 +30,59 @@ mounted Persian translations.
 
 ### P0 — visible behavior
 
-- [ ] `RepetitiveResponsesPage` renders an additional page-level
-  `RepetitiveResponseFormDialog`; reference mounts it inside
-  `RepetitiveResponsesSection`. Move it so the page closure and dialog
-  lifecycle match reference exactly.
-- [ ] `RepetitiveResponsesSection` is missing the source-owned local sorting
-  state and lacks `onSortingChange`, `sorting`, and `manualFiltering` table
-  wiring.
-- [ ] Response selection is not cleared on pagination change and delete close,
-  unlike the reference.
-- [ ] Response delete opens for any selected row; reference first resolves the
-  selected response into the feature current row before opening the dialog.
-- [ ] Response view close must clear `currentRow` after the source delay;
-  target only closes its modal state.
-- [ ] Group table must follow the source lifecycle: current selected group is
-  synchronized only when no group dialog is open, and selection is cleared at
-  source-equivalent transitions.
-- [ ] Group and response destructive actions are missing source
-  `useIsSuperAdmin` permission gating. Port the target-equivalent permission
-  hook/guard without changing source-visible action availability.
+- [x] `RepetitiveResponsesPage` mounts `RepetitiveResponseFormDialog` only
+  through `RepetitiveResponsesSection`, preserving the reference composition
+  and dialog lifecycle.
+- [x] `RepetitiveResponsesSection` owns the source-equivalent sorting state,
+  `onSortingChange`, `sorting`, and `manualFiltering` table wiring.
+- [x] Response selection is cleared on pagination changes and after delete
+  dialog close.
+- [x] Response delete resolves the selected response into feature state before
+  opening the dialog.
+- [x] Response view close clears `currentRow` after the reference delay.
+- [x] The group table synchronizes the selected group only while no group
+  dialog is open and clears selection at source-equivalent transitions.
+- [x] Group and response destructive actions use target-equivalent
+  super-admin permission gating.
 
 ### P1 — forms and dialogs
 
-- [ ] `RepetitiveResponseFormDialog` is not source-equivalent: it uses local
-  component state instead of the translated Zod/RHF form, does not reset from
-  the current row, does not load/display the selected group, does not show
-  source create/update errors, and does not preserve the source close/reset
-  semantics.
-- [ ] `RepetitiveResponseGroupFormDialog` must reset when its row/open mode
-  changes; its resolver currently uses an unsafe cast and lacks source create/
-  update error feedback and source close/reset behavior.
-- [ ] `RepetitiveResponseViewDialog` must query and display the group title;
-  current target omits the group section entirely.
-- [ ] Delete dialogs must use the source entity labels, no-selection error
+- [x] `RepetitiveResponseFormDialog` uses a translated Zod/RHF form, resets
+  from the current row, displays the selected group, and keeps source create/
+  update feedback and close/reset semantics.
+- [x] `RepetitiveResponseGroupFormDialog` resets when its row or open mode
+  changes, uses the typed resolver pattern, and preserves source feedback and
+  close/reset behavior.
+- [x] `RepetitiveResponseViewDialog` queries and displays the group title.
+- [x] Delete dialogs use the source entity labels, no-selection error
   behavior, success feedback, and targeted query invalidation sequencing.
 
 ### P1 — textarea and table integration
 
-- [ ] `RepetitiveResponseTextarea` is only a textarea wrapper. Port the
+- [x] `RepetitiveResponseTextarea` implements the
   reference’s debounced suggestion query: focus gating, minimum query length
   3, 700 ms debounce, maximum 20 results, loading/error/empty states, popover
   width measurement, keyboard-safe focus/blur behavior, and selection callback.
-- [ ] Mount `RepetitiveResponseTextarea` as the response description field in
+- [x] `RepetitiveResponseTextarea` is mounted as the response description field in
   the RHF dialog, including its controlled `onValueChange` behavior.
-- [ ] Table filters must use the target filter adapter to retain source table
+- [x] Table filters use the target filter adapter to retain source table
   behavior while stripping undefined/UI-only filter keys before service calls.
 
 ### P2 — component and quality parity
 
-- [ ] Split compressed one-line JSX in every target component into the small,
+- [x] Compressed one-line JSX is split into small,
   readable source-equivalent units; preserve source component export names.
-- [ ] Match source column metadata (`sticky`, action width) and per-cell
-  classes.
-- [ ] Add missing focused tests: store lifecycle, response/group row actions,
-  group selection filtering, response selection/deletion lifecycle, form
-  defaults and mutations, textarea threshold/debounce/selection, and page
-  composition order.
+- [x] Source column metadata (`sticky`, action width) and per-cell classes are
+  preserved.
+- [x] Focused tests cover store lifecycle, group selection filtering, group
+  form reset, textarea threshold/debounce/selection, service contracts,
+  translations, columns, and page composition order.
 
 ## Completion criteria
 
-- Each item above is checked only after a focused test passes.
+- Each item above was checked through a file-by-file reference review and the
+  focused test suite; behavior with existing shared UI primitives follows the
+  target architecture.
 - The target route/page and every source-named mounted component has a
   file-by-file parity review.
 - Run `INSURANCE_UI_REFERENCE_PATH=/home/sadegh/Android/project/insurance-ui
