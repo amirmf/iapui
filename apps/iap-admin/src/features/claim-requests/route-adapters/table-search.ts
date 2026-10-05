@@ -1,7 +1,6 @@
+import { CLAIM_REQUEST_FEATURE_QUERY_KEY } from '@features/claim-requests/route-adapters/claim-request-feature'
 import type { TableFilterSearch } from '@shared/tables'
 import type { PaginationState, SortingState } from '@tanstack/react-table'
-
-import { CLAIM_REQUEST_FEATURE_QUERY_KEY } from '../model/claim-request-feature'
 
 export const claimRequestPageNumberSearchKey = 'page'
 export const claimRequestPageSizeSearchKey = 'size'

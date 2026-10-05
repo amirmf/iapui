@@ -1,16 +1,16 @@
-import { describe, expect, it } from 'vitest'
-
-import { useClaimRequestStore } from '../context/store/claim-request-store'
-import { CLAIM_REQUEST_FEATURES } from '../model/claim-request-feature'
+import { useClaimRequestStore } from '@features/claim-requests/context/store/claim-request-store'
+import { CLAIM_REQUEST_FEATURES } from '@features/claim-requests/route-adapters/claim-request-feature'
 import {
   getClaimRequestQuickStatus,
   toClaimRequestApiFilters,
-} from '../model/claim-request-filters'
+} from '@features/claim-requests/route-adapters/claim-request-filters'
+import { describe, expect, it } from 'vitest'
+
 import {
   hasClaimRequestPageChanged,
   parseClaimRequestTableSearch,
   toClaimRequestTableSearch,
-} from './claim-request-table-state'
+} from './table-search'
 
 describe('claim request table URL state', () => {
   it('matches the reference pagination and sorting query contract', () => {

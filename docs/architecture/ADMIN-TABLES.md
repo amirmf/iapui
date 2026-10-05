@@ -9,7 +9,10 @@ server-state, routing, exports, and application localization.
 
 Features own column definitions, API request functions, query keys, route
 search validation, filter identifiers, permissions, and product-specific empty
-states. They import only the public `@shared/tables` entry point.
+states. URL-synchronized table state and its validation live in the owning
+page's `route-adapters/` directory (or in the feature's `route-adapters/`
+directory for a single-root-route feature). They import only the public
+`@shared/tables` entry point.
 
 `shared/tables/index.ts` is deliberately the only public entry point.
 Implementation is organized by capability: `data-table/` owns base table

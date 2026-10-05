@@ -1,5 +1,9 @@
 import { useMemo } from 'react'
 
+import {
+  type DashboardFilterValues,
+  toDashboardReportFilters,
+} from '@features/dashboard/route-adapters/report-filters'
 import type {
   AssigneeStatusCountReport,
   AssigneeStatusSumReport,
@@ -8,10 +12,6 @@ import { PivotTable, type PivotValueField } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-import {
-  type DashboardFilterValues,
-  toDashboardReportFilters,
-} from '../model/report-filters'
 import { dashboardService } from '../services/dashboard-service'
 import { DashboardFilters as DashboardFiltersForm } from './dashboard-filters'
 import { DashboardReportHeader } from './dashboard-report-header'

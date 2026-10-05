@@ -1,4 +1,4 @@
-export * from './model/doc-type-route-search-schema'
+export * from './pages/index/route-adapters/route-search-schema'
 export * from './pages/create/doc-type-create-page'
 export * from './pages/edit/doc-type-edit-page'
 export * from './pages/form-builder/doc-type-form-builder-page'

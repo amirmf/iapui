@@ -11,7 +11,7 @@ import {
   parseDocTypeTableSearch,
   toDocTypeApiFilters,
   toDocTypeTableSearch,
-} from '@features/doc-types/queries/doc-type-table-state'
+} from '@features/doc-types/pages/index/route-adapters/table-search'
 import type { AdminDocType } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'
 import type { ApiFilterParams } from '@iap/shared-lib'

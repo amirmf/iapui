@@ -15,7 +15,7 @@ for local client-state coordination.
   `context/provider/`.
 - Keep page-private components and state under their owning `pages/<page>/`
   boundary when they are not shared by another page of the feature.
-- Reclassify non-schema table, filter, and route-state adapters out of `model/`.
+- Reclassify non-schema table, filter, and Router adapters out of `model/`.
 
 ## Migration order
 
@@ -36,5 +36,7 @@ for local client-state coordination.
 
 Complete. Application and workspace-package components use `components/`,
 except for the intentional `@iap/ui` package name. Client state uses the
-`context/store/` and `context/provider/` boundaries, while table/route-control
-adapters use `queries/` rather than `model/`.
+`context/store/` and `context/provider/` boundaries. Table/route-control
+adapters are owned by `route-adapters/` beneath their page (or beneath the
+feature root for a single-root-route feature), while `queries/` is reserved for
+TanStack Query definitions.

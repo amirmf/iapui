@@ -1,5 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
 
+import {
+  type ClaimReportTableSearch,
+  parseClaimReportTableSearch,
+  toClaimReportTableSearch,
+} from '@features/claim-reports/route-adapters/table-search'
 import type {
   OutpatientDocAcceptance,
   PageOutpatientDocAcceptance,
@@ -21,11 +26,6 @@ import { useTranslation } from 'react-i18next'
 import { useClaimReportColumns } from './components/claim-report-columns'
 import { ClaimReportDataTableToolbar } from './components/claim-report-data-table-toolbar'
 import { ClaimReportsSurface } from './components/claim-reports-surface'
-import {
-  type ClaimReportTableSearch,
-  parseClaimReportTableSearch,
-  toClaimReportTableSearch,
-} from './model/claim-report-table-search'
 import { outpatientDocAcceptanceService } from './services/outpatient-doc-acceptance-service'
 
 const EMPTY_CLAIM_REPORTS: OutpatientDocAcceptance[] = []

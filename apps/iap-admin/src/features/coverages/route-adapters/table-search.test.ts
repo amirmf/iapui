@@ -4,7 +4,7 @@ import {
   parseCoverageTableSearch,
   toCoverageApiFilters,
   toCoverageTableSearch,
-} from './coverage-table-state'
+} from './table-search'
 
 describe('coverage table state', () => {
   it('parses page, sorting, and feature filters from the URL', () => {

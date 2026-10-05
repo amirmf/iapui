@@ -1,9 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import {
-  parseTicketTableSearch,
-  toTicketTableSearch,
-} from './ticket-table-state'
+import { parseTicketTableSearch, toTicketTableSearch } from './table-search'
 
 describe('ticket table URL state', () => {
   it('matches the reference ticket pagination and sorting URL contract', () => {

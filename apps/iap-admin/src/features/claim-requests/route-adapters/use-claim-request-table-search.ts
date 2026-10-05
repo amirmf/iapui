@@ -1,23 +1,22 @@
 import { useCallback, useMemo } from 'react'
 
-import { isDoctorRole, useAuthSession } from '@iap/auth'
-import { type TableFilterSearch } from '@shared/tables'
-import { useRouter } from '@tanstack/react-router'
-import { produce } from 'immer'
-
-import {
-  parseClaimRequestTableSearch,
-  toClaimRequestTableSearch,
-} from '../queries/claim-request-table-state'
 import {
   CLAIM_REQUEST_FEATURES,
   CLAIM_REQUEST_FEATURE_QUERY_KEY,
   CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS,
-} from './claim-request-feature'
+} from '@features/claim-requests/route-adapters/claim-request-feature'
 import {
   type ClaimRequestQuickStatus,
   getClaimRequestQuickStatus,
-} from './claim-request-filters'
+} from '@features/claim-requests/route-adapters/claim-request-filters'
+import {
+  parseClaimRequestTableSearch,
+  toClaimRequestTableSearch,
+} from '@features/claim-requests/route-adapters/table-search'
+import { isDoctorRole, useAuthSession } from '@iap/auth'
+import { type TableFilterSearch } from '@shared/tables'
+import { useRouter } from '@tanstack/react-router'
+import { produce } from 'immer'
 
 function toSearchRecord(value: Record<string, unknown>): TableFilterSearch {
   return Object.fromEntries(

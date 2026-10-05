@@ -1,7 +1,7 @@
+import { useAuthNavigation } from '@features/auth/route-adapters/use-auth-navigation'
 import { LoginPage, useLoginPageAccess } from '@iap/auth'
 import { authBrand } from '@shared/config/auth-brand'
 
-import { useAuthNavigation } from '../model/use-auth-navigation'
 import { AuthPageLoading } from './auth-page-loading'
 
 export function Login() {

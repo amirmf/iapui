@@ -1,18 +1,18 @@
 import { useMemo } from 'react'
 
 import {
+  claimReportDirectionQueryParamKey,
+  claimReportPageQueryParamKey,
+  claimReportPageSizeQueryParamKey,
+  claimReportSortQueryParamKey,
+} from '@features/claim-reports/route-adapters/table-search'
+import {
   type TableFilterBaseProps,
   TableFilterQueryParams,
 } from '@shared/tables'
 import { useTranslation } from 'react-i18next'
 
 import { getOutpatientDocAcceptanceStatusOptions } from '../constants/outpatient-doc-acceptance-status'
-import {
-  claimReportDirectionQueryParamKey,
-  claimReportPageQueryParamKey,
-  claimReportPageSizeQueryParamKey,
-  claimReportSortQueryParamKey,
-} from '../model/claim-report-table-search'
 
 const filterInputClassName = 'lg:w-full'
 const filterWrapperClassName = 'w-full sm:w-1/4 xl:w-1/5 px-1'

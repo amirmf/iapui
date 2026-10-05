@@ -8,12 +8,12 @@ import { BranchSyncButton } from '@features/branches/components/branch-sync-butt
 import { BranchesPageSurface } from '@features/branches/components/branches-page-surface'
 import { BranchProvider } from '@features/branches/context/provider/branch-provider'
 import { useBranchStore } from '@features/branches/context/store/branch-store'
+import { useBranchesData } from '@features/branches/queries/use-branches-data'
 import {
   parseBranchTableSearch,
   toBranchApiFilters,
   toBranchTableSearch,
-} from '@features/branches/queries/branch-table-state'
-import { useBranchesData } from '@features/branches/queries/use-branches-data'
+} from '@features/branches/route-adapters/table-search'
 import type { Branch } from '@iap/api-types'
 import { Button } from '@iap/ui'
 import { PaginatedDataTable, type TableFilterSearch } from '@shared/tables'

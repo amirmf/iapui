@@ -1,13 +1,13 @@
 import { useCallback, useState } from 'react'
 
+import {
+  type DashboardFilterValues,
+  toDashboardFilters,
+} from '@features/dashboard/route-adapters/report-filters'
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from '@iap/ui'
 import { useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
-import {
-  type DashboardFilterValues,
-  toDashboardFilters,
-} from '../model/report-filters'
 import { type ReportTab, isReportTab } from '../model/report-tabs'
 import { AgreementsReportTable } from './agreements-report-table'
 import { AssigneeReportTable } from './assignee-report-table'

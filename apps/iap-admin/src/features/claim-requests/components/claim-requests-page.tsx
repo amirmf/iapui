@@ -1,5 +1,12 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
+import {
+  CLAIM_REQUEST_FEATURES,
+  getClaimRequestFeature,
+} from '@features/claim-requests/route-adapters/claim-request-feature'
+import { toClaimRequestApiFilters } from '@features/claim-requests/route-adapters/claim-request-filters'
+import { toClaimRequestTableSearch } from '@features/claim-requests/route-adapters/table-search'
+import { useClaimRequestTableSearch } from '@features/claim-requests/route-adapters/use-claim-request-table-search'
 import { ClaimRequestsTicketsPage } from '@features/tickets'
 import type { ClaimRequest } from '@iap/api-types'
 import type { ApiFilterParams } from '@iap/shared-lib'
@@ -15,13 +22,6 @@ import { useTranslation } from 'react-i18next'
 
 import { ClaimRequestProvider } from '../context/provider/claim-request-provider'
 import { useClaimRequestStore } from '../context/store/claim-request-store'
-import {
-  CLAIM_REQUEST_FEATURES,
-  getClaimRequestFeature,
-} from '../model/claim-request-feature'
-import { toClaimRequestApiFilters } from '../model/claim-request-filters'
-import { useClaimRequestTableSearch } from '../model/use-claim-request-table-search'
-import { toClaimRequestTableSearch } from '../queries/claim-request-table-state'
 import { claimRequestService } from '../services/claim-request-service'
 import { ClaimRequestBulkCoreAiDialog } from './claim-request-bulk-core-ai-dialog'
 import { ClaimRequestBulkDeleteDialog } from './claim-request-bulk-delete-dialog'

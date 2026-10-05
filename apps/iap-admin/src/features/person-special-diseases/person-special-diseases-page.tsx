@@ -8,7 +8,7 @@ import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/
 import {
   parsePersonSpecialDiseaseTableSearch,
   toPersonSpecialDiseaseTableSearch,
-} from '@features/person-special-diseases/queries/person-special-disease-table-state'
+} from '@features/person-special-diseases/route-adapters/table-search'
 import type { PersonSpecialDisease } from '@iap/api-types'
 import { Button, cn } from '@iap/ui'
 import { personSpecialDiseaseService } from '@modules/person-special-diseases'

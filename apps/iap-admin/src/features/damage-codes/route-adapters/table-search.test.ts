@@ -4,7 +4,7 @@ import {
   parseDamageCodeTableSearch,
   toDamageCodeApiFilters,
   toDamageCodeTableSearch,
-} from './damage-code-table-state'
+} from './table-search'
 
 describe('damage-code table state', () => {
   it('keeps reference URL defaults and maps date ranges to API keys', () => {

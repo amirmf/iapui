@@ -4,7 +4,7 @@ import {
   parseBranchTableSearch,
   toBranchApiFilters,
   toBranchTableSearch,
-} from './branch-table-state'
+} from './table-search'
 
 describe('toBranchApiFilters', () => {
   it('preserves the reference filters and serializes the selected server sort', () => {

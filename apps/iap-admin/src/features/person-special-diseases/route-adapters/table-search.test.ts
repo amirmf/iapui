@@ -1,10 +1,10 @@
+import { personSpecialDiseaseRouteSearchSchema } from '@features/person-special-diseases/route-adapters/route-search-schema'
 import { describe, expect, it } from 'vitest'
 
-import { personSpecialDiseaseRouteSearchSchema } from '../model/person-special-disease-route-search-schema'
 import {
   parsePersonSpecialDiseaseTableSearch,
   toPersonSpecialDiseaseTableSearch,
-} from './person-special-disease-table-state'
+} from './table-search'
 
 describe('person special disease table URL state', () => {
   it('preserves every non-pagination filter while parsing the reference pagination contract', () => {

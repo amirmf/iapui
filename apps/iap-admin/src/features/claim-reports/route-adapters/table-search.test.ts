@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   parseClaimReportTableSearch,
   toClaimReportTableSearch,
-} from './claim-report-table-search'
+} from './table-search'
 
 describe('Claim Reports table URL state', () => {
   it('uses the reference page, size, sort, and direction query keys', () => {

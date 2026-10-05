@@ -4,7 +4,7 @@ import {
   parseDocTypeTableSearch,
   toDocTypeApiFilters,
   toDocTypeTableSearch,
-} from './doc-type-table-state'
+} from './table-search'
 
 describe('document-type table URL state', () => {
   it('matches the reference pagination and sorting URL contract', () => {

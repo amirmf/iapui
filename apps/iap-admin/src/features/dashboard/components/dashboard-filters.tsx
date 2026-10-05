@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 
+import type { DashboardFilterValues } from '@features/dashboard/route-adapters/report-filters'
 import {
   TableFilters,
   toApiFilterValues,
@@ -8,7 +9,6 @@ import {
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-import type { DashboardFilterValues } from '../model/report-filters'
 import { dashboardService } from '../services/dashboard-service'
 
 const textFilterIds = [

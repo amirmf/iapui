@@ -8,12 +8,12 @@ import { BankAccountHeaderActions } from '@features/bank-accounts/components/ban
 import { BankAccountsPageSurface } from '@features/bank-accounts/components/bank-accounts-page-surface'
 import { BankAccountProvider } from '@features/bank-accounts/context/provider/bank-account-provider'
 import { useBankAccountStore } from '@features/bank-accounts/context/store/bank-account-store'
+import { useBankAccountsData } from '@features/bank-accounts/queries/use-bank-accounts-data'
 import {
   parseBankAccountTableSearch,
   toBankAccountApiFilters,
   toBankAccountTableSearch,
-} from '@features/bank-accounts/queries/bank-account-table-state'
-import { useBankAccountsData } from '@features/bank-accounts/queries/use-bank-accounts-data'
+} from '@features/bank-accounts/route-adapters/table-search'
 import type { BankAccount } from '@iap/api-types'
 import { PaginatedDataTable, type TableFilterSearch } from '@shared/tables'
 import { useLocation, useRouter } from '@tanstack/react-router'

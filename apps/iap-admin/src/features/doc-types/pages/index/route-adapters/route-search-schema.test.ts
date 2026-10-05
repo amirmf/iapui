@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { docTypeRouteSearchSchema } from './doc-type-route-search-schema'
+import { docTypeRouteSearchSchema } from './route-search-schema'
 
 describe('docTypeRouteSearchSchema', () => {
   it('accepts the reference table URL state and rejects unknown search fields', () => {

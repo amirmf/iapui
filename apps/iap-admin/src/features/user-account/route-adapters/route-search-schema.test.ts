@@ -1,4 +1,4 @@
-import { userAccountRouteSearchSchema } from '@features/user-account/model/user-account-route-search-schema'
+import { userAccountRouteSearchSchema } from '@features/user-account/route-adapters/route-search-schema'
 import { describe, expect, it } from 'vitest'
 
 describe('userAccountRouteSearchSchema', () => {

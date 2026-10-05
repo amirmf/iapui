@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 
+import type { ClaimRequestQuickStatus } from '@features/claim-requests/route-adapters/claim-request-filters'
 import { useAuthSession } from '@iap/auth'
 import {
   type TableFilterBaseProps,
@@ -12,7 +13,6 @@ import {
   claimRequestAiStatusTranslationKeys,
   claimRequestStatusTranslationKeys,
 } from '../constants/claim-request-status'
-import type { ClaimRequestQuickStatus } from '../model/claim-request-filters'
 import { docTypeOptionsService } from '../services/doc-type-options-service'
 
 type ClaimRequestToolbarProps = {

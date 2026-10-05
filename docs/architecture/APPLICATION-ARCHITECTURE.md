@@ -84,7 +84,7 @@ When implementation begins:
 
 ### `src/features`
 
-Owns product- and screen-specific behavior. Folders should mirror stable customer or admin journeys. A feature may contain `components`, `model`, `context`, `services`, `queries`, and a public `index.ts` as needed.
+Owns product- and screen-specific behavior. Folders should mirror stable customer or admin journeys. A feature may contain `components`, `model`, `context`, `services`, `queries`, `route-adapters`, and a public `index.ts` as needed.
 
 Within application source (`features`, `modules`, and `shared`) and workspace
 packages, React components belong in a `components/` directory. Do not
@@ -144,6 +144,7 @@ features/<feature>/
 │   ├── store/                   # Zustand stores
 │   └── provider/                # React contexts and their providers
 ├── queries/                     # TanStack Query definitions
+├── route-adapters/              # feature ↔ Router adapters, when root-page-owned
 └── services/                    # backend-facing feature services
 ```
 
@@ -166,16 +167,37 @@ features/<feature>/
   should be moved to the target location when their owning feature is changed;
   a migration must update all affected imports and tests in the same change.
 
-`queries/` owns TanStack Query definitions and feature-local adapters that
-translate route or table controls into query inputs and API filters. These
-adapters are client control logic, not domain models, and therefore must not
-be placed in `model/`.
+`queries/` owns only TanStack Query definitions: query options, query keys,
+and feature-level query or mutation hooks. It must not contain route, URL, or
+table-control state.
+
+`route-adapters/` owns the feature's integration with TanStack Router. It
+contains route-search schemas, parsers and serializers, URL/table-filter
+adapters, route defaults, and navigation hooks or redirect adapters. For a
+page with its own `pages/<page>/` directory, use
+`pages/<page>/route-adapters/`; for a feature that uses the single-root-route
+exception, use `features/<feature>/route-adapters/`.
+
+For example, `route-adapters/table-search.ts` translates route or table
+controls into query inputs and API filters,
+`route-adapters/route-search-schema.ts` validates the page's search
+parameters, and `route-adapters/use-auth-navigation.ts` adapts an auth action
+to Router navigation. These are feature-to-Router contracts, not domain
+models, and must not be placed in `model/` or `queries/`.
+
+`route-adapters/` must not declare file routes, call `createFileRoute`, own
+route loaders, render UI, call backend services, or hold local UI/server state.
+Those responsibilities remain in `src/app/router`, `components/`, `services/`,
+`context/`, and `queries/` respectively. This keeps it distinct from the
+application's routing boundary while allowing features to own their Router
+integration.
 
 The same ownership vocabulary applies inside workspace packages: package-level
 models and schemas use `model/`, reusable React components use `components/`,
-and package-owned client state uses `context/store/` or `context/provider/`.
-React Context instances that are purely private implementation detail of one
-reusable component may remain colocated with that component.
+package-owned URL/router coordination uses `route-adapters/`, and package-owned
+client state uses `context/store/` or `context/provider/`. React Context
+instances that are purely private implementation detail of one reusable
+component may remain colocated with that component.
 
 Use `services/` for backend-facing feature or package services. Service files use the
 `<domain>-service.ts` naming convention, for example `auth-service.ts`.

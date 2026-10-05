@@ -10,7 +10,7 @@ import { toTicketApiFilters } from '@features/tickets/model/ticket-filters'
 import {
   parseTicketTableSearch,
   toTicketTableSearch,
-} from '@features/tickets/queries/ticket-table-state'
+} from '@features/tickets/pages/index/route-adapters/table-search'
 import { ticketService } from '@features/tickets/services/ticket-service'
 import type { SupportTicket } from '@iap/api-types'
 import { Button } from '@iap/ui'

@@ -1,17 +1,17 @@
 import { useLayoutEffect, useMemo } from 'react'
 
-import { cn } from '@iap/ui'
-import { useTranslation } from 'react-i18next'
-
-import { claimRequestStatusTranslationKeys } from '../constants/claim-request-status'
-import { CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS } from '../model/claim-request-feature'
+import { CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS } from '@features/claim-requests/route-adapters/claim-request-feature'
 import {
   type ClaimRequestQuickStatus,
   claimRequestQuickStatuses,
   claimRequestSentToBankQuickStatus,
   doctorClaimRequestQuickStatuses,
-} from '../model/claim-request-filters'
-import { useClaimRequestTableSearch } from '../model/use-claim-request-table-search'
+} from '@features/claim-requests/route-adapters/claim-request-filters'
+import { useClaimRequestTableSearch } from '@features/claim-requests/route-adapters/use-claim-request-table-search'
+import { cn } from '@iap/ui'
+import { useTranslation } from 'react-i18next'
+
+import { claimRequestStatusTranslationKeys } from '../constants/claim-request-status'
 
 const statusCounts = new Map<string, number>()
 

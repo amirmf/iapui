@@ -11,7 +11,7 @@ import {
   parseCoverageTableSearch,
   toCoverageApiFilters,
   toCoverageTableSearch,
-} from '@features/coverages/queries/coverage-table-state'
+} from '@features/coverages/route-adapters/table-search'
 import { coverageService } from '@features/coverages/services/coverage-service'
 import type { Coverage } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'

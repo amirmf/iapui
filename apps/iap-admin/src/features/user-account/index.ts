@@ -1,2 +1,2 @@
 export * from './components/user-accounts-page'
-export * from './model/user-account-route-search-schema'
+export * from './route-adapters/route-search-schema'

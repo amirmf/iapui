@@ -1,2 +1,2 @@
-export { claimReportRouteSearchSchema } from './model/claim-report-route-search-schema'
+export { claimReportRouteSearchSchema } from './route-adapters/route-search-schema'
 export { ClaimReportsPage } from './claim-reports-page'

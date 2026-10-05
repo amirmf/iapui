@@ -4,7 +4,7 @@ import {
   parseBankAccountTableSearch,
   toBankAccountApiFilters,
   toBankAccountTableSearch,
-} from './bank-account-table-state'
+} from './table-search'
 
 describe('bank account table state', () => {
   it('preserves the reference URL contract and page-size default', () => {

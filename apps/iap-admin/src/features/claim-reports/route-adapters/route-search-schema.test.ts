@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { claimReportRouteSearchSchema } from './claim-report-route-search-schema'
+import { claimReportRouteSearchSchema } from './route-search-schema'
 
 describe('claimReportRouteSearchSchema', () => {
   it('accepts the claim-report table filters and controls', () => {

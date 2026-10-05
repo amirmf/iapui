@@ -12,7 +12,7 @@ import {
   parseDamageCodeTableSearch,
   toDamageCodeApiFilters,
   toDamageCodeTableSearch,
-} from '@features/damage-codes/queries/damage-code-table-state'
+} from '@features/damage-codes/route-adapters/table-search'
 import { damageCodeService } from '@features/damage-codes/services/damage-code-service'
 import type { DamageCode, DamageCodeSummary } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'

@@ -147,11 +147,24 @@ async function checkLegacyDirectories(applicationSourceRoot) {
         )
       }
 
-      if (/-table-state\.[tj]sx?$/.test(fileName)) {
+      if (
+        /-(?:table-state|table-search|route-search-schema)\.[tj]sx?$/.test(
+          fileName
+        ) ||
+        /-table-search\.[tj]sx?$/.test(fileName)
+      ) {
         addViolation(
           'model-must-only-contain-data-contracts',
           modelFile,
-          'Move table state and route-control adapters to their owning page or query boundary.'
+          'Move table state and route-control adapters to the owning route-adapters/ directory.'
+        )
+      }
+
+      if (/from\s+['"]@tanstack\/react-router['"]/.test(source)) {
+        addViolation(
+          'model-must-not-own-route-adapters',
+          modelFile,
+          'Move TanStack Router state and navigation code to the owning route-adapters/ directory.'
         )
       }
     }
