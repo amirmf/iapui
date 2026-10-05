@@ -17,25 +17,18 @@ import { isSuperAdminRole, useAuthSession } from '@iap/auth'
 import type { ApiFilterParams } from '@iap/shared-lib'
 import { Button, Permission, cn } from '@iap/ui'
 import { docTypeService } from '@modules/doc-types'
-import { PaginatedDataTable, type TableFilterSearch } from '@shared/tables'
+import {
+  PaginatedDataTable,
+  type TableFilterSearch,
+  useTableFilterQueryParams,
+} from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter, useRouterState } from '@tanstack/react-router'
-import type {
-  PaginationState,
-  Row,
-  SortingState,
-  Updater,
-} from '@tanstack/react-table'
+import type { Row } from '@tanstack/react-table'
 import { Plus, RefreshCw, Trash2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 const EMPTY_DOC_TYPES: AdminDocType[] = []
-
-function resolveUpdater<T>(updater: Updater<T>, previous: T): T {
-  return typeof updater === 'function'
-    ? (updater as (value: T) => T)(previous)
-    : updater
-}
 
 function DocTypesContent() {
   const { t } = useTranslation()
@@ -44,7 +37,11 @@ function DocTypesContent() {
   const search = useRouterState({
     select: (state) => state.location.search as TableFilterSearch,
   })
-  const tableState = useMemo(() => parseDocTypeTableSearch(search), [search])
+  const tableState = useTableFilterQueryParams({
+    parse: parseDocTypeTableSearch,
+    search,
+    serialize: toDocTypeTableSearch,
+  })
   const columns = useDocTypeColumns()
   const currentRow = useDocTypeStore((state) => state.currentRow)
   const editingRowId = useDocTypeStore((state) => state.editingRowId)
@@ -91,50 +88,6 @@ function DocTypesContent() {
     tableState.pagination.pageSize,
   ])
 
-  const updateTableState = useCallback(
-    (
-      pagination: PaginationState,
-      sorting: SortingState,
-      filters = tableState.filters
-    ) => {
-      router.navigate({
-        replace: true,
-        search: toDocTypeTableSearch({ filters, pagination, sorting }) as never,
-        to: './',
-      })
-    },
-    [router, tableState.filters]
-  )
-  const onPaginationChange = useCallback(
-    (updater: Updater<PaginationState>) =>
-      updateTableState(
-        resolveUpdater(updater, tableState.pagination),
-        tableState.sorting
-      ),
-    [tableState.pagination, tableState.sorting, updateTableState]
-  )
-  const onSortingChange = useCallback(
-    (updater: Updater<SortingState>) =>
-      updateTableState(
-        tableState.pagination,
-        resolveUpdater(updater, tableState.sorting)
-      ),
-    [tableState.pagination, tableState.sorting, updateTableState]
-  )
-  const onFilterValuesChange = useCallback(
-    (updater: (previous: TableFilterSearch) => TableFilterSearch) =>
-      updateTableState(
-        { ...tableState.pagination, pageIndex: 0 },
-        tableState.sorting,
-        updater(tableState.filters)
-      ),
-    [
-      tableState.filters,
-      tableState.pagination,
-      tableState.sorting,
-      updateTableState,
-    ]
-  )
   const renderRow = useCallback(
     (row: Row<AdminDocType>) =>
       editingRowId === row.original.id ? (
@@ -189,7 +142,7 @@ function DocTypesContent() {
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
           <DocTypeDataTableToolbar
-            onValuesChange={onFilterValuesChange}
+            onValuesChange={tableState.onFiltersChange}
             values={tableState.filters}
           />
           <PaginatedDataTable<AdminDocType>
@@ -201,9 +154,9 @@ function DocTypesContent() {
             hasCheckboxes={canManage}
             isLoading={query.isLoading}
             manualSorting
-            onPaginationChange={onPaginationChange}
+            onPaginationChange={tableState.onPaginationChange}
             onRowSelectionChange={setRowSelection}
-            onSortingChange={onSortingChange}
+            onSortingChange={tableState.onSortingChange}
             pageCount={query.data?.totalPages ?? 0}
             pagination={tableState.pagination}
             renderRow={renderRow}

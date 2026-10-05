@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { DamageCodeDeleteMethodDialog } from '@features/damage-codes/components/damage-code-dialogs/damage-code-delete-method-dialog'
 import { DamageCodeFormDialog } from '@features/damage-codes/components/damage-code-dialogs/damage-code-form-dialog'
@@ -17,32 +17,29 @@ import { damageCodeService } from '@features/damage-codes/services/damage-code-s
 import type { DamageCode, DamageCodeSummary } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'
 import { Button, Permission, cn } from '@iap/ui'
-import { PaginatedDataTable, type TableFilterSearch } from '@shared/tables'
+import {
+  PaginatedDataTable,
+  type TableFilterSearch,
+  useTableFilterQueryParams,
+} from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
-import { useRouter, useRouterState } from '@tanstack/react-router'
-import type {
-  PaginationState,
-  SortingState,
-  Updater,
-  VisibilityState,
-} from '@tanstack/react-table'
+import { useRouterState } from '@tanstack/react-router'
+import type { VisibilityState } from '@tanstack/react-table'
 import { Plus, RefreshCw, Trash2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 const emptyDamageCodes: DamageCode[] = []
-const resolveUpdater = <T,>(updater: Updater<T>, previous: T) =>
-  typeof updater === 'function'
-    ? (updater as (value: T) => T)(previous)
-    : updater
-
 export function DamageCodesPage() {
   const { t } = useTranslation()
   const { user } = useAuthSession()
-  const router = useRouter()
   const search = useRouterState({
     select: (state) => state.location.search as TableFilterSearch,
   })
-  const tableState = useMemo(() => parseDamageCodeTableSearch(search), [search])
+  const tableState = useTableFilterQueryParams({
+    parse: parseDamageCodeTableSearch,
+    search,
+    serialize: toDamageCodeTableSearch,
+  })
   const columns = useDamageCodeColumns()
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const currentRow = useDamageCodeStore((state) => state.currentRow)
@@ -100,48 +97,6 @@ export function DamageCodesPage() {
     tableState.pagination.pageIndex,
     tableState.pagination.pageSize,
   ])
-  const updateTable = useCallback(
-    (
-      pagination: PaginationState,
-      sorting: SortingState,
-      filters = tableState.filters
-    ) =>
-      router.navigate({
-        replace: true,
-        search: toDamageCodeTableSearch({
-          filters,
-          pagination,
-          sorting,
-        }) as never,
-        to: './',
-      }),
-    [router, tableState.filters]
-  )
-  const onPaginationChange = useCallback(
-    (updater: Updater<PaginationState>) =>
-      updateTable(
-        resolveUpdater(updater, tableState.pagination),
-        tableState.sorting
-      ),
-    [tableState.pagination, tableState.sorting, updateTable]
-  )
-  const onSortingChange = useCallback(
-    (updater: Updater<SortingState>) =>
-      updateTable(
-        tableState.pagination,
-        resolveUpdater(updater, tableState.sorting)
-      ),
-    [tableState.pagination, tableState.sorting, updateTable]
-  )
-  const onFilterValuesChange = useCallback(
-    (updater: (previous: TableFilterSearch) => TableFilterSearch) =>
-      updateTable(
-        { ...tableState.pagination, pageIndex: 0 },
-        tableState.sorting,
-        updater(tableState.filters)
-      ),
-    [tableState.filters, tableState.pagination, tableState.sorting, updateTable]
-  )
   const closeCurrent = () => {
     setOpenDialog(null)
     window.setTimeout(() => setCurrentRow(null), 500)
@@ -188,7 +143,7 @@ export function DamageCodesPage() {
         </div>
         <div className='-mx-4 overflow-auto px-4 py-1'>
           <DamageCodeDataTableTools
-            onValuesChange={onFilterValuesChange}
+            onValuesChange={tableState.onFiltersChange}
             values={tableState.filters}
           />
           <PaginatedDataTable
@@ -201,10 +156,10 @@ export function DamageCodesPage() {
             hasCheckboxes
             isLoading={query.isLoading}
             manualSorting
-            onPaginationChange={onPaginationChange}
+            onPaginationChange={tableState.onPaginationChange}
             onColumnVisibilityChange={setColumnVisibility}
             onRowSelectionChange={setRowSelection}
-            onSortingChange={onSortingChange}
+            onSortingChange={tableState.onSortingChange}
             pageCount={query.data?.totalPages ?? 0}
             pagination={tableState.pagination}
             rowSelection={rowSelection}

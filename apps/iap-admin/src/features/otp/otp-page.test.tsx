@@ -44,10 +44,12 @@ vi.mock('@shared/tables', () => ({
   ),
   useTableFilterState: () => ({
     filters: {},
-    onChange: vi.fn(),
+    onFilterValueChange: vi.fn(),
+    onPaginationChange: vi.fn(),
+    onSortingChange: vi.fn(),
     pagination: { pageIndex: 0, pageSize: 40 },
-    reset: vi.fn(),
-    setPagination: vi.fn(),
+    resetFilters: vi.fn(),
+    sorting: [],
   }),
 }))
 

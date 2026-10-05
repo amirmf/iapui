@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { BankAccountBulkDeleteDialog } from '@features/bank-accounts/components/bank-account-bulk-delete-dialog'
 import { useBankAccountColumns } from '@features/bank-accounts/components/bank-account-columns'
@@ -15,34 +15,27 @@ import {
   toBankAccountTableSearch,
 } from '@features/bank-accounts/route-adapters/table-search'
 import type { BankAccount } from '@iap/api-types'
-import { PaginatedDataTable, type TableFilterSearch } from '@shared/tables'
-import { useLocation, useRouter } from '@tanstack/react-router'
-import type {
-  PaginationState,
-  SortingState,
-  Updater,
-} from '@tanstack/react-table'
+import {
+  PaginatedDataTable,
+  type TableFilterSearch,
+  useTableFilterQueryParams,
+} from '@shared/tables'
+import { useLocation } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
 const EMPTY_BANK_ACCOUNTS: BankAccount[] = []
 
-function resolveUpdater<T>(updater: Updater<T>, previous: T): T {
-  return typeof updater === 'function'
-    ? (updater as (value: T) => T)(previous)
-    : updater
-}
-
 function BankAccountsContent() {
   const { t } = useTranslation()
   const location = useLocation()
-  const router = useRouter()
   const currentRow = useBankAccountStore((state) => state.currentRow)
   const rowSelection = useBankAccountStore((state) => state.rowSelection)
   const setRowSelection = useBankAccountStore((state) => state.setRowSelection)
-  const tableState = useMemo(
-    () => parseBankAccountTableSearch(location.search as TableFilterSearch),
-    [location.search]
-  )
+  const tableState = useTableFilterQueryParams({
+    parse: parseBankAccountTableSearch,
+    search: location.search as TableFilterSearch,
+    serialize: toBankAccountTableSearch,
+  })
   const filters = useMemo(
     () => toBankAccountApiFilters(tableState.filters, tableState.sorting),
     [tableState.filters, tableState.sorting]
@@ -60,36 +53,6 @@ function BankAccountsContent() {
         .map(([rowId]) => bankAccounts[Number(rowId)]?.id)
         .filter((id): id is string => Boolean(id)),
     [bankAccounts, rowSelection]
-  )
-  const updateTableState = useCallback(
-    (pagination: PaginationState, sorting: SortingState) => {
-      router.navigate({
-        replace: true,
-        search: toBankAccountTableSearch({
-          filters: tableState.filters,
-          pagination,
-          sorting,
-        }) as never,
-        to: './',
-      })
-    },
-    [router, tableState.filters]
-  )
-  const onPaginationChange = useCallback(
-    (updater: Updater<PaginationState>) =>
-      updateTableState(
-        resolveUpdater(updater, tableState.pagination),
-        tableState.sorting
-      ),
-    [tableState.pagination, tableState.sorting, updateTableState]
-  )
-  const onSortingChange = useCallback(
-    (updater: Updater<SortingState>) =>
-      updateTableState(
-        tableState.pagination,
-        resolveUpdater(updater, tableState.sorting)
-      ),
-    [tableState.pagination, tableState.sorting, updateTableState]
   )
 
   return (
@@ -118,9 +81,9 @@ function BankAccountsContent() {
               hasCheckboxes
               isLoading={query.isLoading}
               manualSorting
-              onPaginationChange={onPaginationChange}
+              onPaginationChange={tableState.onPaginationChange}
               onRowSelectionChange={setRowSelection}
-              onSortingChange={onSortingChange}
+              onSortingChange={tableState.onSortingChange}
               pageCount={query.data?.totalPages ?? 0}
               pagination={tableState.pagination}
               rowSelection={rowSelection}

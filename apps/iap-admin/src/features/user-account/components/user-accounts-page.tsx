@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 
 import { PartyFormDialog } from '@features/user-account/components/party-form-dialog'
 import { PartyUserAccountDialog } from '@features/user-account/components/party-user-account-dialog'
@@ -17,29 +17,26 @@ import {
   type TableFilterSearch,
   parseTableFilterSearch,
   toTableFilterSearch,
+  useTableFilterQueryParams,
 } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
-import { useRouter, useRouterState } from '@tanstack/react-router'
-import type { PaginationState, Updater } from '@tanstack/react-table'
+import { useRouterState } from '@tanstack/react-router'
 import { Plus, RefreshCw } from 'lucide-react'
 
 const EMPTY_USER_ACCOUNTS: UserAccount[] = []
 
-function resolveUpdater<T>(updater: Updater<T>, previous: T): T {
-  return typeof updater === 'function'
-    ? (updater as (value: T) => T)(previous)
-    : updater
-}
-
 function UserAccountsContent() {
   const { t } = useTranslate()
   const { user } = useAuthSession()
-  const router = useRouter()
   const search = useRouterState({
     select: (state) => state.location.search as TableFilterSearch,
   })
   const openDialog = useUserAccountStore((state) => state.openDialog)
-  const tableState = useMemo(() => parseTableFilterSearch(search), [search])
+  const tableState = useTableFilterQueryParams({
+    parse: parseTableFilterSearch,
+    search,
+    serialize: toTableFilterSearch,
+  })
   const query = useQuery({
     queryFn: ({ signal }) =>
       userAccountService.getPageFull({
@@ -59,17 +56,6 @@ function UserAccountsContent() {
   const columns = useUserAccountColumns()
   const users = query.data?.content ?? EMPTY_USER_ACCOUNTS
   const { refetch } = query
-  const changePage = useCallback(
-    (updater: Updater<PaginationState>) => {
-      const pagination = resolveUpdater(updater, tableState.pagination)
-      router.navigate({
-        replace: true,
-        search: toTableFilterSearch({ ...tableState, pagination }) as never,
-        to: './',
-      })
-    },
-    [router, tableState]
-  )
   const refresh = useCallback(() => void refetch(), [refetch])
   const canManage = isAdminRole(user?.roles ?? [])
 
@@ -112,7 +98,7 @@ function UserAccountsContent() {
               empty: t('parties.noParties'),
               loading: t('common.loading'),
             }}
-            onPaginationChange={changePage}
+            onPaginationChange={tableState.onPaginationChange}
             pageCount={query.data?.totalPages ?? 0}
             pagination={tableState.pagination}
             tableWrapperClassName='max-h-140'

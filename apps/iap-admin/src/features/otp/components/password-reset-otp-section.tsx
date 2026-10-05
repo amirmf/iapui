@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
 import type { OtpListRequest, PagePasswordResetOtpList } from '@iap/api-types'
 import { Button, cn } from '@iap/ui'
@@ -15,9 +15,19 @@ import { usePasswordResetOtpColumns } from './password-reset-otp-columns'
 export default function PasswordResetOtpSection() {
   const { t } = useTranslation()
   const columns = usePasswordResetOtpColumns()
-  const { pagination, setPagination, filters, onChange, reset } =
-    useTableFilterState()
-  const [sorting, setSorting] = useState<SortingState>([])
+  const {
+    filters,
+    onFilterValueChange,
+    onPaginationChange,
+    onSortingChange,
+    pagination,
+    resetFilters,
+    sorting,
+  } = useTableFilterState({
+    filters: {},
+    pagination: { pageIndex: 0, pageSize: 40 },
+    sorting: [] as SortingState,
+  })
   const activeSort = sorting[0]
   const sort = activeSort?.id
   const direction = activeSort ? (activeSort.desc ? 'DESC' : 'ASC') : undefined
@@ -70,8 +80,8 @@ export default function PasswordResetOtpSection() {
       <div className='-mx-4 overflow-auto px-4 py-1'>
         <OptDataTableToolbar
           filters={filters}
-          onChange={onChange}
-          onReset={reset}
+          onChange={onFilterValueChange}
+          onReset={resetFilters}
         />
         <PaginatedDataTable
           columns={columns}
@@ -81,8 +91,8 @@ export default function PasswordResetOtpSection() {
           isLoading={isLoading}
           manualFiltering
           manualSorting
-          onPaginationChange={setPagination}
-          onSortingChange={setSorting}
+          onPaginationChange={onPaginationChange}
+          onSortingChange={onSortingChange}
           pageCount={pageCount}
           pagination={pagination}
           sorting={sorting}

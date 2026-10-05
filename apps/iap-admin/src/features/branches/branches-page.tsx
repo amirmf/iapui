@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { useBranchColumns } from '@features/branches/components/branch-columns'
 import { BranchDataTableToolbar } from '@features/branches/components/branch-data-table-toolbar'
@@ -16,36 +16,29 @@ import {
 } from '@features/branches/route-adapters/table-search'
 import type { Branch } from '@iap/api-types'
 import { Button } from '@iap/ui'
-import { PaginatedDataTable, type TableFilterSearch } from '@shared/tables'
-import { useLocation, useRouter } from '@tanstack/react-router'
-import type {
-  PaginationState,
-  SortingState,
-  Updater,
-} from '@tanstack/react-table'
+import {
+  PaginatedDataTable,
+  type TableFilterSearch,
+  useTableFilterQueryParams,
+} from '@shared/tables'
+import { useLocation } from '@tanstack/react-router'
 import { Plus, RefreshCw } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 const EMPTY_BRANCHES: Branch[] = []
 
-function resolveUpdater<T>(updater: Updater<T>, previous: T): T {
-  return typeof updater === 'function'
-    ? (updater as (value: T) => T)(previous)
-    : updater
-}
-
 function BranchesContent() {
   const { t } = useTranslation()
   const location = useLocation()
-  const router = useRouter()
   const currentRow = useBranchStore((state) => state.currentRow)
   const openDialog = useBranchStore((state) => state.openDialog)
   const setCurrentRow = useBranchStore((state) => state.setCurrentRow)
   const setOpenDialog = useBranchStore((state) => state.setOpenDialog)
-  const tableState = useMemo(
-    () => parseBranchTableSearch(location.search as TableFilterSearch),
-    [location.search]
-  )
+  const tableState = useTableFilterQueryParams({
+    parse: parseBranchTableSearch,
+    search: location.search as TableFilterSearch,
+    serialize: toBranchTableSearch,
+  })
   const filters = useMemo(
     () => toBranchApiFilters(tableState.filters, tableState.sorting),
     [tableState.filters, tableState.sorting]
@@ -56,75 +49,6 @@ function BranchesContent() {
   })
   const columns = useBranchColumns()
   const branches = query.data?.content ?? EMPTY_BRANCHES
-  const updateTableState = useCallback(
-    (
-      pagination: PaginationState,
-      sorting: SortingState,
-      filters = tableState.filters
-    ) => {
-      router.navigate({
-        replace: true,
-        search: toBranchTableSearch({
-          filters,
-          pagination,
-          sorting,
-        }) as never,
-        to: './',
-      })
-    },
-    [router, tableState.filters]
-  )
-  const onPaginationChange = useCallback(
-    (updater: Updater<PaginationState>) =>
-      updateTableState(
-        resolveUpdater(updater, tableState.pagination),
-        tableState.sorting
-      ),
-    [tableState.pagination, tableState.sorting, updateTableState]
-  )
-  const onSortingChange = useCallback(
-    (updater: Updater<SortingState>) =>
-      updateTableState(
-        tableState.pagination,
-        resolveUpdater(updater, tableState.sorting)
-      ),
-    [tableState.pagination, tableState.sorting, updateTableState]
-  )
-  const onFilterValuesChange = useCallback(
-    (updater: (previous: TableFilterSearch) => TableFilterSearch) => {
-      router.navigate({
-        replace: true,
-        search: (previous: TableFilterSearch) => {
-          const nextFilters = updater(tableState.filters)
-          const next = { ...previous }
-
-          for (const key of Object.keys(tableState.filters)) {
-            if (!(key in nextFilters)) delete next[key]
-          }
-          Object.assign(next, nextFilters)
-
-          const page = next.page
-          if (typeof page === 'string') {
-            if (Number(page) > 1) next.page = '1'
-            else delete next.page
-          }
-
-          return next
-        },
-        to: './',
-      } as never)
-    },
-    [router, tableState.filters]
-  )
-  const onResetFilters = useCallback(
-    () =>
-      router.navigate({
-        replace: true,
-        search: () => ({}),
-        to: './',
-      } as never),
-    [router]
-  )
 
   return (
     <>
@@ -155,8 +79,8 @@ function BranchesContent() {
           </div>
           <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
             <BranchDataTableToolbar
-              onReset={onResetFilters}
-              onValuesChange={onFilterValuesChange}
+              onReset={tableState.resetFilters}
+              onValuesChange={tableState.onFiltersChange}
               values={tableState.filters}
             />
             <PaginatedDataTable<Branch>
@@ -166,8 +90,8 @@ function BranchesContent() {
               enableSorting
               isLoading={query.isLoading}
               manualSorting
-              onPaginationChange={onPaginationChange}
-              onSortingChange={onSortingChange}
+              onPaginationChange={tableState.onPaginationChange}
+              onSortingChange={tableState.onSortingChange}
               pageCount={query.data?.totalPages ?? 0}
               pagination={tableState.pagination}
               sorting={tableState.sorting}

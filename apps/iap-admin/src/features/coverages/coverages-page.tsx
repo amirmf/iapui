@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { CoverageDamageCodeApplsSection } from '@features/coverage-damage-code-appls'
 import { CoverageDeleteMethodDialog } from '@features/coverages/components/coverage-dialogs/coverage-delete-method-dialog'
@@ -21,32 +21,24 @@ import { useTranslate } from '@shared/i18n/i18n'
 import {
   PaginatedDataTable,
   type TableFilterSearch,
-  type TableFilterValues,
+  useTableFilterQueryParams,
 } from '@shared/tables'
 import { useQuery } from '@tanstack/react-query'
-import { useRouter, useRouterState } from '@tanstack/react-router'
-import type {
-  PaginationState,
-  SortingState,
-  Updater,
-} from '@tanstack/react-table'
+import { useRouterState } from '@tanstack/react-router'
 import { Plus, RefreshCw, Trash2 } from 'lucide-react'
 
 const EMPTY_COVERAGES: Coverage[] = []
-function resolveUpdater<T>(updater: Updater<T>, previous: T): T {
-  return typeof updater === 'function'
-    ? (updater as (value: T) => T)(previous)
-    : updater
-}
-
 export function CoveragesPage() {
   const { t } = useTranslate()
   const { user } = useAuthSession()
-  const router = useRouter()
   const search = useRouterState({
     select: (state) => state.location.search as TableFilterSearch,
   })
-  const tableState = useMemo(() => parseCoverageTableSearch(search), [search])
+  const tableState = useTableFilterQueryParams({
+    parse: parseCoverageTableSearch,
+    search,
+    serialize: toCoverageTableSearch,
+  })
   const columns = useCoverageColumns()
   const rowSelection = useCoverageStore((state) => state.rowSelection)
   const setCurrentRow = useCoverageStore((state) => state.setCurrentRow)
@@ -83,54 +75,6 @@ export function CoveragesPage() {
     tableState.pagination.pageIndex,
     tableState.pagination.pageSize,
   ])
-  const updateTableState = useCallback(
-    (
-      pagination: PaginationState,
-      sorting: SortingState,
-      filters = tableState.filters
-    ) => {
-      router.navigate({
-        replace: true,
-        search: toCoverageTableSearch({
-          filters,
-          pagination,
-          sorting,
-        }) as never,
-        to: './',
-      })
-    },
-    [router, tableState.filters]
-  )
-  const onPaginationChange = useCallback(
-    (updater: Updater<PaginationState>) =>
-      updateTableState(
-        resolveUpdater(updater, tableState.pagination),
-        tableState.sorting
-      ),
-    [tableState.pagination, tableState.sorting, updateTableState]
-  )
-  const onSortingChange = useCallback(
-    (updater: Updater<SortingState>) =>
-      updateTableState(
-        tableState.pagination,
-        resolveUpdater(updater, tableState.sorting)
-      ),
-    [tableState.pagination, tableState.sorting, updateTableState]
-  )
-  const onFilterValuesChange = useCallback(
-    (updater: (previous: TableFilterValues) => TableFilterValues) =>
-      updateTableState(
-        { ...tableState.pagination, pageIndex: 0 },
-        tableState.sorting,
-        updater(tableState.filters)
-      ),
-    [
-      tableState.filters,
-      tableState.pagination,
-      tableState.sorting,
-      updateTableState,
-    ]
-  )
   return (
     <>
       <div className='flex flex-col gap-4 pb-4'>
@@ -173,7 +117,7 @@ export function CoveragesPage() {
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
           <CoverageDataTableToolbar
-            onValuesChange={onFilterValuesChange}
+            onValuesChange={tableState.onFiltersChange}
             values={tableState.filters}
           />
           <PaginatedDataTable
@@ -185,9 +129,9 @@ export function CoveragesPage() {
             hasCheckboxes
             isLoading={query.isLoading}
             manualFiltering
-            onPaginationChange={onPaginationChange}
+            onPaginationChange={tableState.onPaginationChange}
             onRowSelectionChange={setRowSelection}
-            onSortingChange={onSortingChange}
+            onSortingChange={tableState.onSortingChange}
             pageCount={query.data?.totalPages ?? 0}
             pagination={tableState.pagination}
             rowSelection={rowSelection}

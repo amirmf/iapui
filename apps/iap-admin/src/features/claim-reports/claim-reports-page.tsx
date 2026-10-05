@@ -11,16 +11,11 @@ import type {
 } from '@iap/api-types'
 import type { ApiFilterParams } from '@iap/shared-lib'
 import { Button, cn } from '@iap/ui'
-import { PaginatedDataTable } from '@shared/tables'
+import { PaginatedDataTable, useTableFilterQueryParams } from '@shared/tables'
 import { IconRefresh } from '@tabler/icons-react'
 import { useQuery } from '@tanstack/react-query'
-import { useRouter, useRouterState } from '@tanstack/react-router'
-import type {
-  PaginationState,
-  SortingState,
-  Updater,
-  VisibilityState,
-} from '@tanstack/react-table'
+import { useRouterState } from '@tanstack/react-router'
+import type { VisibilityState } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 
 import { useClaimReportColumns } from './components/claim-report-columns'
@@ -30,22 +25,16 @@ import { outpatientDocAcceptanceService } from './services/outpatient-doc-accept
 
 const EMPTY_CLAIM_REPORTS: OutpatientDocAcceptance[] = []
 
-function resolveUpdater<T>(updater: Updater<T>, previous: T): T {
-  return typeof updater === 'function'
-    ? (updater as (value: T) => T)(previous)
-    : updater
-}
-
 export function ClaimReportsPage() {
   const { t } = useTranslation()
-  const router = useRouter()
   const search = useRouterState({
     select: (state) => state.location.search as ClaimReportTableSearch,
   })
-  const tableState = useMemo(
-    () => parseClaimReportTableSearch(search),
-    [search]
-  )
+  const tableState = useTableFilterQueryParams({
+    parse: parseClaimReportTableSearch,
+    search,
+    serialize: toClaimReportTableSearch,
+  })
   const filters = useMemo<ApiFilterParams>(
     () =>
       tableState.filters.sort
@@ -73,36 +62,6 @@ export function ClaimReportsPage() {
   const columns = useClaimReportColumns()
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const reports = query.data?.content ?? EMPTY_CLAIM_REPORTS
-  const updateTableState = useCallback(
-    (pagination: PaginationState, sorting: SortingState) => {
-      router.navigate({
-        replace: true,
-        search: toClaimReportTableSearch({
-          ...tableState,
-          pagination,
-          sorting,
-        }) as never,
-        to: './',
-      })
-    },
-    [router, tableState]
-  )
-  const onPaginationChange = useCallback(
-    (updater: Updater<PaginationState>) =>
-      updateTableState(
-        resolveUpdater(updater, tableState.pagination),
-        tableState.sorting
-      ),
-    [tableState.pagination, tableState.sorting, updateTableState]
-  )
-  const onSortingChange = useCallback(
-    (updater: Updater<SortingState>) =>
-      updateTableState(
-        tableState.pagination,
-        resolveUpdater(updater, tableState.sorting)
-      ),
-    [tableState.pagination, tableState.sorting, updateTableState]
-  )
   const refresh = useCallback(() => void query.refetch(), [query])
 
   return (
@@ -138,8 +97,8 @@ export function ClaimReportsPage() {
           isLoading={query.isLoading}
           labels={{ empty: t('claimReports.messages.noClaimReports') }}
           onColumnVisibilityChange={setColumnVisibility}
-          onPaginationChange={onPaginationChange}
-          onSortingChange={onSortingChange}
+          onPaginationChange={tableState.onPaginationChange}
+          onSortingChange={tableState.onSortingChange}
           pageCount={query.data?.totalPages ?? 0}
           pagination={tableState.pagination}
           manualFiltering
