@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { BankAccountRowActions } from '@features/bank-accounts/pages/index/components/bank-account-row-actions'
+import { BankAccountRowActions } from '@features/bank-accounts/components/bank-account-row-actions'
 import type { BankAccount } from '@iap/api-types'
 import { Badge, formatDateTime } from '@iap/ui'
 import { DataTableColumnHeader } from '@shared/tables'

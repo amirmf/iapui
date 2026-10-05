@@ -76,8 +76,8 @@ reference file:
 
 ## Architecture decisions
 
-- `src/app` remains a route-only composition boundary; the page is owned by
-  `features/bank-accounts/pages/index`.
+- `src/app` remains a route-only composition boundary; the root-only page is
+  owned directly by `features/bank-accounts`.
 - Public, cross-application contracts live in `@iap/api-types`; transport
   behaviour is feature-local because no other target feature consumes it.
 - The target shared table/filter/dialog primitives replace equivalent

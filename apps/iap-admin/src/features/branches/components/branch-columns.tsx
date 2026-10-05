@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { BranchRowActions } from '@features/branches/pages/index/components/branch-row-actions'
+import { BranchRowActions } from '@features/branches/components/branch-row-actions'
 import type { Branch } from '@iap/api-types'
 import { DataTableColumnHeader } from '@shared/tables'
 import { createColumnHelper } from '@tanstack/react-table'

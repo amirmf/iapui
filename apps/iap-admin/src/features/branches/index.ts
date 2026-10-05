@@ -1,1 +1,1 @@
-export * from './pages/index/branches-page'
+export * from './branches-page'

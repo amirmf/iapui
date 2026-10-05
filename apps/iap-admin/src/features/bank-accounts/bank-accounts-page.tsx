@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from 'react'
 
+import { BankAccountBulkDeleteDialog } from '@features/bank-accounts/components/bank-account-bulk-delete-dialog'
+import { useBankAccountColumns } from '@features/bank-accounts/components/bank-account-columns'
+import { BankAccountDataTableToolbar } from '@features/bank-accounts/components/bank-account-data-table-toolbar'
+import { BankAccountDeleteDialog } from '@features/bank-accounts/components/bank-account-delete-dialog'
+import { BankAccountHeaderActions } from '@features/bank-accounts/components/bank-account-header-actions'
+import { BankAccountsPageSurface } from '@features/bank-accounts/components/bank-accounts-page-surface'
 import { BankAccountProvider } from '@features/bank-accounts/context/provider/bank-account-provider'
 import { useBankAccountStore } from '@features/bank-accounts/context/store/bank-account-store'
-import { BankAccountBulkDeleteDialog } from '@features/bank-accounts/pages/index/components/bank-account-bulk-delete-dialog'
-import { useBankAccountColumns } from '@features/bank-accounts/pages/index/components/bank-account-columns'
-import { BankAccountDataTableToolbar } from '@features/bank-accounts/pages/index/components/bank-account-data-table-toolbar'
-import { BankAccountDeleteDialog } from '@features/bank-accounts/pages/index/components/bank-account-delete-dialog'
-import { BankAccountHeaderActions } from '@features/bank-accounts/pages/index/components/bank-account-header-actions'
-import { BankAccountsPageSurface } from '@features/bank-accounts/pages/index/components/bank-accounts-page-surface'
 import {
   parseBankAccountTableSearch,
   toBankAccountApiFilters,

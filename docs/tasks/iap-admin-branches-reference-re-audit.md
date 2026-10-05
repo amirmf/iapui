@@ -3,7 +3,7 @@
 ## Scope and source closure
 
 - Target route: `apps/iap-admin/src/app/router/routes/_authenticated/branches/index.tsx`
-- Target page: `apps/iap-admin/src/features/branches/pages/index/branches-page.tsx`
+- Target page: `apps/iap-admin/src/features/branches/branches-page.tsx`
 - Reference route: `insurance-ui/src/routes/_authenticated/branches/index.tsx`
 - Reference page: `insurance-ui/src/features/branches/pages/branches-page.tsx`
 - Reference closure reviewed file-by-file:
