@@ -1,7 +1,7 @@
 import { Button, cn } from '@iap/ui'
 import { Moon, Sun } from 'lucide-react'
 
-import { useThemeStore } from './theme-store'
+import { useThemeStore } from './context/store/theme-store'
 
 export type ThemeSwitcherProps = {
   ariaLabel: string

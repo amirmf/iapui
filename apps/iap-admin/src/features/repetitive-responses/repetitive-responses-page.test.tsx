@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { RepetitiveResponsesPage } from './repetitive-responses-page'
 
 vi.mock(
-  '@features/repetitive-responses/model/repetitive-response-provider',
+  '@features/repetitive-responses/context/provider/repetitive-response-provider',
   () => ({
     RepetitiveResponseProvider: ({ children }: { children: ReactNode }) => (
       <div data-testid='provider'>{children}</div>

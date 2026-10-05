@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
-import { CoverageDamageCodeApplsSection } from '@features/coverage-damage-code-appls/ui/coverage-damage-code-appls-section'
+import { CoverageDamageCodeApplsSection } from '@features/coverage-damage-code-appls'
 import { CoverageDeleteMethodDialog } from '@features/coverages/components/coverage-dialogs/coverage-delete-method-dialog'
 import { CoverageFormDialog } from '@features/coverages/components/coverage-dialogs/coverage-form-dialog'
 import { CoverageViewDialog } from '@features/coverages/components/coverage-dialogs/coverage-view-dialog'
 import { useCoverageColumns } from '@features/coverages/components/coverage-table/coverage-columns'
 import { CoverageDataTableToolbar } from '@features/coverages/components/coverage-table/coverage-data-table-toolbar'
+import { useCoverageStore } from '@features/coverages/context/store/coverage-store'
 import {
   parseCoverageTableSearch,
   toCoverageApiFilters,
   toCoverageTableSearch,
-} from '@features/coverages/model/coverage-table-state'
-import { useCoverageStore } from '@features/coverages/model/store/coverage-store'
+} from '@features/coverages/queries/coverage-table-state'
 import { coverageService } from '@features/coverages/services/coverage-service'
 import type { Coverage } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'

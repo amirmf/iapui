@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 
 import { useQueryClient } from '@tanstack/react-query'
 
-import type { AuthPageProps } from '../ui/auth-page.types'
-import { useAuthSession } from './auth-session'
+import type { AuthPageProps } from '../components/auth-page.types'
+import { useAuthSession } from '../context/provider/auth-session'
 
 type AuthNavigation = AuthPageProps['onNavigate']
 

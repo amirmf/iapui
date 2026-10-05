@@ -2,7 +2,7 @@ import {
   coverageStatusTranslationKeys,
   coverageTypeTranslationKeys,
 } from '@features/coverages/constants/coverage-constant'
-import { useCoverageStore } from '@features/coverages/model/store/coverage-store'
+import { useCoverageStore } from '@features/coverages/context/store/coverage-store'
 import {
   Badge,
   Dialog,

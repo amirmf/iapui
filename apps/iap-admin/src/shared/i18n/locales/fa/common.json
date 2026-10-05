@@ -792,7 +792,7 @@
       "latestAssignementDisplayName": "نام ارزیاب",
       "extPolicyId": "شماره بیمه‌نامه",
       "extContractId": "شماره قرارداد",
-      "extNationalCode": "کد ملی",
+      "extNationalCode": "کد ملی بیمه شده",
       "extMainNationalCode": "کد ملی بیمه‌شده اصلی",
       "extDisplayName": "نام بیمه‌شده",
       "extCustomerName": "نام بیمه‌گذار",

@@ -1,4 +1,4 @@
-import { useRepetitiveResponseGroup } from '@features/repetitive-responses/model/repetitive-response-store'
+import { useRepetitiveResponseGroup } from '@features/repetitive-responses/context/store/repetitive-response-store'
 import type { RepetitiveResponseGroup } from '@iap/api-types'
 import { TableActionButton, TableActions } from '@shared/tables'
 import type { Row } from '@tanstack/react-table'

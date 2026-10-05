@@ -5,7 +5,7 @@ import RepetitiveResponseGroupDataTableToolbar from '@features/repetitive-respon
 import { RepetitiveResponseGroupDeleteMethodDialog } from '@features/repetitive-responses/components/groups/repetitive-response-group-delete-method-dialog'
 import { RepetitiveResponseGroupFormDialog } from '@features/repetitive-responses/components/groups/repetitive-response-group-form-dialog'
 import { RepetitiveResponseGroupViewDialog } from '@features/repetitive-responses/components/groups/repetitive-response-group-view-dialog'
-import { useRepetitiveResponseGroup } from '@features/repetitive-responses/model/repetitive-response-store'
+import { useRepetitiveResponseGroup } from '@features/repetitive-responses/context/store/repetitive-response-store'
 import { repetitiveResponseGroupService } from '@features/repetitive-responses/services/repetitive-response-group-service'
 import type { RepetitiveResponseGroup } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'

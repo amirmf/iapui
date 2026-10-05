@@ -1,5 +1,5 @@
+import { DocTypeForm } from '@features/doc-types/components/doc-type-form/doc-type-form'
 import { DocTypePageLayout } from '@features/doc-types/pages/shared/doc-type-page-layout'
-import { DocTypeForm } from '@features/doc-types/ui/doc-type-form/doc-type-form'
 import { Button } from '@iap/ui'
 import { docTypeService } from '@modules/doc-types'
 import { useQuery } from '@tanstack/react-query'

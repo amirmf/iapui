@@ -1,18 +1,18 @@
 import { useCallback, useMemo } from 'react'
 
-import { useBranchStore } from '@features/branches/model/branch-store'
-import {
-  parseBranchTableSearch,
-  toBranchApiFilters,
-  toBranchTableSearch,
-} from '@features/branches/model/branch-table-state'
+import { BranchProvider } from '@features/branches/context/provider/branch-provider'
+import { useBranchStore } from '@features/branches/context/store/branch-store'
 import { useBranchColumns } from '@features/branches/pages/index/components/branch-columns'
 import { BranchDataTableToolbar } from '@features/branches/pages/index/components/branch-data-table-toolbar'
 import { BranchDeleteDialog } from '@features/branches/pages/index/components/branch-delete-dialog'
 import { BranchFormDialog } from '@features/branches/pages/index/components/branch-form-dialog'
-import { BranchProvider } from '@features/branches/pages/index/components/branch-provider'
 import { BranchSyncButton } from '@features/branches/pages/index/components/branch-sync-button'
 import { BranchesPageSurface } from '@features/branches/pages/index/components/branches-page-surface'
+import {
+  parseBranchTableSearch,
+  toBranchApiFilters,
+  toBranchTableSearch,
+} from '@features/branches/queries/branch-table-state'
 import { useBranchesData } from '@features/branches/queries/use-branches-data'
 import type { Branch } from '@iap/api-types'
 import { Button } from '@iap/ui'

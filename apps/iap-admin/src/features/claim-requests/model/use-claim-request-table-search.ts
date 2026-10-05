@@ -6,6 +6,10 @@ import { useRouter } from '@tanstack/react-router'
 import { produce } from 'immer'
 
 import {
+  parseClaimRequestTableSearch,
+  toClaimRequestTableSearch,
+} from '../queries/claim-request-table-state'
+import {
   CLAIM_REQUEST_FEATURES,
   CLAIM_REQUEST_FEATURE_QUERY_KEY,
   CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS,
@@ -14,10 +18,6 @@ import {
   type ClaimRequestQuickStatus,
   getClaimRequestQuickStatus,
 } from './claim-request-filters'
-import {
-  parseClaimRequestTableSearch,
-  toClaimRequestTableSearch,
-} from './claim-request-table-state'
 
 function toSearchRecord(value: Record<string, unknown>): TableFilterSearch {
   return Object.fromEntries(

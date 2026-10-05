@@ -1,4 +1,4 @@
-import { useDocTypeStore } from '@features/doc-types/model/doc-type-store'
+import { useDocTypeStore } from '@features/doc-types/context/store/doc-type-store'
 import { ConfirmDialog } from '@iap/dialogs'
 import { docTypeService } from '@modules/doc-types'
 import { useMutation } from '@tanstack/react-query'

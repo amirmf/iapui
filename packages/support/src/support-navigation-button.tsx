@@ -1,7 +1,7 @@
 import { Bot } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { useSupportFlowStore } from './support-store'
+import { useSupportFlowStore } from './context/store/support-store'
 
 export function SupportNavigationButton() {
   const { t: translate } = useTranslation()

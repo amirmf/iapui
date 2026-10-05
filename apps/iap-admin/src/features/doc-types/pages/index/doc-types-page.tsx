@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
-import { useDocTypeStore } from '@features/doc-types/model/doc-type-store'
-import {
-  parseDocTypeTableSearch,
-  toDocTypeApiFilters,
-  toDocTypeTableSearch,
-} from '@features/doc-types/model/doc-type-table-state'
+import { useDocTypeStore } from '@features/doc-types/context/store/doc-type-store'
 import { DocTypeBulkDeleteDialog } from '@features/doc-types/pages/index/components/doc-type-bulk-delete-dialog'
 import { useDocTypeColumns } from '@features/doc-types/pages/index/components/doc-type-columns'
 import { DocTypeDataTableToolbar } from '@features/doc-types/pages/index/components/doc-type-data-table-toolbar'
 import { DocTypeDeleteDialog } from '@features/doc-types/pages/index/components/doc-type-delete-dialog'
 import { DocTypeInlineEditRow } from '@features/doc-types/pages/index/components/doc-type-inline-edit-row'
 import { DocTypeViewDialog } from '@features/doc-types/pages/index/components/doc-type-view-dialog'
+import {
+  parseDocTypeTableSearch,
+  toDocTypeApiFilters,
+  toDocTypeTableSearch,
+} from '@features/doc-types/queries/doc-type-table-state'
 import type { AdminDocType } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'
 import type { ApiFilterParams } from '@iap/shared-lib'

@@ -104,7 +104,7 @@ function getStaticClaimRequestTranslationKeys() {
 function getDynamicTextFilterTranslationKeys() {
   const toolbarPath = path.resolve(
     process.cwd(),
-    'src/features/claim-requests/ui/claim-request-toolbar.tsx'
+    'src/features/claim-requests/components/claim-request-toolbar.tsx'
   )
   const toolbarSource = fs.readFileSync(toolbarPath, 'utf8')
   const textFilterConfig = toolbarSource.match(

@@ -1,4 +1,4 @@
-import { useBankAccountStore } from '@features/bank-accounts/model/bank-account-store'
+import { useBankAccountStore } from '@features/bank-accounts/context/store/bank-account-store'
 import { BankAccountExportCsvButton } from '@features/bank-accounts/pages/index/components/bank-account-export-csv-button'
 import type { BankAccount } from '@iap/api-types'
 import { Button } from '@iap/ui'

@@ -8,7 +8,7 @@ import { RepetitiveResponseViewDialog } from '@features/repetitive-responses/com
 import {
   useRepetitiveResponse,
   useRepetitiveResponseGroup,
-} from '@features/repetitive-responses/model/repetitive-response-store'
+} from '@features/repetitive-responses/context/store/repetitive-response-store'
 import { repetitiveResponseService } from '@features/repetitive-responses/services/repetitive-response-service'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'
 import { Button, Permission, cn } from '@iap/ui'

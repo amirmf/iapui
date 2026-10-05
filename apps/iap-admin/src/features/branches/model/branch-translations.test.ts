@@ -20,7 +20,7 @@ describe('BranchesPage Persian translations', () => {
     )
     const referenceRoot =
       process.env.INSURANCE_UI_REFERENCE_PATH ??
-      path.resolve(currentDirectory, '../../../../../insurance-ui')
+      path.resolve(currentDirectory, '../../../../../../../insurance-ui')
     const referencePath = path.join(referenceRoot, 'src/locales/fa.json')
 
     expect(

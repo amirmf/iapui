@@ -1,1 +1,1 @@
-export { ReadonlyAssessmentItems } from './ui/readonly-assessment-items'
+export { ReadonlyAssessmentItems } from './components/readonly-assessment-items'

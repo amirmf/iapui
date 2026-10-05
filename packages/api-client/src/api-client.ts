@@ -1,10 +1,14 @@
 import axios, { AxiosHeaders, type AxiosInstance } from 'axios'
 
-import { useAuthSessionStore } from './auth-session-store'
-
 let apiClient: AxiosInstance | null = null
+let getAccessToken: () => string | null = () => null
 
-export function configureApiClient(baseUrl: string) {
+export function configureApiClient(
+  baseUrl: string,
+  readAccessToken: () => string | null = () => null
+) {
+  getAccessToken = readAccessToken
+
   if (apiClient) {
     apiClient.defaults.baseURL = baseUrl
     return
@@ -17,7 +21,7 @@ export function configureApiClient(baseUrl: string) {
   })
 
   apiClient.interceptors.request.use((config) => {
-    const token = useAuthSessionStore.getState().accessToken
+    const token = getAccessToken()
 
     if (!token) {
       return config

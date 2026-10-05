@@ -1,8 +1,10 @@
+import {
+  type AuditInfo,
+  useAuditInfoStore,
+} from '@shared/context/store/audit-info-store'
 import { TableActionButton } from '@shared/tables'
 import { UserSquare } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-
-import { type AuditInfo, useAuditInfoStore } from './audit-info-store'
 
 type AuditInformationRowActionProps = { row: AuditInfo }
 

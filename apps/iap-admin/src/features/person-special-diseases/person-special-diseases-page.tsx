@@ -4,11 +4,11 @@ import { PersonSpecialDiseaseBulkDeleteDialog } from '@features/person-special-d
 import { usePersonSpecialDiseaseColumns } from '@features/person-special-diseases/components/person-special-disease-columns'
 import { PersonSpecialDiseaseDeleteDialog } from '@features/person-special-diseases/components/person-special-disease-delete-dialog'
 import { PersonSpecialDiseaseFormDialog } from '@features/person-special-diseases/components/person-special-disease-form-dialog'
+import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/context/store/person-special-disease-store'
 import {
   parsePersonSpecialDiseaseTableSearch,
   toPersonSpecialDiseaseTableSearch,
-} from '@features/person-special-diseases/model/person-special-disease-table-state'
-import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/model/store/person-special-disease-store'
+} from '@features/person-special-diseases/queries/person-special-disease-table-state'
 import type { PersonSpecialDisease } from '@iap/api-types'
 import { Button, cn } from '@iap/ui'
 import { personSpecialDiseaseService } from '@modules/person-special-diseases'

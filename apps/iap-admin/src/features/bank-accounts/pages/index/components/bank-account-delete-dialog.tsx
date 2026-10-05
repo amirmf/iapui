@@ -1,4 +1,4 @@
-import { useBankAccountStore } from '@features/bank-accounts/model/bank-account-store'
+import { useBankAccountStore } from '@features/bank-accounts/context/store/bank-account-store'
 import { bankAccountService } from '@features/bank-accounts/services/bank-account-service'
 import { ConfirmDialog } from '@iap/dialogs'
 import { IconTrash } from '@tabler/icons-react'

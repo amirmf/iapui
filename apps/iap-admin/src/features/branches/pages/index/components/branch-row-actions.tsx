@@ -1,4 +1,4 @@
-import { useBranchStore } from '@features/branches/model/branch-store'
+import { useBranchStore } from '@features/branches/context/store/branch-store'
 import type { Branch } from '@iap/api-types'
 import { TableActionButton, TableActions } from '@shared/tables'
 import type { Row } from '@tanstack/react-table'

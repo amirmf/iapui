@@ -1,4 +1,4 @@
-import { useDocTypeStore } from '@features/doc-types/model/doc-type-store'
+import { useDocTypeStore } from '@features/doc-types/context/store/doc-type-store'
 import type { AdminDocType } from '@iap/api-types'
 import {
   Button,

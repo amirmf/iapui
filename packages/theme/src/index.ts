@@ -1,2 +1,2 @@
-export * from './theme-store'
+export * from './context/store/theme-store'
 export * from './theme-switcher'

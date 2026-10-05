@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 
 import { queryClient } from '@app/router'
 import { configureApiClient } from '@iap/api-client'
+import { useAuthStore } from '@iap/auth'
 import '@iap/design-tokens/theme.css'
 import { i18nReady } from '@shared/i18n/i18n'
 import { AppProviders } from '@shared/providers/app-providers'
@@ -17,7 +18,8 @@ if (!rootElement) {
 
 void i18nReady.then(() => {
   configureApiClient(
-    import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
+    import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+    () => useAuthStore.getState().accessToken
   )
 
   createRoot(rootElement).render(

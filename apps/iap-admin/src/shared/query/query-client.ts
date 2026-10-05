@@ -1,4 +1,4 @@
-import { useAuthSessionStore } from '@iap/api-client'
+import { useAuthStore } from '@iap/auth'
 import { toastError } from '@iap/ui'
 import { QueryCache, QueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
@@ -54,7 +54,7 @@ export function createAppQueryClient(props: CreateQueryClientOptions) {
 
         if (status === 401) {
           toastError({ message: 'نشست شما منقضی شده است.' })
-          useAuthSessionStore.getState().clearSession()
+          useAuthStore.getState().clearSession()
 
           const callbackUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`
           onUnauthorized(callbackUrl)

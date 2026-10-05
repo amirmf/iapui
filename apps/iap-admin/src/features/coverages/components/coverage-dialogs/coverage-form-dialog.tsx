@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 
-import { useCoverageStore } from '@features/coverages/model/store/coverage-store'
+import { useCoverageStore } from '@features/coverages/context/store/coverage-store'
 import { coverageService } from '@features/coverages/services/coverage-service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {

@@ -5,7 +5,7 @@ import { DamageCodePricingDataTableToolbar } from '@features/damage-codes/compon
 import { DamageCodePricingDeleteMethodDialog } from '@features/damage-codes/components/pricings/damage-code-pricing-delete-method-dialog'
 import { DamageCodePricingFormDialog } from '@features/damage-codes/components/pricings/damage-code-pricing-form-dialog'
 import { DamageCodePricingViewDialog } from '@features/damage-codes/components/pricings/damage-code-pricing-view-dialog'
-import { useDamageCodeStore } from '@features/damage-codes/model/store/damage-code-store'
+import { useDamageCodeStore } from '@features/damage-codes/context/store/damage-code-store'
 import { damageCodePricingService } from '@features/damage-codes/services/damage-code-pricing-service'
 import type { DamageCodeSummary } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'

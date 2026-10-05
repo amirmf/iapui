@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { useRepetitiveResponseStore } from '@features/repetitive-responses/model/repetitive-response-store'
+import { useRepetitiveResponseStore } from '@features/repetitive-responses/context/store/repetitive-response-store'
 import { i18nReady } from '@shared/i18n/i18n'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'

@@ -1,4 +1,4 @@
-import { useDamageCodeStore } from '@features/damage-codes/model/store/damage-code-store'
+import { useDamageCodeStore } from '@features/damage-codes/context/store/damage-code-store'
 import type { DamageCodePricing } from '@iap/api-types'
 import { TableActionButton, TableActions } from '@shared/tables'
 import type { Row } from '@tanstack/react-table'

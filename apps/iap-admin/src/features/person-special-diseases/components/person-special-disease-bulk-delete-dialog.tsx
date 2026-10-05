@@ -1,5 +1,5 @@
+import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/context/store/person-special-disease-store'
 import { getSelectedPersonSpecialDiseaseIds } from '@features/person-special-diseases/model/person-special-disease-row-selection'
-import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/model/store/person-special-disease-store'
 import type { PersonSpecialDisease } from '@iap/api-types'
 import { type DeleteMethod, DeleteMethodDialog } from '@iap/dialogs'
 import { personSpecialDiseaseService } from '@modules/person-special-diseases'

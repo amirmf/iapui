@@ -1,4 +1,4 @@
-export { Login } from './ui/login'
-export { PasswordReset } from './ui/password-reset'
-export { Register } from './ui/register'
-export { Sso } from './ui/sso'
+export { Login } from './components/login'
+export { PasswordReset } from './components/password-reset'
+export { Register } from './components/register'
+export { Sso } from './components/sso'

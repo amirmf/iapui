@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react'
 
-import { useExportCsvStore } from '@shared/tables/export-csv/use-export-csv-store'
+import { useExportCsvStore } from '@shared/context/store/use-export-csv-store'
 import { saveAs } from 'file-saver'
 
 function toCsvFileName(fileName: string) {

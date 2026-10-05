@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
 import { PersonSpecialDiseaseUserSearchSelect } from '@features/person-special-diseases/components/person-special-disease-user-search-select'
+import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/context/store/person-special-disease-store'
 import {
   type PersonSpecialDiseaseFormValues,
   createPersonSpecialDiseaseFormSchema,
 } from '@features/person-special-diseases/model/person-special-disease-form-schema'
-import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/model/store/person-special-disease-store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { type PersonSpecialDisease } from '@iap/api-types'
 import {

@@ -1,4 +1,4 @@
-import { useBankAccountStore } from '@features/bank-accounts/model/bank-account-store'
+import { useBankAccountStore } from '@features/bank-accounts/context/store/bank-account-store'
 import type { BankAccount } from '@iap/api-types'
 import { TableActionButton, TableActions } from '@shared/tables'
 import { IconTrash } from '@tabler/icons-react'

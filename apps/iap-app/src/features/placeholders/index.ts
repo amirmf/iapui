@@ -1,1 +1,1 @@
-export { PlaceholderPage } from './ui/placeholder-page'
+export { PlaceholderPage } from './components/placeholder-page'

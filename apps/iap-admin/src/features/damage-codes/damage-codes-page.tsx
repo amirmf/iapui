@@ -7,12 +7,12 @@ import { useDamageCodeColumns } from '@features/damage-codes/components/damage-c
 import { DamageCodeDataTableTools } from '@features/damage-codes/components/damage-code-table/damage-code-data-table-tools'
 import { DamageCodePricingDialog } from '@features/damage-codes/components/pricings/damage-code-pricing-dialog'
 import { DamageCodePricingsSection } from '@features/damage-codes/components/pricings/damage-code-pricings-section'
+import { useDamageCodeStore } from '@features/damage-codes/context/store/damage-code-store'
 import {
   parseDamageCodeTableSearch,
   toDamageCodeApiFilters,
   toDamageCodeTableSearch,
-} from '@features/damage-codes/model/damage-code-table-state'
-import { useDamageCodeStore } from '@features/damage-codes/model/store/damage-code-store'
+} from '@features/damage-codes/queries/damage-code-table-state'
 import { damageCodeService } from '@features/damage-codes/services/damage-code-service'
 import type { DamageCode, DamageCodeSummary } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'

@@ -1,4 +1,4 @@
-import { useDamageCodeStore } from '@features/damage-codes/model/store/damage-code-store'
+import { useDamageCodeStore } from '@features/damage-codes/context/store/damage-code-store'
 import { i18n, i18nReady } from '@shared/i18n/i18n'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'

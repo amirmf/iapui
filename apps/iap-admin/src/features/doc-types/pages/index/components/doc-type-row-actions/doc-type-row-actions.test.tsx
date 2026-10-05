@@ -1,4 +1,4 @@
-import { useDocTypeStore } from '@features/doc-types/model/doc-type-store'
+import { useDocTypeStore } from '@features/doc-types/context/store/doc-type-store'
 import { i18n, i18nReady } from '@shared/i18n/i18n'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'

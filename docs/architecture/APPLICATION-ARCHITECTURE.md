@@ -84,7 +84,14 @@ When implementation begins:
 
 ### `src/features`
 
-Owns product- and screen-specific behavior. Folders should mirror stable customer or admin journeys. A feature may contain `services`, `model`, `queries`, `schemas`, `ui`, and a public `index.ts` as needed.
+Owns product- and screen-specific behavior. Folders should mirror stable customer or admin journeys. A feature may contain `components`, `model`, `context`, `services`, `queries`, and a public `index.ts` as needed.
+
+Within application source (`features`, `modules`, and `shared`) and workspace
+packages, React components belong in a `components/` directory. Do not
+introduce or retain a `ui/` directory for that purpose. The `@iap/ui` package
+is an intentional exception: its name identifies the workspace's shared
+presentational-primitives package, rather than an application folder
+convention.
 
 Every navigable page owned by a feature normally has a matching directory under
 that feature's `pages/` directory. The directory mirrors the static page kind
@@ -98,11 +105,11 @@ For a feature that owns only its root route and has no sibling page journeys,
 the page component may live directly in the feature root and its page-exclusive
 component groups may live under `components/`. This avoids a redundant
 `pages/index/` wrapper while retaining the same ownership boundary. If a second
-page journey is introduced later, move the root page and its exclusive UI into
-the corresponding `pages/` directories. Code shared only by sibling page
-directories belongs in the nearest `shared/` directory; reusable capability
-must still follow the normal `modules` or application-wide `shared` ownership
-rules.
+page journey is introduced later, move the root page and its exclusive
+components into the corresponding `pages/` directories. Code shared only by
+sibling page directories belongs in the nearest `shared/` directory; reusable
+capability must still follow the normal `modules` or application-wide `shared`
+ownership rules.
 
 Do not create a directory for every component mechanically. Keep a small,
 single-file page component next to its peers when no further categorization is
@@ -112,15 +119,63 @@ components and the directory makes that group easier to navigate. A
 page-exclusive component or component group belongs under
 `pages/<page>/components/` (or under the root `components/` group for the
 single-root-route exception); a component reused by multiple pages of the
-feature belongs under `ui/`. Do not create a feature-wide `components/` dumping
-ground, and do not place a component in `ui/` merely because it is visually
-reusable when it is owned by one page.
+feature belongs under the feature's `components/`. Do not create a feature-wide
+`components/` dumping ground: a component owned by one page remains under that
+page's `components/` directory.
 
-Feature-local client state is organized under `model/`:
+### Feature model and context
 
-- `model/store/` owns Zustand stores for feature-scoped UI state shared by multiple feature components, such as selection, dialog state, and temporary local workflows. It must not hold server state, API results, or route state.
-- `model/context/` owns React contexts only when state or actions must be shared across deeply nested or separately composed feature UI. Do not create a context merely to avoid a direct, meaningful prop.
-- Do not create empty `store/` or `context/` folders preemptively. Create each folder when it has an owning implementation, and keep its files feature-local unless a reusable application capability genuinely emerges.
+`model/` is a data-contract boundary. It contains only the feature's business
+models and validation contracts: domain types, value objects, enums, and Zod
+schemas (including form schemas when the schema is feature-specific). It must
+not contain React components, providers, hooks that manage state, Zustand
+stores, or Context definitions.
+
+Feature-local client-state coordination belongs under `context/`. In this
+architecture, `context/` is a feature-structure name: it includes both Zustand
+stores and React Context implementations, and is not limited to React's
+`createContext` API.
+
+```text
+features/<feature>/
+├── components/                  # feature-reusable React components
+├── model/                       # models, types, enums, and Zod schemas only
+├── context/
+│   ├── store/                   # Zustand stores
+│   └── provider/                # React contexts and their providers
+├── queries/                     # TanStack Query definitions
+└── services/                    # backend-facing feature services
+```
+
+- `context/store/` owns Zustand stores for feature-scoped client UI state shared
+  by multiple feature components, such as selection, dialog state, and
+  temporary local workflows. It must not hold server state, API results, or
+  route state.
+- `context/provider/` owns a React context together with its provider when state
+  or actions must be shared across deeply nested or separately composed feature
+  UI. Do not create a context merely to avoid a direct, meaningful prop.
+- Keep provider files that own feature state in `context/provider/`, not in
+  `components/` or a page directory. Providers that only compose application-
+  wide technical integrations (for example, Query Client or authentication
+  session composition) remain in `shared/providers/`.
+- Do not create empty `context/`, `store/`, or `provider/` folders preemptively.
+  Create each folder when it has an owning implementation, and keep it
+  feature-local unless a reusable application capability genuinely emerges.
+- New code must use these locations. Existing `ui/`, `model/store/`,
+  `model/context/`, and colocated state-provider folders are legacy layout and
+  should be moved to the target location when their owning feature is changed;
+  a migration must update all affected imports and tests in the same change.
+
+`queries/` owns TanStack Query definitions and feature-local adapters that
+translate route or table controls into query inputs and API filters. These
+adapters are client control logic, not domain models, and therefore must not
+be placed in `model/`.
+
+The same ownership vocabulary applies inside workspace packages: package-level
+models and schemas use `model/`, reusable React components use `components/`,
+and package-owned client state uses `context/store/` or `context/provider/`.
+React Context instances that are purely private implementation detail of one
+reusable component may remain colocated with that component.
 
 Use `services/` for backend-facing feature or package services. Service files use the
 `<domain>-service.ts` naming convention, for example `auth-service.ts`.
@@ -131,7 +186,13 @@ Owns reusable business capabilities inside one application, independent of a par
 
 ### `src/shared`
 
-Owns application-wide technical infrastructure and non-business UI composition: app shell, providers, configuration, localization, theme, and application-local utilities. It is not a cross-application dumping ground.
+Owns application-wide technical infrastructure and non-business UI composition:
+app shell, technical providers, configuration, localization, theme, and
+application-local utilities. Application-wide React components use
+`shared/components/`; application-wide client-state coordination uses
+`shared/context/` with the same `store/` and `provider/` split as features. It
+is not a
+cross-application dumping ground.
 
 ### `src/styles`
 
@@ -226,6 +287,9 @@ workspace packages → no application imports
 ## State, forms, and UI conventions
 
 - Keep server state in a query layer and local UI state close to its owner.
+- Use `context/store/` only for client state that needs Zustand. Use
+  `context/provider/` only when React Context's tree-scoped sharing is appropriate;
+  neither is a replacement for TanStack Query's server-state cache.
 - Standard mutation failures are reported through the global TanStack Query
   error handler and `toastError`. Do not add a mutation-level `onError` only
   to display an error; reserve it for behavior that is specific to that
@@ -241,6 +305,10 @@ workspace packages → no application imports
 - Place focused tests beside the owner or in its local `test/` folder.
 - Keep browser application tests separate from package tests.
 
-## Initial state
+## Current implementation baseline
 
-Both applications include a minimal Vite/React bootstrap, a root route, and an empty index route. Product features, application providers, API clients, and ADR documents are added only in response to an explicit implementation request.
+Both applications provide a Vite/React bootstrap, route composition, application
+providers, API-client configuration, localization, and implemented product
+features. New code must preserve the ownership and dependency rules in this
+document; `pnpm lint` includes the architecture-boundary check that enforces
+the most important folder and import constraints.

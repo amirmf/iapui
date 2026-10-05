@@ -30,7 +30,7 @@ vi.mock('@features/doc-types/pages/shared/doc-type-page-layout', () => ({
   ),
 }))
 
-vi.mock('@features/doc-types/ui/doc-type-form/doc-type-form', () => ({
+vi.mock('@features/doc-types/components/doc-type-form/doc-type-form', () => ({
   DocTypeForm: (props: { docType: { id: string }; mode: string }) => (
     <div data-testid='document-type-form'>
       {`${props.mode}:${props.docType.id}`}

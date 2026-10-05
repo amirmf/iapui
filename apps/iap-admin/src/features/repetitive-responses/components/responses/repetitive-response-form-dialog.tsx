@@ -2,13 +2,13 @@ import { useCallback, useEffect, useMemo } from 'react'
 
 import { RepetitiveResponseTextarea } from '@features/repetitive-responses/components/responses/repetitive-response-textarea'
 import {
+  useRepetitiveResponse,
+  useRepetitiveResponseGroup,
+} from '@features/repetitive-responses/context/store/repetitive-response-store'
+import {
   type RepetitiveResponseForm,
   createRepetitiveResponseFormSchema,
 } from '@features/repetitive-responses/model/repetitive-response-form-schema'
-import {
-  useRepetitiveResponse,
-  useRepetitiveResponseGroup,
-} from '@features/repetitive-responses/model/repetitive-response-store'
 import { repetitiveResponseGroupService } from '@features/repetitive-responses/services/repetitive-response-group-service'
 import { repetitiveResponseService } from '@features/repetitive-responses/services/repetitive-response-service'
 import { zodResolver } from '@hookform/resolvers/zod'

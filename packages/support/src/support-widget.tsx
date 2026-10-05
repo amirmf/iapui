@@ -4,8 +4,11 @@ import { Button, Textarea } from '@iap/ui'
 import { Bot, ChevronRight, RotateCcw, Send, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import type { SupportFlowContext } from './support-context'
-import { optionsFromResponse, useSupportFlowStore } from './support-store'
+import {
+  optionsFromResponse,
+  useSupportFlowStore,
+} from './context/store/support-store'
+import type { SupportFlowContext } from './model/support-flow-context'
 
 type SupportWidgetProps = {
   context: SupportFlowContext

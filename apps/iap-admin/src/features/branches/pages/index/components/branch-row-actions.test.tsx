@@ -1,4 +1,4 @@
-import { useBranchStore } from '@features/branches/model/branch-store'
+import { useBranchStore } from '@features/branches/context/store/branch-store'
 import { i18n, i18nReady } from '@shared/i18n/i18n'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'

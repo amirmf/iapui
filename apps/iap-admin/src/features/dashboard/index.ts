@@ -1,1 +1,1 @@
-export * from './ui/dashboard-page'
+export * from './components/dashboard-page'

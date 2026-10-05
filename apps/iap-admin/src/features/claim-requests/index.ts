@@ -1,6 +1,6 @@
-export { ClaimRequestsPage } from './ui/claim-requests-page'
+export { ClaimRequestsPage } from './components/claim-requests-page'
 export { claimRequestService } from './services/claim-request-service'
-export { ClaimRequestQuickStatusFilter } from './ui/claim-request-quick-status-filter'
+export { ClaimRequestQuickStatusFilter } from './components/claim-request-quick-status-filter'
 export type { ClaimRequestQuickStatus } from './model/claim-request-filters'
 export {
   CLAIM_REQUEST_FEATURES,

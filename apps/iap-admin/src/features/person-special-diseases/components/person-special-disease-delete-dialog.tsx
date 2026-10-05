@@ -1,4 +1,4 @@
-import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/model/store/person-special-disease-store'
+import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/context/store/person-special-disease-store'
 import { ConfirmDialog } from '@iap/dialogs'
 import { personSpecialDiseaseService } from '@modules/person-special-diseases'
 import { useMutation } from '@tanstack/react-query'

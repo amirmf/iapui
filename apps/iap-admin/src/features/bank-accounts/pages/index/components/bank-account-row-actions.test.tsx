@@ -1,4 +1,4 @@
-import { useBankAccountStore } from '@features/bank-accounts/model/bank-account-store'
+import { useBankAccountStore } from '@features/bank-accounts/context/store/bank-account-store'
 import { i18n, i18nReady } from '@shared/i18n/i18n'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'

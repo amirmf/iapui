@@ -1,18 +1,18 @@
 import { useCallback, useMemo } from 'react'
 
-import { useBankAccountStore } from '@features/bank-accounts/model/bank-account-store'
-import {
-  parseBankAccountTableSearch,
-  toBankAccountApiFilters,
-  toBankAccountTableSearch,
-} from '@features/bank-accounts/model/bank-account-table-state'
+import { BankAccountProvider } from '@features/bank-accounts/context/provider/bank-account-provider'
+import { useBankAccountStore } from '@features/bank-accounts/context/store/bank-account-store'
 import { BankAccountBulkDeleteDialog } from '@features/bank-accounts/pages/index/components/bank-account-bulk-delete-dialog'
 import { useBankAccountColumns } from '@features/bank-accounts/pages/index/components/bank-account-columns'
 import { BankAccountDataTableToolbar } from '@features/bank-accounts/pages/index/components/bank-account-data-table-toolbar'
 import { BankAccountDeleteDialog } from '@features/bank-accounts/pages/index/components/bank-account-delete-dialog'
 import { BankAccountHeaderActions } from '@features/bank-accounts/pages/index/components/bank-account-header-actions'
-import { BankAccountProvider } from '@features/bank-accounts/pages/index/components/bank-account-provider'
 import { BankAccountsPageSurface } from '@features/bank-accounts/pages/index/components/bank-accounts-page-surface'
+import {
+  parseBankAccountTableSearch,
+  toBankAccountApiFilters,
+  toBankAccountTableSearch,
+} from '@features/bank-accounts/queries/bank-account-table-state'
 import { useBankAccountsData } from '@features/bank-accounts/queries/use-bank-accounts-data'
 import type { BankAccount } from '@iap/api-types'
 import { PaginatedDataTable, type TableFilterSearch } from '@shared/tables'

@@ -1,4 +1,4 @@
-import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/model/store/person-special-disease-store'
+import { usePersonSpecialDiseaseStore } from '@features/person-special-diseases/context/store/person-special-disease-store'
 import type { PersonSpecialDisease } from '@iap/api-types'
 import { TableActionButton, TableActions } from '@shared/tables'
 import type { Row } from '@tanstack/react-table'
