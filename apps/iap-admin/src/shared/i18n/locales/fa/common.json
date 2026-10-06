@@ -1654,6 +1654,66 @@
     "supportQuestions": "سوالات پشتیبانی",
     "medicalCenter": "مراکز درمانی"
   },
+  "assignementRules": {
+    "title": "قوانین ارجاع",
+    "empty": "هیچ قانون ارجاعی یافت نشد.",
+    "actions": {
+      "create": "ایجاد قانون ارجاع",
+      "edit": "ویرایش قانون ارجاع",
+      "delete": "حذف قانون ارجاع",
+      "refresh": "بروزرسانی"
+    },
+    "dialog": {
+      "create": "ایجاد قانون ارجاع",
+      "edit": "ویرایش قانون ارجاع",
+      "delete": "حذف قانون ارجاع",
+      "deleteDescription": "آیا از حذف این قانون ارجاع مطمئن هستید؟"
+    },
+    "fields": {
+      "title": "عنوان",
+      "docTypeCode": "کد نوع سند",
+      "assignee": "نام کاربری ارزیاب",
+      "status": "وضعیت",
+      "policyId": "بیمه‌نامه",
+      "contractId": "شناسه قرارداد",
+      "workUnit": "کد شعبه",
+      "amountMin": "حداقل مبلغ",
+      "amountMax": "حداکثر مبلغ",
+      "amountApprovedMin": "حداقل مبلغ تاییدشده",
+      "amountApprovedMax": "حداکثر مبلغ تاییدشده",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "columns": {
+      "title": "عنوان",
+      "docTypeCode": "نوع سند",
+      "assignee": "ارزیاب",
+      "workUnit": "شعبه",
+      "status": "وضعیت"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال"
+    },
+    "bulkDelete": {
+      "button": "حذف انتخاب‌شده‌ها",
+      "title": "حذف قوانین انتخاب‌شده",
+      "description": "آیا از حذف {{count}} قانون ارجاع انتخاب‌شده مطمئن هستید؟"
+    },
+    "messages": {
+      "created": "قانون ارجاع با موفقیت ایجاد شد.",
+      "updated": "قانون ارجاع با موفقیت ویرایش شد.",
+      "deleted": "قانون ارجاع با موفقیت حذف شد.",
+      "createFailed": "ایجاد قانون ارجاع ناموفق بود.",
+      "updateFailed": "ویرایش قانون ارجاع ناموفق بود.",
+      "deleteFailed": "حذف قانون ارجاع ناموفق بود.",
+      "bulkDeleted": "قوانین ارجاع انتخاب‌شده با موفقیت حذف شدند.",
+      "bulkDeleteFailed": "حذف قوانین ارجاع انتخاب‌شده ناموفق بود."
+    },
+    "errors": {
+      "titleRequired": "عنوان الزامی است."
+    }
+  },
   "assessmentItems": {
     "empty": "مورد ارزیابی وجود ندارد.",
     "quantitySuffix": "عدد",
