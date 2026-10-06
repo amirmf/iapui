@@ -1,8 +1,8 @@
 # Admin table foundation
 
 `src/shared/tables` is admin-local technical infrastructure. Its root is only
-the public API. `data-table/` owns TanStack table composition and server-table
-state; `filter/` owns reusable filter controls and URL adapters; `pivot-table/`
+the public API. `data-table/` owns TanStack table composition; `filter/` owns
+reusable filter controls, their local state, and URL adapters; `pivot-table/`
 owns local aggregation and browser exports. Features own their columns, API
 request, query key, filter names, route validation, and product empty states.
 
@@ -13,12 +13,15 @@ request, query key, filter names, route validation, and product empty states.
   does not own API calls or route state. Its default empty and loading labels
   use `common.noRecords` and `common.loading`; pass `labels` only to override
   those defaults for a specific table.
-- Use `useServerTableState` for server-driven pagination, sorting, and filters.
-- At a typed route boundary, use `parseTableFilterSearch` and
-  `toTableFilterSearch`; validate the route search before parsing it.
+- Use `useTableFilterState` for local filter, pagination, and sorting state.
+- Use `useTableFilterQueryParams` when table state is URL-synced. Features own
+  their route-search parser and serializer under `route-adapters/`; the shared
+  hook only applies table transitions and Router navigation.
+- `parseTableFilterSearch` and `toTableFilterSearch` in `filter-utils` support
+  the default `page`/`pageSize`/`sort`/`sortDirection` URL contract. Features
+  with a different contract keep their own parser and serializer.
 - `TableFilterState`/`TableFilters` is controlled. `TableFilterQueryParams` is
-  the route-search adapter for pages that explicitly choose URL-synced filters.
-  A feature owns its values and connects them to its server table state or route
-  search.
+  a convenience component for filter-only URL toolbars; do not combine it with
+  `TableFilterState` for the same filter values.
 - `PivotTable` is for local aggregation and browser CSV/PDF downloads. Feature
   code owns any domain-specific PDF layout, font, and export authorization.

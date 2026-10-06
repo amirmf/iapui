@@ -1,37 +1,81 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { updateTableFilterValue } from '@shared/tables/filter/filter-utils'
 import type {
   TableFilterValue,
   TableFilterValues,
 } from '@shared/tables/filter/types'
-import type { PaginationState } from '@tanstack/react-table'
+import type {
+  OnChangeFn,
+  PaginationState,
+  SortingState,
+  Updater,
+} from '@tanstack/react-table'
 
-const initialPagination: PaginationState = { pageIndex: 0, pageSize: 40 }
+export type TableFilterStateModel<TFilters extends TableFilterValues> = {
+  filters: TFilters
+  pagination: PaginationState
+  sorting: SortingState
+}
 
-export function useTableFilterState(initialValues: TableFilterValues = {}) {
-  const [filters, setFilters] = useState<TableFilterValues>(initialValues)
-  const [pagination, setPagination] = useState(initialPagination)
-  const onChange = useCallback(
-    (id: string, value: TableFilterValue) =>
-      setFilters((previous) => updateTableFilterValue(previous, id, value)),
+export function resolveTableUpdater<T>(updater: Updater<T>, previous: T): T {
+  return typeof updater === 'function'
+    ? (updater as (previous: T) => T)(previous)
+    : updater
+}
+
+/** Keeps local filter, pagination, and sorting state in sync for a table. */
+export function useTableFilterState<TFilters extends TableFilterValues>(
+  initialState: TableFilterStateModel<TFilters>
+) {
+  const [state, setState] =
+    useState<TableFilterStateModel<TFilters>>(initialState)
+
+  const onFiltersChange = useCallback((updater: Updater<TFilters>) => {
+    setState((previous) => ({
+      ...previous,
+      filters: resolveTableUpdater(updater, previous.filters),
+      pagination: { ...previous.pagination, pageIndex: 0 },
+    }))
+  }, [])
+  const onPaginationChange = useCallback<OnChangeFn<PaginationState>>(
+    (updater) => {
+      setState((previous) => ({
+        ...previous,
+        pagination: resolveTableUpdater(updater, previous.pagination),
+      }))
+    },
     []
   )
-  const reset = useCallback((nextFilters: TableFilterValues = {}) => {
-    setFilters(nextFilters)
-    setPagination((previous) => ({ ...previous, pageIndex: 0 }))
+  const onSortingChange = useCallback<OnChangeFn<SortingState>>((updater) => {
+    setState((previous) => ({
+      ...previous,
+      pagination: { ...previous.pagination, pageIndex: 0 },
+      sorting: resolveTableUpdater(updater, previous.sorting),
+    }))
   }, [])
-  const isFiltered = useMemo(() => Object.keys(filters).length > 0, [filters])
+  const onFilterValueChange = useCallback(
+    (id: string, value: TableFilterValue) =>
+      onFiltersChange(
+        (previous) => updateTableFilterValue(previous, id, value) as TFilters
+      ),
+    [onFiltersChange]
+  )
+  const resetFilters = useCallback((nextFilters: TFilters = {} as TFilters) => {
+    setState((previous) => ({
+      ...previous,
+      filters: nextFilters,
+      pagination: { ...previous.pagination, pageIndex: 0 },
+    }))
+  }, [])
 
   return {
-    filters,
-    isFiltered,
-    onChange,
-    pagination,
-    reset,
-    setFilters,
-    setPagination,
-    setValues: setFilters,
-    values: filters,
+    ...state,
+    onFiltersChange,
+    onFilterValueChange,
+    onPaginationChange,
+    onSortingChange,
+    resetFilters,
+    setState,
   }
 }

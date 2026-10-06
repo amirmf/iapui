@@ -1,8 +1,12 @@
 import { useCallback, useMemo, useState } from 'react'
 
 import {
+  directionQueryParamKey,
   getTableFilterCount,
   isTableFiltered,
+  pageNumberQueryParamKey,
+  pageSizeQueryParamKey,
+  sortQueryParamKey,
   updateTableFilterValue,
 } from '@shared/tables/filter/filter-utils'
 import { TableFilterContent } from '@shared/tables/filter/table-filter-content'
@@ -12,12 +16,6 @@ import type {
   TableFilterValue,
   TableFilterValues,
 } from '@shared/tables/filter/types'
-import {
-  directionQueryParamKey,
-  pageNumberQueryParamKey,
-  pageSizeQueryParamKey,
-  sortQueryParamKey,
-} from '@shared/tables/filter/use-sync-query-params-table-filter'
 import { useLocation, useRouter } from '@tanstack/react-router'
 
 const defaultControlQueryParamKeys = [
