@@ -1,377 +1,4 @@
 {
-  "dataTable": {
-    "rowsSelected": "{{selected}} از {{total}} سطر انتخاب شده است.",
-    "rowsPerPage": "سطر در هر صفحه",
-    "pageIndicator": "صفحه {{page}} از {{pageCount}}",
-    "goToFirstPage": "رفتن به اولین صفحه",
-    "goToPreviousPage": "رفتن به صفحه قبلی",
-    "goToNextPage": "رفتن به صفحه بعدی",
-    "goToLastPage": "رفتن به آخرین صفحه",
-    "selectAllRows": "انتخاب همه سطرها",
-    "selectRow": "انتخاب سطر",
-    "total": "مجموع",
-    "loading": "در حال بارگذاری...",
-    "empty": "داده‌ای یافت نشد.",
-    "noResults": "نتیجه‌ای یافت نشد.",
-    "facetedFilter": {
-      "searchPlaceholder": "جستجو در {{title}}...",
-      "noResults": "نتیجه‌ای یافت نشد.",
-      "clear": "پاک کردن فیلترها",
-      "multiSelected": "{{count}} مورد انتخاب شده"
-    }
-  },
-  "routing": {
-    "actions": {
-      "goHome": "بازگشت به صفحه اصلی"
-    },
-    "error": {
-      "description": "مشکلی در نمایش صفحه پیش آمد. لطفاً دوباره تلاش کنید.",
-      "title": "خطایی رخ داد"
-    },
-    "notFound": {
-      "description": "نشانی مورد نظر پیدا نشد.",
-      "title": "صفحه پیدا نشد"
-    }
-  },
-  "auth": {
-    "login": {
-      "description": "با استفاده از نام کاربری و رمز عبور وارد حساب خود شوید.",
-      "forgotPassword": "بازیابی رمز عبور",
-      "password": "رمز عبور",
-      "register": "ایجاد حساب کاربری",
-      "submit": "ورود",
-      "submitting": "در حال ورود...",
-      "title": "ورود",
-      "tutorial": "مشاهده آموزش ورود / ثبت‌نام",
-      "username": "کد ملی (کد یکتا اتباع)"
-    },
-    "passwordReset": {
-      "backToLogin": "بازگشت به ورود",
-      "changeIdentity": "تغییر شماره",
-      "codeSentTo": "کد بازیابی به {{mobileNumber}} ارسال شد.",
-      "description": "برای بازیابی حساب خود یک رمز یکبار مصرف درخواست کنید.",
-      "mobileNumber": "شماره همراه",
-      "nationalCode": "کد ملی",
-      "otpCode": "کد بازیابی",
-      "password": "رمز عبور جدید",
-      "passwordConfirmation": "تکرار رمز عبور جدید",
-      "requestCode": "ارسال کد بازیابی",
-      "requestingCode": "در حال ارسال کد…",
-      "remembered": "رمز خود را به یاد آوردید؟",
-      "submit": "بازیابی رمز عبور",
-      "submitting": "در حال بازیابی رمز عبور...",
-      "title": "بازیابی رمز عبور",
-      "verifyDescription": "کد دریافت‌شده و رمز جدید را برای تکمیل بازیابی وارد کنید.",
-      "verifyTitle": "کد بازیابی را وارد کنید"
-    },
-    "passwordChange": {
-      "title": "تغییر رمز عبور",
-      "description": "رمز عبور شما منقضی شده است. برای ادامه استفاده از برنامه آن را تغییر دهید یا از حساب خارج شوید.",
-      "currentPassword": "رمز عبور فعلی",
-      "newPassword": "رمز عبور جدید",
-      "confirmNewPassword": "تکرار رمز عبور جدید",
-      "submit": "تغییر رمز عبور",
-      "submitting": "در حال تغییر رمز عبور...",
-      "success": "رمز عبور شما با موفقیت تغییر کرد.",
-      "actions": {
-        "showPassword": "نمایش رمز عبور",
-        "hidePassword": "پنهان کردن رمز عبور"
-      },
-      "requirements": {
-        "label": "شرایط رمز عبور جدید",
-        "minimumLength": "حداقل ۱۲ کاراکتر",
-        "uppercaseLetter": "حداقل یک حرف بزرگ انگلیسی",
-        "lowercaseLetter": "حداقل یک حرف کوچک انگلیسی",
-        "symbol": "حداقل یک کاراکتر نماد",
-        "number": "حداقل یک عدد"
-      },
-      "validation": {
-        "currentPasswordRequired": "رمز عبور فعلی را وارد کنید.",
-        "newPasswordRequired": "رمز عبور جدید را وارد کنید.",
-        "newPasswordMaxLength": "رمز عبور نمی‌تواند بیشتر از ۲۵۵ کاراکتر باشد.",
-        "confirmNewPasswordRequired": "تکرار رمز عبور جدید را وارد کنید.",
-        "passwordRequirements": "رمز عبور جدید همه شرایط را ندارد.",
-        "passwordsMatch": "رمز عبور جدید و تکرار آن باید یکسان باشند."
-      }
-    },
-    "register": {
-      "backToLogin": "وارد شوید",
-      "changeNumber": "تغییر شماره",
-      "codeSentTo": "کد تأیید به {{mobileNumber}} ارسال شد.",
-      "description": "برای ساخت حساب جدید، اطلاعات خود را وارد کنید.",
-      "foreign": "خارجی",
-      "foreignNationalCode": "کد یکتا",
-      "haveAccount": "قبلاً حساب دارید؟",
-      "iranian": "ایرانی",
-      "mobileNumber": "شماره همراه",
-      "nationalCode": "کد ملی",
-      "nationality": "ملیت",
-      "otpCode": "کد تأیید",
-      "password": "رمز عبور",
-      "passwordConfirmation": "تأیید رمز عبور",
-      "requestCode": "ارسال کد تأیید",
-      "requestingCode": "در حال ارسال کد…",
-      "submit": "ایجاد حساب",
-      "submitting": "در حال ایجاد حساب...",
-      "title": "ایجاد حساب کاربری"
-    },
-    "sso": {
-      "loading": "در حال ورود…"
-    },
-    "validation": {
-      "mobileNumber": "شماره موبایل معتبر وارد کنید.",
-      "mobileNumberPattern": "شماره موبایل باید با فرمت ۰۹xxxxxxxxx یا +۹۸٩xxxxxxxxx باشد.",
-      "nationalCode": "کد ملی باید ۱۰ رقم باشد.",
-      "otpCode": "کد تأیید ارسال‌شده به گوشی را وارد کنید.",
-      "passwordConfirmationRequired": "تأیید رمز عبور الزامی است.",
-      "passwordMinLength": "رمز عبور باید حداقل ۶ کاراکتر باشد.",
-      "passwordRequired": "رمز عبور الزامی است.",
-      "passwordsMatch": "رمز عبور و تأیید آن باید یکسان باشند.",
-      "usernameRequired": "کد ملی الزامی است."
-    }
-  },
-  "repetitiveResponses": {
-    "title": "مدیریت پاسخ‌های تکراری",
-    "description": "مدیریت پاسخ‌های آماده برای رسیدگی سریع‌تر به خسارت.",
-    "create": "ایجاد پاسخ تکراری",
-    "refresh": "بروزرسانی",
-    "noRepetitiveResponses": "هیچ پاسخ تکراری یافت نشد.",
-    "columns": {
-      "seqNum": "شماره ترتیب",
-      "title": "عنوان",
-      "response": "پاسخ",
-      "usageCount": "تعداد استفاده",
-      "status": "وضعیت",
-      "fromDate": "تاریخ شروع",
-      "thruDate": "تاریخ پایان"
-    },
-    "filters": {
-      "title": "عنوان",
-      "response": "پاسخ",
-      "status": "وضعیت"
-    },
-    "status": {
-      "active": "فعال",
-      "inactive": "غیرفعال",
-      "suspended": "تعلیق شده",
-      "pending": "در انتظار"
-    },
-    "dialog": {
-      "viewDetails": "مشاهده جزئیات",
-      "create": "ایجاد پاسخ تکراری",
-      "edit": "ویرایش پاسخ تکراری",
-      "delete": "حذف پاسخ تکراری",
-      "softDelete": "حذف نرم",
-      "fields": {
-        "seqNum": "شماره ترتیب",
-        "title": "عنوان",
-        "response": "پاسخ",
-        "group": "گروه",
-        "usageCount": "تعداد استفاده",
-        "status": "وضعیت",
-        "fromDate": "تاریخ شروع",
-        "thruDate": "تاریخ پایان"
-      },
-      "placeholders": {
-        "group": "انتخاب گروه"
-      }
-    },
-    "validation": {
-      "titleRequired": "عنوان الزامی است",
-      "responseRequired": "پاسخ الزامی است",
-      "groupRequired": "انتخاب گروه الزامی است"
-    },
-    "softDeleteDesc": "حذف نرم تاریخ پایان را تنظیم کرده و پاسخ را بدون حذف دائمی غیرفعال می‌کند.",
-    "messages": {
-      "created": "پاسخ تکراری ایجاد شد",
-      "createError": "ایجاد پاسخ تکراری ناموفق بود",
-      "updated": "پاسخ تکراری به‌روزرسانی شد",
-      "updateError": "به‌روزرسانی پاسخ تکراری ناموفق بود",
-      "deleted": "پاسخ تکراری حذف شد",
-      "deleteError": "حذف پاسخ تکراری ناموفق بود",
-      "softDeleted": "پاسخ تکراری به صورت نرم حذف شد",
-      "softDeleteError": "حذف نرم پاسخ تکراری ناموفق بود"
-    },
-    "tab": {
-      "responses": "پاسخ‌ها",
-      "groups": "گروه‌ها"
-    }
-  },
-  "repetitiveResponseGroups": {
-    "title": "مدیریت گروه‌های پاسخ تکراری",
-    "create": "ایجاد گروه",
-    "refresh": "بروزرسانی",
-    "noGroups": "هیچ گروه پاسخ تکراری یافت نشد.",
-    "columns": {
-      "title": "عنوان",
-      "seqNum": "شماره ترتیب"
-    },
-    "filters": {
-      "title": "عنوان"
-    },
-    "dialog": {
-      "viewDetails": "مشاهده جزئیات",
-      "create": "ایجاد گروه",
-      "edit": "ویرایش گروه",
-      "fields": {
-        "title": "عنوان",
-        "seqNum": "شماره ترتیب"
-      }
-    },
-    "validation": {
-      "titleRequired": "عنوان الزامی است"
-    },
-    "messages": {
-      "created": "گروه پاسخ تکراری ایجاد شد",
-      "createError": "ایجاد گروه پاسخ تکراری ناموفق بود",
-      "updated": "گروه پاسخ تکراری به‌روزرسانی شد",
-      "updateError": "به‌روزرسانی گروه پاسخ تکراری ناموفق بود",
-      "noSelectionError": "هیچ گروه پاسخ تکراری انتخاب نشده است"
-    },
-    "entityName": "گروه پاسخ تکراری"
-  },
-  "damageCodes": {
-    "title": "مدیریت کدهای خسارت",
-    "description": "مدیریت همه کد خسارت با اطلاعات قیمت‌گذاری.",
-    "create": "ایجاد کد خسارت",
-    "refresh": "بروزرسانی",
-    "noDamageCodes": "هیچ کد خساراتی یافت نشد.",
-    "columns": {
-      "code": "کد",
-      "title": "عنوان",
-      "extId": "شناسه خارجی",
-      "codeType": "نوع کد",
-      "description": "توضیحات",
-      "status": "وضعیت",
-      "fromDate": "تاریخ شروع",
-      "thruDate": "تاریخ پایان",
-      "created": "ایجاد شده"
-    },
-    "filters": {
-      "code": "کد",
-      "title": "عنوان",
-      "extId": "شناسه خارجی",
-      "codeType": "نوع کد",
-      "description": "توضیحات",
-      "status": "وضعیت",
-      "fromDate": "تاریخ شروع",
-      "thruDate": "تاریخ پایان",
-      "created": "تاریخ ایجاد",
-      "thruDateFrom": "تاریخ پایان از",
-      "thruDateTo": "تاریخ پایان تا"
-    },
-    "status": {
-      "active": "فعال",
-      "inactive": "غیرفعال",
-      "pending": "در انتظار",
-      "deprecated": "منسوخ شده"
-    },
-    "dialog": {
-      "details": "جزئیات",
-      "basicInfo": "اطلاعات اصلی",
-      "dateInfo": "اطلاعات تاریخ",
-      "systemInfo": "اطلاعات سیستمی",
-      "create": "ایجاد کد خسارت جدید",
-      "noStartDate": "بدون تاریخ",
-      "edit": "ویرایش کد خسارت",
-      "delete": "حذف کد خسارت",
-      "deleteDesc": "آیا مطمئن هستید که می‌خواهید این کد خسارت را به طور دائم حذف کنید؟",
-      "deleteWarning": "این عملیات کد خسارت را به طور دائم از سیستم حذف می‌کند و قابل بازگشت نیست.",
-      "createDesc": "کد خسارت جدید را با پر کردن فرم زیر ایجاد کنید.",
-      "editDesc": "اطلاعات کد خسارت را در زیر به‌روزرسانی کنید.",
-      "fields": {
-        "code": "کد",
-        "extId": "شناسه خارجی",
-        "extCode": "کد خارجی",
-        "codeType": "نوع کد",
-        "title": "عنوان",
-        "description": "توضیحات",
-        "status": "وضعیت",
-        "fromDate": "تاریخ شروع",
-        "thruDate": "تاریخ پایان "
-      }
-    },
-    "softDeleteDesc": "حذف نرم تاریخ پایان را تنظیم کرده و کد خسارت را بدون حذف دائمی غیرفعال می‌کند.",
-    "bulkDelete": {
-      "button": "حذف انتخاب‌شده‌ها",
-      "title": "حذف کدهای خسارت",
-      "description": "این عملیات {{count}} کد خسارت انتخاب‌شده را به طور دائم حذف می‌کند. این عمل قابل بازگشت نیست.",
-      "selectionInfo": "{{count}} کد خسارت انتخاب شد",
-      "confirm": "حذف",
-      "submitting": "در حال حذف...",
-      "success": "کدهای خسارت با موفقیت حذف شدند.",
-      "error": "حذف کدهای خسارت انتخاب‌شده انجام نشد.",
-      "noSelection": "لطفاً قبل از حذف حداقل یک کد خسارت را انتخاب کنید."
-    },
-    "messages": {
-      "created": "کد خسارت ثبت شد",
-      "createError": "ثبت کد خسارت انجام نشد",
-      "updated": "کد خسارت به‌روزرسانی شد",
-      "updateError": "به‌روزرسانی کد خسارت انجام نشد",
-      "deleted": "کد خسارت حذف شد",
-      "deleteError": "حذف کد خسارت انجام نشد",
-      "softDeleted": "کد خسارت نرم‌حذف شد",
-      "softDeleteError": "حذف نرم کد خسارت انجام نشد"
-    },
-    "pricing": {
-      "title": "مدیریت قیمت‌گذاری",
-      "current": "قیمت‌گذاری فعلی",
-      "addPricing": "افزودن قیمت",
-      "editPricing": "ویرایش قیمت",
-      "addNew": "افزودن قیمت جدید",
-      "noPricing": "اطلاعات قیمت‌گذاری موجود نیست",
-      "fields": {
-        "priceType": "نوع قیمت",
-        "selectPriceType": "نوع قیمت را انتخاب کنید",
-        "amount": "مقدار",
-        "unit": "واحد",
-        "unitPlaceholder": "واحد",
-        "fromDate": "تاریخ شروع",
-        "selectFromDate": "تاریخ شروع را انتخاب کنید",
-        "thruDate": "تاریخ پایان",
-        "selectThruDate": "تاریخ پایان را انتخاب کنید"
-      },
-      "types": {
-        "total": "کل",
-        "professional": "حرفه‌ای",
-        "technical": "فنی",
-        "baseanesthesiavalue": "ارزش پایه بیهوشی",
-        "privatesectortariff": "تعرفه بخش خصوصی",
-        "privatesectorsupplementaryinsurance": "تکمیلی بخش خصوصی",
-        "governmentsectortariff": "تعرفه بخش دولتی",
-        "governmentsectorsupplementaryinsurance": "تکمیلی بخش دولتی",
-        "charitysectortariff": "تعرفه بخش خیریه",
-        "charitysectorsupplementaryinsurance": "تکمیلی بخش خیریه",
-        "publicnongovernmentsectortariff": "تعرفه عمومی غیردولتی",
-        "publicnongovernmentsupplementaryinsurance": "تکمیلی عمومی غیردولتی",
-        "basicinsuranceshare": "سهم بیمه پایه",
-        "teethgeneraldoctor": "دندانپزشک عمومی",
-        "teethspecialdoctor": "دندانپزشک متخصص"
-      },
-      "messages": {
-        "created": "قیمت ثبت شد",
-        "createError": "ثبت قیمت انجام نشد",
-        "updated": "قیمت به‌روزرسانی شد",
-        "updateError": "به‌روزرسانی قیمت انجام نشد",
-        "deleted": "قیمت حذف شد",
-        "deleteError": "حذف قیمت انجام نشد",
-        "softDeleted": "قیمت نرم‌حذف شد",
-        "softDeleteError": "حذف نرم قیمت انجام نشد",
-        "deleteConfirm": "آیا از حذف این قیمت مطمئن هستید؟",
-        "softDeleteConfirm": "آیا از حذف نرم این قیمت مطمئن هستید؟"
-      },
-      "ongoing": "جاری",
-      "softDelete": "حذف نرم",
-      "clickToAdd": "برای افزودن کلیک کنید"
-    },
-    "actions": {
-      "viewDetails": "مشاهده جزئیات",
-      "edit": "ویرایش",
-      "managePricing": "مدیریت قیمت‌گذاری",
-      "delete": "حذف",
-      "softDelete": "حذف نرم"
-    }
-  },
   "damageCodePricings": {
     "title": "قیمت‌گذاری کد خسارت",
     "create": "قیمت جدید",
@@ -440,634 +67,6 @@
       "title": "جزئیات قیمت",
       "description": "اطلاعات کامل این رکورد قیمت را مشاهده کنید."
     }
-  },
-  "dashboard": {
-    "title": "داشبورد",
-    "download": "دانلود",
-    "refresh": "بروزرسانی",
-    "reports": {
-      "tabs": {
-        "reportCountByAssignee": "تعداد بر اساس ارزیاب (جزئیات)",
-        "reportCountByAssigneeSummary": "تعداد بر اساس ارزیاب (خلاصه)",
-        "reportSumByAssignee": "مبلغ بر اساس ارزیاب",
-        "reportDistributionByStatus": "توزیع بر اساس وضعیت",
-        "agreementsWithoutMainAssessmentUser": "قراردادهای بدون ارزیاب ارشد"
-      },
-      "columns": {
-        "status": "وضعیت",
-        "assignedUserDisplayName": "نام ارزیاب",
-        "count": "تعداد",
-        "amount": "مبلغ",
-        "totalSumAmount": "مبلغ تایید شده",
-        "distribution": "توزیع درخواست خسارت",
-        "extContractId": "شناسه قرارداد",
-        "title": "عنوان",
-        "code": "کد",
-        "fromDate": "تاریخ شروع"
-      },
-      "filters": {
-        "extPolicyId": "شماره بیمه‌نامه",
-        "extContractId": "شماره قرارداد",
-        "extPlanCaption": "طرح",
-        "extCustomerId": "شناسه بیمه‌گذار",
-        "extCustomerName": "نام بیمه‌گذار",
-        "extWorkUnitName": "نام شعبه",
-        "extWorkUnitCode": "کد شعبه",
-        "extWorkUnitCityName": "شهر شعبه",
-        "extWorkUnitProvinceName": "استان شعبه",
-        "status": "وضعیت",
-        "latestAssignementUsername": "کدملی ارزیاب",
-        "latestAssignementDisplayName": "نام ارزیاب",
-        "amount": "مبلغ",
-        "createdAt": "تاریخ ثبت",
-        "assessedAt": "تاریخ ارزیابی",
-        "submitDate": "تاریخ هزینه",
-        "totalSumAmount": "مبلغ تایید شده",
-        "docType": "نوع سند",
-        "mainAssignedUserUsername": "کدملی ارزیاب اصلی",
-        "mainAssignedUserDisplayName": "نام ارزیاب اصلی"
-      },
-      "statuses": {
-        "SUBMITTED": "ثبت شده",
-        "IN_REVIEW": "بررسی AI",
-        "IN_ASSESSMENT": "ارزیابی اولیه",
-        "DELEGATED": "در انتظار پاسخ ارجاع",
-        "DEDICATED_TO_USER": "بررسی‌های من",
-        "APPROVED": "تأیید شده در انتظار ارسال به فناوران",
-        "REJECTED": "رد (غیرقابل پرداخت)",
-        "FAILED_FETCH_API": "خطا در دریافت از سرویس",
-        "SENT": "ارسال شده در انتظار پرداخت",
-        "SENT_FAILED": "خطا ارسال",
-        "PAID": "واریز شده",
-        "TERMINATED": "ابطال",
-        "RETURN": "عودت شده در انتظار پاسخ کاربر",
-        "PAYMENT_REJECTED": "رد شده در پرداخت",
-        "PAYMENT_RETURN": "عودت شده از پرداخت",
-        "PAYMENT_RETURN_RESEND": "عودت شده از پرداخت (ارسال مجدد)",
-        "DELETED": "حذف شده"
-      },
-      "agreementStatuses": {
-        "ACTIVE": "فعال",
-        "INACTIVE": "غیرفعال",
-        "DRAFT": "پیش‌نویس",
-        "EXPIRED": "منقضی شده",
-        "TERMINATED": "خاتمه یافته"
-      },
-      "empty": {
-        "agreementsWithoutMainAssessmentUser": "همه قراردادها ارزیاب اصلی دارند."
-      },
-      "actions": {
-        "showReport": "جهت نمایش گزارش کلیک کنید"
-      }
-    }
-  },
-  "placeholder": {
-    "description": "این صفحه در حال پیاده‌سازی است."
-  },
-  "otp": {
-    "sections": {
-      "signupOtp": "OTP ثبت‌نام",
-      "passwordResetOtp": "OTP بازیابی رمز عبور"
-    },
-    "columns": {
-      "username": "نام کاربری",
-      "phoneNumber": "شماره موبایل",
-      "nationalCode": "کد ملی",
-      "requestCount": "تعداد درخواست",
-      "failedAttempts": "تلاش ناموفق",
-      "locked": "قفل شده",
-      "otpCreatedAt": "زمان ایجاد OTP",
-      "expiresAt": "زمان انقضا",
-      "consumedAt": "زمان مصرف",
-      "otpHash": "کد یکبار مصرف"
-    },
-    "filters": {
-      "phoneNumber": "فیلتر بر اساس شماره موبایل",
-      "nationalCode": "فیلتر بر اساس کد ملی"
-    },
-    "empty": {
-      "signupOtp": "رکوردی برای OTP ثبت‌نام یافت نشد.",
-      "passwordResetOtp": "رکوردی برای OTP بازیابی رمز عبور یافت نشد."
-    }
-  },
-  "coverages": {
-    "title": "مدیریت پوشش‌ها",
-    "description": "مدیریت همه پوشش‌های موجود در سیستم مدیریت ادعاهای شما.",
-    "create": " تعریف پوشش جدید",
-    "refresh": "بروزرسانی",
-    "noCoverages": "هیچ پوشش یافت نشد.",
-    "columns": {
-      "code": "کد",
-      "title": "عنوان",
-      "extId": "شناسه خارجی",
-      "typeIndicator": "شاخص نوع",
-      "type": "نوع",
-      "rootCoverage": "پوشش اصلی",
-      "maxCoverage": "حداکثر پوشش",
-      "status": "وضعیت",
-      "fromDate": "تاریخ شروع",
-      "thruDate": "تاریخ پایان",
-      "created": "ایجاد شده"
-    },
-    "filters": {
-      "code": "کد",
-      "title": "عنوان",
-      "extId": "شناسه خارجی",
-      "typeIndicator": "شاخص نوع",
-      "rootCoverage": "پوشش اصلی",
-      "type": "نوع",
-      "maxCoverage": "حداکثر پوشش",
-      "status": "وضعیت",
-      "fromDate": "تاریخ شروع",
-      "thruDate": "تاریخ پایان",
-      "created": "تاریخ ایجاد",
-      "thruDateFrom": "تاریخ پایان از",
-      "thruDateTo": "تاریخ پایان تا"
-    },
-    "type": {
-      "group": "گروهی",
-      "detail": "جزئیات"
-    },
-    "status": {
-      "active": "فعال",
-      "inactive": "غیرفعال",
-      "suspended": "تعلیق شده",
-      "pending": "در انتظار"
-    },
-    "dialog": {
-      "viewDetails": "مشاهده جزئیات",
-      "create": "ایجاد پوشش جدید",
-      "edit": "ویرایش پوشش",
-      "delete": "حذف ",
-      "softDelete": "حذف نرم",
-      "createDesc": "پوشش جدید را با پر کردن فرم زیر ایجاد کنید.",
-      "editDesc": "اطلاعات پوشش را در زیر به‌روزرسانی کنید.",
-      "fields": {
-        "title": "عنوان",
-        "code": "کد",
-        "typeIndicator": "شاخص نوع",
-        "type": "نوع",
-        "maxCoverage": "سقف پوشش",
-        "status": "وضعیت",
-        "rootCoverageId": "شناسه پوشش اصلی ",
-        "fromDate": "تاریخ شروع",
-        "thruDate": "تاریخ پایان "
-      }
-    },
-    "softDeleteDesc": "حذف نرم تاریخ پایان را تنظیم کرده و پوشش را بدون حذف دائمی غیرفعال می‌کند.",
-    "bulkDelete": {
-      "button": "حذف انتخاب‌شده‌ها",
-      "title": "حذف پوشش‌ها",
-      "description": "این عملیات {{count}} پوشش انتخاب‌شده را به صورت دائمی حذف می‌کند. این عمل قابل بازگشت نیست.",
-      "selectionInfo": "{{count}} پوشش انتخاب‌شده",
-      "confirm": "حذف",
-      "submitting": "در حال حذف...",
-      "success": "پوشش‌ها با موفقیت حذف شدند.",
-      "error": "حذف پوشش‌های انتخاب‌شده ناموفق بود.",
-      "noSelection": "لطفاً حداقل یک پوشش را برای حذف انتخاب کنید."
-    },
-    "messages": {
-      "deleted": "پوشش حذف شد",
-      "deleteError": "حذف پوشش ناموفق بود",
-      "softDeleted": "پوشش به صورت نرم حذف شد",
-      "softDeleteError": "حذف نرم پوشش ناموفق بود"
-    }
-  },
-  "coverageDamageCodeAppls": {
-    "title": "نگاشت پوشش و کد",
-    "description": "مدیریت نگاشت بین پوشش‌ها و کدهای خسارت.",
-    "create": "افزودن نگاشت",
-    "refresh": "بروزرسانی",
-    "columns": {
-      "coverageTitle": "عنوان پوشش",
-      "coverageCode": "کد پوشش",
-      "damageTitle": "عنوان کد خسارت",
-      "damageCode": "کد خسارت",
-      "priority": "اولویت",
-      "status": "وضعیت",
-      "ratio": "نسبت"
-    },
-    "actions": {
-      "view": "نمایش",
-      "edit": "ویرایش",
-      "softDelete": "حذف نرم",
-      "delete": "حذف"
-    },
-    "bulkDelete": {
-      "button": "حذف انتخاب‌شده‌ها",
-      "title": "حذف نگاشت‌های پوشش و کد",
-      "description": "این عملیات {{count}} نگاشت انتخاب‌شده را به صورت دائمی حذف می‌کند. این عمل قابل بازگشت نیست.",
-      "selectionInfo": "{{count}} نگاشت انتخاب‌شده",
-      "confirm": "حذف",
-      "submitting": "در حال حذف...",
-      "success": "نگاشت‌ها با موفقیت حذف شدند.",
-      "error": "حذف نگاشت‌های انتخاب‌شده ناموفق بود.",
-      "noSelection": "لطفاً حداقل یک نگاشت را برای حذف انتخاب کنید."
-    },
-    "dialog": {
-      "create": "ایجاد نگاشت",
-      "edit": "ویرایش نگاشت",
-      "createDesc": "یک نگاشت جدید ایجاد کنید.",
-      "editDesc": "نگاشت را به‌روزرسانی کنید."
-    },
-    "form": {
-      "coverage": "پوشش",
-      "selectCoverage": "انتخاب پوشش",
-      "damageCode": "کد خسارت",
-      "selectDamageCode": "انتخاب کد خسارت",
-      "priority": "اولویت",
-      "status": "وضعیت",
-      "ratio": "نسبت",
-      "device": "دستگاه",
-      "description": "توضیحات",
-      "serviceHeadline": "عنوان خدمت",
-      "serviceGroup": "گروه خدمت",
-      "isRequired": "اجباری است",
-      "ruleDesc": "شرح قانون",
-      "fromDate": "تاریخ شروع",
-      "thruDate": "تاریخ پایان"
-    },
-    "status": {
-      "active": "فعال",
-      "inactive": "غیرفعال",
-      "suspended": "تعلیق شده",
-      "pending": "در انتظار"
-    },
-    "view": {
-      "title": "جزئیات نگاشت",
-      "description": "جزئیات نگاشت"
-    },
-    "delete": {
-      "title": "حذف نگاشت",
-      "description": "آیا از حذف این نگاشت اطمینان دارید؟"
-    }
-  },
-  "form": {
-    "submit": "ثبت",
-    "creating": "در حال ثبت",
-    "updating": "در حال ویرایش",
-    "uploading": "در حال بارگذاری...",
-    "update": "ویرایش",
-    "updateParty": "ویرایش شخص",
-    "enterTitle": "عنوان را وارد کنید",
-    "enterCode": "کد را وارد کنید",
-    "enterMaxCoverage": "حداکثر پوشش را وارد کنید",
-    "enterCodeType": "نوع کد را وارد کنید",
-    "enterDescription": "توضیحات را وارد کنید",
-    "enterDocType": "نوع سند را وارد کنید",
-    "selectStatus": "وضعیت را انتخاب کنید",
-    "selectType": "نوع را انتخاب کنید",
-    "selectPartyType": "نوع شخص را انتخاب کنید"
-  },
-  "common": {
-    "more": "بیشتر",
-    "collapse": "بستن",
-    "asc": "صعودی",
-    "desc": "نزولی",
-    "resetFilter": "حذف فیلترها",
-    "select": "انتخاب کنید",
-    "noResults": "نتیجه‌ای یافت نشد",
-    "clear": "پاک کردن",
-    "search": "جستجو",
-    "none": "هیچکدام",
-    "create": "ثبت",
-    "saveChanges": "ذخیره تغییرات",
-    "all": "همه",
-    "passwordRequirements": {
-      "label": "الزامات رمز عبور",
-      "description": "رمز عبور باید حداقل شامل یک حرف بزرگ، یک حرف کوچک و یک عدد باشد."
-    },
-    "cancel": "انصراف",
-    "close": "بستن",
-    "optional": "اختیاری",
-    "confirm": "تأیید",
-    "yes": "بله",
-    "no": "خیر",
-    "from": "از",
-    "to": "تا",
-    "showLess": "فیلترهای کمتر",
-    "showMore": "فیلترهای بیشتر",
-    "reset": "بازنشانی",
-    "save": "ذخیره",
-    "update": "به‌روزرسانی",
-    "noRecords": "داده‌ای یافت نشد.",
-    "notAvailable": "در دسترس نیست",
-    "openInNewTab": "باز کردن در زبانه جدید",
-    "openMenu": "باز کردن منو",
-    "loading": "در حال بارگذاری...",
-    "refresh": "بروزرسانی",
-    "exportCsv": "خروجی CSV",
-    "total": "مجموع",
-    "signOut": "خروج",
-    "username": "نام کاربری",
-    "displayName": "نام",
-    "createdAt": "ایجاد شده در",
-    "updatedAt": "به‌روزرسانی شده در",
-    "delete": "حذف",
-    "edit": "ویرایش",
-    "softDelete": "حذف نرم",
-    "deleteSuccess": "مورد با موفقیت حذف شد",
-    "softDeleteSuccess": "مورد با موفقیت حذف نرم شد",
-    "deleteConfirm": "آیا از حذف مطمئن هستید؟",
-    "softDeleteConfirm": "این مورد غیرفعال می‌شود.",
-    "deleteMethodDescription": "نحوه حذف این مورد را انتخاب کنید",
-    "thruDate": "تاریخ پایان",
-    "back": "بازگشت",
-    "goBack": "بازگشت",
-    "dialog": {
-      "confirm": "ادامه",
-      "cancel": "لغو",
-      "deleteDialog": {
-        "permanentTitle": "حذف دایمی ردیف اطلاعاتی",
-        "confirmMessage": "آیا مطمئن هستید که می‌خواهید این ردیف را به طور دائم حذف کنید؟",
-        "typeToConfirm": "شناسه رو جهت حذف وارد کنید",
-        "enterToConfirm": "شناسه رو جهت حذف وارد کنید",
-        "deleteWarning": "هشدار",
-        "cannotUndo": "این عملیات این ردیف را به طور دائم از سیستم حذف می‌کند و قابل بازگشت نیست",
-        "permanentWarning": "هشدار"
-      }
-    },
-    "auditInfo": {
-      "action": "اطلاعات ثبت کننده",
-      "title": "اطلاعات ثبت کننده",
-      "createdSection": "اطلاعات ایجاد",
-      "updatedSection": "اطلاعات آخرین به‌روزرسانی",
-      "createdBy": "ایجادکننده",
-      "updatedBy": "آخرین به‌روزرسانی توسط",
-      "userLoadError": "اطلاعات کاربر در دسترس نیست"
-    },
-    "retry": "تلاش دوباره",
-    "fileUploader": {
-      "dragAndDrop": "فایل‌ها را بکشید و رها کنید یا برای انتخاب کلیک کنید",
-      "allowedTypes": "فقط تصاویر PNG، JPG، JPEG، HEIC",
-      "onlyAllowed": "فقط فایل‌های تصویری با فرمت PNG، JPG، JPEG، HEIC مجاز هستند",
-      "someSkipped": "بعضی فایل‌ها به دلیل نوع نامعتبر نادیده گرفته شدند",
-      "heicConversionFailed": "تبدیل {{filename}} از HEIC/HEIF به JPEG انجام نشد.",
-      "uploadFailed": "بارگذاری {{filename}} انجام نشد",
-      "failed": "ناموفق",
-      "progressValue": "{{percent}}%"
-    }
-  },
-  "claimRequests": {
-    "title": "درخواست‌های خسارت",
-    "description": "مدیریت درخواست‌های خسارت بیمه.",
-    "refresh": "بروزرسانی",
-    "columns": {
-      "amount": "مبلغ درخواستی",
-      "totalSumAmount": "مبلغ تایید شده",
-      "corePaidAmount": "مبلغ فناوران",
-      "corePaidAmountPercent": "درصد اختلاف",
-      "extPaymentDate": "تاریخ پرداخت",
-      "ibanStatus": "وضعیت شبا",
-      "status": "وضعیت",
-      "aiStatus": "وضعیت AI",
-      "submitDate": "تاریخ هزینه",
-      "docType": "انواع مدارک",
-      "extPolicyId": "شماره بیمه‌نامه",
-      "extContractId": "شماره قرارداد",
-      "extNationalCode": "کد ملی",
-      "extMainNationalCode": "کد ملی بیمه شده اصلی",
-      "extDisplayName": "نام بیمه‌شده",
-      "extCustomerName": "نام بیمه‌گذار",
-      "createdAt": "تاریخ ثبت",
-      "assessedAt": "تاریخ ارزیابی",
-      "extPlanCaption": "طرح",
-      "businessKey": "کد پذیرش",
-      "latestAssignementDisplayName": "نام ارزیاب",
-      "extWorkUnitName": "نام شعبه",
-      "requestType": "نوع درخواست",
-      "isReturn": "عودتی"
-    },
-    "filters": {
-      "latestAssignementDisplayName": "نام ارزیاب",
-      "extPolicyId": "شماره بیمه‌نامه",
-      "extContractId": "شماره قرارداد",
-      "extNationalCode": "کد ملی بیمه شده",
-      "extMainNationalCode": "کد ملی بیمه‌شده اصلی",
-      "extDisplayName": "نام بیمه‌شده",
-      "extCustomerName": "نام بیمه‌گذار",
-      "extCustomerCompanyCode": "کد شرکت بیمه‌گذار",
-      "extCustomerNationalCode": "کد ملی بیمه‌گذار",
-      "extCustomerCityName": "شهر بیمه‌گذار",
-      "extWorkUnitName": "نام شعبه",
-      "extWorkUnitCode": "کد شعبه",
-      "extWorkUnitCityName": "شهر شعبه",
-      "extWorkUnitProvinceName": "استان شعبه",
-      "extPlanCaption": "طرح",
-      "businessKey": "کد پذیرش",
-      "amountFrom": "مبلغ از",
-      "amountTo": "مبلغ تا",
-      "totalSumAmountFrom": "مبلغ تایید شده از",
-      "totalSumAmountTo": "مبلغ تایید شده تا",
-      "corePaidAmountFrom": "مبلغ فناوران از",
-      "corePaidAmountTo": "مبلغ فناوران تا",
-      "corePaidAmountPercentFrom": "درصد اختلاف از",
-      "corePaidAmountPercentTo": "درصد اختلاف تا",
-      "submitDateFrom": "تاریخ هزینه از",
-      "submitDateTo": "تاریخ هزینه تا",
-      "createdAtFrom": "تاریخ ثبت از",
-      "createdAtTo": "تاریخ ثبت تا",
-      "assessedAtFrom": "تاریخ ارزیابی از",
-      "assessedAtTo": "تاریخ ارزیابی تا",
-      "isReturn": "عودتی",
-      "ibanStatus": "وضعیت شبا",
-      "latestAssignementUsername": "کدملی ارزیاب",
-      "mainAssignedUserUsername": "کدملی ارزیاب اصلی",
-      "mainAssignedUserDisplayName": "نام ارزیاب اصلی",
-      "seenBy": "فیلد",
-      "outpatientDocAcceptanceExtId": "شماره پذیرش فناوران",
-      "registeredByAgentUsername": "نام کاربری نماینده ثبت",
-      "registeredByAgentDisplayName": "نام نماینده ثبت"
-    },
-    "ibanStatusValues": {
-      "has": "دارد",
-      "doesNotHave": "ندارد"
-    },
-    "status": {
-      "submitted": "ثبت شده",
-      "inReview": "بررسی AI",
-      "inAssessment": "ارزیابی اولیه",
-      "delegated": "در انتظار پاسخ ارجاع",
-      "dedicatedToUser": "بررسی‌های من",
-      "approved": "تأیید شده در انتظار ارسال به فناوران",
-      "rejected": "رد (غیرقابل پرداخت)",
-      "failed_fetch_api": "خطا در دریافت از سرویس",
-      "sent": "ارسال شده در انتظار پرداخت",
-      "sent_failed": "خطا ارسال",
-      "paid": "واریز شده",
-      "sentToBank": "ارسال شده به بانک",
-      "needsReassessment": "نیاز به ارزیابی مجدد",
-      "terminated": "ابطال",
-      "return": "عودت شده در انتظار پاسخ کاربر",
-      "paymentRejected": "رد شده در پرداخت",
-      "paymentReturn": "عودت شده از پرداخت",
-      "paymentReturnResend": "عودت شده از پرداخت (ارسال مجدد)",
-      "deleted": "حذف شده"
-    },
-    "requestType": {
-      "main": "اصلی",
-      "adjustment": "متمم"
-    },
-    "aiStatus": {
-      "approved": "تأیید شده",
-      "return": "عودت داده شده",
-      "reviewRequired": "نیاز به بررسی",
-      "reject": "رد شده",
-      "reviewRequiredSubmitInfoDuplicated": "نیاز به بررسی (اطلاعات تکراری)",
-      "reviewRequiredImageDuplicated": "نیاز به بررسی (تصویر تکراری)",
-      "reviewRequiredImageDigitallyEdited": "نیاز به بررسی (تصویر ویرایش‌شده دیجیتالی)",
-      "returnNoCoverage": "عودت داده شده (بدون پوشش)",
-      "returnMaxCeiling": "عودت داده شده (تمکیل سقف)"
-    },
-    "actions": {
-      "downloadExcel": "دانلود اکسل",
-      "inquiryFanavaran": "استعلام فناوران",
-      "assignToMe": "تخصیص به من و ارزیابی",
-      "removeMyAssessment": "خارج کردن از کارتابل",
-      "sendStatusChangeNotification": "ارسال اعلان تغییر وضعیت",
-      "delete": "حذف",
-      "viewDetails": "مشاهده جزئیات"
-    },
-    "bulk": {
-      "delete": {
-        "title": "حذف گروهی درخواست‌ها",
-        "description": "آیا از حذف {{count}} درخواست انتخاب‌شده مطمئن هستید؟"
-      },
-      "generateAndSend": {
-        "title": "ایجاد و ارسال گروهی",
-        "description": "آیا از ایجاد و ارسال {{count}} درخواست انتخاب‌شده مطمئن هستید؟"
-      },
-      "inquiry": {
-        "title": "استعلام فناوران",
-        "description": "آیا از ارسال استعلام برای {{count}} درخواست انتخاب‌شده مطمئن هستید؟"
-      }
-    },
-    "dialog": {
-      "fields": {
-        "description": "توضیحات",
-        "isCheat": "درخواست به عنوان تقلب ثبت شود.",
-        "objectionStatus": "تعیین وضعیت",
-        "attachments": "پیوست‌ها"
-      }
-    },
-    "validation": {
-      "status": "وضعیت الزامی است"
-    },
-    "documents": {
-      "title": "اسناد خسارت",
-      "docTypeLabel": "نوع سند",
-      "empty": "هیچ سندی برای این درخواست خسارت موجود نیست.",
-      "modalTitle": "فرم سند: {{docType}}",
-      "modalTitleFallback": "فرم سند",
-      "formTitle": "فرم سند: {{docType}}",
-      "formTitleFallback": "فرم سند",
-      "missingDocument": "سند انتخاب‌شده یافت نشد.",
-      "unavailable": "امکان نمایش فرم برای این سند وجود ندارد.",
-      "actions": {
-        "openForm": "مشاهده فرم",
-        "save": "ذخیره تغییرات"
-      },
-      "messages": {
-        "updateSuccess": "اطلاعات سند با موفقیت به‌روزرسانی شد.",
-        "updateError": "به‌روزرسانی اطلاعات سند انجام نشد.",
-        "missingSchemaTitle": "طرح فرم موجود نیست",
-        "missingSchemaDescription": "برای این درخواست خسارت هنوز طرح فرم را تعریف نکرده‌اید."
-      }
-    },
-    "bulkDataExtraction": {
-      "button": "آغاز فرآیند Core AI",
-      "title": "آغاز فرآیند داده Core AI",
-      "description": "این عملیات فرایند استخراج داده Core AI را برای {{count}} درخواست انتخاب‌شده آغاز می‌کند.",
-      "selectionInfo": "{{count}} درخواست انتخاب شده",
-      "confirm": "آغاز فرایند",
-      "submitting": "در حال آغاز...",
-      "success": "فرایند استخراج داده Core AI برای {{count}} درخواست انتخاب‌شده آغاز شد.",
-      "error": "آغاز فرایند استخراج داده Core AI ناموفق بود.",
-      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
-    },
-    "generateAndSendBulk": {
-      "button": "ارسال گروهی به فناوران",
-      "title": "ارسال گروهی به فناوران",
-      "description": "این عملیات پذیرش اسناد سرپایی را تولید می‌کند و {{count}} درخواست انتخاب‌شده را به فناوران ارسال می‌کند.",
-      "selectionInfo": "{{count}} درخواست انتخاب شده",
-      "confirm": "ارسال به فناوران",
-      "submitting": "در حال ارسال...",
-      "success": "درخواست‌های انتخاب‌شده با موفقیت به فناوران ارسال شدند.",
-      "error": "ارسال درخواست‌های انتخاب‌شده به فناوران ناموفق بود.",
-      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
-    },
-    "bulkDelete": {
-      "button": "حذف انتخاب‌ها",
-      "title": "حذف درخواست‌های خسارت",
-      "description": "این عملیات {{count}} درخواست انتخاب‌شده را برای همیشه حذف می‌کند و قابل بازگشت نیست.",
-      "selectionInfo": "{{count}} درخواست انتخاب شده",
-      "confirm": "حذف",
-      "submitting": "در حال حذف...",
-      "success": "درخواست‌های انتخاب‌شده با موفقیت حذف شدند.",
-      "error": "حذف درخواست‌های انتخاب‌شده ناموفق بود.",
-      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
-    },
-    "messages": {
-      "deleted": "درخواست خسارت حذف شد",
-      "claimIdMissing": "شناسه درخواست وجود ندارد.",
-      "removeMyAssessmentSuccess": "خارج کردن از کارتابل با موفقیت انجام شد.",
-      "statusChangeNotificationSent": "اعلان تغییر وضعیت با موفقیت ارسال شد.",
-      "inquiryFanavaranSuccess": "استعلام فناوران با موفقیت ارسال شد.",
-      "inquiryFanavaranError": "ارسال استعلام فناوران ناموفق بود.",
-      "excelDownloaded": "فایل اکسل دانلود شد",
-      "excelDownloadFailed": "دانلود اکسل ناموفق بود",
-      "docTypeUpdateError": "به‌روزرسانی نوع سند انجام نشد."
-    },
-    "confirmations": {
-      "inquiryFanavaran": {
-        "title": "استعلام فناوران",
-        "description": "آیا از ارسال استعلام جزئیات بیمه‌نامه به فناوران مطمئن هستید؟"
-      },
-      "assignToMe": {
-        "title": "اختصاص درخواست خسارت به من",
-        "description": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را به خودتان اختصاص دهید؟"
-      },
-      "removeMyAssessment": {
-        "title": "خارج کردن از کارتابل من",
-        "description": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را از کارتابل خود خارج کنید؟"
-      }
-    },
-    "management": {
-      "title": "مدیریت درخواست خسارت"
-    },
-    "bulkStatusChange": {
-      "button": "تغییر گروهی وضعیت",
-      "title": "تغییر گروهی وضعیت",
-      "description": "برای {{count}} درخواست انتخاب‌شده یک وضعیت انتخاب کنید.",
-      "statusPlaceholder": "انتخاب وضعیت",
-      "confirm": "تغییر وضعیت",
-      "submitting": "در حال تغییر...",
-      "success": "وضعیت {{count}} درخواست انتخاب‌شده با موفقیت تغییر کرد.",
-      "error": "تغییر وضعیت درخواست‌های انتخاب‌شده ناموفق بود.",
-      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید.",
-      "defaultDescription": "تغییر گروهی وضعیت",
-      "descriptionPlaceholder": "توضیحات تغییر گروهی وضعیت را وارد کنید"
-    },
-    "extContractIdPlaceholder": "شماره قرارداد",
-    "extPolicyIdPlaceholder": "کد رایانه بیمه نامه",
-    "fetchNewRequests": "کلیک جهت مشاهده درخواست‌ها"
-  },
-  "panelSwitcher": {
-    "switch": "تغییر پنل: {{panel}}",
-    "current": "{{panel}} — پنل فعلی",
-    "panels": {
-      "evaluation": "پنل ارزیابی",
-      "customer": "سامانه مشتریان"
-    }
-  },
-  "shell": {
-    "closeNavigation": "بستن نوار ناوبری",
-    "collapseNavigation": "جمع کردن نوار ناوبری",
-    "expandNavigation": "باز کردن نوار ناوبری",
-    "loading": "در حال بررسی نشست...",
-    "logout": "خروج",
-    "navigation": "ناوبری اصلی",
-    "openNavigation": "باز کردن نوار ناوبری"
   },
   "userAccounts": {
     "title": "حساب‌های کاربری",
@@ -1165,6 +164,627 @@
       "branchUser": "کاربر شعبه",
       "customerUser": "کاربر مشتری",
       "ticketAgent": "کارشناس تیکت"
+    }
+  },
+  "files": {
+    "viewer": {
+      "loading": "در حال بارگذاری پیوست...",
+      "progressValue": "{{percent}}%",
+      "loadFailed": "بارگذاری پیوست امکان‌پذیر نبود.",
+      "actions": {
+        "zoomIn": "بزرگ‌نمایی",
+        "zoomOut": "کوچک‌نمایی",
+        "resetView": "بازنشانی نما",
+        "rotateLeft": "چرخش به چپ",
+        "rotateRight": "چرخش به راست",
+        "downloadImage": "دانلود تصویر"
+      }
+    }
+  },
+  "outpatientDocAcceptances": {
+    "title": "مالی و پرداخت",
+    "entityName": "پذیرش سند سرپایی",
+    "description": "مدیریت پذیرش اسناد و خسارت‌های مرتبط.",
+    "actions": {
+      "bulkDelete": "حذف انتخاب‌شده‌ها",
+      "refresh": "به‌روزرسانی",
+      "create": "ایجاد پذیرش",
+      "generate": "تولید پذیرش‌ها",
+      "send": "ارسال به فناوران",
+      "cancel": "لغو پذیرش",
+      "terminate": "خاتمه پذیرش",
+      "viewDetails": "مشاهده جزئیات",
+      "edit": "ویرایش پذیرش",
+      "delete": "حذف پذیرش",
+      "manageClaim": "مدیریت خسارت",
+      "manageIssuance": "مدیریت صدور",
+      "manageDamageCases": "مدیریت پرونده‌ها",
+      "viewClaim": "مشاهده خسارت",
+      "editClaim": "ویرایش خسارت",
+      "createClaim": "ایجاد خسارت",
+      "viewIssuance": "مشاهده صدور",
+      "editIssuance": "ویرایش صدور",
+      "createIssuance": "ایجاد صدور",
+      "refreshDamageCases": "به‌روزرسانی",
+      "createDamageCase": "ایجاد پرونده خسارت",
+      "syncInqueryStatuses": "همگام‌سازی وضعیت‌های استعلام",
+      "generateAdjustment": "تولید متمم‌ها"
+    },
+    "messages": {
+      "noDocAcceptances": "هیچ پذیرش اسناد سرپایی یافت نشد.",
+      "created": "پذیرش اسناد سرپایی با موفقیت ایجاد شد.",
+      "createError": "ایجاد پذیرش اسناد سرپایی ناموفق بود.",
+      "updated": "پذیرش اسناد سرپایی با موفقیت ویرایش شد.",
+      "updateError": "ویرایش پذیرش اسناد سرپایی ناموفق بود.",
+      "deleted": "پذیرش اسناد سرپایی با موفقیت حذف شد.",
+      "deleteError": "حذف پذیرش اسناد سرپایی ناموفق بود.",
+      "noClaim": "برای این پذیرش خسارتی ثبت نشده است.",
+      "claimCreated": "خسارت سرپایی با موفقیت ذخیره شد.",
+      "claimCreateError": "ایجاد خسارت سرپایی ناموفق بود.",
+      "claimUpdated": "خسارت سرپایی با موفقیت ویرایش شد.",
+      "claimUpdateError": "ویرایش خسارت سرپایی ناموفق بود.",
+      "noIssuance": "برای این پذیرش صدوری وجود ندارد.",
+      "issuanceCreated": "صدور با موفقیت ذخیره شد.",
+      "issuanceCreateError": "ایجاد صدور ناموفق بود.",
+      "issuanceUpdated": "صدور با موفقیت ویرایش شد.",
+      "issuanceUpdateError": "ویرایش صدور ناموفق بود.",
+      "noDamageCases": "پرونده خسارتی برای این پذیرش ثبت نشده است.",
+      "damageCaseCreated": "پرونده خسارت با موفقیت ذخیره شد.",
+      "damageCaseCreateError": "ایجاد پرونده خسارت ناموفق بود.",
+      "damageCaseUpdated": "پرونده خسارت با موفقیت ویرایش شد.",
+      "damageCaseUpdateError": "ویرایش پرونده خسارت ناموفق بود.",
+      "damageCaseDeleted": "پرونده خسارت با موفقیت حذف شد.",
+      "damageCaseDeleteError": "حذف پرونده خسارت ناموفق بود.",
+      "generated": "{{count}} پذیرش سرپایی با موفقیت تولید شد.",
+      "generateError": "تولید پذیرش‌های سرپایی ناموفق بود.",
+      "sent": "{{count}} پذیرش سرپایی با موفقیت ارسال شد.",
+      "sendError": "ارسال پذیرش‌های سرپایی ناموفق بود.",
+      "cancelled": "پذیرش اسناد سرپایی با موفقیت لغو شد.",
+      "cancelError": "لغو پذیرش اسناد سرپایی ناموفق بود.",
+      "terminated": "پذیرش اسناد سرپایی با موفقیت خاتمه یافت.",
+      "terminateError": "خاتمه پذیرش اسناد سرپایی ناموفق بود.",
+      "syncInqueryStatusesSuccess": "{{count}} وضعیت استعلام با موفقیت همگام‌سازی شد.",
+      "syncInqueryStatusesError": "همگام‌سازی وضعیت‌های استعلام ناموفق بود.",
+      "generatedAdjustment": "{{count}} متمم پذیرش سرپایی با موفقیت تولید شد.",
+      "generateAdjustmentError": "تولید متمم‌های پذیرش سرپایی ناموفق بود."
+    },
+    "columns": {
+      "createdAt": "تاریخ ایجاد",
+      "exId": "شناسه خارجی",
+      "letterNo": "شماره نامه",
+      "deliveryDate": "تاریخ تحویل",
+      "totalAmount": "مبلغ کل",
+      "claimCount": "تعداد خسارت",
+      "policyId": "شناسه بیمه‌نامه",
+      "status": "وضعیت",
+      "wsStatus": "وضعیت سرویس",
+      "inqueryStatusTitle": "عنوان وضعیت استعلام",
+      "inqueryStatusId": "شناسه وضعیت استعلام",
+      "opUnitId": "شناسه واحد عملیاتی",
+      "extLocationId": "شناسه موقعیت خارجی",
+      "updatedAt": "آخرین بروزرسانی"
+    },
+    "filters": {
+      "exId": "شناسه خارجی",
+      "letterNo": "شماره نامه",
+      "policyId": "شناسه بیمه‌نامه",
+      "inqueryStatusId": "شناسه وضعیت استعلام",
+      "inqueryStatusTitle": "عنوان وضعیت استعلام",
+      "opUnitId": "شناسه واحد عملیاتی",
+      "extLocationId": "شناسه موقعیت خارجی",
+      "searchPlaceholder": "جستجو بر اساس شماره نامه...",
+      "deliveryDateFrom": "تاریخ تحویل از",
+      "deliveryDateTo": "تاریخ تحویل تا",
+      "updatedAtFrom": "آخرین بروزرسانی از",
+      "updatedAtTo": "آخرین بروزرسانی تا"
+    },
+    "dialog": {
+      "edit": "ویرایش پذیرش اسناد سرپایی",
+      "create": "ایجاد پذیرش اسناد سرپایی",
+      "details": "جزئیات پذیرش",
+      "cancelTitle": "لغو پذیرش اسناد سرپایی",
+      "cancelConfirmation": "آیا از لغو این پذیرش اسناد سرپایی اطمینان دارید؟",
+      "confirmCancel": "تایید لغو",
+      "terminateTitle": "خاتمه پذیرش اسناد سرپایی",
+      "terminateConfirmation": "آیا از خاتمه این پذیرش اسناد سرپایی اطمینان دارید؟",
+      "confirmTerminate": "تایید خاتمه"
+    },
+    "generateDialog": {
+      "title": "تولید پذیرش‌های سرپایی",
+      "fields": {
+        "claimRequestId": "شناسه درخواست خسارت",
+        "date": "تاریخ تولید"
+      }
+    },
+    "sendDialog": {
+      "title": "ارسال پذیرش‌های سرپایی",
+      "fields": {
+        "outpatientDocAcceptanceId": "شناسه پذیرش",
+        "date": "تاریخ ارسال"
+      }
+    },
+    "tabs": {
+      "overview": "مرور",
+      "claim": "خسارت",
+      "issuance": "صدور",
+      "damageCases": "پرونده‌های خسارت"
+    },
+    "sections": {
+      "claimTitle": "خسارت سرپایی",
+      "issuanceTitle": "صدور",
+      "damageCasesTitle": "پرونده‌های خسارت"
+    },
+    "form": {
+      "id": "شناسه پذیرش",
+      "exId": "شناسه خارجی",
+      "docDeliveryKindId": "نوع تحویل سند",
+      "deliveryDate": "تاریخ تحویل",
+      "acceptanceKindId": "نوع پذیرش",
+      "claimCount": "تعداد خسارت‌ها",
+      "dichargeMonth": "ماه ترخیص",
+      "totalAmount": "مبلغ کل",
+      "policyId": "شناسه بیمه‌نامه",
+      "insuredPersonId": "شناسه بیمه‌شده",
+      "medicalCenterId": "شناسه مرکز درمانی",
+      "letterDate": "تاریخ نامه",
+      "letterNo": "شماره نامه",
+      "secretariatNo": "شماره دبیرخانه",
+      "secretariatDate": "تاریخ دبیرخانه",
+      "paymentDate": "تاریخ پرداخت",
+      "docDelivererAgentId": "شناسه تحویل‌دهنده",
+      "dataSenderId": "شناسه ارسال‌کننده",
+      "claimExpertId": "شناسه کارشناس خسارت",
+      "opUnitId": "شناسه واحد عملیاتی",
+      "exStatus": "وضعیت خارجی",
+      "status": "وضعیت",
+      "statusPlaceholder": "انتخاب وضعیت",
+      "wsStatus": "وضعیت سرویس",
+      "wsStatusPlaceholder": "انتخاب وضعیت سرویس",
+      "claimRequestId": "شناسه درخواست خسارت",
+      "wsResult": "نتیجه سرویس"
+    },
+    "claimFields": {
+      "id": "شناسه خسارت",
+      "acceptanceId": "شناسه پذیرش",
+      "announcementDate": "تاریخ اعلام",
+      "chargePlanId": "شناسه طرح",
+      "claimExpertId": "شناسه کارشناس خسارت",
+      "dmgRegisterarId": "شناسه ثبت‌کننده خسارت",
+      "docDelivererAgentId": "شناسه تحویل‌دهنده مدارک",
+      "docDeliveryKindId": "شناسه نوع تحویل مدارک",
+      "draftExpertId": "شناسه کارشناس برآورد",
+      "dataSenderId": "شناسه ارسال‌کننده",
+      "expertiseEndDate": "تاریخ پایان کارشناسی",
+      "estimateAmount": "مبلغ برآوردی",
+      "exId": "شناسه خارجی",
+      "claimNo": "شماره پرونده فناوران",
+      "insuredPersonId": "شناسه بیمه‌شده",
+      "medicalCenterId": "شناسه مرکز درمانی",
+      "policyId": "شناسه بیمه‌نامه",
+      "letterNo": "شماره نامه",
+      "description": "توضیحات",
+      "hasPreAuth": "دارای پیش‌مجوز",
+      "hasReturnDocs": "دارای مدارک برگشتی",
+      "isMatchedWithList": "مطابقت با لیست",
+      "isPaymentFromCash": "پرداخت نقدی",
+      "statusChangeDate": "تاریخ تغییر وضعیت",
+      "exStatus": "وضعیت خارجی",
+      "status": "وضعیت",
+      "claimRequestId": "شناسه درخواست خسارت",
+      "wsStatus": "وضعیت سرویس",
+      "wsResult": "نتیجه سرویس"
+    },
+    "claimDialog": {
+      "create": "ایجاد خسارت سرپایی",
+      "edit": "ویرایش خسارت سرپایی",
+      "details": "جزئیات خسارت"
+    },
+    "issuanceFields": {
+      "id": "شناسه صدور",
+      "draftKindId": "شناسه نوع حواله",
+      "description": "توضیحات",
+      "certificationExpertId": "شناسه کارشناس تایید",
+      "complementReasonId": "شناسه دلیل تکمیلی",
+      "dataSenderId": "شناسه ارسال‌کننده",
+      "amount": "مبلغ",
+      "autoCalc": "محاسبه خودکار",
+      "claimId": "شناسه خسارت",
+      "docAcceptanceId": "شناسه پذیرش",
+      "draftNo": "شماره حواله",
+      "draftReasonId": "شناسه دلیل حواله",
+      "reasonId": "شناسه دلیل",
+      "exId": "شناسه خارجی",
+      "isComfort": "پرداخت رفاهی",
+      "issuDate": "تاریخ صدور",
+      "sourceId": "شناسه منبع",
+      "exStatus": "وضعیت خارجی",
+      "calcTime": "زمان محاسبه",
+      "changeTime": "زمان تغییر",
+      "paymentPreparationTime": "زمان آماده‌سازی پرداخت",
+      "calcJobStatus": "وضعیت محاسبه",
+      "status": "وضعیت",
+      "claimRequestId": "شناسه درخواست خسارت",
+      "dmgCases": "تعداد پرونده‌های خسارت",
+      "wsStatus": "وضعیت سرویس",
+      "wsResult": "نتیجه سرویس"
+    },
+    "issuanceDialog": {
+      "create": "ایجاد صدور",
+      "edit": "ویرایش صدور",
+      "details": "جزئیات صدور"
+    },
+    "damageCaseFields": {
+      "id": "شناسه پرونده خسارت",
+      "insuredPersonId": "شناسه بیمه‌شده",
+      "serviceDate": "تاریخ خدمت",
+      "medicalSystemCode": "کد نظام پزشکی",
+      "illnessId": "شناسه بیماری",
+      "serviceDetailId": "شناسه خدمت",
+      "serviceProvinceId": "شناسه استان خدمت",
+      "tariffKindId": "شناسه تعرفه",
+      "doctorSpecialityId": "شناسه تخصص پزشک",
+      "isFranchiseDeduction": "کسر فرانشیز",
+      "excessFranchiseAmount": "مازاد فرانشیز",
+      "deductionKindId": "شناسه نوع کسور",
+      "deductionAmount": "مبلغ کسور",
+      "firstInsurerShareAmount": "سهم بیمه‌گر اول",
+      "expertiseFranchisePercent": "درصد فرانشیز کارشناسی",
+      "otherOrganizationsShareAmount": "سهم سایر سازمان‌ها",
+      "toothId": "شناسه دندان",
+      "insuredIsAdult": "بیمه‌شده بالغ است",
+      "medicalCenterId": "شناسه مرکز درمانی",
+      "drugCount": "تعداد اقلام دارو",
+      "deliveredDocTypeId": "شناسه نوع سند تحویلی",
+      "preAuthId": "شناسه پیش‌مجوز",
+      "medicalBookLetSerialNo": "سریال دفترچه",
+      "medicalBookletPageNo": "شماره صفحه دفترچه",
+      "cardSerial": "سریال کارت",
+      "deductionDesc": "شرح کسور",
+      "discountAmount": "مبلغ تخفیف",
+      "excessOfTheInsurersCommitmentAmount": "مازاد تعهد بیمه‌گر",
+      "outOfTheInsurersCommitmentAmount": "خارج از تعهد بیمه‌گر",
+      "thePatientLedFranchise": "فرانشیز پرداختی بیمار",
+      "otherRecoverableAmount": "سایر مبالغ قابل وصول",
+      "requestedAmount": "مبلغ درخواستی",
+      "approvedAmount": "مبلغ تایید شده",
+      "drugClaimId": "شناسه خسارت دارو",
+      "systemCalculated": "محاسبه شده توسط سیستم",
+      "dataSenderId": "شناسه ارسال‌کننده",
+      "claimId": "شناسه خسارت",
+      "draftId": "شناسه حواله",
+      "firstInsurerId": "شناسه بیمه‌گر اول",
+      "franchise": "فرانشیز",
+      "exId": "شناسه خارجی",
+      "nonPaymentReason": "دلیل عدم پرداخت",
+      "totalAmount": "مبلغ کل",
+      "isCalculated": "محاسبه شده است",
+      "status": "وضعیت",
+      "claimRequestId": "شناسه درخواست خسارت",
+      "assessmentItemId": "شناسه آیتم ارزیابی",
+      "wsResult": "نتیجه سرویس",
+      "wsStatus": "وضعیت سرویس"
+    },
+    "damageCaseDialog": {
+      "title": "پرونده‌های خسارت",
+      "create": "ایجاد پرونده خسارت",
+      "edit": "ویرایش پرونده خسارت",
+      "details": "جزئیات پرونده خسارت",
+      "total": "تعداد پرونده‌ها: {{count}}",
+      "deleteConfirm": "آیا از حذف پرونده خسارت با تاریخ {{serviceDate}} و مبلغ {{amount}} مطمئن هستید؟"
+    },
+    "status": {
+      "SUBMIT": "ثبت شده",
+      "SENT_TO_SERVER": "ارسال به سرور",
+      "DELETED": "حذف شده",
+      "REJECT": "رد شده",
+      "FAILED": "ناموفق",
+      "SUCCESS": "موفق"
+    },
+    "wsStatus": {
+      "FAILD": "ناموفق",
+      "PROGRESS": "در حال انجام",
+      "DONE": "انجام شد"
+    },
+    "generateAdjustmentDialog": {
+      "title": "تولید متمم مالی و پرداخت",
+      "fields": {
+        "claimRequestId": "شناسه درخواست خسارت"
+      }
+    }
+  },
+  "tickets": {
+    "title": "تیکت‌ها",
+    "description": "تیکت‌های پشتیبانی را بررسی کنید و به پیام‌ها پاسخ دهید.",
+    "refresh": "به‌روزرسانی",
+    "empty": "تیکتی یافت نشد.",
+    "error": "امکان دریافت تیکت‌ها وجود ندارد.",
+    "columns": {
+      "ticketNumber": "شماره تیکت",
+      "claimRequestId": "شماره درخواست",
+      "subject": "موضوع",
+      "category": "دسته‌بندی",
+      "ownerUsername": "نام کاربری بیمه شده",
+      "assignedUsername": "ارجاع شده به",
+      "ownerDisplayName": "نام بیمه شده",
+      "assignedUserDisplayName": "نام ارجاع‌شده",
+      "status": "وضعیت",
+      "priority": "اولویت",
+      "lastMessageAt": "آخرین پیام",
+      "createdAt": "ایجاد شده"
+    },
+    "status": {
+      "OPEN": "باز",
+      "ASSIGNED": "ارجاع شده",
+      "WAITING_FOR_USER": "در انتظار کاربر",
+      "WAITING_FOR_SUPPORT": "در انتظار پشتیبانی",
+      "ANSWERED": "پاسخ داده شده",
+      "CLOSED": "بسته شده"
+    },
+    "priority": {
+      "LOW": "کم",
+      "NORMAL": "عادی",
+      "HIGH": "زیاد",
+      "URGENT": "فوری"
+    },
+    "category": {
+      "PAYMENT": "پرداخت",
+      "CLAIM_ISSUE": "مشکل خسارت",
+      "INFO_ISSUE": "مشکل اطلاعات"
+    },
+    "visibility": {
+      "PUBLIC": "عمومی",
+      "INTERNAL": "داخلی"
+    },
+    "statusHistory": {
+      "title": "تاریخچه وضعیت",
+      "description": "خط زمانی همه تغییرات وضعیت تیکت همراه با زمان به‌روزرسانی و کاربر.",
+      "open": "مشاهده تاریخچه وضعیت تیکت",
+      "user": "به‌روزرسانی توسط {{userId}}",
+      "transition": "{{from}} به {{to}}"
+    },
+    "confirmations": {
+      "assignToLatestAssessmentUser": {
+        "title": "تیکت به ارزیاب ارجاع شود؟",
+        "description": "این تیکت به آخرین کاربر ارزیابی ارجاع داده می‌شود."
+      }
+    },
+    "detail": {
+      "title": "جزئیات تیکت",
+      "description": "اطلاعات تیکت و تاریخچه گفتگو.",
+      "loading": "در حال دریافت جزئیات تیکت...",
+      "error": "امکان دریافت جزئیات تیکت وجود ندارد.",
+      "close": "بستن",
+      "cancel": "انصراف",
+      "openClaimRequest": "مشاهده درخواست خسارت",
+      "assignToLatestAssessmentUser": "ارجاع به ارزیاب",
+      "assigningToLatestAssessmentUser": "در حال ارجاع به ارزیاب...",
+      "closeTicket": "بستن تیکت",
+      "closingTicket": "در حال بستن تیکت...",
+      "ownerDisplayName": "نام بیمه شده",
+      "assignedUserDisplayName": "نام ارجاع‌شده"
+    },
+    "relatedClaimRequest": {
+      "title": "درخواست خسارت مرتبط",
+      "unavailable": "درخواست خسارت مرتبطی برای این تیکت وجود ندارد.",
+      "loading": "در حال دریافت درخواست خسارت مرتبط...",
+      "error": "امکان دریافت درخواست خسارت مرتبط وجود ندارد.",
+      "empty": "درخواست خسارت مرتبط در دسترس نیست.",
+      "assessmentItems": "اقلام ارزیابی",
+      "assessmentItemsUnavailable": "اقلام ارزیابی در دسترس نیستند.",
+      "assessmentItemsError": "امکان دریافت اقلام ارزیابی وجود ندارد."
+    },
+    "messages": {
+      "title": "پیام‌ها",
+      "loading": "در حال دریافت پیام‌ها...",
+      "empty": "پیامی یافت نشد.",
+      "error": "امکان دریافت پیام‌ها وجود ندارد.",
+      "unknownSender": "فرستنده نامشخص",
+      "placeholder": "پاسخ خود را بنویسید...",
+      "send": "ارسال پاسخ",
+      "sending": "در حال ارسال...",
+      "assignToLatestAssessmentUserSuccess": "تیکت با موفقیت به ارزیاب ارجاع شد.",
+      "ticketIdMissing": "شناسه تیکت در دسترس نیست."
+    },
+    "filters": {
+      "myTickets": "تیکت‌های من"
+    },
+    "actions": {
+      "view": "مشاهده",
+      "viewDetails": "مشاهده جزئیات تیکت"
+    }
+  },
+  "coverages": {
+    "title": "مدیریت پوشش‌ها",
+    "description": "مدیریت همه پوشش‌های موجود در سیستم مدیریت ادعاهای شما.",
+    "create": " تعریف پوشش جدید",
+    "refresh": "بروزرسانی",
+    "noCoverages": "هیچ پوشش یافت نشد.",
+    "columns": {
+      "code": "کد",
+      "title": "عنوان",
+      "extId": "شناسه خارجی",
+      "typeIndicator": "شاخص نوع",
+      "type": "نوع",
+      "rootCoverage": "پوشش اصلی",
+      "maxCoverage": "حداکثر پوشش",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "created": "ایجاد شده"
+    },
+    "filters": {
+      "code": "کد",
+      "title": "عنوان",
+      "extId": "شناسه خارجی",
+      "typeIndicator": "شاخص نوع",
+      "rootCoverage": "پوشش اصلی",
+      "type": "نوع",
+      "maxCoverage": "حداکثر پوشش",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "created": "تاریخ ایجاد",
+      "thruDateFrom": "تاریخ پایان از",
+      "thruDateTo": "تاریخ پایان تا"
+    },
+    "type": {
+      "group": "گروهی",
+      "detail": "جزئیات"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "suspended": "تعلیق شده",
+      "pending": "در انتظار"
+    },
+    "dialog": {
+      "viewDetails": "مشاهده جزئیات",
+      "create": "ایجاد پوشش جدید",
+      "edit": "ویرایش پوشش",
+      "delete": "حذف ",
+      "softDelete": "حذف نرم",
+      "createDesc": "پوشش جدید را با پر کردن فرم زیر ایجاد کنید.",
+      "editDesc": "اطلاعات پوشش را در زیر به‌روزرسانی کنید.",
+      "fields": {
+        "title": "عنوان",
+        "code": "کد",
+        "typeIndicator": "شاخص نوع",
+        "type": "نوع",
+        "maxCoverage": "سقف پوشش",
+        "status": "وضعیت",
+        "rootCoverageId": "شناسه پوشش اصلی ",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان "
+      }
+    },
+    "softDeleteDesc": "حذف نرم تاریخ پایان را تنظیم کرده و پوشش را بدون حذف دائمی غیرفعال می‌کند.",
+    "bulkDelete": {
+      "button": "حذف انتخاب‌شده‌ها",
+      "title": "حذف پوشش‌ها",
+      "description": "این عملیات {{count}} پوشش انتخاب‌شده را به صورت دائمی حذف می‌کند. این عمل قابل بازگشت نیست.",
+      "selectionInfo": "{{count}} پوشش انتخاب‌شده",
+      "confirm": "حذف",
+      "submitting": "در حال حذف...",
+      "success": "پوشش‌ها با موفقیت حذف شدند.",
+      "error": "حذف پوشش‌های انتخاب‌شده ناموفق بود.",
+      "noSelection": "لطفاً حداقل یک پوشش را برای حذف انتخاب کنید."
+    },
+    "messages": {
+      "deleted": "پوشش حذف شد",
+      "deleteError": "حذف پوشش ناموفق بود",
+      "softDeleted": "پوشش به صورت نرم حذف شد",
+      "softDeleteError": "حذف نرم پوشش ناموفق بود"
+    }
+  },
+  "agreements": {
+    "validation": {
+      "invalidIsoDateTime": "تاریخ و زمان ISO نامعتبر است",
+      "titleRequired": "عنوان الزامی است",
+      "codeRequired": "کد الزامی است"
+    },
+    "title": "مدیریت قراردادها",
+    "create": "تعریف قرارداد جدید ",
+    "refresh": "بروزرسانی",
+    "noAgreements": "هیچ قراردادی یافت نشد.",
+    "columns": {
+      "code": "کد",
+      "templateCode": "کد قالب",
+      "extContractId": "شناسه قرارداد",
+      "extPolicyId": "شناسه بیمه‌نامه",
+      "extPlanId": "شناسه طرح",
+      "extLocation": "موقعیت مکانی",
+      "overrideRatio": "ضریب تعرفه",
+      "title": "عنوان",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "draft": "پیش‌نویس",
+      "expired": "منقضی شده",
+      "terminated": "خاتمه یافته"
+    },
+    "filters": {
+      "thruDateFrom": "تاریخ پایان از",
+      "thruDateTo": "تاریخ پایان تا"
+    },
+    "dialog": {
+      "create": "ایجاد قرارداد جدید",
+      "createDesc": "قرارداد جدید را با پر کردن فرم زیر ایجاد کنید.",
+      "edit": "ویرایش قرارداد",
+      "editDesc": "اطلاعات قرارداد را در زیر به‌روزرسانی کنید.",
+      "details": "جزئیات قرارداد",
+      "fields": {
+        "title": "عنوان",
+        "code": "کد",
+        "templateCode": "کد قالب",
+        "extContractId": "شناسه قرارداد خارجی",
+        "extPolicyId": "شناسه بیمه‌نامه خارجی",
+        "extPlanId": "شناسه طرح خارجی",
+        "extLocation": "موقعیت مکانی خارجی",
+        "overrideRatio": "ضریب تعرفه",
+        "status": "وضعیت",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان"
+      }
+    },
+    "actions": {
+      "edit": "ویرایش",
+      "initializeCoverageAppls": "راه‌اندازی نگاشت‌های پوشش"
+    },
+    "initializeCoverageApplsDesc": "آیا نگاشت‌های پوشش برای این قرارداد ایجاد شود؟ این کار برای کدهای خسارت فعال بدون قیمت‌گذاری، نگاشت ایجاد می‌کند.",
+    "messages": {
+      "created": "قرارداد با موفقیت ایجاد شد",
+      "updated": "قرارداد با موفقیت به‌روزرسانی شد",
+      "coverageInitialized": "نگاشت‌های پوشش ایجاد شد"
+    },
+    "partyAppls": {
+      "title": "نگاشتهای اشخاص",
+      "add": "افزودن شخص",
+      "user": "کاربر",
+      "selectUser": "انتخاب کاربر",
+      "relationshipType": "نوع رابطه",
+      "role": "نقش",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "docTypes": "نوع سند",
+      "agreementTitle": "عنوان قرارداد",
+      "contactIdLabel": "شناسه قرارداد",
+      "policyIdLabel": "شناسه بیمه‌نامه",
+      "bulkCreate": {
+        "agreementTitle": "عنوان",
+        "bulkCreateTitleBtn": "افزودن انبوهی اشخاص",
+        "description": "قراردادها و کاربران انتخاب‌شده را بررسی کنید، سپس نگاشت اشخاص را به‌صورت انبوه ایجاد کنید.",
+        "displayName": "نام نمایشی",
+        "extContractId": "شناسه قرارداد",
+        "noResults": "نتیجه‌ای یافت نشد",
+        "selectedAgreements": "قرارداد‌ها",
+        "success": "نگاشتهای اشخاص با موفقیت ایجاد شدند.",
+        "title": "افزودن انبوهی اشخاص",
+        "user": "کاربران",
+        "username": "نام کاربری"
+      },
+      "roles": {
+        "owner": "مالک",
+        "assessmentUser": "کاربر ارزیابی",
+        "mainAssessmentUser": "کاربر ارزیابی اصلی",
+        "hqUser": "کاربر ستاد مرکزی",
+        "doctorUser": "کاربر پزشک",
+        "requestRegisteryAgent": "کاربر نماینده ثبت",
+        "mainRequestRegisteryAgent": "کاربر نماینده ثبت ارشد",
+        "branchUser": "کاربر شعبه",
+        "customerUser": "بیمه‌گذار"
+      },
+      "filters": {
+        "displayName": "نام نمایشی",
+        "username": "نام کاربری",
+        "extPolicyId": "شماره بیمه‌نامه",
+        "extContractId": "شماره قرارداد",
+        "extLocation": "موقعیت مکانی",
+        "agreementTitle": "عنوان قرارداد"
+      }
     }
   },
   "parties": {
@@ -1433,6 +1053,285 @@
       }
     }
   },
+  "assessmentItems": {
+    "empty": "مورد ارزیابی وجود ندارد.",
+    "quantitySuffix": "عدد",
+    "dialog": {
+      "fields": {
+        "estimatedAmount": "مبلغ ارزیابی",
+        "franchizeDeductionAmount": "فرانشیز",
+        "remainCoverageAmount": "مانده پوشش",
+        "amountPaid": "تایید شده",
+        "toothNumbers": "شماره دندان",
+        "description": "توضیحات"
+      }
+    }
+  },
+  "agreementPartyAppls": {
+    "validation": {
+      "userAccountIdRequired": "انتخاب حساب کاربری الزامی است"
+    },
+    "bulkAssign": {
+      "title": "انتصاب شخص به قراردادهای انتخاب‌شده",
+      "description": "یک کاربر و نقش را برای انتصاب به همه قراردادهای انتخاب‌شده انتخاب کنید.",
+      "submit": "انتصاب شخص به قراردادها",
+      "success": "شخص با موفقیت به قراردادهای انتخاب‌شده منتسب شدند."
+    },
+    "delete": {
+      "descriptionWithAgreementAndRole": "آیا مطمئن هستید می‌خواهید {{displayName}} را با نقش {{role}} از {{agreementTitle}} حذف کنید؟"
+    }
+  },
+  "bankAccounts": {
+    "title": "حساب‌های بانکی",
+    "description": "نمایش {{count}} رکورد حساب بانکی",
+    "columns": {
+      "bankAccountNumber": "شماره حساب",
+      "bankAccountType": "نوع حساب",
+      "phoneNumber": "شماره موبایل",
+      "userId": "شناسه کاربر",
+      "isValid": "معتبر",
+      "createdAt": "تاریخ ایجاد"
+    },
+    "filters": {
+      "bankAccountNumber": "شماره حساب",
+      "phoneNumber": "شماره موبایل",
+      "userId": "شناسه کاربر",
+      "username": "کدملی"
+    },
+    "types": {
+      "IBAN": "شبا",
+      "CARD": "کارت"
+    },
+    "actions": {
+      "delete": "حذف",
+      "bulkDelete": "حذف انتخاب‌شده‌ها"
+    },
+    "messages": {
+      "deleted": "حساب بانکی با موفقیت حذف شد"
+    },
+    "bulkDelete": {
+      "title": "حذف حساب‌های بانکی انتخاب‌شده",
+      "description": "آیا از حذف دائمی {{count}} رکورد حساب بانکی انتخاب‌شده مطمئن هستید؟",
+      "confirm": "حذف انتخاب‌شده‌ها",
+      "submitting": "در حال حذف...",
+      "success": "حساب‌های بانکی انتخاب‌شده با موفقیت حذف شدند",
+      "noSelection": "حداقل یک حساب بانکی انتخاب کنید."
+    }
+  },
+  "sidebar": {
+    "general": "عمومی",
+    "dashboard": "داشبورد",
+    "parties": "اشخاص",
+    "assessmentPrompts": "دستورات ارزیابی",
+    "aiAssessmentRules": "قوانین ارزیابی هوشمند",
+    "repetitiveResponses": "پاسخ‌های تکراری",
+    "branches": "شعب",
+    "coverages-maxa": " پوشش ها",
+    "agreements": "قرارداد",
+    "docTypes": "نوع سند",
+    "claimRequests": "درخواست‌های خسارت",
+    "claimRequestsAgent": "درخواست‌های من",
+    "createClaimRequests": "ثبت درخواست خسارت",
+    "damageCodes": "کد خسارت",
+    "tasks": "کار",
+    "apps": "اپلیکیشن",
+    "chats": "نمودار",
+    "users": "کاربر",
+    "myiap": "نرم‌افزار کاربران",
+    "otp": "رمز یکبار مصرف",
+    "other": {
+      "title": "سیستم",
+      "setting": "تنظیمات ",
+      "helpCenter": "راهنما"
+    },
+    "coverageDamageCodeAppls": "نگاشت پوشش و کد",
+    "coverageGroupCategories": "دسته‌های گروه پوشش",
+    "coverageGroupCategoryAppls": "نگاشت‌های دسته گروه پوشش",
+    "outpatientDocAcceptances": "مالی و پرداخت",
+    "subUsers": "قرارداد - کاربران",
+    "personSpecialDiseases": "بیماری‌های خاص افراد",
+    "bankAccounts": "حساب‌های بانکی",
+    "claimReports": "پذیرش و پرونده‌ها",
+    "pipelines": "خطوط پردازش",
+    "assignementRules": "قوانین ارجاع",
+    "tickets": "تیکت‌ها",
+    "supportQuestions": "سوالات پشتیبانی",
+    "medicalCenter": "مراکز درمانی"
+  },
+  "assessmentPrompts": {
+    "title": "مدیریت قوانین ارزیابی",
+    "create": "تعریف قانون جدید",
+    "refresh": "بروزرسانی",
+    "noPrompts": "  قانونی یافت نشد.",
+    "columns": {
+      "title": "عنوان",
+      "prompt": "دستور",
+      "docType": "نوع سند",
+      "placeType": "نوع محل",
+      "agreement": "قرارداد",
+      "ruleState": "حالت قانون",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "filters": {
+      "title": "عنوان",
+      "agreementTitle": "عنوان قرارداد",
+      "agreementCode": "کد قرارداد",
+      "docType": "نوع سند",
+      "thruDateFrom": "تاریخ پایان از",
+      "thruDateTo": "تاریخ پایان تا"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "suspended": "تعلیق شده",
+      "pending": "در انتظار"
+    },
+    "placeType": {
+      "hospital": "بیمارستان",
+      "clinic": "کلینیک",
+      "surgeryCenter": "مرکز جراحی"
+    },
+    "ruleState": {
+      "PRELIMINARY": "ابتدایی",
+      "SECONDARY": "ثانویه",
+      "CALCULATION": "محاسباتی",
+      "preliminary": "ابتدایی",
+      "secondary": "ثانویه",
+      "calculation": "محاسباتی",
+      "display": "نمایش"
+    },
+    "dialog": {
+      "create": "ایجاد قانون ارزیابی جدید",
+      "edit": "ویرایش قانون ارزیابی",
+      "details": "جزئیات قانون ارزیابی",
+      "fields": {
+        "title": "عنوان",
+        "prompt": "دستور",
+        "agreement": "قرارداد",
+        "selectAgreement": "جستجوی قرارداد",
+        "inputParams": "پارامترهای ورودی",
+        "methodNames": "نام تابع",
+        "status": "وضعیت",
+        "ruleState": "حالت قانون",
+        "placeType": "نوع محل",
+        "docType": "نوع سند",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان"
+      }
+    },
+    "actions": {
+      "viewDetails": "مشاهده جزئیات",
+      "edit": "ویرایش"
+    },
+    "bulkDelete": {
+      "button": "حذف انتخاب‌ها"
+    },
+    "messages": {
+      "created": "قانون ارزیابی با موفقیت ایجاد شد",
+      "createError": "ایجاد قانون ارزیابی ناموفق بود",
+      "updated": "قانون ارزیابی با موفقیت به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی قانون ارزیابی ناموفق بود"
+    }
+  },
+  "auth": {
+    "login": {
+      "description": "با استفاده از نام کاربری و رمز عبور وارد حساب خود شوید.",
+      "forgotPassword": "بازیابی رمز عبور",
+      "password": "رمز عبور",
+      "register": "ایجاد حساب کاربری",
+      "submit": "ورود",
+      "submitting": "در حال ورود...",
+      "title": "ورود",
+      "tutorial": "مشاهده آموزش ورود / ثبت‌نام",
+      "username": "کد ملی (کد یکتا اتباع)"
+    },
+    "passwordReset": {
+      "backToLogin": "بازگشت به ورود",
+      "changeIdentity": "تغییر شماره",
+      "codeSentTo": "کد بازیابی به {{mobileNumber}} ارسال شد.",
+      "description": "برای بازیابی حساب خود یک رمز یکبار مصرف درخواست کنید.",
+      "mobileNumber": "شماره همراه",
+      "nationalCode": "کد ملی",
+      "otpCode": "کد بازیابی",
+      "password": "رمز عبور جدید",
+      "passwordConfirmation": "تکرار رمز عبور جدید",
+      "requestCode": "ارسال کد بازیابی",
+      "requestingCode": "در حال ارسال کد…",
+      "remembered": "رمز خود را به یاد آوردید؟",
+      "submit": "بازیابی رمز عبور",
+      "submitting": "در حال بازیابی رمز عبور...",
+      "title": "بازیابی رمز عبور",
+      "verifyDescription": "کد دریافت‌شده و رمز جدید را برای تکمیل بازیابی وارد کنید.",
+      "verifyTitle": "کد بازیابی را وارد کنید"
+    },
+    "passwordChange": {
+      "title": "تغییر رمز عبور",
+      "description": "رمز عبور شما منقضی شده است. برای ادامه استفاده از برنامه آن را تغییر دهید یا از حساب خارج شوید.",
+      "currentPassword": "رمز عبور فعلی",
+      "newPassword": "رمز عبور جدید",
+      "confirmNewPassword": "تکرار رمز عبور جدید",
+      "submit": "تغییر رمز عبور",
+      "submitting": "در حال تغییر رمز عبور...",
+      "success": "رمز عبور شما با موفقیت تغییر کرد.",
+      "actions": {
+        "showPassword": "نمایش رمز عبور",
+        "hidePassword": "پنهان کردن رمز عبور"
+      },
+      "requirements": {
+        "label": "شرایط رمز عبور جدید",
+        "minimumLength": "حداقل ۱۲ کاراکتر",
+        "uppercaseLetter": "حداقل یک حرف بزرگ انگلیسی",
+        "lowercaseLetter": "حداقل یک حرف کوچک انگلیسی",
+        "symbol": "حداقل یک کاراکتر نماد",
+        "number": "حداقل یک عدد"
+      },
+      "validation": {
+        "currentPasswordRequired": "رمز عبور فعلی را وارد کنید.",
+        "newPasswordRequired": "رمز عبور جدید را وارد کنید.",
+        "newPasswordMaxLength": "رمز عبور نمی‌تواند بیشتر از ۲۵۵ کاراکتر باشد.",
+        "confirmNewPasswordRequired": "تکرار رمز عبور جدید را وارد کنید.",
+        "passwordRequirements": "رمز عبور جدید همه شرایط را ندارد.",
+        "passwordsMatch": "رمز عبور جدید و تکرار آن باید یکسان باشند."
+      }
+    },
+    "register": {
+      "backToLogin": "وارد شوید",
+      "changeNumber": "تغییر شماره",
+      "codeSentTo": "کد تأیید به {{mobileNumber}} ارسال شد.",
+      "description": "برای ساخت حساب جدید، اطلاعات خود را وارد کنید.",
+      "foreign": "خارجی",
+      "foreignNationalCode": "کد یکتا",
+      "haveAccount": "قبلاً حساب دارید؟",
+      "iranian": "ایرانی",
+      "mobileNumber": "شماره همراه",
+      "nationalCode": "کد ملی",
+      "nationality": "ملیت",
+      "otpCode": "کد تأیید",
+      "password": "رمز عبور",
+      "passwordConfirmation": "تأیید رمز عبور",
+      "requestCode": "ارسال کد تأیید",
+      "requestingCode": "در حال ارسال کد…",
+      "submit": "ایجاد حساب",
+      "submitting": "در حال ایجاد حساب...",
+      "title": "ایجاد حساب کاربری"
+    },
+    "sso": {
+      "loading": "در حال ورود…"
+    },
+    "validation": {
+      "mobileNumber": "شماره موبایل معتبر وارد کنید.",
+      "mobileNumberPattern": "شماره موبایل باید با فرمت ۰۹xxxxxxxxx یا +۹۸٩xxxxxxxxx باشد.",
+      "nationalCode": "کد ملی باید ۱۰ رقم باشد.",
+      "otpCode": "کد تأیید ارسال‌شده به گوشی را وارد کنید.",
+      "passwordConfirmationRequired": "تأیید رمز عبور الزامی است.",
+      "passwordMinLength": "رمز عبور باید حداقل ۶ کاراکتر باشد.",
+      "passwordRequired": "رمز عبور الزامی است.",
+      "passwordsMatch": "رمز عبور و تأیید آن باید یکسان باشند.",
+      "usernameRequired": "کد ملی الزامی است."
+    }
+  },
   "personSpecialDiseases": {
     "title": "بیماری‌های خاص اشخاص",
     "entityName": "بیماری خاص شخص",
@@ -1474,6 +1373,66 @@
     "validation": {
       "nationalCodeRequired": "انتخاب کاربر الزامی است.",
       "specialDiseasesRequired": "انتخاب حداقل یک بیماری خاص الزامی است."
+    }
+  },
+  "assignementRules": {
+    "title": "قوانین ارجاع",
+    "empty": "هیچ قانون ارجاعی یافت نشد.",
+    "actions": {
+      "create": "ایجاد قانون ارجاع",
+      "edit": "ویرایش قانون ارجاع",
+      "delete": "حذف قانون ارجاع",
+      "refresh": "بروزرسانی"
+    },
+    "dialog": {
+      "create": "ایجاد قانون ارجاع",
+      "edit": "ویرایش قانون ارجاع",
+      "delete": "حذف قانون ارجاع",
+      "deleteDescription": "آیا از حذف این قانون ارجاع مطمئن هستید؟"
+    },
+    "fields": {
+      "title": "عنوان",
+      "docTypeCode": "کد نوع سند",
+      "assignee": "نام کاربری ارزیاب",
+      "status": "وضعیت",
+      "policyId": "بیمه‌نامه",
+      "contractId": "شناسه قرارداد",
+      "workUnit": "کد شعبه",
+      "amountMin": "حداقل مبلغ",
+      "amountMax": "حداکثر مبلغ",
+      "amountApprovedMin": "حداقل مبلغ تاییدشده",
+      "amountApprovedMax": "حداکثر مبلغ تاییدشده",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "columns": {
+      "title": "عنوان",
+      "docTypeCode": "نوع سند",
+      "assignee": "ارزیاب",
+      "workUnit": "شعبه",
+      "status": "وضعیت"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال"
+    },
+    "bulkDelete": {
+      "button": "حذف انتخاب‌شده‌ها",
+      "title": "حذف قوانین انتخاب‌شده",
+      "description": "آیا از حذف {{count}} قانون ارجاع انتخاب‌شده مطمئن هستید؟"
+    },
+    "messages": {
+      "created": "قانون ارجاع با موفقیت ایجاد شد.",
+      "updated": "قانون ارجاع با موفقیت ویرایش شد.",
+      "deleted": "قانون ارجاع با موفقیت حذف شد.",
+      "createFailed": "ایجاد قانون ارجاع ناموفق بود.",
+      "updateFailed": "ویرایش قانون ارجاع ناموفق بود.",
+      "deleteFailed": "حذف قانون ارجاع ناموفق بود.",
+      "bulkDeleted": "قوانین ارجاع انتخاب‌شده با موفقیت حذف شدند.",
+      "bulkDeleteFailed": "حذف قوانین ارجاع انتخاب‌شده ناموفق بود."
+    },
+    "errors": {
+      "titleRequired": "عنوان الزامی است."
     }
   },
   "docTypes": {
@@ -1562,212 +1521,54 @@
       "submissionSaveError": "ذخیره نمونه ارسال انجام نشد"
     }
   },
-  "branches": {
-    "title": "شعب",
-    "noBranches": "هیچ شعبه‌ای یافت نشد.",
-    "actions": {
-      "edit": "ویرایش",
-      "delete": "حذف",
-      "sync": "همگام‌سازی شعب",
-      "refresh": "بروزرسانی"
-    },
-    "dialog": {
-      "create": "ایجاد شعبه",
-      "edit": "ویرایش شعبه",
-      "delete": "حذف شعبه",
-      "deleteDesc": "آیا از حذف این شعبه مطمئن هستید؟"
-    },
-    "form": {
-      "code": "کد",
-      "title": "عنوان",
-      "status": "وضعیت"
-    },
-    "messages": {
-      "created": "شعبه با موفقیت ایجاد شد",
-      "updated": "شعبه با موفقیت ویرایش شد",
-      "deleted": "شعبه با موفقیت حذف شد",
-      "synced": "شعب با موفقیت همگام‌سازی شد"
-    },
-    "columns": {
-      "code": "کد",
-      "unitName": "نام",
-      "tel": "تلفن"
+  "panelSwitcher": {
+    "switch": "تغییر پنل: {{panel}}",
+    "current": "{{panel}} — پنل فعلی",
+    "panels": {
+      "evaluation": "پنل ارزیابی",
+      "customer": "سامانه مشتریان"
     }
   },
-  "bankAccounts": {
-    "title": "حساب‌های بانکی",
-    "description": "نمایش {{count}} رکورد حساب بانکی",
-    "columns": {
-      "bankAccountNumber": "شماره حساب",
-      "bankAccountType": "نوع حساب",
-      "phoneNumber": "شماره موبایل",
-      "userId": "شناسه کاربر",
-      "isValid": "معتبر",
-      "createdAt": "تاریخ ایجاد"
-    },
-    "filters": {
-      "bankAccountNumber": "شماره حساب",
-      "phoneNumber": "شماره موبایل",
-      "userId": "شناسه کاربر",
-      "username": "کدملی"
-    },
-    "types": {
-      "IBAN": "شبا",
-      "CARD": "کارت"
-    },
-    "actions": {
-      "delete": "حذف",
-      "bulkDelete": "حذف انتخاب‌شده‌ها"
-    },
-    "messages": {
-      "deleted": "حساب بانکی با موفقیت حذف شد"
-    },
-    "bulkDelete": {
-      "title": "حذف حساب‌های بانکی انتخاب‌شده",
-      "description": "آیا از حذف دائمی {{count}} رکورد حساب بانکی انتخاب‌شده مطمئن هستید؟",
-      "confirm": "حذف انتخاب‌شده‌ها",
-      "submitting": "در حال حذف...",
-      "success": "حساب‌های بانکی انتخاب‌شده با موفقیت حذف شدند",
-      "noSelection": "حداقل یک حساب بانکی انتخاب کنید."
+  "dataTable": {
+    "rowsSelected": "{{selected}} از {{total}} سطر انتخاب شده است.",
+    "rowsPerPage": "سطر در هر صفحه",
+    "pageIndicator": "صفحه {{page}} از {{pageCount}}",
+    "goToFirstPage": "رفتن به اولین صفحه",
+    "goToPreviousPage": "رفتن به صفحه قبلی",
+    "goToNextPage": "رفتن به صفحه بعدی",
+    "goToLastPage": "رفتن به آخرین صفحه",
+    "selectAllRows": "انتخاب همه سطرها",
+    "selectRow": "انتخاب سطر",
+    "total": "مجموع",
+    "loading": "در حال بارگذاری...",
+    "empty": "داده‌ای یافت نشد.",
+    "noResults": "نتیجه‌ای یافت نشد.",
+    "facetedFilter": {
+      "searchPlaceholder": "جستجو در {{title}}...",
+      "noResults": "نتیجه‌ای یافت نشد.",
+      "clear": "پاک کردن فیلترها",
+      "multiSelected": "{{count}} مورد انتخاب شده"
     }
   },
-  "sidebar": {
-    "general": "عمومی",
-    "dashboard": "داشبورد",
-    "parties": "اشخاص",
-    "assessmentPrompts": "دستورات ارزیابی",
-    "aiAssessmentRules": "قوانین ارزیابی هوشمند",
-    "repetitiveResponses": "پاسخ‌های تکراری",
-    "branches": "شعب",
-    "coverages-maxa": " پوشش ها",
-    "agreements": "قرارداد",
-    "docTypes": "نوع سند",
-    "claimRequests": "درخواست‌های خسارت",
-    "claimRequestsAgent": "درخواست‌های من",
-    "createClaimRequests": "ثبت درخواست خسارت",
-    "damageCodes": "کد خسارت",
-    "tasks": "کار",
-    "apps": "اپلیکیشن",
-    "chats": "نمودار",
-    "users": "کاربر",
-    "myiap": "نرم‌افزار کاربران",
-    "otp": "رمز یکبار مصرف",
-    "other": {
-      "title": "سیستم",
-      "setting": "تنظیمات ",
-      "helpCenter": "راهنما"
-    },
-    "coverageDamageCodeAppls": "نگاشت پوشش و کد",
-    "coverageGroupCategories": "دسته‌های گروه پوشش",
-    "coverageGroupCategoryAppls": "نگاشت‌های دسته گروه پوشش",
-    "outpatientDocAcceptances": "مالی و پرداخت",
-    "subUsers": "قرارداد - کاربران",
-    "personSpecialDiseases": "بیماری‌های خاص افراد",
-    "bankAccounts": "حساب‌های بانکی",
-    "claimReports": "پذیرش و پرونده‌ها",
-    "pipelines": "خطوط پردازش",
-    "assignementRules": "قوانین ارجاع",
-    "tickets": "تیکت‌ها",
-    "supportQuestions": "سوالات پشتیبانی",
-    "medicalCenter": "مراکز درمانی"
-  },
-  "assignementRules": {
-    "title": "قوانین ارجاع",
-    "empty": "هیچ قانون ارجاعی یافت نشد.",
-    "actions": {
-      "create": "ایجاد قانون ارجاع",
-      "edit": "ویرایش قانون ارجاع",
-      "delete": "حذف قانون ارجاع",
-      "refresh": "بروزرسانی"
-    },
-    "dialog": {
-      "create": "ایجاد قانون ارجاع",
-      "edit": "ویرایش قانون ارجاع",
-      "delete": "حذف قانون ارجاع",
-      "deleteDescription": "آیا از حذف این قانون ارجاع مطمئن هستید؟"
-    },
-    "fields": {
-      "title": "عنوان",
-      "docTypeCode": "کد نوع سند",
-      "assignee": "نام کاربری ارزیاب",
-      "status": "وضعیت",
-      "policyId": "بیمه‌نامه",
-      "contractId": "شناسه قرارداد",
-      "workUnit": "کد شعبه",
-      "amountMin": "حداقل مبلغ",
-      "amountMax": "حداکثر مبلغ",
-      "amountApprovedMin": "حداقل مبلغ تاییدشده",
-      "amountApprovedMax": "حداکثر مبلغ تاییدشده",
-      "fromDate": "تاریخ شروع",
-      "thruDate": "تاریخ پایان"
-    },
-    "columns": {
-      "title": "عنوان",
-      "docTypeCode": "نوع سند",
-      "assignee": "ارزیاب",
-      "workUnit": "شعبه",
-      "status": "وضعیت"
-    },
-    "status": {
-      "active": "فعال",
-      "inactive": "غیرفعال"
-    },
-    "bulkDelete": {
-      "button": "حذف انتخاب‌شده‌ها",
-      "title": "حذف قوانین انتخاب‌شده",
-      "description": "آیا از حذف {{count}} قانون ارجاع انتخاب‌شده مطمئن هستید؟"
-    },
-    "messages": {
-      "created": "قانون ارجاع با موفقیت ایجاد شد.",
-      "updated": "قانون ارجاع با موفقیت ویرایش شد.",
-      "deleted": "قانون ارجاع با موفقیت حذف شد.",
-      "createFailed": "ایجاد قانون ارجاع ناموفق بود.",
-      "updateFailed": "ویرایش قانون ارجاع ناموفق بود.",
-      "deleteFailed": "حذف قانون ارجاع ناموفق بود.",
-      "bulkDeleted": "قوانین ارجاع انتخاب‌شده با موفقیت حذف شدند.",
-      "bulkDeleteFailed": "حذف قوانین ارجاع انتخاب‌شده ناموفق بود."
-    },
-    "errors": {
-      "titleRequired": "عنوان الزامی است."
-    }
-  },
-  "assessmentItems": {
-    "empty": "مورد ارزیابی وجود ندارد.",
-    "quantitySuffix": "عدد",
-    "dialog": {
-      "fields": {
-        "estimatedAmount": "مبلغ ارزیابی",
-        "franchizeDeductionAmount": "فرانشیز",
-        "remainCoverageAmount": "مانده پوشش",
-        "amountPaid": "تایید شده",
-        "toothNumbers": "شماره دندان",
-        "description": "توضیحات"
-      }
-    }
-  },
-  "assessmentPrompts": {
-    "title": "مدیریت قوانین ارزیابی",
-    "create": "تعریف قانون جدید",
+  "repetitiveResponses": {
+    "title": "مدیریت پاسخ‌های تکراری",
+    "description": "مدیریت پاسخ‌های آماده برای رسیدگی سریع‌تر به خسارت.",
+    "create": "ایجاد پاسخ تکراری",
     "refresh": "بروزرسانی",
-    "noPrompts": "  قانونی یافت نشد.",
+    "noRepetitiveResponses": "هیچ پاسخ تکراری یافت نشد.",
     "columns": {
+      "seqNum": "شماره ترتیب",
       "title": "عنوان",
-      "prompt": "دستور",
-      "docType": "نوع سند",
-      "placeType": "نوع محل",
-      "agreement": "قرارداد",
-      "ruleState": "حالت قانون",
+      "response": "پاسخ",
+      "usageCount": "تعداد استفاده",
       "status": "وضعیت",
       "fromDate": "تاریخ شروع",
       "thruDate": "تاریخ پایان"
     },
     "filters": {
       "title": "عنوان",
-      "agreementTitle": "عنوان قرارداد",
-      "agreementCode": "کد قرارداد",
-      "docType": "نوع سند",
-      "thruDateFrom": "تاریخ پایان از",
-      "thruDateTo": "تاریخ پایان تا"
+      "response": "پاسخ",
+      "status": "وضعیت"
     },
     "status": {
       "active": "فعال",
@@ -1775,292 +1576,345 @@
       "suspended": "تعلیق شده",
       "pending": "در انتظار"
     },
-    "placeType": {
-      "hospital": "بیمارستان",
-      "clinic": "کلینیک",
-      "surgeryCenter": "مرکز جراحی"
-    },
-    "ruleState": {
-      "PRELIMINARY": "ابتدایی",
-      "SECONDARY": "ثانویه",
-      "CALCULATION": "محاسباتی",
-      "preliminary": "ابتدایی",
-      "secondary": "ثانویه",
-      "calculation": "محاسباتی",
-      "display": "نمایش"
-    },
     "dialog": {
-      "create": "ایجاد قانون ارزیابی جدید",
-      "edit": "ویرایش قانون ارزیابی",
-      "details": "جزئیات قانون ارزیابی",
+      "viewDetails": "مشاهده جزئیات",
+      "create": "ایجاد پاسخ تکراری",
+      "edit": "ویرایش پاسخ تکراری",
+      "delete": "حذف پاسخ تکراری",
+      "softDelete": "حذف نرم",
       "fields": {
+        "seqNum": "شماره ترتیب",
         "title": "عنوان",
-        "prompt": "دستور",
-        "agreement": "قرارداد",
-        "selectAgreement": "جستجوی قرارداد",
-        "inputParams": "پارامترهای ورودی",
-        "methodNames": "نام تابع",
+        "response": "پاسخ",
+        "group": "گروه",
+        "usageCount": "تعداد استفاده",
         "status": "وضعیت",
-        "ruleState": "حالت قانون",
-        "placeType": "نوع محل",
-        "docType": "نوع سند",
         "fromDate": "تاریخ شروع",
         "thruDate": "تاریخ پایان"
+      },
+      "placeholders": {
+        "group": "انتخاب گروه"
       }
     },
+    "validation": {
+      "titleRequired": "عنوان الزامی است",
+      "responseRequired": "پاسخ الزامی است",
+      "groupRequired": "انتخاب گروه الزامی است"
+    },
+    "softDeleteDesc": "حذف نرم تاریخ پایان را تنظیم کرده و پاسخ را بدون حذف دائمی غیرفعال می‌کند.",
+    "messages": {
+      "created": "پاسخ تکراری ایجاد شد",
+      "createError": "ایجاد پاسخ تکراری ناموفق بود",
+      "updated": "پاسخ تکراری به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی پاسخ تکراری ناموفق بود",
+      "deleted": "پاسخ تکراری حذف شد",
+      "deleteError": "حذف پاسخ تکراری ناموفق بود",
+      "softDeleted": "پاسخ تکراری به صورت نرم حذف شد",
+      "softDeleteError": "حذف نرم پاسخ تکراری ناموفق بود"
+    },
+    "tab": {
+      "responses": "پاسخ‌ها",
+      "groups": "گروه‌ها"
+    }
+  },
+  "routing": {
     "actions": {
-      "viewDetails": "مشاهده جزئیات",
-      "edit": "ویرایش"
+      "goHome": "بازگشت به صفحه اصلی"
+    },
+    "error": {
+      "description": "مشکلی در نمایش صفحه پیش آمد. لطفاً دوباره تلاش کنید.",
+      "title": "خطایی رخ داد"
+    },
+    "notFound": {
+      "description": "نشانی مورد نظر پیدا نشد.",
+      "title": "صفحه پیدا نشد"
+    }
+  },
+  "form": {
+    "submit": "ثبت",
+    "creating": "در حال ثبت",
+    "updating": "در حال ویرایش",
+    "uploading": "در حال بارگذاری...",
+    "update": "ویرایش",
+    "updateParty": "ویرایش شخص",
+    "enterTitle": "عنوان را وارد کنید",
+    "enterCode": "کد را وارد کنید",
+    "enterMaxCoverage": "حداکثر پوشش را وارد کنید",
+    "enterCodeType": "نوع کد را وارد کنید",
+    "enterDescription": "توضیحات را وارد کنید",
+    "enterDocType": "نوع سند را وارد کنید",
+    "selectStatus": "وضعیت را انتخاب کنید",
+    "selectType": "نوع را انتخاب کنید",
+    "selectPartyType": "نوع شخص را انتخاب کنید"
+  },
+  "claimRequests": {
+    "title": "درخواست‌های خسارت",
+    "description": "مدیریت درخواست‌های خسارت بیمه.",
+    "refresh": "بروزرسانی",
+    "columns": {
+      "amount": "مبلغ درخواستی",
+      "totalSumAmount": "مبلغ تایید شده",
+      "corePaidAmount": "مبلغ فناوران",
+      "corePaidAmountPercent": "درصد اختلاف",
+      "extPaymentDate": "تاریخ پرداخت",
+      "ibanStatus": "وضعیت شبا",
+      "status": "وضعیت",
+      "aiStatus": "وضعیت AI",
+      "submitDate": "تاریخ هزینه",
+      "docType": "انواع مدارک",
+      "extPolicyId": "شماره بیمه‌نامه",
+      "extContractId": "شماره قرارداد",
+      "extNationalCode": "کد ملی",
+      "extMainNationalCode": "کد ملی بیمه شده اصلی",
+      "extDisplayName": "نام بیمه‌شده",
+      "extCustomerName": "نام بیمه‌گذار",
+      "createdAt": "تاریخ ثبت",
+      "assessedAt": "تاریخ ارزیابی",
+      "extPlanCaption": "طرح",
+      "businessKey": "کد پذیرش",
+      "latestAssignementDisplayName": "نام ارزیاب",
+      "extWorkUnitName": "نام شعبه",
+      "requestType": "نوع درخواست",
+      "isReturn": "عودتی"
+    },
+    "filters": {
+      "latestAssignementDisplayName": "نام ارزیاب",
+      "extPolicyId": "شماره بیمه‌نامه",
+      "extContractId": "شماره قرارداد",
+      "extNationalCode": "کد ملی بیمه شده",
+      "extMainNationalCode": "کد ملی بیمه‌شده اصلی",
+      "extDisplayName": "نام بیمه‌شده",
+      "extCustomerName": "نام بیمه‌گذار",
+      "extCustomerCompanyCode": "کد شرکت بیمه‌گذار",
+      "extCustomerNationalCode": "کد ملی بیمه‌گذار",
+      "extCustomerCityName": "شهر بیمه‌گذار",
+      "extWorkUnitName": "نام شعبه",
+      "extWorkUnitCode": "کد شعبه",
+      "extWorkUnitCityName": "شهر شعبه",
+      "extWorkUnitProvinceName": "استان شعبه",
+      "extPlanCaption": "طرح",
+      "businessKey": "کد پذیرش",
+      "amountFrom": "مبلغ از",
+      "amountTo": "مبلغ تا",
+      "totalSumAmountFrom": "مبلغ تایید شده از",
+      "totalSumAmountTo": "مبلغ تایید شده تا",
+      "corePaidAmountFrom": "مبلغ فناوران از",
+      "corePaidAmountTo": "مبلغ فناوران تا",
+      "corePaidAmountPercentFrom": "درصد اختلاف از",
+      "corePaidAmountPercentTo": "درصد اختلاف تا",
+      "submitDateFrom": "تاریخ هزینه از",
+      "submitDateTo": "تاریخ هزینه تا",
+      "createdAtFrom": "تاریخ ثبت از",
+      "createdAtTo": "تاریخ ثبت تا",
+      "assessedAtFrom": "تاریخ ارزیابی از",
+      "assessedAtTo": "تاریخ ارزیابی تا",
+      "isReturn": "عودتی",
+      "ibanStatus": "وضعیت شبا",
+      "latestAssignementUsername": "کدملی ارزیاب",
+      "mainAssignedUserUsername": "کدملی ارزیاب اصلی",
+      "mainAssignedUserDisplayName": "نام ارزیاب اصلی",
+      "seenBy": "فیلد",
+      "outpatientDocAcceptanceExtId": "شماره پذیرش فناوران",
+      "registeredByAgentUsername": "نام کاربری نماینده ثبت",
+      "registeredByAgentDisplayName": "نام نماینده ثبت"
+    },
+    "ibanStatusValues": {
+      "has": "دارد",
+      "doesNotHave": "ندارد"
+    },
+    "status": {
+      "submitted": "ثبت شده",
+      "inReview": "بررسی AI",
+      "inAssessment": "ارزیابی اولیه",
+      "delegated": "در انتظار پاسخ ارجاع",
+      "dedicatedToUser": "بررسی‌های من",
+      "approved": "تأیید شده در انتظار ارسال به فناوران",
+      "rejected": "رد (غیرقابل پرداخت)",
+      "failed_fetch_api": "خطا در دریافت از سرویس",
+      "sent": "ارسال شده در انتظار پرداخت",
+      "sent_failed": "خطا ارسال",
+      "paid": "واریز شده",
+      "sentToBank": "ارسال شده به بانک",
+      "needsReassessment": "نیاز به ارزیابی مجدد",
+      "terminated": "ابطال",
+      "return": "عودت شده در انتظار پاسخ کاربر",
+      "paymentRejected": "رد شده در پرداخت",
+      "paymentReturn": "عودت شده از پرداخت",
+      "paymentReturnResend": "عودت شده از پرداخت (ارسال مجدد)",
+      "deleted": "حذف شده"
+    },
+    "requestType": {
+      "main": "اصلی",
+      "adjustment": "متمم"
+    },
+    "aiStatus": {
+      "approved": "تأیید شده",
+      "return": "عودت داده شده",
+      "reviewRequired": "نیاز به بررسی",
+      "reject": "رد شده",
+      "reviewRequiredSubmitInfoDuplicated": "نیاز به بررسی (اطلاعات تکراری)",
+      "reviewRequiredImageDuplicated": "نیاز به بررسی (تصویر تکراری)",
+      "reviewRequiredImageDigitallyEdited": "نیاز به بررسی (تصویر ویرایش‌شده دیجیتالی)",
+      "returnNoCoverage": "عودت داده شده (بدون پوشش)",
+      "returnMaxCeiling": "عودت داده شده (تمکیل سقف)"
+    },
+    "actions": {
+      "downloadExcel": "دانلود اکسل",
+      "inquiryFanavaran": "استعلام فناوران",
+      "assignToMe": "تخصیص به من و ارزیابی",
+      "removeMyAssessment": "خارج کردن از کارتابل",
+      "sendStatusChangeNotification": "ارسال اعلان تغییر وضعیت",
+      "delete": "حذف",
+      "viewDetails": "مشاهده جزئیات"
+    },
+    "bulk": {
+      "delete": {
+        "title": "حذف گروهی درخواست‌ها",
+        "description": "آیا از حذف {{count}} درخواست انتخاب‌شده مطمئن هستید؟"
+      },
+      "generateAndSend": {
+        "title": "ایجاد و ارسال گروهی",
+        "description": "آیا از ایجاد و ارسال {{count}} درخواست انتخاب‌شده مطمئن هستید؟"
+      },
+      "inquiry": {
+        "title": "استعلام فناوران",
+        "description": "آیا از ارسال استعلام برای {{count}} درخواست انتخاب‌شده مطمئن هستید؟"
+      }
+    },
+    "dialog": {
+      "fields": {
+        "description": "توضیحات",
+        "isCheat": "درخواست به عنوان تقلب ثبت شود.",
+        "objectionStatus": "تعیین وضعیت",
+        "attachments": "پیوست‌ها"
+      }
+    },
+    "validation": {
+      "status": "وضعیت الزامی است"
+    },
+    "documents": {
+      "title": "اسناد خسارت",
+      "docTypeLabel": "نوع سند",
+      "empty": "هیچ سندی برای این درخواست خسارت موجود نیست.",
+      "modalTitle": "فرم سند: {{docType}}",
+      "modalTitleFallback": "فرم سند",
+      "formTitle": "فرم سند: {{docType}}",
+      "formTitleFallback": "فرم سند",
+      "missingDocument": "سند انتخاب‌شده یافت نشد.",
+      "unavailable": "امکان نمایش فرم برای این سند وجود ندارد.",
+      "actions": {
+        "openForm": "مشاهده فرم",
+        "save": "ذخیره تغییرات"
+      },
+      "messages": {
+        "updateSuccess": "اطلاعات سند با موفقیت به‌روزرسانی شد.",
+        "updateError": "به‌روزرسانی اطلاعات سند انجام نشد.",
+        "missingSchemaTitle": "طرح فرم موجود نیست",
+        "missingSchemaDescription": "برای این درخواست خسارت هنوز طرح فرم را تعریف نکرده‌اید."
+      }
+    },
+    "bulkDataExtraction": {
+      "button": "آغاز فرآیند Core AI",
+      "title": "آغاز فرآیند داده Core AI",
+      "description": "این عملیات فرایند استخراج داده Core AI را برای {{count}} درخواست انتخاب‌شده آغاز می‌کند.",
+      "selectionInfo": "{{count}} درخواست انتخاب شده",
+      "confirm": "آغاز فرایند",
+      "submitting": "در حال آغاز...",
+      "success": "فرایند استخراج داده Core AI برای {{count}} درخواست انتخاب‌شده آغاز شد.",
+      "error": "آغاز فرایند استخراج داده Core AI ناموفق بود.",
+      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
+    },
+    "generateAndSendBulk": {
+      "button": "ارسال گروهی به فناوران",
+      "title": "ارسال گروهی به فناوران",
+      "description": "این عملیات پذیرش اسناد سرپایی را تولید می‌کند و {{count}} درخواست انتخاب‌شده را به فناوران ارسال می‌کند.",
+      "selectionInfo": "{{count}} درخواست انتخاب شده",
+      "confirm": "ارسال به فناوران",
+      "submitting": "در حال ارسال...",
+      "success": "درخواست‌های انتخاب‌شده با موفقیت به فناوران ارسال شدند.",
+      "error": "ارسال درخواست‌های انتخاب‌شده به فناوران ناموفق بود.",
+      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
     },
     "bulkDelete": {
-      "button": "حذف انتخاب‌ها"
+      "button": "حذف انتخاب‌ها",
+      "title": "حذف درخواست‌های خسارت",
+      "description": "این عملیات {{count}} درخواست انتخاب‌شده را برای همیشه حذف می‌کند و قابل بازگشت نیست.",
+      "selectionInfo": "{{count}} درخواست انتخاب شده",
+      "confirm": "حذف",
+      "submitting": "در حال حذف...",
+      "success": "درخواست‌های انتخاب‌شده با موفقیت حذف شدند.",
+      "error": "حذف درخواست‌های انتخاب‌شده ناموفق بود.",
+      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
     },
     "messages": {
-      "created": "قانون ارزیابی با موفقیت ایجاد شد",
-      "createError": "ایجاد قانون ارزیابی ناموفق بود",
-      "updated": "قانون ارزیابی با موفقیت به‌روزرسانی شد",
-      "updateError": "به‌روزرسانی قانون ارزیابی ناموفق بود"
-    }
-  },
-  "tickets": {
-    "title": "تیکت‌ها",
-    "description": "تیکت‌های پشتیبانی را بررسی کنید و به پیام‌ها پاسخ دهید.",
-    "refresh": "به‌روزرسانی",
-    "empty": "تیکتی یافت نشد.",
-    "error": "امکان دریافت تیکت‌ها وجود ندارد.",
-    "columns": {
-      "ticketNumber": "شماره تیکت",
-      "claimRequestId": "شماره درخواست",
-      "subject": "موضوع",
-      "category": "دسته‌بندی",
-      "ownerUsername": "نام کاربری بیمه شده",
-      "assignedUsername": "ارجاع شده به",
-      "ownerDisplayName": "نام بیمه شده",
-      "assignedUserDisplayName": "نام ارجاع‌شده",
-      "status": "وضعیت",
-      "priority": "اولویت",
-      "lastMessageAt": "آخرین پیام",
-      "createdAt": "ایجاد شده"
-    },
-    "status": {
-      "OPEN": "باز",
-      "ASSIGNED": "ارجاع شده",
-      "WAITING_FOR_USER": "در انتظار کاربر",
-      "WAITING_FOR_SUPPORT": "در انتظار پشتیبانی",
-      "ANSWERED": "پاسخ داده شده",
-      "CLOSED": "بسته شده"
-    },
-    "priority": {
-      "LOW": "کم",
-      "NORMAL": "عادی",
-      "HIGH": "زیاد",
-      "URGENT": "فوری"
-    },
-    "category": {
-      "PAYMENT": "پرداخت",
-      "CLAIM_ISSUE": "مشکل خسارت",
-      "INFO_ISSUE": "مشکل اطلاعات"
-    },
-    "visibility": {
-      "PUBLIC": "عمومی",
-      "INTERNAL": "داخلی"
-    },
-    "statusHistory": {
-      "title": "تاریخچه وضعیت",
-      "description": "خط زمانی همه تغییرات وضعیت تیکت همراه با زمان به‌روزرسانی و کاربر.",
-      "open": "مشاهده تاریخچه وضعیت تیکت",
-      "user": "به‌روزرسانی توسط {{userId}}",
-      "transition": "{{from}} به {{to}}"
+      "deleted": "درخواست خسارت حذف شد",
+      "claimIdMissing": "شناسه درخواست وجود ندارد.",
+      "removeMyAssessmentSuccess": "خارج کردن از کارتابل با موفقیت انجام شد.",
+      "statusChangeNotificationSent": "اعلان تغییر وضعیت با موفقیت ارسال شد.",
+      "inquiryFanavaranSuccess": "استعلام فناوران با موفقیت ارسال شد.",
+      "inquiryFanavaranError": "ارسال استعلام فناوران ناموفق بود.",
+      "excelDownloaded": "فایل اکسل دانلود شد",
+      "excelDownloadFailed": "دانلود اکسل ناموفق بود",
+      "docTypeUpdateError": "به‌روزرسانی نوع سند انجام نشد."
     },
     "confirmations": {
-      "assignToLatestAssessmentUser": {
-        "title": "تیکت به ارزیاب ارجاع شود؟",
-        "description": "این تیکت به آخرین کاربر ارزیابی ارجاع داده می‌شود."
+      "inquiryFanavaran": {
+        "title": "استعلام فناوران",
+        "description": "آیا از ارسال استعلام جزئیات بیمه‌نامه به فناوران مطمئن هستید؟"
+      },
+      "assignToMe": {
+        "title": "اختصاص درخواست خسارت به من",
+        "description": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را به خودتان اختصاص دهید؟"
+      },
+      "removeMyAssessment": {
+        "title": "خارج کردن از کارتابل من",
+        "description": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را از کارتابل خود خارج کنید؟"
       }
     },
-    "detail": {
-      "title": "جزئیات تیکت",
-      "description": "اطلاعات تیکت و تاریخچه گفتگو.",
-      "loading": "در حال دریافت جزئیات تیکت...",
-      "error": "امکان دریافت جزئیات تیکت وجود ندارد.",
-      "close": "بستن",
-      "cancel": "انصراف",
-      "openClaimRequest": "مشاهده درخواست خسارت",
-      "assignToLatestAssessmentUser": "ارجاع به ارزیاب",
-      "assigningToLatestAssessmentUser": "در حال ارجاع به ارزیاب...",
-      "closeTicket": "بستن تیکت",
-      "closingTicket": "در حال بستن تیکت...",
-      "ownerDisplayName": "نام بیمه شده",
-      "assignedUserDisplayName": "نام ارجاع‌شده"
+    "management": {
+      "title": "مدیریت درخواست خسارت"
     },
-    "relatedClaimRequest": {
-      "title": "درخواست خسارت مرتبط",
-      "unavailable": "درخواست خسارت مرتبطی برای این تیکت وجود ندارد.",
-      "loading": "در حال دریافت درخواست خسارت مرتبط...",
-      "error": "امکان دریافت درخواست خسارت مرتبط وجود ندارد.",
-      "empty": "درخواست خسارت مرتبط در دسترس نیست.",
-      "assessmentItems": "اقلام ارزیابی",
-      "assessmentItemsUnavailable": "اقلام ارزیابی در دسترس نیستند.",
-      "assessmentItemsError": "امکان دریافت اقلام ارزیابی وجود ندارد."
+    "bulkStatusChange": {
+      "button": "تغییر گروهی وضعیت",
+      "title": "تغییر گروهی وضعیت",
+      "description": "برای {{count}} درخواست انتخاب‌شده یک وضعیت انتخاب کنید.",
+      "statusPlaceholder": "انتخاب وضعیت",
+      "confirm": "تغییر وضعیت",
+      "submitting": "در حال تغییر...",
+      "success": "وضعیت {{count}} درخواست انتخاب‌شده با موفقیت تغییر کرد.",
+      "error": "تغییر وضعیت درخواست‌های انتخاب‌شده ناموفق بود.",
+      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید.",
+      "defaultDescription": "تغییر گروهی وضعیت",
+      "descriptionPlaceholder": "توضیحات تغییر گروهی وضعیت را وارد کنید"
     },
-    "messages": {
-      "title": "پیام‌ها",
-      "loading": "در حال دریافت پیام‌ها...",
-      "empty": "پیامی یافت نشد.",
-      "error": "امکان دریافت پیام‌ها وجود ندارد.",
-      "unknownSender": "فرستنده نامشخص",
-      "placeholder": "پاسخ خود را بنویسید...",
-      "send": "ارسال پاسخ",
-      "sending": "در حال ارسال...",
-      "assignToLatestAssessmentUserSuccess": "تیکت با موفقیت به ارزیاب ارجاع شد.",
-      "ticketIdMissing": "شناسه تیکت در دسترس نیست."
-    },
-    "filters": {
-      "myTickets": "تیکت‌های من"
-    },
-    "actions": {
-      "view": "مشاهده",
-      "viewDetails": "مشاهده جزئیات تیکت"
-    }
+    "extContractIdPlaceholder": "شماره قرارداد",
+    "extPolicyIdPlaceholder": "کد رایانه بیمه نامه",
+    "fetchNewRequests": "کلیک جهت مشاهده درخواست‌ها"
   },
-  "outpatientDocAcceptances": {
-    "status": {
-      "SUBMIT": "ثبت شده",
-      "SENT_TO_SERVER": "ارسال به سرور",
-      "DELETED": "حذف شده",
-      "REJECT": "رد شده",
-      "FAILED": "ناموفق",
-      "SUCCESS": "موفق"
+  "otp": {
+    "sections": {
+      "signupOtp": "OTP ثبت‌نام",
+      "passwordResetOtp": "OTP بازیابی رمز عبور"
     },
-    "wsStatus": {
-      "FAILD": "ناموفق",
-      "PROGRESS": "در حال انجام",
-      "DONE": "انجام شد"
-    }
-  },
-  "agreements": {
-    "validation": {
-      "invalidIsoDateTime": "تاریخ و زمان ISO نامعتبر است",
-      "titleRequired": "عنوان الزامی است",
-      "codeRequired": "کد الزامی است"
-    },
-    "title": "مدیریت قراردادها",
-    "create": "تعریف قرارداد جدید ",
-    "refresh": "بروزرسانی",
-    "noAgreements": "هیچ قراردادی یافت نشد.",
     "columns": {
-      "code": "کد",
-      "templateCode": "کد قالب",
-      "extContractId": "شناسه قرارداد",
-      "extPolicyId": "شناسه بیمه‌نامه",
-      "extPlanId": "شناسه طرح",
-      "extLocation": "موقعیت مکانی",
-      "overrideRatio": "ضریب تعرفه",
-      "title": "عنوان",
-      "status": "وضعیت",
-      "fromDate": "تاریخ شروع",
-      "thruDate": "تاریخ پایان"
-    },
-    "status": {
-      "active": "فعال",
-      "inactive": "غیرفعال",
-      "draft": "پیش‌نویس",
-      "expired": "منقضی شده",
-      "terminated": "خاتمه یافته"
+      "username": "نام کاربری",
+      "phoneNumber": "شماره موبایل",
+      "nationalCode": "کد ملی",
+      "requestCount": "تعداد درخواست",
+      "failedAttempts": "تلاش ناموفق",
+      "locked": "قفل شده",
+      "otpCreatedAt": "زمان ایجاد OTP",
+      "expiresAt": "زمان انقضا",
+      "consumedAt": "زمان مصرف",
+      "otpHash": "کد یکبار مصرف"
     },
     "filters": {
-      "thruDateFrom": "تاریخ پایان از",
-      "thruDateTo": "تاریخ پایان تا"
+      "phoneNumber": "فیلتر بر اساس شماره موبایل",
+      "nationalCode": "فیلتر بر اساس کد ملی"
     },
-    "dialog": {
-      "create": "ایجاد قرارداد جدید",
-      "createDesc": "قرارداد جدید را با پر کردن فرم زیر ایجاد کنید.",
-      "edit": "ویرایش قرارداد",
-      "editDesc": "اطلاعات قرارداد را در زیر به‌روزرسانی کنید.",
-      "details": "جزئیات قرارداد",
-      "fields": {
-        "title": "عنوان",
-        "code": "کد",
-        "templateCode": "کد قالب",
-        "extContractId": "شناسه قرارداد خارجی",
-        "extPolicyId": "شناسه بیمه‌نامه خارجی",
-        "extPlanId": "شناسه طرح خارجی",
-        "extLocation": "موقعیت مکانی خارجی",
-        "overrideRatio": "ضریب تعرفه",
-        "status": "وضعیت",
-        "fromDate": "تاریخ شروع",
-        "thruDate": "تاریخ پایان"
-      }
-    },
-    "actions": {
-      "edit": "ویرایش",
-      "initializeCoverageAppls": "راه‌اندازی نگاشت‌های پوشش"
-    },
-    "initializeCoverageApplsDesc": "آیا نگاشت‌های پوشش برای این قرارداد ایجاد شود؟ این کار برای کدهای خسارت فعال بدون قیمت‌گذاری، نگاشت ایجاد می‌کند.",
-    "messages": {
-      "created": "قرارداد با موفقیت ایجاد شد",
-      "updated": "قرارداد با موفقیت به‌روزرسانی شد",
-      "coverageInitialized": "نگاشت‌های پوشش ایجاد شد"
-    },
-    "partyAppls": {
-      "title": "نگاشتهای اشخاص",
-      "add": "افزودن شخص",
-      "user": "کاربر",
-      "selectUser": "انتخاب کاربر",
-      "relationshipType": "نوع رابطه",
-      "role": "نقش",
-      "fromDate": "تاریخ شروع",
-      "thruDate": "تاریخ پایان",
-      "docTypes": "نوع سند",
-      "agreementTitle": "عنوان قرارداد",
-      "contactIdLabel": "شناسه قرارداد",
-      "policyIdLabel": "شناسه بیمه‌نامه",
-      "bulkCreate": {
-        "agreementTitle": "عنوان",
-        "bulkCreateTitleBtn": "افزودن انبوهی اشخاص",
-        "description": "قراردادها و کاربران انتخاب‌شده را بررسی کنید، سپس نگاشت اشخاص را به‌صورت انبوه ایجاد کنید.",
-        "displayName": "نام نمایشی",
-        "extContractId": "شناسه قرارداد",
-        "noResults": "نتیجه‌ای یافت نشد",
-        "selectedAgreements": "قرارداد‌ها",
-        "success": "نگاشتهای اشخاص با موفقیت ایجاد شدند.",
-        "title": "افزودن انبوهی اشخاص",
-        "user": "کاربران",
-        "username": "نام کاربری"
-      },
-      "roles": {
-        "owner": "مالک",
-        "assessmentUser": "کاربر ارزیابی",
-        "mainAssessmentUser": "کاربر ارزیابی اصلی",
-        "hqUser": "کاربر ستاد مرکزی",
-        "doctorUser": "کاربر پزشک",
-        "requestRegisteryAgent": "کاربر نماینده ثبت",
-        "mainRequestRegisteryAgent": "کاربر نماینده ثبت ارشد",
-        "branchUser": "کاربر شعبه",
-        "customerUser": "بیمه‌گذار"
-      },
-      "filters": {
-        "displayName": "نام نمایشی",
-        "username": "نام کاربری",
-        "extPolicyId": "شماره بیمه‌نامه",
-        "extContractId": "شماره قرارداد",
-        "extLocation": "موقعیت مکانی",
-        "agreementTitle": "عنوان قرارداد"
-      }
-    }
-  },
-  "agreementPartyAppls": {
-    "validation": {
-      "userAccountIdRequired": "انتخاب حساب کاربری الزامی است"
-    },
-    "bulkAssign": {
-      "title": "انتصاب شخص به قراردادهای انتخاب‌شده",
-      "description": "یک کاربر و نقش را برای انتصاب به همه قراردادهای انتخاب‌شده انتخاب کنید.",
-      "submit": "انتصاب شخص به قراردادها",
-      "success": "شخص با موفقیت به قراردادهای انتخاب‌شده منتسب شدند."
-    },
-    "delete": {
-      "descriptionWithAgreementAndRole": "آیا مطمئن هستید می‌خواهید {{displayName}} را با نقش {{role}} از {{agreementTitle}} حذف کنید؟"
+    "empty": {
+      "signupOtp": "رکوردی برای OTP ثبت‌نام یافت نشد.",
+      "passwordResetOtp": "رکوردی برای OTP بازیابی رمز عبور یافت نشد."
     }
   },
   "agreementCoverageAppls": {
@@ -2116,6 +1970,149 @@
       "updated": "نگاشت بروزرسانی شد"
     }
   },
+  "coverageDamageCodeAppls": {
+    "title": "نگاشت پوشش و کد",
+    "description": "مدیریت نگاشت بین پوشش‌ها و کدهای خسارت.",
+    "create": "افزودن نگاشت",
+    "refresh": "بروزرسانی",
+    "columns": {
+      "coverageTitle": "عنوان پوشش",
+      "coverageCode": "کد پوشش",
+      "damageTitle": "عنوان کد خسارت",
+      "damageCode": "کد خسارت",
+      "priority": "اولویت",
+      "status": "وضعیت",
+      "ratio": "نسبت"
+    },
+    "actions": {
+      "view": "نمایش",
+      "edit": "ویرایش",
+      "softDelete": "حذف نرم",
+      "delete": "حذف"
+    },
+    "bulkDelete": {
+      "button": "حذف انتخاب‌شده‌ها",
+      "title": "حذف نگاشت‌های پوشش و کد",
+      "description": "این عملیات {{count}} نگاشت انتخاب‌شده را به صورت دائمی حذف می‌کند. این عمل قابل بازگشت نیست.",
+      "selectionInfo": "{{count}} نگاشت انتخاب‌شده",
+      "confirm": "حذف",
+      "submitting": "در حال حذف...",
+      "success": "نگاشت‌ها با موفقیت حذف شدند.",
+      "error": "حذف نگاشت‌های انتخاب‌شده ناموفق بود.",
+      "noSelection": "لطفاً حداقل یک نگاشت را برای حذف انتخاب کنید."
+    },
+    "dialog": {
+      "create": "ایجاد نگاشت",
+      "edit": "ویرایش نگاشت",
+      "createDesc": "یک نگاشت جدید ایجاد کنید.",
+      "editDesc": "نگاشت را به‌روزرسانی کنید."
+    },
+    "form": {
+      "coverage": "پوشش",
+      "selectCoverage": "انتخاب پوشش",
+      "damageCode": "کد خسارت",
+      "selectDamageCode": "انتخاب کد خسارت",
+      "priority": "اولویت",
+      "status": "وضعیت",
+      "ratio": "نسبت",
+      "device": "دستگاه",
+      "description": "توضیحات",
+      "serviceHeadline": "عنوان خدمت",
+      "serviceGroup": "گروه خدمت",
+      "isRequired": "اجباری است",
+      "ruleDesc": "شرح قانون",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "suspended": "تعلیق شده",
+      "pending": "در انتظار"
+    },
+    "view": {
+      "title": "جزئیات نگاشت",
+      "description": "جزئیات نگاشت"
+    },
+    "delete": {
+      "title": "حذف نگاشت",
+      "description": "آیا از حذف این نگاشت اطمینان دارید؟"
+    }
+  },
+  "medicalCenter": {
+    "title": "مراکز درمانی",
+    "description": "بارگذاری و مدیریت صورتحساب‌های مراکز درمانی.",
+    "columns": {
+      "documentNumber": "شماره سند",
+      "date": "تاریخ صورتحساب",
+      "totalAmount": "مبلغ کل",
+      "state": "وضعیت",
+      "createdAt": "تاریخ ایجاد"
+    },
+    "filters": {
+      "documentNumber": "شماره سند",
+      "state": "وضعیت"
+    },
+    "states": {
+      "SUBMITTED": "ثبت‌شده",
+      "EXTRACTING": "در حال استخراج",
+      "EXTRACTED": "استخراج‌شده",
+      "FAILED": "ناموفق"
+    },
+    "actions": {
+      "view": "مشاهده جزئیات",
+      "edit": "ویرایش صورتحساب",
+      "delete": "حذف صورتحساب",
+      "create": "بارگذاری صورتحساب",
+      "refresh": "بروزسانی",
+      "upload": "بارگذاری",
+      "uploading": "در حال بارگذاری…"
+    },
+    "create": {
+      "title": "بارگذاری صورتحساب",
+      "file": "فایل صورتحساب"
+    },
+    "edit": {
+      "title": "ویرایش صورتحساب"
+    },
+    "details": {
+      "title": "جزئیات صورتحساب"
+    },
+    "delete": {
+      "title": "حذف صورتحساب",
+      "description": "صورتحساب {{documentNumber}} برای همیشه حذف شود؟ این عملیات قابل بازگشت نیست."
+    },
+    "fields": {
+      "documentNumber": "شماره سند",
+      "date": "تاریخ صورتحساب",
+      "printDate": "تاریخ چاپ",
+      "issueDate": "تاریخ صدور",
+      "totalAmount": "مبلغ کل",
+      "state": "وضعیت",
+      "statePlaceholder": "وضعیت را انتخاب کنید",
+      "fileName": "نام فایل",
+      "recordCount": "تعداد ردیف‌ها"
+    },
+    "validation": {
+      "fileRequired": "یک فایل صورتحساب غیرخالی انتخاب کنید.",
+      "amountInvalid": "یک مبلغ نامنفی معتبر وارد کنید."
+    },
+    "messages": {
+      "created": "صورتحساب بارگذاری شد.",
+      "createError": "بارگذاری صورتحساب ناموفق بود.",
+      "updated": "صورتحساب ویرایش شد.",
+      "updateError": "ویرایش صورتحساب ناموفق بود.",
+      "deleted": "صورتحساب حذف شد.",
+      "deleteError": "حذف صورتحساب ناموفق بود.",
+      "detailError": "جزئیات صورتحساب بارگذاری نشد.",
+      "listError": "صورتحساب‌ها بارگذاری نشدند."
+    },
+    "loading": "در حال بارگذاری صورتحساب‌ها…",
+    "empty": "صورتحساب مرکز درمانی یافت نشد."
+  },
+  "placeholder": {
+    "description": "این صفحه در حال پیاده‌سازی است."
+  },
   "claimReports": {
     "title": "پذیرش و پرونده‌ها",
     "actions": {
@@ -2161,6 +2158,129 @@
       "pdfDownloaded": "فایل PDF دانلود شد",
       "excelDownloadFailed": "دانلود اکسل ناموفق بود"
     }
+  },
+  "branches": {
+    "title": "شعب",
+    "noBranches": "هیچ شعبه‌ای یافت نشد.",
+    "actions": {
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "sync": "همگام‌سازی شعب",
+      "refresh": "بروزرسانی"
+    },
+    "dialog": {
+      "create": "ایجاد شعبه",
+      "edit": "ویرایش شعبه",
+      "delete": "حذف شعبه",
+      "deleteDesc": "آیا از حذف این شعبه مطمئن هستید؟"
+    },
+    "form": {
+      "code": "کد",
+      "title": "عنوان",
+      "status": "وضعیت"
+    },
+    "messages": {
+      "created": "شعبه با موفقیت ایجاد شد",
+      "updated": "شعبه با موفقیت ویرایش شد",
+      "deleted": "شعبه با موفقیت حذف شد",
+      "synced": "شعب با موفقیت همگام‌سازی شد"
+    },
+    "columns": {
+      "code": "کد",
+      "unitName": "نام",
+      "tel": "تلفن"
+    }
+  },
+  "common": {
+    "collapse": "بستن",
+    "asc": "صعودی",
+    "clear": "پاک کردن",
+    "displayName": "نام",
+    "back": "بازگشت",
+    "username": "نام کاربری",
+    "refresh": "بروزرسانی",
+    "dialog": {
+      "confirm": "ادامه",
+      "cancel": "لغو",
+      "deleteDialog": {
+        "permanentTitle": "حذف دایمی ردیف اطلاعاتی",
+        "confirmMessage": "آیا مطمئن هستید که می‌خواهید این ردیف را به طور دائم حذف کنید؟",
+        "typeToConfirm": "شناسه رو جهت حذف وارد کنید",
+        "enterToConfirm": "شناسه رو جهت حذف وارد کنید",
+        "deleteWarning": "هشدار",
+        "cannotUndo": "این عملیات این ردیف را به طور دائم از سیستم حذف می‌کند و قابل بازگشت نیست",
+        "permanentWarning": "هشدار"
+      }
+    },
+    "showMore": "فیلترهای بیشتر",
+    "close": "بستن",
+    "cancel": "انصراف",
+    "none": "هیچکدام",
+    "deleteConfirm": "آیا از حذف مطمئن هستید؟",
+    "thruDate": "تاریخ پایان",
+    "auditInfo": {
+      "action": "اطلاعات ثبت کننده",
+      "title": "اطلاعات ثبت کننده",
+      "createdSection": "اطلاعات ایجاد",
+      "updatedSection": "اطلاعات آخرین به‌روزرسانی",
+      "createdBy": "ایجادکننده",
+      "updatedBy": "آخرین به‌روزرسانی توسط",
+      "userLoadError": "اطلاعات کاربر در دسترس نیست"
+    },
+    "view": "مشاهده",
+    "softDeleteConfirm": "این مورد غیرفعال می‌شود.",
+    "no": "خیر",
+    "update": "به‌روزرسانی",
+    "desc": "نزولی",
+    "fileUploader": {
+      "dragAndDrop": "فایل‌ها را بکشید و رها کنید یا برای انتخاب کلیک کنید",
+      "allowedTypes": "فقط تصاویر PNG، JPG، JPEG، HEIC",
+      "onlyAllowed": "فقط فایل‌های تصویری با فرمت PNG، JPG، JPEG، HEIC مجاز هستند",
+      "someSkipped": "بعضی فایل‌ها به دلیل نوع نامعتبر نادیده گرفته شدند",
+      "heicConversionFailed": "تبدیل {{filename}} از HEIC/HEIF به JPEG انجام نشد.",
+      "uploadFailed": "بارگذاری {{filename}} انجام نشد",
+      "failed": "ناموفق",
+      "progressValue": "{{percent}}%"
+    },
+    "total": "مجموع",
+    "retry": "تلاش دوباره",
+    "submit": "ارسال",
+    "save": "ذخیره",
+    "notAvailable": "در دسترس نیست",
+    "openInNewTab": "باز کردن در زبانه جدید",
+    "openMenu": "باز کردن منو",
+    "createdAt": "ایجاد شده در",
+    "passwordRequirements": {
+      "label": "الزامات رمز عبور",
+      "description": "رمز عبور باید حداقل شامل یک حرف بزرگ، یک حرف کوچک و یک عدد باشد."
+    },
+    "deleteSuccess": "مورد با موفقیت حذف شد",
+    "search": "جستجو",
+    "softDeleteSuccess": "مورد با موفقیت حذف نرم شد",
+    "delete": "حذف",
+    "select": "انتخاب کنید",
+    "deleteMethodDescription": "نحوه حذف این مورد را انتخاب کنید",
+    "to": "تا",
+    "goBack": "بازگشت",
+    "saveChanges": "ذخیره تغییرات",
+    "more": "بیشتر",
+    "noResults": "نتیجه‌ای یافت نشد",
+    "optional": "اختیاری",
+    "signOut": "خروج",
+    "softDelete": "حذف نرم",
+    "loading": "در حال بارگذاری...",
+    "edit": "ویرایش",
+    "noRecords": "داده‌ای یافت نشد.",
+    "create": "ثبت",
+    "all": "همه",
+    "from": "از",
+    "updatedAt": "به‌روزرسانی شده در",
+    "resetFilter": "حذف فیلترها",
+    "exportCsv": "خروجی CSV",
+    "showLess": "فیلترهای کمتر",
+    "reset": "بازنشانی",
+    "yes": "بله",
+    "confirm": "تأیید"
   },
   "aiAssessmentRules": {
     "title": "قوانین ارزیابی هوشمند",
@@ -2352,89 +2472,267 @@
       "maxThreshold": "حداکثر آستانه باید بزرگ‌تر یا مساوی حداقل آستانه باشد."
     }
   },
-  "medicalCenter": {
-    "title": "مراکز درمانی",
-    "description": "بارگذاری و مدیریت صورتحساب‌های مراکز درمانی.",
+  "shell": {
+    "closeNavigation": "بستن نوار ناوبری",
+    "collapseNavigation": "جمع کردن نوار ناوبری",
+    "expandNavigation": "باز کردن نوار ناوبری",
+    "loading": "در حال بررسی نشست...",
+    "logout": "خروج",
+    "navigation": "ناوبری اصلی",
+    "openNavigation": "باز کردن نوار ناوبری"
+  },
+  "repetitiveResponseGroups": {
+    "title": "مدیریت گروه‌های پاسخ تکراری",
+    "create": "ایجاد گروه",
+    "refresh": "بروزرسانی",
+    "noGroups": "هیچ گروه پاسخ تکراری یافت نشد.",
     "columns": {
-      "documentNumber": "شماره سند",
-      "date": "تاریخ صورتحساب",
-      "totalAmount": "مبلغ کل",
-      "state": "وضعیت",
-      "createdAt": "تاریخ ایجاد"
+      "title": "عنوان",
+      "seqNum": "شماره ترتیب"
     },
     "filters": {
-      "documentNumber": "شماره سند",
-      "state": "وضعیت"
+      "title": "عنوان"
     },
-    "states": {
-      "SUBMITTED": "ثبت‌شده",
-      "EXTRACTING": "در حال استخراج",
-      "EXTRACTED": "استخراج‌شده",
-      "FAILED": "ناموفق"
-    },
-    "actions": {
-      "view": "مشاهده جزئیات",
-      "edit": "ویرایش صورتحساب",
-      "delete": "حذف صورتحساب",
-      "create": "بارگذاری صورتحساب",
-      "refresh": "بروزسانی",
-      "upload": "بارگذاری",
-      "uploading": "در حال بارگذاری…"
-    },
-    "create": {
-      "title": "بارگذاری صورتحساب",
-      "file": "فایل صورتحساب"
-    },
-    "edit": {
-      "title": "ویرایش صورتحساب"
-    },
-    "details": {
-      "title": "جزئیات صورتحساب"
-    },
-    "delete": {
-      "title": "حذف صورتحساب",
-      "description": "صورتحساب {{documentNumber}} برای همیشه حذف شود؟ این عملیات قابل بازگشت نیست."
-    },
-    "fields": {
-      "documentNumber": "شماره سند",
-      "date": "تاریخ صورتحساب",
-      "printDate": "تاریخ چاپ",
-      "issueDate": "تاریخ صدور",
-      "totalAmount": "مبلغ کل",
-      "state": "وضعیت",
-      "statePlaceholder": "وضعیت را انتخاب کنید",
-      "fileName": "نام فایل",
-      "recordCount": "تعداد ردیف‌ها"
+    "dialog": {
+      "viewDetails": "مشاهده جزئیات",
+      "create": "ایجاد گروه",
+      "edit": "ویرایش گروه",
+      "fields": {
+        "title": "عنوان",
+        "seqNum": "شماره ترتیب"
+      }
     },
     "validation": {
-      "fileRequired": "یک فایل صورتحساب غیرخالی انتخاب کنید.",
-      "amountInvalid": "یک مبلغ نامنفی معتبر وارد کنید."
+      "titleRequired": "عنوان الزامی است"
     },
     "messages": {
-      "created": "صورتحساب بارگذاری شد.",
-      "createError": "بارگذاری صورتحساب ناموفق بود.",
-      "updated": "صورتحساب ویرایش شد.",
-      "updateError": "ویرایش صورتحساب ناموفق بود.",
-      "deleted": "صورتحساب حذف شد.",
-      "deleteError": "حذف صورتحساب ناموفق بود.",
-      "detailError": "جزئیات صورتحساب بارگذاری نشد.",
-      "listError": "صورتحساب‌ها بارگذاری نشدند."
+      "created": "گروه پاسخ تکراری ایجاد شد",
+      "createError": "ایجاد گروه پاسخ تکراری ناموفق بود",
+      "updated": "گروه پاسخ تکراری به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی گروه پاسخ تکراری ناموفق بود",
+      "noSelectionError": "هیچ گروه پاسخ تکراری انتخاب نشده است"
     },
-    "loading": "در حال بارگذاری صورتحساب‌ها…",
-    "empty": "صورتحساب مرکز درمانی یافت نشد."
+    "entityName": "گروه پاسخ تکراری"
   },
-  "files": {
-    "viewer": {
-      "loading": "در حال بارگذاری پیوست...",
-      "progressValue": "{{percent}}%",
-      "loadFailed": "بارگذاری پیوست امکان‌پذیر نبود.",
+  "damageCodes": {
+    "title": "مدیریت کدهای خسارت",
+    "description": "مدیریت همه کد خسارت با اطلاعات قیمت‌گذاری.",
+    "create": "ایجاد کد خسارت",
+    "refresh": "بروزرسانی",
+    "noDamageCodes": "هیچ کد خساراتی یافت نشد.",
+    "columns": {
+      "code": "کد",
+      "title": "عنوان",
+      "extId": "شناسه خارجی",
+      "codeType": "نوع کد",
+      "description": "توضیحات",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "created": "ایجاد شده"
+    },
+    "filters": {
+      "code": "کد",
+      "title": "عنوان",
+      "extId": "شناسه خارجی",
+      "codeType": "نوع کد",
+      "description": "توضیحات",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "created": "تاریخ ایجاد",
+      "thruDateFrom": "تاریخ پایان از",
+      "thruDateTo": "تاریخ پایان تا"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "pending": "در انتظار",
+      "deprecated": "منسوخ شده"
+    },
+    "dialog": {
+      "details": "جزئیات",
+      "basicInfo": "اطلاعات اصلی",
+      "dateInfo": "اطلاعات تاریخ",
+      "systemInfo": "اطلاعات سیستمی",
+      "create": "ایجاد کد خسارت جدید",
+      "noStartDate": "بدون تاریخ",
+      "edit": "ویرایش کد خسارت",
+      "delete": "حذف کد خسارت",
+      "deleteDesc": "آیا مطمئن هستید که می‌خواهید این کد خسارت را به طور دائم حذف کنید؟",
+      "deleteWarning": "این عملیات کد خسارت را به طور دائم از سیستم حذف می‌کند و قابل بازگشت نیست.",
+      "createDesc": "کد خسارت جدید را با پر کردن فرم زیر ایجاد کنید.",
+      "editDesc": "اطلاعات کد خسارت را در زیر به‌روزرسانی کنید.",
+      "fields": {
+        "code": "کد",
+        "extId": "شناسه خارجی",
+        "extCode": "کد خارجی",
+        "codeType": "نوع کد",
+        "title": "عنوان",
+        "description": "توضیحات",
+        "status": "وضعیت",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان "
+      }
+    },
+    "softDeleteDesc": "حذف نرم تاریخ پایان را تنظیم کرده و کد خسارت را بدون حذف دائمی غیرفعال می‌کند.",
+    "bulkDelete": {
+      "button": "حذف انتخاب‌شده‌ها",
+      "title": "حذف کدهای خسارت",
+      "description": "این عملیات {{count}} کد خسارت انتخاب‌شده را به طور دائم حذف می‌کند. این عمل قابل بازگشت نیست.",
+      "selectionInfo": "{{count}} کد خسارت انتخاب شد",
+      "confirm": "حذف",
+      "submitting": "در حال حذف...",
+      "success": "کدهای خسارت با موفقیت حذف شدند.",
+      "error": "حذف کدهای خسارت انتخاب‌شده انجام نشد.",
+      "noSelection": "لطفاً قبل از حذف حداقل یک کد خسارت را انتخاب کنید."
+    },
+    "messages": {
+      "created": "کد خسارت ثبت شد",
+      "createError": "ثبت کد خسارت انجام نشد",
+      "updated": "کد خسارت به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی کد خسارت انجام نشد",
+      "deleted": "کد خسارت حذف شد",
+      "deleteError": "حذف کد خسارت انجام نشد",
+      "softDeleted": "کد خسارت نرم‌حذف شد",
+      "softDeleteError": "حذف نرم کد خسارت انجام نشد"
+    },
+    "pricing": {
+      "title": "مدیریت قیمت‌گذاری",
+      "current": "قیمت‌گذاری فعلی",
+      "addPricing": "افزودن قیمت",
+      "editPricing": "ویرایش قیمت",
+      "addNew": "افزودن قیمت جدید",
+      "noPricing": "اطلاعات قیمت‌گذاری موجود نیست",
+      "fields": {
+        "priceType": "نوع قیمت",
+        "selectPriceType": "نوع قیمت را انتخاب کنید",
+        "amount": "مقدار",
+        "unit": "واحد",
+        "unitPlaceholder": "واحد",
+        "fromDate": "تاریخ شروع",
+        "selectFromDate": "تاریخ شروع را انتخاب کنید",
+        "thruDate": "تاریخ پایان",
+        "selectThruDate": "تاریخ پایان را انتخاب کنید"
+      },
+      "types": {
+        "total": "کل",
+        "professional": "حرفه‌ای",
+        "technical": "فنی",
+        "baseanesthesiavalue": "ارزش پایه بیهوشی",
+        "privatesectortariff": "تعرفه بخش خصوصی",
+        "privatesectorsupplementaryinsurance": "تکمیلی بخش خصوصی",
+        "governmentsectortariff": "تعرفه بخش دولتی",
+        "governmentsectorsupplementaryinsurance": "تکمیلی بخش دولتی",
+        "charitysectortariff": "تعرفه بخش خیریه",
+        "charitysectorsupplementaryinsurance": "تکمیلی بخش خیریه",
+        "publicnongovernmentsectortariff": "تعرفه عمومی غیردولتی",
+        "publicnongovernmentsupplementaryinsurance": "تکمیلی عمومی غیردولتی",
+        "basicinsuranceshare": "سهم بیمه پایه",
+        "teethgeneraldoctor": "دندانپزشک عمومی",
+        "teethspecialdoctor": "دندانپزشک متخصص"
+      },
+      "messages": {
+        "created": "قیمت ثبت شد",
+        "createError": "ثبت قیمت انجام نشد",
+        "updated": "قیمت به‌روزرسانی شد",
+        "updateError": "به‌روزرسانی قیمت انجام نشد",
+        "deleted": "قیمت حذف شد",
+        "deleteError": "حذف قیمت انجام نشد",
+        "softDeleted": "قیمت نرم‌حذف شد",
+        "softDeleteError": "حذف نرم قیمت انجام نشد",
+        "deleteConfirm": "آیا از حذف این قیمت مطمئن هستید؟",
+        "softDeleteConfirm": "آیا از حذف نرم این قیمت مطمئن هستید؟"
+      },
+      "ongoing": "جاری",
+      "softDelete": "حذف نرم",
+      "clickToAdd": "برای افزودن کلیک کنید"
+    },
+    "actions": {
+      "viewDetails": "مشاهده جزئیات",
+      "edit": "ویرایش",
+      "managePricing": "مدیریت قیمت‌گذاری",
+      "delete": "حذف",
+      "softDelete": "حذف نرم"
+    }
+  },
+  "dashboard": {
+    "title": "داشبورد",
+    "download": "دانلود",
+    "refresh": "بروزرسانی",
+    "reports": {
+      "tabs": {
+        "reportCountByAssignee": "تعداد بر اساس ارزیاب (جزئیات)",
+        "reportCountByAssigneeSummary": "تعداد بر اساس ارزیاب (خلاصه)",
+        "reportSumByAssignee": "مبلغ بر اساس ارزیاب",
+        "reportDistributionByStatus": "توزیع بر اساس وضعیت",
+        "agreementsWithoutMainAssessmentUser": "قراردادهای بدون ارزیاب ارشد"
+      },
+      "columns": {
+        "status": "وضعیت",
+        "assignedUserDisplayName": "نام ارزیاب",
+        "count": "تعداد",
+        "amount": "مبلغ",
+        "totalSumAmount": "مبلغ تایید شده",
+        "distribution": "توزیع درخواست خسارت",
+        "extContractId": "شناسه قرارداد",
+        "title": "عنوان",
+        "code": "کد",
+        "fromDate": "تاریخ شروع"
+      },
+      "filters": {
+        "extPolicyId": "شماره بیمه‌نامه",
+        "extContractId": "شماره قرارداد",
+        "extPlanCaption": "طرح",
+        "extCustomerId": "شناسه بیمه‌گذار",
+        "extCustomerName": "نام بیمه‌گذار",
+        "extWorkUnitName": "نام شعبه",
+        "extWorkUnitCode": "کد شعبه",
+        "extWorkUnitCityName": "شهر شعبه",
+        "extWorkUnitProvinceName": "استان شعبه",
+        "status": "وضعیت",
+        "latestAssignementUsername": "کدملی ارزیاب",
+        "latestAssignementDisplayName": "نام ارزیاب",
+        "amount": "مبلغ",
+        "createdAt": "تاریخ ثبت",
+        "assessedAt": "تاریخ ارزیابی",
+        "submitDate": "تاریخ هزینه",
+        "totalSumAmount": "مبلغ تایید شده",
+        "docType": "نوع سند",
+        "mainAssignedUserUsername": "کدملی ارزیاب اصلی",
+        "mainAssignedUserDisplayName": "نام ارزیاب اصلی"
+      },
+      "statuses": {
+        "SUBMITTED": "ثبت شده",
+        "IN_REVIEW": "بررسی AI",
+        "IN_ASSESSMENT": "ارزیابی اولیه",
+        "DELEGATED": "در انتظار پاسخ ارجاع",
+        "DEDICATED_TO_USER": "بررسی‌های من",
+        "APPROVED": "تأیید شده در انتظار ارسال به فناوران",
+        "REJECTED": "رد (غیرقابل پرداخت)",
+        "FAILED_FETCH_API": "خطا در دریافت از سرویس",
+        "SENT": "ارسال شده در انتظار پرداخت",
+        "SENT_FAILED": "خطا ارسال",
+        "PAID": "واریز شده",
+        "TERMINATED": "ابطال",
+        "RETURN": "عودت شده در انتظار پاسخ کاربر",
+        "PAYMENT_REJECTED": "رد شده در پرداخت",
+        "PAYMENT_RETURN": "عودت شده از پرداخت",
+        "PAYMENT_RETURN_RESEND": "عودت شده از پرداخت (ارسال مجدد)",
+        "DELETED": "حذف شده"
+      },
+      "agreementStatuses": {
+        "ACTIVE": "فعال",
+        "INACTIVE": "غیرفعال",
+        "DRAFT": "پیش‌نویس",
+        "EXPIRED": "منقضی شده",
+        "TERMINATED": "خاتمه یافته"
+      },
+      "empty": {
+        "agreementsWithoutMainAssessmentUser": "همه قراردادها ارزیاب اصلی دارند."
+      },
       "actions": {
-        "zoomIn": "بزرگ‌نمایی",
-        "zoomOut": "کوچک‌نمایی",
-        "resetView": "بازنشانی نما",
-        "rotateLeft": "چرخش به چپ",
-        "rotateRight": "چرخش به راست",
-        "downloadImage": "دانلود تصویر"
+        "showReport": "جهت نمایش گزارش کلیک کنید"
       }
     }
   }

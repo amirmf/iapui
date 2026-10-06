@@ -1,0 +1,8 @@
+export { OutpatientClaimFormDialog } from '@features/outpatient-doc-acceptances/components/outpatient-claim-form-dialog'
+export { OutpatientClaimViewDialog } from '@features/outpatient-doc-acceptances/components/outpatient-claim-view-dialog'
+export { IssuanceFormDialog } from '@features/outpatient-doc-acceptances/components/issuance-form-dialog'
+export { IssuanceViewDialog } from '@features/outpatient-doc-acceptances/components/issuance-view-dialog'
+export { DamageCasesDialog } from '@features/outpatient-doc-acceptances/components/damage-cases-dialog'
+export { DamageCasesTable } from '@features/outpatient-doc-acceptances/components/damage-cases-table'
+export { DmgCaseFormDialog } from '@features/outpatient-doc-acceptances/components/dmg-case-form-dialog'
+export { DmgCaseViewDialog } from '@features/outpatient-doc-acceptances/components/dmg-case-view-dialog'
