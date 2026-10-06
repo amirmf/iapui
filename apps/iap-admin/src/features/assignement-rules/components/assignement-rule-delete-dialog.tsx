@@ -1,11 +1,9 @@
+import { useAssignementRule } from '@features/assignement-rules/context/store/assignement-rule-store'
+import { useDeleteAssignementRule } from '@features/assignement-rules/queries/use-assignement-rule-mutations'
 import { ConfirmDialog } from '@iap/dialogs'
 import type { QueryObserverResult } from '@tanstack/react-query'
-import { useMutation } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-
-import { useAssignementRule } from '../context/assignement-rule-context'
-import assignementRuleService from '../services/assignement-rule-service'
 
 export function AssignementRuleDeleteDialog<TData>(props: {
   refetch: () => Promise<QueryObserverResult<TData>> | Promise<unknown> | void
@@ -22,14 +20,10 @@ export function AssignementRuleDeleteDialog<TData>(props: {
     setCurrentRow(null)
   }
 
-  const mutation = useMutation({
-    mutationFn: (id: string) => assignementRuleService.delete(id),
-    onError: () => toast.error(t('assignementRules.messages.deleteFailed')),
-    onSuccess: async () => {
-      await refetch()
-      toast.success(t('assignementRules.messages.deleted'))
-      handleClose()
-    },
+  const mutation = useDeleteAssignementRule(async () => {
+    await refetch()
+    toast.success(t('assignementRules.messages.deleted'))
+    handleClose()
   })
 
   return (

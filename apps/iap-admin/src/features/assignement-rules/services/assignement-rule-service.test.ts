@@ -1,7 +1,6 @@
+import { assignementRuleService } from '@features/assignement-rules/services/assignement-rule-service'
 import { getApiClient } from '@iap/api-client'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-
-import { assignementRuleService } from './assignement-rule-service'
 
 vi.mock('@iap/api-client', () => ({
   getApiClient: vi.fn(),
@@ -128,5 +127,18 @@ describe('assignementRuleService', () => {
     expect(mockDelete).toHaveBeenCalledWith('/assignement-rules/bulk-delete', {
       data: ids,
     })
+  })
+  it('rejects invalid identifiers before sending requests', async () => {
+    await expect(assignementRuleService.getById('invalid')).rejects.toThrow()
+    await expect(
+      assignementRuleService.update('invalid', {
+        title: 'Rule',
+        status: 'ACTIVE',
+      })
+    ).rejects.toThrow()
+    await expect(assignementRuleService.delete('invalid')).rejects.toThrow()
+    expect(mockGet).not.toHaveBeenCalled()
+    expect(mockPut).not.toHaveBeenCalled()
+    expect(mockDelete).not.toHaveBeenCalled()
   })
 })

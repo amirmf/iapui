@@ -1,9 +1,8 @@
-import { describe, expect, it } from 'vitest'
-
 import {
   parseAssignementRuleTableSearch,
   toAssignementRuleTableSearch,
-} from './table-search'
+} from '@features/assignement-rules/route-adapters/table-search'
+import { describe, expect, it } from 'vitest'
 
 describe('table-search adapter', () => {
   it('parses empty search object to default pagination and empty filters', () => {

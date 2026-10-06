@@ -1,37 +1,54 @@
 // @vitest-environment jsdom
+import { AssignementRulesPage } from '@features/assignement-rules/assignement-rules-page'
 import { i18nReady } from '@shared/i18n/i18n'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { AssignementRulesPage } from './pages/assignement-rules-page'
-
-vi.mock('./components/assignement-rule-bulk-delete-dialog', () => ({
-  AssignementRuleBulkDeleteDialog: () => null,
-}))
-vi.mock('./components/assignement-rule-delete-dialog', () => ({
-  AssignementRuleDeleteDialog: () => null,
-}))
-vi.mock('./components/assignement-rule-form-dialog', () => ({
-  AssignementRuleFormDialog: () => null,
-}))
-vi.mock('./components/assignement-rule-columns', () => ({
-  useAssignementRuleColumns: () => [],
-}))
-vi.mock('./components/assignement-rule-data-table-toolbar', () => ({
-  AssignementRuleDataTableToolbar: () => <div data-testid='toolbar' />,
-}))
-vi.mock('./services/assignement-rule-service', () => ({
-  assignementRuleService: {
-    getPage: vi.fn().mockResolvedValue({
-      content: [],
-      number: 0,
-      size: 40,
-      totalElements: 0,
-      totalPages: 0,
-    }),
-  },
-}))
+vi.mock(
+  '@features/assignement-rules/components/assignement-rule-bulk-delete-dialog',
+  () => ({
+    AssignementRuleBulkDeleteDialog: () => null,
+  })
+)
+vi.mock(
+  '@features/assignement-rules/components/assignement-rule-delete-dialog',
+  () => ({
+    AssignementRuleDeleteDialog: () => null,
+  })
+)
+vi.mock(
+  '@features/assignement-rules/components/assignement-rule-form-dialog',
+  () => ({
+    AssignementRuleFormDialog: () => null,
+  })
+)
+vi.mock(
+  '@features/assignement-rules/components/assignement-rule-columns',
+  () => ({
+    useAssignementRuleColumns: () => [],
+  })
+)
+vi.mock(
+  '@features/assignement-rules/components/assignement-rule-data-table-toolbar',
+  () => ({
+    AssignementRuleDataTableToolbar: () => <div data-testid='toolbar' />,
+  })
+)
+vi.mock(
+  '@features/assignement-rules/services/assignement-rule-service',
+  () => ({
+    assignementRuleService: {
+      getPage: vi.fn().mockResolvedValue({
+        content: [],
+        number: 0,
+        size: 40,
+        totalElements: 0,
+        totalPages: 0,
+      }),
+    },
+  })
+)
 vi.mock('@shared/tables', () => ({
   PaginatedDataTable: () => <div role='table' />,
 }))

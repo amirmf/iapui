@@ -1,11 +1,10 @@
 // @vitest-environment jsdom
+import { AssignementRuleDataTableToolbar } from '@features/assignement-rules/components/assignement-rule-data-table-toolbar'
 import { i18nReady } from '@shared/i18n/i18n'
 import type { TableFilterBaseProps } from '@shared/tables/filter/types'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { cleanup, render, waitFor } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-
-import { AssignementRuleDataTableToolbar } from './assignement-rule-data-table-toolbar'
 
 const { filter } = vi.hoisted(() => ({
   filter: vi.fn<(props: TableFilterBaseProps) => null>(),

@@ -82,7 +82,7 @@ export type AssignementRuleForm = z.infer<
   - Create mutation calls `assignementRuleService.create(toRequestData(data))`.
   - Update mutation calls `assignementRuleService.update(id, toRequestData(data))`.
   - Success toasts: `t('assignementRules.messages.created')` / `t('assignementRules.messages.updated')`.
-  - Error toasts: `t('assignementRules.messages.createFailed')` / `t('assignementRules.messages.updateFailed')`.
+  - Standard mutation errors use the application Query Client error handler; do not override it with toast-only `onError` callbacks.
   - Awaits `refetch()`, closes dialog, resets current row.
 
 ## 5. Unit Tests

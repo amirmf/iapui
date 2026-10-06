@@ -1,14 +1,13 @@
+import { AssignementRuleRowActions } from '@features/assignement-rules/components/assignement-rule-row-actions'
+import {
+  assignementRuleStatusBadgeColors,
+  assignementRuleStatusTranslationKeys,
+} from '@features/assignement-rules/constants/assignement-rule-constant'
 import type { AssignementRule } from '@iap/api-types'
 import { Badge } from '@iap/ui'
 import { DataTableColumnHeader } from '@shared/tables'
 import type { ColumnDef } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
-
-import {
-  assignementRuleStatusBadgeColors,
-  assignementRuleStatusTranslationKeys,
-} from '../constants/assignement-rule-constant'
-import { AssignementRuleRowActions } from './assignement-rule-row-actions'
 
 export function useAssignementRuleColumns(): ColumnDef<AssignementRule>[] {
   const { t } = useTranslation()

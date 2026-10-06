@@ -1,14 +1,12 @@
 import { useMemo } from 'react'
 
-import { docTypeService } from '@modules/doc-types'
+import { getAssignementRuleStatusOptions } from '@features/assignement-rules/constants/assignement-rule-constant'
+import { useAssignementRuleDocTypes } from '@features/assignement-rules/queries/use-assignement-rule-doc-types'
 import {
   type TableFilterBaseProps,
   TableFilterQueryParams,
 } from '@shared/tables'
-import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
-
-import { getAssignementRuleStatusOptions } from '../constants/assignement-rule-constant'
 
 const filterInputClassName = 'lg:w-full'
 const filterWrapperClassName = 'w-full sm:w-1/4 xl:w-1/5 px-1'
@@ -17,12 +15,7 @@ const facetedFilterClassName = 'mx-1'
 export function AssignementRuleDataTableToolbar() {
   const { t } = useTranslation()
 
-  const docTypesQuery = useQuery({
-    queryFn: ({ signal }) =>
-      docTypeService.getPage({ page: 0, signal, size: 100 }),
-    queryKey: ['doc-types', 'page', 0, 100],
-    staleTime: Infinity,
-  })
+  const docTypesQuery = useAssignementRuleDocTypes()
 
   const docTypeOptions = useMemo(
     () =>

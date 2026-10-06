@@ -13,7 +13,7 @@ Add automated tests and run all mandatory quality gates to verify complete parit
 
 3. **Store Tests:**
    - `apps/iap-admin/src/features/assignement-rules/context/store/assignement-rule-store.test.ts`: validates dialog opening, closing, row setting, and reset.
-   - `apps/iap-admin/src/features/assignement-rules/model/assignement-rule-row-selection.test.ts`: validates ID extraction logic.
+   - `apps/iap-admin/src/features/assignement-rules/context/store/assignement-rule-row-selection.test.ts`: validates ID extraction logic.
 
 4. **Table State & Route Adapter Tests:**
    - `apps/iap-admin/src/features/assignement-rules/route-adapters/table-search.test.ts`: validates pagination & filter URL parsing and serialization.
@@ -31,7 +31,7 @@ Run and verify each of the following local gates:
 pnpm --filter iap-admin test
 
 # 2. Type Checking
-pnpm check-type
+pnpm --filter iap-admin typecheck
 
 # 3. Linter & Architecture Boundaries
 pnpm lint

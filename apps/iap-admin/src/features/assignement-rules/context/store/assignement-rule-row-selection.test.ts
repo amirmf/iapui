@@ -1,7 +1,6 @@
+import { getSelectedAssignementRuleIds } from '@features/assignement-rules/context/store/assignement-rule-row-selection'
 import type { AssignementRule } from '@iap/api-types'
 import { describe, expect, it } from 'vitest'
-
-import { getSelectedAssignementRuleIds } from './assignement-rule-row-selection'
 
 describe('getSelectedAssignementRuleIds', () => {
   const rows: AssignementRule[] = [

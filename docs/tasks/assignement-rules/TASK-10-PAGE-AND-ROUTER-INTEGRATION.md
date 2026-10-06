@@ -27,7 +27,7 @@ Following the single-root-route pattern established by `person-special-diseases-
       - Click: `setOpenDialog('bulkDelete')`
     - **Refresh:**
       - Variant: `'outline'`
-      - Icon: `<RefreshCw className={cn('size-4', isLoading && 'animate-spin')} />`
+      - Icon: `<RefreshCw className={cn('size-4', isFetching && 'animate-spin')} />`
       - Text: `t('assignementRules.actions.refresh')`
       - Disabled when `isLoading`
       - Click: `refetch()`

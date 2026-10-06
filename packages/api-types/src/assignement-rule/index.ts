@@ -2,12 +2,14 @@ import { z } from 'zod'
 
 import { createPageRequestSchema, createPageResponseSchema } from '../common'
 
+export const assignementRuleIdSchema = z.uuid()
+
 export const assignementRuleStatusSchema = z.enum(['ACTIVE', 'INACTIVE'])
 export type AssignementRuleStatus = z.infer<typeof assignementRuleStatusSchema>
 
 export const assignementRuleSchema = z
   .object({
-    id: z.uuid().nullish(),
+    id: assignementRuleIdSchema.nullish(),
     title: z.string().nullish(),
     docTypeCode: z.string().nullish(),
     extPolicyId: z.number().int().nullish(),
@@ -40,7 +42,7 @@ export type AssignementRulePageRequest = z.infer<
   typeof assignementRulePageRequestSchema
 >
 
-export const assignementRuleRequestSchema = z.object({
+export const assignementRuleRequestSchema = z.strictObject({
   title: z.string().trim().min(1),
   docTypeCode: z.string().trim().optional(),
   extPolicyId: z.number().int().optional(),
@@ -60,6 +62,6 @@ export type AssignementRuleRequest = z.infer<
   typeof assignementRuleRequestSchema
 >
 
-export const assignementRuleIdsSchema = z.array(z.uuid()).min(1)
+export const assignementRuleIdsSchema = z.array(assignementRuleIdSchema).min(1)
 export type AssignementRuleIds = z.infer<typeof assignementRuleIdsSchema>
 export const bulkDeleteAssignementRulesRequestSchema = assignementRuleIdsSchema

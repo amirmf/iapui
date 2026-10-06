@@ -1,4 +1,6 @@
 // @vitest-environment jsdom
+import { AssignementRuleDeleteDialog } from '@features/assignement-rules/components/assignement-rule-delete-dialog'
+import { useAssignementRuleStore } from '@features/assignement-rules/context/store/assignement-rule-store'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import {
   cleanup,
@@ -8,9 +10,6 @@ import {
   waitFor,
 } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-
-import { useAssignementRuleStore } from '../context/store/assignement-rule-store'
-import { AssignementRuleDeleteDialog } from './assignement-rule-delete-dialog'
 
 vi.mock('@iap/dialogs', () => ({
   ConfirmDialog: ({
@@ -35,14 +34,17 @@ vi.mock('@iap/dialogs', () => ({
 const { mockDelete } = vi.hoisted(() => ({
   mockDelete: vi.fn(),
 }))
-vi.mock('../services/assignement-rule-service', () => ({
-  assignementRuleService: {
-    delete: mockDelete,
-  },
-  default: {
-    delete: mockDelete,
-  },
-}))
+vi.mock(
+  '@features/assignement-rules/services/assignement-rule-service',
+  () => ({
+    assignementRuleService: {
+      delete: mockDelete,
+    },
+    default: {
+      delete: mockDelete,
+    },
+  })
+)
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),

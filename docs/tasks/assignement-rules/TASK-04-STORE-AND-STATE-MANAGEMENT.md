@@ -9,7 +9,7 @@ Implement feature-scoped Zustand store for client UI state (dialog visibility, s
 ## Implementation Target
 - `apps/iap-admin/src/features/assignement-rules/context/store/assignement-rule-store.ts`
 - `apps/iap-admin/src/features/assignement-rules/context/store/assignement-rule-store.test.ts`
-- Helper for selected IDs: `apps/iap-admin/src/features/assignement-rules/model/assignement-rule-row-selection.ts`
+- Helper for selected IDs: `apps/iap-admin/src/features/assignement-rules/context/store/assignement-rule-row-selection.ts`
 
 ## 1. Store Implementation (`assignement-rule-store.ts`)
 ```ts

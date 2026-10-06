@@ -1,3 +1,5 @@
+import type { AssignementRuleForm } from '@features/assignement-rules/model/assignement-rule-form-schema'
+import { useAssignementRuleDocTypes } from '@features/assignement-rules/queries/use-assignement-rule-doc-types'
 import {
   FormControl,
   FormField,
@@ -6,28 +8,15 @@ import {
   FormMessage,
 } from '@iap/forms'
 import { Select } from '@iap/ui'
-import { docTypeService } from '@modules/doc-types'
-import { useQuery } from '@tanstack/react-query'
 import { useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import type { AssignementRuleForm } from '../model/assignement-rule-form-schema'
-
-export function AssignementRuleDocTypeCodeField({
-  enabled,
-}: {
-  enabled: boolean
-}) {
+export function AssignementRuleDocTypeCodeField(props: { enabled: boolean }) {
+  const { enabled } = props
   const { t } = useTranslation()
   const { control } = useFormContext<AssignementRuleForm>()
 
-  const docTypesQuery = useQuery({
-    enabled,
-    queryFn: ({ signal }) =>
-      docTypeService.getPage({ page: 0, signal, size: 100 }),
-    queryKey: ['doc-types', 'page', 0, 100],
-    staleTime: Infinity,
-  })
+  const docTypesQuery = useAssignementRuleDocTypes(enabled)
 
   const options = (docTypesQuery.data?.content ?? [])
     .filter(

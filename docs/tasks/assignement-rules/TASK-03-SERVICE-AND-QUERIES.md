@@ -21,6 +21,7 @@ import {
   type AssignementRule,
   type AssignementRuleRequest,
   type PageAssignementRule,
+  assignementRuleIdSchema,
   assignementRuleIdsSchema,
   assignementRulePageRequestSchema,
   assignementRuleRequestSchema,
@@ -61,7 +62,8 @@ export const assignementRuleService = {
   },
 
   async getById(id: string, signal?: AbortSignal): Promise<AssignementRule> {
-    const response = await getApiClient().get(`/assignement-rules/${id}`, {
+    const validId = assignementRuleIdSchema.parse(id)
+    const response = await getApiClient().get(`/assignement-rules/${validId}`, {
       signal,
     })
     return assignementRuleSchema.parse(response.data)
@@ -81,15 +83,17 @@ export const assignementRuleService = {
     data: AssignementRuleRequest
   ): Promise<AssignementRule> {
     const valid = assignementRuleRequestSchema.parse(data)
-    const response = await getApiClient().put(`/assignement-rules/${id}`, {
+    const validId = assignementRuleIdSchema.parse(id)
+    const response = await getApiClient().put(`/assignement-rules/${validId}`, {
       ...toPayload(valid),
-      id,
+      id: validId,
     })
     return assignementRuleSchema.parse(response.data)
   },
 
   async delete(id: string): Promise<void> {
-    await getApiClient().delete(`/assignement-rules/${id}`)
+    const validId = assignementRuleIdSchema.parse(id)
+    await getApiClient().delete(`/assignement-rules/${validId}`)
   },
 
   async bulkDelete(ids: string[]): Promise<void> {
@@ -107,9 +111,9 @@ import { useQuery } from '@tanstack/react-query'
 import type { PaginationState } from '@tanstack/react-table'
 import type { ApiFilterParams } from '@iap/shared-lib'
 import type { PageAssignementRule } from '@iap/api-types'
-import { assignementRuleService } from '../services/assignement-rule-service'
+import { assignementRuleService } from '@features/assignement-rules/services/assignement-rule-service'
 
-export function useAssignementRulesQuery(params: {
+export function useAssignementRulesData(params: {
   filters: ApiFilterParams
   pagination: PaginationState
 }) {

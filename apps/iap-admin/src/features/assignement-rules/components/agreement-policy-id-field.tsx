@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 
-import { agreementService } from '@features/agreements'
+import { useAssignementRuleAgreements } from '@features/assignement-rules/queries/use-assignement-rule-agreements'
 import {
   FormControl,
   FormField,
@@ -9,7 +9,6 @@ import {
   FormMessage,
 } from '@iap/forms'
 import { SearchableSelect } from '@iap/ui'
-import { useQuery } from '@tanstack/react-query'
 import type { Control, FieldPathByValue, FieldValues } from 'react-hook-form'
 import { useWatch } from 'react-hook-form'
 
@@ -39,14 +38,15 @@ function useDebouncedValue(value: string, delay = 500) {
 export function AgreementPolicyIdField<
   TFieldValues extends FieldValues,
   TName extends FieldPathByValue<TFieldValues, string | undefined>,
->({
-  control,
-  name,
-  label,
-  placeholder,
-  enabled = true,
-  isEdit = false,
-}: AgreementPolicyIdFieldProps<TFieldValues, TName>) {
+>(props: AgreementPolicyIdFieldProps<TFieldValues, TName>) {
+  const {
+    control,
+    name,
+    label,
+    placeholder,
+    enabled = true,
+    isEdit = false,
+  } = props
   const value = useWatch({ control, name })
   const selectedFieldValue =
     typeof value === 'string' && value !== '' ? value : undefined
@@ -54,33 +54,13 @@ export function AgreementPolicyIdField<
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedSearch = useDebouncedValue(searchTerm.trim())
 
-  const { data: agreementPage, isFetching } = useQuery({
-    enabled,
-    gcTime: 30_000,
-    queryFn: ({ signal }) =>
-      agreementService.getPage({
-        filters: debouncedSearch ? { title: debouncedSearch } : {},
-        page: 0,
-        signal,
-        size: 20,
-      }),
-    queryKey: ['agreement-options', 'extPolicyId', debouncedSearch],
-    staleTime: 30_000,
-  })
-
-  const { data: selectedAgreementPage } = useQuery({
-    enabled: enabled && isEdit && Boolean(selectedFieldValue),
-    gcTime: 30_000,
-    queryFn: ({ signal }) =>
-      agreementService.getPage({
-        filters: { extPolicyId: selectedFieldValue! },
-        page: 0,
-        signal,
-        size: 1,
-      }),
-    queryKey: ['agreement-selected-option', 'extPolicyId', selectedFieldValue],
-    staleTime: 30_000,
-  })
+  const { agreementPage, isFetching, selectedAgreementPage } =
+    useAssignementRuleAgreements({
+      enabled,
+      isEdit,
+      debouncedSearch,
+      selectedFieldValue,
+    })
 
   const options = useMemo(
     () =>

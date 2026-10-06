@@ -71,4 +71,13 @@ describe('assignementRule contracts', () => {
     expect(assignementRuleIdsSchema.parse(ids)).toEqual(ids)
     expect(() => assignementRuleIdsSchema.parse([])).toThrow()
   })
+  it('rejects undeclared request properties at the API boundary', () => {
+    expect(() =>
+      assignementRuleRequestSchema.parse({
+        status: 'ACTIVE',
+        title: 'Rule',
+        unexpected: true,
+      })
+    ).toThrow()
+  })
 })

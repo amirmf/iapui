@@ -35,3 +35,39 @@ This directory contains the component-by-component implementation breakdown for 
                            │
 [TASK-05: Route Adapters] ─┘
 ```
+
+## Architecture reconciliation (2026-10-06)
+
+The feature uses the single-root-route exception in the application architecture.
+Its page lives at `assignement-rules-page.tsx`, with page-exclusive UI under
+`components/`. The route consumes the feature's public `index.ts`.
+
+The implementation owns responsibilities at their actual locations, rather than
+re-exporting legacy implementations from correctly named wrapper files:
+
+- `context/store/`: Zustand state and the selected-row ID helper with its tests.
+- `context/provider/`: page-unmount store cleanup.
+- `model/`: the translated form schema and inferred form type.
+- `queries/`: page data, document-type and agreement lookups, and mutation hooks.
+- `route-adapters/`: search contracts and pagination navigation.
+- `components/`: header actions, form fields, form value conversion, table and dialogs.
+- `services/`: API calls, UUID validation, payload serialization and response parsing.
+
+The shared request schema is strict and rejects undeclared fields. Standard
+mutation failures use the application Query Client error handler. Success
+callbacks retain the existing refetch and dialog cleanup behavior. Refresh uses
+`isFetching` so a manual refresh also disables the button and shows progress.
+
+See [the reusable review checklist](../../architecture/FEATURE-ARCHITECTURE-REVIEW.md)
+when reviewing other pages. Existing project skills cover the implementation
+patterns; this reconciliation does not introduce an additional skill.
+
+### Verified scope
+
+The final implementation passed all 146 admin test files (387 tests), admin and
+API-contract type checking, feature ESLint, formatting, architecture checks and
+the admin production build. Tests that read the external reference repository
+require `INSURANCE_UI_REFERENCE_PATH` to point to the local `insurance-ui` root.
+The architecture refactor did not perform a new browser parity review or add
+the planned form-dialog integration suite; those historical task acceptance
+items should not be interpreted as newly verified.

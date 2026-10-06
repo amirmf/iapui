@@ -1,6 +1,5 @@
+import { assignementRuleFormSchema } from '@features/assignement-rules/model/assignement-rule-form-schema'
 import { describe, expect, it } from 'vitest'
-
-import { assignementRuleFormSchema } from './assignement-rule-form-schema'
 
 describe('assignementRuleFormSchema', () => {
   const mockT = ((key: string) => key) as never

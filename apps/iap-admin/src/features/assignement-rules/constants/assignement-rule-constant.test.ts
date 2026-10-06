@@ -1,10 +1,9 @@
-import { describe, expect, it } from 'vitest'
-
 import {
   assignementRuleStatusBadgeColors,
   assignementRuleStatusTranslationKeys,
   getAssignementRuleStatusOptions,
-} from './assignement-rule-constant'
+} from '@features/assignement-rules/constants/assignement-rule-constant'
+import { describe, expect, it } from 'vitest'
 
 describe('assignementRuleConstant', () => {
   it('maps ACTIVE and INACTIVE to correct translation keys and colors', () => {

@@ -1,6 +1,5 @@
+import { useAssignementRuleStore } from '@features/assignement-rules/context/store/assignement-rule-store'
 import { beforeEach, describe, expect, it } from 'vitest'
-
-import { useAssignementRuleStore } from './assignement-rule-store'
 
 describe('useAssignementRuleStore', () => {
   beforeEach(() => {

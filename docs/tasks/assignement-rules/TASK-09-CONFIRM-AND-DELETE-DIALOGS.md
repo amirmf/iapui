@@ -26,7 +26,7 @@ export function AssignementRuleDeleteDialog(props: {
 - Confirm variant / destructive: `variant='error'` or `confirmVariant='destructive'`.
 - Mutation calls `assignementRuleService.delete(currentRow.id)`.
 - Success: toasts `t('assignementRules.messages.deleted')`, refetches, closes dialog, clears current row.
-- Error: toasts `t('assignementRules.messages.deleteFailed')`.
+- Error: the application Query Client reports the failure; the dialog remains open.
 
 ## 2. Bulk Delete Dialog (`assignement-rule-bulk-delete-dialog.tsx`)
 ```ts
@@ -43,7 +43,7 @@ export function AssignementRuleBulkDeleteDialog(props: {
 - Disabled when `ids.length === 0`.
 - Mutation calls `assignementRuleService.bulkDelete(ids)`.
 - Success: toasts `t('assignementRules.messages.bulkDeleted')`, clears row selection, refetches, closes dialog.
-- Error: toasts `t('assignementRules.messages.bulkDeleteFailed')`.
+- Error: the application Query Client reports the failure; the dialog remains open.
 
 ## 3. Unit Tests
 - Verify single delete dialog renders with row title/context and triggers delete on confirmation.

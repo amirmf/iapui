@@ -1,11 +1,10 @@
+import { useAssignementRuleColumns } from '@features/assignement-rules/components/assignement-rule-columns'
+import { useAssignementRuleStore } from '@features/assignement-rules/context/store/assignement-rule-store'
 import { assignementRuleSchema } from '@iap/api-types'
 import { i18n, i18nReady } from '@shared/i18n/i18n'
 import { cleanup, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
-
-import { useAssignementRuleStore } from '../context/store/assignement-rule-store'
-import { useAssignementRuleColumns } from './assignement-rule-columns'
 
 const rule = assignementRuleSchema.parse({
   id: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
