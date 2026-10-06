@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 
-import { agreementService } from '@features/agreements'
-import type { Agreement } from '@iap/api-types'
 import {
   FormControl,
   FormField,
@@ -10,7 +8,6 @@ import {
   FormMessage,
 } from '@iap/forms'
 import { SearchableSelect } from '@iap/ui'
-import { useQuery } from '@tanstack/react-query'
 import {
   type Control,
   type FieldPathByValue,
@@ -18,8 +15,14 @@ import {
   useWatch,
 } from 'react-hook-form'
 
-export type AgreementFieldValueType =
-  'extContractId' | 'extPolicyId' | 'templateCode'
+import {
+  type AgreementFieldValueType,
+  getAgreementOptionValue,
+  useAgreementOptionsQuery,
+  useSelectedAgreementQuery,
+} from '../../queries/use-agreement-options'
+
+export type { AgreementFieldValueType }
 
 export interface AgreementFieldProps<
   TFieldValues extends FieldValues,
@@ -34,11 +37,6 @@ export interface AgreementFieldProps<
   placeholder: string
   valueType: AgreementFieldValueType
 }
-
-const agreementValue = (
-  agreement: Agreement,
-  valueType: AgreementFieldValueType
-) => agreement[valueType]
 
 function useDebouncedTextSearch(delay = 500) {
   const [text, setText] = useState('')
@@ -74,39 +72,23 @@ export function AgreementField<
   const selectedFieldValue = typeof value === 'string' ? value : undefined
   const { search, setSearch } = useDebouncedTextSearch()
 
-  const { data: agreementPage, isFetching } = useQuery({
+  const { data: agreementPage, isFetching } = useAgreementOptionsQuery({
     enabled,
-    gcTime: 30_000,
-    queryFn: ({ signal }) =>
-      agreementService.getPage({
-        filters: search ? { title: search } : {},
-        page: 0,
-        signal,
-        size: 20,
-      }),
-    queryKey: ['agreement-options', valueType, search],
-    staleTime: 30_000,
+    search,
+    valueType,
   })
 
-  const { data: selectedAgreementPage } = useQuery({
-    enabled: enabled && isEdit && Boolean(selectedFieldValue),
-    gcTime: 30_000,
-    queryFn: ({ signal }) =>
-      agreementService.getPage({
-        filters: { [valueType]: selectedFieldValue },
-        page: 0,
-        signal,
-        size: 1,
-      }),
-    queryKey: ['agreement-selected-option', valueType, selectedFieldValue],
-    staleTime: 30_000,
+  const { data: selectedAgreementPage } = useSelectedAgreementQuery({
+    enabled,
+    isEdit,
+    selectedValue: selectedFieldValue,
+    valueType,
   })
 
   const options = useMemo(
     () =>
       (agreementPage?.content ?? []).flatMap((agreement) => {
-        const optionValue = agreementValue(agreement, valueType)
-
+        const optionValue = getAgreementOptionValue(agreement, valueType)
         return optionValue == null
           ? []
           : [{ label: agreement.title ?? '', value: String(optionValue) }]
@@ -117,8 +99,7 @@ export function AgreementField<
   const selectedAgreement = selectedAgreementPage?.content[0]
   const selectedFromLookup = useMemo(() => {
     if (!selectedAgreement) return null
-
-    const optionValue = agreementValue(selectedAgreement, valueType)
+    const optionValue = getAgreementOptionValue(selectedAgreement, valueType)
     return optionValue == null
       ? null
       : { label: selectedAgreement.title ?? '', value: String(optionValue) }

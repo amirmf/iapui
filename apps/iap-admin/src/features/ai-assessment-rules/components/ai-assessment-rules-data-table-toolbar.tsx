@@ -1,16 +1,17 @@
 import { useMemo } from 'react'
 
-import {
-  getAiAssessmentRuleDefinitionTypeOptions,
-  getAiAssessmentRuleStateOptions,
-  getAiAssessmentRuleStatusOptions,
-} from '@features/ai-assessment-rules/constants/ai-assessment-rule-constant'
 import { useDocTypesData } from '@modules/doc-types'
 import { useTranslate } from '@shared/i18n/i18n'
 import {
   type TableFilterBaseProps,
   TableFilterQueryParams,
 } from '@shared/tables'
+
+import {
+  getAiAssessmentRuleDefinitionTypeOptions,
+  getAiAssessmentRuleStateOptions,
+  getAiAssessmentRuleStatusOptions,
+} from '../constants/ai-assessment-rule-constant'
 
 const filterInputClassName = 'lg:w-full'
 const filterWrapperClassName = 'w-full sm:w-1/4 xl:w-1/5 px-1'
