@@ -42,20 +42,29 @@ export function TableRowCheckbox<TData>(props: {
 }
 
 export function createSelectColumn<TData>(props: {
+  presentation?: 'default' | 'reference'
   meta?: ColumnDef<TData>['meta']
   selectAllLabel: string
   selectRowLabel: string
 }): ColumnDef<TData> {
-  const { meta, selectAllLabel, selectRowLabel } = props
+  const { meta, presentation, selectAllLabel, selectRowLabel } = props
 
   return {
     cell: ({ row }) => (
-      <TableRowCheckbox ariaLabel={selectRowLabel} row={row} />
+      <TableRowCheckbox
+        ariaLabel={selectRowLabel}
+        row={row}
+        className={cn(presentation === 'reference' && 'ms-2 border-gray-500')}
+      />
     ),
     enableHiding: false,
     enableSorting: false,
     header: ({ table }) => (
-      <TableHeaderCheckbox ariaLabel={selectAllLabel} table={table} />
+      <TableHeaderCheckbox
+        ariaLabel={selectAllLabel}
+        table={table}
+        className={cn(presentation === 'reference' && 'me-1.5 border-gray-500')}
+      />
     ),
     id: 'select',
     meta,

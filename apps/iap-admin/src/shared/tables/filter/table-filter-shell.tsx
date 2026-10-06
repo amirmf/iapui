@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { Button, cn } from '@iap/ui'
+import { Button, ReferenceIcons, cn } from '@iap/ui'
 import { ChevronDown, RotateCcw } from 'lucide-react'
 
 export function TableFilterShell(props: {
@@ -14,6 +14,7 @@ export function TableFilterShell(props: {
   onExpandChange: () => void
   onReset: () => void
   resetLabel?: string
+  presentation?: 'default' | 'reference'
 }) {
   const {
     children,
@@ -26,19 +27,30 @@ export function TableFilterShell(props: {
     onExpandChange,
     onReset,
     resetLabel = 'Reset filters',
+    presentation = 'default',
   } = props
+  const { Cross2Icon } = ReferenceIcons
 
   return (
-    <section className={cn('space-y-3', className)}>
+    <section
+      className={cn(presentation !== 'reference' && 'space-y-3', className)}
+    >
       {children}
       <div
         className={cn(
           'flex items-center gap-2',
-          hasMoreFilters ? 'justify-between' : 'justify-end'
+          hasMoreFilters && 'justify-between',
+          !hasMoreFilters && 'justify-end',
+          presentation === 'reference' && 'my-4'
         )}
       >
         {hasMoreFilters ? (
-          <Button onClick={onExpandChange} size='sm' variant='ghost'>
+          <Button
+            aria-expanded={expanded}
+            onClick={onExpandChange}
+            size='sm'
+            variant='ghost'
+          >
             {expanded ? collapseLabel : expandLabel}
             <ChevronDown
               aria-hidden='true'
@@ -50,8 +62,17 @@ export function TableFilterShell(props: {
           </Button>
         ) : null}
         {isFiltered ? (
-          <Button onClick={onReset} size='sm' variant='outline'>
-            <RotateCcw aria-hidden='true' className='me-1 size-4' />
+          <Button
+            className={cn(presentation === 'reference' && 'h-7 px-2 lg:px-2.5')}
+            onClick={onReset}
+            size='sm'
+            variant={presentation === 'reference' ? 'secondary' : 'outline'}
+          >
+            {presentation === 'reference' ? (
+              <Cross2Icon aria-hidden='true' className='me-2 size-4' />
+            ) : (
+              <RotateCcw aria-hidden='true' className='me-1 size-4' />
+            )}
             {resetLabel}
           </Button>
         ) : null}

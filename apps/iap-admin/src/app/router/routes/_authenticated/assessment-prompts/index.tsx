@@ -1,6 +1,11 @@
-import { PlaceholderPage } from '@features/placeholder'
+import {
+  AssessmentPromptsPage,
+  assessmentPromptRouteSearchSchema,
+} from '@features/assessment-prompts'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/assessment-prompts/')({
-  component: () => <PlaceholderPage titleKey='sidebar.assessmentPrompts' />,
+  component: AssessmentPromptsPage,
+  loader: () => ({ crumb: 'assessment' }),
+  validateSearch: assessmentPromptRouteSearchSchema,
 })

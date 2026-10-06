@@ -21,8 +21,14 @@ export function LongText(props: {
   children: ReactNode
   className?: string
   contentClassName?: string
+  presentation?: 'default' | 'reference'
 }) {
-  const { children, className, contentClassName } = props
+  const {
+    children,
+    className,
+    contentClassName,
+    presentation = 'default',
+  } = props
   const ref = useRef<HTMLDivElement>(null)
   const [isOverflown, setIsOverflown] = useState(false)
 
@@ -52,7 +58,7 @@ export function LongText(props: {
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>{text}</TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent presentation={presentation}>
               <p className={contentClassName}>{children}</p>
             </TooltipContent>
           </Tooltip>
@@ -61,7 +67,10 @@ export function LongText(props: {
       <div className='sm:hidden'>
         <Popover>
           <PopoverTrigger asChild>{text}</PopoverTrigger>
-          <PopoverContent className={cn('w-fit', contentClassName)}>
+          <PopoverContent
+            presentation={presentation}
+            className={cn('w-fit', contentClassName)}
+          >
             <p>{children}</p>
           </PopoverContent>
         </Popover>

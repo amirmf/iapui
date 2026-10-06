@@ -7,3 +7,5 @@ export type DataTableLabels = {
 }
 
 export type DataTableRowLayout = 'table' | 'two-column'
+
+export type DataTablePresentation = 'default' | 'reference'

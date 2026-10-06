@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { TableCell, TableRow } from '@iap/ui'
+import { TableCell, TableRow, cn } from '@iap/ui'
 import { DataTableLayout } from '@shared/tables/data-table/data-table-layout'
 import type {
   DataTableLabels,
@@ -58,6 +58,7 @@ export function SimpleDataTable<TData>(props: {
   hasActiveFilters?: boolean
   isLoading?: boolean
   labels?: DataTableLabels
+  presentation?: 'default' | 'reference'
   noResultsContent?: ReactNode
   renderPagination?: (table: TanStackTable<TData>) => ReactNode
   renderRow?: (row: Row<TData>) => ReactNode
@@ -75,6 +76,7 @@ export function SimpleDataTable<TData>(props: {
     hasActiveFilters = false,
     isLoading = false,
     labels,
+    presentation = 'default',
     noResultsContent,
     renderPagination,
     renderRow,
@@ -95,6 +97,7 @@ export function SimpleDataTable<TData>(props: {
     <DataTableLayout
       caption={caption}
       className={className}
+      presentation={presentation}
       renderPagination={renderPagination}
       renderToolbar={renderToolbar}
       table={table}
@@ -104,7 +107,10 @@ export function SimpleDataTable<TData>(props: {
       {isLoading ? (
         <TableRow>
           <TableCell
-            className='h-28 text-center text-muted-foreground'
+            className={cn(
+              'h-28 text-center text-muted-foreground',
+              presentation === 'reference' && 'h-24 p-2 text-foreground'
+            )}
             colSpan={visibleColumnCount}
           >
             {labels?.loading ?? 'Loading…'}
@@ -120,13 +126,19 @@ export function SimpleDataTable<TData>(props: {
               <TableRow
                 data-state={row.getIsSelected() ? 'selected' : undefined}
                 key={row.id}
+                className={cn(
+                  presentation === 'reference' &&
+                    'group/row relative hover:bg-muted/50 data-[state=selected]:bg-muted'
+                )}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
-                    className={
+                    className={cn(
+                      presentation === 'reference' &&
+                        'whitespace-nowrap p-2 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
                       cell.column.columnDef.meta?.className ??
-                      cell.column.columnDef.meta?.cellClassName
-                    }
+                        cell.column.columnDef.meta?.cellClassName
+                    )}
                     key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -138,7 +150,10 @@ export function SimpleDataTable<TData>(props: {
       ) : (
         <TableRow>
           <TableCell
-            className='h-28 text-center text-muted-foreground'
+            className={cn(
+              'h-28 text-center text-muted-foreground',
+              presentation === 'reference' && 'h-24 p-2 text-foreground'
+            )}
             colSpan={visibleColumnCount}
           >
             {statusContent}

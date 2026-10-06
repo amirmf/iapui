@@ -1,4 +1,22 @@
 /* Shared theme for the react-multi-date-picker primitive. */
+.custom-calendar.reference-calendar .rmdp-header-values {
+  color: rgb(var(--color-card-foreground));
+}
+
+.custom-calendar.reference-calendar .rmdp-week-day {
+  color: rgb(var(--color-text-primary));
+}
+
+.custom-calendar.reference-calendar
+  .rmdp-day.rmdp-selected
+  span:not(.highlight) {
+  color: rgb(var(--color-base-white));
+}
+
+.custom-calendar.reference-calendar.rmdp-ep-arrow[direction='top'] {
+  border-bottom-width: 1px;
+}
+
 .custom-calendar.rmdp-wrapper,
 .custom-calendar .rmdp-month-picker,
 .custom-calendar .rmdp-year-picker {

@@ -9,9 +9,16 @@ function getLanguage() {
   return document.documentElement.lang || 'fa'
 }
 
-function toTehranDate(date: string | Date): Date | undefined {
+type DateFormatOptions = { language?: string; normalizeTimezone?: boolean }
+
+function toTehranDate(
+  date: string | Date,
+  normalizeTimezone = true
+): Date | undefined {
   const parsedDate =
-    typeof date === 'string' ? new Date(normalizeIsoDate(date)) : date
+    typeof date === 'string'
+      ? new Date(normalizeTimezone ? normalizeIsoDate(date) : date)
+      : date
 
   if (Number.isNaN(parsedDate.getTime())) return undefined
 
@@ -29,28 +36,30 @@ export function normalizeIsoDate(date: string): string {
 
 export function formatDateTime(
   date: string | Date | null | undefined,
-  pattern?: string
+  pattern?: string,
+  options: DateFormatOptions = {}
 ): string {
   if (!date) return '-'
-  const tehranDate = toTehranDate(date)
+  const tehranDate = toTehranDate(date, options.normalizeTimezone)
 
   if (!tehranDate) return '-'
 
-  return getLanguage() === 'fa'
+  return (options.language ?? getLanguage()) === 'fa'
     ? formatJalali(tehranDate, pattern || 'yyyy/MM/dd HH:mm')
     : format(tehranDate, pattern || 'MMM d, yyyy HH:mm')
 }
 
 export function formatDate(
   date: string | Date | null | undefined,
-  pattern = 'MMM d, yyyy'
+  pattern = 'MMM d, yyyy',
+  options: DateFormatOptions = {}
 ): string {
   if (!date) return '-'
-  const tehranDate = toTehranDate(date)
+  const tehranDate = toTehranDate(date, options.normalizeTimezone)
 
   if (!tehranDate) return '-'
 
-  return getLanguage() === 'fa'
+  return (options.language ?? getLanguage()) === 'fa'
     ? formatJalali(tehranDate, 'yyyy/MM/dd')
     : format(tehranDate, pattern)
 }

@@ -6,6 +6,36 @@ import { DatePicker } from './date-picker'
 import { DateRangePicker } from './date-range-picker'
 
 describe('DatePicker', () => {
+  it('uses the source range-date clear control when reference clearing is enabled', async () => {
+    const onChange = vi.fn()
+    render(
+      <DatePicker
+        presentation='reference'
+        clearLabel='پاک کردن'
+        onChange={onChange}
+        value={new Date('2026-01-01T00:00:00')}
+      />
+    )
+    const clear = screen.getByRole('button', { name: 'پاک کردن' })
+    expect(clear).toHaveClass('left-3')
+    expect(clear).not.toHaveClass('size-11')
+    await userEvent.setup().click(clear)
+    expect(onChange).toHaveBeenCalledWith(undefined)
+  })
+  it('supports the reference form appearance without adding a source-absent clear control', () => {
+    render(
+      <DatePicker
+        presentation='reference'
+        showClear={false}
+        onChange={vi.fn()}
+        value={new Date('2026-01-01T00:00:00')}
+      />
+    )
+    expect(
+      screen.queryByRole('button', { name: 'Clear date' })
+    ).not.toBeInTheDocument()
+    expect(screen.getByRole('textbox')).toHaveClass('pr-10', 'pl-10')
+  })
   it('clears a controlled value through its accessible clear control', async () => {
     const user = userEvent.setup()
     const onChange = vi.fn()

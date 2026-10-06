@@ -9,10 +9,19 @@ export type TableActionButtonProps = Omit<
   icon: ReactNode
   label: string
   tooltipText?: ReactNode
+  presentation?: 'default' | 'reference'
 }
 
 export function TableActionButton(props: TableActionButtonProps) {
-  const { className, icon, label, ref, tooltipText = label, ...rest } = props
+  const {
+    className,
+    icon,
+    label,
+    ref,
+    tooltipText = label,
+    presentation = 'default',
+    ...rest
+  } = props
 
   return (
     <Tooltip>
@@ -29,7 +38,9 @@ export function TableActionButton(props: TableActionButtonProps) {
           <span className='sr-only'>{label}</span>
         </Button>
       </TooltipTrigger>
-      <TooltipContent>{tooltipText}</TooltipContent>
+      <TooltipContent presentation={presentation}>
+        {presentation === 'reference' ? <p>{tooltipText}</p> : tooltipText}
+      </TooltipContent>
     </Tooltip>
   )
 }

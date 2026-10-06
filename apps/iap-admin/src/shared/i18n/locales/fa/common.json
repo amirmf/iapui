@@ -693,6 +693,18 @@
     "selectPartyType": "نوع شخص را انتخاب کنید"
   },
   "common": {
+    "more": "بیشتر",
+    "collapse": "بستن",
+    "asc": "صعودی",
+    "desc": "نزولی",
+    "resetFilter": "حذف فیلترها",
+    "select": "انتخاب کنید",
+    "noResults": "نتیجه‌ای یافت نشد",
+    "clear": "پاک کردن",
+    "search": "جستجو",
+    "none": "هیچکدام",
+    "create": "ثبت",
+    "saveChanges": "ذخیره تغییرات",
     "all": "همه",
     "passwordRequirements": {
       "label": "الزامات رمز عبور",
@@ -1629,6 +1641,99 @@
         "toothNumbers": "شماره دندان",
         "description": "توضیحات"
       }
+    }
+  },
+  "assessmentPrompts": {
+    "title": "مدیریت قوانین ارزیابی",
+    "create": "تعریف قانون جدید",
+    "refresh": "بروزرسانی",
+    "noPrompts": "  قانونی یافت نشد.",
+    "columns": {
+      "title": "عنوان",
+      "prompt": "دستور",
+      "docType": "نوع سند",
+      "placeType": "نوع محل",
+      "agreement": "قرارداد",
+      "ruleState": "حالت قانون",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "filters": {
+      "title": "عنوان",
+      "agreementTitle": "عنوان قرارداد",
+      "agreementCode": "کد قرارداد",
+      "docType": "نوع سند",
+      "thruDateFrom": "تاریخ پایان از",
+      "thruDateTo": "تاریخ پایان تا"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "suspended": "تعلیق شده",
+      "pending": "در انتظار"
+    },
+    "placeType": {
+      "hospital": "بیمارستان",
+      "clinic": "کلینیک",
+      "surgeryCenter": "مرکز جراحی"
+    },
+    "ruleState": {
+      "PRELIMINARY": "ابتدایی",
+      "SECONDARY": "ثانویه",
+      "CALCULATION": "محاسباتی",
+      "preliminary": "ابتدایی",
+      "secondary": "ثانویه",
+      "calculation": "محاسباتی",
+      "display": "نمایش"
+    },
+    "dialog": {
+      "create": "ایجاد قانون ارزیابی جدید",
+      "edit": "ویرایش قانون ارزیابی",
+      "details": "جزئیات قانون ارزیابی",
+      "fields": {
+        "title": "عنوان",
+        "prompt": "دستور",
+        "agreement": "قرارداد",
+        "selectAgreement": "جستجوی قرارداد",
+        "inputParams": "پارامترهای ورودی",
+        "methodNames": "نام تابع",
+        "status": "وضعیت",
+        "ruleState": "حالت قانون",
+        "placeType": "نوع محل",
+        "docType": "نوع سند",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان"
+      }
+    },
+    "actions": { "viewDetails": "مشاهده جزئیات", "edit": "ویرایش" },
+    "bulkDelete": { "button": "حذف انتخاب‌ها" },
+    "messages": {
+      "created": "قانون ارزیابی با موفقیت ایجاد شد",
+      "createError": "ایجاد قانون ارزیابی ناموفق بود",
+      "updated": "قانون ارزیابی با موفقیت به‌روزرسانی شد",
+      "updateError": "به‌روزرسانی قانون ارزیابی ناموفق بود"
+    }
+  },
+  "dataTable": {
+    "rowsSelected": "{{selected}} از {{total}} سطر انتخاب شده است.",
+    "rowsPerPage": "سطر در هر صفحه",
+    "pageIndicator": "صفحه {{page}} از {{pageCount}}",
+    "goToFirstPage": "رفتن به اولین صفحه",
+    "goToPreviousPage": "رفتن به صفحه قبلی",
+    "goToNextPage": "رفتن به صفحه بعدی",
+    "goToLastPage": "رفتن به آخرین صفحه",
+    "selectAllRows": "انتخاب همه سطرها",
+    "selectRow": "انتخاب سطر",
+    "total": "مجموع",
+    "loading": "در حال بارگذاری...",
+    "empty": "داده‌ای یافت نشد.",
+    "noResults": "نتیجه‌ای یافت نشد.",
+    "facetedFilter": {
+      "searchPlaceholder": "جستجو در {{title}}...",
+      "noResults": "نتیجه‌ای یافت نشد.",
+      "clear": "پاک کردن فیلترها",
+      "multiSelected": "{{count}} مورد انتخاب شده"
     }
   },
   "tickets": {

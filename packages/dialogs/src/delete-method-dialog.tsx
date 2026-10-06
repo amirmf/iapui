@@ -15,7 +15,9 @@ import {
   DialogHeader,
   DialogTitle,
   Label,
+  cn,
 } from '@iap/ui'
+import { IconArrowRight, IconEyeOff, IconTrash } from '@tabler/icons-react'
 import { ArrowRightIcon, EyeOffIcon, Trash2Icon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
@@ -36,6 +38,7 @@ export type DeleteMethodDialogLabels = {
 }
 
 export type DeleteMethodDialogProps = {
+  appearance?: 'default' | 'reference'
   entityName: string
   isLoading?: boolean
   labels?: DeleteMethodDialogLabels
@@ -51,6 +54,7 @@ type DeleteStage = 'select-method' | 'confirm'
 
 export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
   const {
+    appearance = 'default',
     entityName,
     isLoading = false,
     labels: customLabels,
@@ -61,7 +65,11 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
     resetDelay = 0,
     showDatePicker = true,
   } = props
-  const { t } = useTranslation()
+  const isReference = appearance === 'reference'
+  const SoftDeleteIcon = isReference ? IconEyeOff : EyeOffIcon
+  const HardDeleteIcon = isReference ? IconTrash : Trash2Icon
+  const BackIcon = isReference ? IconArrowRight : ArrowRightIcon
+  const { t, i18n } = useTranslation()
   const labels: DeleteMethodDialogLabels = customLabels ?? {
     back: t('common.back'),
     cancel: t('common.dialog.cancel'),
@@ -122,6 +130,9 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
         selectedMethod === 'soft' ? thruDate?.toISOString() : undefined
       )
       onOpenChange(false)
+    } catch {
+      // The caller reports request failures. Keep the confirmation open so
+      // the user can retry without losing their selected method or date.
     } finally {
       setIsSubmitting(false)
     }
@@ -130,22 +141,37 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
   if (stage === 'select-method') {
     return (
       <Dialog onOpenChange={handleOpenChange} open={open}>
-        <DialogContent closeLabel={labels.cancel}>
-          <DialogHeader>
-            <DialogTitle>{labels.title}</DialogTitle>
+        <DialogContent
+          presentation={isReference ? 'reference' : 'default'}
+          className={cn(isReference && 'sm:max-w-md')}
+          closeLabel={labels.cancel}
+        >
+          <DialogHeader presentation={isReference ? 'reference' : 'default'}>
+            <DialogTitle presentation={isReference ? 'reference' : 'default'}>
+              {labels.title}
+            </DialogTitle>
           </DialogHeader>
           <div className='space-y-4'>
             <p className='text-muted-foreground text-sm'>
               {labels.description.replace('{entityName}', entityName)}
             </p>
-            <div className='grid gap-3 sm:grid-cols-2'>
+            <div
+              className={cn(
+                'grid',
+                isReference && 'grid-cols-2 gap-4',
+                !isReference && 'gap-3 sm:grid-cols-2'
+              )}
+            >
               <Button
                 disabled={isBusy}
                 onClick={() => handleSelectMethod('soft')}
                 type='button'
                 variant='outline'
               >
-                <EyeOffIcon aria-hidden='true' className='size-4' />
+                <SoftDeleteIcon
+                  aria-hidden='true'
+                  className={cn('size-4', isReference && 'mr-2')}
+                />
                 {labels.softDelete}
               </Button>
               <Button
@@ -155,7 +181,10 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
                 type='button'
                 variant='outline'
               >
-                <Trash2Icon aria-hidden='true' className='size-4' />
+                <HardDeleteIcon
+                  aria-hidden='true'
+                  className={cn('size-4', isReference && 'mr-2')}
+                />
                 {labels.hardDelete}
               </Button>
             </div>
@@ -175,39 +204,84 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
 
   return (
     <AlertDialog onOpenChange={handleOpenChange} open={open}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>{confirmTitle}</AlertDialogTitle>
-          <AlertDialogDescription>
+      <AlertDialogContent presentation={isReference ? 'reference' : 'default'}>
+        <AlertDialogHeader
+          className={cn(
+            isReference && 'text-left sm:ltr:text-left sm:rtl:text-right'
+          )}
+        >
+          <AlertDialogTitle
+            className={cn(isReference && 'text-lg font-semibold')}
+          >
+            {isReference ? (
+              <span className='text-destructive flex items-center gap-2'>
+                {isHardDelete ? (
+                  <HardDeleteIcon aria-hidden='true' size={18} />
+                ) : (
+                  <SoftDeleteIcon aria-hidden='true' size={18} />
+                )}
+                {confirmTitle}
+              </span>
+            ) : (
+              confirmTitle
+            )}
+          </AlertDialogTitle>
+          <AlertDialogDescription
+            className={cn(isReference && 'text-muted-foreground text-sm')}
+          >
             {confirmDescription.replace('{entityName}', entityName)}
           </AlertDialogDescription>
         </AlertDialogHeader>
         {!isHardDelete && showDatePicker ? (
           <div className='space-y-2'>
             <Label>{labels.dateLabel}</Label>
-            <DatePicker onChange={setThruDate} value={thruDate} />
+            <DatePicker
+              presentation={isReference ? 'reference' : 'default'}
+              showClear={!isReference}
+              locale={
+                isReference ? (i18n.language === 'fa' ? 'fa' : 'en') : undefined
+              }
+              className={cn(isReference && 'w-60')}
+              onChange={setThruDate}
+              value={thruDate}
+            />
           </div>
         ) : null}
         <AlertDialogFooter>
-          {!preselectedMethod ? (
-            <Button disabled={isBusy} onClick={handleBack} variant='outline'>
-              <ArrowRightIcon
+          {!preselectedMethod || isReference ? (
+            <Button
+              disabled={isBusy}
+              onClick={handleBack}
+              variant={isReference ? 'ghost' : 'outline'}
+            >
+              <BackIcon
                 aria-hidden='true'
-                className='size-4 rtl:rotate-180'
+                className={cn(
+                  'size-4',
+                  isReference && 'mr-2',
+                  !isReference && 'rtl:rotate-180'
+                )}
               />
               {labels.back}
             </Button>
           ) : null}
-          <AlertDialogCancel disabled={isBusy}>
-            {labels.cancel}
-          </AlertDialogCancel>
-          <Button
-            disabled={isBusy}
-            onClick={() => void handleDelete()}
-            variant='destructive'
+          <div
+            className={cn(
+              isReference && 'flex flex-1 justify-end gap-2',
+              !isReference && 'contents'
+            )}
           >
-            {isHardDelete ? labels.hardDelete : labels.softDelete}
-          </Button>
+            <AlertDialogCancel disabled={isBusy}>
+              {labels.cancel}
+            </AlertDialogCancel>
+            <Button
+              disabled={isBusy}
+              onClick={() => void handleDelete()}
+              variant={isReference && !isHardDelete ? 'default' : 'destructive'}
+            >
+              {isHardDelete ? labels.hardDelete : labels.softDelete}
+            </Button>
+          </div>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

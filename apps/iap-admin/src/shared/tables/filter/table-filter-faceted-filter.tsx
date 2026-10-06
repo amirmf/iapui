@@ -1,4 +1,5 @@
 import { MultiSelect, Select } from '@iap/ui'
+import { ReferenceFacetedFilter } from '@shared/tables/filter/reference-faceted-filter'
 import type {
   FacetedTableFilterConfig,
   TableFilterValues,
@@ -8,6 +9,7 @@ export function TableFilterFacetedFilter(
   props: FacetedTableFilterConfig & {
     onValueChange: (id: string, value: string | string[] | undefined) => void
     values: TableFilterValues
+    presentation?: 'default' | 'reference'
   }
 ) {
   const {
@@ -18,9 +20,11 @@ export function TableFilterFacetedFilter(
     onValueChange,
     options,
     placeholder = id,
+    presentation = 'default',
     searchPlaceholder,
     values,
   } = props
+  if (presentation === 'reference') return <ReferenceFacetedFilter {...props} />
   const value = values[id]
   const selected = options.filter((option) =>
     Array.isArray(value) ? value.includes(option.value) : value === option.value

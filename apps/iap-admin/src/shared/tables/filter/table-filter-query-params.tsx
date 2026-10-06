@@ -41,6 +41,7 @@ export function TableFilterQueryParams(
     ignoreQueryParams = [],
     labels,
     pageQueryParamKey = pageNumberQueryParamKey,
+    presentation = 'default',
     resetPageToFirst = false,
     showReset = true,
     ...filterProps
@@ -107,6 +108,7 @@ export function TableFilterQueryParams(
       onExpandChange={() => setExpanded((current) => !current)}
       onReset={onReset}
       resetLabel={labels?.reset}
+      presentation={presentation}
     >
       <TableFilterContent
         {...filterProps}
@@ -114,6 +116,7 @@ export function TableFilterQueryParams(
         expanded={expanded}
         onValueChange={onValueChange}
         values={values}
+        presentation={presentation}
       />
     </TableFilterShell>
   )

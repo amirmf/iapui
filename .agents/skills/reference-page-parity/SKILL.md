@@ -42,3 +42,24 @@ Use this skill when a target page must match a local reference implementation.
 - If a required reference capability is absent in the target, port the minimal
   source-backed capability when it is in page scope. Otherwise document the
   exact evidence and ask for direction rather than claiming parity.
+
+## Contract precedence and integration
+
+- If a reference contract conflicts with an accepted architecture convention,
+  ask which semantics take precedence before changing validation. Record an
+  explicitly authorized exception with its page scope; do not extend it to other
+  domains. Architecture ownership and public import boundaries still apply.
+- Compare schema acceptance, stripped/retained output, canonical export names
+  and validation issue order, including nested schemas and null/empty values.
+  Shared factories are reusable only when their behavior matches the decision.
+- Trace presentation through every mounted dependency, including tooltips,
+  popovers, calendar CSS and date fields inside shared confirmations. Forward
+  the host language and source clear behavior at each boundary.
+- During integration with a newer main branch, inspect existing public
+  capabilities before adding another equivalent primitive. Reconcile shared
+  changes without replacing the other page's accepted behavior. Run affected
+  consumers and shared-package tests against the integrated tree, and record
+  which final edits were covered by each verification run.
+- Resolve source-only dependency values inside the scoped component rather than
+  at module initialization when default consumers should not evaluate them.
+  Test unchanged defaults as well as reference presentation.

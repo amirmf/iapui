@@ -7,7 +7,8 @@ import {
   useState,
 } from 'react'
 
-import { CalendarDays, X } from 'lucide-react'
+import { Cross2Icon } from '@radix-ui/react-icons'
+import { Calendar, CalendarDays, X } from 'lucide-react'
 import DateObject from 'react-date-object'
 import gregorian from 'react-date-object/calendars/gregorian'
 import persian from 'react-date-object/calendars/persian'
@@ -43,7 +44,9 @@ export type DatePickerProps = {
   onBlur?: () => void
   onChange: (value: Date | undefined) => void
   placeholder?: string
+  presentation?: 'default' | 'reference'
   ref?: Ref<HTMLInputElement>
+  showClear?: boolean
   value?: Date
 }
 
@@ -65,7 +68,9 @@ type CalendarInputProps = {
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
   openCalendar?: () => void
   placeholder?: string
+  presentation: 'default' | 'reference'
   readOnly: boolean
+  showClear: boolean
   ref?: Ref<HTMLInputElement>
   value?: string
 }
@@ -143,8 +148,10 @@ function CalendarInput(props: CalendarInputProps) {
     onKeyDown,
     openCalendar,
     placeholder,
+    presentation,
     readOnly,
     ref,
+    showClear,
     value,
   } = props
 
@@ -170,16 +177,33 @@ function CalendarInput(props: CalendarInputProps) {
         readOnly={readOnly}
         ref={ref}
         value={inputValue ?? value ?? ''}
-        className={cn('cursor-pointer pe-10', hasValue && 'ps-12')}
+        className={cn(
+          presentation === 'reference' && 'pr-10',
+          presentation === 'reference' && hasValue && 'pl-10',
+          presentation !== 'reference' && 'cursor-pointer pe-10',
+          presentation !== 'reference' && hasValue && 'ps-12'
+        )}
       />
-      <CalendarDays
-        aria-hidden='true'
-        className='text-muted-foreground pointer-events-none absolute end-3 top-1/2 size-4 -translate-y-1/2'
-      />
-      {hasValue ? (
+      {presentation === 'reference' ? (
+        <Calendar
+          aria-hidden='true'
+          className='pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 opacity-50'
+        />
+      ) : (
+        <CalendarDays
+          aria-hidden='true'
+          className='text-muted-foreground pointer-events-none absolute end-3 top-1/2 size-4 -translate-y-1/2'
+        />
+      )}
+      {hasValue && showClear ? (
         <button
           aria-label={clearLabel}
-          className='text-muted-foreground hover:bg-surface-muted hover:text-foreground focus-visible:ring-ring absolute start-1 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-lg focus-visible:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50'
+          className={cn(
+            presentation === 'reference' &&
+              'text-muted-foreground hover:text-foreground absolute top-1/2 left-3 -translate-y-1/2',
+            presentation !== 'reference' &&
+              'text-muted-foreground hover:bg-surface-muted hover:text-foreground focus-visible:ring-ring absolute start-1 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-lg focus-visible:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50'
+          )}
           disabled={disabled}
           onClick={(event) => {
             event.preventDefault()
@@ -188,7 +212,11 @@ function CalendarInput(props: CalendarInputProps) {
           }}
           type='button'
         >
-          <X aria-hidden='true' className='size-4' />
+          {presentation === 'reference' ? (
+            <Cross2Icon aria-hidden='true' className='h-4 w-4' />
+          ) : (
+            <X aria-hidden='true' className='size-4' />
+          )}
         </button>
       ) : null}
     </div>
@@ -213,9 +241,21 @@ export function DatePicker(props: DatePickerProps) {
     onBlur,
     onChange,
     placeholder,
+    presentation = 'default',
     ref,
+    showClear = true,
     value,
   } = props
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    if (presentation !== 'reference' || typeof window.matchMedia !== 'function')
+      return
+    const media = window.matchMedia('(max-width: 767px)')
+    const onChange = () => setIsMobile(window.innerWidth < 768)
+    onChange()
+    media.addEventListener('change', onChange)
+    return () => media.removeEventListener('change', onChange)
+  }, [presentation])
   const [isTyping, setIsTyping] = useState(false)
   const [typedValue, setTypedValue] = useState(() =>
     formatPersianDate(value, mode)
@@ -284,7 +324,12 @@ export function DatePicker(props: DatePickerProps) {
     <MultiDatePicker
       calendar={calendarConfig.calendar}
       calendarPosition='bottom-center'
-      className={cn('custom-calendar pointer-events-auto', calendarClassName)}
+      className={cn(
+        'custom-calendar pointer-events-auto',
+        presentation === 'reference' && 'reference-calendar',
+        presentation === 'reference' && isMobile && 'rmdp-mobile',
+        calendarClassName
+      )}
       containerClassName={cn('w-full', className)}
       currentDate={
         mode === 'date-time' && value ? new DateObject(value) : undefined
@@ -327,6 +372,8 @@ export function DatePicker(props: DatePickerProps) {
           onInputBlur={canEdit ? handleInputBlur : undefined}
           onInputChange={canEdit ? handleInputChange : undefined}
           placeholder={placeholder}
+          presentation={presentation}
+          showClear={showClear}
           readOnly={!canEdit}
           ref={ref}
         />

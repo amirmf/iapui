@@ -20,6 +20,7 @@ export type DateRangeValue = {
 }
 
 export type DateRangePickerProps = {
+  presentation?: 'default' | 'reference'
   'aria-describedby'?: string
   'aria-invalid'?: boolean
   'aria-labelledby'?: string
@@ -29,6 +30,8 @@ export type DateRangePickerProps = {
   'data-form-field'?: string
   'data-slot'?: string
   fromPlaceholder?: string
+  formatLabel?: (date: Date) => string
+  separator?: string
   id?: string
   locale?: DatePickerLocale
   maxDate?: Date
@@ -68,11 +71,14 @@ export function DateRangePicker(props: DateRangePickerProps) {
     'aria-invalid': ariaInvalid,
     'aria-labelledby': ariaLabelledBy,
     className,
+    presentation = 'default',
     clearLabel,
     disabled = false,
     'data-form-field': dataFormField,
     'data-slot': dataSlot,
     fromPlaceholder = 'From',
+    formatLabel,
+    separator = '–',
     locale = 'fa',
     maxDate,
     minDate,
@@ -84,8 +90,14 @@ export function DateRangePicker(props: DateRangePickerProps) {
     triggerClassName,
     value,
   } = props
-  const fromLabel = formatRangeDate(value.from, locale, mode) ?? fromPlaceholder
-  const toLabel = formatRangeDate(value.to, locale, mode) ?? toPlaceholder
+  const fromLabel =
+    value.from && formatLabel
+      ? formatLabel(value.from)
+      : (formatRangeDate(value.from, locale, mode) ?? fromPlaceholder)
+  const toLabel =
+    value.to && formatLabel
+      ? formatLabel(value.to)
+      : (formatRangeDate(value.to, locale, mode) ?? toPlaceholder)
 
   return (
     <Popover>
@@ -110,7 +122,7 @@ export function DateRangePicker(props: DateRangePickerProps) {
             {fromLabel}
           </span>
           <span aria-hidden='true' className='text-muted-foreground'>
-            –
+            {separator}
           </span>
           <span
             className={cn('truncate', !value.to && 'text-muted-foreground')}
@@ -119,9 +131,14 @@ export function DateRangePicker(props: DateRangePickerProps) {
           </span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent align='start' className={cn('w-80', className)}>
+      <PopoverContent
+        presentation={presentation}
+        align='start'
+        className={cn('w-80', className)}
+      >
         <div className='flex gap-2'>
           <DatePicker
+            presentation={presentation}
             clearLabel={clearLabel}
             disabled={disabled}
             locale={locale}
@@ -133,6 +150,7 @@ export function DateRangePicker(props: DateRangePickerProps) {
             value={value.from}
           />
           <DatePicker
+            presentation={presentation}
             clearLabel={clearLabel}
             disabled={disabled}
             locale={locale}
