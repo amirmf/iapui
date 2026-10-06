@@ -33,6 +33,7 @@ export type DatePickerProps = {
   calendarClassName?: string
   className?: string
   clearLabel?: string
+  clearable?: boolean
   disabled?: boolean
   editable?: boolean
   id?: string
@@ -54,6 +55,7 @@ type CalendarInputProps = {
   'aria-describedby'?: string
   'aria-invalid'?: boolean
   clearLabel: string
+  clearable: boolean
   dataFormField?: string
   dataSlot?: string
   disabled?: boolean
@@ -134,6 +136,7 @@ function CalendarInput(props: CalendarInputProps) {
     'aria-describedby': ariaDescribedBy,
     'aria-invalid': ariaInvalid,
     clearLabel,
+    clearable,
     dataFormField,
     dataSlot,
     disabled,
@@ -195,7 +198,7 @@ function CalendarInput(props: CalendarInputProps) {
           className='text-muted-foreground pointer-events-none absolute end-3 top-1/2 size-4 -translate-y-1/2'
         />
       )}
-      {hasValue && showClear ? (
+      {hasValue && showClear && clearable ? (
         <button
           aria-label={clearLabel}
           className={cn(
@@ -230,6 +233,7 @@ export function DatePicker(props: DatePickerProps) {
     calendarClassName,
     className,
     clearLabel = 'Clear date',
+    clearable = true,
     disabled = false,
     editable = false,
     id,
@@ -358,6 +362,7 @@ export function DatePicker(props: DatePickerProps) {
       render={
         <CalendarInput
           clearLabel={clearLabel}
+          clearable={clearable}
           aria-describedby={props['aria-describedby']}
           aria-invalid={props['aria-invalid']}
           dataFormField={dataFormField}

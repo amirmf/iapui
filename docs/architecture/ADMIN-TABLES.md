@@ -38,14 +38,27 @@ import.
 
 ## Server-driven tables
 
-For backend-paginated data, a feature uses `useServerTableState` and gives the
+Table/filter reference presentation is opt-in and preserves feature ownership
+of API inputs and route state. See
+[Reference-page controls](REFERENCE-PAGE-CONTROLS.md) for pagination, sorting,
+filter reset and debounce behavior added during the Agreements port.
+
+For backend-paginated data, a feature uses `useTableFilterState` (local state)
+or `useTableFilterQueryParams` (URL state) and gives the
 same pagination and sorting state to both its query and TanStack Table with
 manual pagination, filtering, and sorting enabled. Do not apply client-side
 filtering to an incomplete server page.
 
 At a TanStack Router boundary, validate search parameters first with a strict,
 feature-owned schema that declares its pagination, sorting, and filter keys.
-Then use `parseTableFilterSearch` and `toTableFilterSearch` from the filter
-module to convert only the standard table keys. Feature filter names pass
-through unchanged. Read URL-synced search through `useRouterState`; do not read
+Then use `parseTableFilterSearch` and `toTableFilterSearch` from the public
+table API for the default URL contract, or a feature-owned parser/serializer
+for source-specific keys such as Agreements `size` and `direction`. Feature
+filter names pass through unchanged. Read URL-synced search through
+`useRouterState`; do not read
 `router.state` directly, so the feature subscribes explicitly to navigation.
+
+`useTableFilterState` accepts `{ filters, pagination, sorting }` and returns
+`onFiltersChange`, `onPaginationChange`, `onSortingChange`, and `resetFilters`.
+Filter changes reset the page, following the current main-branch contract.
+`resetFilters` also returns to the first page and retains the chosen page size.

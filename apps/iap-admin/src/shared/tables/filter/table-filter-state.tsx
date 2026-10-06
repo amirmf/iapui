@@ -20,6 +20,7 @@ export function TableFilterState(
       updater: (previous: TableFilterValues) => TableFilterValues
     ) => void
     values: TableFilterValues
+    showReset?: boolean
   }
 ) {
   const {
@@ -29,10 +30,13 @@ export function TableFilterState(
     labels,
     onReset,
     onValuesChange,
+    presentation = 'default',
+    showReset = true,
     values,
     ...filterProps
   } = props
   const [expanded, setExpanded] = useState(false)
+  const [resetRevision, setResetRevision] = useState(0)
   const onValueChange = useCallback(
     (id: string, value: string | string[] | undefined) =>
       onValuesChange((previous) => updateTableFilterValue(previous, id, value)),
@@ -47,13 +51,20 @@ export function TableFilterState(
       expandLabel={labels?.expand}
       expanded={expanded}
       hasMoreFilters={count > defaultVisibleFilterCount}
-      isFiltered={isTableFiltered(values, ignoredFilterIds)}
+      isFiltered={showReset && isTableFiltered(values, ignoredFilterIds)}
       onExpandChange={() => setExpanded((current) => !current)}
-      onReset={onReset ?? (() => onValuesChange(() => ({})))}
+      onReset={() => {
+        setResetRevision((revision) => revision + 1)
+        if (onReset) onReset()
+        else onValuesChange(() => ({}))
+      }}
       resetLabel={labels?.reset}
+      presentation={presentation}
     >
       <TableFilterContent
         {...filterProps}
+        presentation={presentation}
+        key={resetRevision}
         defaultVisibleFilterCount={defaultVisibleFilterCount}
         expanded={expanded}
         onValueChange={onValueChange}

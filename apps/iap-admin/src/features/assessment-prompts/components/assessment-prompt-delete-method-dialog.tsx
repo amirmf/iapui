@@ -51,7 +51,7 @@ export function AssessmentPromptDeleteMethodDialog(
   return (
     <DeleteMethodDialog
       entityName='assessment prompt'
-      appearance='reference'
+      presentation='reference'
       resetDelay={300}
       isLoading={deletion.isPending}
       onDelete={(method, thruDate) =>

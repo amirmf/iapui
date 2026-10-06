@@ -47,6 +47,11 @@ React Hook Form context.
 
 ## Styling
 
+For inspected reference-page ports, selected primitives and dialog compositions
+offer opt-in `presentation='reference'`. See
+[Reference-page controls](REFERENCE-PAGE-CONTROLS.md) for supported APIs and
+behavioral boundaries. Default presentation remains unchanged for other pages.
+
 Styles required by a shared primitive are colocated with that primitive in
 `@iap/ui`. Application-global document rules remain in the owning
 application's `src/styles` entry point.

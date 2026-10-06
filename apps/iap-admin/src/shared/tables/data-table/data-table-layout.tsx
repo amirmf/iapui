@@ -39,9 +39,9 @@ export function DataTableLayout<TData>(props: {
       {renderToolbar?.(table)}
       <div
         className={cn(
-          'relative overflow-x-auto rounded-xl border border-border bg-card',
-          presentation === 'reference' &&
-            'flex max-h-[480px] flex-col overflow-hidden rounded-md bg-transparent',
+          presentation === 'reference'
+            ? 'relative flex max-h-[480px] flex-col overflow-hidden rounded-md border'
+            : 'relative overflow-x-auto rounded-xl border border-border bg-card',
           tableWrapperClassName
         )}
       >
@@ -51,17 +51,18 @@ export function DataTableLayout<TData>(props: {
           ) : null}
           <TableHeader
             className={cn(
-              'sticky top-0 z-10 bg-card',
-              presentation === 'reference' && 'z-20 bg-background'
+              'sticky top-0',
+              presentation === 'reference'
+                ? 'z-20 bg-background'
+                : 'z-10 bg-card'
             )}
           >
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
-                className={cn(
-                  presentation === 'reference' &&
-                    'group/row hover:bg-muted/50 data-[state=selected]:bg-muted'
-                )}
+                className={
+                  presentation === 'reference' ? 'group/row' : undefined
+                }
               >
                 {headerGroup.headers.map((header) => {
                   const sorting = header.column.getIsSorted()
@@ -80,7 +81,7 @@ export function DataTableLayout<TData>(props: {
                       }
                       className={cn(
                         presentation === 'reference' &&
-                          'h-10 px-2 text-left text-sm font-medium text-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+                          'h-10 px-2 text-left text-sm font-medium text-foreground',
                         header.column.columnDef.meta?.className ??
                           header.column.columnDef.meta?.headerClassName
                       )}

@@ -24,6 +24,10 @@ changing Agreements or another domain's accepted contracts.
   definitions in the public `@iap/api-types` domain entry point.
 - The agreement lookup and nested response use source-backed agreement data;
   integration must preserve the public contracts used by the Agreements feature.
+  These assessment-specific definitions live in `assessment-prompt/agreement.ts`
+  and are exported through the public `assessmentPromptAgreementContracts`
+  namespace. Canonical source schema names remain inside that namespace; root
+  Agreement exports retain the accepted Agreements feature semantics.
 
 ## Reuse for future pages
 

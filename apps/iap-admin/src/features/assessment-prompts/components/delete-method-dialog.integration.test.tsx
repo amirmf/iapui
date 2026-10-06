@@ -49,7 +49,7 @@ describe('shared delete confirmation failure recovery', () => {
   it('matches reference method grid and confirmation title, footer and soft action appearance', async () => {
     render(
       <DeleteMethodDialog
-        appearance='reference'
+        presentation='reference'
         entityName='assessment prompt'
         onDelete={vi.fn()}
         onOpenChange={vi.fn()}

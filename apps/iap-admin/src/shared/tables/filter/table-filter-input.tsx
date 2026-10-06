@@ -13,65 +13,51 @@ export function TableFilterInput(
 ) {
   const {
     className,
-    debounceMs,
+    presentation = 'default',
+    debounceMs = presentation === 'reference' ? 1200 : 400,
     id,
     onValueChange,
     queryKey,
-    presentation = 'default',
     value = '',
     wrapperClassName,
     ...inputProps
   } = props
   const [text, setText] = useState(value)
-  const dirty = useRef(false)
-  const skipNext = useRef(false)
+  const pending = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
-  useEffect(() => setText(value), [value])
   useEffect(() => {
-    if (presentation === 'reference' && (!dirty.current || skipNext.current)) {
-      skipNext.current = false
-      return
-    }
-    const timeout = window.setTimeout(
-      () => onValueChange(queryKey ?? id, text.trim() || undefined),
-      debounceMs ?? (presentation === 'reference' ? 1200 : 400)
+    clearTimeout(pending.current)
+    setText(value)
+  }, [id, value])
+  useEffect(() => () => clearTimeout(pending.current), [])
+
+  const change = (next: string) => {
+    setText(next)
+    clearTimeout(pending.current)
+    pending.current = setTimeout(
+      () => onValueChange(queryKey ?? id, next.trim() || undefined),
+      debounceMs
     )
-    return () => window.clearTimeout(timeout)
-  }, [debounceMs, onValueChange, presentation, queryKey, id, text])
+  }
+  const clear = () => {
+    clearTimeout(pending.current)
+    setText('')
+    onValueChange(queryKey ?? id, undefined)
+  }
 
   return (
     <div className={cn('relative', wrapperClassName)}>
       <Input
         {...inputProps}
-        className={cn(
-          presentation === 'reference' && 'pe-8',
-          presentation !== 'reference' && 'pe-9',
-          className
-        )}
-        onChange={(event) => {
-          dirty.current = true
-          setText(event.target.value)
-        }}
+        className={cn('pe-9', className)}
+        onChange={(event) => change(event.target.value)}
         value={text}
       />
-      {text.trim() ? (
+      {text ? (
         <button
-          aria-label={
-            presentation === 'reference' ? 'Clear input' : `Clear ${id}`
-          }
-          className={cn(
-            presentation === 'reference' &&
-              'absolute left-2 top-1/2 -translate-y-1/2 p-1 text-muted-foreground transition-colors hover:text-foreground',
-            presentation !== 'reference' &&
-              'absolute end-2 top-1/2 size-7 -translate-y-1/2 rounded text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
-          )}
-          onClick={() => {
-            setText('')
-            if (presentation === 'reference') {
-              skipNext.current = true
-              onValueChange(queryKey ?? id, undefined)
-            }
-          }}
+          aria-label='Clear input'
+          className='absolute end-2 top-1/2 size-7 -translate-y-1/2 rounded text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+          onClick={clear}
           type='button'
         >
           <X aria-hidden='true' className='m-auto size-4' />

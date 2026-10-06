@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { formatLocalDateTime } from '@iap/shared-lib'
 import { DateRangePicker, type DateRangeValue, cn } from '@iap/ui'
-import { formatDate } from '@shared/lib/format-date'
+import { useTranslate } from '@shared/i18n/i18n'
 import {
   parseTableFilterDate,
   tableFilterKeys,
@@ -21,79 +22,84 @@ export function TableFilterDateRangeFilter(
 ) {
   const {
     className,
-    debounceMs = 500,
-    fromPlaceholder = 'From',
+    fromPlaceholder,
     fromKey,
     id,
     locale,
     mode = 'date',
     onValueChange,
-    presentation = 'default',
-    toPlaceholder = 'To',
+    toPlaceholder,
     toKey,
     values,
     wrapperClassName,
+    presentation = 'default',
   } = props
-  const resolvedFromKey = fromKey ?? tableFilterKeys.dateFrom(id)
-  const resolvedToKey = toKey ?? tableFilterKeys.dateTo(id)
+  const { t } = useTranslate()
+  const resolvedFromKey =
+    fromKey ??
+    (presentation === 'reference'
+      ? `${id}__from`
+      : tableFilterKeys.dateFrom(id))
+  const resolvedToKey =
+    toKey ??
+    (presentation === 'reference' ? `${id}__to` : tableFilterKeys.dateTo(id))
+  const [range, setRange] = useState<DateRangeValue>(() => ({
+    from: parseTableFilterDate(values[resolvedFromKey]),
+    to: parseTableFilterDate(values[resolvedToKey]),
+  }))
+  const pending = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const isReference = presentation === 'reference'
   const fromValue = values[resolvedFromKey]
   const toValue = values[resolvedToKey]
-  const [localRange, setLocalRange] = useState<DateRangeValue>(() => ({
-    from: parseTableFilterDate(fromValue),
-    to: parseTableFilterDate(toValue),
-  }))
-  const pending = useRef<number | undefined>(undefined)
   useEffect(() => {
-    setLocalRange({
+    clearTimeout(pending.current)
+    setRange({
       from: parseTableFilterDate(fromValue),
       to: parseTableFilterDate(toValue),
     })
-  }, [fromValue, toValue])
-  useEffect(() => () => window.clearTimeout(pending.current), [])
-  const emit = (range: DateRangeValue) => {
-    onValueChange(resolvedFromKey, toTableFilterDate(range.from, mode))
-    onValueChange(resolvedToKey, toTableFilterDate(range.to, mode))
+  }, [fromValue, toValue, resolvedFromKey, resolvedToKey])
+  useEffect(() => () => clearTimeout(pending.current), [])
+  const change = (next: DateRangeValue) => {
+    setRange(next)
+    clearTimeout(pending.current)
+    const publish = () => {
+      onValueChange(
+        resolvedFromKey,
+        isReference && mode === 'date'
+          ? next.from
+            ? formatLocalDateTime(next.from, 'yyyy-MM-dd')
+            : undefined
+          : toTableFilterDate(next.from, mode)
+      )
+      onValueChange(
+        resolvedToKey,
+        isReference && mode === 'date'
+          ? next.to
+            ? formatLocalDateTime(next.to, 'yyyy-MM-dd')
+            : undefined
+          : toTableFilterDate(next.to, mode)
+      )
+    }
+    if (isReference) pending.current = setTimeout(publish, 500)
+    else publish()
   }
 
-  const picker = (
+  return (
     <DateRangePicker
       presentation={presentation}
-      className={cn(
-        presentation === 'reference' && 'p-3',
-        presentation !== 'reference' && wrapperClassName,
-        presentation !== 'reference' && className
-      )}
-      triggerClassName={cn(
-        presentation === 'reference' && 'h-8 w-full',
-        presentation === 'reference' && className
-      )}
-      fromPlaceholder={fromPlaceholder}
-      formatLabel={presentation === 'reference' ? formatDate : undefined}
-      separator={presentation === 'reference' ? '-' : undefined}
+      className={cn(!isReference && [wrapperClassName, className])}
+      wrapperClassName={isReference ? wrapperClassName : undefined}
+      triggerClassName={cn(isReference && ['lg:w-[250px]', className])}
+      fromPlaceholder={
+        fromPlaceholder ?? (isReference ? t('common.from') : 'From')
+      }
+      clearLabel={isReference ? t('common.clear') : undefined}
       locale={locale}
       mode={mode}
-      onChange={(range) => {
-        if (presentation === 'reference') {
-          setLocalRange(range)
-          window.clearTimeout(pending.current)
-          pending.current = window.setTimeout(() => emit(range), debounceMs)
-        } else emit(range)
-      }}
-      toPlaceholder={toPlaceholder}
-      value={
-        presentation === 'reference'
-          ? localRange
-          : {
-              from: parseTableFilterDate(values[resolvedFromKey]),
-              to: parseTableFilterDate(values[resolvedToKey]),
-            }
-      }
+      onChange={change}
+      toPlaceholder={toPlaceholder ?? (isReference ? t('common.to') : 'To')}
+      value={range}
     />
-  )
-  return presentation === 'reference' ? (
-    <div className={wrapperClassName}>{picker}</div>
-  ) : (
-    picker
   )
 }
 

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { agreementSchema } from '../agreement'
+import { agreementSchema } from './agreement'
 
 export const assessmentPromptRuleStateSchema = z.enum([
   'PRELIMINARY',

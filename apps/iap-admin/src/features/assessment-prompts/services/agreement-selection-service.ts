@@ -1,11 +1,13 @@
 import { getApiClient } from '@iap/api-client'
 import {
   agreementPageRequestSchema,
-  agreementSchema,
+  assessmentPromptAgreementContracts,
   getAgreementRequestSchema,
-  pageAgreementSchema,
 } from '@iap/api-types'
 import { transformApiFilterParams } from '@iap/shared-lib'
+
+const { agreementSchema, pageAgreementSchema } =
+  assessmentPromptAgreementContracts
 
 export const agreementSelectionService = {
   async getById(id: string, options?: { signal?: AbortSignal }) {

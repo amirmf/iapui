@@ -24,6 +24,7 @@
     "@iap/panel-switcher": "workspace:*",
     "@iap/shared-lib": "workspace:*",
     "@iap/ui": "workspace:*",
+    "@radix-ui/react-icons": "^1.3.2",
     "@react-pdf/renderer": "^4.9.0",
     "@tabler/icons-react": "^3.46.0",
     "@tanstack/react-query": "^5.103.2",

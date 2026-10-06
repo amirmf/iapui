@@ -104,5 +104,6 @@ These are disclosed differences, not source-parity claims:
 
 Backend behavior is tested with mocks, not a live backend. No browser screenshot
 comparison has been performed, so pixel-perfect rendering is not asserted.
-No commit, merge or deployment was requested. Current observed verification is
-recorded in task10; no completion is inferred from task-file existence.
+The user subsequently authorized local commit, merge to main and worktree
+cleanup. Final integration evidence is recorded in `11-main-integration.md`;
+no remote push or deployment is included.

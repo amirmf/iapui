@@ -1,4 +1,21 @@
 {
+  "dataTable": {
+    "rowsSelected": "{{selected}} از {{total}} سطر انتخاب شده است.",
+    "rowsPerPage": "سطر در هر صفحه",
+    "pageIndicator": "صفحه {{page}} از {{pageCount}}",
+    "total": "مجموع",
+    "loading": "در حال بارگذاری...",
+    "empty": "داده‌ای یافت نشد.",
+    "noResults": "نتیجه‌ای یافت نشد.",
+    "selectAllRows": "انتخاب همه سطرها",
+    "selectRow": "انتخاب سطر",
+    "facetedFilter": {
+      "searchPlaceholder": "جستجو در {{title}}...",
+      "noResults": "نتیجه‌ای یافت نشد.",
+      "clear": "پاک کردن فیلترها",
+      "multiSelected": "{{count}} مورد انتخاب شده"
+    }
+  },
   "routing": {
     "actions": {
       "goHome": "بازگشت به صفحه اصلی"
@@ -712,6 +729,9 @@
     },
     "cancel": "انصراف",
     "close": "بستن",
+    "collapse": "بستن",
+    "more": "بیشتر",
+    "resetFilter": "حذف فیلترها",
     "optional": "اختیاری",
     "confirm": "تأیید",
     "yes": "بله",
@@ -721,7 +741,12 @@
     "showLess": "فیلترهای کمتر",
     "showMore": "فیلترهای بیشتر",
     "reset": "بازنشانی",
+    "create": "ثبت",
     "save": "ذخیره",
+    "saveChanges": "ذخیره تغییرات",
+    "select": "انتخاب کنید",
+    "update": "به‌روزرسانی",
+    "noResults": "نتیجه‌ای یافت نشد",
     "noRecords": "داده‌ای یافت نشد.",
     "notAvailable": "در دسترس نیست",
     "optional": "اختیاری",
@@ -1851,6 +1876,177 @@
       "PROGRESS": "در حال انجام",
       "DONE": "انجام شد"
     }
+  },
+  "agreements": {
+    "validation": {
+      "invalidIsoDateTime": "تاریخ و زمان ISO نامعتبر است",
+      "titleRequired": "عنوان الزامی است",
+      "codeRequired": "کد الزامی است"
+    },
+    "title": "مدیریت قراردادها",
+    "create": "تعریف قرارداد جدید ",
+    "refresh": "بروزرسانی",
+    "noAgreements": "هیچ قراردادی یافت نشد.",
+    "columns": {
+      "code": "کد",
+      "templateCode": "کد قالب",
+      "extContractId": "شناسه قرارداد",
+      "extPolicyId": "شناسه بیمه‌نامه",
+      "extPlanId": "شناسه طرح",
+      "extLocation": "موقعیت مکانی",
+      "overrideRatio": "ضریب تعرفه",
+      "title": "عنوان",
+      "status": "وضعیت",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "draft": "پیش‌نویس",
+      "expired": "منقضی شده",
+      "terminated": "خاتمه یافته"
+    },
+    "filters": {
+      "thruDateFrom": "تاریخ پایان از",
+      "thruDateTo": "تاریخ پایان تا"
+    },
+    "dialog": {
+      "create": "ایجاد قرارداد جدید",
+      "createDesc": "قرارداد جدید را با پر کردن فرم زیر ایجاد کنید.",
+      "edit": "ویرایش قرارداد",
+      "editDesc": "اطلاعات قرارداد را در زیر به‌روزرسانی کنید.",
+      "details": "جزئیات قرارداد",
+      "fields": {
+        "title": "عنوان",
+        "code": "کد",
+        "templateCode": "کد قالب",
+        "extContractId": "شناسه قرارداد خارجی",
+        "extPolicyId": "شناسه بیمه‌نامه خارجی",
+        "extPlanId": "شناسه طرح خارجی",
+        "extLocation": "موقعیت مکانی خارجی",
+        "overrideRatio": "ضریب تعرفه",
+        "status": "وضعیت",
+        "fromDate": "تاریخ شروع",
+        "thruDate": "تاریخ پایان"
+      }
+    },
+    "actions": {
+      "edit": "ویرایش",
+      "initializeCoverageAppls": "راه‌اندازی نگاشت‌های پوشش"
+    },
+    "initializeCoverageApplsDesc": "آیا نگاشت‌های پوشش برای این قرارداد ایجاد شود؟ این کار برای کدهای خسارت فعال بدون قیمت‌گذاری، نگاشت ایجاد می‌کند.",
+    "messages": {
+      "created": "قرارداد با موفقیت ایجاد شد",
+      "updated": "قرارداد با موفقیت به‌روزرسانی شد",
+      "coverageInitialized": "نگاشت‌های پوشش ایجاد شد"
+    },
+    "partyAppls": {
+      "title": "نگاشتهای اشخاص",
+      "add": "افزودن شخص",
+      "user": "کاربر",
+      "selectUser": "انتخاب کاربر",
+      "relationshipType": "نوع رابطه",
+      "role": "نقش",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان",
+      "docTypes": "نوع سند",
+      "agreementTitle": "عنوان قرارداد",
+      "contactIdLabel": "شناسه قرارداد",
+      "policyIdLabel": "شناسه بیمه‌نامه",
+      "bulkCreate": {
+        "agreementTitle": "عنوان",
+        "bulkCreateTitleBtn": "افزودن انبوهی اشخاص",
+        "description": "قراردادها و کاربران انتخاب‌شده را بررسی کنید، سپس نگاشت اشخاص را به‌صورت انبوه ایجاد کنید.",
+        "displayName": "نام نمایشی",
+        "extContractId": "شناسه قرارداد",
+        "noResults": "نتیجه‌ای یافت نشد",
+        "selectedAgreements": "قرارداد‌ها",
+        "success": "نگاشتهای اشخاص با موفقیت ایجاد شدند.",
+        "title": "افزودن انبوهی اشخاص",
+        "user": "کاربران",
+        "username": "نام کاربری"
+      },
+      "roles": {
+        "owner": "مالک",
+        "assessmentUser": "کاربر ارزیابی",
+        "mainAssessmentUser": "کاربر ارزیابی اصلی",
+        "hqUser": "کاربر ستاد مرکزی",
+        "doctorUser": "کاربر پزشک",
+        "requestRegisteryAgent": "کاربر نماینده ثبت",
+        "mainRequestRegisteryAgent": "کاربر نماینده ثبت ارشد",
+        "branchUser": "کاربر شعبه",
+        "customerUser": "بیمه‌گذار"
+      },
+      "filters": {
+        "displayName": "نام نمایشی",
+        "username": "نام کاربری",
+        "extPolicyId": "شماره بیمه‌نامه",
+        "extContractId": "شماره قرارداد",
+        "extLocation": "موقعیت مکانی",
+        "agreementTitle": "عنوان قرارداد"
+      }
+    }
+  },
+  "agreementPartyAppls": {
+    "validation": { "userAccountIdRequired": "انتخاب حساب کاربری الزامی است" },
+    "bulkAssign": {
+      "title": "انتصاب شخص به قراردادهای انتخاب‌شده",
+      "description": "یک کاربر و نقش را برای انتصاب به همه قراردادهای انتخاب‌شده انتخاب کنید.",
+      "submit": "انتصاب شخص به قراردادها",
+      "success": "شخص با موفقیت به قراردادهای انتخاب‌شده منتسب شدند."
+    },
+    "delete": {
+      "descriptionWithAgreementAndRole": "آیا مطمئن هستید می‌خواهید {{displayName}} را با نقش {{role}} از {{agreementTitle}} حذف کنید؟"
+    }
+  },
+  "agreementCoverageAppls": {
+    "title": "کاربردهای پوشش قرارداد",
+    "description": "مدیریت نگاشت‌های پوشش در سطح قرارداد.",
+    "create": "نگاشت جدید",
+    "refresh": "بروزرسانی",
+    "columns": {
+      "damageTitle": "عنوان کد خسارت",
+      "damageCode": "کد خسارت",
+      "coverageTitle": "عنوان پوشش",
+      "coverageGroupTitle": "عنوان گروه پوشش",
+      "agreementTitle": "عنوان قرارداد",
+      "agreementCode": "کد قرارداد",
+      "extPolicyId": "شناسه بیمه‌نامه خارجی",
+      "overrideRatio": "ضریب تعرفه",
+      "franchisePercentage": "درصد فرانشیز",
+      "coverageAmount": "مبلغ پوشش",
+      "amountPerCase": "مبلغ هر پرونده",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "actions": {
+      "view": "مشاهده جزئیات",
+      "edit": "ویرایش",
+      "inlineEdit": "ویرایش درجا"
+    },
+    "dialog": {
+      "create": "ایجاد نگاشت",
+      "createDesc": "یک نگاشت جدید بین قرارداد و پوشش ایجاد کنید.",
+      "edit": "ویرایش نگاشت",
+      "editDesc": "نگاشت قرارداد و پوشش را بروزرسانی کنید."
+    },
+    "form": {
+      "agreement": "قرارداد",
+      "selectAgreement": "انتخاب قرارداد",
+      "coverageDetail": "جزئیات پوشش",
+      "selectCoverageDetail": "انتخاب جزئیات پوشش",
+      "damageCode": "کد خسارت",
+      "selectDamageCode": "انتخاب کد خسارت",
+      "overrideRatio": "ضریب تعرفه",
+      "franchisePercentage": "درصد فرانشیز",
+      "coverageAmount": "مبلغ پوشش",
+      "amountPerCase": "مبلغ هر پرونده",
+      "fromDate": "تاریخ شروع",
+      "thruDate": "تاریخ پایان"
+    },
+    "view": { "title": "جزئیات نگاشت", "description": "اطلاعات نگاشت" },
+    "messages": { "updated": "نگاشت بروزرسانی شد" }
   },
   "claimReports": {
     "title": "پذیرش و پرونده‌ها",

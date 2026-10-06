@@ -58,8 +58,8 @@ export function SimpleDataTable<TData>(props: {
   hasActiveFilters?: boolean
   isLoading?: boolean
   labels?: DataTableLabels
-  presentation?: 'default' | 'reference'
   noResultsContent?: ReactNode
+  presentation?: 'default' | 'reference'
   renderPagination?: (table: TanStackTable<TData>) => ReactNode
   renderRow?: (row: Row<TData>) => ReactNode
   renderToolbar?: (table: TanStackTable<TData>) => ReactNode
@@ -76,8 +76,8 @@ export function SimpleDataTable<TData>(props: {
     hasActiveFilters = false,
     isLoading = false,
     labels,
-    presentation = 'default',
     noResultsContent,
+    presentation = 'default',
     renderPagination,
     renderRow,
     renderToolbar,
@@ -89,7 +89,11 @@ export function SimpleDataTable<TData>(props: {
   } = props
   const rows = table.getRowModel().rows
   const visibleColumnCount = Math.max(table.getVisibleFlatColumns().length, 1)
-  const statusContent = hasActiveFilters
+  const statusContent = (
+    presentation === 'reference'
+      ? table.options.data.length > 0
+      : hasActiveFilters
+  )
     ? (noResultsContent ?? labels?.noResults ?? 'No matching records.')
     : (emptyContent ?? labels?.empty ?? 'No records found.')
 
@@ -108,8 +112,10 @@ export function SimpleDataTable<TData>(props: {
         <TableRow>
           <TableCell
             className={cn(
-              'h-28 text-center text-muted-foreground',
-              presentation === 'reference' && 'h-24 p-2 text-foreground'
+              'text-center',
+              presentation === 'reference'
+                ? 'h-24'
+                : 'h-28 text-muted-foreground'
             )}
             colSpan={visibleColumnCount}
           >
@@ -124,18 +130,18 @@ export function SimpleDataTable<TData>(props: {
               <TwoColumnRow key={row.id} label={twoColumnLabel} row={row} />
             ) : (
               <TableRow
+                className={
+                  presentation === 'reference'
+                    ? 'group/row relative hover:bg-muted/50 data-[state=selected]:bg-muted'
+                    : undefined
+                }
                 data-state={row.getIsSelected() ? 'selected' : undefined}
                 key={row.id}
-                className={cn(
-                  presentation === 'reference' &&
-                    'group/row relative hover:bg-muted/50 data-[state=selected]:bg-muted'
-                )}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     className={cn(
-                      presentation === 'reference' &&
-                        'whitespace-nowrap p-2 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+                      presentation === 'reference' && 'p-2',
                       cell.column.columnDef.meta?.className ??
                         cell.column.columnDef.meta?.cellClassName
                     )}
@@ -151,8 +157,10 @@ export function SimpleDataTable<TData>(props: {
         <TableRow>
           <TableCell
             className={cn(
-              'h-28 text-center text-muted-foreground',
-              presentation === 'reference' && 'h-24 p-2 text-foreground'
+              'text-center',
+              presentation === 'reference'
+                ? 'h-24'
+                : 'h-28 text-muted-foreground'
             )}
             colSpan={visibleColumnCount}
           >

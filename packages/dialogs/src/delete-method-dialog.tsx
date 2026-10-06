@@ -38,7 +38,6 @@ export type DeleteMethodDialogLabels = {
 }
 
 export type DeleteMethodDialogProps = {
-  appearance?: 'default' | 'reference'
   entityName: string
   isLoading?: boolean
   labels?: DeleteMethodDialogLabels
@@ -47,6 +46,7 @@ export type DeleteMethodDialogProps = {
   open: boolean
   preselectedMethod?: DeleteMethod
   resetDelay?: number
+  presentation?: 'default' | 'reference'
   showDatePicker?: boolean
 }
 
@@ -54,7 +54,6 @@ type DeleteStage = 'select-method' | 'confirm'
 
 export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
   const {
-    appearance = 'default',
     entityName,
     isLoading = false,
     labels: customLabels,
@@ -62,14 +61,15 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
     onOpenChange,
     open,
     preselectedMethod,
+    presentation = 'default',
     resetDelay = 0,
     showDatePicker = true,
   } = props
-  const isReference = appearance === 'reference'
-  const SoftDeleteIcon = isReference ? IconEyeOff : EyeOffIcon
-  const HardDeleteIcon = isReference ? IconTrash : Trash2Icon
-  const BackIcon = isReference ? IconArrowRight : ArrowRightIcon
   const { t, i18n } = useTranslation()
+  const isReference = presentation === 'reference'
+  const BackIcon = isReference ? IconArrowRight : ArrowRightIcon
+  const SoftIcon = isReference ? IconEyeOff : EyeOffIcon
+  const HardIcon = isReference ? IconTrash : Trash2Icon
   const labels: DeleteMethodDialogLabels = customLabels ?? {
     back: t('common.back'),
     cancel: t('common.dialog.cancel'),
@@ -131,8 +131,7 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
       )
       onOpenChange(false)
     } catch {
-      // The caller reports request failures. Keep the confirmation open so
-      // the user can retry without losing their selected method or date.
+      // The owning feature reports mutation failures. Keep confirmation open.
     } finally {
       setIsSubmitting(false)
     }
@@ -142,14 +141,12 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
     return (
       <Dialog onOpenChange={handleOpenChange} open={open}>
         <DialogContent
-          presentation={isReference ? 'reference' : 'default'}
-          className={cn(isReference && 'sm:max-w-md')}
           closeLabel={labels.cancel}
+          className={cn(isReference && 'sm:max-w-md')}
+          presentation={presentation}
         >
-          <DialogHeader presentation={isReference ? 'reference' : 'default'}>
-            <DialogTitle presentation={isReference ? 'reference' : 'default'}>
-              {labels.title}
-            </DialogTitle>
+          <DialogHeader>
+            <DialogTitle>{labels.title}</DialogTitle>
           </DialogHeader>
           <div className='space-y-4'>
             <p className='text-muted-foreground text-sm'>
@@ -158,33 +155,28 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
             <div
               className={cn(
                 'grid',
-                isReference && 'grid-cols-2 gap-4',
-                !isReference && 'gap-3 sm:grid-cols-2'
+                isReference ? 'grid-cols-2 gap-4' : 'gap-3 sm:grid-cols-2'
               )}
             >
               <Button
+                presentation={presentation}
                 disabled={isBusy}
                 onClick={() => handleSelectMethod('soft')}
                 type='button'
                 variant='outline'
               >
-                <SoftDeleteIcon
-                  aria-hidden='true'
-                  className={cn('size-4', isReference && 'mr-2')}
-                />
+                <SoftIcon aria-hidden='true' className='size-4' />
                 {labels.softDelete}
               </Button>
               <Button
+                presentation={presentation}
                 className='border-destructive text-destructive hover:bg-destructive/10'
                 disabled={isBusy}
                 onClick={() => handleSelectMethod('hard')}
                 type='button'
                 variant='outline'
               >
-                <HardDeleteIcon
-                  aria-hidden='true'
-                  className={cn('size-4', isReference && 'mr-2')}
-                />
+                <HardIcon aria-hidden='true' className='size-4' />
                 {labels.hardDelete}
               </Button>
             </div>
@@ -204,21 +196,15 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
 
   return (
     <AlertDialog onOpenChange={handleOpenChange} open={open}>
-      <AlertDialogContent presentation={isReference ? 'reference' : 'default'}>
-        <AlertDialogHeader
-          className={cn(
-            isReference && 'text-left sm:ltr:text-left sm:rtl:text-right'
-          )}
-        >
-          <AlertDialogTitle
-            className={cn(isReference && 'text-lg font-semibold')}
-          >
+      <AlertDialogContent presentation={presentation}>
+        <AlertDialogHeader className={cn(isReference && 'text-left')}>
+          <AlertDialogTitle>
             {isReference ? (
               <span className='text-destructive flex items-center gap-2'>
                 {isHardDelete ? (
-                  <HardDeleteIcon aria-hidden='true' size={18} />
+                  <HardIcon aria-hidden='true' className='size-4.5' />
                 ) : (
-                  <SoftDeleteIcon aria-hidden='true' size={18} />
+                  <SoftIcon aria-hidden='true' className='size-4.5' />
                 )}
                 {confirmTitle}
               </span>
@@ -226,9 +212,7 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
               confirmTitle
             )}
           </AlertDialogTitle>
-          <AlertDialogDescription
-            className={cn(isReference && 'text-muted-foreground text-sm')}
-          >
+          <AlertDialogDescription>
             {confirmDescription.replace('{entityName}', entityName)}
           </AlertDialogDescription>
         </AlertDialogHeader>
@@ -236,20 +220,21 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
           <div className='space-y-2'>
             <Label>{labels.dateLabel}</Label>
             <DatePicker
-              presentation={isReference ? 'reference' : 'default'}
-              showClear={!isReference}
+              presentation={presentation}
               locale={
                 isReference ? (i18n.language === 'fa' ? 'fa' : 'en') : undefined
               }
               className={cn(isReference && 'w-60')}
+              clearable={!isReference}
               onChange={setThruDate}
               value={thruDate}
             />
           </div>
         ) : null}
         <AlertDialogFooter>
-          {!preselectedMethod || isReference ? (
+          {!preselectedMethod ? (
             <Button
+              presentation={presentation}
               disabled={isBusy}
               onClick={handleBack}
               variant={isReference ? 'ghost' : 'outline'}
@@ -258,8 +243,7 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
                 aria-hidden='true'
                 className={cn(
                   'size-4',
-                  isReference && 'mr-2',
-                  !isReference && 'rtl:rotate-180'
+                  isReference ? 'mr-2' : 'rtl:rotate-180'
                 )}
               />
               {labels.back}
@@ -267,14 +251,14 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
           ) : null}
           <div
             className={cn(
-              isReference && 'flex flex-1 justify-end gap-2',
-              !isReference && 'contents'
+              isReference ? 'flex flex-1 justify-end gap-2' : 'contents'
             )}
           >
             <AlertDialogCancel disabled={isBusy}>
               {labels.cancel}
             </AlertDialogCancel>
             <Button
+              presentation={presentation}
               disabled={isBusy}
               onClick={() => void handleDelete()}
               variant={isReference && !isHardDelete ? 'default' : 'destructive'}

@@ -49,6 +49,7 @@ export function TableFilterQueryParams(
   const location = useLocation()
   const router = useRouter()
   const [expanded, setExpanded] = useState(false)
+  const [resetRevision, setResetRevision] = useState(0)
   const values = location.search as TableFilterValues
   const ignoredIds = useMemo(
     () => [...controlQueryParamKeys, ...ignoreQueryParams],
@@ -83,6 +84,7 @@ export function TableFilterQueryParams(
     [pageQueryParamKey, resetPageToFirst, router]
   )
   const onReset = useCallback(() => {
+    setResetRevision((revision) => revision + 1)
     router.navigate({
       replace: true,
       search: (previous: TableFilterValues) =>
@@ -112,11 +114,12 @@ export function TableFilterQueryParams(
     >
       <TableFilterContent
         {...filterProps}
+        presentation={presentation}
+        key={resetRevision}
         defaultVisibleFilterCount={defaultVisibleFilterCount}
         expanded={expanded}
         onValueChange={onValueChange}
         values={values}
-        presentation={presentation}
       />
     </TableFilterShell>
   )

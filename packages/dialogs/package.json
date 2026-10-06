@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@iap/ui": "workspace:*",
-    "@tabler/icons-react": "^3.46.0",
+    "@tabler/icons-react": "^3.48.0",
     "lucide-react": "^0.468.0"
   },
   "peerDependencies": {

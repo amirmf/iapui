@@ -72,9 +72,9 @@ export function TableFilterContent(
   return (
     <div
       className={cn(
-        presentation === 'reference' &&
-          '-mx-2 flex flex-1 flex-col flex-wrap items-start gap-y-2 sm:flex-row sm:items-center',
-        presentation !== 'reference' && 'flex flex-wrap items-center gap-2',
+        presentation === 'reference'
+          ? '-mx-2 flex flex-1 flex-col flex-wrap items-start gap-y-2 sm:flex-row sm:items-center'
+          : 'flex flex-wrap items-center gap-2',
         className
       )}
     >
@@ -90,10 +90,10 @@ export function TableFilterContent(
           return (
             <TableFilterInput
               {...config}
+              presentation={presentation}
               key={config.id}
               onValueChange={onValueChange}
               value={stringQueryValue}
-              presentation={presentation}
             />
           )
         if (kind === 'number')
@@ -109,19 +109,19 @@ export function TableFilterContent(
           return (
             <TableFilterDateRangeFilter
               {...config}
+              presentation={presentation}
               key={config.id}
               onValueChange={onValueChange}
               values={values}
-              presentation={presentation}
             />
           )
         return (
           <TableFilterFacetedFilter
             {...config}
+            presentation={presentation}
             key={config.id}
             onValueChange={onValueChange}
             values={values}
-            presentation={presentation}
           />
         )
       })}

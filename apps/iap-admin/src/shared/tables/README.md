@@ -14,6 +14,9 @@ request, query key, filter names, route validation, and product empty states.
   use `common.noRecords` and `common.loading`; pass `labels` only to override
   those defaults for a specific table.
 - Use `useTableFilterState` for local filter, pagination, and sorting state.
+  Supply `{ filters, pagination, sorting }`; consume `onFiltersChange`,
+  `onPaginationChange` and `resetFilters`. Filter updates reset pagination to
+  the first page, following the current main-branch contract.
 - Use `useTableFilterQueryParams` when table state is URL-synced. Features own
   their route-search parser and serializer under `route-adapters/`; the shared
   hook only applies table transitions and Router navigation.
