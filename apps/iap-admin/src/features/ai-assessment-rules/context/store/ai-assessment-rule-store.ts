@@ -1,9 +1,12 @@
 import type { AiAssessmentRule } from '@iap/api-types'
-import type { RowSelectionState, Updater } from '@tanstack/react-table'
+import type { RowSelectionState } from '@tanstack/react-table'
 import { create } from 'zustand'
 
 export type AiAssessmentRuleDialogType =
   'bulkDelete' | 'create' | 'delete' | 'edit'
+
+export type RowSelectionUpdater =
+  RowSelectionState | ((previous: RowSelectionState) => RowSelectionState)
 
 export interface AiAssessmentRuleState {
   currentRow: AiAssessmentRule | null
@@ -12,7 +15,7 @@ export interface AiAssessmentRuleState {
   rowSelection: RowSelectionState
   setCurrentRow: (row: AiAssessmentRule | null) => void
   setOpen: (open: AiAssessmentRuleDialogType | null) => void
-  setRowSelection: (updater: Updater<RowSelectionState>) => void
+  setRowSelection: (updater: RowSelectionUpdater) => void
 }
 
 const initialState = {

@@ -1,6 +1,5 @@
 import { useEffect, useMemo } from 'react'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import {
   type AiAssessmentRuleAutomationLevelForm as AiAssessmentRuleAutomationLevelFormValues,
   type AiAssessmentRuleAutomationLevelItem,
@@ -19,6 +18,7 @@ import { useTranslate } from '@shared/i18n/i18n'
 import { useForm } from 'react-hook-form'
 
 import { getAiAssessmentRuleAutomationLevelOptions } from '../../constants/ai-assessment-rule-constant'
+import { typedZodResolver } from '../../utils/typed-zod-resolver'
 
 interface AiAssessmentRuleAutomationLevelFormProps {
   automationLevel?: AiAssessmentRuleAutomationLevelItem
@@ -46,7 +46,7 @@ export function AiAssessmentRuleAutomationLevelForm({
   const { t } = useTranslate()
   const form = useForm<AiAssessmentRuleAutomationLevelFormValues>({
     defaultValues: toFormValues(automationLevel),
-    resolver: zodResolver(aiAssessmentRuleAutomationLevelFormSchema(t)),
+    resolver: typedZodResolver(aiAssessmentRuleAutomationLevelFormSchema(t)),
   })
   const levelOptions = useMemo(
     () => getAiAssessmentRuleAutomationLevelOptions(t),

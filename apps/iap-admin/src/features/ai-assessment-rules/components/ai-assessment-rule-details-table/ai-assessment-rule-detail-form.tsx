@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import {
   type AiAssessmentRuleDetail,
   type AiAssessmentRuleDetailForm as AiAssessmentRuleDetailFormValues,
@@ -19,6 +18,7 @@ import { useDocTypesData } from '@modules/doc-types'
 import { useTranslate } from '@shared/i18n/i18n'
 import { useForm } from 'react-hook-form'
 
+import { typedZodResolver } from '../../utils/typed-zod-resolver'
 import { AiAssessmentRuleJsonEditor } from '../ai-assessment-rule-json-editor'
 import {
   formatJsonText,
@@ -65,7 +65,7 @@ export function AiAssessmentRuleDetailForm({
   const { data, isLoading, options } = useDocTypesData.optionsCode()
   const form = useForm<AiAssessmentRuleDetailFormValues>({
     defaultValues: toFormValues(detail),
-    resolver: zodResolver(aiAssessmentRuleDetailFormSchema(t)),
+    resolver: typedZodResolver(aiAssessmentRuleDetailFormSchema(t)),
   })
 
   useEffect(() => {

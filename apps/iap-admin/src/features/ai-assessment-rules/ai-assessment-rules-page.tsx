@@ -1,13 +1,6 @@
-import { useEffect, useMemo } from 'react'
-
 import { Main } from '@shared/components/layout/main'
 import { useTranslate } from '@shared/i18n/i18n'
-import {
-  PaginatedDataTable,
-  type TableFilterSearch,
-  useTableFilterQueryParams,
-} from '@shared/tables'
-import { useRouterState } from '@tanstack/react-router'
+import { PaginatedDataTable } from '@shared/tables'
 
 import { AiAssessmentRuleBulkDeleteDialog } from './components/ai-assessment-rule-bulk-delete-dialog'
 import { useAiAssessmentRuleColumns } from './components/ai-assessment-rule-columns'
@@ -17,62 +10,23 @@ import { AiAssessmentRuleInspector } from './components/ai-assessment-rule-inspe
 import { AiAssessmentRulesDataTableToolbar } from './components/ai-assessment-rules-data-table-toolbar'
 import { AiAssessmentRulesTableActions } from './components/ai-assessment-rules-table-actions'
 import AiAssessmentRuleProvider from './context/provider/ai-assessment-rule-provider'
-import { useAiAssessmentRule } from './context/store/ai-assessment-rule-store'
-import { useAiAssessmentRulesQuery } from './queries/use-ai-assessment-rules'
-import {
-  parseAiAssessmentRuleTableSearch,
-  toAiAssessmentRuleApiFilters,
-  toAiAssessmentRuleTableSearch,
-} from './route-adapters/table-search'
+import { useAiAssessmentRulesPageState } from './hooks/use-ai-assessment-rules-page-state'
 
 function AiAssessmentRulesContent() {
   const { t } = useTranslate()
-  const search = useRouterState({
-    select: (state) => state.location.search as TableFilterSearch,
-  })
-  const { filters, onPaginationChange, onSortingChange, pagination, sorting } =
-    useTableFilterQueryParams({
-      parse: parseAiAssessmentRuleTableSearch,
-      resetPageOnSortingChange: false,
-      search,
-      serialize: toAiAssessmentRuleTableSearch,
-    })
-  const rowSelection = useAiAssessmentRule((state) => state.rowSelection)
-  const setRowSelection = useAiAssessmentRule((state) => state.setRowSelection)
-  const activeSort = sorting[0]
-  const request = {
-    direction: activeSort
-      ? activeSort.desc
-        ? ('DESC' as const)
-        : ('ASC' as const)
-      : undefined,
-    filters: toAiAssessmentRuleApiFilters(filters),
-    page: pagination.pageIndex,
-    size: pagination.pageSize,
-    sort: activeSort?.id,
-  }
-  const query = useAiAssessmentRulesQuery(request)
-  const rules = useMemo(() => query.data?.content ?? [], [query.data])
-  const selectedIds = useMemo(
-    () =>
-      Object.entries(rowSelection)
-        .filter(([, selected]) => selected)
-        .map(([index]) => rules[Number(index)]?.id)
-        .filter((id): id is string => Boolean(id)),
-    [rowSelection, rules]
-  )
-  const inspectedRule = useMemo(() => {
-    const [firstSelectedRowIndex] =
-      Object.entries(rowSelection).find(([, selected]) => selected) ?? []
-    return firstSelectedRowIndex === undefined
-      ? undefined
-      : rules[Number(firstSelectedRowIndex)]
-  }, [rowSelection, rules])
   const columns = useAiAssessmentRuleColumns()
-
-  useEffect(() => {
-    setRowSelection({})
-  }, [pagination.pageIndex, pagination.pageSize, setRowSelection])
+  const {
+    inspectedRule,
+    onPaginationChange,
+    onSortingChange,
+    pagination,
+    query,
+    rowSelection,
+    rules,
+    selectedIds,
+    setRowSelection,
+    sorting,
+  } = useAiAssessmentRulesPageState()
 
   return (
     <>

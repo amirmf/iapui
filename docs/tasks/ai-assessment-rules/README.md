@@ -24,6 +24,7 @@ The goal is to implement full reference-parity for the `/ai-assessment-rules/` p
 | 09 | [Page Composition, Thin Route, and Translations](./09-page-composition-and-thin-route.md) | Completed | Page component, grid layout, route file, Persian translations in `common.json` |
 | 10 | [Verification and Integration](./10-verification-and-reconciliation.md) | Completed | Lint, typecheck, unit/contract tests, build validation |
 | 11 | [Reference Parity Audit & Reconciliation](./11-reference-parity-audit-and-reconciliation.md) | Completed | Component-by-component deep audit, reconciliation of discrepancies, and full parity verification |
+| 12 | [Architecture Refinement & Small Components](./12-architecture-refinement-and-small-components.md) | Completed | Page state hook extraction, multi-store lifecycle, typed resolvers, and master-detail guide |
 
 ## Verified Reference Closure
 
