@@ -11,6 +11,8 @@ Use this skill when a target page must match a local reference implementation.
 
 - Identify the target page, its reference entry point, and every branch it can
   mount. Trace the direct component closure before changing code.
+- Confirm the owning application (`iap-admin` or `iap-app`) from the user's
+  request before editing. A reference route does not determine the target app.
 - Include shared dependencies in the closure: table/pagination/sort menus,
   filters, selects, date controls, dialog compositions and their primitives.
   Being shared is not evidence of equivalent visible behavior. Inspect nested
@@ -82,3 +84,12 @@ Use this skill when a target page must match a local reference implementation.
 - Resolve source-only dependency values inside the scoped component rather than
   at module initialization when default consumers should not evaluate them.
   Test unchanged defaults as well as reference presentation.
+- Compare URL transitions as well as parsed defaults: controls may write only
+  their own parameters, and sorting may initialize once instead of tracking
+  later URL changes. Compare committed and unpublished debounced selections.
+- Exercise actual form adapters for clearing and dirty-field submission;
+  mocked date/select primitives can hide integration differences. Distinguish
+  a proven reference divergence from behavior shared with the reference.
+- In shared schema factories, type translation callbacks by the keys they
+  accept instead of importing application-augmented i18next types. Verify all
+  consuming applications: their locale type augmentations can differ.

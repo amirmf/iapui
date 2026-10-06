@@ -36,6 +36,8 @@ export type DateRangeTableFilterConfig = BaseConfig & {
 }
 
 export type FacetedTableFilterConfig = BaseConfig & {
+  /** Resolve single selection from the committed URL like the reference. */
+  deferSingleSelection?: boolean
   debounceMs?: number
   disabled?: boolean
   multiple?: boolean

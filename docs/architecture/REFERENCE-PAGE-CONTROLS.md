@@ -30,6 +30,19 @@ flows in `@iap/dialogs`. Import only public APIs. This supplements
 
 ## Behavioral pitfalls
 
+- Medical Center adds opt-in `SearchableSelect` / `SingleSelect`
+  `presentation='reference'` for its trigger, `Table presentation='reference'`, and
+  date formatting `invalidDate='throw'`. These preserve existing defaults;
+  use them only when verified source behavior requires them.
+- The Medical Center single-facet control uses
+  `deferSingleSelection=true` so its displayed selection follows the
+  published URL value until the debounce completes. Other consumers retain
+  their existing selection timing.
+- The reusable admin file capability is exposed by `@modules/files`; import
+  its public API rather than copying upload/viewer internals into features.
+  File contracts belong to `@iap/api-types`. Read the Medical Center audit for
+  automatic upload, HEIC, lazy download and viewer behavior evidence.
+
 - Audit shared primitives as well as the page's direct JSX. A matching component
   name does not prove equivalent loading, empty, pending or keyboard behavior.
 - Preserve source debounce per control. In the Agreements closure, text filters

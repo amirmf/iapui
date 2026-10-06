@@ -45,7 +45,7 @@ export function DataTableLayout<TData>(props: {
           tableWrapperClassName
         )}
       >
-        <Table>
+        <Table presentation={presentation}>
           {caption ? (
             <TableCaption className='sr-only'>{caption}</TableCaption>
           ) : null}
@@ -60,9 +60,10 @@ export function DataTableLayout<TData>(props: {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
-                className={
-                  presentation === 'reference' ? 'group/row' : undefined
-                }
+                className={cn(
+                  presentation === 'reference' &&
+                    'group/row hover:bg-muted/50 data-[state=selected]:bg-muted'
+                )}
               >
                 {headerGroup.headers.map((header) => {
                   const sorting = header.column.getIsSorted()

@@ -42,6 +42,7 @@ export type SearchableSelectProps = {
   onOpenChange?: (open: boolean) => void
   className?: string
   showSearch?: boolean
+  presentation?: 'default' | 'reference'
   selectText?: string
   loadingText?: ReactNode
   emptyText?: ReactNode
@@ -64,6 +65,7 @@ export function SearchableSelect(props: SearchableSelectProps) {
     onOpenChange,
     className,
     showSearch = true,
+    presentation = 'default',
     selectText = 'Select',
     loadingText = 'Loading…',
     emptyText = 'No results found.',
@@ -86,6 +88,7 @@ export function SearchableSelect(props: SearchableSelectProps) {
       <PopoverTrigger asChild>
         <Button
           {...controlProps}
+          presentation={presentation}
           variant='outline'
           role='combobox'
           aria-expanded={open}

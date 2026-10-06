@@ -9,7 +9,11 @@ function getLanguage() {
   return document.documentElement.lang || 'fa'
 }
 
-type DateFormatOptions = { language?: string; normalizeTimezone?: boolean }
+type DateFormatOptions = {
+  language?: string
+  normalizeTimezone?: boolean
+  invalidDate?: 'empty' | 'throw'
+}
 
 function toTehranDate(
   date: string | Date,
@@ -42,7 +46,11 @@ export function formatDateTime(
   if (!date) return '-'
   const tehranDate = toTehranDate(date, options.normalizeTimezone)
 
-  if (!tehranDate) return '-'
+  if (!tehranDate) {
+    if (options.invalidDate === 'throw')
+      throw new RangeError('Invalid time value')
+    return '-'
+  }
 
   return (options.language ?? getLanguage()) === 'fa'
     ? formatJalali(tehranDate, pattern || 'yyyy/MM/dd HH:mm')
@@ -57,7 +65,11 @@ export function formatDate(
   if (!date) return '-'
   const tehranDate = toTehranDate(date, options.normalizeTimezone)
 
-  if (!tehranDate) return '-'
+  if (!tehranDate) {
+    if (options.invalidDate === 'throw')
+      throw new RangeError('Invalid time value')
+    return '-'
+  }
 
   return (options.language ?? getLanguage()) === 'fa'
     ? formatJalali(tehranDate, 'yyyy/MM/dd')

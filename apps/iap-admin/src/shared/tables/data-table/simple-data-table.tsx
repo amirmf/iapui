@@ -109,12 +109,17 @@ export function SimpleDataTable<TData>(props: {
       tableWrapperClassName={tableWrapperClassName}
     >
       {isLoading ? (
-        <TableRow>
+        <TableRow
+          className={cn(
+            presentation === 'reference' &&
+              'hover:bg-muted/50 data-[state=selected]:bg-muted'
+          )}
+        >
           <TableCell
             className={cn(
               'text-center',
               presentation === 'reference'
-                ? 'h-24'
+                ? 'h-24 whitespace-nowrap p-2'
                 : 'h-28 text-muted-foreground'
             )}
             colSpan={visibleColumnCount}
@@ -130,18 +135,17 @@ export function SimpleDataTable<TData>(props: {
               <TwoColumnRow key={row.id} label={twoColumnLabel} row={row} />
             ) : (
               <TableRow
-                className={
-                  presentation === 'reference'
-                    ? 'group/row relative hover:bg-muted/50 data-[state=selected]:bg-muted'
-                    : undefined
-                }
+                className={cn(
+                  presentation === 'reference' &&
+                    'group/row relative hover:bg-muted/50 data-[state=selected]:bg-muted'
+                )}
                 data-state={row.getIsSelected() ? 'selected' : undefined}
                 key={row.id}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     className={cn(
-                      presentation === 'reference' && 'p-2',
+                      presentation === 'reference' && 'whitespace-nowrap p-2',
                       cell.column.columnDef.meta?.className ??
                         cell.column.columnDef.meta?.cellClassName
                     )}
@@ -154,12 +158,17 @@ export function SimpleDataTable<TData>(props: {
             ))
         )
       ) : (
-        <TableRow>
+        <TableRow
+          className={cn(
+            presentation === 'reference' &&
+              'hover:bg-muted/50 data-[state=selected]:bg-muted'
+          )}
+        >
           <TableCell
             className={cn(
               'text-center',
               presentation === 'reference'
-                ? 'h-24'
+                ? 'h-24 whitespace-nowrap p-2'
                 : 'h-28 text-muted-foreground'
             )}
             colSpan={visibleColumnCount}

@@ -1,6 +1,7 @@
-import { PlaceholderPage } from '@features/placeholder'
+import { MedicalCenterInvoicesPage } from '@features/medical-center'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/medical-center/')({
-  component: () => <PlaceholderPage titleKey='sidebar.medicalCenter' />,
+  component: MedicalCenterInvoicesPage,
+  loader: () => ({ crumb: 'medical-center' }),
 })

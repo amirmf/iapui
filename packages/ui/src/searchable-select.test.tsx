@@ -10,6 +10,27 @@ const items = [
 ]
 
 describe('source scalar select behavior', () => {
+  it('opts the trigger into source disabled styling without changing default consumers', () => {
+    const { rerender } = render(
+      <SingleSelect items={items} value='A' onChange={vi.fn()} disabled />
+    )
+    expect(screen.getByRole('combobox')).not.toHaveClass('disabled:bg-muted')
+    rerender(
+      <SingleSelect
+        items={items}
+        value='A'
+        onChange={vi.fn()}
+        disabled
+        presentation='reference'
+      />
+    )
+    expect(screen.getByRole('combobox')).toHaveClass(
+      'disabled:bg-muted',
+      'disabled:text-muted-foreground',
+      'disabled:pointer-events-auto'
+    )
+    expect(screen.getByRole('combobox')).toBeDisabled()
+  })
   it('searches labels locally and emits the unchanged search immediately', () => {
     const onSearch = vi.fn()
     render(

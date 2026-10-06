@@ -795,6 +795,17 @@
       "createdBy": "ایجادکننده",
       "updatedBy": "آخرین به‌روزرسانی توسط",
       "userLoadError": "اطلاعات کاربر در دسترس نیست"
+    },
+    "retry": "تلاش دوباره",
+    "fileUploader": {
+      "dragAndDrop": "فایل‌ها را بکشید و رها کنید یا برای انتخاب کلیک کنید",
+      "allowedTypes": "فقط تصاویر PNG، JPG، JPEG، HEIC",
+      "onlyAllowed": "فقط فایل‌های تصویری با فرمت PNG، JPG، JPEG، HEIC مجاز هستند",
+      "someSkipped": "بعضی فایل‌ها به دلیل نوع نامعتبر نادیده گرفته شدند",
+      "heicConversionFailed": "تبدیل {{filename}} از HEIC/HEIF به JPEG انجام نشد.",
+      "uploadFailed": "بارگذاری {{filename}} انجام نشد",
+      "failed": "ناموفق",
+      "progressValue": "{{percent}}%"
     }
   },
   "claimRequests": {
@@ -935,7 +946,8 @@
       "fields": {
         "description": "توضیحات",
         "isCheat": "درخواست به عنوان تقلب ثبت شود.",
-        "objectionStatus": "تعیین وضعیت"
+        "objectionStatus": "تعیین وضعیت",
+        "attachments": "پیوست‌ها"
       }
     },
     "validation": {
@@ -2338,6 +2350,92 @@
       "prompt": "دستور الزامی است",
       "number": "یک عدد معتبر وارد کنید.",
       "maxThreshold": "حداکثر آستانه باید بزرگ‌تر یا مساوی حداقل آستانه باشد."
+    }
+  },
+  "medicalCenter": {
+    "title": "مراکز درمانی",
+    "description": "بارگذاری و مدیریت صورتحساب‌های مراکز درمانی.",
+    "columns": {
+      "documentNumber": "شماره سند",
+      "date": "تاریخ صورتحساب",
+      "totalAmount": "مبلغ کل",
+      "state": "وضعیت",
+      "createdAt": "تاریخ ایجاد"
+    },
+    "filters": {
+      "documentNumber": "شماره سند",
+      "state": "وضعیت"
+    },
+    "states": {
+      "SUBMITTED": "ثبت‌شده",
+      "EXTRACTING": "در حال استخراج",
+      "EXTRACTED": "استخراج‌شده",
+      "FAILED": "ناموفق"
+    },
+    "actions": {
+      "view": "مشاهده جزئیات",
+      "edit": "ویرایش صورتحساب",
+      "delete": "حذف صورتحساب",
+      "create": "بارگذاری صورتحساب",
+      "refresh": "بروزسانی",
+      "upload": "بارگذاری",
+      "uploading": "در حال بارگذاری…"
+    },
+    "create": {
+      "title": "بارگذاری صورتحساب",
+      "file": "فایل صورتحساب"
+    },
+    "edit": {
+      "title": "ویرایش صورتحساب"
+    },
+    "details": {
+      "title": "جزئیات صورتحساب"
+    },
+    "delete": {
+      "title": "حذف صورتحساب",
+      "description": "صورتحساب {{documentNumber}} برای همیشه حذف شود؟ این عملیات قابل بازگشت نیست."
+    },
+    "fields": {
+      "documentNumber": "شماره سند",
+      "date": "تاریخ صورتحساب",
+      "printDate": "تاریخ چاپ",
+      "issueDate": "تاریخ صدور",
+      "totalAmount": "مبلغ کل",
+      "state": "وضعیت",
+      "statePlaceholder": "وضعیت را انتخاب کنید",
+      "fileName": "نام فایل",
+      "recordCount": "تعداد ردیف‌ها"
+    },
+    "validation": {
+      "fileRequired": "یک فایل صورتحساب غیرخالی انتخاب کنید.",
+      "amountInvalid": "یک مبلغ نامنفی معتبر وارد کنید."
+    },
+    "messages": {
+      "created": "صورتحساب بارگذاری شد.",
+      "createError": "بارگذاری صورتحساب ناموفق بود.",
+      "updated": "صورتحساب ویرایش شد.",
+      "updateError": "ویرایش صورتحساب ناموفق بود.",
+      "deleted": "صورتحساب حذف شد.",
+      "deleteError": "حذف صورتحساب ناموفق بود.",
+      "detailError": "جزئیات صورتحساب بارگذاری نشد.",
+      "listError": "صورتحساب‌ها بارگذاری نشدند."
+    },
+    "loading": "در حال بارگذاری صورتحساب‌ها…",
+    "empty": "صورتحساب مرکز درمانی یافت نشد."
+  },
+  "files": {
+    "viewer": {
+      "loading": "در حال بارگذاری پیوست...",
+      "progressValue": "{{percent}}%",
+      "loadFailed": "بارگذاری پیوست امکان‌پذیر نبود.",
+      "actions": {
+        "zoomIn": "بزرگ‌نمایی",
+        "zoomOut": "کوچک‌نمایی",
+        "resetView": "بازنشانی نما",
+        "rotateLeft": "چرخش به چپ",
+        "rotateRight": "چرخش به راست",
+        "downloadImage": "دانلود تصویر"
+      }
     }
   }
 }

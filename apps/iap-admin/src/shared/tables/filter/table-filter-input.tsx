@@ -49,14 +49,21 @@ export function TableFilterInput(
     <div className={cn('relative', wrapperClassName)}>
       <Input
         {...inputProps}
-        className={cn('pe-9', className)}
+        className={cn(
+          presentation === 'reference' ? 'pe-8' : 'pe-9',
+          className
+        )}
         onChange={(event) => change(event.target.value)}
         value={text}
       />
-      {text ? (
+      {(presentation === 'reference' ? text.trim() : text) ? (
         <button
           aria-label='Clear input'
-          className='absolute end-2 top-1/2 size-7 -translate-y-1/2 rounded text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+          className={cn(
+            presentation === 'reference'
+              ? 'absolute left-2 top-1/2 -translate-y-1/2 p-1 text-muted-foreground transition-colors hover:text-foreground'
+              : 'absolute end-2 top-1/2 size-7 -translate-y-1/2 rounded text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+          )}
           onClick={clear}
           type='button'
         >

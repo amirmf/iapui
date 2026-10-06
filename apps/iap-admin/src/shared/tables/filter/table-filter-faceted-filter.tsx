@@ -83,6 +83,7 @@ export function TableFilterFacetedFilter(
   const {
     className,
     presentation = 'default',
+    deferSingleSelection = false,
     debounceMs = presentation === 'reference' ? 1000 : 0,
     disabled,
     id,
@@ -116,8 +117,16 @@ export function TableFilterFacetedFilter(
     : localValue
       ? [localValue]
       : []
+  const displayedValues =
+    deferSingleSelection && !multiple
+      ? Array.isArray(externalValue)
+        ? externalValue
+        : externalValue
+          ? [externalValue]
+          : []
+      : selectedValues
   const selected = options.filter((option) =>
-    selectedValues.includes(option.value)
+    displayedValues.includes(option.value)
   )
   const visibleOptions = options.filter((option) =>
     option.label.toLocaleLowerCase().includes(search.toLocaleLowerCase())
@@ -147,7 +156,7 @@ export function TableFilterFacetedFilter(
               presentation={presentation}
               multiple={multiple}
               selected={selected}
-              selectedCount={selectedValues.length}
+              selectedCount={displayedValues.length}
             />
           </Button>
         </PopoverTrigger>
@@ -162,10 +171,10 @@ export function TableFilterFacetedFilter(
               emptyLabel={t('dataTable.facetedFilter.noResults')}
               searchLabel={searchLabel}
               options={options}
-              selectedValues={selectedValues}
+              selectedValues={displayedValues}
               onClear={() => change(undefined, true)}
               onSelect={(option) => {
-                const isSelected = selectedValues.includes(option.value)
+                const isSelected = displayedValues.includes(option.value)
                 const next = multiple
                   ? isSelected
                     ? selectedValues.filter((value) => value !== option.value)
@@ -199,7 +208,7 @@ export function TableFilterFacetedFilter(
                 ) : null}
                 <div aria-label={placeholder} role='group'>
                   {visibleOptions.map((option) => {
-                    const isSelected = selectedValues.includes(option.value)
+                    const isSelected = displayedValues.includes(option.value)
                     return (
                       <Button
                         key={option.value}

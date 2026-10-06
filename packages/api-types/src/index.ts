@@ -44,6 +44,7 @@ export type {
   UpdateDocTypeRequest,
 } from './doc-type'
 export * from './insurance-policy'
+export * from './medical-center'
 export * from './outpatient-doc-acceptance'
 export * from './person-special-disease'
 export * from './party'
@@ -51,3 +52,5 @@ export * from './repetitive-responses'
 export * from './support'
 export * from './support-ticket'
 export * from './user-account'
+
+export * from './files'

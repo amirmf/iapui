@@ -2,11 +2,20 @@ import type { ComponentPropsWithRef } from 'react'
 
 import { cn } from './lib/cn'
 
-export function Table(props: ComponentPropsWithRef<'table'>) {
-  const { className, ref, ...rest } = props
+export function Table(
+  props: ComponentPropsWithRef<'table'> & {
+    presentation?: 'default' | 'reference'
+  }
+) {
+  const { className, ref, presentation = 'default', ...rest } = props
 
   return (
-    <div className='w-full overflow-x-auto'>
+    <div
+      className={cn(
+        'w-full overflow-x-auto',
+        presentation === 'reference' && 'relative'
+      )}
+    >
       <table
         ref={ref}
         className={cn('w-full caption-bottom text-sm', className)}
