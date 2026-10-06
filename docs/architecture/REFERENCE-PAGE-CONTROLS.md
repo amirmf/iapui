@@ -89,3 +89,19 @@ Application paths above are relative to `apps/iap-admin/src`; package paths are
 relative to the repository root. Update task evidence after integration with
 the current main branch. Report browser/screenshot and live-backend coverage
 separately from source comparisons, unit tests, typechecks and builds.
+
+## Form and transport parity evidence
+
+For large source forms, preserve the verified field order, names, defaults and
+validation semantics while extracting field groups under a FormProvider.
+Source form schemas may normalize UI strings and strip unknown form fields;
+validate the mapped wire payload separately with strict transport schemas in
+`@iap/api-types`. Keep numeric conversion, trimming, parent-ID fallbacks and
+omitted fields in the service, verified with request-boundary tests.
+
+A component filename or passing typecheck does not prove functional parity.
+Verify rendered field order/defaults, create versus edit behavior, failed
+confirmations remaining open, original row IDs, and toast/invalidation sequencing.
+Do not replace a source form with a generic single-input adapter, truncated
+object details, or an empty export. Record source-backed completion evidence in
+the owning task document and mark superseded audits historical.
