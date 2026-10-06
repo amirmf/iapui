@@ -12,7 +12,11 @@ import type { AgreementCoverageApplFull } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'
 import { Button, Input, TableCell, TableRow, cn } from '@iap/ui'
 import { useTranslate } from '@shared/i18n/i18n'
-import { PaginatedDataTable, useTableFilterState } from '@shared/tables'
+import {
+  PaginatedDataTable,
+  type TableFilterValues,
+  useTableFilterState,
+} from '@shared/tables'
 import { IconPlus, IconRefresh, IconTrash } from '@tabler/icons-react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
@@ -39,13 +43,22 @@ function AgreementCoverageApplsSectionContent(props: SectionContentProps) {
     (state) => state.setInlineEditRow
   )
   const columns = useAgreementCoverageApplColumns()
-  const { filters, pagination, setPagination, reset, setFilters } =
-    useTableFilterState({ agreementId: agreementId ?? undefined })
+  const {
+    filters,
+    pagination,
+    onPaginationChange,
+    resetFilters,
+    onFiltersChange,
+  } = useTableFilterState<TableFilterValues>({
+    filters: { agreementId: agreementId ?? undefined },
+    pagination: { pageIndex: 0, pageSize: 40 },
+    sorting: [],
+  })
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   const handleOnReset = useCallback(() => {
-    reset({ agreementId: agreementId ?? undefined })
-  }, [agreementId, reset])
+    resetFilters({ agreementId: agreementId ?? undefined })
+  }, [agreementId, resetFilters])
 
   useEffect(() => {
     handleOnReset()
@@ -364,7 +377,7 @@ function AgreementCoverageApplsSectionContent(props: SectionContentProps) {
           <AgreementCoverageDataTableToolbar
             ignoredFilterIds={['agreementId']}
             values={filters}
-            onValuesChange={setFilters}
+            onValuesChange={onFiltersChange}
             onReset={handleOnReset}
           />
           <PaginatedDataTable
@@ -376,7 +389,7 @@ function AgreementCoverageApplsSectionContent(props: SectionContentProps) {
             pageCount={pageCount}
             totalCount={totalCount}
             pagination={pagination}
-            onPaginationChange={setPagination}
+            onPaginationChange={onPaginationChange}
             rowSelection={rowSelection}
             onRowSelectionChange={setRowSelection}
             renderRow={renderRow}

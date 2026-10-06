@@ -48,8 +48,17 @@ export function AgreementPartyApplsContent(
   const setRowSelection = useAgreementPartyApplStore(
     (state) => state.setRowSelection
   )
-  const { filters, pagination, setPagination, setFilters, reset } =
-    useTableFilterState()
+  const {
+    filters,
+    pagination,
+    onPaginationChange,
+    onFiltersChange,
+    resetFilters,
+  } = useTableFilterState({
+    filters: {},
+    pagination: { pageIndex: 0, pageSize: 40 },
+    sorting: [],
+  })
   const agreementIds = useMemo(
     () =>
       agreements.length
@@ -106,8 +115,8 @@ export function AgreementPartyApplsContent(
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1'>
           <AgreementPartyApplDataTableToolbar
-            onReset={reset}
-            onValuesChange={setFilters}
+            onReset={resetFilters}
+            onValuesChange={onFiltersChange}
             values={filters}
           />
           <PaginatedDataTable
@@ -125,7 +134,7 @@ export function AgreementPartyApplsContent(
               empty: t('common.noResults' as never),
             }}
             manualFiltering
-            onPaginationChange={setPagination}
+            onPaginationChange={onPaginationChange}
             onRowSelectionChange={setRowSelection}
             pageCount={Math.max(query.data?.totalPages ?? 0, 1)}
             pagination={pagination}

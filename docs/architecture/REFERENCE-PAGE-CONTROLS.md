@@ -40,6 +40,13 @@ flows in `@iap/dialogs`. Import only public APIs. This supplements
 - Keep URL/control state out of backend services. Use the feature's route
   adapter and public filter serialization; preserve explicit source range keys
   before adapting them to backend filters.
+- Current local table state uses `useTableFilterState({ filters, pagination,
+  sorting })`. Copy source defaults explicitly (Agreements uses 40 rows).
+  Filter transitions reset pagination under the current main-branch contract.
+  During Agreements integration, the user explicitly chose main over the
+  reference's page-preserving filter behavior. Explicit `resetFilters` also
+  resets the page without changing its size; do not add a parity-specific
+  bypass for this accepted architecture behavior.
 - For async lookups, option objects are transient but selected scalar IDs may
   remain valid. A refreshed option list must not prevent clearing that value.
 - Copy date interpretation from the source at the appropriate caller boundary.

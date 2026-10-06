@@ -13,14 +13,19 @@ import {
 import { TableFilterFacetedFilter } from './table-filter-faceted-filter'
 import { TableFilterInput } from './table-filter-input'
 import { TableFilterState } from './table-filter-state'
+import type { TableFilterValues } from './types'
 import { useTableFilterState } from './use-table-filter-state'
 
 function StatefulFilters() {
-  const state = useTableFilterState({ committed: 'existing' })
+  const state = useTableFilterState<TableFilterValues>({
+    filters: { committed: 'existing' },
+    pagination: { pageIndex: 0, pageSize: 40 },
+    sorting: [],
+  })
   return (
     <>
       <TableFilterState
-        onValuesChange={state.setFilters}
+        onValuesChange={state.onFiltersChange}
         textFilters={[{ id: 'title', placeholder: 'Title', debounceMs: 1200 }]}
         values={state.filters}
       />

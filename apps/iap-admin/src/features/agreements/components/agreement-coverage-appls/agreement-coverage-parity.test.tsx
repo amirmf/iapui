@@ -4,6 +4,7 @@ import { AgreementCoverageApplsSection } from '@features/agreements/components/a
 import { useAgreementCoverageApplStore } from '@features/agreements/context/store/agreement-coverage-appl-store'
 import type { AgreementCoverageApplFull } from '@iap/api-types'
 import { i18n, i18nReady } from '@shared/i18n/i18n'
+import type { TableFilterValues } from '@shared/tables'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { PaginationState, Row } from '@tanstack/react-table'
 import {
@@ -68,7 +69,25 @@ vi.mock(
 vi.mock(
   '@features/agreements/components/agreement-coverage-appls/agreement-coverage-data-table-toolbar',
   () => ({
-    AgreementCoverageDataTableToolbar: () => null,
+    AgreementCoverageDataTableToolbar: (props: {
+      onValuesChange: (
+        updater: (previous: TableFilterValues) => TableFilterValues
+      ) => void
+    }) => {
+      const { onValuesChange } = props
+      return (
+        <button
+          onClick={() =>
+            onValuesChange((previous) => ({
+              ...previous,
+              coverageTitle__like: 'updated',
+            }))
+          }
+        >
+          Change filter
+        </button>
+      )
+    },
   })
 )
 vi.mock('@shared/tables', async (importOriginal) => ({
@@ -198,6 +217,27 @@ describe('Coverage reference lifecycle and inline edits', () => {
         filters: { agreementId: 'other-agreement' },
       })
     )
+    expect(screen.getByTestId('selection').textContent).toBe('0')
+  })
+
+  it('follows main by resetting pagination and selection when filters change', async () => {
+    mount()
+    await waitFor(() => expect(getPage).toHaveBeenCalled())
+    fireEvent.click(screen.getByRole('button', { name: 'Next page' }))
+    await waitFor(() =>
+      expect(screen.getByTestId('page').textContent).toBe('1')
+    )
+    fireEvent.click(screen.getByRole('button', { name: 'Select row' }))
+    expect(screen.getByTestId('selection').textContent).toBe('1')
+    fireEvent.click(screen.getByRole('button', { name: 'Change filter' }))
+    await waitFor(() =>
+      expect(getPage).toHaveBeenCalledWith({
+        page: 0,
+        size: 40,
+        filters: { agreementId: 'agreement', coverageTitle__like: 'updated' },
+      })
+    )
+    expect(screen.getByTestId('page').textContent).toBe('0')
     expect(screen.getByTestId('selection').textContent).toBe('0')
   })
 

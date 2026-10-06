@@ -86,6 +86,28 @@ Enum translation keys are centralized, typed against public schema-inferred enum
 
 ## Reusable guidance and handoff preparation
 
+Integration task H1 — Complete: current main `2a7fe09` changed
+`useTableFilterState` to a structured initial state and transition callbacks.
+Adapt the party/coverage consumers and the filter test harness to this public
+API. Source `components/data-table/filter/use-table-filter-state.ts` preserves
+the current page on ordinary filter changes but resets to page zero on explicit
+reset. The user explicitly selected the current main-branch contract for this
+integration issue: filter changes reset pagination to page zero. Keep 40-row
+defaults, use main's public callbacks unchanged, and do not introduce a hook
+option to bypass this behavior. Add a feature regression and rerun integrated
+tests and quality gates. This is an accepted variance from the reference.
+
+Final integration evidence: the combined branch includes main `2a7fe09` and
+feature commit `2d7b444`. The shared `useTableFilterState` implementation is
+identical to main; only its feature consumers and test harness were adapted.
+The coverage regression verifies page/selection reset on filter change.
+After the user's main-precedence decision, the entire admin suite passed
+**110 files / 258 tests**, UI passed **13 files / 43 tests**, and app
+typecheck/lint, architecture checks, diff checks and production build passed.
+The 161-entry translation comparison still reports zero mismatches. Both
+updated skills passed the skill validator. Browser/live-backend verification
+limitations above remain unchanged.
+
 - Added `docs/architecture/REFERENCE-PAGE-CONTROLS.md` to explain the scoped public capabilities and source-backed behavioral pitfalls for subsequent pages.
 - Updated the existing `reference-page-parity` and `shared-dialogs` skills rather than creating overlapping skills. Historical task documents now point directly at V4.
 - User authorized commit, local main integration, worktree removal and task-owned server cleanup on 2026-10-06. Revalidate the combined branch against the current main before removal; do not close unrelated listeners or remove unrelated worktrees.
