@@ -57,10 +57,10 @@ flows in `@iap/dialogs`. Import only public APIs. This supplements
   verifying source field optionality, aliases and nested responses. Document
   these architecture adaptations rather than presenting them as exact source
   schema identity.
-  Exception: the explicitly accepted Assessment Prompts source contract uses
-  stripping requests and nullish page content. Read
-  `ASSESSMENT-PROMPTS-REFERENCE-CONTRACT.md`; do not apply its exception to
-  Agreements or another page.
+  Exception: the explicitly accepted Assessment Prompts and AI Assessment Rules source contracts use
+  stripping requests and domain-specific schemas. Read
+  `ASSESSMENT-PROMPTS-REFERENCE-CONTRACT.md` and `AI-ASSESSMENT-RULES-REFERENCE-CONTRACT.md`; do not apply their exceptions
+  to Agreements or other pages without explicit user requirement.
 - Source-absent locale keys may intentionally show English fallback text.
   Extract actual Persian values and compare them programmatically; do not
   invent translations or assume an existing target key gives source parity.

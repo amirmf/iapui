@@ -3,12 +3,16 @@
     "rowsSelected": "{{selected}} از {{total}} سطر انتخاب شده است.",
     "rowsPerPage": "سطر در هر صفحه",
     "pageIndicator": "صفحه {{page}} از {{pageCount}}",
+    "goToFirstPage": "رفتن به اولین صفحه",
+    "goToPreviousPage": "رفتن به صفحه قبلی",
+    "goToNextPage": "رفتن به صفحه بعدی",
+    "goToLastPage": "رفتن به آخرین صفحه",
+    "selectAllRows": "انتخاب همه سطرها",
+    "selectRow": "انتخاب سطر",
     "total": "مجموع",
     "loading": "در حال بارگذاری...",
     "empty": "داده‌ای یافت نشد.",
     "noResults": "نتیجه‌ای یافت نشد.",
-    "selectAllRows": "انتخاب همه سطرها",
-    "selectRow": "انتخاب سطر",
     "facetedFilter": {
       "searchPlaceholder": "جستجو در {{title}}...",
       "noResults": "نتیجه‌ای یافت نشد.",
@@ -580,7 +584,10 @@
       "thruDateFrom": "تاریخ پایان از",
       "thruDateTo": "تاریخ پایان تا"
     },
-    "type": { "group": "گروهی", "detail": "جزئیات" },
+    "type": {
+      "group": "گروهی",
+      "detail": "جزئیات"
+    },
     "status": {
       "active": "فعال",
       "inactive": "غیرفعال",
@@ -686,7 +693,10 @@
       "suspended": "تعلیق شده",
       "pending": "در انتظار"
     },
-    "view": { "title": "جزئیات نگاشت", "description": "جزئیات نگاشت" },
+    "view": {
+      "title": "جزئیات نگاشت",
+      "description": "جزئیات نگاشت"
+    },
     "delete": {
       "title": "حذف نگاشت",
       "description": "آیا از حذف این نگاشت اطمینان دارید؟"
@@ -729,9 +739,6 @@
     },
     "cancel": "انصراف",
     "close": "بستن",
-    "collapse": "بستن",
-    "more": "بیشتر",
-    "resetFilter": "حذف فیلترها",
     "optional": "اختیاری",
     "confirm": "تأیید",
     "yes": "بله",
@@ -741,15 +748,10 @@
     "showLess": "فیلترهای کمتر",
     "showMore": "فیلترهای بیشتر",
     "reset": "بازنشانی",
-    "create": "ثبت",
     "save": "ذخیره",
-    "saveChanges": "ذخیره تغییرات",
-    "select": "انتخاب کنید",
     "update": "به‌روزرسانی",
-    "noResults": "نتیجه‌ای یافت نشد",
     "noRecords": "داده‌ای یافت نشد.",
     "notAvailable": "در دسترس نیست",
-    "optional": "اختیاری",
     "openInNewTab": "باز کردن در زبانه جدید",
     "openMenu": "باز کردن منو",
     "loading": "در حال بارگذاری...",
@@ -949,7 +951,10 @@
       "formTitleFallback": "فرم سند",
       "missingDocument": "سند انتخاب‌شده یافت نشد.",
       "unavailable": "امکان نمایش فرم برای این سند وجود ندارد.",
-      "actions": { "openForm": "مشاهده فرم", "save": "ذخیره تغییرات" },
+      "actions": {
+        "openForm": "مشاهده فرم",
+        "save": "ذخیره تغییرات"
+      },
       "messages": {
         "updateSuccess": "اطلاعات سند با موفقیت به‌روزرسانی شد.",
         "updateError": "به‌روزرسانی اطلاعات سند انجام نشد.",
@@ -1791,34 +1796,18 @@
         "thruDate": "تاریخ پایان"
       }
     },
-    "actions": { "viewDetails": "مشاهده جزئیات", "edit": "ویرایش" },
-    "bulkDelete": { "button": "حذف انتخاب‌ها" },
+    "actions": {
+      "viewDetails": "مشاهده جزئیات",
+      "edit": "ویرایش"
+    },
+    "bulkDelete": {
+      "button": "حذف انتخاب‌ها"
+    },
     "messages": {
       "created": "قانون ارزیابی با موفقیت ایجاد شد",
       "createError": "ایجاد قانون ارزیابی ناموفق بود",
       "updated": "قانون ارزیابی با موفقیت به‌روزرسانی شد",
       "updateError": "به‌روزرسانی قانون ارزیابی ناموفق بود"
-    }
-  },
-  "dataTable": {
-    "rowsSelected": "{{selected}} از {{total}} سطر انتخاب شده است.",
-    "rowsPerPage": "سطر در هر صفحه",
-    "pageIndicator": "صفحه {{page}} از {{pageCount}}",
-    "goToFirstPage": "رفتن به اولین صفحه",
-    "goToPreviousPage": "رفتن به صفحه قبلی",
-    "goToNextPage": "رفتن به صفحه بعدی",
-    "goToLastPage": "رفتن به آخرین صفحه",
-    "selectAllRows": "انتخاب همه سطرها",
-    "selectRow": "انتخاب سطر",
-    "total": "مجموع",
-    "loading": "در حال بارگذاری...",
-    "empty": "داده‌ای یافت نشد.",
-    "noResults": "نتیجه‌ای یافت نشد.",
-    "facetedFilter": {
-      "searchPlaceholder": "جستجو در {{title}}...",
-      "noResults": "نتیجه‌ای یافت نشد.",
-      "clear": "پاک کردن فیلترها",
-      "multiSelected": "{{count}} مورد انتخاب شده"
     }
   },
   "tickets": {
@@ -2049,7 +2038,9 @@
     }
   },
   "agreementPartyAppls": {
-    "validation": { "userAccountIdRequired": "انتخاب حساب کاربری الزامی است" },
+    "validation": {
+      "userAccountIdRequired": "انتخاب حساب کاربری الزامی است"
+    },
     "bulkAssign": {
       "title": "انتصاب شخص به قراردادهای انتخاب‌شده",
       "description": "یک کاربر و نقش را برای انتصاب به همه قراردادهای انتخاب‌شده انتخاب کنید.",
@@ -2105,8 +2096,13 @@
       "fromDate": "تاریخ شروع",
       "thruDate": "تاریخ پایان"
     },
-    "view": { "title": "جزئیات نگاشت", "description": "اطلاعات نگاشت" },
-    "messages": { "updated": "نگاشت بروزرسانی شد" }
+    "view": {
+      "title": "جزئیات نگاشت",
+      "description": "اطلاعات نگاشت"
+    },
+    "messages": {
+      "updated": "نگاشت بروزرسانی شد"
+    }
   },
   "claimReports": {
     "title": "پذیرش و پرونده‌ها",
@@ -2152,6 +2148,196 @@
       "excelDownloaded": "فایل اکسل دانلود شد",
       "pdfDownloaded": "فایل PDF دانلود شد",
       "excelDownloadFailed": "دانلود اکسل ناموفق بود"
+    }
+  },
+  "aiAssessmentRules": {
+    "title": "قوانین ارزیابی هوشمند",
+    "description": "مدیریت قوانین مورد استفاده در ارزیابی‌های خودکار.",
+    "empty": "قانون ارزیابی هوشمندی یافت نشد.",
+    "actions": {
+      "create": "ایجاد قانون",
+      "edit": "ویرایش قانون",
+      "delete": "حذف قانون",
+      "bulkDelete": "حذف انتخاب‌شده‌ها",
+      "refresh": "بروزرسانی"
+    },
+    "ruleDetails": {
+      "actions": {
+        "create": "افزودن جزئیات قانون",
+        "edit": "ویرایش جزئیات قانون",
+        "delete": "حذف جزئیات قانون"
+      },
+      "docTypePlaceholder": "نوع سند را انتخاب کنید",
+      "create": {
+        "title": "افزودن جزئیات قانون"
+      },
+      "edit": {
+        "title": "ویرایش جزئیات قانون"
+      },
+      "delete": {
+        "title": "حذف جزئیات قانون",
+        "description": "این جزئیات قانون حذف شود؟ این عمل قابل بازگشت نیست."
+      },
+      "messages": {
+        "created": "جزئیات قانون با موفقیت افزوده شد",
+        "updated": "جزئیات قانون با موفقیت به‌روزرسانی شد",
+        "deleted": "جزئیات قانون با موفقیت حذف شد"
+      }
+    },
+    "automationLevels": {
+      "actions": {
+        "create": "افزودن سطح خودکارسازی",
+        "edit": "ویرایش سطح خودکارسازی",
+        "delete": "حذف سطح خودکارسازی"
+      },
+      "create": {
+        "title": "افزودن سطح خودکارسازی"
+      },
+      "edit": {
+        "title": "ویرایش سطح خودکارسازی"
+      },
+      "delete": {
+        "title": "حذف سطح خودکارسازی",
+        "description": "این سطح خودکارسازی حذف شود؟ این عمل قابل بازگشت نیست."
+      },
+      "messages": {
+        "created": "سطح خودکارسازی با موفقیت افزوده شد",
+        "updated": "سطح خودکارسازی با موفقیت به‌روزرسانی شد",
+        "deleted": "سطح خودکارسازی با موفقیت حذف شد"
+      }
+    },
+    "fields": {
+      "title": "عنوان",
+      "code": "کد",
+      "definitionType": "نوع تعریف",
+      "agreementTemplateCode": "کد الگوی قرارداد",
+      "extContractId": "شناسه قرارداد",
+      "extPolicyId": "شناسه بیمه‌نامه",
+      "aiModel": "مدل هوش مصنوعی",
+      "prompt": "دستور",
+      "methodNames": "نام متدها",
+      "inputParams": "پارامترهای ورودی",
+      "sequence": "ترتیب",
+      "docTypeCode": "نوع سند",
+      "docTypes": "انواع سند",
+      "automationLevels": "سطح خودکارسازی",
+      "automationLevel": "نوع خودکارسازی",
+      "minThreshold": "حداقل آستانه",
+      "maxThreshold": "حداکثر آستانه",
+      "skipRule": "رد کردن قانون",
+      "thruDate": "تاریخ پایان",
+      "status": "وضعیت",
+      "ruleState": "وضعیت قانون",
+      "assessType": "نوع ارزیابی"
+    },
+    "placeholder": {
+      "docTypes": "یک یا چند نوع سند را انتخاب کنید"
+    },
+    "inspector": {
+      "title": "جزئیات قانون انتخاب‌شده",
+      "empty": "برای مشاهده جزئیات، یک قانون را از جدول انتخاب کنید.",
+      "ruleDetails": "جزئیات قانون",
+      "automationLevelsDescription": "آستانه‌های خودکارسازی قانون انتخاب‌شده.",
+      "ruleDetailsDescription": "ورودی‌های دستور و تنظیمات سند قانون انتخاب‌شده.",
+      "emptyAutomationLevels": "سطح خودکارسازی تعریف نشده است.",
+      "emptyRuleDetails": "جزئیات قانونی تعریف نشده است."
+    },
+    "filters": {
+      "title": "فیلتر بر اساس عنوان",
+      "code": "فیلتر بر اساس کد",
+      "agreementTemplateCode": "فیلتر بر اساس کد الگوی قرارداد"
+    },
+    "enums": {
+      "definitionTypes": {
+        "general": "عمومی",
+        "agreementTemplate": "الگوی قرارداد",
+        "contract": "قرارداد",
+        "policy": "بیمه‌نامه"
+      },
+      "models": {
+        "none": "هیچ‌کدام",
+        "kavanVisionSmall": "کاوان بینایی کوچک",
+        "kavanVisionBig": "کاوان بینایی بزرگ",
+        "kavanTextSmall": "کاوان متن کوچک",
+        "kavanTextBig": "کاوان متن بزرگ",
+        "kavanMedicalSmall": "کاوان پزشکی کوچک",
+        "kavanMedicalBig": "کاوان پزشکی بزرگ"
+      },
+      "status": {
+        "active": "فعال",
+        "inactive": "غیرفعال"
+      },
+      "ruleStates": {
+        "core": "هسته",
+        "duplication": "تکراری",
+        "image": "تصویر",
+        "docsValidation": "اعتبارسنجی مدارک",
+        "codeDetection": "شناسایی کد",
+        "extraction": "استخراج",
+        "help": "راهنما",
+        "docs": "مدارک",
+        "information": "اطلاعات",
+        "calculation": "محاسبه",
+        "calculationValidation": "اعتبارسنجی محاسبه",
+        "autoApprove": "تأیید خودکار",
+        "eligible": "واجد شرایط",
+        "secondApprove": "تأیید دوم"
+      },
+      "assessmentTypes": {
+        "nameMismatch": "عدم تطابق نام",
+        "dateMismatch": "عدم تطابق تاریخ",
+        "doctorMismatch": "عدم تطابق پزشک",
+        "noCeiling": "بدون سقف",
+        "noCoverage": "بدون پوشش",
+        "coreMismatch": "عدم تطابق هسته",
+        "digitalEdit": "ویرایش دیجیتال",
+        "manualEdit": "ویرایش دستی",
+        "docsMismatch": "عدم تطابق مدارک",
+        "unusualAmount": "مبلغ غیرعادی",
+        "calculation": "محاسبه",
+        "approve": "تأیید",
+        "expertUnusualCalculation": "محاسبه غیرعادی کارشناس",
+        "expertUnusualCalculationExceedTariff": "محاسبه غیرعادی کارشناس بیش از تعرفه",
+        "needSecondApprove": "نیازمند تأیید دوم"
+      },
+      "automationLevels": {
+        "hint": "راهنما",
+        "fullAuto": "کاملاً خودکار",
+        "requireApprove": "نیازمند تأیید"
+      },
+      "skipRules": {
+        "skip": "رد کردن"
+      }
+    },
+    "create": {
+      "title": "ایجاد قانون ارزیابی هوشمند",
+      "description": "یک قانون ارزیابی خودکار تعریف کنید."
+    },
+    "edit": {
+      "title": "ویرایش قانون ارزیابی هوشمند",
+      "description": "قانون ارزیابی را به‌روزرسانی کنید."
+    },
+    "delete": {
+      "title": "حذف قانون ارزیابی هوشمند",
+      "description": "{{title}} حذف شود؟ این عمل قابل بازگشت نیست."
+    },
+    "bulkDelete": {
+      "title": "حذف قوانین انتخاب‌شده",
+      "description": "{{count}} قانون انتخاب‌شده حذف شود؟ این عمل قابل بازگشت نیست."
+    },
+    "messages": {
+      "created": "قانون ارزیابی هوشمند ایجاد شد.",
+      "updated": "قانون ارزیابی هوشمند به‌روزرسانی شد.",
+      "listError": "بارگذاری قوانین ارزیابی هوشمند انجام نشد.",
+      "detailError": "بارگذاری قانون ارزیابی هوشمند انجام نشد."
+    },
+    "validation": {
+      "json": "یک JSON معتبر وارد کنید",
+      "title": "عنوان الزامی است",
+      "code": "کد الزامی است",
+      "prompt": "دستور الزامی است",
+      "number": "یک عدد معتبر وارد کنید.",
+      "maxThreshold": "حداکثر آستانه باید بزرگ‌تر یا مساوی حداقل آستانه باشد."
     }
   }
 }
