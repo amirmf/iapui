@@ -1,4 +1,5 @@
 import { Button, cn } from '@iap/ui'
+import { ReferencePaginationControls } from '@shared/tables/data-table/reference-pagination-controls'
 import type { Table } from '@tanstack/react-table'
 import {
   ChevronLeft,
@@ -24,6 +25,7 @@ export function DataTablePagination<TData>(props: {
   hasCheckboxes?: boolean
   labels?: DataTablePaginationLabels
   pageSizeOptions?: readonly number[]
+  presentation?: 'default' | 'reference'
   smallPagination?: boolean
   table: Table<TData>
   totalCount?: number
@@ -32,6 +34,7 @@ export function DataTablePagination<TData>(props: {
     hasCheckboxes = false,
     labels,
     pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS,
+    presentation = 'default',
     smallPagination = false,
     table,
     totalCount,
@@ -43,6 +46,16 @@ export function DataTablePagination<TData>(props: {
   const status =
     labels?.status?.(pageIndex + 1, pageCount) ??
     `Page ${pageIndex + 1} of ${pageCount}`
+
+  if (presentation === 'reference')
+    return (
+      <ReferencePaginationControls
+        hasCheckboxes={hasCheckboxes}
+        smallPagination={smallPagination}
+        table={table}
+        totalCount={totalCount}
+      />
+    )
 
   return (
     <nav

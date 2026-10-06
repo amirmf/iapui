@@ -60,6 +60,7 @@ export function PaginatedDataTable<TData>(props: {
   pagination: PaginationState
   paginationLabels?: DataTablePaginationLabels
   pageSizeOptions?: readonly number[]
+  presentation?: 'default' | 'reference'
   renderToolbar?: (table: Table<TData>) => ReactNode
   renderRow?: (row: Row<TData>) => ReactNode
   rowLayout?: DataTableRowLayout
@@ -99,12 +100,13 @@ export function PaginatedDataTable<TData>(props: {
     pagination,
     paginationLabels,
     pageSizeOptions,
+    presentation = 'default',
     renderToolbar,
     renderRow,
     rowLayout,
     rowSelection,
-    selectAllLabel = 'Select all rows',
-    selectRowLabel = 'Select row',
+    selectAllLabel,
+    selectRowLabel,
     smallPagination = false,
     sorting,
     tableBodyClassName,
@@ -122,16 +124,46 @@ export function PaginatedDataTable<TData>(props: {
   const resolvedRowSelection = rowSelection ?? internalRowSelection
   const resolvedSorting = sorting ?? internalSorting
   const resolvedLabels: DataTableLabels = {
-    empty: t('common.noRecords'),
-    loading: t('common.loading'),
+    empty: t(
+      presentation === 'reference' ? 'dataTable.empty' : 'common.noRecords'
+    ),
+    loading: t(
+      presentation === 'reference' ? 'dataTable.loading' : 'common.loading'
+    ),
+    ...(presentation === 'reference'
+      ? { noResults: t('dataTable.noResults') }
+      : {}),
     ...labels,
   }
+  const resolvedSelectAllLabel =
+    selectAllLabel ??
+    (presentation === 'reference'
+      ? t('dataTable.selectAllRows')
+      : 'Select all rows')
+  const resolvedSelectRowLabel =
+    selectRowLabel ??
+    (presentation === 'reference' ? t('dataTable.selectRow') : 'Select row')
   const selectColumn = useMemo(
     () =>
       hasCheckboxes
-        ? createSelectColumn<TData>({ selectAllLabel, selectRowLabel })
+        ? createSelectColumn<TData>({
+            selectAllLabel: resolvedSelectAllLabel,
+            selectRowLabel: resolvedSelectRowLabel,
+            meta:
+              presentation === 'reference'
+                ? {
+                    className:
+                      'sticky left-0 z-10 w-10 min-w-10 max-w-10 rounded-tl bg-background group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted md:table-cell',
+                  }
+                : undefined,
+          })
         : undefined,
-    [hasCheckboxes, selectAllLabel, selectRowLabel]
+    [
+      hasCheckboxes,
+      presentation,
+      resolvedSelectAllLabel,
+      resolvedSelectRowLabel,
+    ]
   )
   const resolvedColumns = useMemo<AnyValueColumnDef<TData>[]>(
     () => (selectColumn ? [selectColumn, ...columns] : [...columns]),
@@ -175,11 +207,13 @@ export function PaginatedDataTable<TData>(props: {
       isLoading={isLoading}
       labels={resolvedLabels}
       noResultsContent={noResultsContent}
+      presentation={presentation}
       renderPagination={(currentTable) => (
         <DataTablePagination
           hasCheckboxes={hasCheckboxes}
           labels={paginationLabels}
           pageSizeOptions={pageSizeOptions}
+          presentation={presentation}
           smallPagination={smallPagination}
           table={currentTable}
           totalCount={totalCount}

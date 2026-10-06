@@ -43,6 +43,7 @@ export const buttonVariants = cva(
 export type ButtonProps = ComponentPropsWithRef<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
+    presentation?: 'default' | 'reference'
   }
 
 export function Button(props: ButtonProps) {
@@ -53,6 +54,7 @@ export function Button(props: ButtonProps) {
     size,
     type = 'button',
     variant,
+    presentation = 'default',
     ...rest
   } = props
   const Component = asChild ? Slot : 'button'
@@ -60,7 +62,16 @@ export function Button(props: ButtonProps) {
   return (
     <Component
       ref={ref}
-      className={cn(buttonVariants({ size, variant }), className)}
+      className={cn(
+        buttonVariants({ size, variant }),
+        presentation === 'reference' &&
+          'disabled:bg-muted disabled:text-muted-foreground disabled:pointer-events-auto',
+        presentation === 'reference' &&
+          variant === 'ghost' &&
+          'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+        className
+      )}
+      data-slot='button'
       type={asChild ? undefined : type}
       {...rest}
     />

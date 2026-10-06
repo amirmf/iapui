@@ -1,5 +1,6 @@
 /** Public entry point for contracts shared by Storefront and Admin. */
 export * from './auth'
+export * from './agreement'
 export * from './assessment-item'
 export * from './bank-account'
 export * from './branch'

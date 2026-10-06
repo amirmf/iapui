@@ -48,6 +48,7 @@ export function TableFilterContent(
     facetedFilters = [],
     numberRangeFilters = [],
     onValueChange,
+    presentation = 'default',
     textFilters = [],
     values,
   } = props
@@ -69,7 +70,14 @@ export function TableFilterContent(
     : filters.slice(0, defaultVisibleFilterCount)
 
   return (
-    <div className={cn('flex flex-wrap items-center gap-2', className)}>
+    <div
+      className={cn(
+        presentation === 'reference'
+          ? '-mx-2 flex flex-1 flex-col flex-wrap items-start gap-y-2 sm:flex-row sm:items-center'
+          : 'flex flex-wrap items-center gap-2',
+        className
+      )}
+    >
       {visibleFilters.map(({ config, kind }) => {
         const filterValue = values[config.id]
         const stringValue =
@@ -100,6 +108,7 @@ export function TableFilterContent(
           return (
             <TableFilterDateRangeFilter
               {...config}
+              presentation={presentation}
               key={config.id}
               onValueChange={onValueChange}
               values={values}
@@ -108,6 +117,7 @@ export function TableFilterContent(
         return (
           <TableFilterFacetedFilter
             {...config}
+            presentation={presentation}
             key={config.id}
             onValueChange={onValueChange}
             values={values}

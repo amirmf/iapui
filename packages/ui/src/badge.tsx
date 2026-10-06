@@ -22,14 +22,21 @@ export const badgeVariants = cva(
 )
 
 export type BadgeProps = ComponentPropsWithoutRef<'span'> &
-  VariantProps<typeof badgeVariants>
+  VariantProps<typeof badgeVariants> & {
+    presentation?: 'default' | 'reference'
+  }
 
 export function Badge(props: BadgeProps) {
-  const { className, variant, ...rest } = props
+  const { className, variant, presentation = 'default', ...rest } = props
 
   return (
     <span
-      className={cn(badgeVariants({ variant }), className)}
+      className={cn(
+        badgeVariants({ variant }),
+        presentation === 'reference' &&
+          'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 w-fit overflow-hidden transition-[color,box-shadow] focus-visible:ring-[3px] [&>svg]:pointer-events-none',
+        className
+      )}
       data-slot='badge'
       {...rest}
     />

@@ -37,6 +37,7 @@ export type ConfirmDialogProps = {
   open: boolean
   title: ReactNode
   variant?: ConfirmDialogVariant
+  presentation?: 'default' | 'reference'
 }
 
 const statusIcons = {
@@ -70,12 +71,14 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     onConfirm,
     onOpenChange,
     open,
+    presentation = 'default',
     title,
     variant = 'default',
   } = props
   const { t } = useTranslation()
   const statusVariant = variant === 'default' ? null : variant
   const StatusIcon = statusVariant ? statusIcons[statusVariant] : null
+  const isReference = presentation === 'reference'
 
   const handleOpenChange = (nextOpen: boolean) => {
     if (!isLoading) onOpenChange(nextOpen)
@@ -83,27 +86,36 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
 
   return (
     <AlertDialog onOpenChange={handleOpenChange} open={open}>
-      <AlertDialogContent className={className}>
-        <AlertDialogHeader>
-          <div className='flex items-start gap-3'>
-            {StatusIcon ? (
-              <div
-                aria-hidden='true'
-                className={cn(
-                  'flex size-10 shrink-0 items-center justify-center rounded-full',
-                  statusVariant ? statusIconClasses[statusVariant] : undefined
-                )}
-              >
-                <StatusIcon aria-hidden='true' className='size-6' />
-              </div>
-            ) : null}
-            <div className='min-w-0 flex-1 space-y-2'>
+      <AlertDialogContent className={className} presentation={presentation}>
+        <AlertDialogHeader className={cn(isReference && 'text-left')}>
+          {isReference ? (
+            <>
               <AlertDialogTitle>{title}</AlertDialogTitle>
               <AlertDialogDescription asChild>
                 <div>{description}</div>
               </AlertDialogDescription>
+            </>
+          ) : (
+            <div className='flex items-start gap-3'>
+              {StatusIcon ? (
+                <div
+                  aria-hidden='true'
+                  className={cn(
+                    'flex size-10 shrink-0 items-center justify-center rounded-full',
+                    statusVariant ? statusIconClasses[statusVariant] : undefined
+                  )}
+                >
+                  <StatusIcon aria-hidden='true' className='size-6' />
+                </div>
+              ) : null}
+              <div className='min-w-0 flex-1 space-y-2'>
+                <AlertDialogTitle>{title}</AlertDialogTitle>
+                <AlertDialogDescription asChild>
+                  <div>{description}</div>
+                </AlertDialogDescription>
+              </div>
             </div>
-          </div>
+          )}
         </AlertDialogHeader>
         {children}
         <AlertDialogFooter>
@@ -113,6 +125,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
             </AlertDialogCancel>
           ) : null}
           <Button
+            presentation={presentation}
             disabled={disableConfirm || isLoading}
             onClick={onConfirm}
             type='button'

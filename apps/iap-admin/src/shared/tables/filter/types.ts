@@ -35,6 +35,7 @@ export type DateRangeTableFilterConfig = BaseConfig & {
 }
 
 export type FacetedTableFilterConfig = BaseConfig & {
+  debounceMs?: number
   disabled?: boolean
   multiple?: boolean
   options: readonly TableFilterOption[]
@@ -43,6 +44,7 @@ export type FacetedTableFilterConfig = BaseConfig & {
 }
 
 export type TableFilterBaseProps = {
+  presentation?: 'default' | 'reference'
   children?: ReactNode
   className?: string
   dateRangeFilters?: readonly DateRangeTableFilterConfig[]

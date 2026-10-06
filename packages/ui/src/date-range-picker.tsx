@@ -11,6 +11,7 @@ import {
   type DatePickerLocale,
   type DatePickerMode,
 } from './date-picker'
+import { formatDate } from './format-date'
 import { cn } from './lib/cn'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
 
@@ -39,6 +40,8 @@ export type DateRangePickerProps = {
   ref?: Ref<HTMLButtonElement>
   toPlaceholder?: string
   triggerClassName?: string
+  wrapperClassName?: string
+  presentation?: 'default' | 'reference'
   value: DateRangeValue
 }
 
@@ -73,6 +76,7 @@ export function DateRangePicker(props: DateRangePickerProps) {
     'data-form-field': dataFormField,
     'data-slot': dataSlot,
     fromPlaceholder = 'From',
+    id,
     locale = 'fa',
     maxDate,
     minDate,
@@ -82,44 +86,62 @@ export function DateRangePicker(props: DateRangePickerProps) {
     ref,
     toPlaceholder = 'To',
     triggerClassName,
+    wrapperClassName,
+    presentation = 'default',
     value,
   } = props
-  const fromLabel = formatRangeDate(value.from, locale, mode) ?? fromPlaceholder
-  const toLabel = formatRangeDate(value.to, locale, mode) ?? toPlaceholder
+  const isReference = presentation === 'reference'
+  const formatLabel = (date?: Date) =>
+    isReference && mode === 'date' && date
+      ? formatDate(format(date, 'yyyy-MM-dd'))
+      : formatRangeDate(date, locale, mode)
+  const fromLabel = formatLabel(value.from) ?? fromPlaceholder
+  const toLabel = formatLabel(value.to) ?? toPlaceholder
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          aria-describedby={ariaDescribedBy}
-          aria-invalid={ariaInvalid}
-          aria-labelledby={ariaLabelledBy}
-          className={cn('w-full justify-start font-normal', triggerClassName)}
-          data-form-field={dataFormField}
-          data-slot={dataSlot ?? 'date-range-picker-trigger'}
-          disabled={disabled}
-          id={props.id}
-          onBlur={onBlur}
-          ref={ref}
-          type='button'
-          variant='outline'
-        >
-          <span
-            className={cn('truncate', !value.from && 'text-muted-foreground')}
+      <div className={wrapperClassName}>
+        <PopoverTrigger asChild>
+          <Button
+            presentation={presentation}
+            aria-describedby={ariaDescribedBy}
+            aria-invalid={ariaInvalid}
+            aria-labelledby={ariaLabelledBy}
+            className={cn(
+              'w-full justify-start font-normal',
+              isReference && 'h-8',
+              triggerClassName
+            )}
+            data-form-field={dataFormField}
+            data-slot={dataSlot ?? 'date-range-picker-trigger'}
+            disabled={disabled}
+            id={id}
+            onBlur={onBlur}
+            ref={ref}
+            type='button'
+            variant='outline'
+            size={isReference ? 'sm' : 'default'}
           >
-            {fromLabel}
-          </span>
-          <span aria-hidden='true' className='text-muted-foreground'>
-            –
-          </span>
-          <span
-            className={cn('truncate', !value.to && 'text-muted-foreground')}
-          >
-            {toLabel}
-          </span>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent align='start' className={cn('w-80', className)}>
+            <span
+              className={cn('truncate', !value.from && 'text-muted-foreground')}
+            >
+              {fromLabel}
+            </span>
+            <span aria-hidden='true' className='text-muted-foreground'>
+              {isReference ? '-' : '–'}
+            </span>
+            <span
+              className={cn('truncate', !value.to && 'text-muted-foreground')}
+            >
+              {toLabel}
+            </span>
+          </Button>
+        </PopoverTrigger>
+      </div>
+      <PopoverContent
+        align='start'
+        className={cn('w-80', isReference && 'p-3', className)}
+      >
         <div className='flex gap-2'>
           <DatePicker
             clearLabel={clearLabel}

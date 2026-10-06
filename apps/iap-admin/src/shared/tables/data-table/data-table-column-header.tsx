@@ -1,6 +1,7 @@
 import { type ReactNode, useState } from 'react'
 
 import { Button, Popover, PopoverContent, PopoverTrigger, cn } from '@iap/ui'
+import { ReferenceColumnHeader } from '@shared/tables/data-table/reference-column-header'
 import type { Column } from '@tanstack/react-table'
 import { ArrowDown, ArrowUp, ChevronsUpDown, RotateCcw } from 'lucide-react'
 
@@ -16,10 +17,20 @@ export function DataTableColumnHeader<TData, TValue>(props: {
   column: Column<TData, TValue>
   labels?: TableSortLabels
   title: ReactNode
+  presentation?: 'default' | 'reference'
 }) {
-  const { className, column, labels, title } = props
+  const { className, column, labels, title, presentation = 'default' } = props
   const [open, setOpen] = useState(false)
   const sorting = column.getIsSorted()
+
+  if (presentation === 'reference')
+    return (
+      <ReferenceColumnHeader
+        className={className}
+        column={column}
+        title={title}
+      />
+    )
 
   if (!column.getCanSort()) {
     return (

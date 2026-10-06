@@ -38,6 +38,11 @@ import.
 
 ## Server-driven tables
 
+Table/filter reference presentation is opt-in and preserves feature ownership
+of API inputs and route state. See
+[Reference-page controls](REFERENCE-PAGE-CONTROLS.md) for pagination, sorting,
+filter reset and debounce behavior added during the Agreements port.
+
 For backend-paginated data, a feature uses `useServerTableState` and gives the
 same pagination and sorting state to both its query and TanStack Table with
 manual pagination, filtering, and sorting enabled. Do not apply client-side

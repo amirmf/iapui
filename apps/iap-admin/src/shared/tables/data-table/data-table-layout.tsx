@@ -15,6 +15,7 @@ export function DataTableLayout<TData>(props: {
   caption?: ReactNode
   children: ReactNode
   className?: string
+  presentation?: 'default' | 'reference'
   renderPagination?: (table: TanStackTable<TData>) => ReactNode
   renderToolbar?: (table: TanStackTable<TData>) => ReactNode
   table: TanStackTable<TData>
@@ -25,6 +26,7 @@ export function DataTableLayout<TData>(props: {
     caption,
     children,
     className,
+    presentation = 'default',
     renderPagination,
     renderToolbar,
     table,
@@ -37,7 +39,9 @@ export function DataTableLayout<TData>(props: {
       {renderToolbar?.(table)}
       <div
         className={cn(
-          'relative overflow-x-auto rounded-xl border border-border bg-card',
+          presentation === 'reference'
+            ? 'relative flex max-h-[480px] flex-col overflow-hidden rounded-md border'
+            : 'relative overflow-x-auto rounded-xl border border-border bg-card',
           tableWrapperClassName
         )}
       >
@@ -45,9 +49,21 @@ export function DataTableLayout<TData>(props: {
           {caption ? (
             <TableCaption className='sr-only'>{caption}</TableCaption>
           ) : null}
-          <TableHeader className='sticky top-0 z-10 bg-card'>
+          <TableHeader
+            className={cn(
+              'sticky top-0',
+              presentation === 'reference'
+                ? 'z-20 bg-background'
+                : 'z-10 bg-card'
+            )}
+          >
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow
+                key={headerGroup.id}
+                className={
+                  presentation === 'reference' ? 'group/row' : undefined
+                }
+              >
                 {headerGroup.headers.map((header) => {
                   const sorting = header.column.getIsSorted()
                   const sortable = header.column.getCanSort()
@@ -63,10 +79,12 @@ export function DataTableLayout<TData>(props: {
                               : 'none'
                           : undefined
                       }
-                      className={
+                      className={cn(
+                        presentation === 'reference' &&
+                          'h-10 px-2 text-sm font-medium',
                         header.column.columnDef.meta?.className ??
-                        header.column.columnDef.meta?.headerClassName
-                      }
+                          header.column.columnDef.meta?.headerClassName
+                      )}
                       colSpan={header.colSpan}
                       key={header.id}
                     >
@@ -82,7 +100,13 @@ export function DataTableLayout<TData>(props: {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody aria-live='polite' className={tableBodyClassName}>
+          <TableBody
+            aria-live='polite'
+            className={cn(
+              presentation === 'reference' && 'overflow-auto',
+              tableBodyClassName
+            )}
+          >
             {children}
           </TableBody>
         </Table>

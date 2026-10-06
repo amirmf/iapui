@@ -15,7 +15,9 @@ import {
   DialogHeader,
   DialogTitle,
   Label,
+  cn,
 } from '@iap/ui'
+import { IconArrowRight, IconEyeOff, IconTrash } from '@tabler/icons-react'
 import { ArrowRightIcon, EyeOffIcon, Trash2Icon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
@@ -44,6 +46,7 @@ export type DeleteMethodDialogProps = {
   open: boolean
   preselectedMethod?: DeleteMethod
   resetDelay?: number
+  presentation?: 'default' | 'reference'
   showDatePicker?: boolean
 }
 
@@ -58,10 +61,15 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
     onOpenChange,
     open,
     preselectedMethod,
+    presentation = 'default',
     resetDelay = 0,
     showDatePicker = true,
   } = props
   const { t } = useTranslation()
+  const isReference = presentation === 'reference'
+  const BackIcon = isReference ? IconArrowRight : ArrowRightIcon
+  const SoftIcon = isReference ? IconEyeOff : EyeOffIcon
+  const HardIcon = isReference ? IconTrash : Trash2Icon
   const labels: DeleteMethodDialogLabels = customLabels ?? {
     back: t('common.back'),
     cancel: t('common.dialog.cancel'),
@@ -122,6 +130,8 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
         selectedMethod === 'soft' ? thruDate?.toISOString() : undefined
       )
       onOpenChange(false)
+    } catch {
+      // The owning feature reports mutation failures. Keep confirmation open.
     } finally {
       setIsSubmitting(false)
     }
@@ -130,7 +140,11 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
   if (stage === 'select-method') {
     return (
       <Dialog onOpenChange={handleOpenChange} open={open}>
-        <DialogContent closeLabel={labels.cancel}>
+        <DialogContent
+          closeLabel={labels.cancel}
+          className={cn(isReference && 'sm:max-w-md')}
+          presentation={presentation}
+        >
           <DialogHeader>
             <DialogTitle>{labels.title}</DialogTitle>
           </DialogHeader>
@@ -138,24 +152,31 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
             <p className='text-muted-foreground text-sm'>
               {labels.description.replace('{entityName}', entityName)}
             </p>
-            <div className='grid gap-3 sm:grid-cols-2'>
+            <div
+              className={cn(
+                'grid',
+                isReference ? 'grid-cols-2 gap-4' : 'gap-3 sm:grid-cols-2'
+              )}
+            >
               <Button
+                presentation={presentation}
                 disabled={isBusy}
                 onClick={() => handleSelectMethod('soft')}
                 type='button'
                 variant='outline'
               >
-                <EyeOffIcon aria-hidden='true' className='size-4' />
+                <SoftIcon aria-hidden='true' className='size-4' />
                 {labels.softDelete}
               </Button>
               <Button
+                presentation={presentation}
                 className='border-destructive text-destructive hover:bg-destructive/10'
                 disabled={isBusy}
                 onClick={() => handleSelectMethod('hard')}
                 type='button'
                 variant='outline'
               >
-                <Trash2Icon aria-hidden='true' className='size-4' />
+                <HardIcon aria-hidden='true' className='size-4' />
                 {labels.hardDelete}
               </Button>
             </div>
@@ -175,9 +196,22 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
 
   return (
     <AlertDialog onOpenChange={handleOpenChange} open={open}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>{confirmTitle}</AlertDialogTitle>
+      <AlertDialogContent presentation={presentation}>
+        <AlertDialogHeader className={cn(isReference && 'text-left')}>
+          <AlertDialogTitle>
+            {isReference ? (
+              <span className='text-destructive flex items-center gap-2'>
+                {isHardDelete ? (
+                  <HardIcon aria-hidden='true' className='size-4.5' />
+                ) : (
+                  <SoftIcon aria-hidden='true' className='size-4.5' />
+                )}
+                {confirmTitle}
+              </span>
+            ) : (
+              confirmTitle
+            )}
+          </AlertDialogTitle>
           <AlertDialogDescription>
             {confirmDescription.replace('{entityName}', entityName)}
           </AlertDialogDescription>
@@ -185,29 +219,49 @@ export function DeleteMethodDialog(props: DeleteMethodDialogProps) {
         {!isHardDelete && showDatePicker ? (
           <div className='space-y-2'>
             <Label>{labels.dateLabel}</Label>
-            <DatePicker onChange={setThruDate} value={thruDate} />
+            <DatePicker
+              className={cn(isReference && 'w-60')}
+              clearable={!isReference}
+              onChange={setThruDate}
+              value={thruDate}
+            />
           </div>
         ) : null}
         <AlertDialogFooter>
           {!preselectedMethod ? (
-            <Button disabled={isBusy} onClick={handleBack} variant='outline'>
-              <ArrowRightIcon
+            <Button
+              presentation={presentation}
+              disabled={isBusy}
+              onClick={handleBack}
+              variant={isReference ? 'ghost' : 'outline'}
+            >
+              <BackIcon
                 aria-hidden='true'
-                className='size-4 rtl:rotate-180'
+                className={cn(
+                  'size-4',
+                  isReference ? 'mr-2' : 'rtl:rotate-180'
+                )}
               />
               {labels.back}
             </Button>
           ) : null}
-          <AlertDialogCancel disabled={isBusy}>
-            {labels.cancel}
-          </AlertDialogCancel>
-          <Button
-            disabled={isBusy}
-            onClick={() => void handleDelete()}
-            variant='destructive'
+          <div
+            className={cn(
+              isReference ? 'flex flex-1 justify-end gap-2' : 'contents'
+            )}
           >
-            {isHardDelete ? labels.hardDelete : labels.softDelete}
-          </Button>
+            <AlertDialogCancel disabled={isBusy}>
+              {labels.cancel}
+            </AlertDialogCancel>
+            <Button
+              presentation={presentation}
+              disabled={isBusy}
+              onClick={() => void handleDelete()}
+              variant={isReference && !isHardDelete ? 'default' : 'destructive'}
+            >
+              {isHardDelete ? labels.hardDelete : labels.softDelete}
+            </Button>
+          </div>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

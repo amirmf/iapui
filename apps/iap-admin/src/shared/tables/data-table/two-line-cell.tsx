@@ -8,15 +8,24 @@ export function TwoLineHeader<TData, TValue>(props: {
   column: Column<TData, TValue>
   primary: ReactNode
   secondary?: ReactNode
+  presentation?: 'default' | 'reference'
 }) {
-  const { column, primary, secondary } = props
+  const { column, primary, secondary, presentation = 'default' } = props
 
   return (
     <div className='flex flex-col gap-1 text-sm'>
-      <DataTableColumnHeader column={column} title={primary} />
+      <DataTableColumnHeader
+        presentation={presentation}
+        column={column}
+        title={primary}
+      />
       {secondary ? (
         <div className='text-xs font-normal text-muted-foreground'>
-          <DataTableColumnHeader column={column} title={secondary} />
+          <DataTableColumnHeader
+            presentation={presentation}
+            column={column}
+            title={secondary}
+          />
         </div>
       ) : null}
     </div>
@@ -24,6 +33,7 @@ export function TwoLineHeader<TData, TValue>(props: {
 }
 
 export function TwoLineCell(props: {
+  emptyValue?: ReactNode
   primary: ReactNode
   primaryClassName?: string
   longText?: boolean
@@ -34,12 +44,13 @@ export function TwoLineCell(props: {
   truncate?: boolean
 }) {
   const {
+    emptyValue = '–',
     primary,
     primaryClassName,
     longText = false,
     longTextPrimary = false,
     longTextSecondary = false,
-    secondary = '–',
+    secondary,
     secondaryClassName,
     truncate = true,
   } = props
@@ -48,7 +59,7 @@ export function TwoLineCell(props: {
     <div className='flex min-w-0 flex-col gap-1 text-sm'>
       {longText || longTextPrimary ? (
         <LongText className={cn('font-medium', primaryClassName)}>
-          {primary ?? '–'}
+          {primary ?? emptyValue}
         </LongText>
       ) : (
         <div
@@ -58,7 +69,7 @@ export function TwoLineCell(props: {
             primaryClassName
           )}
         >
-          {primary ?? '–'}
+          {primary ?? emptyValue}
         </div>
       )}
       <div
@@ -68,9 +79,11 @@ export function TwoLineCell(props: {
         )}
       >
         {longText || longTextSecondary ? (
-          <LongText className={secondaryClassName}>{secondary}</LongText>
+          <LongText className={secondaryClassName}>
+            {secondary ?? emptyValue}
+          </LongText>
         ) : (
-          <div className={secondaryClassName}>{secondary}</div>
+          <div className={secondaryClassName}>{secondary ?? emptyValue}</div>
         )}
       </div>
     </div>

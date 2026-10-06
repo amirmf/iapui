@@ -39,3 +39,18 @@ dialog composition.
 Mount the two `@iap/auth` global dialogs once in an authenticated application
 shell. Feature code opens the audit dialog through the exported store; it must
 not render another dialog host per table row.
+
+## Reference-page presentation
+
+For a source-backed parity task, `ConfirmDialog` and `DeleteMethodDialog`
+support opt-in `presentation='reference'`. This passes through the shared
+Dialog/AlertDialog presentation without changing unrelated consumers.
+`DeleteMethodDialog` accepts a caller-selected `resetDelay`; copy the source
+timing instead of applying one global default. Its rejected operation callback
+keeps confirmation open; the caller's mutation/global error handler reports
+the failure. Do not swallow the error in the caller and resolve the operation,
+which would incorrectly close the shared dialog.
+
+Read `docs/architecture/REFERENCE-PAGE-CONTROLS.md` when porting dialog/date
+behavior from the reference. Product-specific cleanup timers remain owned by
+the feature, not the reusable composition.

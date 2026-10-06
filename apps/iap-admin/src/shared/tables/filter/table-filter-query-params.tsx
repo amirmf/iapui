@@ -43,6 +43,7 @@ export function TableFilterQueryParams(
     ignoreQueryParams = [],
     labels,
     pageQueryParamKey = pageNumberQueryParamKey,
+    presentation = 'default',
     resetPageToFirst = false,
     showReset = true,
     ...filterProps
@@ -50,6 +51,7 @@ export function TableFilterQueryParams(
   const location = useLocation()
   const router = useRouter()
   const [expanded, setExpanded] = useState(false)
+  const [resetRevision, setResetRevision] = useState(0)
   const values = location.search as TableFilterValues
   const ignoredIds = useMemo(
     () => [...controlQueryParamKeys, ...ignoreQueryParams],
@@ -84,6 +86,7 @@ export function TableFilterQueryParams(
     [pageQueryParamKey, resetPageToFirst, router]
   )
   const onReset = useCallback(() => {
+    setResetRevision((revision) => revision + 1)
     router.navigate({
       replace: true,
       search: (previous: TableFilterValues) =>
@@ -109,9 +112,12 @@ export function TableFilterQueryParams(
       onExpandChange={() => setExpanded((current) => !current)}
       onReset={onReset}
       resetLabel={labels?.reset}
+      presentation={presentation}
     >
       <TableFilterContent
         {...filterProps}
+        presentation={presentation}
+        key={resetRevision}
         defaultVisibleFilterCount={defaultVisibleFilterCount}
         expanded={expanded}
         onValueChange={onValueChange}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { Input, cn } from '@iap/ui'
 import type { TextTableFilterConfig } from '@shared/tables/filter/types'
@@ -21,29 +21,41 @@ export function TableFilterInput(
     ...inputProps
   } = props
   const [text, setText] = useState(value)
+  const pending = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
-  useEffect(() => setText(value), [value])
   useEffect(() => {
-    const timeout = window.setTimeout(
-      () => onValueChange(queryKey ?? id, text.trim() || undefined),
+    clearTimeout(pending.current)
+    setText(value)
+  }, [id, value])
+  useEffect(() => () => clearTimeout(pending.current), [])
+
+  const change = (next: string) => {
+    setText(next)
+    clearTimeout(pending.current)
+    pending.current = setTimeout(
+      () => onValueChange(queryKey ?? id, next.trim() || undefined),
       debounceMs
     )
-    return () => window.clearTimeout(timeout)
-  }, [debounceMs, onValueChange, queryKey, id, text])
+  }
+  const clear = () => {
+    clearTimeout(pending.current)
+    setText('')
+    onValueChange(queryKey ?? id, undefined)
+  }
 
   return (
     <div className={cn('relative', wrapperClassName)}>
       <Input
         {...inputProps}
         className={cn('pe-9', className)}
-        onChange={(event) => setText(event.target.value)}
+        onChange={(event) => change(event.target.value)}
         value={text}
       />
       {text ? (
         <button
-          aria-label={`Clear ${id}`}
+          aria-label='Clear input'
           className='absolute end-2 top-1/2 size-7 -translate-y-1/2 rounded text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
-          onClick={() => setText('')}
+          onClick={clear}
           type='button'
         >
           <X aria-hidden='true' className='m-auto size-4' />
