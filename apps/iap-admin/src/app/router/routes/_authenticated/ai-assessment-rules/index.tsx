@@ -1,6 +1,11 @@
-import { PlaceholderPage } from '@features/placeholder'
+import {
+  AiAssessmentRulesPage,
+  aiAssessmentRuleRouteSearchSchema,
+} from '@features/ai-assessment-rules'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/ai-assessment-rules/')({
-  component: () => <PlaceholderPage titleKey='sidebar.aiAssessmentRules' />,
+  component: AiAssessmentRulesPage,
+  loader: () => ({ crumb: 'ai-assessment-rules' }),
+  validateSearch: aiAssessmentRuleRouteSearchSchema,
 })
