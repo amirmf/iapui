@@ -1,29 +1,34 @@
 ---
 name: agent-panel-claim-requests
-description: Guide for implementing, extending, and maintaining agent claim request pages (index, create, details/management) in iap-admin with exact reference parity to insurance-ui.
+description: Guide for implementing, extending, and maintaining agent claim request pages (index, create, details/management) in iap-admin with exact reference parity to insurance-ui and aligned with application architecture.
 ---
 
 # Agent Panel Claim Requests
 
-Use this skill when implementing, maintaining, or extending agent claim requests pages (`/agent/claim-requests/**`) in `apps/iap-admin` with exact line-by-line parity to the `insurance-ui` reference project.
+Use this skill when implementing, maintaining, or extending agent claim requests pages (`/agent/claim-requests/**`) in `apps/iap-admin` with exact reference parity to `insurance-ui` and full compliance with `docs/architecture/APPLICATION-ARCHITECTURE.md`.
 
 ## Scope and Capabilities
 
 The Agent Claim Requests area serves registry agents managing insurance claims:
 1. **Index List Page** (`/agent/claim-requests/`):
    - Route: `apps/iap-admin/src/app/router/routes/_agent/agent/claim-requests/index.tsx`
-   - Page: `apps/iap-admin/src/features/agent-claim-requests/pages/agent-claim-requests-page.tsx`
+   - Page Journey: `apps/iap-admin/src/features/agent-claim-requests/pages/index/agent-claim-requests-page.tsx`
+   - Components: `pages/index/components/` (`agent-claim-requests-header.tsx`, `agent-claim-requests-table.tsx`, `agent-claim-request-columns.tsx`, `agent-claim-request-header-actions.tsx`, `agent-claim-request-row-actions.tsx`, `agent-claim-request-delete-dialog.tsx`)
+   - Queries: `pages/index/queries/use-agent-claim-requests-query.ts`
+   - Context: `pages/index/context/store/agent-claim-request-store.ts` and `pages/index/context/provider/agent-claim-request-provider.tsx`
+   - Route Adapters: `pages/index/route-adapters/use-sync-query-params-table-filter.ts`
    - Features: Multi-column paginated table, quick status filter, search-params sync, Excel export, row actions (details, complete documents, refresh policy, delete).
 2. **Creation Journey** (`/agent/claim-requests/create/`):
    - Route: `apps/iap-admin/src/app/router/routes/_agent/agent/claim-requests/create/index.tsx`
    - Creation steps, inquiry, sub-insured person selection, document upload.
 3. **Claim Management / Details** (`/agent/claim-requests/$claimRequestId/claim-request-management/`):
    - Route: `apps/iap-admin/src/app/router/routes/_agent/agent/claim-requests/$claimRequestId.claim-request-management/index.tsx`
-   - Page: `apps/iap-admin/src/features/agent-claim-requests/pages/agent-claim-request-management.tsx`
-   - Query: `apps/iap-admin/src/features/agent-claim-requests/queries/use-agent-claim-request-management-data.ts`
+   - Page Journey: `apps/iap-admin/src/features/agent-claim-requests/pages/claim-request-management/agent-claim-request-management-page.tsx`
+   - Components: `pages/claim-request-management/components/` (`agent-claim-request-management-header.tsx`, `agent-claim-request-management-details.tsx`, `agent-claim-request-management-footer.tsx`)
+   - Queries: `pages/claim-request-management/queries/use-agent-claim-request-management-data.ts`
    - Prefetch loader: `agentClaimRequestManagementQueryOptions` with `staleTime: 'static'`, returning `{ crumb: 'claimDetails' }`.
    - Error & Pending: `pendingComponent: ClaimRequestManagementPanelPending`, `errorComponent: ClaimRequestManagementQueryError`.
-   - Layout: Header with `ClaimRequestLastStatusSection` and `ClaimRequestAssignSection`; `ClaimRequestInfoList` with `viewDetailsAdjustmentLink='/agent/claim-requests/$claimRequestId/claim-request-management/'`; two columns: left card with `ClaimRequestAssessmentItemsSection`, `ClaimRequestDoctorResponses`, `ClaimRequestDuplicatedSection`, `ClaimRequestManagementError`, `ClaimRequestObjectionSection` (objection form guarded with `!isAgentPanel`); right card with `ClaimRequestAttachmentsSection`; bottom with `ClaimRequestManagementPrevRequest` and `ClaimRequestDocumentsSection` (guarded with `!isAgentPanel`).
+   - Layout: Clean composite panels decomposing header status, claim info list, two-column assessment/attachments details, and history/document footer.
    - Boundary rule: All shared sections imported from `@features/claim-requests` must be exported via its public barrel (`apps/iap-admin/src/features/claim-requests/index.ts`).
 
 ## Core Architecture and Contracts
@@ -31,34 +36,33 @@ The Agent Claim Requests area serves registry agents managing insurance claims:
 ### 1. API Services and Endpoint Conventions
 
 All agent-specific claim request endpoints follow the `/claim-request-registery-agent/**` path pattern:
-- **Paged List**: `GET /claim-request-registery-agent/claim-requests/page-full`
-- **Excel Export**: `GET /claim-request-registery-agent/claim-requests/export-page-lite-excel` (with `responseType: 'blob'`)
+- **Paged List**: `GET /claim-request-registery-agent/claim-requests/page-full` (uses `transformApiFilterParams`)
+- **Excel Export**: `GET /claim-request-registery-agent/claim-requests/page-lite/excel` (with `responseType: 'blob'`, uses `transformApiFilterParams`)
 - **Single Claim**: `GET /claim-request-registery-agent/claim-requests/{id}`
 - **Create**: `POST /claim-request-registery-agent/claim-requests`
 - **Update**: `PUT /claim-request-registery-agent/claim-requests/{id}`
 - **Delete**: `DELETE /claim-request-registery-agent/claim-requests/{id}`
-- **Refresh Policy**: `POST /claim-request-registery-agent/claim-requests/{id}/refresh-policy-details`
-- **Objection**: `POST /claim-request-registery-agent/claim-requests/{id}/objection`
-- **Inquiry**: `POST /claim-request-registery-agent/claim-requests/inquiry`
-- **Sub-Insured People**: `GET /claim-request-registery-agent/claim-requests/sub-insured-people`
+- **Refresh Policy**: `POST /claim-requests/{id}/policy-details`
+- **Objection**: `POST /claim-request-registery-agent/claim-requests/objections`
+- **Inquiry**: `GET /claim-request-registery-agent/inquery`
+- **Sub-Insured People**: `GET /claim-request-registery-agent/sub-insured-people/{policyId}/{username}`
 
-Always import and use `agentClaimRequestService` from `@features/agent-claim-requests`. Provide both named and default exports.
+Always import and use `agentClaimRequestService` from `@features/agent-claim-requests`.
 
 ### 2. Contracts and Schemas
 
-All schemas reside in `packages/api-types/src/agent-claim-request/index.ts` and are exported via `@iap/api-types`:
-- Inferred types: `AgentClaimRequest`, `RegisteryAgentPolicy`, `RegisteryAgentSubInsuredPerson`, `RegisteryAgentInquiry`, `CreateClaimRequestByRegisteryAgentRequest`, `RegisteryAgentAddObjectionRequest`.
-- Service schemas: `apps/iap-admin/src/features/agent-claim-requests/data/agent-claim-request-service-schema.ts`.
+All schemas reside in `model/`:
+- `apps/iap-admin/src/features/agent-claim-requests/model/agent-claim-request-schema.ts`
+- `apps/iap-admin/src/features/agent-claim-requests/model/agent-claim-request-constant.ts`
+- Re-exported via public barrel `apps/iap-admin/src/features/agent-claim-requests/index.ts`.
 - Never duplicate schemas or use loose `any`. Infer types directly from Zod.
 
 ### 3. Context and State Management
 
-- Use a unified feature context: `apps/iap-admin/src/features/agent-claim-requests/context/claim-request-context.tsx`.
-- The file exports:
-  - `AgentClaimRequestProvider` (default and named)
-  - `useAgentClaimRequest`
-  - `useAgentClaimRequestStore`
-- When exporting both the component and hooks from the same file, include `/* eslint-disable react-refresh/only-export-components */` at the top to satisfy Fast Refresh lint rules.
+- Page-exclusive state resides in `pages/index/context/store/` and `pages/index/context/provider/`.
+- `useAgentClaimRequestStore` manages modal and active row state for table operations.
+- `AgentClaimRequestProvider` resets store state on component unmount.
+- Re-exported through the feature's public API for backwards compatibility.
 
 ### 4. Search Params and URL Synchronization
 
@@ -70,15 +74,15 @@ useSyncQueryParamsTableFilter({
   filters,
   sorting,
   onSortingChange,
-});
+})
 ```
 **Critical Guard**: To avoid infinite re-render loops in tests or when query params change, extract primitive string values (`pageParam`, `sizeParam`, `sortParam`, `directionParam`) and guard updates against identical values before calling `setPagination` or `onSortingChange`.
 
 ### 5. Table and Column Setup
 
 - Primary table uses `PaginatedDataTable` from `@shared/tables`.
-- Always set `tableWrapperClassName="max-h-130"` for consistency with the reference grid styling.
-- Columns use `TwoLineHeader` and `TwoLineCell` for high-density information (e.g., Claim Code / Tracking Number, Insured Person / National Code).
+- Set `tableWrapperClassName="max-h-130"` for consistency with the reference grid styling.
+- Columns use `TwoLineHeader` and `TwoLineCell` for high-density information.
 - Hidden columns are defined with `showColumn: false` in meta so they can be toggled via the toolbar without cluttering the default view.
 
 ### 6. Router and Breadcrumb Rules
@@ -99,5 +103,5 @@ When building or modifying agent claim request features:
 1. `pnpm --filter iap-admin typecheck` (zero TypeScript errors).
 2. `pnpm --filter iap-admin lint` (zero warnings and errors).
 3. `pnpm architecture:check` (verifies package/feature boundaries).
-4. `pnpm --filter iap-admin test` (all unit and integration tests passing).
+4. `pnpm --filter iap-admin test agent-claim-requests` (all unit and integration tests passing).
 5. `pnpm --filter iap-admin build` (production build succeeds).

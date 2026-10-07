@@ -7,16 +7,13 @@ import {
   type RegisteryAgentInquiryResponse,
   type SubInsuredPersonResponse,
   claimRequestSchema,
-  pageClaimRequestSchema,
-} from '@iap/api-types'
-import { type ApiFilterParams, transformApiFilterParams } from '@iap/shared-lib'
-
-import {
   createClaimRequestByRegisteryAgentRequestSchema,
+  pageClaimRequestSchema,
   registeryAgentAddObjectionRequestSchema,
   registeryAgentInquirySchema,
   subInsuredPersonResponseListSchema,
-} from '../model/agent-claim-request-schema'
+} from '@iap/api-types'
+import { type ApiFilterParams, transformApiFilterParams } from '@iap/shared-lib'
 
 export const agentClaimRequestService = {
   getById: async (
