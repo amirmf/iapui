@@ -53,5 +53,6 @@ export * from './support'
 export * from './support-ticket'
 export * from './user-account'
 export * from './pipeline'
+export * from './sub-user'
 
 export * from './files'

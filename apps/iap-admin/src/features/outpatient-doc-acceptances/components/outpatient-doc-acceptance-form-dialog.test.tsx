@@ -66,16 +66,14 @@ describe('acceptance reference form field closure', () => {
   })
 
   it('prefills numeric identifiers, dates and free text from the edited row', () => {
-    useOutpatientDocAcceptanceStore
-      .getState()
-      .openDialog('edit', {
-        id: 'row-1',
-        exId: 81,
-        docDeliveryKindId: 4,
-        deliveryDate: '2026-10-06',
-        letterNo: 'L-9',
-        wsResult: 'result text',
-      })
+    useOutpatientDocAcceptanceStore.getState().openDialog('edit', {
+      id: 'row-1',
+      exId: 81,
+      docDeliveryKindId: 4,
+      deliveryDate: '2026-10-06',
+      letterNo: 'L-9',
+      wsResult: 'result text',
+    })
     render(
       <QueryClientProvider client={new QueryClient()}>
         <OutpatientDocAcceptanceFormDialog />

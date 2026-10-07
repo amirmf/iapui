@@ -44,9 +44,10 @@ export type PageRepetitiveResponseGroup = z.infer<
   typeof repetitiveResponseGroupPageSchema
 >
 
-export const repetitiveResponseGroupPageRequestSchema = createPageRequestSchema().extend({
-  size: z.number().int().positive().default(30),
-})
+export const repetitiveResponseGroupPageRequestSchema =
+  createPageRequestSchema().extend({
+    size: z.number().int().positive().default(30),
+  })
 
 export const getRepetitiveResponseGroupRequestSchema = z
   .object({ path: idPathSchema })
@@ -115,7 +116,8 @@ export const repetitiveResponsePageRequestSchema = createPageRequestSchema()
 export const getRepetitiveResponseRequestSchema = z
   .object({ path: idPathSchema })
   .strict()
-export const createRepetitiveResponseRequestSchema = repetitiveResponseRequestSchema
+export const createRepetitiveResponseRequestSchema =
+  repetitiveResponseRequestSchema
 export const updateRepetitiveResponseRequestSchema = z
   .object({
     body: repetitiveResponseRequestSchema,

@@ -71,13 +71,11 @@ describe.each(cases)(
         defaultOptions: { mutations: { retry: false } },
       })
       const invalidate = vi.spyOn(client, 'invalidateQueries')
-      useOutpatientDocAcceptanceStore
-        .getState()
-        .openDialog(mode, {
-          id: 'acceptance-9',
-          exId: 17,
-          letterNo: 'letter-4',
-        })
+      useOutpatientDocAcceptanceStore.getState().openDialog(mode, {
+        id: 'acceptance-9',
+        exId: 17,
+        letterNo: 'letter-4',
+      })
       render(
         <QueryClientProvider client={client}>
           <Component />
