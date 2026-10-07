@@ -1,17 +1,15 @@
 import { useCallback } from 'react'
 
 import {
-  CLAIM_REQUEST_FEATURES,
-  CLAIM_REQUEST_FEATURE_QUERY_KEY,
   CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS,
   type ClaimRequestQuickStatus,
   ClaimRequestStatusFilter,
 } from '@features/claim-requests'
+import { TicketsContent } from '@features/tickets/components/tickets-content'
+import { TicketProvider } from '@features/tickets/context/provider/ticket-provider'
+import { toClaimRequestsSearch } from '@features/tickets/route-adapters/claim-request-navigation'
 import { useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-
-import { TicketProvider } from '../context/provider/ticket-provider'
-import { TicketsContent } from './tickets-content'
 
 export function ClaimRequestsTicketsPage() {
   const { t } = useTranslation()
@@ -22,11 +20,7 @@ export function ClaimRequestsTicketsPage() {
 
       router.navigate({
         replace: true,
-        search: {
-          [CLAIM_REQUEST_FEATURE_QUERY_KEY]:
-            CLAIM_REQUEST_FEATURES.claimRequests,
-          quickStatus: status,
-        } as never,
+        search: toClaimRequestsSearch(status) as never,
         to: './',
       })
     },

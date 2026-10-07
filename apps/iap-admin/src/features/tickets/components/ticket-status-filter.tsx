@@ -1,5 +1,7 @@
 import { useLayoutEffect } from 'react'
 
+import { TICKET_STATUS_TRANSLATION_KEYS } from '@features/tickets/constants/tickets-constant'
+import { toTicketStatusSearch } from '@features/tickets/route-adapters/ticket-navigation'
 import { ticketStatusSchema } from '@iap/api-types'
 import { cn } from '@iap/ui'
 import { useLocation, useRouter } from '@tanstack/react-router'
@@ -70,11 +72,11 @@ export function TicketStatusFilter(props: TicketStatusFilterProps) {
             onClick={() => {
               router.navigate({
                 replace: true,
-                search: (previous) => ({
-                  ...previous,
-                  page: undefined,
-                  status,
-                }),
+                search: (previous) =>
+                  toTicketStatusSearch(
+                    previous as Record<string, string | string[] | undefined>,
+                    status
+                  ),
                 to: './',
               })
             }}
@@ -83,7 +85,7 @@ export function TicketStatusFilter(props: TicketStatusFilterProps) {
             <p>
               {status === 'ALL'
                 ? t('common.all')
-                : t(`tickets.status.${status}` as never)}
+                : t(TICKET_STATUS_TRANSLATION_KEYS[status])}
             </p>
             <p>({displayedCount})</p>
           </button>

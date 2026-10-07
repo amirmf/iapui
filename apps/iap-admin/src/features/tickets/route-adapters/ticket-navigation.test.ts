@@ -1,8 +1,7 @@
 import { CLAIM_REQUEST_FEATURES } from '@features/claim-requests'
+import { toClaimRequestsSearch } from '@features/tickets/route-adapters/claim-request-navigation'
+import { toTicketStatusSearch } from '@features/tickets/route-adapters/ticket-navigation'
 import { describe, expect, it } from 'vitest'
-
-import { toClaimRequestsSearch } from './ticket-navigation'
-import { toTicketStatusSearch } from './ticket-navigation'
 
 describe('ticket navigation', () => {
   it('returns from tickets to the reference claim-request feature state', () => {

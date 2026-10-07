@@ -342,6 +342,9 @@ workspace packages → no application imports
   paths such as `../../shared/tables`, including between files in the same
   module.
 - Backend contracts live in `api-types`; transport behavior lives in `api-client`.
+- The approved tickets-specific source-acceptance exception is documented in
+  [TICKETS-REFERENCE-CONTRACT.md](TICKETS-REFERENCE-CONTRACT.md); it does not
+  change the default strict-request or common page-factory rules for other domains.
 - Every backend endpoint contract must expose Zod v4 schemas for both its request
   and response in `api-types`. API services validate outgoing requests and
   incoming responses with those schemas; TypeScript types are inferred from the

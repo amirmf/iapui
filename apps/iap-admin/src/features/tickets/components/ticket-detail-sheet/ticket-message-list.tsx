@@ -1,7 +1,10 @@
+import { TicketMessage } from '@features/tickets/components/ticket-detail-sheet/ticket-message'
+import {
+  TICKET_VISIBILITY_TRANSLATION_KEYS,
+  ticketVisibilityColors,
+} from '@features/tickets/constants/tickets-constant'
 import type { SupportTicketMessage } from '@iap/api-types'
 import { useTranslation } from 'react-i18next'
-
-import { TicketMessage } from './ticket-message'
 
 type TicketMessageListProps = {
   isError: boolean
@@ -43,6 +46,16 @@ export function TicketMessageList(props: TicketMessageListProps) {
             <TicketMessage
               key={message.id ?? message.createdAt}
               message={message}
+              visibilityLabel={
+                message.visibility
+                  ? t(TICKET_VISIBILITY_TRANSLATION_KEYS[message.visibility])
+                  : undefined
+              }
+              visibilityClassName={
+                message.visibility
+                  ? ticketVisibilityColors[message.visibility]
+                  : undefined
+              }
             />
           ))}
         </div>

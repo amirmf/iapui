@@ -1,5 +1,6 @@
 # Tickets page parity
 
+> Historical audit. Superseded by [the fresh remediation audit](tickets-page/TASK-07-VERIFIED-REMEDIATION.md). Earlier completion and deferred claims are not current evidence.
 ## Scope
 
 Implement the authenticated `/tickets` route in `iap-admin` with verified parity

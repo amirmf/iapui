@@ -1,16 +1,15 @@
 import { type ReactNode, useMemo } from 'react'
 
+import { TicketStatusFilter } from '@features/tickets/components/ticket-status-filter'
+import {
+  getTicketCategoryOptions,
+  getTicketPriorityOptions,
+} from '@features/tickets/constants/tickets-constant'
 import {
   type TableFilterBaseProps,
   TableFilterQueryParams,
 } from '@shared/tables'
 import { useTranslation } from 'react-i18next'
-
-import {
-  getTicketCategoryOptions,
-  getTicketPriorityOptions,
-} from '../model/ticket-presentation'
-import { TicketStatusFilter } from './ticket-status-filter'
 
 const filterInputClassName = 'lg:w-full'
 const filterWrapperClassName = 'w-full sm:w-1/4 xl:w-1/5 px-1'
@@ -76,6 +75,8 @@ export function TicketsDataTableToolbar(props: TicketsDataTableToolbarProps) {
         ignoreQueryParams={['status', 'features']}
         controlQueryParamKeys={['page', 'size', 'sort', 'direction']}
         presentation='reference'
+        resetPageToFirst
+        resetIgnoredQueryParams
         showReset
         textFilters={textFilters}
       />

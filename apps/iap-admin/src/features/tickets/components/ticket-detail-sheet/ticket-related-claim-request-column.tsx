@@ -1,12 +1,13 @@
-import { ReadonlyAssessmentItems } from '@features/assessment-items'
 import {
-  ClaimRequestReadonlyInfoList,
-  claimRequestService,
-} from '@features/claim-requests'
+  AssessmentItemsCardList,
+  useAssessmentItemsData,
+} from '@features/assessment-items'
+import { ClaimRequestReadonlyInfoList } from '@features/claim-requests'
+import { ticketRelatedClaimRequestQueryOptions } from '@features/tickets/queries/ticket-related-claim-request-query'
 import type { SupportTicket } from '@iap/api-types'
 import { Button } from '@iap/ui'
+import { IconExternalLink } from '@tabler/icons-react'
 import { useQuery } from '@tanstack/react-query'
-import { ExternalLink } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 type TicketRelatedClaimRequestColumnProps = {
@@ -20,12 +21,11 @@ export function TicketRelatedClaimRequestColumn(
   const { isOpen, ticket } = props
   const { t } = useTranslation()
   const claimRequestId = ticket?.claimRequestId?.trim() || undefined
-  const claimRequestQuery = useQuery({
-    enabled: isOpen && Boolean(claimRequestId),
-    queryFn: ({ signal }) =>
-      claimRequestService.getById(claimRequestId!, { signal }),
-    queryKey: ['claimRequest', claimRequestId],
-  })
+  const claimRequestQuery = useQuery(
+    ticketRelatedClaimRequestQueryOptions(claimRequestId, isOpen)
+  )
+  const assessmentClaimRequestId = isOpen ? claimRequestId : undefined
+  const assessmentItemsQuery = useAssessmentItemsData(assessmentClaimRequestId)
 
   return (
     <section
@@ -90,16 +90,29 @@ export function TicketRelatedClaimRequestColumn(
                   rel='noopener noreferrer'
                   target='_blank'
                 >
-                  <ExternalLink aria-hidden='true' size={12} />
+                  <IconExternalLink aria-hidden='true' size={12} />
                   <span>{t('tickets.detail.openClaimRequest')}</span>
                 </a>
               </Button>
             </div>
-            <ReadonlyAssessmentItems
-              claimRequest={claimRequestQuery.data}
-              claimRequestId={claimRequestId}
-              enabled={isOpen}
-            />
+            {!assessmentClaimRequestId ? (
+              <p className='text-sm text-muted-foreground'>
+                {t('tickets.relatedClaimRequest.assessmentItemsUnavailable')}
+              </p>
+            ) : assessmentItemsQuery.isError ? (
+              <p className='text-sm text-destructive'>
+                {t('tickets.relatedClaimRequest.assessmentItemsError')}
+              </p>
+            ) : (
+              <AssessmentItemsCardList
+                claimRequest={claimRequestQuery.data}
+                claimRequestId={assessmentClaimRequestId}
+                isLoading={assessmentItemsQuery.isLoading}
+                items={assessmentItemsQuery.data}
+                mode='readonly'
+                showEmptyMessage
+              />
+            )}
           </section>
         </>
       ) : null}

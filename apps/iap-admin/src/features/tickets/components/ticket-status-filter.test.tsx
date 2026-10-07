@@ -1,8 +1,7 @@
 // @vitest-environment jsdom
+import { TicketStatusFilter } from '@features/tickets/components/ticket-status-filter'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-
-import { TicketStatusFilter } from './ticket-status-filter'
 
 const router = vi.hoisted(() => ({ navigate: vi.fn() }))
 const location = vi.hoisted(() => ({

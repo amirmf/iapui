@@ -1,12 +1,14 @@
-import type { ApiFilterParams } from '@iap/shared-lib'
+import type { FindSupportTicketsRequest } from '@iap/api-types'
 import type { TableFilterSearch } from '@shared/tables'
 import type { SortingState } from '@tanstack/react-table'
 
 export function toTicketApiFilters(
   filters: TableFilterSearch,
   sorting: SortingState
-): ApiFilterParams {
-  const ticketFilters: ApiFilterParams = { ...filters }
+): FindSupportTicketsRequest['query']['filters'] {
+  const ticketFilters: FindSupportTicketsRequest['query']['filters'] = {
+    ...filters,
+  }
   delete ticketFilters.features
   if (ticketFilters.status === 'ALL') {
     delete ticketFilters.status

@@ -1,13 +1,19 @@
 import { type FormEvent, useState } from 'react'
 
+import { TicketCommunicationColumn } from '@features/tickets/components/ticket-detail-sheet/ticket-communication-column'
+import { TicketDetailSheetHeader } from '@features/tickets/components/ticket-detail-sheet/ticket-detail-sheet-header'
+import { TicketRelatedClaimRequestColumn } from '@features/tickets/components/ticket-detail-sheet/ticket-related-claim-request-column'
+import { useTicketStore } from '@features/tickets/context/store/ticket-store'
+import {
+  closeTicketMutationOptions,
+  createTicketMessageMutationOptions,
+} from '@features/tickets/queries/ticket-mutations'
+import {
+  ticketDetailQueryOptions,
+  ticketMessagesQueryOptions,
+} from '@features/tickets/queries/ticket-queries'
 import { Sheet, SheetContent } from '@iap/ui'
 import { useMutation, useQuery } from '@tanstack/react-query'
-
-import { useTicketStore } from '../context/store/ticket-store'
-import { ticketService } from '../services/ticket-service'
-import { TicketCommunicationColumn } from './ticket-communication-column'
-import { TicketDetailSheetHeader } from './ticket-detail-sheet-header'
-import { TicketRelatedClaimRequestColumn } from './ticket-related-claim-request-column'
 
 type TicketDetailSheetProps = {
   refetch: () => Promise<unknown>
@@ -15,35 +21,15 @@ type TicketDetailSheetProps = {
 
 export function TicketDetailSheet(props: TicketDetailSheetProps) {
   const { refetch } = props
-  const currentRow = useTicketStore((state) => state.currentRow)
+  const ticketId = useTicketStore((state) => state.currentTicketId)
   const open = useTicketStore((state) => state.open)
   const setOpen = useTicketStore((state) => state.setOpen)
   const [body, setBody] = useState('')
-  const ticketId = currentRow?.id ?? null
   const isOpen = open === 'detail'
-  const ticketQuery = useQuery({
-    enabled: isOpen && Boolean(ticketId),
-    initialData: currentRow ?? undefined,
-    queryFn: ({ signal }) =>
-      ticketService.findById({ path: { id: ticketId! }, signal }),
-    queryKey: ['tickets', ticketId],
-  })
-  const messagesQuery = useQuery({
-    enabled: isOpen && Boolean(ticketId),
-    queryFn: ({ signal }) =>
-      ticketService.findMessages({
-        path: { ticketId: ticketId! },
-        query: { size: 100 },
-        signal,
-      }),
-    queryKey: ['ticketMessages', ticketId],
-  })
+  const ticketQuery = useQuery(ticketDetailQueryOptions(ticketId, isOpen))
+  const messagesQuery = useQuery(ticketMessagesQueryOptions(ticketId, isOpen))
   const createMessage = useMutation({
-    mutationFn: () =>
-      ticketService.createMessage({
-        body: { body },
-        path: { ticketId: ticketId! },
-      }),
+    ...createTicketMessageMutationOptions(ticketId, body),
     onSuccess: async () => {
       setBody('')
       await messagesQuery.refetch()
@@ -51,7 +37,7 @@ export function TicketDetailSheet(props: TicketDetailSheetProps) {
     },
   })
   const closeTicket = useMutation({
-    mutationFn: () => ticketService.close({ path: { ticketId: ticketId! } }),
+    ...closeTicketMutationOptions(ticketId),
     onSuccess: async () => {
       await ticketQuery.refetch()
       await refetch()

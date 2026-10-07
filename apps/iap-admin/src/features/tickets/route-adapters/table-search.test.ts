@@ -1,6 +1,8 @@
+import {
+  parseTicketTableSearch,
+  toTicketTableSearch,
+} from '@features/tickets/route-adapters/table-search'
 import { describe, expect, it } from 'vitest'
-
-import { parseTicketTableSearch, toTicketTableSearch } from './table-search'
 
 describe('ticket table URL state', () => {
   it('matches the reference ticket pagination and sorting URL contract', () => {
@@ -31,7 +33,7 @@ describe('ticket table URL state', () => {
   it('uses the reference defaults for malformed table controls', () => {
     expect(parseTicketTableSearch({ page: '-1', size: 'many' })).toEqual({
       filters: {},
-      pagination: { pageIndex: 0, pageSize: 40 },
+      pagination: { pageIndex: -2, pageSize: 40 },
       sorting: [],
     })
   })

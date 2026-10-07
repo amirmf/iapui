@@ -1,12 +1,11 @@
 import type { FormEvent } from 'react'
 
+import { TicketDetailSheetActions } from '@features/tickets/components/ticket-detail-sheet/ticket-detail-sheet-actions'
+import { TicketMessageList } from '@features/tickets/components/ticket-detail-sheet/ticket-message-list'
+import { TicketReadonlyDetail } from '@features/tickets/components/ticket-detail-sheet/ticket-readonly-detail'
 import type { SupportTicket, SupportTicketMessage } from '@iap/api-types'
 import { Textarea } from '@iap/ui'
 import { useTranslation } from 'react-i18next'
-
-import { TicketDetailSheetActions } from './ticket-detail-sheet-actions'
-import { TicketMessageList } from './ticket-message-list'
-import { TicketReadonlyDetail } from './ticket-readonly-detail'
 
 type TicketCommunicationColumnProps = {
   body: string

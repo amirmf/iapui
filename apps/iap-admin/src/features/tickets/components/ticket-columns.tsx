@@ -1,21 +1,20 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 
+import { TicketRowActions } from '@features/tickets/components/ticket-row-actions'
+import {
+  TICKET_CATEGORY_TRANSLATION_KEYS,
+  TICKET_PRIORITY_TRANSLATION_KEYS,
+  TICKET_STATUS_TRANSLATION_KEYS,
+  ticketCategoryColors,
+  ticketPriorityColors,
+  ticketStatusColors,
+} from '@features/tickets/constants/tickets-constant'
+import { useOpenTicket } from '@features/tickets/context/store/use-open-ticket'
 import type { SupportTicket } from '@iap/api-types'
 import { Badge, Button, LongText, cn, formatDateTime } from '@iap/ui'
 import { TwoLineCell, TwoLineCellWrapper, TwoLineHeader } from '@shared/tables'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
-
-import { useTicketStore } from '../context/store/ticket-store'
-import {
-  ticketCategoryClasses,
-  ticketCategoryTranslationKeys,
-  ticketPriorityClasses,
-  ticketPriorityTranslationKeys,
-  ticketStatusClasses,
-  ticketStatusTranslationKeys,
-} from '../model/ticket-presentation'
-import { TicketRowActions } from './ticket-row-actions'
 
 const columnHelper = createColumnHelper<SupportTicket>()
 
@@ -23,17 +22,8 @@ export type TicketColumnsVariant = 'claim-request-context' | 'default'
 
 export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
   const { t, i18n } = useTranslation()
-  const setCurrentRow = useTicketStore((state) => state.setCurrentRow)
-  const setOpen = useTicketStore((state) => state.setOpen)
+  const openTicket = useOpenTicket()
   const showClaimRequestId = variant === 'claim-request-context'
-
-  const openTicket = useCallback(
-    (ticket: SupportTicket) => {
-      setCurrentRow(ticket)
-      setOpen('detail')
-    },
-    [setCurrentRow, setOpen]
-  )
 
   return useMemo(
     () => [
@@ -86,10 +76,10 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
                   <Badge
                     presentation='reference'
                     key={category}
-                    className={cn('w-fit', ticketCategoryClasses[category])}
+                    className={cn('w-fit', ticketCategoryColors[category])}
                     variant='outline'
                   >
-                    {t(ticketCategoryTranslationKeys[category])}
+                    {t(TICKET_CATEGORY_TRANSLATION_KEYS[category])}
                   </Badge>
                 ) : (
                   '-'
@@ -130,9 +120,9 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
       }),
       columnHelper.display({
         cell: (context) => (
-          <span className='truncate text-sm font-medium'>
+          <div className='truncate text-sm font-medium'>
             {context.row.original.assignedUserAccount?.displayName ?? '-'}
-          </span>
+          </div>
         ),
         header: ({ column }) => (
           <TwoLineHeader
@@ -154,10 +144,10 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
               {status ? (
                 <Badge
                   presentation='reference'
-                  className={cn('w-fit', ticketStatusClasses[status])}
+                  className={cn('w-fit', ticketStatusColors[status])}
                   variant='outline'
                 >
-                  {t(ticketStatusTranslationKeys[status])}
+                  {t(TICKET_STATUS_TRANSLATION_KEYS[status])}
                 </Badge>
               ) : (
                 '-'
@@ -165,10 +155,10 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
               {priority ? (
                 <Badge
                   presentation='reference'
-                  className={cn('w-fit', ticketPriorityClasses[priority])}
+                  className={cn('w-fit', ticketPriorityColors[priority])}
                   variant='outline'
                 >
-                  {t(ticketPriorityTranslationKeys[priority])}
+                  {t(TICKET_PRIORITY_TRANSLATION_KEYS[priority])}
                 </Badge>
               ) : null}
             </div>

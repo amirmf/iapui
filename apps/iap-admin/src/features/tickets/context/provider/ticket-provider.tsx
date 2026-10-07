@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { useEffect } from 'react'
 
-import { useTicketStore } from '../store/ticket-store'
+import { useTicketStore } from '@features/tickets/context/store/ticket-store'
 
 type TicketProviderProps = {
   children: ReactNode

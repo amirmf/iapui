@@ -1,6 +1,5 @@
+import { ticketService } from '@features/tickets/services/ticket-service'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-
-import { ticketService } from './ticket-service'
 
 const apiClient = vi.hoisted(() => ({
   get: vi.fn(),
@@ -19,20 +18,24 @@ describe('ticketService', () => {
     apiClient.post.mockResolvedValue({ data: {} })
     const signal = new AbortController().signal
 
-    await ticketService.findPage({
-      query: {
-        filters: { status: 'ASSIGNED', tags: ['urgent'] },
-        page: 1,
-        size: 30,
+    await ticketService.getPageFull(
+      {
+        query: {
+          filters: { status: 'ASSIGNED', tags: ['urgent'] },
+          page: 1,
+          size: 30,
+        },
       },
-      signal,
-    })
-    await ticketService.findById({ path: { id: ticketId }, signal })
-    await ticketService.findMessages({
-      path: { ticketId },
-      query: { page: 0, size: 100 },
-      signal,
-    })
+      { signal }
+    )
+    await ticketService.getById({ path: { id: ticketId } }, { signal })
+    await ticketService.getMessages(
+      {
+        path: { ticketId },
+        query: { page: 0, size: 100 },
+      },
+      { signal }
+    )
     await ticketService.createMessage({
       body: { body: 'پیام' },
       path: { ticketId },
@@ -78,7 +81,7 @@ describe('ticketService', () => {
 
   it('rejects malformed path IDs before transport', async () => {
     await expect(
-      ticketService.findById({ path: { id: 'invalid' } })
+      ticketService.getById({ path: { id: 'invalid' } })
     ).rejects.toThrow()
     await expect(
       ticketService.createMessage({
@@ -93,8 +96,8 @@ describe('ticketService', () => {
   it('applies the reference defaults for omitted page requests', async () => {
     apiClient.get.mockResolvedValue({ data: { content: [] } })
 
-    await ticketService.findPage({ query: {} })
-    await ticketService.findMessages({ path: { ticketId }, query: {} })
+    await ticketService.getPageFull({ query: { filters: {} } })
+    await ticketService.getMessages({ path: { ticketId }, query: {} })
 
     expect(apiClient.get).toHaveBeenNthCalledWith(
       1,

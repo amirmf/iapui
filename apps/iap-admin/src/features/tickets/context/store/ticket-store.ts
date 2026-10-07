@@ -1,27 +1,29 @@
-import type { SupportTicket } from '@iap/api-types'
 import type { RowSelectionState, Updater } from '@tanstack/react-table'
 import { create } from 'zustand'
 
 type TicketSheet = 'detail'
 
 type TicketState = {
-  currentRow: SupportTicket | null
+  currentTicketId: string | null
   open: TicketSheet | null
   reset: () => void
   rowSelection: RowSelectionState
-  setCurrentRow: (currentRow: SupportTicket | null) => void
+  setCurrentTicketId: (currentTicketId: string | null) => void
   setOpen: (open: TicketSheet | null) => void
   setRowSelection: (updater: Updater<RowSelectionState>) => void
 }
 
 export const useTicketStore = create<TicketState>((set) => ({
-  currentRow: null,
+  currentTicketId: null,
   open: null,
-  reset: () => set({ currentRow: null, open: null, rowSelection: {} }),
+  reset: () => set({ currentTicketId: null, open: null, rowSelection: {} }),
   rowSelection: {},
-  setCurrentRow: (currentRow) => set({ currentRow }),
+  setCurrentTicketId: (currentTicketId) => set({ currentTicketId }),
   setOpen: (open) =>
-    set((state) => ({ currentRow: open ? state.currentRow : null, open })),
+    set((state) => ({
+      currentTicketId: open ? state.currentTicketId : null,
+      open,
+    })),
   setRowSelection: (updater) =>
     set((state) => ({
       rowSelection:
