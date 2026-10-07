@@ -61,7 +61,7 @@ export const medicalCenterInvoicePageSchema = z.object({
   totalElements: z.number().int().optional(),
   totalPages: z.number().int().optional(),
   size: z.number().int().optional(),
-  content: z.array(medicalCenterInvoiceSchema).optional(),
+  content: z.array(medicalCenterInvoiceSchema).nullish(),
   number: z.number().int().optional(),
   sort: sortSchema.optional(),
   numberOfElements: z.number().int().optional(),

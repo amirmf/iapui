@@ -61,7 +61,7 @@ describe('aiAssessmentRuleService', () => {
         }),
       })
     )
-    expect(result.content[0]?.id).toBe('rule-1')
+    expect(result.content?.[0]?.id).toBe('rule-1')
   })
 
   it('gets rule by ID', async () => {

@@ -183,7 +183,7 @@ export const pageUserAccountSchema = z
     first: z.boolean().optional(),
     last: z.boolean().optional(),
     empty: z.boolean().optional(),
-    content: z.array(userAccountSchema).optional(),
+    content: z.array(userAccountSchema).nullish(),
   })
   .loose()
 export type PageUserAccount = z.infer<typeof pageUserAccountSchema>

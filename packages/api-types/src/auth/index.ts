@@ -228,7 +228,7 @@ const otpPageableSchema = z
 
 export const pageSignupOtpListSchema = z
   .object({
-    content: z.array(signupOtpListSchema),
+    content: z.array(signupOtpListSchema).nullish(),
     empty: z.boolean(),
     first: z.boolean(),
     last: z.boolean(),
@@ -244,7 +244,7 @@ export const pageSignupOtpListSchema = z
 
 export const pagePasswordResetOtpListSchema = z
   .object({
-    content: z.array(passwordResetOtpListSchema),
+    content: z.array(passwordResetOtpListSchema).nullish(),
     empty: z.boolean(),
     first: z.boolean(),
     last: z.boolean(),

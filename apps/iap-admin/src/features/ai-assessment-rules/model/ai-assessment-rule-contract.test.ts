@@ -57,7 +57,7 @@ describe('ai-assessment-rule contracts', () => {
     }
     const parsed = pageAiAssessmentRuleSchema.parse(pageRaw)
     expect(parsed.totalElements).toBe(1)
-    expect(parsed.content[0]?.id).toBe('rule-1')
+    expect(parsed.content?.[0]?.id).toBe('rule-1')
   })
 
   it('validates detail form schema json validation', () => {

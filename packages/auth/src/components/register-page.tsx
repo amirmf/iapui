@@ -30,7 +30,8 @@ import { AuthCard } from './auth-card'
 import type { AuthPageProps } from './auth-page.types'
 import { PasswordFields } from './password-fields'
 
-export function RegisterPage({ brand, onNavigate }: AuthPageProps) {
+export function RegisterPage(props: AuthPageProps) {
+  const { brand, onNavigate, footerActions } = props
   const { t } = useTranslation()
   const [identity, setIdentity] = useState<RegistrationIdentity | null>(null)
 
@@ -60,6 +61,7 @@ export function RegisterPage({ brand, onNavigate }: AuthPageProps) {
               {t('auth.login.tutorial')}
             </a>
           </Button>
+          {footerActions}
         </>
       }
       title={t('auth.register.title')}

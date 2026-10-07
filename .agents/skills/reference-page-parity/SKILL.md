@@ -66,6 +66,12 @@ Use this skill when a target page must match a local reference implementation.
 
 ## Contract precedence and integration
 
+- Paginated response `content` is always nullish under the accepted workspace
+  architecture. Use `.nullish()` even when the reference rejects null or missing
+  content. Validate present array items and consume `content ?? []` safely.
+  This accepted exception does not require another approval. Request pagination
+  defaults and unknown-key handling remain separate decisions.
+
 - If a reference contract conflicts with an accepted architecture convention,
   ask which semantics take precedence before changing validation. Record an
   explicitly authorized exception with its page scope; do not extend it to other
@@ -93,3 +99,17 @@ Use this skill when a target page must match a local reference implementation.
 - In shared schema factories, type translation callbacks by the keys they
   accept instead of importing application-augmented i18next types. Verify all
   consuming applications: their locale type augmentations can differ.
+
+## Shared Support integration
+
+When a reference page mounts Support actions, read
+`docs/architecture/SUPPORT-INTEGRATION.md` and its scoped contract record. Reuse
+public `@iap/support` actions with verified source feature keys; do not mount
+another widget inside a page already covered by its layout. Compare mobile auth
+entry points as well as the floating desktop control. Normalize canonical paths
+at the Router boundary before selecting public/private Support transport.
+
+My-IAP pages belong only to iap-app. Customer claim links use the configured
+customer application origin and `/myclaims/{encoded-id}` without `/myiap`;
+backend `/my/iap-ticket` paths remain unchanged. Reuse tenant deployment
+configuration instead of inventing a URL or adding an admin compatibility route.

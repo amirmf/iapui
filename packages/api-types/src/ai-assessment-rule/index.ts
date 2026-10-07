@@ -204,7 +204,7 @@ export type AiAssessmentRule = z.infer<typeof aiAssessmentRuleSchema>
 
 export const pageAiAssessmentRuleSchema = z
   .object({
-    content: z.array(aiAssessmentRuleSchema),
+    content: z.array(aiAssessmentRuleSchema).nullish(),
     empty: z.boolean(),
     first: z.boolean(),
     last: z.boolean(),

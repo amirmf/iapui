@@ -63,7 +63,7 @@ export const pageBranchSchema = z.object({
   totalElements: z.number().optional(),
   pageable: pageableObjectSchema.optional(),
   size: z.number().optional(),
-  content: z.array(branchSchema),
+  content: z.array(branchSchema).nullish(),
   number: z.number().optional(),
   sort: sortObjectSchema.optional(),
   first: z.boolean().optional(),

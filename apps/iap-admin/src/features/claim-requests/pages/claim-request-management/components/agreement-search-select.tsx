@@ -41,7 +41,7 @@ export function AgreementSearchSelect(props: {
     refetchOnWindowFocus: false,
   })
   const items =
-    query.data?.content.map((item) => ({
+    query.data?.content?.map((item) => ({
       label: item.title ?? item.code ?? item.id ?? '',
       value: item.id ?? '',
     })) ?? []

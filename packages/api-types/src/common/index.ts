@@ -21,15 +21,15 @@ export function createPageRequestSchema() {
 /**
  * Creates the common backend page response contract.
  *
- * Content remains required because consumers render it directly. Pagination
- * metadata is nullable and optional to tolerate endpoints that omit it.
+ * Content is always nullish; consumers treat missing or null content as an empty list.
+ * Pagination metadata is nullable and optional to tolerate incomplete responses.
  */
 export function createPageResponseSchema<TItemSchema extends z.ZodType>(
   itemSchema: TItemSchema
 ) {
   return z
     .object({
-      content: z.array(itemSchema),
+      content: z.array(itemSchema).nullish(),
       empty: z.boolean().nullish(),
       first: z.boolean().nullish(),
       last: z.boolean().nullish(),

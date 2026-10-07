@@ -1,9 +1,15 @@
 {
   "environment": {
-    "development": { "VITE_API_BASE_URL": "https://iapapi.ostaadx.ai/api/" },
-    "production": { "VITE_API_BASE_URL": "https://daiapi.ostaadx.ai/api/" }
+    "development": {
+      "VITE_API_BASE_URL": "https://iapapi.ostaadx.ai/api/"
+    },
+    "production": {
+      "VITE_API_BASE_URL": "https://daiapi.ostaadx.ai/api/"
+    }
   },
-  "assets": { "loginLogo": "/images/logo/dana/dana-logo.svg" },
+  "assets": {
+    "loginLogo": "/images/logo/dana/dana-logo.svg"
+  },
   "domain_url": {
     "app": "http://localhost:5173",
     "admin": "http://localhost:5174"
@@ -21,5 +27,9 @@
       "twitterTitle": "meta.twitterTitle",
       "twitterDescription": "meta.twitterDescription"
     }
+  },
+  "myIapNavigation": {
+    "background": "rgba(62, 64, 149, 1)",
+    "backgroundDark": "rgba(16, 18, 103, 1)"
   }
 }

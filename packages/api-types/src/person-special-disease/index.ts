@@ -59,7 +59,7 @@ const pageableObjectSchema = z
   .loose()
 export const pagePersonSpecialDiseaseSchema = z
   .object({
-    content: z.array(personSpecialDiseaseSchema),
+    content: z.array(personSpecialDiseaseSchema).nullish(),
     totalPages: z.number().int(),
     totalElements: z.number(),
     number: z.number().int(),

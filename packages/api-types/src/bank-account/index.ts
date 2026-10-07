@@ -24,7 +24,7 @@ export const pageBankAccountSchema = z.object({
   totalPages: z.number().optional(),
   totalElements: z.number().optional(),
   size: z.number().optional(),
-  content: bankAccountListSchema.optional(),
+  content: bankAccountListSchema.nullish(),
   number: z.number().optional(),
   first: z.boolean().optional(),
   last: z.boolean().optional(),

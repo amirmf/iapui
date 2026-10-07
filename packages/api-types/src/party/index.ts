@@ -91,7 +91,7 @@ export const partyPageRequestSchema = z.object({
 })
 export const pagePartySchema = z
   .object({
-    content: z.array(partySchema).optional(),
+    content: z.array(partySchema).nullish(),
     totalElements: z.number().optional(),
     totalPages: z.number().int().optional(),
     size: z.number().int().optional(),

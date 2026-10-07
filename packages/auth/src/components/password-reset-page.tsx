@@ -20,7 +20,8 @@ import { AuthCard } from './auth-card'
 import type { AuthPageProps } from './auth-page.types'
 import { PasswordFields } from './password-fields'
 
-export function PasswordResetPage({ brand, onNavigate }: AuthPageProps) {
+export function PasswordResetPage(props: AuthPageProps) {
+  const { brand, onNavigate, footerActions } = props
   const { t } = useTranslation()
   const [identity, setIdentity] = useState<PasswordResetIdentity | null>(null)
 
@@ -33,17 +34,20 @@ export function PasswordResetPage({ brand, onNavigate }: AuthPageProps) {
           : t('auth.passwordReset.description')
       }
       footer={
-        <div>
-          <span>{t('auth.passwordReset.remembered')}</span>
-          <Button
-            className='text-primary mr-2 h-auto min-h-0 px-0 py-0 font-medium'
-            onClick={() => onNavigate('login')}
-            type='button'
-            variant='link'
-          >
-            {t('auth.passwordReset.backToLogin')}
-          </Button>
-        </div>
+        <>
+          <div>
+            <span>{t('auth.passwordReset.remembered')}</span>
+            <Button
+              className='text-primary mr-2 h-auto min-h-0 px-0 py-0 font-medium'
+              onClick={() => onNavigate('login')}
+              type='button'
+              variant='link'
+            >
+              {t('auth.passwordReset.backToLogin')}
+            </Button>
+          </div>
+          {footerActions}
+        </>
       }
       title={
         identity

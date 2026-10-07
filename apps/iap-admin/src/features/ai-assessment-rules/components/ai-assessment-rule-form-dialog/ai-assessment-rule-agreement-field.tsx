@@ -96,7 +96,7 @@ export function AgreementField<
     [agreementPage, valueType]
   )
 
-  const selectedAgreement = selectedAgreementPage?.content[0]
+  const selectedAgreement = selectedAgreementPage?.content?.[0]
   const selectedFromLookup = useMemo(() => {
     if (!selectedAgreement) return null
     const optionValue = getAgreementOptionValue(selectedAgreement, valueType)

@@ -65,6 +65,25 @@ describe('panel route boundaries', () => {
     }
   )
 
+  it.each(['/myiap', '/myiap/myclaims', '/myiap/myclaims/opaque-id'])(
+    'does not register %s in admin',
+    (pathname) => {
+      const router = makeRouter()
+      expect(
+        Object.values(router.routesById).some((route) =>
+          route.fullPath.startsWith('/myiap')
+        )
+      ).toBe(false)
+      for (const url of [pathname, `${pathname}/`]) {
+        expect(
+          router
+            .matchRoutes(url)
+            .some((match) => match.routeId.includes('/myiap'))
+        ).toBe(false)
+      }
+    }
+  )
+
   it('keeps the agent root layout-only and the operations branch separate', () => {
     const router = makeRouter()
     expect(router.matchRoutes('/agent').at(-1)?.routeId).toBe('/_agent/agent')

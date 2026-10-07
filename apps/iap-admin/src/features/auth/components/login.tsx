@@ -1,5 +1,6 @@
 import { useAuthNavigation } from '@features/auth/route-adapters/use-auth-navigation'
 import { LoginPage, useLoginPageAccess } from '@iap/auth'
+import { SupportFlowOpenButton } from '@iap/support'
 import { authBrand } from '@shared/config/auth-brand'
 
 import { AuthPageLoading } from './auth-page-loading'
@@ -11,5 +12,11 @@ export function Login() {
   if (isLoading) return <AuthPageLoading />
   if (isAuthenticated) return null
 
-  return <LoginPage brand={authBrand} onNavigate={onNavigate} />
+  return (
+    <LoginPage
+      brand={authBrand}
+      onNavigate={onNavigate}
+      footerActions={<SupportFlowOpenButton colorContext='auth' />}
+    />
+  )
 }

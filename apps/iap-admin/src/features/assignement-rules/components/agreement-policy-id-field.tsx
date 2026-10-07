@@ -73,7 +73,7 @@ export function AgreementPolicyIdField<
     [agreementPage]
   )
 
-  const selectedAgreement = selectedAgreementPage?.content[0]
+  const selectedAgreement = selectedAgreementPage?.content?.[0]
   const selectedFromLookup = useMemo(() => {
     if (!selectedAgreement || selectedAgreement.extPolicyId == null) return null
     return {

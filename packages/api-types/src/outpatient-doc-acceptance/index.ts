@@ -213,7 +213,7 @@ export const pageOutpatientDocAcceptanceSchema = z
     totalElements: z.number(),
     pageable: pageableObjectSchema.optional(),
     size: z.number(),
-    content: z.array(outpatientDocAcceptanceSchema),
+    content: z.array(outpatientDocAcceptanceSchema).nullish(),
     number: z.number(),
     sort: sortObjectSchema.optional(),
     numberOfElements: z.number(),

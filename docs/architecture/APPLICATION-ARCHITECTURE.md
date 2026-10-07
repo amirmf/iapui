@@ -82,6 +82,10 @@ When implementation begins:
   use a matching page directory for page-specific UI when that improves
   discoverability; it must not duplicate reusable route logic.
 
+My-IAP pages and routes belong exclusively to `iap-app`. Do not create My-IAP
+journeys or placeholder routes in `iap-admin`; shared Support ticket views and
+backend contracts do not change this page ownership.
+
 ### Admin panel route partitions
 
 `iap-admin` groups panel routes into independent sibling layout boundaries:
@@ -342,6 +346,8 @@ workspace packages → no application imports
   paths such as `../../shared/tables`, including between files in the same
   module.
 - Backend contracts live in `api-types`; transport behavior lives in `api-client`.
+- The approved Support flow and My-IAP request parity decision is documented
+  in [SUPPORT-REFERENCE-CONTRACT.md](SUPPORT-REFERENCE-CONTRACT.md).
 - The approved tickets-specific source-acceptance exception is documented in
   [TICKETS-REFERENCE-CONTRACT.md](TICKETS-REFERENCE-CONTRACT.md); it does not
   change the default strict-request or common page-factory rules for other domains.
@@ -361,9 +367,15 @@ workspace packages → no application imports
   chaining `.optional()` after `.nullish()`).
 - General-purpose API contract schemas live in `@iap/api-types/src/common/`.
   Paginated backend responses use its `createPageResponseSchema` factory. Pass
-  only the content-item schema; `content` remains required, while pagination
-  metadata is nullable and optional to tolerate incomplete backend metadata
-  without weakening item validation.
+  only the content-item schema. Paginated response `content` is always nullish
+  across all domains, including independent page schemas: use `.nullish()` to
+  accept both missing content and `null`. Validate every item when an array is
+  present. Consumers treat missing or null content as an empty collection
+  (`content ?? []`). Pagination metadata remains nullable and optional.
+  This workspace-wide decision was explicitly accepted on 2026-10-07; earlier
+  task records describing required content are historical evidence, not current
+  implementation guidance. Request pagination defaults and validation rules
+  are unaffected by this response-field decision.
 - Filterable paginated request contracts use `createPageRequestSchema` from
   `@iap/api-types/src/common/`. Its `filters` field uses the shared
   `pageFiltersSchema` from `@iap/shared-lib`, which is also the input contract

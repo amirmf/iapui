@@ -17,6 +17,10 @@ const brandSchema = z.object({
     loginCompany: z.string().min(1),
     loginTitle: z.string().min(1),
   }),
+  myIapNavigation: z.object({
+    background: z.string().min(1),
+    backgroundDark: z.string().min(1),
+  }),
   metadata: z.object({
     translationKeys: z.object({
       description: z.string().min(1),
@@ -75,6 +79,8 @@ export async function prepareTenant({ mode, root = process.cwd() }) {
     `VITE_IAP_ADMIN_DOMAIN_URL=${JSON.stringify(brand.domain_url.admin)}`,
     `VITE_LOGIN_LOGO=${JSON.stringify(brand.assets.loginLogo)}`,
     `VITE_LOGIN_TITLE=${JSON.stringify(brand.identity.loginTitle)}`,
+    `VITE_MY_IAP_NAV_BACKGROUND=${JSON.stringify(brand.myIapNavigation.background)}`,
+    `VITE_MY_IAP_NAV_BACKGROUND_DARK=${JSON.stringify(brand.myIapNavigation.backgroundDark)}`,
     `VITE_LOGIN_COMPANY=${JSON.stringify(brand.identity.loginCompany)}`,
     `VITE_META_TITLE=${JSON.stringify(getTranslation(locale, translationKeys.title))}`,
     `VITE_META_META_TITLE=${JSON.stringify(getTranslation(locale, translationKeys.metaTitle))}`,

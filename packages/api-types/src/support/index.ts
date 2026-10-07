@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
-import { createPageResponseSchema } from '../common'
+import { claimRequestStatusSchema } from '../claim-request'
+import { ticketStatusSchema } from '../tickets'
 
 const supportParametersContextValueSchema = z.union([
   z.object({}).loose(),
@@ -14,67 +15,105 @@ export const supportParametersContextSchema = z.record(
 )
 
 export const supportFlowRequestSchema = z.object({
+  userPrompt: z.string().optional(),
+  parametersContext: supportParametersContextSchema.optional(),
+  selectedQuestionKey: z.string().optional(),
+  questionStack: z.array(z.string()).optional(),
+  pageKey: z.string().optional(),
   featureKeys: z.array(z.string()).optional(),
   optionsPage: z.number().int().optional(),
   optionsSize: z.number().int().optional(),
-  pageKey: z.string().optional(),
-  parametersContext: supportParametersContextSchema.optional(),
-  questionStack: z.array(z.string()).optional(),
-  selectedQuestionKey: z.string().optional(),
-  userPrompt: z.string().optional(),
 })
 
 export const supportOptionSchema = z.object({
-  amount: z.number().nullable().optional(),
-  businessKey: z.number().int().nullable().optional(),
-  createdAt: z.string().nullable().optional(),
-  displayName: z.string().nullable().optional(),
-  expectedAnswerTime: z.string().nullable().optional(),
-  id: z.string().nullable().optional(),
-  status: z.string().nullable().optional(),
-  submitDate: z.string().nullable().optional(),
-  title: z.string().nullable().optional(),
+  id: z.string().nullish(),
+  title: z.string().nullish(),
+  displayName: z.string().nullish(),
+  businessKey: z.number().int().nullish(),
+  status: claimRequestStatusSchema
+    .or(ticketStatusSchema)
+    .or(z.string())
+    .nullish(),
+  submitDate: z.string().nullish(),
+  amount: z.number().nullish(),
+  createdAt: z.string().nullish(),
+  expectedAnswerTime: z.string().nullish(),
 })
-
-export const supportOptionsPageSchema =
-  createPageResponseSchema(supportOptionSchema)
 
 export const supportRequiredParamInputDisplaySchema = z.enum([
   'TEXT',
   'LIST',
   'NOINPUT',
 ])
-export type SupportRequiredParamInputDisplay = z.infer<
-  typeof supportRequiredParamInputDisplaySchema
->
+
+export const supportOptionsPageSchema = z.object({
+  totalPages: z.number().int().optional(),
+  totalElements: z.number().int().optional(),
+  size: z.number().int().optional(),
+  content: z.array(supportOptionSchema).nullish(),
+  number: z.number().int().optional(),
+  sort: z
+    .object({
+      empty: z.boolean().optional(),
+      sorted: z.boolean().optional(),
+      unsorted: z.boolean().optional(),
+    })
+    .optional(),
+  numberOfElements: z.number().int().optional(),
+  first: z.boolean().optional(),
+  last: z.boolean().optional(),
+  pageable: z
+    .object({
+      offset: z.number().int().optional(),
+      sort: z
+        .object({
+          empty: z.boolean().optional(),
+          sorted: z.boolean().optional(),
+          unsorted: z.boolean().optional(),
+        })
+        .optional(),
+      pageNumber: z.number().int().optional(),
+      pageSize: z.number().int().optional(),
+      paged: z.boolean().optional(),
+      unpaged: z.boolean().optional(),
+    })
+    .optional(),
+  empty: z.boolean().optional(),
+})
+
+export const supportResponseDataSchema = z.object({
+  message: z.string().nullish(),
+  options: supportOptionsPageSchema.nullish(),
+  requiredParam: z.string().nullish(),
+  requiredParamInputDisplay: supportRequiredParamInputDisplaySchema.nullish(),
+})
+
+export const supportSelectableQuestionSchema = z.object({
+  key: z.string().nullish(),
+  title: z.string().nullish(),
+  requiredParam: z.string().nullish(),
+})
 
 export const supportFlowResponseSchema = z.object({
   nextSelectableQuestionKeys: z
-    .array(
-      z.object({
-        key: z.string().nullable().optional(),
-        requiredParam: z.string().nullable().optional(),
-        title: z.string().nullable().optional(),
-      })
-    )
+    .array(supportSelectableQuestionSchema)
     .optional(),
-  parametersContext: supportParametersContextSchema.optional(),
+  response: supportResponseDataSchema.optional(),
   questionStack: z.array(z.string()).optional(),
-  response: z
-    .object({
-      message: z.string().nullable().optional(),
-      options: supportOptionsPageSchema.nullable().optional(),
-      requiredParam: z.string().nullable().optional(),
-      requiredParamInputDisplay: supportRequiredParamInputDisplaySchema
-        .nullable()
-        .optional(),
-    })
-    .optional(),
+  parametersContext: supportParametersContextSchema.optional(),
 })
 
+export type SupportRequiredParamInputDisplay = z.infer<
+  typeof supportRequiredParamInputDisplaySchema
+>
 export type SupportFlowRequest = z.infer<typeof supportFlowRequestSchema>
 export type SupportFlowResponse = z.infer<typeof supportFlowResponseSchema>
+export type SupportResponseData = z.infer<typeof supportResponseDataSchema>
+export type SupportSelectableQuestion = z.infer<
+  typeof supportSelectableQuestionSchema
+>
 export type SupportOption = z.infer<typeof supportOptionSchema>
+export type SupportOptionsPage = z.infer<typeof supportOptionsPageSchema>
 
 // ==========================================
 // Support Questions API Contracts
@@ -117,7 +156,7 @@ export const supportQuestionListSchema = z.array(supportQuestionSchema)
 
 export const pageSupportQuestionSchema = z
   .object({
-    content: z.array(supportQuestionSchema).nullable().optional(),
+    content: z.array(supportQuestionSchema).nullish(),
     totalElements: z.number().int().nullable().optional(),
     totalPages: z.number().int().nullable().optional(),
     size: z.number().int().nullable().optional(),
@@ -235,7 +274,7 @@ export const supportPageListSchema = z.array(supportPageSchema)
 
 export const pageSupportPageSchema = z
   .object({
-    content: z.array(supportPageSchema).nullable().optional(),
+    content: z.array(supportPageSchema).nullish(),
     totalElements: z.number().int().nullable().optional(),
     totalPages: z.number().int().nullable().optional(),
     size: z.number().int().nullable().optional(),
@@ -305,7 +344,7 @@ export const supportFeatureListSchema = z.array(supportFeatureSchema)
 
 export const pageSupportFeatureSchema = z
   .object({
-    content: z.array(supportFeatureSchema).nullable().optional(),
+    content: z.array(supportFeatureSchema).nullish(),
     totalElements: z.number().int().nullable().optional(),
     totalPages: z.number().int().nullable().optional(),
     size: z.number().int().nullable().optional(),

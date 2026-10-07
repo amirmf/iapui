@@ -20,8 +20,7 @@ export const buttonVariants = cva(
           'bg-green-600 text-white shadow-sm hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600',
         outline:
           'border bg-white shadow-sm hover:bg-gray-100 hover:text-gray-900 dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
-        ghost:
-          'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-50',
+        ghost: '',
         destructive:
           'bg-destructive text-white shadow-sm hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40',
         link: 'underline-offset-4 hover:underline',
@@ -33,10 +32,29 @@ export const buttonVariants = cva(
         lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
         icon: 'size-9',
       },
+      presentation: {
+        default: '',
+        reference: '',
+      },
     },
+    compoundVariants: [
+      {
+        variant: 'ghost',
+        presentation: 'default',
+        className:
+          'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-50',
+      },
+      {
+        variant: 'ghost',
+        presentation: 'reference',
+        className:
+          'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+      },
+    ],
     defaultVariants: {
       variant: 'primary',
       size: 'default',
+      presentation: 'default',
     },
   }
 )
@@ -64,12 +82,9 @@ export function Button(props: ButtonProps) {
     <Component
       ref={ref}
       className={cn(
-        buttonVariants({ size, variant }),
+        buttonVariants({ size, variant, presentation }),
         presentation === 'reference' &&
           'disabled:bg-muted disabled:text-muted-foreground disabled:pointer-events-auto',
-        presentation === 'reference' &&
-          variant === 'ghost' &&
-          'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
         className
       )}
       data-slot='button'

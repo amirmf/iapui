@@ -48,7 +48,7 @@ export type Agreement = z.infer<typeof agreementSchema>
 
 export const pageAgreementSchema = z
   .object({
-    content: z.array(agreementSchema),
+    content: z.array(agreementSchema).nullish(),
     totalElements: z.number(),
     totalPages: z.number(),
     size: z.number(),

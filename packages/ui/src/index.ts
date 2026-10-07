@@ -45,3 +45,5 @@ export * from './separator'
 export * from './alert'
 
 export * from './scroll-area'
+
+export { formatDate } from './format-date'

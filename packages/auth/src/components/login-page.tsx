@@ -18,7 +18,8 @@ import { authService } from '../services/auth-service'
 import { AuthCard } from './auth-card'
 import type { AuthPageProps } from './auth-page.types'
 
-export function LoginPage({ brand, onNavigate }: AuthPageProps) {
+export function LoginPage(props: AuthPageProps) {
+  const { brand, onNavigate, footerActions } = props
   const { t } = useTranslation()
   const setSession = useAuthStore((state) => state.setSession)
   const schema = useMemo(
@@ -61,6 +62,7 @@ export function LoginPage({ brand, onNavigate }: AuthPageProps) {
               {t('auth.login.tutorial')}
             </a>
           </Button>
+          {footerActions}
         </>
       }
       title={t('auth.login.title')}

@@ -5,6 +5,7 @@ import {
   ForcePasswordChangeDialog,
   useAuthSession,
 } from '@iap/auth'
+import { SupportFlowWidget } from '@iap/support'
 import { cn } from '@iap/ui'
 import { Outlet } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
@@ -56,6 +57,7 @@ export function AuthenticatedLayout() {
         >
           <Outlet />
         </main>
+        <SupportFlowWidget position='admin' />
         <ForcePasswordChangeDialog />
         <AuditInformationDialog />
       </div>

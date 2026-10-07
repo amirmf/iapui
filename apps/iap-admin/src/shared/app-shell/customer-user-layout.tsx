@@ -5,9 +5,9 @@ import {
   ForcePasswordChangeDialog,
   useAuthSession,
 } from '@iap/auth'
-import { SupportWidget } from '@iap/support'
+import { SupportFlowWidget } from '@iap/support'
 import { cn } from '@iap/ui'
-import { Outlet, useRouterState } from '@tanstack/react-router'
+import { Outlet } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
 import { AdminHeader } from './admin-header'
@@ -19,9 +19,6 @@ export function CustomerUserLayout() {
   const { isLoading, logout, user } = useAuthSession()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
-  const pathname = useRouterState({
-    select: (state) => state.location.pathname,
-  })
 
   if (isLoading || !user) {
     return (
@@ -63,12 +60,7 @@ export function CustomerUserLayout() {
         >
           <Outlet />
         </main>
-        <SupportWidget
-          context={{
-            isMyIap: false,
-            pageKey: pathname.replace(/^\/+|\/+$/g, '').replaceAll('/', '__'),
-          }}
-        />
+        <SupportFlowWidget position='admin' />
         <ForcePasswordChangeDialog />
         <AuditInformationDialog />
       </div>
