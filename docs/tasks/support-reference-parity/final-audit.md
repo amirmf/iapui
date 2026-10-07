@@ -7,7 +7,7 @@ Earlier implementation and re-audit reports are historical evidence.
 Reference: `/home/sadegh/Android/project/insurance-ui/src/features/support`.
 Target: `/home/sadegh/.codex/worktrees/support-reference-parity/iap-ui`, branch
 `codex/support-reference-parity`; shared `packages/support`, public contracts,
-primitives and admin host composition. No commit or merge was performed.
+primitives and admin host composition. Completion and main integration are recorded below.
 
 ## Complete coverage
 
@@ -89,3 +89,24 @@ With `INSURANCE_UI_REFERENCE_PATH` pointing at the actual reference checkout:
   claimed by this parity audit.
 - The iap-app build's unrelated generated route-tree formatting changes were
   restored after confirming no route-semantic change.
+
+## Completion and main integration
+
+The implementation commit is `f14c320`. Before delivery, the existing main
+commit `dbbfa64` was integrated into the task branch. Its agent list/management
+features remain intact. The only merge conflict was the Persian locale object:
+both the new agent subtree and exact Support subtree were preserved.
+
+Post-integration verification passed 125 admin tests across 13 files, including
+new main agent list/management/service tests, and all 60 Support tests.
+The incoming agent service test accessed content as required; its assertion was
+updated to optional indexing for the accepted nullish workspace contract. The
+workspace content test now covers 44 exported page schemas (45 cases) after
+main's additional agent response alias. Architecture and whitespace checks
+passed. The commit hook runs workspace TypeScript and staged lint/format checks.
+
+Reusable integration guidance is in
+`docs/architecture/SUPPORT-INTEGRATION.md` and the updated local
+`reference-page-parity` skill. It covers layout/page entry ownership, canonical
+public auth context, configured customer links, nullish content, localization
+and shared primitive presentation checks.

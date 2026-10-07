@@ -2467,6 +2467,27 @@
         "tarefPrice": "تعرفه",
         "ciamId": "شناسه CIAM"
       }
+    },
+    "delete": {
+      "title": "حذف درخواست خسارت",
+      "description": "آیا از حذف این درخواست خسارت مطمئن هستید؟",
+      "confirm": "حذف"
+    },
+    "create": "درخواست خسارت جدید",
+    "bulkAssign": {
+      "button": "ارجاع انتخاب‌ها",
+      "title": "ارجاع درخواست‌های خسارت",
+      "description": "کاربر مقصد را برای {{count}} درخواست انتخاب‌شده تعیین کنید.",
+      "selectionInfo": "{{count}} درخواست انتخاب شده",
+      "submit": "ارجاع",
+      "submitting": "در حال ارجاع...",
+      "success": "درخواست‌های انتخاب‌شده با موفقیت ارجاع شدند.",
+      "error": "ارجاع درخواست‌های انتخاب‌شده ناموفق بود.",
+      "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
+    },
+    "tabs": {
+      "info": "اطلاعات",
+      "result": "ارزیابی"
     }
   },
   "otp": {
@@ -3713,6 +3734,143 @@
       "description": "درخواست‌های خسارت در دسترس خود را بررسی کنید.",
       "view": "مشاهده جزئیات",
       "empty": "درخواست خسارتی در دسترس نیست."
+    }
+  },
+  "agent": {
+    "claimRequests": {
+      "title": "درخواست‌های من",
+      "refresh": "بروزرسانی",
+      "columns": {
+        "beneficiaryInsuranceNumber": "شماره بیمه",
+        "amount": "مبلغ",
+        "totalSumAmount": "مبلغ تایید شده",
+        "status": "وضعیت",
+        "aiStatus": "وضعیت AI",
+        "submitDate": "تاریخ هزینه",
+        "docType": "انواع مدارک",
+        "extPolicyId": "شماره بیمه‌نامه",
+        "extContractId": "شماره قرارداد",
+        "extNationalCode": "کد ملی",
+        "extDisplayName": "نام بیمه‌شده",
+        "extCustomerName": "نام بیمه‌گذار",
+        "extCustomerCompanyCode": "کد شرکت بیمه‌گذار",
+        "extCustomerNationalCode": "کد ملی بیمه‌گذار",
+        "extCustomerCityName": "شهر بیمه‌گذار",
+        "extMobileNumber": "شماره همراه",
+        "createdAt": "تاریخ ثبت",
+        "extMainNationalCode": "کد ملی بیمه شده اصلی",
+        "extWorkUnitName": "نام شعبه",
+        "extWorkUnitCode": "کد شعبه",
+        "extWorkUnitCityName": "شهر شعبه",
+        "extWorkUnitProvinceName": "استان شعبه",
+        "extPlanCaption": "طرح",
+        "businessKey": "کد پذیرش",
+        "completionOfDocuments": "تکمیل مدارک"
+      },
+      "filters": {
+        "extPolicyId": "شماره بیمه‌نامه",
+        "extContractId": "شماره قرارداد",
+        "extNationalCode": "کد ملی",
+        "extMainNationalCode": "کد ملی بیمه‌شده اصلی",
+        "extDisplayName": "نام بیمه‌شده",
+        "extMobileNumber": "شماره موبایل",
+        "extCustomerName": "نام بیمه‌گذار",
+        "extCustomerCompanyCode": "کد شرکت بیمه‌گذار",
+        "extCustomerNationalCode": "کد ملی بیمه‌گذار",
+        "extCustomerCityName": "شهر بیمه‌گذار",
+        "extWorkUnitName": "نام شعبه",
+        "extWorkUnitCode": "کد شعبه",
+        "extWorkUnitCityName": "شهر شعبه",
+        "extWorkUnitProvinceName": "استان شعبه",
+        "extPlanCaption": "طرح",
+        "businessKey": "کد پذیرش",
+        "amount": "مبلغ",
+        "docType": "کد نوع سند",
+        "submitDate": "تاریخ ارسال",
+        "clearSubmitDate": "حذف فیلتر تاریخ ارسال",
+        "createdAt": "تاریخ ایجاد",
+        "clearCreatedAt": "حذف فیلتر تاریخ ایجاد",
+        "amountFrom": "مبلغ از",
+        "amountTo": "مبلغ تا",
+        "totalSumAmountFrom": "مبلغ تایید شده از",
+        "totalSumAmountTo": "مبلغ تایید شده تا",
+        "submitDateFrom": "تاریخ هزینه از",
+        "submitDateTo": "تاریخ هزینه تا",
+        "createdAtFrom": "تاریخ ثبت از",
+        "createdAtTo": "تاریخ ثبت تا"
+      },
+      "detail": {
+        "title": "جزئیات درخواست",
+        "submitDate": "تاریخ هزینه",
+        "createdAt": "تاریخ ثبت",
+        "beneficiary": "برای",
+        "amount": "درخواستی",
+        "rejectionReasons": "نتیجه ارزیابی",
+        "viewDetails": "مشاهده جزئیات",
+        "status": "وضعیت",
+        "docType": "نوع سند",
+        "description": "توضیحات",
+        "descriptionPlaceholder": "پاسخ خود را وارد کنید...",
+        "attachments": "پیوست‌ها",
+        "uploadAttachments": "آپلود پیوست‌ها",
+        "submitForm": "ارسال پاسخ",
+        "submitCompleteDoc": "تکمیل مدارک",
+        "subInsuredPerson": "شخص بیمه‌شده اصلی",
+        "mobileNumber": "شماره موبایل",
+        "customerName": "نام مشتری",
+        "policyNumber": "بیمه نامه",
+        "extPolicyId": "شماره بیمه‌نامه",
+        "extContractId": "شماره قرارداد",
+        "businessKey": "کد پذیرش",
+        "extWorkUnitName": "نام شعبه",
+        "extWorkUnitCode": "کد شعبه",
+        "extWorkUnitProvinceName": "استان شعبه",
+        "extWorkUnitCityName": "شهر شعبه",
+        "completeAttachment": "تکمیل مدارک",
+        "seenBy": "مشاهده شده توسط",
+        "viewUserDetails": "مشاهده جزئیات کاربر",
+        "seenByDetails": "جزئیات کاربر - مشاهده شده توسط",
+        "userInformation": "اطلاعات کامل کاربری که این درخواست را مشاهده کرد",
+        "seenAt": "مشاهده شده در"
+      },
+      "messages": {
+        "descriptionRequired": "لطفاً توضیحات را وارد کنید",
+        "claimIdMissing": "شناسه درخواست وجود ندارد",
+        "formSubmitSuccess": "فرم با موفقیت ارسال شد",
+        "formSubmitError": "ارسال فرم ناموفق بود",
+        "policyDetailsUpdated": "جزئیات بیمه‌نامه با موفقیت همگام شد.",
+        "deleted": "درخواست خسارت با موفقیت حذف شد"
+      },
+      "create": {
+        "title": "ثبت درخواست خسارت",
+        "description": "برای ثبت درخواست خسارت جدید، اطلاعات زیر را تکمیل کنید.",
+        "messages": {
+          "selectedUserMissing": "کاربر انتخاب‌شده برای این حساب نماینده یافت نشد."
+        },
+        "fields": {
+          "inquiryNationalCode": "کد ملی کاربر",
+          "inquiryNationalCodePlaceholder": "کد ملی را وارد کنید",
+          "selectedNationalCode": "کاربر انتخاب شده"
+        },
+        "validation": {
+          "inquiryNationalCodeRequired": "کد ملی برای استعلام الزامی است",
+          "inquiryNationalCodeLength": "کد ملی باید ۱۰ رقم باشد"
+        },
+        "accountNotFound": {
+          "title": "حساب کاربری برای شخص موردنظر یافت نشد.",
+          "description1": "برای ایجاد حساب کاربری بیمه‌شده، روی گزینه",
+          "description2": " «ثبت‌نام بیمه‌شده» ",
+          "description3": "کلیک کرده و اطلاعات لازم را وارد کنید.",
+          "understood": "متوجه شدم",
+          "registerInsured": "ثبت‌نام بیمه‌شده"
+        }
+      },
+      "actions": {
+        "viewDetails": "مشاهده جزییات",
+        "refreshPolicyDetails": "بروزرسانی جزئیات بیمه‌نامه",
+        "completionOfDocuments": "تکمیل مدارک",
+        "delete": "حذف"
+      }
     }
   },
   "supportFlow": {
