@@ -55,9 +55,11 @@ export function SimpleDataTable<TData>(props: {
   caption?: ReactNode
   className?: string
   emptyContent?: ReactNode
+  emptyStateText?: ReactNode
   hasActiveFilters?: boolean
   isLoading?: boolean
   labels?: DataTableLabels
+  loadingText?: ReactNode
   noResultsContent?: ReactNode
   presentation?: 'default' | 'reference'
   renderPagination?: (table: TanStackTable<TData>) => ReactNode
@@ -73,9 +75,11 @@ export function SimpleDataTable<TData>(props: {
     caption,
     className,
     emptyContent,
+    emptyStateText,
     hasActiveFilters = false,
     isLoading = false,
     labels,
+    loadingText,
     noResultsContent,
     presentation = 'default',
     renderPagination,
@@ -89,13 +93,16 @@ export function SimpleDataTable<TData>(props: {
   } = props
   const rows = table.getRowModel().rows
   const visibleColumnCount = Math.max(table.getVisibleFlatColumns().length, 1)
+  const resolvedEmpty =
+    emptyStateText ?? emptyContent ?? labels?.empty ?? 'No records found.'
+  const resolvedLoading = loadingText ?? labels?.loading ?? 'Loading…'
   const statusContent = (
     presentation === 'reference'
       ? table.options.data.length > 0
       : hasActiveFilters
   )
     ? (noResultsContent ?? labels?.noResults ?? 'No matching records.')
-    : (emptyContent ?? labels?.empty ?? 'No records found.')
+    : resolvedEmpty
 
   return (
     <DataTableLayout
@@ -124,7 +131,7 @@ export function SimpleDataTable<TData>(props: {
             )}
             colSpan={visibleColumnCount}
           >
-            {labels?.loading ?? 'Loading…'}
+            {resolvedLoading}
           </TableCell>
         </TableRow>
       ) : rows.length ? (
