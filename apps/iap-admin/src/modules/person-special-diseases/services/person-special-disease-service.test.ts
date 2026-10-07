@@ -15,17 +15,15 @@ describe('personSpecialDiseaseService', () => {
   beforeEach(() => vi.clearAllMocks())
 
   it('uses the omitted reference endpoints with validated response parsing', async () => {
-    apiClient.get
-      .mockResolvedValueOnce({ data: {} })
-      .mockResolvedValueOnce({
-        data: {
-          content: [],
-          number: 0,
-          size: 20,
-          totalElements: 0,
-          totalPages: 0,
-        },
-      })
+    apiClient.get.mockResolvedValueOnce({ data: {} }).mockResolvedValueOnce({
+      data: {
+        content: [],
+        number: 0,
+        size: 20,
+        totalElements: 0,
+        totalPages: 0,
+      },
+    })
     apiClient.put.mockResolvedValue({ data: [] })
     await personSpecialDiseaseService.getById('disease-1')
     await personSpecialDiseaseService.getPage({

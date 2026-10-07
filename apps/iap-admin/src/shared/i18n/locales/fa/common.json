@@ -2780,5 +2780,103 @@
       "title": "توقف اجرای خط پردازش",
       "description": "آیا از توقف این اجرای خط پردازش مطمئن هستید؟"
     }
+  },
+  "subUsers": {
+    "title": "ارزیابان من",
+    "empty": "کاربر زیرمجموعه‌ای یافت نشد.",
+    "columns": {
+      "username": "نام کاربری",
+      "displayName": "نام نمایشی",
+      "mobileNumber": "شماره موبایل",
+      "email": "ایمیل",
+      "roles": "نقش‌ها",
+      "status": "وضعیت",
+      "actions": "عملیات"
+    },
+    "filters": {
+      "textFilter": "فیلتر بر اساس نام کاربری/موبایل...",
+      "username": "نام کاربری",
+      "displayName": "نام نمایشی",
+      "mobileNumber": "شماره موبایل"
+    },
+    "status": {
+      "enabled": "فعال",
+      "disabled": "غیرفعال"
+    },
+    "actions": {
+      "refresh": "بروزرسانی",
+      "create": "ایجاد کاربر",
+      "details": "جزئیات",
+      "edit": "ویرایش",
+      "enable": "فعال‌سازی",
+      "disable": "غیرفعال‌سازی",
+      "releaseAssignments": "خالی کردن کارتابل"
+    },
+    "details": {
+      "title": "جزئیات کاربر زیرمجموعه"
+    },
+    "form": {
+      "username": "نام کاربری",
+      "createTitle": "ایجاد کاربر زیرمجموعه",
+      "editTitle": "ویرایش کاربر زیرمجموعه",
+      "createDescription": "یک حساب کاربری زیرمجموعه جدید ایجاد کنید.",
+      "editDescription": "اطلاعات کاربر زیرمجموعه را به‌روزرسانی کنید.",
+      "password": "رمز عبور",
+      "firstName": "نام",
+      "lastName": "نام خانوادگی",
+      "roles": "نقش‌ها",
+      "docTypes": "انواع اسناد",
+      "docTypesPlaceholder": "یک یا چند نوع سند را انتخاب کنید"
+    },
+    "messages": {
+      "saveSuccess": "کاربر با موفقیت ذخیره شد",
+      "saveError": "ذخیره کاربر ناموفق بود",
+      "statusUpdateSuccess": "وضعیت کاربر به‌روزرسانی شد",
+      "statusUpdateError": "به‌روزرسانی وضعیت کاربر ناموفق بود",
+      "releaseAssignmentsSuccess": "کارتابل با موفقیت خالی شد",
+      "userIdMissing": "شناسه کاربر موجود نیست"
+    },
+    "validation": {
+      "username": {
+        "required": "نام کاربری الزامی است",
+        "minLength": "نام کاربری باید 10 کاراکتر باشد",
+        "invalid": "نام کاربری باید دقیقاً ۱۰ رقم باشد"
+      },
+      "password": {
+        "required": "رمز عبور الزامی است",
+        "minLength": "رمز عبور باید حداقل ۶ کاراکتر باشد"
+      },
+      "email": {
+        "required": "ایمیل الزامی است",
+        "invalid": "لطفاً یک آدرس ایمیل معتبر وارد کنید"
+      },
+      "mobileNumber": {
+        "required": "شماره موبایل الزامی است",
+        "invalid": "لطفاً یک شماره موبایل ایرانی معتبر وارد کنید"
+      },
+      "docTypeCodes": {
+        "required": "حداقل یک نوع سند باید انتخاب شود"
+      },
+      "roles": {
+        "required": "حداقل یک نقش باید انتخاب شود",
+        "doctorUserExclusive": "نقش کاربر پزشک نمی‌تواند با نقش‌های دیگر ترکیب شود"
+      },
+      "partyFname": {
+        "required": "نام ضروری است",
+        "minLength": "نام باید حداقل ۲ کاراکتر باشد"
+      },
+      "partyLname": {
+        "required": "نام خانوادگی ضروری است",
+        "minLength": "نام خانوادگی باید حداقل ۲ کاراکتر باشد"
+      }
+    },
+    "releaseAssignments": {
+      "title": "خالی کردن کارتابل",
+      "description": "آیا از خالی کردن کارتابل {{user}} مطمئن هستید؟",
+      "confirm": "خالی کردن کارتابل"
+    }
+  },
+  "breadcrumb": {
+    "sub-users": "ارزیابان من"
   }
 }
