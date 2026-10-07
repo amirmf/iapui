@@ -4,11 +4,13 @@ import { Link, useRouterState } from '@tanstack/react-router'
 import { PanelRightClose, PanelRightOpen, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+import type { AdminNavigationItem } from './admin-navigation'
 import { adminNavigation } from './admin-navigation'
 
 type AdminSidebarProps = {
   isCollapsed: boolean
   isMobileOpen: boolean
+  items?: readonly AdminNavigationItem[]
   onCloseMobile: () => void
   onToggleCollapsed: () => void
   roles: Parameters<typeof canAccessPathByRole>[0]
@@ -17,6 +19,7 @@ type AdminSidebarProps = {
 export function AdminSidebar({
   isCollapsed,
   isMobileOpen,
+  items = adminNavigation,
   onCloseMobile,
   onToggleCollapsed,
   roles,
@@ -25,7 +28,7 @@ export function AdminSidebar({
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   })
-  const visibleItems = adminNavigation.filter(
+  const visibleItems = items.filter(
     (item) =>
       canAccessPathByRole(roles, item.to) &&
       !canNotAccessPathByRole(roles, item.to)

@@ -84,31 +84,33 @@ When implementation begins:
 
 ### Admin panel route partitions
 
-`iap-admin` groups panel routes under the existing `_authenticated` boundary:
+`iap-admin` groups panel routes into independent sibling layout boundaries:
 
-- Operations pages remain directly under `_authenticated` with unprefixed URLs.
-- `_authenticated/_agent/agent/**` owns `/agent/**`.
-- `_authenticated/_customer-user/customer-user/**` owns `/customer-user/**`.
+- Operations pages remain directly under `_authenticated` with unprefixed URLs (layout: `AuthenticatedLayout`).
+- `_agent/agent/**` owns `/agent/**` (layout: `AgentLayout`, guard: `beforeLoadAuth`).
+- `_customer-user/customer-user/**` owns `/customer-user/**` (layout: `CustomerUserLayout`, guard: `beforeLoadAuth`).
 
 `_agent` and `_customer-user` are pathless grouping routes; their names never
-appear in browser URLs. These partitions currently inherit the authenticated
-shell and guard. Folder separation does not introduce panel-specific layouts
-or authorization rules.
+appear in browser URLs. Each panel partition provides its own dedicated layout
+shell, sidebar navigation data, header home page URL, breadcrumb hierarchy, and
+panel switcher registration, while sharing standard authentication guards
+(`beforeLoadAuth`), security dialogs, and support widget capabilities.
 
-When replacing panel placeholders, keep the route entry thin and compose the
-owning feature's public API. Verify the corresponding reference page before
-adding business behavior, API loaders, navigation, or role rules. Keep static
-page segments in page directories and dynamic IDs in flat route filenames;
-for example, `claim-requests/$claimRequestId.index.tsx` and
+When replacing panel placeholders with full feature implementations, keep the
+route entry thin and compose the owning feature's public API. Verify the
+corresponding reference page before adding business behavior, API loaders,
+navigation, or role rules. Keep static page segments in page directories and
+dynamic IDs in flat route filenames; for example,
+`claim-requests/$claimRequestId.index.tsx` and
 `claim-requests/$claimRequestId.claim-request-management/index.tsx`.
 
 The Router canonicalizes trailing slashes with `trailingSlash: 'always'`.
-Preserve both direct URL forms, dynamic parameter matching, authenticated
-ancestry, and sibling panel separation in
+Preserve both direct URL forms, dynamic parameter matching, independent panel
+layout ancestry, and sibling panel separation in
 `apps/iap-admin/src/shared/router/panel-routes.test.ts`. Generate the route tree
 through the existing Vite Router plugin; never edit it manually. The verified
-placeholder inventory is in
-[the panel route task](../tasks/iap-admin-agent-customer-user-routes.md).
+tasks and layout contracts are documented under
+`docs/tasks/agent-customer-user-layouts/`.
 
 ### `src/features`
 
