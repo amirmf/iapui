@@ -14,3 +14,6 @@ export { ClaimRequestManagementPage } from '@features/claim-requests/pages/claim
 export { ClaimRequestManagementPending } from '@features/claim-requests/pages/claim-request-management/components/claim-request-management-pending'
 export { ClaimRequestManagementQueryError } from '@features/claim-requests/pages/claim-request-management/components/claim-request-management-query-error'
 export { claimRequestManagementQueryOptions } from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
+export { ClaimRequestDataTableToolbar } from '@features/claim-requests/pages/index/components/claim-request-data-table-toolbar'
+export { ClaimRequestExportExcelButton } from '@features/claim-requests/pages/index/components/claim-request-export-excel-button'
+export { applyClaimRequestQuickStatusFilter } from '@features/claim-requests/utils/claim-request-quick-status-filter'
