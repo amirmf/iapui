@@ -1,10 +1,9 @@
 // @vitest-environment jsdom
 import type { ComponentProps, PropsWithChildren, ReactNode } from 'react'
 
+import { ClaimRequestsTicketsPage } from '@features/tickets/components/claim-requests-tickets-page'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-
-import { ClaimRequestsTicketsPage } from './claim-requests-tickets-page'
 
 const router = vi.hoisted(() => ({
   navigate: vi.fn(),
@@ -51,6 +50,7 @@ vi.mock('@shared/tables', () => ({
 }))
 
 vi.mock('@tanstack/react-query', () => ({
+  queryOptions: (options: unknown) => options,
   useQuery: () => ({
     data: { content: [], totalElements: 0, totalPages: 0 },
     isError: false,
@@ -68,17 +68,20 @@ vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }))
 
-vi.mock('../services/ticket-service', () => ({
-  ticketService: { findPage: vi.fn() },
+vi.mock('@features/tickets/services/ticket-service', () => ({
+  ticketService: { getPageFull: vi.fn() },
 }))
 
 vi.mock('./ticket-columns', () => ({
   useTicketColumns: () => [],
 }))
 
-vi.mock('./ticket-detail-sheet', () => ({
-  TicketDetailSheet: () => null,
-}))
+vi.mock(
+  '@features/tickets/components/ticket-detail-sheet/ticket-detail-sheet',
+  () => ({
+    TicketDetailSheet: () => null,
+  })
+)
 
 vi.mock('../context/provider/ticket-provider', () => ({
   TicketProvider: ({ children }: PropsWithChildren) => <>{children}</>,

@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 
 type TicketMessageProps = {
   message: SupportTicketMessage
+  visibilityLabel?: string
+  visibilityClassName?: string
 }
 
 export function TicketMessage(props: TicketMessageProps) {

@@ -1,8 +1,7 @@
 // @vitest-environment jsdom
+import { TicketMessage } from '@features/tickets/components/ticket-detail-sheet/ticket-message'
 import { render } from '@testing-library/react'
 import { expect, it, vi } from 'vitest'
-
-import { TicketMessage } from './ticket-message'
 
 const formatDateTime = vi.hoisted(() => vi.fn(() => 'source date'))
 vi.mock('@iap/ui', async (importOriginal) => ({

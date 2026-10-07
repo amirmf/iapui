@@ -1,8 +1,7 @@
 // @vitest-environment jsdom
+import { TicketMessageList } from '@features/tickets/components/ticket-detail-sheet/ticket-message-list'
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-
-import { TicketMessageList } from './ticket-message-list'
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),

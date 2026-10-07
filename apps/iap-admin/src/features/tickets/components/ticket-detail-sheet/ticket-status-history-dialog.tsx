@@ -1,5 +1,9 @@
 import { type ComponentType, type ReactNode, useMemo } from 'react'
 
+import {
+  TICKET_STATUS_TRANSLATION_KEYS,
+  ticketStatusColors,
+} from '@features/tickets/constants/tickets-constant'
 import type { SupportTicketStatusHistory, TicketStatus } from '@iap/api-types'
 import {
   Dialog,
@@ -21,11 +25,6 @@ import {
   UserCheck,
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-
-import {
-  ticketStatusClasses,
-  ticketStatusTranslationKeys,
-} from '../model/ticket-presentation'
 
 type TicketStatusHistoryDialogProps = {
   children: ReactNode
@@ -113,7 +112,7 @@ function TicketStatusHistoryEntry(props: TicketStatusHistoryEntryProps) {
       <span
         className={cn(
           'relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-400 ring-4 ring-dialog-background',
-          isFirst && status && ticketStatusClasses[status]
+          isFirst && status && ticketStatusColors[status]
         )}
       >
         <Icon className='h-5 w-5' />
@@ -121,22 +120,20 @@ function TicketStatusHistoryEntry(props: TicketStatusHistoryEntryProps) {
       <div
         className={cn(
           'min-w-0 flex-1 rounded-lg border bg-background p-3 text-sm shadow-sm',
-          isFirst && status && ticketStatusClasses[status]
+          isFirst && status && ticketStatusColors[status]
         )}
       >
         <div className='flex flex-wrap items-start justify-between gap-2'>
           <p className='font-medium'>
-            {status ? t(ticketStatusTranslationKeys[status]) : '-'}
+            {status ? t(TICKET_STATUS_TRANSLATION_KEYS[status]) : '-'}
           </p>
-          {entry.changedAt ? (
-            <time className='text-xs'>
-              {formatDateTime(entry.changedAt, 'HH:mm yyyy/MM/dd', {
-                language: i18n.language,
-                normalizeTimezone: false,
-                invalidDate: 'throw',
-              })}
-            </time>
-          ) : null}
+          <time className='text-xs'>
+            {formatDateTime(entry.changedAt, 'HH:mm yyyy/MM/dd', {
+              language: i18n.language,
+              normalizeTimezone: false,
+              invalidDate: 'throw',
+            })}
+          </time>
         </div>
         {userLabel ? (
           <p className='mt-2 text-xs'>

@@ -1,6 +1,5 @@
+import { toTicketApiFilters } from '@features/tickets/route-adapters/ticket-filters'
 import { describe, expect, it } from 'vitest'
-
-import { toTicketApiFilters } from './ticket-filters'
 
 describe('ticket filters', () => {
   it('matches the reference default ticket status and sorting', () => {

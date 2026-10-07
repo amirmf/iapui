@@ -152,3 +152,35 @@ metadata and public domain-prefixed exports remain explicitly listed in the
 not evidence of identical whole-schema validation semantics. Source/unit
 verification, screenshot comparison and live backend verification must remain
 separate claims.
+
+## Tickets integration lessons
+
+The completed tickets parity and architecture audit is recorded in
+[its task inventory](../tasks/tickets-page/README.md).
+
+- A feature with one root URL may keep its page component at the feature root;
+  keep reusable root components in `components/` and group related detail-sheet
+  components together. Embedded use in another feature is not a new URL owned
+  by the tickets feature. Preserve public feature imports.
+- Store only selection identifiers and dialog state in Zustand. Keep response
+  objects in TanStack Query. When replacing source `initialData` with a cache
+  seed, seed only a key without data, retain fetched details, and verify missing
+  identifiers and closing behaviour. See tickets `use-open-ticket` regressions.
+- Query options and mutation definitions belong in `queries/`. URL parsers and
+  navigation hooks belong in `route-adapters/` and must not hold local UI state
+  or call services. Keep draft input and local sorting in their component owner.
+- Preserve source cache keys and source mutation success sequencing during
+  extraction. Start independent related queries together; do not accidentally
+  defer assessment data until the parent response mounts its child observer.
+- Tickets opts into `TableFilterQueryParams resetIgnoredQueryParams` to clear
+  the complete search object, including ignored status/context parameters, and
+  `resetPageToFirst` to write page `1` after filtering at page >1. Default reset
+  retains ignored keys for existing consumers. Do not apply these flags to
+  another page without inspecting its source reset transitions.
+- Typed enum maps must preserve insertion order because option factories use
+  that order. Alphabetizing priority/category maps changes visible options.
+- Exact support-ticket schema acceptance is an explicitly approved exception
+  in [TICKETS-REFERENCE-CONTRACT.md](TICKETS-REFERENCE-CONTRACT.md). Contracts
+  live under `packages/api-types/src/tickets`; other domains keep their existing
+  strict request and common page-factory rules. Never extend this exception
+  simply because another page also has a paginated response.

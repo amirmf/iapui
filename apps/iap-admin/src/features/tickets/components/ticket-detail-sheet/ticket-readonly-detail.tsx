@@ -1,18 +1,17 @@
 import type { ReactNode } from 'react'
 
-import type { SupportTicket } from '@iap/api-types'
-import { Badge, badgeVariants, cn, formatDateTime } from '@iap/ui'
-import { useTranslation } from 'react-i18next'
-
+import { TicketStatusHistoryDialog } from '@features/tickets/components/ticket-detail-sheet/ticket-status-history-dialog'
 import {
-  ticketCategoryClasses,
-  ticketCategoryTranslationKeys,
-  ticketPriorityClasses,
-  ticketPriorityTranslationKeys,
-  ticketStatusClasses,
-  ticketStatusTranslationKeys,
-} from '../model/ticket-presentation'
-import { TicketStatusHistoryDialog } from './ticket-status-history-dialog'
+  TICKET_CATEGORY_TRANSLATION_KEYS,
+  TICKET_PRIORITY_TRANSLATION_KEYS,
+  TICKET_STATUS_TRANSLATION_KEYS,
+  ticketCategoryColors,
+  ticketPriorityColors,
+  ticketStatusColors,
+} from '@features/tickets/constants/tickets-constant'
+import type { SupportTicket } from '@iap/api-types'
+import { Badge, cn, formatDateTime } from '@iap/ui'
+import { useTranslation } from 'react-i18next'
 
 type TicketReadonlyDetailProps = {
   ticket?: SupportTicket
@@ -35,20 +34,21 @@ export function TicketReadonlyDetail(props: TicketReadonlyDetailProps) {
         value={
           ticket?.status ? (
             <TicketStatusHistoryDialog statusHistory={ticket.statusHistory}>
-              <button
-                aria-label={t('tickets.statusHistory.open')}
-                className={cn(
-                  badgeVariants({ variant: 'outline' }),
-                  'w-fit disabled:cursor-default disabled:opacity-100',
-                  ticket.statusHistory?.length &&
-                    'cursor-pointer hover:ring-2 hover:ring-ring/20 focus-visible:ring-ring/50',
-                  ticketStatusClasses[ticket.status]
-                )}
-                disabled={!ticket.statusHistory?.length}
-                type='button'
-              >
-                {t(ticketStatusTranslationKeys[ticket.status])}
-              </button>
+              <Badge asChild presentation='reference' variant='outline'>
+                <button
+                  aria-label={t('tickets.statusHistory.open')}
+                  className={cn(
+                    'w-fit disabled:cursor-default disabled:opacity-100',
+                    ticket.statusHistory?.length &&
+                      'cursor-pointer hover:ring-2 hover:ring-ring/20 focus-visible:ring-ring/50',
+                    ticketStatusColors[ticket.status]
+                  )}
+                  disabled={!ticket.statusHistory?.length}
+                  type='button'
+                >
+                  {t(TICKET_STATUS_TRANSLATION_KEYS[ticket.status])}
+                </button>
+              </Badge>
             </TicketStatusHistoryDialog>
           ) : (
             '-'
@@ -61,10 +61,10 @@ export function TicketReadonlyDetail(props: TicketReadonlyDetailProps) {
           ticket?.priority ? (
             <Badge
               presentation='reference'
-              className={cn('w-fit', ticketPriorityClasses[ticket.priority])}
+              className={cn('w-fit', ticketPriorityColors[ticket.priority])}
               variant='outline'
             >
-              {t(ticketPriorityTranslationKeys[ticket.priority])}
+              {t(TICKET_PRIORITY_TRANSLATION_KEYS[ticket.priority])}
             </Badge>
           ) : (
             '-'
@@ -77,10 +77,10 @@ export function TicketReadonlyDetail(props: TicketReadonlyDetailProps) {
           ticket?.category ? (
             <Badge
               presentation='reference'
-              className={cn('w-fit', ticketCategoryClasses[ticket.category])}
+              className={cn('w-fit', ticketCategoryColors[ticket.category])}
               variant='outline'
             >
-              {t(ticketCategoryTranslationKeys[ticket.category])}
+              {t(TICKET_CATEGORY_TRANSLATION_KEYS[ticket.category])}
             </Badge>
           ) : (
             '-'

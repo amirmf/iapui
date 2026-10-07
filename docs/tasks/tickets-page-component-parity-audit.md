@@ -1,5 +1,6 @@
 # Tickets page component parity audit
 
+> Historical audit. Superseded by [the fresh remediation audit](tickets-page/TASK-07-VERIFIED-REMEDIATION.md). Earlier completion and deferred claims are not current evidence.
 ## Scope and source of truth
 
 This audit compares the complete mounted closure of the authenticated tickets

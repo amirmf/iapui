@@ -31,6 +31,7 @@ export function TableFilterQueryParams(
     ignoreQueryParams?: readonly string[]
     pageQueryParamKey?: string
     resetPageToFirst?: boolean
+    resetIgnoredQueryParams?: boolean
     showReset?: boolean
   }
 ) {
@@ -43,6 +44,7 @@ export function TableFilterQueryParams(
     pageQueryParamKey = pageNumberQueryParamKey,
     presentation = 'default',
     resetPageToFirst = false,
+    resetIgnoredQueryParams = false,
     showReset = true,
     ...filterProps
   } = props
@@ -88,14 +90,16 @@ export function TableFilterQueryParams(
     router.navigate({
       replace: true,
       search: (previous: TableFilterValues) =>
-        Object.fromEntries(
-          Object.entries(previous).filter(([key]) =>
-            ignoreQueryParams.includes(key)
-          )
-        ),
+        resetIgnoredQueryParams
+          ? {}
+          : Object.fromEntries(
+              Object.entries(previous).filter(([key]) =>
+                ignoreQueryParams.includes(key)
+              )
+            ),
       to: './',
     } as never)
-  }, [ignoreQueryParams, router])
+  }, [ignoreQueryParams, resetIgnoredQueryParams, router])
   const count = getTableFilterCount(props)
   const filtered = isTableFiltered(values, ignoredIds)
 

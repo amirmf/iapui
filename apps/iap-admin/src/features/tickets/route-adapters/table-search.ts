@@ -24,12 +24,8 @@ export type TicketTableSearchState = {
   sorting: SortingState
 }
 
-function parsePositiveInteger(value: unknown, fallback: number) {
-  if (typeof value !== 'string') return fallback
-
-  const parsed = Number(value)
-
-  return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback
+function normalizeNumber(value: unknown, fallback: number) {
+  return typeof value === 'string' && !Number.isNaN(+value) ? +value : fallback
 }
 
 export function parseTicketTableSearch(
@@ -47,8 +43,8 @@ export function parseTicketTableSearch(
   return {
     filters,
     pagination: {
-      pageIndex: parsePositiveInteger(search[ticketPageNumberSearchKey], 1) - 1,
-      pageSize: parsePositiveInteger(search[ticketPageSizeSearchKey], 40),
+      pageIndex: normalizeNumber(search[ticketPageNumberSearchKey], 1) - 1,
+      pageSize: normalizeNumber(search[ticketPageSizeSearchKey], 40),
     },
     sorting:
       typeof sort === 'string' && (direction === 'asc' || direction === 'desc')

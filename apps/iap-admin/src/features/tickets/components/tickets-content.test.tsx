@@ -1,8 +1,7 @@
 // @vitest-environment jsdom
+import { TicketsContent } from '@features/tickets/components/tickets-content'
 import { cleanup, render } from '@testing-library/react'
 import { afterEach, expect, it, vi } from 'vitest'
-
-import { TicketsContent } from './tickets-content'
 
 const state = vi.hoisted(() => ({
   search: { features: 'tickets', priority: 'HIGH' } as Record<string, string>,
@@ -15,6 +14,7 @@ vi.mock('@tanstack/react-router', () => ({
   useRouter: () => ({ navigate: state.navigate }),
 }))
 vi.mock('@tanstack/react-query', () => ({
+  queryOptions: (options: unknown) => options,
   useQuery: (options: unknown) => {
     state.query(options)
     return { data: { content: [] }, refetch: vi.fn() }
@@ -32,9 +32,12 @@ vi.mock('@shared/tables', () => ({
 vi.mock('@features/tickets/components/ticket-columns', () => ({
   useTicketColumns: () => [],
 }))
-vi.mock('@features/tickets/components/ticket-detail-sheet', () => ({
-  TicketDetailSheet: () => null,
-}))
+vi.mock(
+  '@features/tickets/components/ticket-detail-sheet/ticket-detail-sheet',
+  () => ({
+    TicketDetailSheet: () => null,
+  })
+)
 vi.mock('@features/tickets/components/tickets-data-table-toolbar', () => ({
   TicketsDataTableToolbar: () => null,
 }))
@@ -48,6 +51,7 @@ afterEach(() => {
 
 it('keeps source UI sorting empty while defaulting API sorting, and writes only pagination controls', () => {
   render(<TicketsContent />)
+  expect(document.querySelector('main')?.className).toContain('rounded-[20px]')
   const table = state.table.mock.lastCall![0]
   expect(table.presentation).toBe('reference')
   expect(table.sorting).toEqual([])
