@@ -4,7 +4,7 @@ import {
   AI_ASSESSMENT_RESULT_RESOLUTION_TYPE_BADGE_COLORS,
   AI_ASSESSMENT_RESULT_RESOLUTION_TYPE_CARD_COLORS,
   AI_ASSESSMENT_RESULT_RESOLUTION_TYPE_TRANSLATION_KEYS,
-} from '@features/claim-requests/constants/claim-request-status'
+} from '@features/claim-requests/model/claim-request-status'
 import type { ClaimRequest } from '@iap/api-types'
 import { cn } from '@iap/ui'
 import { Badge } from '@iap/ui'

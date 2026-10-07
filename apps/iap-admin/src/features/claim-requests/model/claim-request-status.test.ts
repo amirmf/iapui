@@ -4,7 +4,7 @@ import {
   getClaimRequestAiStatusOptions,
   getClaimRequestRequestTypeOptions,
   getClaimRequestStatusOptions,
-} from '@features/claim-requests/constants/claim-request-status'
+} from '@features/claim-requests/model/claim-request-status'
 import fs from 'node:fs'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'

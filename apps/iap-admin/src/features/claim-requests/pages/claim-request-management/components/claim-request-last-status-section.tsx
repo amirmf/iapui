@@ -1,12 +1,12 @@
 import {
-  CLAIM_REQUEST_STATUS_TRANSLATION_KEYS,
-  MY_IAP_SENT_TO_BANK_FILTER_VALUE,
-  claimStatusColors,
-} from '@features/claim-requests/constants/claim-request-status'
-import {
   getClaimRequestDisplayStatus,
   getClaimRequestDisplayStatusColor,
 } from '@features/claim-requests/model/claim-request-display-status'
+import {
+  CLAIM_REQUEST_STATUS_TRANSLATION_KEYS,
+  MY_IAP_SENT_TO_BANK_FILTER_VALUE,
+  claimStatusColors,
+} from '@features/claim-requests/model/claim-request-status'
 import { ClaimRequestStatusHistoryDialog } from '@features/claim-requests/pages/claim-request-management/components/claim-request-status-history-dialog'
 import {
   type ClaimRequestStatus,

@@ -1,6 +1,6 @@
 import { useLayoutEffect, useMemo } from 'react'
 
-import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/constants/claim-request-status'
+import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/model/claim-request-status'
 import { CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS } from '@features/claim-requests/route-adapters/claim-request-feature'
 import {
   type ClaimRequestQuickStatus,

@@ -4,7 +4,7 @@ import {
   CLAIM_REQUEST_DUPLICATE_TYPE_BADGE_COLORS,
   CLAIM_REQUEST_DUPLICATE_TYPE_BOX_COLORS,
   CLAIM_REQUEST_DUPLICATE_TYPE_TRANSLATION_KEYS,
-} from '@features/claim-requests/constants/claim-request-status'
+} from '@features/claim-requests/model/claim-request-status'
 import { ClaimRequestDuplicateImageDialog } from '@features/claim-requests/pages/claim-request-management/components/duplicated/claim-request-duplicate-image-dialog'
 import { useIsAgentPanel } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-is-agent-panel'
 import { type ClaimRequest } from '@iap/api-types'

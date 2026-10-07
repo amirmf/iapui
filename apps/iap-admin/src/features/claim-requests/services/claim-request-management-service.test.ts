@@ -1,8 +1,7 @@
+import { claimRequestManagementService as service } from '@features/claim-requests/services/claim-request-management-service'
+import { coreAiManagementService } from '@features/claim-requests/services/core-ai-management-service'
+import { fanhubTaminService } from '@features/claim-requests/services/fanhub-tamin-service'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-
-import { claimRequestManagementService as service } from './claim-request-management-service'
-import { coreAiManagementService } from './core-ai-management-service'
-import { fanhubTaminService } from './fanhub-tamin-service'
 
 const api = vi.hoisted(() => ({ get: vi.fn(), patch: vi.fn(), post: vi.fn() }))
 vi.mock('@iap/api-client', () => ({ getApiClient: () => api }))

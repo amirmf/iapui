@@ -2,18 +2,18 @@ import { useMemo } from 'react'
 
 import { ClaimRequestRowActions } from '@features/claim-requests/components/claim-request-row-actions'
 import { ClaimRequestSpecialDiseaseBadges } from '@features/claim-requests/components/claim-request-special-disease-badges'
-import {
-  CLAIM_REQUEST_AI_STATUS_TRANSLATION_KEYS,
-  CLAIM_REQUEST_STATUS_TRANSLATION_KEYS,
-  aiStatusColors,
-  claimStatusColors,
-} from '@features/claim-requests/constants/claim-request-status'
 import { useClaimRequestIds } from '@features/claim-requests/context/store/claim-request-ids-store'
 import {
   getClaimRequestDisplayStatus,
   getClaimRequestDisplayStatusColor,
   sentToBankStatus,
 } from '@features/claim-requests/model/claim-request-display-status'
+import {
+  CLAIM_REQUEST_AI_STATUS_TRANSLATION_KEYS,
+  CLAIM_REQUEST_STATUS_TRANSLATION_KEYS,
+  aiStatusColors,
+  claimStatusColors,
+} from '@features/claim-requests/model/claim-request-status'
 import type { ClaimRequest } from '@iap/api-types'
 import { Badge, cn, formatDate, formatDateTime } from '@iap/ui'
 import { TwoLineCell, TwoLineHeader } from '@shared/tables'

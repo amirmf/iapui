@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import {
   CLAIM_REQUEST_STATUS_TRANSLATION_KEYS,
   claimStatusColors,
-} from '@features/claim-requests/constants/claim-request-status'
+} from '@features/claim-requests/model/claim-request-status'
 import ClaimRequestManagementPrevRequestRowActions from '@features/claim-requests/pages/claim-request-management/components/claim-request-management-prev-request/claim-request-management-prev-request-row-actions'
 import {
   type ClaimRequestHistory,

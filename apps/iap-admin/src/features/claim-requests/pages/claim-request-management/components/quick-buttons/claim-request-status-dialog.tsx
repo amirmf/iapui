@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { getClaimRequestStatusOptions } from '@features/claim-requests/constants/claim-request-status'
 import type { ClaimRequestStatus } from '@features/claim-requests/model/claim-request-management-forms'
+import { getClaimRequestStatusOptions } from '@features/claim-requests/model/claim-request-status'
 import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'
 import { useClaimRequestManagementParams as useParams } from '@features/claim-requests/route-adapters/use-claim-request-management-params'
 import claimRequestService from '@features/claim-requests/services/claim-request-management-service'

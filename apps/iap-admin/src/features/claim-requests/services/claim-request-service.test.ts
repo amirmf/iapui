@@ -1,11 +1,10 @@
+import { claimRequestService } from '@features/claim-requests/services/claim-request-service'
+import { coreAiService } from '@features/claim-requests/services/core-ai-service'
 import {
   claimRequestSchema,
   coreAiDataExtractionRequestSchema,
 } from '@iap/api-types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-
-import { claimRequestService } from './claim-request-service'
-import { coreAiService } from './core-ai-service'
 
 const apiClient = vi.hoisted(() => ({
   delete: vi.fn(),

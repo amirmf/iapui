@@ -5,7 +5,7 @@ import {
   getClaimRequestAiStatusOptions,
   getClaimRequestRequestTypeOptions,
   getClaimRequestStatusOptions,
-} from '@features/claim-requests/constants/claim-request-status'
+} from '@features/claim-requests/model/claim-request-status'
 import type { ClaimRequestQuickStatus } from '@features/claim-requests/route-adapters/claim-request-filters'
 import { useAuthSession } from '@iap/auth'
 import { useDocTypesData } from '@modules/doc-types'

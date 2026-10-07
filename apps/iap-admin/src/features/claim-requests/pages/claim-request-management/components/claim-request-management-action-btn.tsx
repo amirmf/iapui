@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 
-import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/constants/claim-request-status'
 import { isClaimRequestStatus } from '@features/claim-requests/model/claim-request-management-status'
+import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/model/claim-request-status'
 import RefreshPolicyDetailsButton from '@features/claim-requests/pages/claim-request-management/components/action-buttons/refresh-policy-details-button'
 import StartCoreAiWorkflowButton from '@features/claim-requests/pages/claim-request-management/components/action-buttons/start-core-ai-workflow-button'
 import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'

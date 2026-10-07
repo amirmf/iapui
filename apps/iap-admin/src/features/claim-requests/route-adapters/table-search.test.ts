@@ -4,13 +4,12 @@ import {
   getClaimRequestQuickStatus,
   toClaimRequestApiFilters,
 } from '@features/claim-requests/route-adapters/claim-request-filters'
-import { describe, expect, it } from 'vitest'
-
 import {
   hasClaimRequestPageChanged,
   parseClaimRequestTableSearch,
   toClaimRequestTableSearch,
-} from './table-search'
+} from '@features/claim-requests/route-adapters/table-search'
+import { describe, expect, it } from 'vitest'
 
 describe('claim request table URL state', () => {
   it('matches the reference pagination and sorting query contract', () => {

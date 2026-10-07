@@ -1,7 +1,7 @@
 import {
   CLAIM_OBJECTION_REQUEST_STATUSES,
   CLAIM_OBJECTION_REQUEST_STATUS_TRANSLATION_KEYS,
-} from '@features/claim-requests/constants/claim-request-status'
+} from '@features/claim-requests/model/claim-request-status'
 import type { ClaimRequestObjectionForm } from '@features/claim-requests/pages/claim-request-management/model/claim-request-objection-form-schema'
 import {
   FormControl,

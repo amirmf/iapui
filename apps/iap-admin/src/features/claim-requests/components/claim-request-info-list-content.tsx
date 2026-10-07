@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react'
 
 import ClaimRequestInfoListCard from '@features/claim-requests/components/claim-request-info-list-card'
-import { CLAIM_REQUEST_IBAN_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/constants/claim-request-status'
+import { CLAIM_REQUEST_IBAN_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/model/claim-request-status'
 import type { ClaimRequest, PersonSpecialDiseasesEnum } from '@iap/api-types'
 import { Badge, cn, formatDate } from '@iap/ui'
 import {

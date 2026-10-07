@@ -1,4 +1,4 @@
-import * as constants from '@features/claim-requests/constants/claim-request-status'
+import * as constants from '@features/claim-requests/model/claim-request-status'
 import { claimRequestManagementQueryOptions } from '@features/claim-requests/queries/use-claim-request-management-data'
 import { claimRequestService } from '@features/claim-requests/services/claim-request-service'
 import fa from '@shared/i18n/locales/fa/common.json'

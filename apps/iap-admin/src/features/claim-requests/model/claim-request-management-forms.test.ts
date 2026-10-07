@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest'
-
 import {
   claimRequestAssigneeFieldsFormSchema,
   claimRequestReplayFormSchema,
@@ -7,7 +5,8 @@ import {
   returnFromPaymentFormSchema,
   returnFromPaymentSendAgainFormSchema,
   updateSubmitDateFormSchema,
-} from './claim-request-management-forms'
+} from '@features/claim-requests/model/claim-request-management-forms'
+import { describe, expect, it } from 'vitest'
 
 const t = (key: string) => `translated:${key}`
 describe('management source form validation', () => {

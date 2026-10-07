@@ -1,4 +1,4 @@
-import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/constants/claim-request-status'
+import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/model/claim-request-status'
 import { cn } from '@iap/ui'
 import { useTranslation } from 'react-i18next'
 

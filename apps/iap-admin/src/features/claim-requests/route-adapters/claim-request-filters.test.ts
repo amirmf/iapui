@@ -1,9 +1,8 @@
-import { describe, expect, it } from 'vitest'
-
 import {
   getClaimRequestQuickStatus,
   toClaimRequestApiFilters,
-} from './claim-request-filters'
+} from '@features/claim-requests/route-adapters/claim-request-filters'
+import { describe, expect, it } from 'vitest'
 
 describe('claim request filters', () => {
   it('uses the reference page default quick status', () => {

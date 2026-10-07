@@ -1,3 +1,4 @@
+import { ReturnFromPaymentDialog } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/return-from-payment-section/return-from-payment-dialog'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import {
   cleanup,
@@ -16,8 +17,6 @@ import {
   it,
   vi,
 } from 'vitest'
-
-import { ReturnFromPaymentDialog } from './return-from-payment-dialog'
 
 const state = vi.hoisted(() => ({ submit: vi.fn(), toast: vi.fn() }))
 vi.mock(
