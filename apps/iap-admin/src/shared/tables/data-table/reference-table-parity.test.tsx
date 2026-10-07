@@ -223,4 +223,29 @@ describe('reference table presentation', () => {
     expect(screen.getByText('0')).toBeTruthy()
     expect(screen.getAllByText('-')).toHaveLength(1)
   })
+  it('forwards scoped row classes without changing default rows', () => {
+    render(
+      <PaginatedDataTable
+        {...defaults}
+        data={[{ title: 'VIP' }, { title: 'Ordinary' }]}
+        getRowClassName={(row) =>
+          row.original.title === 'VIP'
+            ? 'special-disease-row bg-primary/10'
+            : undefined
+        }
+      />
+    )
+    expect(screen.getByText('VIP').closest('tr')?.className).toContain(
+      'special-disease-row'
+    )
+    expect(screen.getByText('VIP').closest('tr')?.className).toContain(
+      'bg-primary/10'
+    )
+    expect(screen.getByText('Ordinary').closest('tr')?.className).not.toContain(
+      'special-disease-row'
+    )
+    expect(screen.getByText('Ordinary').closest('tr')?.className).toContain(
+      'hover:bg-muted/50'
+    )
+  })
 })

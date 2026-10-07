@@ -1,6 +1,6 @@
 import { type ReactNode, useEffect } from 'react'
 
-import { useClaimRequestStore } from '../store/claim-request-store'
+import { useClaimRequestStore } from '@features/claim-requests/context/store/claim-request-store'
 
 type ClaimRequestProviderProps = {
   children: ReactNode

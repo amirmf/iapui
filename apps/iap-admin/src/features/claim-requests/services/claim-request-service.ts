@@ -1,3 +1,5 @@
+import { exportDocumentReceipt } from '@features/claim-requests/services/claim-request-document-receipt-service'
+import { coreAiService } from '@features/claim-requests/services/core-ai-service'
 import { getApiClient } from '@iap/api-client'
 import {
   type AssignClaimRequestToMeStatusRequest,
@@ -9,20 +11,33 @@ import {
   assignClaimRequestToMeStatusRequestSchema,
   assignNewClaimRequestsRequestSchema,
   claimRequestBulkStatusChangeRequestSchema,
+  claimRequestExportExcelRequestSchema,
+  claimRequestExportExcelResponseSchema,
   claimRequestIdSchema,
   claimRequestIdsSchema,
+  claimRequestListSchema,
   claimRequestSchema,
-  coreAiDataExtractionRequestSchema,
-  coreAiDataExtractionResponseSchema,
+  claimRequestVoidResponseSchema,
   pageClaimRequestRequestSchema,
   pageClaimRequestSchema,
+  subInsuredPersonResponseListSchema,
   updateClaimRequestDocTypeRequestSchema,
   updateClaimRequestDocumentsRequestSchema,
 } from '@iap/api-types'
 import { type ApiFilterParams, transformApiFilterParams } from '@iap/shared-lib'
-import { z } from 'zod'
 
-export const claimRequestService = {
+const service = {
+  getSubInsuredPeople: async (
+    claimRequestId: string,
+    options?: { signal?: AbortSignal }
+  ) => {
+    const id = claimRequestIdSchema.parse(claimRequestId)
+    const response = await getApiClient().get(
+      `/claim-requests/${id}/sub-insured-people`,
+      { signal: options?.signal }
+    )
+    return subInsuredPersonResponseListSchema.parse(response.data)
+  },
   findById: async (id: string, signal?: AbortSignal) => {
     const claimRequestId = claimRequestIdSchema.parse(id)
     const response = await getApiClient().get(
@@ -74,43 +89,65 @@ export const claimRequestService = {
     extPolicyId?: string
   }) => {
     const request = assignNewClaimRequestsRequestSchema.parse(params ?? {})
-    await getApiClient().post('/claim-requests/assignments/me/new', undefined, {
-      params: request,
-    })
+    const response = await getApiClient().post(
+      '/claim-requests/assignments/me/new',
+      undefined,
+      {
+        params: request,
+      }
+    )
+    claimRequestVoidResponseSchema.parse(response.data)
   },
   bulkDelete: async (ids: string[]) => {
     const request = claimRequestIdsSchema.parse(ids)
-    await getApiClient().delete('/claim-requests/bulk-delete', {
-      data: request,
-    })
+    const response = await getApiClient().delete(
+      '/claim-requests/bulk-delete',
+      {
+        data: request,
+      }
+    )
+    claimRequestVoidResponseSchema.parse(response.data)
   },
   delete: async (id: string) => {
     const claimRequestId = claimRequestIdSchema.parse(id)
-    await getApiClient().delete(`/claim-requests/${claimRequestId}`)
+    const response = await getApiClient().delete(
+      `/claim-requests/${claimRequestId}`
+    )
+    claimRequestVoidResponseSchema.parse(response.data)
   },
-  exportPageLiteExcel: async (filters: ApiFilterParams) => {
+  exportPageLiteExcel: async (
+    options: { filters?: ApiFilterParams; signal?: AbortSignal } = {}
+  ) => {
+    const { signal, ...input } = options
+    const request = claimRequestExportExcelRequestSchema.parse(input)
     const response = await getApiClient().get(
       '/claim-requests/page-lite/excel',
       {
-        params: transformApiFilterParams(filters),
+        params: transformApiFilterParams(request.filters),
         responseType: 'blob',
+        signal,
       }
     )
-    return response.data as Blob
+    return claimRequestExportExcelResponseSchema.parse(response.data)
   },
   generateAndSendBulk: async (ids: string[]) => {
     const request = claimRequestIdsSchema.parse(ids)
-    await getApiClient().post(
+    const response = await getApiClient().post(
       '/outpatient-doc-acceptances/generate-and-send-bulk',
       undefined,
       { params: { claimRequestIds: request } }
     )
+    claimRequestVoidResponseSchema.parse(response.data)
   },
   inquiryFanavaranBulk: async (ids: string[]) => {
     const request = claimRequestIdsSchema.parse(ids)
-    await getApiClient().post('/claim-requests/policy-details/bulk', {
-      claimRequestIds: request,
-    })
+    const response = await getApiClient().post(
+      '/claim-requests/policy-details/bulk',
+      {
+        claimRequestIds: request,
+      }
+    )
+    claimRequestVoidResponseSchema.parse(response.data)
   },
   submitBulkStatusChange: async (
     payload: ClaimRequestBulkStatusChangeRequest
@@ -120,27 +157,16 @@ export const claimRequestService = {
       '/claim-requests/objections-bulk',
       request
     )
-    return z.array(claimRequestSchema).parse(response.data)
+    return claimRequestListSchema.parse(response.data)
   },
-  startBulkCoreAiDataExtraction: async (
-    payloads: CoreAiDataExtractionRequest[]
-  ) => {
-    const request = z
-      .array(coreAiDataExtractionRequestSchema)
-      .min(1)
-      .parse(payloads)
-    const response = await getApiClient().post(
-      '/core-ai/workflows/data-extraction/start/bulk',
-      request
-    )
-
-    return z.array(coreAiDataExtractionResponseSchema).parse(response.data)
-  },
+  startBulkCoreAiDataExtraction: (payloads: CoreAiDataExtractionRequest[]) =>
+    coreAiService.bulkStartDataExtractionWorkflow(payloads),
   sendStatusChangeNotification: async (id: string) => {
     const claimRequestId = claimRequestIdSchema.parse(id)
-    await getApiClient().post(
+    const response = await getApiClient().post(
       `/claim-requests/${claimRequestId}/status-change-notifications`
     )
+    claimRequestVoidResponseSchema.parse(response.data)
   },
   updateDocType: async (payload: UpdateClaimRequestDocTypeRequest) => {
     const request = updateClaimRequestDocTypeRequestSchema.parse(payload)
@@ -158,4 +184,13 @@ export const claimRequestService = {
     )
     return claimRequestSchema.parse(response.data)
   },
+}
+
+export const claimRequestService = {
+  ...service,
+  getPageLite: service.findPage,
+  getById: (id: string, options?: { signal?: AbortSignal }) =>
+    service.findById(id, options?.signal),
+  submitObjectionsBulk: service.submitBulkStatusChange,
+  exportDocumentReceipt,
 }

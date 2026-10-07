@@ -1,42 +1,44 @@
+import { claimRequestService } from '@features/claim-requests/services/claim-request-service'
 import type { ApiFilterParams } from '@iap/shared-lib'
 import { Button } from '@iap/ui'
+import { IconDownload } from '@tabler/icons-react'
 import { useMutation } from '@tanstack/react-query'
-import { Download } from 'lucide-react'
+import { saveAs } from 'file-saver'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
-import { claimRequestService } from '../services/claim-request-service'
-
 type ClaimRequestExportExcelButtonProps = {
   filters: ApiFilterParams
+  exportExcel?: (params: {
+    filters?: ApiFilterParams
+    signal?: AbortSignal
+  }) => Promise<Blob>
 }
 
-export function ClaimRequestExportExcelButton({
-  filters,
-}: ClaimRequestExportExcelButtonProps) {
+export function ClaimRequestExportExcelButton(
+  props: ClaimRequestExportExcelButtonProps
+) {
+  const { filters, exportExcel = claimRequestService.exportPageLiteExcel } =
+    props
   const { t } = useTranslation()
   const exportMutation = useMutation({
-    mutationFn: () => claimRequestService.exportPageLiteExcel(filters),
+    mutationFn: () => exportExcel({ filters }),
     onSuccess: (blob) => {
-      const url = URL.createObjectURL(blob)
-      const anchor = document.createElement('a')
-      anchor.href = url
-      anchor.download = 'claim-requests.xlsx'
-      anchor.click()
-      URL.revokeObjectURL(url)
+      saveAs(blob, 'claim-requests.xlsx')
       toast.success(t('claimRequests.messages.excelDownloaded'))
     },
-    onError: () => toast.error(t('claimRequests.messages.excelDownloadFailed')),
   })
 
   return (
     <Button
+      type='button'
+      presentation='reference'
       className='space-x-2'
       disabled={exportMutation.isPending}
       onClick={() => exportMutation.mutate()}
       variant='outline'
     >
-      <Download aria-hidden='true' className='size-4' />
+      <IconDownload aria-hidden='true' size={18} />
       <span>{t('claimRequests.actions.downloadExcel')}</span>
     </Button>
   )

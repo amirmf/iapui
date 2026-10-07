@@ -1,7 +1,7 @@
 import type { SupportTicket } from '@iap/api-types'
 import { TableActionButton, TableActions } from '@shared/tables'
+import { IconEye } from '@tabler/icons-react'
 import type { Row } from '@tanstack/react-table'
-import { Eye } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { useTicketStore } from '../context/store/ticket-store'
@@ -19,7 +19,8 @@ export function TicketRowActions(props: TicketRowActionsProps) {
   return (
     <TableActions>
       <TableActionButton
-        icon={<Eye aria-hidden='true' className='size-5' />}
+        presentation='reference'
+        icon={<IconEye aria-hidden='true' className='size-5' />}
         label={t('tickets.actions.view')}
         onClick={() => {
           setCurrentRow(row.original)

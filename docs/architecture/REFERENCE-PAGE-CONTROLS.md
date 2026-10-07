@@ -119,3 +119,36 @@ confirmations remaining open, original row IDs, and toast/invalidation sequencin
 Do not replace a source form with a generic single-input adapter, truncated
 object details, or an empty export. Record source-backed completion evidence in
 the owning task document and mark superseded audits historical.
+
+## Claim Requests integration lessons
+
+The Claim Requests second audit is recorded in
+[its task inventory](../tasks/claim-requests-re-audit-v2/README.md). Future ports
+should trace alternative feature branches and detail inspectors recursively;
+a reduced summary cannot replace a mounted source information list. Readonly
+assessment cards still mount adjustments, floating coverage lookups,
+calculation-result queries, skeletons and overflow descriptions. Do not infer
+that readonly mode removes those dependencies.
+
+- `@iap/ui` now exposes `SheetContent presentation='reference'`. Its context
+  scopes the source overlay, content, header and title/description presentation
+  to this sheet; default sheets retain their existing behavior.
+- `Button size='xs'` preserves the source compact secondary navigation action.
+- `TwoLineCell presentation='reference'` restores secondary normal font weight
+  and truncation on the inner secondary element. Forward it at the caller.
+- Reference confirmations forward open changes during loading; default
+  confirmations retain their pending guard. Feature-specific pending rules
+  remain owned by the inspected feature.
+- Query keys must identify the cached value shape. The reusable doc-type
+  content lookup uses `['doc-types', 'page', 0, 100, 'content']`, distinct from
+  page-response caches. Sharing an endpoint does not make the shapes identical.
+- Keep enum translation keys and colors centralized, with source order and
+  literal-key fallbacks. Translation coverage should start from source mounted
+  files so target omissions do not disappear from a target-only scan.
+
+Architecture adaptations to strict transport objects, common nullish page
+metadata and public domain-prefixed exports remain explicitly listed in the
+[contract audit](../tasks/claim-requests-re-audit-v2/02-contracts.md). They are
+not evidence of identical whole-schema validation semantics. Source/unit
+verification, screenshot comparison and live backend verification must remain
+separate claims.

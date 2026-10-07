@@ -1,5 +1,7 @@
 # ClaimRequestsPage reference-parity tasks
 
+> Historical evidence from 2026-09-28. Superseded by [the current source audit](claim-requests/README.md).
+
 ## Scope and evidence
 
 This is the second, file-by-file comparison made on 2026-09-28. The reference

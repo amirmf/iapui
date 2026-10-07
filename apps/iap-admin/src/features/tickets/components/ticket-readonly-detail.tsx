@@ -20,7 +20,7 @@ type TicketReadonlyDetailProps = {
 
 export function TicketReadonlyDetail(props: TicketReadonlyDetailProps) {
   const { ticket } = props
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const ownerDisplayName = ticket?.ownerUserAccount?.displayName
   const ownerUsername = ticket?.ownerUserAccount?.username
   const owner =
@@ -60,6 +60,7 @@ export function TicketReadonlyDetail(props: TicketReadonlyDetailProps) {
         value={
           ticket?.priority ? (
             <Badge
+              presentation='reference'
               className={cn('w-fit', ticketPriorityClasses[ticket.priority])}
               variant='outline'
             >
@@ -75,6 +76,7 @@ export function TicketReadonlyDetail(props: TicketReadonlyDetailProps) {
         value={
           ticket?.category ? (
             <Badge
+              presentation='reference'
               className={cn('w-fit', ticketCategoryClasses[ticket.category])}
               variant='outline'
             >
@@ -96,7 +98,11 @@ export function TicketReadonlyDetail(props: TicketReadonlyDetailProps) {
       <TicketMetadataItem
         hasSeparator={false}
         title={t('tickets.columns.createdAt')}
-        value={formatDateTime(ticket?.createdAt)}
+        value={formatDateTime(ticket?.createdAt, undefined, {
+          language: i18n.language,
+          normalizeTimezone: false,
+          invalidDate: 'throw',
+        })}
       />
     </div>
   )

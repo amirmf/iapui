@@ -8,17 +8,15 @@ export function toTicketApiFilters(
 ): ApiFilterParams {
   const ticketFilters: ApiFilterParams = { ...filters }
   delete ticketFilters.features
-  delete ticketFilters.quickStatus
   if (ticketFilters.status === 'ALL') {
     delete ticketFilters.status
   } else if (!ticketFilters.status) {
     ticketFilters.status = 'ASSIGNED'
   }
   const [sort] = sorting
-
-  return {
-    ...ticketFilters,
-    direction: sort?.desc ? 'desc' : 'asc',
-    sort: sort?.id ?? 'updatedAt',
+  if (!ticketFilters.sort) {
+    ticketFilters.sort = sort?.id ?? 'updatedAt'
+    ticketFilters.direction = sort?.desc ? 'desc' : 'asc'
   }
+  return ticketFilters
 }

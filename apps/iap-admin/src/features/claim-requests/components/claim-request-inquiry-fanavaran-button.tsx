@@ -1,23 +1,22 @@
 import { useState } from 'react'
 
+import { useClaimRequestStore } from '@features/claim-requests/context/store/claim-request-store'
+import { claimRequestService } from '@features/claim-requests/services/claim-request-service'
 import { ConfirmDialog } from '@iap/dialogs'
 import { Button } from '@iap/ui'
 import { useMutation } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
-import { useClaimRequestStore } from '../context/store/claim-request-store'
-import { claimRequestService } from '../services/claim-request-service'
-
 type ClaimRequestInquiryFanavaranButtonProps = {
   claimRequestIds: string[]
   onSuccess?: () => Promise<unknown> | void
 }
 
-export function ClaimRequestInquiryFanavaranButton({
-  claimRequestIds,
-  onSuccess,
-}: ClaimRequestInquiryFanavaranButtonProps) {
+export function ClaimRequestInquiryFanavaranButton(
+  props: ClaimRequestInquiryFanavaranButtonProps
+) {
+  const { claimRequestIds, onSuccess } = props
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const setRowSelection = useClaimRequestStore((state) => state.setRowSelection)
@@ -36,12 +35,15 @@ export function ClaimRequestInquiryFanavaranButton({
   return (
     <>
       <Button
+        presentation='reference'
+        type='button'
         disabled={!claimRequestIds.length || inquiryMutation.isPending}
         onClick={() => setOpen(true)}
       >
         {t('claimRequests.actions.inquiryFanavaran')}
       </Button>
       <ConfirmDialog
+        presentation='reference'
         description={t(
           'claimRequests.confirmations.inquiryFanavaran.description'
         )}

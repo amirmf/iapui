@@ -1,12 +1,13 @@
 import { useState } from 'react'
 
+import { claimRequestService } from '@features/claim-requests/services/claim-request-service'
 import { Button, Input } from '@iap/ui'
 import { useMutation } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-import { claimRequestService } from '../services/claim-request-service'
-
-export function ClaimRequestFetchNewEmptyState(props: { onFetch: () => void }) {
+export function ClaimRequestFetchNewEmptyState(props: {
+  onFetch?: () => void
+}) {
   const { onFetch } = props
   const { t } = useTranslation()
   const [extContractId, setExtContractId] = useState('')
@@ -17,7 +18,7 @@ export function ClaimRequestFetchNewEmptyState(props: { onFetch: () => void }) {
         extContractId: extContractId.trim() || undefined,
         extPolicyId: extPolicyId.trim() || undefined,
       }),
-    onSuccess: onFetch,
+    onSuccess: () => onFetch?.(),
   })
 
   return (
@@ -37,6 +38,8 @@ export function ClaimRequestFetchNewEmptyState(props: { onFetch: () => void }) {
         value={extPolicyId}
       />
       <Button
+        presentation='reference'
+        type='button'
         disabled={mutation.isPending}
         onClick={() => mutation.mutate()}
         size='sm'

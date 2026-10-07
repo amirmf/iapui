@@ -5,7 +5,7 @@ import {
   CLAIM_REQUEST_FEATURE_QUERY_KEY,
   CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS,
   type ClaimRequestQuickStatus,
-  ClaimRequestQuickStatusFilter,
+  ClaimRequestStatusFilter,
 } from '@features/claim-requests'
 import { useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
@@ -38,10 +38,10 @@ export function ClaimRequestsTicketsPage() {
       <TicketsContent
         beforeStatusFilter={
           <div className='mb-4'>
-            <ClaimRequestQuickStatusFilter
-              isFetching={false}
-              onQuickStatusChange={handleQuickStatusChange}
-              quickStatus={CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS}
+            <ClaimRequestStatusFilter
+              isLoading={false}
+              onStatusChange={handleQuickStatusChange}
+              selectedStatus={CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS}
             />
           </div>
         }

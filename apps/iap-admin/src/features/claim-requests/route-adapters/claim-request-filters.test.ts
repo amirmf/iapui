@@ -81,4 +81,19 @@ describe('claim request filters', () => {
       }
     )
   })
+  it('preserves source sort and direction inputs independently of visible sorting', () => {
+    expect(toClaimRequestApiFilters({ sort: 'amount' })).toMatchObject({
+      sort: 'amount',
+    })
+    expect(
+      toClaimRequestApiFilters({ sort: 'amount' }).direction
+    ).toBeUndefined()
+    expect(toClaimRequestApiFilters({ direction: 'desc' })).toMatchObject({
+      sort: 'createdAt',
+      direction: 'asc',
+    })
+    expect(
+      toClaimRequestApiFilters({ quickStatus: 'UNRECOGNIZED' })
+    ).toMatchObject({ status: 'UNRECOGNIZED', skipCurrentUserFilter: 'Y' })
+  })
 })

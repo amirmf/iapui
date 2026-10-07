@@ -1,5 +1,6 @@
 import { useLayoutEffect, useMemo } from 'react'
 
+import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/constants/claim-request-status'
 import { CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS } from '@features/claim-requests/route-adapters/claim-request-feature'
 import {
   type ClaimRequestQuickStatus,
@@ -7,34 +8,24 @@ import {
   claimRequestSentToBankQuickStatus,
   doctorClaimRequestQuickStatuses,
 } from '@features/claim-requests/route-adapters/claim-request-filters'
-import { useClaimRequestTableSearch } from '@features/claim-requests/route-adapters/use-claim-request-table-search'
+import { isDoctorRole, useAuthSession } from '@iap/auth'
 import { cn } from '@iap/ui'
 import { useTranslation } from 'react-i18next'
 
-import { claimRequestStatusTranslationKeys } from '../constants/claim-request-status'
-
 const statusCounts = new Map<string, number>()
 
-type ClaimRequestQuickStatusFilterProps = {
+type ClaimRequestStatusFilterProps = {
   count?: number
-  isFetching: boolean
-  onQuickStatusChange?: (status: ClaimRequestQuickStatus) => void
-  quickStatus?: ClaimRequestQuickStatus
+  isLoading?: boolean
+  onStatusChange: (status: ClaimRequestQuickStatus) => void
+  selectedStatus: ClaimRequestQuickStatus
 }
 
-export function ClaimRequestQuickStatusFilter(
-  props: ClaimRequestQuickStatusFilterProps
-) {
-  const { count, isFetching, onQuickStatusChange, quickStatus } = props
+export function ClaimRequestStatusFilter(props: ClaimRequestStatusFilterProps) {
+  const { count, isLoading, onStatusChange, selectedStatus } = props
   const { t } = useTranslation()
-  const {
-    isDoctor,
-    onQuickStatusChange: onSearchQuickStatusChange,
-    quickStatus: searchQuickStatus,
-  } = useClaimRequestTableSearch()
-  const resolvedQuickStatus = quickStatus ?? searchQuickStatus
-  const handleQuickStatusChange =
-    onQuickStatusChange ?? onSearchQuickStatusChange
+  const { user } = useAuthSession()
+  const isDoctor = isDoctorRole(user?.roles ?? [])
   const visibleQuickStatuses = useMemo(
     () =>
       isDoctor
@@ -47,31 +38,31 @@ export function ClaimRequestQuickStatusFilter(
     statusCounts.clear()
   }, [])
 
-  statusCounts.set(resolvedQuickStatus, count ?? 0)
+  statusCounts.set(selectedStatus, count ?? 0)
 
   return (
-    <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8'>
+    <div className='grid grid-cols-8'>
       {visibleQuickStatuses.map((status) => {
         const savedCount = statusCounts.get(status) ?? '-'
         const displayedCount =
           status === CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS
             ? '-'
-            : resolvedQuickStatus === status
-              ? isFetching
+            : selectedStatus === status
+              ? isLoading
                 ? savedCount
                 : count || 0
               : savedCount
 
         return (
           <button
-            aria-pressed={resolvedQuickStatus === status}
+            aria-pressed={selectedStatus === status}
             className={cn(
-              'min-h-11 rounded bg-muted px-1 py-2 text-[0.8rem]',
-              resolvedQuickStatus === status &&
+              'rounded bg-muted px-1 py-2 text-[0.8rem]',
+              selectedStatus === status &&
                 'bg-primary font-medium text-muted shadow'
             )}
             key={status}
-            onClick={() => handleQuickStatusChange(status)}
+            onClick={() => onStatusChange(status)}
             type='button'
           >
             <p>
@@ -81,7 +72,7 @@ export function ClaimRequestQuickStatusFilter(
                   ? t('claimRequests.status.needsReassessment')
                   : status === claimRequestSentToBankQuickStatus
                     ? t('claimRequests.status.sentToBank')
-                    : t(claimRequestStatusTranslationKeys[status])}
+                    : t(CLAIM_REQUEST_STATUS_TRANSLATION_KEYS[status])}
             </p>
             <p>({displayedCount})</p>
           </button>

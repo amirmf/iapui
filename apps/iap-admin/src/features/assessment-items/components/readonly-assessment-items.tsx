@@ -1,146 +1,49 @@
-import type { AssessmentItem } from '@iap/api-types'
-import { Card, CardContent, CardHeader, CardTitle, cn } from '@iap/ui'
+import { AssessmentItemsCardList } from '@features/assessment-items/components/assessment-item-card-list'
+import { assessmentItemService } from '@features/assessment-items/services/assessment-item-service'
+import type { ClaimRequest } from '@iap/api-types'
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-import { assessmentItemService } from '../services/assessment-item-service'
-
-type ReadonlyAssessmentItemsProps = {
+export function ReadonlyAssessmentItems(props: {
   claimRequestId?: string
   enabled: boolean
-}
-
-export function ReadonlyAssessmentItems(props: ReadonlyAssessmentItemsProps) {
-  const { claimRequestId, enabled } = props
+  claimRequest?: ClaimRequest
+}) {
+  const { claimRequestId, enabled, claimRequest } = props
   const { t } = useTranslation()
+  const assessmentClaimRequestId = enabled ? claimRequestId : undefined
   const query = useQuery({
-    enabled: enabled && Boolean(claimRequestId),
-    gcTime: 30_000,
+    queryKey: ['assessmentItems', { claimRequestId: assessmentClaimRequestId }],
     queryFn: ({ signal }) =>
       assessmentItemService.findByClaimRequest({
-        path: { claimRequestId: claimRequestId! },
+        path: { claimRequestId: assessmentClaimRequestId! },
         signal,
       }),
-    queryKey: ['assessmentItems', { claimRequestId }],
+    enabled: !!assessmentClaimRequestId,
+    staleTime: 30000,
+    gcTime: 30000,
     refetchOnWindowFocus: false,
-    staleTime: 30_000,
   })
-
-  if (!claimRequestId) {
+  if (!assessmentClaimRequestId)
     return (
       <p className='text-sm text-muted-foreground'>
         {t('tickets.relatedClaimRequest.assessmentItemsUnavailable')}
       </p>
     )
-  }
-
-  if (query.isLoading) {
+  if (query.isError)
     return (
-      <p className='text-sm text-muted-foreground'>
-        {t('tickets.relatedClaimRequest.loading')}
-      </p>
-    )
-  }
-
-  if (query.isError) {
-    return (
-      <p className='text-sm text-destructive' role='alert'>
+      <p className='text-sm text-destructive'>
         {t('tickets.relatedClaimRequest.assessmentItemsError')}
       </p>
     )
-  }
-
-  if (!query.data?.length) {
-    return (
-      <p className='py-12 text-center text-sm text-muted-foreground'>
-        {t('assessmentItems.empty')}
-      </p>
-    )
-  }
-
   return (
-    <div className='mb-10 grid grid-cols-1 gap-3'>
-      {query.data.map((item) => (
-        <ReadonlyAssessmentItemCard
-          item={item}
-          key={item.id ?? `${item.damageCode?.code}-${item.damageCode?.title}`}
-        />
-      ))}
-    </div>
-  )
-}
-
-function formatAmount(value: number | null | undefined) {
-  return typeof value === 'number' ? value.toLocaleString('en-US') : '-'
-}
-
-function ReadonlyAssessmentItemCard(props: { item: AssessmentItem }) {
-  const { item } = props
-  const { t } = useTranslation()
-  const rows = [
-    {
-      label: t('assessmentItems.dialog.fields.estimatedAmount'),
-      value: `${formatAmount(item.estimatedAmount)} (${formatAmount(item.quantity ?? 1)}${t('assessmentItems.quantitySuffix')})`,
-    },
-    {
-      label: t('assessmentItems.dialog.fields.franchizeDeductionAmount'),
-      value: formatAmount(item.franchizeDeductionAmount),
-      valueClassName: 'text-destructive',
-    },
-    {
-      label: t('assessmentItems.dialog.fields.remainCoverageAmount'),
-      value: formatAmount(item.remainCoverageAmount),
-    },
-    {
-      label: t('assessmentItems.dialog.fields.amountPaid'),
-      value: formatAmount(item.amount),
-      valueClassName: 'font-semibold text-green-600 dark:text-green-400',
-    },
-    {
-      label: t('assessmentItems.dialog.fields.toothNumbers'),
-      value:
-        item.toothNumber?.toString() ?? item.toothNumbers?.join(', ') ?? '-',
-    },
-  ]
-
-  return (
-    <Card className='h-full w-full gap-3 rounded border-gray-400 py-1 shadow-none'>
-      <CardHeader className='border-b px-2 py-1'>
-        <CardTitle className='line-clamp-1 text-sm'>
-          {item.damageCode?.code ? `${item.damageCode.code}: ` : ''}
-          {item.damageCode?.title ?? '-'}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className='space-y-3 px-2'>
-        <div className='grid grid-cols-2 gap-4 text-sm'>
-          {rows.map((row) => (
-            <div
-              className='flex items-center justify-between gap-1'
-              key={row.label}
-            >
-              <p className='text-sm text-muted-foreground'>{row.label}</p>
-              <p
-                className={cn(
-                  'flex-1 text-left text-sm font-medium tabular-nums',
-                  row.valueClassName
-                )}
-              >
-                {row.value}
-              </p>
-            </div>
-          ))}
-        </div>
-        {item.description ? (
-          <div>
-            <p className='text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
-              {t('assessmentItems.dialog.fields.description')}
-            </p>
-            <p className='mt-1 whitespace-pre-wrap text-sm'>
-              {item.description}
-            </p>
-          </div>
-        ) : null}
-      </CardContent>
-    </Card>
+    <AssessmentItemsCardList
+      claimRequest={claimRequest}
+      claimRequestId={assessmentClaimRequestId}
+      items={query.data}
+      isLoading={query.isLoading}
+      mode='readonly'
+      showEmptyMessage
+    />
   )
 }

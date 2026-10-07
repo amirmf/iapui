@@ -86,7 +86,7 @@ function getFeatureSourceFiles() {
 }
 
 function getStaticClaimRequestTranslationKeys() {
-  const translationKeyPattern = /claimRequests\.([A-Za-z0-9_.]+)/g
+  const translationKeyPattern = /['"`]claimRequests\.([A-Za-z0-9_.]+)/g
 
   return [
     ...new Set(
@@ -104,7 +104,7 @@ function getStaticClaimRequestTranslationKeys() {
 function getDynamicTextFilterTranslationKeys() {
   const toolbarPath = path.resolve(
     process.cwd(),
-    'src/features/claim-requests/components/claim-request-toolbar.tsx'
+    'src/features/claim-requests/components/use-claim-request-filter-groups.ts'
   )
   const toolbarSource = fs.readFileSync(toolbarPath, 'utf8')
   const textFilterConfig = toolbarSource.match(
@@ -157,6 +157,52 @@ describe('ClaimRequestsPage Persian translations', () => {
     expect(referenceTranslations).toMatchObject(targetTranslations)
   })
 
+  it('covers literal translation keys from the source mounted claim-list components', () => {
+    const root =
+      process.env.INSURANCE_UI_REFERENCE_PATH ??
+      path.resolve(process.cwd(), '../../../insurance-ui')
+    const reference = JSON.parse(
+      fs.readFileSync(path.join(root, 'src/locales/fa.json'), 'utf8')
+    ) as Record<string, TranslationValue>
+    const sourceFiles = [
+      'pages/claim-requests-page.tsx',
+      'components/claim-request-columns.tsx',
+      'components/claim-request-data-table-toolbar.tsx',
+      'components/claim-request-row-actions.tsx',
+      'components/claim-request-delete-dialog.tsx',
+      'components/claim-request-bulk-delete-dialog.tsx',
+      'components/claim-request-bulk-status-change-dialog.tsx',
+      'components/claim-request-bulk-core-ai-dialog.tsx',
+      'components/claim-request-generate-and-send-bulk-dialog.tsx',
+      'components/claim-request-fetch-new-empty-state.tsx',
+      'components/claim-request-header-actions/index.tsx',
+      'components/claim-request-header-actions/claim-request-document-receipt-button.tsx',
+      'components/claim-request-header-actions/claim-request-export-excel-button.tsx',
+      'components/claim-request-header-actions/claim-request-inquiry-fanavaran-button.tsx',
+      'components/claim-request-row-actions/claim-request-row-actions-assign-to-me-confirm-dialog.tsx',
+      'components/claim-request-row-actions/claim-request-row-actions-remove-my-assessment-confirm-dialog.tsx',
+    ]
+    for (const file of sourceFiles) {
+      const source = fs.readFileSync(
+        path.join(root, 'src/features/claim-requests', file),
+        'utf8'
+      )
+      for (const [, key] of source.matchAll(
+        /['"]((?:claimRequests|common)\.[A-Za-z0-9_.]+)['"]/g
+      )) {
+        const value = getTranslationValue(reference, key)
+        if (value === undefined) continue // Source literal-key fallbacks are asserted separately.
+        expect(
+          getTranslationValue(
+            fa as unknown as Record<string, TranslationValue>,
+            key
+          ),
+          `${file}: ${key}`
+        ).toEqual(value)
+      }
+    }
+  })
+
   it('provides the exact reference value for every static and dynamic mounted key', () => {
     const referencePath = path.resolve(
       process.env.INSURANCE_UI_REFERENCE_PATH ??
@@ -169,6 +215,13 @@ describe('ClaimRequestsPage Persian translations', () => {
     const target = fa.claimRequests as Record<string, TranslationValue>
 
     for (const key of getRequiredClaimRequestTranslationKeys()) {
+      if (key === 'actions.view' || key === 'messages.docTypeUpdateFailed') {
+        expect(
+          getTranslationValue(reference.claimRequests, key)
+        ).toBeUndefined()
+        expect(getTranslationValue(target, key)).toBeUndefined()
+        continue
+      }
       expect(
         getTranslationValue(target, key),
         `Missing target key: ${key}`

@@ -33,6 +33,7 @@ export function TwoLineHeader<TData, TValue>(props: {
 }
 
 export function TwoLineCell(props: {
+  presentation?: 'default' | 'reference'
   emptyValue?: ReactNode
   primary: ReactNode
   primaryClassName?: string
@@ -44,6 +45,7 @@ export function TwoLineCell(props: {
   truncate?: boolean
 }) {
   const {
+    presentation = 'default',
     emptyValue = '–',
     primary,
     primaryClassName,
@@ -75,7 +77,12 @@ export function TwoLineCell(props: {
       <div
         className={cn(
           'text-xs text-muted-foreground',
-          !longText && !longTextSecondary && truncate && 'truncate'
+          presentation === 'reference' && 'font-normal',
+          presentation !== 'reference' &&
+            !longText &&
+            !longTextSecondary &&
+            truncate &&
+            'truncate'
         )}
       >
         {longText || longTextSecondary ? (
@@ -83,7 +90,14 @@ export function TwoLineCell(props: {
             {secondary ?? emptyValue}
           </LongText>
         ) : (
-          <div className={secondaryClassName}>{secondary ?? emptyValue}</div>
+          <div
+            className={cn(
+              presentation === 'reference' && truncate && 'truncate',
+              secondaryClassName
+            )}
+          >
+            {secondary ?? emptyValue}
+          </div>
         )}
       </div>
     </div>

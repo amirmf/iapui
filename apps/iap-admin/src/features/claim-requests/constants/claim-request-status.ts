@@ -47,67 +47,77 @@ export const claimRequestAiStatusColors: Record<ClaimRequestAiStatus, string> =
       'border-yellow-200 bg-yellow-100/30 text-yellow-900 dark:text-yellow-200',
   }
 
-export const claimRequestStatusTranslationKeys: Record<
-  ClaimRequestStatus,
-  | 'claimRequests.status.approved'
-  | 'claimRequests.status.dedicatedToUser'
-  | 'claimRequests.status.delegated'
-  | 'claimRequests.status.deleted'
-  | 'claimRequests.status.failed_fetch_api'
-  | 'claimRequests.status.inAssessment'
-  | 'claimRequests.status.inReview'
-  | 'claimRequests.status.paid'
-  | 'claimRequests.status.paymentRejected'
-  | 'claimRequests.status.paymentReturn'
-  | 'claimRequests.status.paymentReturnResend'
-  | 'claimRequests.status.rejected'
-  | 'claimRequests.status.return'
-  | 'claimRequests.status.sent'
-  | 'claimRequests.status.sent_failed'
-  | 'claimRequests.status.submitted'
-  | 'claimRequests.status.terminated'
-> = {
-  APPROVED: 'claimRequests.status.approved',
-  DEDICATED_TO_USER: 'claimRequests.status.dedicatedToUser',
-  DELEGATED: 'claimRequests.status.delegated',
-  DELETED: 'claimRequests.status.deleted',
-  FAILED_FETCH_API: 'claimRequests.status.failed_fetch_api',
-  IN_ASSESSMENT: 'claimRequests.status.inAssessment',
+export const CLAIM_REQUEST_STATUS_TRANSLATION_KEYS = {
+  SUBMITTED: 'claimRequests.status.submitted',
   IN_REVIEW: 'claimRequests.status.inReview',
+  IN_ASSESSMENT: 'claimRequests.status.inAssessment',
+  DELEGATED: 'claimRequests.status.delegated',
+  DEDICATED_TO_USER: 'claimRequests.status.dedicatedToUser',
+  APPROVED: 'claimRequests.status.approved',
+  REJECTED: 'claimRequests.status.rejected',
+  FAILED_FETCH_API: 'claimRequests.status.failed_fetch_api',
+  SENT: 'claimRequests.status.sent',
+  SENT_FAILED: 'claimRequests.status.sent_failed',
   PAID: 'claimRequests.status.paid',
+  TERMINATED: 'claimRequests.status.terminated',
+  RETURN: 'claimRequests.status.return',
   PAYMENT_REJECTED: 'claimRequests.status.paymentRejected',
   PAYMENT_RETURN: 'claimRequests.status.paymentReturn',
   PAYMENT_RETURN_RESEND: 'claimRequests.status.paymentReturnResend',
-  REJECTED: 'claimRequests.status.rejected',
-  RETURN: 'claimRequests.status.return',
-  SENT: 'claimRequests.status.sent',
-  SENT_FAILED: 'claimRequests.status.sent_failed',
-  SUBMITTED: 'claimRequests.status.submitted',
-  TERMINATED: 'claimRequests.status.terminated',
-}
+  DELETED: 'claimRequests.status.deleted',
+} as const satisfies Record<ClaimRequestStatus, string>
 
-export const claimRequestAiStatusTranslationKeys: Record<
-  ClaimRequestAiStatus,
-  | 'claimRequests.aiStatus.approved'
-  | 'claimRequests.aiStatus.reject'
-  | 'claimRequests.aiStatus.return'
-  | 'claimRequests.aiStatus.returnMaxCeiling'
-  | 'claimRequests.aiStatus.returnNoCoverage'
-  | 'claimRequests.aiStatus.reviewRequired'
-  | 'claimRequests.aiStatus.reviewRequiredImageDigitallyEdited'
-  | 'claimRequests.aiStatus.reviewRequiredImageDuplicated'
-  | 'claimRequests.aiStatus.reviewRequiredSubmitInfoDuplicated'
-> = {
+export const claimRequestStatusTranslationKeys =
+  CLAIM_REQUEST_STATUS_TRANSLATION_KEYS
+
+export const CLAIM_REQUEST_AI_STATUS_TRANSLATION_KEYS = {
   APPROVED: 'claimRequests.aiStatus.approved',
-  REJECT: 'claimRequests.aiStatus.reject',
   RETURN: 'claimRequests.aiStatus.return',
-  RETURN_MAX_CEILING: 'claimRequests.aiStatus.returnMaxCeiling',
-  RETURN_NO_COVERAGE: 'claimRequests.aiStatus.returnNoCoverage',
   REVIEW_REQUIRED: 'claimRequests.aiStatus.reviewRequired',
-  REVIEW_REQUIRED_IMAGE_DIGITALLY_EDITED:
-    'claimRequests.aiStatus.reviewRequiredImageDigitallyEdited',
-  REVIEW_REQUIRED_IMAGE_DUPLICATED:
-    'claimRequests.aiStatus.reviewRequiredImageDuplicated',
   REVIEW_REQUIRED_SUBMIT_INFO_DUPLICATED:
     'claimRequests.aiStatus.reviewRequiredSubmitInfoDuplicated',
+  REVIEW_REQUIRED_IMAGE_DUPLICATED:
+    'claimRequests.aiStatus.reviewRequiredImageDuplicated',
+  REVIEW_REQUIRED_IMAGE_DIGITALLY_EDITED:
+    'claimRequests.aiStatus.reviewRequiredImageDigitallyEdited',
+  RETURN_NO_COVERAGE: 'claimRequests.aiStatus.returnNoCoverage',
+  RETURN_MAX_CEILING: 'claimRequests.aiStatus.returnMaxCeiling',
+  REJECT: 'claimRequests.aiStatus.reject',
+} as const satisfies Record<ClaimRequestAiStatus, string>
+
+export const claimRequestAiStatusTranslationKeys =
+  CLAIM_REQUEST_AI_STATUS_TRANSLATION_KEYS
+
+export const claimStatusColors = claimRequestStatusColors
+export const aiStatusColors = claimRequestAiStatusColors
+export const MY_IAP_SENT_TO_BANK_FILTER_VALUE = 'SENT_TO_BANK' as const
+export const CLAIM_REQUEST_REQUEST_TYPE_TRANSLATION_KEYS = {
+  MAIN: 'claimRequests.requestType.main',
+  ADJUSTMENT: 'claimRequests.requestType.adjustment',
+} as const
+export const CLAIM_REQUEST_IBAN_STATUS_TRANSLATION_KEYS = {
+  Y: 'claimRequests.ibanStatusValues.has',
+  N: 'claimRequests.ibanStatusValues.doesNotHave',
+} as const
+
+type TranslateClaimOption = (
+  key:
+    | (typeof CLAIM_REQUEST_STATUS_TRANSLATION_KEYS)[ClaimRequestStatus]
+    | (typeof CLAIM_REQUEST_AI_STATUS_TRANSLATION_KEYS)[ClaimRequestAiStatus]
+    | (typeof CLAIM_REQUEST_REQUEST_TYPE_TRANSLATION_KEYS)[keyof typeof CLAIM_REQUEST_REQUEST_TYPE_TRANSLATION_KEYS]
+) => string
+export function getClaimRequestStatusOptions(t: TranslateClaimOption) {
+  return Object.entries(CLAIM_REQUEST_STATUS_TRANSLATION_KEYS).map(
+    ([value, key]) => ({ label: t(key), value })
+  )
+}
+export function getClaimRequestAiStatusOptions(t: TranslateClaimOption) {
+  return Object.entries(CLAIM_REQUEST_AI_STATUS_TRANSLATION_KEYS).map(
+    ([value, key]) => ({ label: t(key), value })
+  )
+}
+export function getClaimRequestRequestTypeOptions(t: TranslateClaimOption) {
+  return Object.entries(CLAIM_REQUEST_REQUEST_TYPE_TRANSLATION_KEYS).map(
+    ([value, key]) => ({ label: t(key), value })
+  )
 }

@@ -1,22 +1,22 @@
 import { useMemo } from 'react'
 
+import { ClaimRequestDocumentReceiptButton } from '@features/claim-requests/components/claim-request-document-receipt-button'
+import { ClaimRequestExportExcelButton } from '@features/claim-requests/components/claim-request-export-excel-button'
+import { ClaimRequestInquiryFanavaranButton } from '@features/claim-requests/components/claim-request-inquiry-fanavaran-button'
+import { useClaimRequestStore } from '@features/claim-requests/context/store/claim-request-store'
 import { isAdminRole, isSuperAdminRole, useAuthSession } from '@iap/auth'
 import type { ApiFilterParams } from '@iap/shared-lib'
-import { Button, Permission } from '@iap/ui'
-import { RefreshCw } from 'lucide-react'
+import { Button, Permission, cn } from '@iap/ui'
+import { IconRefresh } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
-
-import { useClaimRequestStore } from '../context/store/claim-request-store'
-import { ClaimRequestExportExcelButton } from './claim-request-export-excel-button'
-import { ClaimRequestInquiryFanavaranButton } from './claim-request-inquiry-fanavaran-button'
 
 export function ClaimRequestHeaderActions(props: {
   filters: ApiFilterParams
-  isFetching: boolean
-  onRefresh: () => Promise<unknown> | void
-  selectedIds: string[]
+  isLoading: boolean
+  onRefetch: () => Promise<unknown> | void
+  claimRequestIds: string[]
 }) {
-  const { filters, isFetching, onRefresh, selectedIds } = props
+  const { filters, isLoading, onRefetch, claimRequestIds } = props
   const { t } = useTranslation()
   const rowSelection = useClaimRequestStore((state) => state.rowSelection)
   const { user } = useAuthSession()
@@ -34,23 +34,30 @@ export function ClaimRequestHeaderActions(props: {
 
   return (
     <div className='flex flex-wrap gap-2'>
+      <ClaimRequestDocumentReceiptButton />
       <Permission hasPermission={canSuperAdmin}>
         <Button
+          presentation='reference'
+          type='button'
           className='space-x-2'
           disabled={!hasSelection}
           onClick={() => setOpenDialog('bulkDataExtraction')}
         >
-          {t('claimRequests.bulkDataExtraction.button')}
+          <span>{t('claimRequests.bulkDataExtraction.button')}</span>
         </Button>
         <Button
+          presentation='reference'
+          type='button'
           className='space-x-2'
           disabled={!hasSelection}
           onClick={() => setOpenDialog('bulkStatusChange')}
           variant='destructive'
         >
-          {t('claimRequests.bulkStatusChange.button')}
+          <span>{t('claimRequests.bulkStatusChange.button')}</span>
         </Button>
         <Button
+          presentation='reference'
+          type='button'
           className='space-x-2'
           disabled={!hasSelection}
           onClick={() => setOpenDialog('bulkDelete')}
@@ -61,6 +68,8 @@ export function ClaimRequestHeaderActions(props: {
       </Permission>
       <Permission hasPermission={canGenerateAndSend}>
         <Button
+          presentation='reference'
+          type='button'
           className='space-x-2'
           disabled={!hasSelection}
           onClick={() => setOpenDialog('bulkGenerateAndSend')}
@@ -71,20 +80,23 @@ export function ClaimRequestHeaderActions(props: {
       </Permission>
       <Permission hasPermission={canAdmin}>
         <ClaimRequestInquiryFanavaranButton
-          claimRequestIds={selectedIds}
-          onSuccess={onRefresh}
+          claimRequestIds={claimRequestIds}
+          onSuccess={onRefetch}
         />
       </Permission>
       <ClaimRequestExportExcelButton filters={filters} />
       <Button
+        presentation='reference'
+        type='button'
         className='space-x-2'
-        disabled={isFetching}
-        onClick={onRefresh}
+        disabled={isLoading}
+        onClick={onRefetch}
         variant='outline'
       >
-        <RefreshCw
+        <IconRefresh
+          size={18}
           aria-hidden='true'
-          className={isFetching ? 'animate-spin' : ''}
+          className={cn(isLoading && 'animate-spin')}
         />
         <span>{t('claimRequests.refresh')}</span>
       </Button>

@@ -1063,8 +1063,99 @@
         "remainCoverageAmount": "مانده پوشش",
         "amountPaid": "تایید شده",
         "toothNumbers": "شماره دندان",
-        "description": "توضیحات"
+        "description": "توضیحات",
+        "floatCoverage": "پوشش شناور"
+      },
+      "toothAssessment": {
+        "title": "پنل ارزیابی دندان",
+        "description": "جزئیات مرتبط با دندان را برای ارزیابی کامل‌تر ثبت کنید.",
+        "fields": {
+          "toothNumber": "شماره دندان",
+          "chartHint": "دندان مورد نظر را از نمودار تعاملی زیر انتخاب کنید.",
+          "toothType": "نوع دندان",
+          "toothTypePlaceholder": "نوع دندان را انتخاب کنید",
+          "toothTypes": {
+            "permanent": "دندان دائمی",
+            "deciduous": "دندان شیری (اطفال)"
+          },
+          "jawQuarters": {
+            "0": "بدون شماره دندان",
+            "19": "بالا راست",
+            "29": "بالا چپ",
+            "39": "پایین چپ",
+            "49": "پایین راست",
+            "56": "بالا راست",
+            "66": "بالا چپ",
+            "76": "پایین چپ",
+            "86": "پایین راست",
+            "90": "فک بالا",
+            "91": "فک پایین",
+            "92": "هر دو فک",
+            "902": "1/2 فک",
+            "904": "1/4 فک",
+            "906": "1/6 فک"
+          },
+          "jaw": "فک بالا",
+          "jawHelp": "برای فک بالا روشن و برای فک پایین خاموش باشد."
+        },
+        "helper": {
+          "selected": "دندان {{number}} انتخاب شد",
+          "notSelected": "هنوز دندانی انتخاب نشده است."
+        },
+        "actions": {
+          "clear": "حذف انتخاب"
+        }
       }
+    },
+    "adjustment": {
+      "action": "ثبت متمم",
+      "title": "ثبت متمم مورد ارزیابی",
+      "totalSumAmount": "مبلغ تایید شده",
+      "status": {
+        "submitted": "تأیید شده",
+        "approved": "تأیید شده",
+        "send": "ارسال شده",
+        "sent_failed": "خطا ارسال",
+        "terminated": "ابطال",
+        "paymentRejected": "رد شده در پرداخت",
+        "paid": "واریز وجه"
+      },
+      "delete": {
+        "title": "حذف متمم",
+        "description": "آیا از حذف این متمم مطمئن هستید؟",
+        "confirm": "حذف"
+      },
+      "field": {
+        "title": "متمم"
+      },
+      "confirm": {
+        "payAmount": "مبلغ قابل پرداخت",
+        "amount": "مبلغ وارد شده",
+        "calculate": {
+          "title": "اتمام سقف پوشش",
+          "description": "سقف پوشش تکمیل شده است."
+        },
+        "maxCoverage": {
+          "title": "اتمام سقف پوشش",
+          "description": "مانده پوشش کمتر از مبلغ وارد شده می باشد."
+        },
+        "maxPerCase": {
+          "title": "سقف تعرفه",
+          "description": "مبلغ تاییده شده بیشتر از سقف تعرفه می باشد."
+        },
+        "morePayAmount": {
+          "title": "مبلغ درخواستی",
+          "description": "مبلغ درخواستی بیشتر از مبلغ قابل پرداخت می باشد."
+        }
+      },
+      "formTitle": "ثبت متمم مورد ارزیابی"
+    },
+    "fanavarnCalc": {
+      "title": "نتیجه محاسبات شعبه و فناوران",
+      "approvedAmount": "تایید شده/ ارزیابی",
+      "franchize": "فرانشیز",
+      "deductionAmount": "مبلغ کسورات",
+      "totalAmount": "پرداختی نهایی"
     }
   },
   "agreementPartyAppls": {
@@ -1716,7 +1807,8 @@
       "seenBy": "فیلد",
       "outpatientDocAcceptanceExtId": "شماره پذیرش فناوران",
       "registeredByAgentUsername": "نام کاربری نماینده ثبت",
-      "registeredByAgentDisplayName": "نام نماینده ثبت"
+      "registeredByAgentDisplayName": "نام نماینده ثبت",
+      "extMainDisplayName": "نام بیمه‌شده اصلی"
     },
     "ibanStatusValues": {
       "has": "دارد",
@@ -1889,7 +1981,62 @@
     },
     "extContractIdPlaceholder": "شماره قرارداد",
     "extPolicyIdPlaceholder": "کد رایانه بیمه نامه",
-    "fetchNewRequests": "کلیک جهت مشاهده درخواست‌ها"
+    "fetchNewRequests": "کلیک جهت مشاهده درخواست‌ها",
+    "filterGroups": {
+      "request": "اطلاعات درخواست",
+      "insured": "بیمه‌شده و قرارداد",
+      "organization": "سازمان و شعبه",
+      "assessment": "ارزیابی و ثبت",
+      "financial": "مالی و پرداخت"
+    },
+    "documentReceipt": {
+      "button": "رسید تحویل مدارک",
+      "title": "رسید تحویل مدارک",
+      "nationalCode": "کد ملی بیمه شده اصلی",
+      "submit": "دریافت رسید",
+      "downloaded": "رسید تحویل مدارک دریافت شد",
+      "validation": {
+        "nationalCodeRequired": "کد ملی بیمه شده اصلی الزامی است."
+      }
+    },
+    "detail": {
+      "beneficiary": "هزینه برای",
+      "subInsuredPerson": "بیمه شده اصلی",
+      "age": "{{age}} ساله",
+      "policyNumber": "بیمه نامه",
+      "extPolicyId": "شماره بیمه‌نامه",
+      "extContractId": "شماره قرارداد",
+      "businessKey": "پذیرش",
+      "extWorkUnitName": "نام شعبه",
+      "extWorkUnitCode": "کد شعبه",
+      "extWorkUnitProvinceName": "استان شعبه",
+      "extWorkUnitCityName": "شهر شعبه",
+      "plan": "طرح",
+      "viewPolicyPdf": "مشاهده بیمه‌نامه",
+      "mobileNumber": "شماره موبایل",
+      "customerName": "بیمه‌گذار",
+      "submitDate": "تاریخ هزینه",
+      "amount": "درخواستی",
+      "totalSumAmount": "تایید شده",
+      "ibanStatus": "وضعیت شبا",
+      "createdAt": "تاریخ ثبت",
+      "documentTypes": "نوع سند",
+      "doctorSpecialty": "تخصص پزشک",
+      "description": "توضیحات",
+      "aiStatus": "وضعیت AI",
+      "errorDescription": "توضیحات خطا",
+      "rejectionReasons": "دلایل رد",
+      "assessmentItems": "موارد ارزیابی",
+      "seenBy": "مشاهده شده توسط",
+      "seenByDetails": "جزئیات کاربر - مشاهده شده توسط",
+      "userInformation": "اطلاعات کامل کاربری که این درخواست را مشاهده کرد",
+      "seenAt": "مشاهده شده در",
+      "specialDiseases": "بیماری‌های خاص",
+      "hasCheatedBefore": "سابقه تقلب دارد",
+      "outpatientDocAcceptanceExtId": "شماره پذیرش فناوران",
+      "extPaymentDate": "تاریخ پرداخت",
+      "assessmentRules": "قوانین ارزیابی"
+    }
   },
   "otp": {
     "sections": {

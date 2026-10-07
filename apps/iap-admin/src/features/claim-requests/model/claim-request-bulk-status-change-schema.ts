@@ -5,10 +5,10 @@ import {
 import type { TFunction } from 'i18next'
 import { z } from 'zod'
 
-export function createClaimRequestBulkStatusChangeSchema(t: TFunction) {
+export function claimRequestBulkStatusChangeFormSchema(t: TFunction) {
   return z.object({
-    claimRequestStatus: claimRequestStatusSchema.optional().refine(Boolean, {
-      message: t('claimRequests.validation.status'),
+    claimRequestStatus: z.enum(claimRequestStatusSchema.options, {
+      error: t('claimRequests.validation.status'),
     }),
     description: z.string().optional(),
     isCheat: claimRequestIbanStatusSchema.optional(),
@@ -16,5 +16,5 @@ export function createClaimRequestBulkStatusChangeSchema(t: TFunction) {
 }
 
 export type ClaimRequestBulkStatusChangeForm = z.infer<
-  ReturnType<typeof createClaimRequestBulkStatusChangeSchema>
+  ReturnType<typeof claimRequestBulkStatusChangeFormSchema>
 >

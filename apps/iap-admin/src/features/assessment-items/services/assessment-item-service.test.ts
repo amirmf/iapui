@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { assessmentItemService } from './assessment-item-service'
 
-const apiClient = vi.hoisted(() => ({ get: vi.fn() }))
+const apiClient = vi.hoisted(() => ({ get: vi.fn(), post: vi.fn() }))
 
 vi.mock('@iap/api-client', () => ({ getApiClient: () => apiClient }))
 
@@ -33,6 +33,26 @@ describe('assessmentItemService', () => {
       '/assessment-items/claim-request/claim-request-1',
       { signal }
     )
+  })
+
+  it('posts the exact calculation request and validates returned damage cases', async () => {
+    const payload = { claimRequestId: 'claim-1', assessmentItemId: 'item-1' }
+    apiClient.post.mockResolvedValue({
+      data: [{ totalAmount: 100, wsStatus: 'DONE', extra: 'retained' }],
+    })
+    await expect(
+      assessmentItemService.getAfterCalculationResult(payload)
+    ).resolves.toEqual([
+      { totalAmount: 100, wsStatus: 'DONE', extra: 'retained' },
+    ])
+    expect(apiClient.post).toHaveBeenCalledWith(
+      '/claim-requests/get-after-calculation-result',
+      payload
+    )
+    apiClient.post.mockResolvedValue({ data: [{ wsStatus: 'INVALID' }] })
+    await expect(
+      assessmentItemService.getAfterCalculationResult(payload)
+    ).rejects.toThrow()
   })
 
   it('rejects an empty claim request ID before transport', async () => {

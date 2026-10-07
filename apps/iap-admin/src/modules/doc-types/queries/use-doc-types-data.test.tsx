@@ -57,7 +57,7 @@ describe('useDocTypesData source selector parity', () => {
     )
     const query = client
       .getQueryCache()
-      .find({ queryKey: ['doc-types', 'page', 0, 100] })!
+      .find({ queryKey: ['doc-types', 'page', 0, 100, 'content'] })!
     expect(query.gcTime).toBe(Infinity)
   })
 

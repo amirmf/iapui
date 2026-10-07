@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react'
 
 import type { SupportTicket } from '@iap/api-types'
-import { Badge, Button, cn, formatDateTime } from '@iap/ui'
-import { TwoLineCell, TwoLineHeader } from '@shared/tables'
+import { Badge, Button, LongText, cn, formatDateTime } from '@iap/ui'
+import { TwoLineCell, TwoLineCellWrapper, TwoLineHeader } from '@shared/tables'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 
@@ -22,7 +22,7 @@ const columnHelper = createColumnHelper<SupportTicket>()
 export type TicketColumnsVariant = 'claim-request-context' | 'default'
 
 export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const setCurrentRow = useTicketStore((state) => state.setCurrentRow)
   const setOpen = useTicketStore((state) => state.setOpen)
   const showClaimRequestId = variant === 'claim-request-context'
@@ -45,6 +45,7 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
 
             return (
               <Button
+                presentation='reference'
                 className='h-auto max-w-44 justify-start p-0 text-start'
                 onClick={() => openTicket(context.row.original)}
                 variant='link'
@@ -59,6 +60,7 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
           },
           header: ({ column }) => (
             <TwoLineHeader
+              presentation='reference'
               column={column}
               primary={
                 showClaimRequestId
@@ -75,24 +77,30 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
           const category = context.row.original.category
 
           return (
-            <TwoLineCell
-              longText
-              primary={context.getValue()}
-              secondary={
+            <TwoLineCellWrapper>
+              {[
+                <LongText presentation='reference' className='max-w-48'>
+                  {context.getValue() || '-'}
+                </LongText>,
                 category ? (
                   <Badge
+                    presentation='reference'
+                    key={category}
                     className={cn('w-fit', ticketCategoryClasses[category])}
                     variant='outline'
                   >
                     {t(ticketCategoryTranslationKeys[category])}
                   </Badge>
-                ) : undefined
-              }
-            />
+                ) : (
+                  '-'
+                ),
+              ]}
+            </TwoLineCellWrapper>
           )
         },
         header: ({ column }) => (
           <TwoLineHeader
+            presentation='reference'
             column={column}
             primary={t('tickets.columns.subject')}
             secondary={t('tickets.columns.category')}
@@ -103,32 +111,38 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
       columnHelper.display({
         cell: (context) => (
           <TwoLineCell
+            presentation='reference'
+            emptyValue='-'
             primary={context.row.original.ownerUserAccount?.displayName}
             secondary={context.row.original.ownerUserAccount?.username}
           />
         ),
         header: ({ column }) => (
           <TwoLineHeader
+            presentation='reference'
             column={column}
             primary={t('tickets.columns.ownerDisplayName')}
             secondary={t('tickets.columns.ownerUsername')}
           />
         ),
-        id: 'ownerUserAccount.displayName',
+        id: 'extDisplayName',
+        enableSorting: true,
       }),
       columnHelper.display({
         cell: (context) => (
           <span className='truncate text-sm font-medium'>
-            {context.row.original.assignedUserAccount?.displayName ?? '–'}
+            {context.row.original.assignedUserAccount?.displayName ?? '-'}
           </span>
         ),
         header: ({ column }) => (
           <TwoLineHeader
+            presentation='reference'
             column={column}
             primary={t('tickets.columns.assignedUserDisplayName')}
           />
         ),
-        id: 'assignedUserAccount.displayName',
+        id: 'assignedUserDisplayName',
+        enableSorting: true,
       }),
       columnHelper.accessor('status', {
         cell: (context) => {
@@ -136,19 +150,21 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
           const status = context.getValue()
 
           return (
-            <div className='flex flex-col gap-1 text-xs'>
+            <div className='flex flex-col gap-1'>
               {status ? (
                 <Badge
+                  presentation='reference'
                   className={cn('w-fit', ticketStatusClasses[status])}
                   variant='outline'
                 >
                   {t(ticketStatusTranslationKeys[status])}
                 </Badge>
               ) : (
-                '–'
+                '-'
               )}
               {priority ? (
                 <Badge
+                  presentation='reference'
                   className={cn('w-fit', ticketPriorityClasses[priority])}
                   variant='outline'
                 >
@@ -160,6 +176,7 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
         },
         header: ({ column }) => (
           <TwoLineHeader
+            presentation='reference'
             column={column}
             primary={t('tickets.columns.status')}
             secondary={t('tickets.columns.priority')}
@@ -170,12 +187,27 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
       columnHelper.accessor('lastMessageAt', {
         cell: (context) => (
           <TwoLineCell
-            primary={formatDateTime(context.getValue())}
-            secondary={formatDateTime(context.row.original.createdAt)}
+            presentation='reference'
+            emptyValue='-'
+            primary={formatDateTime(context.getValue(), undefined, {
+              language: i18n.language,
+              normalizeTimezone: false,
+              invalidDate: 'throw',
+            })}
+            secondary={formatDateTime(
+              context.row.original.createdAt,
+              undefined,
+              {
+                language: i18n.language,
+                normalizeTimezone: false,
+                invalidDate: 'throw',
+              }
+            )}
           />
         ),
         header: ({ column }) => (
           <TwoLineHeader
+            presentation='reference'
             column={column}
             primary={t('tickets.columns.lastMessageAt')}
             secondary={t('tickets.columns.createdAt')}
@@ -190,6 +222,6 @@ export function useTicketColumns(variant: TicketColumnsVariant = 'default') {
         meta: { className: 'sticky left-0 w-12 max-w-12 bg-background' },
       }),
     ],
-    [openTicket, showClaimRequestId, t]
+    [i18n.language, openTicket, showClaimRequestId, t]
   )
 }

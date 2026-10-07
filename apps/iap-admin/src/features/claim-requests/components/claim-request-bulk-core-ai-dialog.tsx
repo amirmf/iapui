@@ -1,22 +1,12 @@
 import { useMemo } from 'react'
 
+import { useClaimRequestStore } from '@features/claim-requests/context/store/claim-request-store'
+import { coreAiService } from '@features/claim-requests/services/core-ai-service'
 import { useAuthSession } from '@iap/auth'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@iap/ui'
+import { ConfirmDialog } from '@iap/dialogs'
 import { useMutation } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-
-import { useClaimRequestStore } from '../context/store/claim-request-store'
-import { claimRequestService } from '../services/claim-request-service'
 
 export function ClaimRequestBulkCoreAiDialog(props: {
   claimRequestIds: string[]
@@ -34,20 +24,20 @@ export function ClaimRequestBulkCoreAiDialog(props: {
   )
   const mutation = useMutation({
     mutationFn: () =>
-      claimRequestService.startBulkCoreAiDataExtraction(
+      coreAiService.bulkStartDataExtractionWorkflow(
         claimRequestIds.map((claimRequestId) => ({
           claimRequestId,
           initiatedBy,
           workflowId: claimRequestId,
         }))
       ),
-    onSuccess: async (responses) => {
+    onSuccess: (responses) => {
       toast.success(
         t('claimRequests.bulkDataExtraction.success', {
           count: responses.length,
         })
       )
-      await onSuccess()
+      onSuccess()
       setOpenDialog(null)
       setRowSelection({})
     },
@@ -56,51 +46,41 @@ export function ClaimRequestBulkCoreAiDialog(props: {
   const isOpen = openDialog === 'bulkDataExtraction'
 
   return (
-    <AlertDialog
-      onOpenChange={(open) => !open && setOpenDialog(null)}
+    <ConfirmDialog
+      presentation='reference'
+      onOpenChange={(open) => {
+        if (!open) setOpenDialog(null)
+      }}
       open={isOpen}
-    >
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>
-            {t('claimRequests.bulkDataExtraction.title')}
-          </AlertDialogTitle>
-          <AlertDialogDescription asChild>
-            <div className='space-y-2'>
-              <p>
-                {t('claimRequests.bulkDataExtraction.description', {
-                  count: claimRequestIds.length,
-                })}
-              </p>
-              <p className='text-sm text-muted-foreground'>
-                {t('claimRequests.bulkDataExtraction.selectionInfo', {
-                  count: claimRequestIds.length,
-                })}
-              </p>
-            </div>
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel disabled={mutation.isPending}>
-            {t('common.cancel')}
-          </AlertDialogCancel>
-          <AlertDialogAction
-            disabled={claimRequestIds.length === 0 || mutation.isPending}
-            onClick={(event) => {
-              event.preventDefault()
-              if (claimRequestIds.length === 0) {
-                toast.error(t('claimRequests.bulkDataExtraction.noSelection'))
-                return
-              }
-              mutation.mutate()
-            }}
-          >
-            {mutation.isPending
-              ? t('claimRequests.bulkDataExtraction.submitting')
-              : t('claimRequests.bulkDataExtraction.confirm')}
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+      title={t('claimRequests.bulkDataExtraction.title')}
+      isLoading={mutation.isPending}
+      disableConfirm={claimRequestIds.length === 0}
+      onConfirm={() => {
+        if (claimRequestIds.length === 0) {
+          toast.error(t('claimRequests.bulkDataExtraction.noSelection'))
+          return
+        }
+        mutation.mutate()
+      }}
+      confirmLabel={
+        mutation.isPending
+          ? t('claimRequests.bulkDataExtraction.submitting')
+          : t('claimRequests.bulkDataExtraction.confirm')
+      }
+      description={
+        <div className='space-y-2'>
+          <p>
+            {t('claimRequests.bulkDataExtraction.description', {
+              count: claimRequestIds.length,
+            })}
+          </p>
+          <p className='text-sm text-muted-foreground'>
+            {t('claimRequests.bulkDataExtraction.selectionInfo', {
+              count: claimRequestIds.length,
+            })}
+          </p>
+        </div>
+      }
+    />
   )
 }

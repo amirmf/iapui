@@ -1,5 +1,12 @@
 import { useEffect, useMemo } from 'react'
 
+import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/constants/claim-request-status'
+import { useClaimRequestStore } from '@features/claim-requests/context/store/claim-request-store'
+import {
+  type ClaimRequestBulkStatusChangeForm,
+  claimRequestBulkStatusChangeFormSchema,
+} from '@features/claim-requests/model/claim-request-bulk-status-change-schema'
+import { claimRequestService } from '@features/claim-requests/services/claim-request-service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { ClaimRequestStatus } from '@iap/api-types'
 import {
@@ -20,24 +27,16 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  Select,
+  SearchableSelect,
 } from '@iap/ui'
 import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
-import { claimRequestStatusTranslationKeys } from '../constants/claim-request-status'
-import { useClaimRequestStore } from '../context/store/claim-request-store'
-import {
-  type ClaimRequestBulkStatusChangeForm,
-  createClaimRequestBulkStatusChangeSchema,
-} from '../model/claim-request-bulk-status-change-schema'
-import { claimRequestService } from '../services/claim-request-service'
-
 type StatusOption = { label: string; value: ClaimRequestStatus }
 
-const defaultValues: ClaimRequestBulkStatusChangeForm = {
+const defaultValues: Partial<ClaimRequestBulkStatusChangeForm> = {
   claimRequestStatus: undefined,
   description: '',
   isCheat: 'N',
@@ -49,7 +48,7 @@ export function ClaimRequestBulkStatusChangeDialog(props: {
 }) {
   const { claimRequestIds, onSuccess } = props
   const { t } = useTranslation()
-  const schema = useMemo(() => createClaimRequestBulkStatusChangeSchema(t), [t])
+  const schema = useMemo(() => claimRequestBulkStatusChangeFormSchema(t), [t])
   const form = useForm<ClaimRequestBulkStatusChangeForm>({
     defaultValues,
     resolver: zodResolver(schema),
@@ -59,25 +58,27 @@ export function ClaimRequestBulkStatusChangeDialog(props: {
   const setRowSelection = useClaimRequestStore((state) => state.setRowSelection)
   const statusOptions = useMemo<StatusOption[]>(
     () =>
-      Object.entries(claimRequestStatusTranslationKeys).map(([value, key]) => ({
-        label: t(key as never),
-        value: value as ClaimRequestStatus,
-      })),
+      Object.entries(CLAIM_REQUEST_STATUS_TRANSLATION_KEYS).map(
+        ([value, key]) => ({
+          label: t(key as never),
+          value: value as ClaimRequestStatus,
+        })
+      ),
     [t]
   )
   const mutation = useMutation({
     mutationFn: (values: ClaimRequestBulkStatusChangeForm) =>
-      claimRequestService.submitBulkStatusChange({
+      claimRequestService.submitObjectionsBulk({
         claimRequestId: claimRequestIds,
         claimRequestStatus: values.claimRequestStatus as ClaimRequestStatus,
         description: values.description?.trim() || undefined,
         isCheat: values.isCheat ?? 'N',
       }),
-    onSuccess: async (responses) => {
+    onSuccess: (responses) => {
       toast.success(
         t('claimRequests.bulkStatusChange.success', { count: responses.length })
       )
-      await onSuccess()
+      onSuccess()
       setOpenDialog(null)
       setRowSelection({})
     },
@@ -98,8 +99,13 @@ export function ClaimRequestBulkStatusChangeDialog(props: {
   }
 
   return (
-    <Dialog onOpenChange={(open) => !open && setOpenDialog(null)} open={isOpen}>
-      <DialogContent>
+    <Dialog
+      onOpenChange={(open) => {
+        setOpenDialog(open ? 'bulkStatusChange' : null)
+      }}
+      open={isOpen}
+    >
+      <DialogContent presentation='reference'>
         <DialogHeader>
           <DialogTitle>{t('claimRequests.bulkStatusChange.title')}</DialogTitle>
           <DialogDescription>
@@ -123,18 +129,19 @@ export function ClaimRequestBulkStatusChangeDialog(props: {
                     {t('claimRequests.dialog.fields.objectionStatus')}
                   </FormLabel>
                   <FormControl>
-                    <Select
+                    <SearchableSelect
+                      clearText={t('common.clear')}
+                      emptyText={t('common.noResults')}
+                      loadingText={t('common.loading')}
+                      selectText={t('common.select')}
+                      presentation='reference'
                       disabled={isPending}
-                      labelKey='label'
-                      onValueChange={(option) => field.onChange(option?.value)}
-                      options={statusOptions}
+                      onChange={field.onChange}
+                      items={statusOptions}
                       placeholder={t(
                         'claimRequests.bulkStatusChange.statusPlaceholder'
                       )}
-                      value={statusOptions.find(
-                        (option) => option.value === field.value
-                      )}
-                      valueKey='value'
+                      value={field.value}
                     />
                   </FormControl>
                   <FormMessage />
@@ -142,6 +149,7 @@ export function ClaimRequestBulkStatusChangeDialog(props: {
               )}
             />
             <TextareaField
+              presentation='reference'
               control={form.control}
               disabled={isPending}
               label={t('claimRequests.dialog.fields.description')}
@@ -166,7 +174,7 @@ export function ClaimRequestBulkStatusChangeDialog(props: {
                       }
                     />
                   </FormControl>
-                  <FormLabel className='cursor-pointer text-destructive'>
+                  <FormLabel className='cursor-pointer font-medium text-destructive'>
                     {t('claimRequests.dialog.fields.isCheat')}
                   </FormLabel>
                   <FormMessage />
@@ -175,8 +183,9 @@ export function ClaimRequestBulkStatusChangeDialog(props: {
             />
           </form>
         </Form>
-        <DialogFooter>
+        <DialogFooter className='gap-2 sm:space-x-2'>
           <Button
+            presentation='reference'
             disabled={isPending}
             onClick={() => setOpenDialog(null)}
             type='button'
@@ -185,6 +194,7 @@ export function ClaimRequestBulkStatusChangeDialog(props: {
             {t('common.cancel')}
           </Button>
           <Button
+            presentation='reference'
             disabled={claimRequestIds.length === 0 || isPending}
             form='claim-request-bulk-status-change-form'
             type='submit'

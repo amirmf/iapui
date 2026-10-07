@@ -68,23 +68,25 @@ export function TicketStatusHistoryDialog(
       <DialogTrigger asChild disabled={!history.length}>
         {children}
       </DialogTrigger>
-      <DialogContent className='sm:max-w-xl'>
+      <DialogContent presentation='reference' className='sm:max-w-xl'>
         <DialogHeader>
           <DialogTitle>{t('tickets.statusHistory.title')}</DialogTitle>
           <DialogDescription>
             {t('tickets.statusHistory.description')}
           </DialogDescription>
         </DialogHeader>
-        <ol className='max-h-[60vh] space-y-0 overflow-auto pe-4'>
-          {history.map((entry, index) => (
-            <TicketStatusHistoryEntry
-              entry={entry}
-              isFirst={index === 0}
-              isLast={index === history.length - 1}
-              key={`${entry.fromStatus ?? 'none'}-${entry.toStatus ?? 'status'}-${entry.changedAt ?? index}`}
-            />
-          ))}
-        </ol>
+        <div className='max-h-[60vh] overflow-auto pe-4'>
+          <ol className='space-y-0'>
+            {history.map((entry, index) => (
+              <TicketStatusHistoryEntry
+                entry={entry}
+                isFirst={index === 0}
+                isLast={index === history.length - 1}
+                key={`${entry.fromStatus ?? 'none'}-${entry.toStatus ?? 'status'}-${entry.changedAt ?? index}`}
+              />
+            ))}
+          </ol>
+        </div>
       </DialogContent>
     </Dialog>
   )
@@ -98,7 +100,7 @@ type TicketStatusHistoryEntryProps = {
 
 function TicketStatusHistoryEntry(props: TicketStatusHistoryEntryProps) {
   const { entry, isFirst, isLast } = props
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const status = entry.toStatus
   const Icon = status ? ticketStatusIconMap[status] : Circle
   const userLabel = getUserLabel(entry)
@@ -128,7 +130,11 @@ function TicketStatusHistoryEntry(props: TicketStatusHistoryEntryProps) {
           </p>
           {entry.changedAt ? (
             <time className='text-xs'>
-              {formatDateTime(entry.changedAt, 'HH:mm yyyy/MM/dd')}
+              {formatDateTime(entry.changedAt, 'HH:mm yyyy/MM/dd', {
+                language: i18n.language,
+                normalizeTimezone: false,
+                invalidDate: 'throw',
+              })}
             </time>
           ) : null}
         </div>

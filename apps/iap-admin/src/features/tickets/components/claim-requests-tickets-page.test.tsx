@@ -29,12 +29,12 @@ vi.mock('@features/claim-requests', () => ({
     tickets: 'tickets',
   },
   CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS: 'tickets',
-  ClaimRequestQuickStatusFilter: ({
-    onQuickStatusChange,
+  ClaimRequestStatusFilter: ({
+    onStatusChange,
   }: {
-    onQuickStatusChange?: (status: 'DELEGATED') => void
+    onStatusChange?: (status: 'DELEGATED') => void
   }) => (
-    <button onClick={() => onQuickStatusChange?.('DELEGATED')} type='button'>
+    <button onClick={() => onStatusChange?.('DELEGATED')} type='button'>
       switch-to-delegated
     </button>
   ),

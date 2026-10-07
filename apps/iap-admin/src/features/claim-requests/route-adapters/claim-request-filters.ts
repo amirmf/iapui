@@ -1,8 +1,7 @@
+import { CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS } from '@features/claim-requests/route-adapters/claim-request-feature'
 import type { ClaimRequestStatus } from '@iap/api-types'
 import type { TableFilterSearch } from '@shared/tables'
 import { produce } from 'immer'
-
-import { CLAIM_REQUEST_TICKET_FEATURE_QUICK_STATUS } from './claim-request-feature'
 
 export const claimRequestSentToBankQuickStatus = 'SENT_TO_BANK' as const
 
@@ -78,15 +77,19 @@ export function toClaimRequestApiFilters(
   filters: TableFilterSearch,
   isDoctor = false
 ) {
-  const quickStatus = getClaimRequestQuickStatus(filters, isDoctor)
+  const quickStatus = isDoctor
+    ? getClaimRequestQuickStatus(filters, true)
+    : (filters.quickStatus ?? 'IN_ASSESSMENT')
 
   return produce(filters, (draft) => {
     delete draft.quickStatus
     delete draft.extPaymentDate
     delete draft.extPaymentDate__neq
-    if (!draft.sort) draft.sort = 'createdAt'
-    if (!draft.direction) draft.direction = 'asc'
-    if (!skipCurrentUserQuickStatuses.has(quickStatus)) {
+    if (!draft.sort) {
+      draft.sort = 'createdAt'
+      draft.direction = 'asc'
+    }
+    if (!skipCurrentUserQuickStatuses.has(quickStatus as string)) {
       draft.skipCurrentUserFilter = 'Y'
     }
     if (quickStatus === claimRequestSentToBankQuickStatus) {

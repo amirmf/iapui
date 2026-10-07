@@ -62,6 +62,7 @@ export function PaginatedDataTable<TData>(props: {
   pageSizeOptions?: readonly number[]
   presentation?: 'default' | 'reference'
   renderToolbar?: (table: Table<TData>) => ReactNode
+  getRowClassName?: (row: Row<TData>) => string | undefined
   renderRow?: (row: Row<TData>) => ReactNode
   rowLayout?: DataTableRowLayout
   rowSelection?: RowSelectionState
@@ -102,6 +103,7 @@ export function PaginatedDataTable<TData>(props: {
     pageSizeOptions,
     presentation = 'default',
     renderToolbar,
+    getRowClassName,
     renderRow,
     rowLayout,
     rowSelection,
@@ -221,6 +223,7 @@ export function PaginatedDataTable<TData>(props: {
         />
       )}
       renderToolbar={renderToolbar}
+      getRowClassName={getRowClassName}
       renderRow={renderRow}
       rowLayout={rowLayout}
       table={table}

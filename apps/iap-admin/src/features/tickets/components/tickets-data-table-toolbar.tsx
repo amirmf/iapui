@@ -57,12 +57,14 @@ export function TicketsDataTableToolbar(props: TicketsDataTableToolbarProps) {
       {
         id: 'priority',
         options: getTicketPriorityOptions(t),
-        placeholder: t('tickets.columns.priority'),
+        title: t('tickets.columns.priority'),
+        className: 'mx-1',
       },
       {
         id: 'category',
         options: getTicketCategoryOptions(t),
-        placeholder: t('tickets.columns.category'),
+        title: t('tickets.columns.category'),
+        className: 'mx-1',
       },
     ],
     [t]
@@ -71,7 +73,9 @@ export function TicketsDataTableToolbar(props: TicketsDataTableToolbarProps) {
     <div className='mb-4'>
       <TableFilterQueryParams
         facetedFilters={facetedFilters}
-        ignoreQueryParams={['features', 'status', 'size', 'direction']}
+        ignoreQueryParams={['status', 'features']}
+        controlQueryParamKeys={['page', 'size', 'sort', 'direction']}
+        presentation='reference'
         showReset
         textFilters={textFilters}
       />

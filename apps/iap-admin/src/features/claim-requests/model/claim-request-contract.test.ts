@@ -62,4 +62,37 @@ describe('ClaimRequestsPage API contracts', () => {
       }).success
     ).toBe(false)
   })
+  it('validates the reference disease, attachment, document and document type fields', () => {
+    expect(
+      claimRequestSchema.parse({ specialDiseases: ['VIP', 'SACRIFICE'] })
+        .specialDiseases
+    ).toEqual(['VIP', 'SACRIFICE'])
+    for (const input of [
+      { specialDiseases: [{}] },
+      { specialDiseases: ['UNKNOWN'] },
+      { attachments: [{}] },
+      { documents: [{ dataJsonSchema: {} }] },
+      { documents: [{ extractedData: 'invalid' }] },
+      { docType: { sequence: 1.5 } },
+      { docType: { maxThreshold: 'invalid' } },
+    ])
+      expect(claimRequestSchema.safeParse(input).success).toBe(false)
+    expect(
+      claimRequestSchema.safeParse({
+        specialDiseases: null,
+        attachments: [
+          {
+            filename: 'a',
+            fileType: 'pdf',
+            fileSize: 1,
+            uploadDate: '2026-10-07',
+            minioObjectName: 'a',
+            bucketName: 'claims',
+          },
+        ],
+        documents: [{ dataJsonSchema: '{}', extractedData: { amount: 10 } }],
+        docType: { sequence: 1, maxThreshold: 10 },
+      }).success
+    ).toBe(true)
+  })
 })

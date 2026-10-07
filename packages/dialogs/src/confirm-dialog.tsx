@@ -81,7 +81,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
   const isReference = presentation === 'reference'
 
   const handleOpenChange = (nextOpen: boolean) => {
-    if (!isLoading) onOpenChange(nextOpen)
+    if (isReference || !isLoading) onOpenChange(nextOpen)
   }
 
   return (

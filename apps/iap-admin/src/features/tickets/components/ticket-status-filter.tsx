@@ -58,7 +58,7 @@ export function TicketStatusFilter(props: TicketStatusFilterProps) {
           <button
             aria-pressed={isSelected}
             className={cn(
-              'min-h-11 rounded bg-muted px-1 py-2 text-[0.8rem]',
+              'rounded bg-muted px-1 py-2 text-[0.8rem]',
               isClaimRequestContext &&
                 'bg-primary-50 text-foreground hover:bg-primary-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:bg-primary-900 dark:hover:bg-primary-800 dark:focus-visible:ring-primary-300',
               isSelected && 'bg-primary font-medium text-muted shadow',

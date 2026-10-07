@@ -1,7 +1,10 @@
 import { ReadonlyAssessmentItems } from '@features/assessment-items'
-import { claimRequestService } from '@features/claim-requests'
+import {
+  ClaimRequestReadonlyInfoList,
+  claimRequestService,
+} from '@features/claim-requests'
 import type { SupportTicket } from '@iap/api-types'
-import { Badge, Button } from '@iap/ui'
+import { Button } from '@iap/ui'
 import { useQuery } from '@tanstack/react-query'
 import { ExternalLink } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -16,11 +19,11 @@ export function TicketRelatedClaimRequestColumn(
 ) {
   const { isOpen, ticket } = props
   const { t } = useTranslation()
-  const claimRequestId = ticket?.claimRequestId?.trim()
+  const claimRequestId = ticket?.claimRequestId?.trim() || undefined
   const claimRequestQuery = useQuery({
     enabled: isOpen && Boolean(claimRequestId),
     queryFn: ({ signal }) =>
-      claimRequestService.findById(claimRequestId!, signal),
+      claimRequestService.getById(claimRequestId!, { signal }),
     queryKey: ['claimRequest', claimRequestId],
   })
 
@@ -64,13 +67,11 @@ export function TicketRelatedClaimRequestColumn(
       ) : null}
       {claimRequestQuery.data ? (
         <>
-          <div className='space-y-2 text-sm'>
-            <p>{claimRequestQuery.data.extDisplayName ?? '-'}</p>
-            <Badge variant='outline'>
-              {claimRequestQuery.data.status ?? '-'}
-            </Badge>
-          </div>
-          <section aria-labelledby='ticket-related-assessment-items-title'>
+          <ClaimRequestReadonlyInfoList data={claimRequestQuery.data} />
+          <section
+            aria-labelledby='ticket-related-assessment-items-title'
+            className='min-w-0'
+          >
             <div className='mb-3 flex items-center justify-between gap-2'>
               <h4
                 className='font-medium'
@@ -78,18 +79,24 @@ export function TicketRelatedClaimRequestColumn(
               >
                 {t('tickets.relatedClaimRequest.assessmentItems')}
               </h4>
-              <Button asChild size='sm' variant='secondary'>
+              <Button
+                presentation='reference'
+                asChild
+                size='xs'
+                variant='secondary'
+              >
                 <a
                   href={`/claim-requests/${claimRequestId}/claim-request-management/`}
                   rel='noopener noreferrer'
                   target='_blank'
                 >
-                  <ExternalLink aria-hidden='true' size={14} />
+                  <ExternalLink aria-hidden='true' size={12} />
                   <span>{t('tickets.detail.openClaimRequest')}</span>
                 </a>
               </Button>
             </div>
             <ReadonlyAssessmentItems
+              claimRequest={claimRequestQuery.data}
               claimRequestId={claimRequestId}
               enabled={isOpen}
             />

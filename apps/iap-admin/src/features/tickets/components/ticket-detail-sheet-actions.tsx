@@ -1,5 +1,5 @@
 import { Button, SheetClose } from '@iap/ui'
-import { Send, X } from 'lucide-react'
+import { IconSend, IconX } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
 
 type TicketDetailSheetActionsProps = {
@@ -23,11 +23,17 @@ export function TicketDetailSheetActions(props: TicketDetailSheetActionsProps) {
   return (
     <div className='flex flex-col gap-2 sm:flex-row sm:justify-end'>
       <SheetClose asChild>
-        <Button className='w-full sm:w-auto' type='button' variant='outline'>
+        <Button
+          presentation='reference'
+          className='w-full sm:w-auto'
+          type='button'
+          variant='outline'
+        >
           {t('tickets.detail.cancel')}
         </Button>
       </SheetClose>
       <Button
+        presentation='reference'
         aria-busy={isClosingTicket}
         className='w-full sm:w-auto'
         disabled={!canCloseTicket || isClosingTicket}
@@ -35,7 +41,7 @@ export function TicketDetailSheetActions(props: TicketDetailSheetActionsProps) {
         type='button'
         variant='destructive'
       >
-        <X aria-hidden='true' size={18} />
+        <IconX aria-hidden='true' size={18} />
         <span>
           {isClosingTicket
             ? t('tickets.detail.closingTicket')
@@ -43,12 +49,13 @@ export function TicketDetailSheetActions(props: TicketDetailSheetActionsProps) {
         </span>
       </Button>
       <Button
+        presentation='reference'
         aria-busy={isSendingMessage}
         className='w-full sm:w-auto'
         disabled={!canSendMessage || isSendingMessage}
         type='submit'
       >
-        <Send aria-hidden='true' size={18} />
+        <IconSend aria-hidden='true' size={18} />
         <span>
           {isSendingMessage
             ? t('tickets.messages.sending')

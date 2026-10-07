@@ -71,6 +71,7 @@ export function TicketDetailSheet(props: TicketDetailSheetProps) {
   return (
     <Sheet onOpenChange={handleOpenChange} open={isOpen}>
       <SheetContent
+        presentation='reference'
         className='flex h-full w-full flex-col overflow-hidden sm:max-w-5xl lg:max-w-7xl'
         side='right'
       >

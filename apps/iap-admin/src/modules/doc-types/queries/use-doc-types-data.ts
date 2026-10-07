@@ -23,7 +23,7 @@ type UseDocTypesDataProps = { enabled?: boolean }
 
 function useDocTypesData(props?: UseDocTypesDataProps) {
   return useQuery({
-    queryKey: ['doc-types', 'page', 0, 100],
+    queryKey: ['doc-types', 'page', 0, 100, 'content'],
     queryFn: async ({ signal }) => {
       const response = await docTypeService.getPage({
         page: 0,

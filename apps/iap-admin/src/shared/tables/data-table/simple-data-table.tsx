@@ -63,6 +63,7 @@ export function SimpleDataTable<TData>(props: {
   noResultsContent?: ReactNode
   presentation?: 'default' | 'reference'
   renderPagination?: (table: TanStackTable<TData>) => ReactNode
+  getRowClassName?: (row: Row<TData>) => string | undefined
   renderRow?: (row: Row<TData>) => ReactNode
   renderToolbar?: (table: TanStackTable<TData>) => ReactNode
   rowLayout?: DataTableRowLayout
@@ -83,6 +84,7 @@ export function SimpleDataTable<TData>(props: {
     noResultsContent,
     presentation = 'default',
     renderPagination,
+    getRowClassName,
     renderRow,
     renderToolbar,
     rowLayout = 'table',
@@ -144,7 +146,8 @@ export function SimpleDataTable<TData>(props: {
               <TableRow
                 className={cn(
                   presentation === 'reference' &&
-                    'group/row relative hover:bg-muted/50 data-[state=selected]:bg-muted'
+                    'group/row relative hover:bg-muted/50 data-[state=selected]:bg-muted',
+                  getRowClassName?.(row)
                 )}
                 data-state={row.getIsSelected() ? 'selected' : undefined}
                 key={row.id}

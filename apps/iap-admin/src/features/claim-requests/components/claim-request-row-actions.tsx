@@ -1,22 +1,28 @@
+import { useClaimRequestStore } from '@features/claim-requests/context/store/claim-request-store'
+import { claimRequestService } from '@features/claim-requests/services/claim-request-service'
 import type { ClaimRequest } from '@iap/api-types'
 import { isSuperAdminRole, useAuthSession } from '@iap/auth'
 import { Permission } from '@iap/ui'
 import { TableActionButton, TableActions } from '@shared/tables'
+import {
+  IconBell,
+  IconEye,
+  IconTrash,
+  IconUserEdit,
+  IconUserMinus,
+} from '@tabler/icons-react'
 import { useMutation } from '@tanstack/react-query'
 import { Link, useLocation } from '@tanstack/react-router'
 import type { Row } from '@tanstack/react-table'
-import { Bell, Eye, Trash2, UserCheck, UserMinus } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-
-import { useClaimRequestStore } from '../context/store/claim-request-store'
-import { claimRequestService } from '../services/claim-request-service'
 
 type ClaimRequestRowActionsProps = {
   row: Row<ClaimRequest>
 }
 
-export function ClaimRequestRowActions({ row }: ClaimRequestRowActionsProps) {
+export function ClaimRequestRowActions(props: ClaimRequestRowActionsProps) {
+  const { row } = props
   const { t } = useTranslation()
   const { user } = useAuthSession()
   const location = useLocation()
@@ -66,7 +72,11 @@ export function ClaimRequestRowActions({ row }: ClaimRequestRowActionsProps) {
       return
     }
     if (!claimRequest.docType?.id) {
-      toast.error(t('claimRequests.messages.docTypeUpdateError'))
+      toast.error(
+        t('claimRequests.messages.docTypeUpdateFailed', {
+          defaultValue: 'claimRequests.messages.docTypeUpdateFailed',
+        })
+      )
       return
     }
 
@@ -75,30 +85,34 @@ export function ClaimRequestRowActions({ row }: ClaimRequestRowActionsProps) {
 
   return (
     <TableActions>
-      {claimRequest.id ? (
-        <Link
-          params={{ claimRequestId: claimRequest.id }}
-          to='/claim-requests/$claimRequestId/claim-request-management/'
-        >
-          <TableActionButton
-            icon={<Eye aria-hidden='true' className='size-5' />}
-            label={t('claimRequests.actions.viewDetails')}
-            tooltipText={t('claimRequests.actions.viewDetails')}
-          />
-        </Link>
-      ) : null}
+      <Link
+        params={{ claimRequestId: claimRequest.id! }}
+        to='/claim-requests/$claimRequestId/claim-request-management/'
+      >
+        <TableActionButton
+          presentation='reference'
+          icon={<IconEye aria-hidden='true' className='size-5' />}
+          label={t('claimRequests.actions.view', {
+            defaultValue: 'claimRequests.actions.view',
+          })}
+          tooltipText={t('claimRequests.actions.viewDetails')}
+        />
+      </Link>
+
       <Permission hasPermission={canAssignToMe}>
         <TableActionButton
-          icon={<UserCheck aria-hidden='true' className='size-5' />}
+          presentation='reference'
+          icon={<IconUserEdit aria-hidden='true' className='size-5' />}
           label={t('claimRequests.actions.assignToMe')}
           tooltipText={t('claimRequests.actions.assignToMe')}
           onClick={() => openDialog('assignToMe')}
-          variant='primary'
+          variant='success'
         />
       </Permission>
       <Permission hasPermission={canRemoveMyAssessment}>
         <TableActionButton
-          icon={<UserMinus aria-hidden='true' className='size-5' />}
+          presentation='reference'
+          icon={<IconUserMinus aria-hidden='true' className='size-5' />}
           label={t('claimRequests.actions.removeMyAssessment')}
           onClick={openRemoveMyAssessmentDialog}
           tooltipText={t('claimRequests.actions.removeMyAssessment')}
@@ -107,14 +121,16 @@ export function ClaimRequestRowActions({ row }: ClaimRequestRowActionsProps) {
       </Permission>
       <Permission hasPermission={isSuperAdmin}>
         <TableActionButton
+          presentation='reference'
           disabled={sendNotificationMutation.isPending}
-          icon={<Bell aria-hidden='true' className='size-5' />}
+          icon={<IconBell aria-hidden='true' className='size-5' />}
           label={t('claimRequests.actions.sendStatusChangeNotification')}
           onClick={sendStatusChangeNotification}
           tooltipText={t('claimRequests.actions.sendStatusChangeNotification')}
         />
         <TableActionButton
-          icon={<Trash2 aria-hidden='true' className='size-5' />}
+          presentation='reference'
+          icon={<IconTrash aria-hidden='true' className='size-5' />}
           label={t('claimRequests.actions.delete')}
           onClick={() => openDialog('delete')}
           tooltipText={t('claimRequests.actions.delete')}
