@@ -10,3 +10,9 @@ export {
   useAgentClaimRequest,
   useAgentClaimRequestStore,
 } from './context/claim-request-context'
+export { AgentClaimRequestManagement } from './pages/agent-claim-request-management'
+export { default as AgentClaimRequestManagementDefault } from './pages/agent-claim-request-management'
+export {
+  agentClaimRequestManagementQueryOptions,
+  useAgentClaimRequestManagementData,
+} from './queries/use-agent-claim-request-management-data'

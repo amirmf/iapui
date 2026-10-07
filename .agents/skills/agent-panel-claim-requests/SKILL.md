@@ -17,9 +17,14 @@ The Agent Claim Requests area serves registry agents managing insurance claims:
 2. **Creation Journey** (`/agent/claim-requests/create/`):
    - Route: `apps/iap-admin/src/app/router/routes/_agent/agent/claim-requests/create/index.tsx`
    - Creation steps, inquiry, sub-insured person selection, document upload.
-3. **Claim Management / Details** (`/agent/claim-requests/$claimRequestId/`):
-   - Route: `apps/iap-admin/src/app/router/routes/_agent/agent/claim-requests/$claimRequestId/index.tsx`
-   - Status tracking, document review, objection submission (`registeryAgentAddObjectionRequestSchema`).
+3. **Claim Management / Details** (`/agent/claim-requests/$claimRequestId/claim-request-management/`):
+   - Route: `apps/iap-admin/src/app/router/routes/_agent/agent/claim-requests/$claimRequestId.claim-request-management/index.tsx`
+   - Page: `apps/iap-admin/src/features/agent-claim-requests/pages/agent-claim-request-management.tsx`
+   - Query: `apps/iap-admin/src/features/agent-claim-requests/queries/use-agent-claim-request-management-data.ts`
+   - Prefetch loader: `agentClaimRequestManagementQueryOptions` with `staleTime: 'static'`, returning `{ crumb: 'claimDetails' }`.
+   - Error & Pending: `pendingComponent: ClaimRequestManagementPanelPending`, `errorComponent: ClaimRequestManagementQueryError`.
+   - Layout: Header with `ClaimRequestLastStatusSection` and `ClaimRequestAssignSection`; `ClaimRequestInfoList` with `viewDetailsAdjustmentLink='/agent/claim-requests/$claimRequestId/claim-request-management/'`; two columns: left card with `ClaimRequestAssessmentItemsSection`, `ClaimRequestDoctorResponses`, `ClaimRequestDuplicatedSection`, `ClaimRequestManagementError`, `ClaimRequestObjectionSection` (objection form guarded with `!isAgentPanel`); right card with `ClaimRequestAttachmentsSection`; bottom with `ClaimRequestManagementPrevRequest` and `ClaimRequestDocumentsSection` (guarded with `!isAgentPanel`).
+   - Boundary rule: All shared sections imported from `@features/claim-requests` must be exported via its public barrel (`apps/iap-admin/src/features/claim-requests/index.ts`).
 
 ## Core Architecture and Contracts
 
