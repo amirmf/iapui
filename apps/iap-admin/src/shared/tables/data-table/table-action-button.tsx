@@ -1,6 +1,7 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 
 import { Button, Tooltip, TooltipContent, TooltipTrigger, cn } from '@iap/ui'
+import type { DataTablePresentation } from '@shared/tables/data-table/types'
 
 export type TableActionVariant =
   | 'default'
@@ -19,7 +20,7 @@ export type TableActionButtonProps = Omit<
   icon: ReactNode
   label: string
   tooltipText?: ReactNode
-  presentation?: 'default' | 'reference'
+  presentation?: DataTablePresentation
   variant?: TableActionVariant
 }
 
@@ -36,16 +37,15 @@ export function TableActionButton(props: TableActionButtonProps) {
   } = props
   const isReference = presentation === 'reference'
 
-  const referenceVariantClass =
-    variant === 'destructive'
-      ? 'text-destructive hover:bg-red-100 hover:text-destructive'
-      : variant === 'info'
-        ? 'text-blue-700 hover:bg-blue-100 hover:text-blue-700'
-        : variant === 'success'
-          ? 'text-green-700 hover:bg-green-100 hover:text-green-700'
-          : variant === 'primary'
-            ? 'text-primary-700 hover:bg-primary-100 hover:text-primary-700'
-            : 'hover:bg-gray-200'
+  const referenceVariantClass = cn('hover:bg-gray-200', {
+    'text-destructive hover:bg-red-100 hover:text-destructive':
+      variant === 'destructive',
+    'text-blue-700 hover:bg-blue-100 hover:text-blue-700': variant === 'info',
+    'text-green-700 hover:bg-green-100 hover:text-green-700':
+      variant === 'success',
+    'text-primary-700 hover:bg-primary-100 hover:text-primary-700':
+      variant === 'primary',
+  })
 
   return (
     <Tooltip>

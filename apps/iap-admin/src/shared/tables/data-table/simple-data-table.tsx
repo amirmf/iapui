@@ -4,6 +4,7 @@ import { TableCell, TableRow, cn } from '@iap/ui'
 import { DataTableLayout } from '@shared/tables/data-table/data-table-layout'
 import type {
   DataTableLabels,
+  DataTablePresentation,
   DataTableRowLayout,
 } from '@shared/tables/data-table/types'
 import {
@@ -61,7 +62,7 @@ export function SimpleDataTable<TData>(props: {
   labels?: DataTableLabels
   loadingText?: ReactNode
   noResultsContent?: ReactNode
-  presentation?: 'default' | 'reference'
+  presentation?: DataTablePresentation
   renderPagination?: (table: TanStackTable<TData>) => ReactNode
   getRowClassName?: (row: Row<TData>) => string | undefined
   renderRow?: (row: Row<TData>) => ReactNode

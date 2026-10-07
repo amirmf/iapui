@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react'
 
 import { TooltipProvider, cn } from '@iap/ui'
+import type { DataTablePresentation } from '@shared/tables/data-table/types'
 
 export function TableActions(props: {
   children: ReactNode
   className?: string
-  presentation?: 'default' | 'reference'
+  presentation?: DataTablePresentation
 }) {
   const { children, className, presentation = 'default' } = props
 
