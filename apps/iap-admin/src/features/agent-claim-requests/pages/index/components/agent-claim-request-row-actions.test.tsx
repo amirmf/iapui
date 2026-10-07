@@ -6,10 +6,10 @@ import type { Row } from '@tanstack/react-table'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { useAgentClaimRequestStore } from '../context/claim-request-context'
+import { useAgentClaimRequestStore } from '../context'
 import { AgentClaimRequestRowActions } from './agent-claim-request-row-actions'
 
-vi.mock('../services/agent-claim-request-service', () => ({
+vi.mock('../../../services/agent-claim-request-service', () => ({
   agentClaimRequestService: {
     refreshPolicyDetails: vi.fn(),
   },

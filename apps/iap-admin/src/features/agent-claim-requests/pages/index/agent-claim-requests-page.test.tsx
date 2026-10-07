@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { cleanup, render, screen } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { agentClaimRequestService } from '../services/agent-claim-request-service'
+import { agentClaimRequestService } from '../../services/agent-claim-request-service'
 import { AgentClaimRequestsPage } from './agent-claim-requests-page'
 
 const mockPageService = vi.hoisted(() => ({
@@ -14,7 +14,7 @@ const mockPageService = vi.hoisted(() => ({
   exportPageLiteExcel: vi.fn(),
 }))
 
-vi.mock('../services/agent-claim-request-service', () => ({
+vi.mock('../../services/agent-claim-request-service', () => ({
   agentClaimRequestService: mockPageService,
   default: mockPageService,
 }))

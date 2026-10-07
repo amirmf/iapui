@@ -4,8 +4,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
-import { useAgentClaimRequestStore } from '../context/claim-request-context'
-import agentClaimRequestService from '../services/agent-claim-request-service'
+import agentClaimRequestService from '../../../services/agent-claim-request-service'
+import { useAgentClaimRequestStore } from '../context'
 
 interface AgentClaimRequestDeleteDialogProps {
   refetch?: () => void

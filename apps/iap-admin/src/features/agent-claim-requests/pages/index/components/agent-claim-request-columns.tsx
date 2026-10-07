@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import {
   CLAIM_REQUEST_STATUS_TRANSLATION_KEYS,
   claimStatusColors,
-} from '../constants/agent-claim-request-constant'
+} from '../../../model/agent-claim-request-constant'
 import AgentClaimRequestRowActions from './agent-claim-request-row-actions'
 
 export const useAgentClaimRequestColumns = (): ColumnDef<ClaimRequest>[] => {

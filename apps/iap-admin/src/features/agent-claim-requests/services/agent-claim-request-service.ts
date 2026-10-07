@@ -16,7 +16,7 @@ import {
   registeryAgentAddObjectionRequestSchema,
   registeryAgentInquirySchema,
   subInsuredPersonResponseListSchema,
-} from '../data/agent-claim-request-service-schema'
+} from '../model/agent-claim-request-schema'
 
 export const agentClaimRequestService = {
   getById: async (
@@ -126,7 +126,7 @@ export const agentClaimRequestService = {
         params: {
           page,
           size,
-          ...filters,
+          ...transformApiFilterParams(filters),
         },
         signal,
       }

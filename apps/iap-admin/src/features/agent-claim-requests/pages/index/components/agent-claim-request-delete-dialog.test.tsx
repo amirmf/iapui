@@ -11,13 +11,13 @@ import {
 } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { useAgentClaimRequestStore } from '../context/claim-request-context'
-import { agentClaimRequestService } from '../services/agent-claim-request-service'
+import { agentClaimRequestService } from '../../../services/agent-claim-request-service'
+import { useAgentClaimRequestStore } from '../context'
 import { AgentClaimRequestDeleteDialog } from './agent-claim-request-delete-dialog'
 
 const mockDelete = vi.hoisted(() => vi.fn())
 
-vi.mock('../services/agent-claim-request-service', () => {
+vi.mock('../../../services/agent-claim-request-service', () => {
   const service = { delete: mockDelete }
   return {
     agentClaimRequestService: service,

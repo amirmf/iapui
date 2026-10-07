@@ -5,7 +5,7 @@ import { IconRefresh } from '@tabler/icons-react'
 import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
-import agentClaimRequestService from '../services/agent-claim-request-service'
+import agentClaimRequestService from '../../../services/agent-claim-request-service'
 
 interface AgentClaimRequestHeaderActionsProps {
   isLoading: boolean

@@ -5,8 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { cleanup, render, screen } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { agentClaimRequestManagementQueryOptions } from '../queries/use-agent-claim-request-management-data'
-import { AgentClaimRequestManagement } from './agent-claim-request-management'
+import { AgentClaimRequestManagement } from './agent-claim-request-management-page'
+import { agentClaimRequestManagementQueryOptions } from './queries/use-agent-claim-request-management-data'
 
 const mockAgentClaimRequestService = vi.hoisted(() => ({
   getById: vi.fn(),
@@ -19,7 +19,7 @@ const mockAgentClaimRequestService = vi.hoisted(() => ({
   inquiry: vi.fn(),
 }))
 
-vi.mock('../services/agent-claim-request-service', () => ({
+vi.mock('../../services/agent-claim-request-service', () => ({
   agentClaimRequestService: mockAgentClaimRequestService,
   default: mockAgentClaimRequestService,
 }))

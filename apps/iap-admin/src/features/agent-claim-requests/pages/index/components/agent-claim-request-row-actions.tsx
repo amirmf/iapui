@@ -13,8 +13,8 @@ import type { Row } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
-import { useAgentClaimRequest } from '../context/claim-request-context'
-import agentClaimRequestService from '../services/agent-claim-request-service'
+import agentClaimRequestService from '../../../services/agent-claim-request-service'
+import { useAgentClaimRequest } from '../context'
 
 interface AgentClaimRequestRowActionsProps {
   row: Row<ClaimRequest>

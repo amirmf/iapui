@@ -1,6 +1,7 @@
-import { agentClaimRequestService } from '@features/agent-claim-requests/services/agent-claim-request-service'
 import { queryOptions, useQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'
+
+import agentClaimRequestService from '../../../services/agent-claim-request-service'
 
 export function agentClaimRequestManagementQueryOptions(
   claimRequestId: string
