@@ -2280,7 +2280,34 @@
     "showLess": "فیلترهای کمتر",
     "reset": "بازنشانی",
     "yes": "بله",
-    "confirm": "تأیید"
+    "confirm": "تأیید",
+    "markdownEditor": {
+      "toolbar": "نوار ابزار قالب‌بندی",
+      "bold": "پررنگ",
+      "italic": "کج",
+      "heading": "عنوان",
+      "fontSize": "اندازه فونت",
+      "bulletList": "فهرست نشانه‌دار",
+      "orderedList": "فهرست شماره‌دار",
+      "textColor": "رنگ متن",
+      "colorPrimary": "رنگ اصلی",
+      "colorSecondary": "رنگ ثانویه",
+      "colorSuccess": "موفقیت",
+      "colorError": "خطا",
+      "colorTextDefault": "رنگ پیش‌فرض متن",
+      "backgroundColor": "رنگ پس‌زمینه",
+      "applyColor": "اعمال رنگ",
+      "clearTextColor": "پاک کردن رنگ متن",
+      "clearBackgroundColor": "پاک کردن رنگ پس‌زمینه",
+      "link": "پیوند",
+      "linkUrl": "نشانی پیوند",
+      "linkUrlPlaceholder": "https://example.com",
+      "applyLink": "اعمال",
+      "removeLink": "حذف پیوند",
+      "imageUrl": "نشانی تصویر",
+      "imageUrlPlaceholder": "https://example.com/image.png",
+      "insertImage": "افزودن تصویر"
+    }
   },
   "aiAssessmentRules": {
     "title": "قوانین ارزیابی هوشمند",
@@ -2878,5 +2905,171 @@
   },
   "breadcrumb": {
     "sub-users": "ارزیابان من"
+  },
+  "supportQuestions": {
+    "title": "سوالات پشتیبانی",
+    "entityName": "سوال پشتیبانی",
+    "create": "ایجاد",
+    "refresh": "به‌روزرسانی",
+    "noQuestions": "سوال پشتیبانی یافت نشد",
+    "columns": {
+      "key": "کلید سوال",
+      "title": "عنوان",
+      "level": "سطح",
+      "nextSelectableQuestionKeys": "کلیدهای قابل انتخاب بعدی",
+      "requiredParam": "پارامتر الزامی",
+      "requiredParamInputDisplay": "نوع ورودی",
+      "status": "وضعیت",
+      "sequence": "ترتیب",
+      "roles": "نقش‌ها"
+    },
+    "fields": {
+      "key": "کلید سوال",
+      "title": "عنوان",
+      "staticResponse": "پاسخ ثابت",
+      "level": "سطح",
+      "nextSelectableQuestionKeys": "کلیدهای قابل انتخاب بعدی",
+      "requiredParam": "پارامتر الزامی",
+      "requiredParamInputDisplay": "نوع ورودی",
+      "selectInputDisplay": "انتخاب نوع ورودی",
+      "sequence": "ترتیب",
+      "roles": "نقش‌ها",
+      "selectRoles": "نقش‌ها را انتخاب کنید",
+      "pageTags": "برچسب‌های صفحه",
+      "selectPageTags": "برچسب‌های صفحه را انتخاب کنید",
+      "featureTags": "برچسب‌های قابلیت",
+      "selectFeatureTags": "برچسب‌های قابلیت را انتخاب کنید",
+      "active": "فعال"
+    },
+    "filters": {
+      "questionKey": "کلید",
+      "title": "عنوان"
+    },
+    "inputDisplay": {
+      "TEXT": "متن",
+      "LIST": "لیست",
+      "NOINPUT": "بدون ورودی"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال"
+    },
+    "actions": {
+      "viewDetails": "مشاهده جزئیات",
+      "edit": "ویرایش",
+      "delete": "حذف"
+    },
+    "dialog": {
+      "create": "ایجاد سوال پشتیبانی",
+      "edit": "ویرایش سوال پشتیبانی",
+      "details": "جزئیات سوال پشتیبانی"
+    },
+    "delete": {
+      "title": "حذف سوال پشتیبانی"
+    },
+    "bulkDelete": {
+      "button": "حذف گروهی",
+      "noSelection": "هیچ سوال پشتیبانی انتخاب نشده است"
+    },
+    "messages": {
+      "created": "سوال پشتیبانی ایجاد شد",
+      "updated": "سوال پشتیبانی به‌روزرسانی شد",
+      "deleted": "سوال پشتیبانی حذف شد"
+    },
+    "validation": {
+      "key": "وارد کردن کلید الزامی است",
+      "title": "وارد کردن عنوان الزامی است"
+    }
+  },
+  "supportPages": {
+    "title": "صفحات پشتیبانی",
+    "columns": {
+      "key": "کلید",
+      "title": "عنوان",
+      "description": "توضیحات",
+      "status": "وضعیت"
+    },
+    "fields": {
+      "key": "کلید",
+      "title": "عنوان",
+      "description": "توضیحات",
+      "active": "فعال"
+    },
+    "actions": {
+      "create": "ایجاد",
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "refresh": "به‌روزرسانی",
+      "save": "ذخیره"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال"
+    },
+    "dialog": {
+      "create": "ایجاد صفحه پشتیبانی",
+      "edit": "ویرایش صفحه پشتیبانی"
+    },
+    "delete": {
+      "title": "حذف صفحه پشتیبانی",
+      "description": "صفحه پشتیبانی «{{key}}» حذف شود؟ این عملیات قابل بازگشت نیست."
+    },
+    "empty": "صفحه پشتیبانی یافت نشد",
+    "messages": {
+      "created": "آیتم با موفقیت ایجاد شد",
+      "updated": "آیتم با موفقیت ویرایش شد",
+      "deleted": "آیتم با موفقیت حذف شد"
+    },
+    "validation": {
+      "key": "وارد کردن کلید الزامی است",
+      "title": "وارد کردن عنوان الزامی است"
+    }
+  },
+  "supportFeatures": {
+    "title": "قابلیت‌های پشتیبانی",
+    "columns": {
+      "key": "کلید",
+      "title": "عنوان",
+      "description": "توضیحات",
+      "pageKeys": "کلیدهای صفحه",
+      "status": "وضعیت"
+    },
+    "fields": {
+      "key": "کلید",
+      "title": "عنوان",
+      "description": "توضیحات",
+      "pageKeys": "کلیدهای صفحه",
+      "pageKeysPlaceholder": "کلیدهای صفحه انتخاب کنید.",
+      "active": "فعال"
+    },
+    "actions": {
+      "create": "ایجاد",
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "refresh": "به‌روزرسانی",
+      "save": "ذخیره"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال"
+    },
+    "dialog": {
+      "create": "ایجاد قابلیت پشتیبانی",
+      "edit": "ویرایش قابلیت پشتیبانی"
+    },
+    "delete": {
+      "title": "حذف قابلیت پشتیبانی",
+      "description": "قابلیت پشتیبانی «{{key}}» حذف شود؟ این عملیات قابل بازگشت نیست."
+    },
+    "empty": "قابلیت پشتیبانی یافت نشد",
+    "messages": {
+      "created": "قابلیت پشتیبانی ایجاد شد",
+      "updated": "قابلیت پشتیبانی ویرایش شد",
+      "deleted": "قابلیت پشتیبانی حذف شد"
+    },
+    "validation": {
+      "key": "وارد کردن کلید الزامی است",
+      "title": "وارد کردن عنوان الزامی است"
+    }
   }
 }
