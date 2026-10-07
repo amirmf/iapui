@@ -9,13 +9,14 @@ import {
   TableRow,
   cn,
 } from '@iap/ui'
+import type { DataTablePresentation } from '@shared/tables/data-table/types'
 import { type Table as TanStackTable, flexRender } from '@tanstack/react-table'
 
 export function DataTableLayout<TData>(props: {
   caption?: ReactNode
   children: ReactNode
   className?: string
-  presentation?: 'default' | 'reference'
+  presentation?: DataTablePresentation
   renderPagination?: (table: TanStackTable<TData>) => ReactNode
   renderToolbar?: (table: TanStackTable<TData>) => ReactNode
   table: TanStackTable<TData>

@@ -8,6 +8,9 @@ request, query key, filter names, route validation, and product empty states.
 
 - Use `@iap/ui` table primitives for semantic markup only.
 - Use `SimpleDataTable` with a caller-owned TanStack Table instance.
+- Use the exported `DataTablePresentation` type when a component accepts the
+  `default` or `reference` presentation; keep presentation-specific classes
+  composed through `cn` from `@iap/ui`.
 - Use `PaginatedDataTable` for server-driven result pages. It receives controlled
   pagination, sort, selection, and column visibility state from the feature; it
   does not own API calls or route state. Its default empty and loading labels

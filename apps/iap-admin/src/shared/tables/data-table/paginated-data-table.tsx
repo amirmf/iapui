@@ -8,6 +8,7 @@ import { SimpleDataTable } from '@shared/tables/data-table/simple-data-table'
 import { createSelectColumn } from '@shared/tables/data-table/table-checkbox'
 import type {
   DataTableLabels,
+  DataTablePresentation,
   DataTableRowLayout,
 } from '@shared/tables/data-table/types'
 import {
@@ -60,7 +61,7 @@ export function PaginatedDataTable<TData>(props: {
   pagination: PaginationState
   paginationLabels?: DataTablePaginationLabels
   pageSizeOptions?: readonly number[]
-  presentation?: 'default' | 'reference'
+  presentation?: DataTablePresentation
   renderToolbar?: (table: Table<TData>) => ReactNode
   getRowClassName?: (row: Row<TData>) => string | undefined
   renderRow?: (row: Row<TData>) => ReactNode
