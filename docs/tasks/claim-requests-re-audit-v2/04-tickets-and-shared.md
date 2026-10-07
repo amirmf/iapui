@@ -18,3 +18,12 @@ Status: complete after source inspection, implementation, focused tests, typeche
 ## Acceptance and evidence
 
 Compare real source files, exercise readonly populated/empty/loading branches and source services, run affected tests, workspace typecheck/lint and diff checks. Source inspection and unit tests cannot establish pixel identity or live backend behavior; browser and backend verification must be reported separately.
+
+Additional completion evidence: `readonly-card-parity.test.tsx` renders the
+public UI primitives and verifies readonly floating coverage, adjustment and
+Fanavaran sections, absent amount rows, source quantity fallback and jaw-quarter
+labels. Both tests pass. Only LongText overflow measurement is replaced in this
+focused test; tooltip context and card primitives are real.
+
+The doc-type cache shape collision found during integration was resolved with a
+content-specific query key suffix; page-response consumers retain their keys.
