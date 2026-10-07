@@ -82,6 +82,34 @@ When implementation begins:
   use a matching page directory for page-specific UI when that improves
   discoverability; it must not duplicate reusable route logic.
 
+### Admin panel route partitions
+
+`iap-admin` groups panel routes under the existing `_authenticated` boundary:
+
+- Operations pages remain directly under `_authenticated` with unprefixed URLs.
+- `_authenticated/_agent/agent/**` owns `/agent/**`.
+- `_authenticated/_customer-user/customer-user/**` owns `/customer-user/**`.
+
+`_agent` and `_customer-user` are pathless grouping routes; their names never
+appear in browser URLs. These partitions currently inherit the authenticated
+shell and guard. Folder separation does not introduce panel-specific layouts
+or authorization rules.
+
+When replacing panel placeholders, keep the route entry thin and compose the
+owning feature's public API. Verify the corresponding reference page before
+adding business behavior, API loaders, navigation, or role rules. Keep static
+page segments in page directories and dynamic IDs in flat route filenames;
+for example, `claim-requests/$claimRequestId.index.tsx` and
+`claim-requests/$claimRequestId.claim-request-management/index.tsx`.
+
+The Router canonicalizes trailing slashes with `trailingSlash: 'always'`.
+Preserve both direct URL forms, dynamic parameter matching, authenticated
+ancestry, and sibling panel separation in
+`apps/iap-admin/src/shared/router/panel-routes.test.ts`. Generate the route tree
+through the existing Vite Router plugin; never edit it manually. The verified
+placeholder inventory is in
+[the panel route task](../tasks/iap-admin-agent-customer-user-routes.md).
+
 ### `src/features`
 
 Owns product- and screen-specific behavior. Folders should mirror stable customer or admin journeys. A feature may contain `components`, `model`, `context`, `services`, `queries`, `route-adapters`, and a public `index.ts` as needed.

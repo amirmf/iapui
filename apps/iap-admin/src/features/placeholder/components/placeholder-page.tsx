@@ -4,7 +4,8 @@ type PlaceholderPageProps = {
   titleKey: string
 }
 
-export function PlaceholderPage({ titleKey }: PlaceholderPageProps) {
+export function PlaceholderPage(props: PlaceholderPageProps) {
+  const { titleKey } = props
   const { t } = useTranslation()
 
   return (

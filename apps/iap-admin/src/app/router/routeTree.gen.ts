@@ -10,6 +10,18 @@ import { Route as AuthLoginIndexRouteImport } from './routes/_auth/login/index'
 import { Route as AuthPasswordResetIndexRouteImport } from './routes/_auth/password-reset/index'
 import { Route as AuthRegisterIndexRouteImport } from './routes/_auth/register/index'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
+import { Route as AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport } from './routes/_authenticated/_agent/agent/claim-requests/$claimRequestId.claim-request-management/index'
+import { Route as AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRouteImport } from './routes/_authenticated/_agent/agent/claim-requests/$claimRequestId.index'
+import { Route as AuthenticatedAgentAgentClaimRequestsCreateIndexRouteImport } from './routes/_authenticated/_agent/agent/claim-requests/create/index'
+import { Route as AuthenticatedAgentAgentClaimRequestsIndexRouteImport } from './routes/_authenticated/_agent/agent/claim-requests/index'
+import { Route as AuthenticatedAgentAgentRouteRouteImport } from './routes/_authenticated/_agent/agent/route'
+import { Route as AuthenticatedAgentAgentUsersCreateIndexRouteImport } from './routes/_authenticated/_agent/agent/users/create/index'
+import { Route as AuthenticatedAgentRouteRouteImport } from './routes/_authenticated/_agent/route'
+import { Route as AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport } from './routes/_authenticated/_customer-user/customer-user/claim-requests/$claimRequestId.claim-request-management/index'
+import { Route as AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRouteImport } from './routes/_authenticated/_customer-user/customer-user/claim-requests/index'
+import { Route as AuthenticatedCustomerUserCustomerUserIndexRouteImport } from './routes/_authenticated/_customer-user/customer-user/index'
+import { Route as AuthenticatedCustomerUserCustomerUserRouteRouteImport } from './routes/_authenticated/_customer-user/customer-user/route'
+import { Route as AuthenticatedCustomerUserRouteRouteImport } from './routes/_authenticated/_customer-user/route'
 import { Route as AuthenticatedAgreementsIndexRouteImport } from './routes/_authenticated/agreements/index'
 import { Route as AuthenticatedAiAssessmentRulesIndexRouteImport } from './routes/_authenticated/ai-assessment-rules/index'
 import { Route as AuthenticatedAssessmentPromptsIndexRouteImport } from './routes/_authenticated/assessment-prompts/index'
@@ -63,6 +75,15 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAgentRouteRoute = AuthenticatedAgentRouteRouteImport.update({
+  id: '/_agent',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCustomerUserRouteRoute =
+  AuthenticatedCustomerUserRouteRouteImport.update({
+    id: '/_customer-user',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const FormioClaimRequestsRouteRoute =
   FormioClaimRequestsRouteRouteImport.update({
     id: '/claim-requests',
@@ -94,6 +115,18 @@ const AuthRegisterIndexRoute = AuthRegisterIndexRouteImport.update({
   path: '/register/',
   getParentRoute: () => AuthRouteRoute,
 } as any)
+const AuthenticatedAgentAgentRouteRoute =
+  AuthenticatedAgentAgentRouteRouteImport.update({
+    id: '/agent',
+    path: '/agent',
+    getParentRoute: () => AuthenticatedAgentRouteRoute,
+  } as any)
+const AuthenticatedCustomerUserCustomerUserRouteRoute =
+  AuthenticatedCustomerUserCustomerUserRouteRouteImport.update({
+    id: '/customer-user',
+    path: '/customer-user',
+    getParentRoute: () => AuthenticatedCustomerUserRouteRoute,
+  } as any)
 const AuthenticatedAgreementsIndexRoute =
   AuthenticatedAgreementsIndexRouteImport.update({
     id: '/agreements/',
@@ -219,6 +252,12 @@ const AuthenticatedUserAccountIndexRoute =
     path: '/user-account/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedCustomerUserCustomerUserIndexRoute =
+  AuthenticatedCustomerUserCustomerUserIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedCustomerUserCustomerUserRouteRoute,
+  } as any)
 const AuthenticatedDocTypesDocTypeIdEditRoute =
   AuthenticatedDocTypesDocTypeIdEditRouteImport.update({
     id: '/doc-types/$docTypeId/edit',
@@ -255,6 +294,18 @@ const FormioDocTypesDocTypeIdSubmissionExampleRoute =
     path: '/$docTypeId/submission-example',
     getParentRoute: () => FormioDocTypesRouteRoute,
   } as any)
+const AuthenticatedAgentAgentClaimRequestsIndexRoute =
+  AuthenticatedAgentAgentClaimRequestsIndexRouteImport.update({
+    id: '/claim-requests/',
+    path: '/claim-requests/',
+    getParentRoute: () => AuthenticatedAgentAgentRouteRoute,
+  } as any)
+const AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRoute =
+  AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRouteImport.update({
+    id: '/claim-requests/',
+    path: '/claim-requests/',
+    getParentRoute: () => AuthenticatedCustomerUserCustomerUserRouteRoute,
+  } as any)
 const AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute =
   AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport.update(
     {
@@ -269,12 +320,48 @@ const FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute =
     path: '/$claimRequestId/documents/$documentId',
     getParentRoute: () => FormioClaimRequestsRouteRoute,
   } as any)
+const AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRoute =
+  AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRouteImport.update({
+    id: '/claim-requests/$claimRequestId/',
+    path: '/claim-requests/$claimRequestId/',
+    getParentRoute: () => AuthenticatedAgentAgentRouteRoute,
+  } as any)
+const AuthenticatedAgentAgentClaimRequestsCreateIndexRoute =
+  AuthenticatedAgentAgentClaimRequestsCreateIndexRouteImport.update({
+    id: '/claim-requests/create/',
+    path: '/claim-requests/create/',
+    getParentRoute: () => AuthenticatedAgentAgentRouteRoute,
+  } as any)
+const AuthenticatedAgentAgentUsersCreateIndexRoute =
+  AuthenticatedAgentAgentUsersCreateIndexRouteImport.update({
+    id: '/users/create/',
+    path: '/users/create/',
+    getParentRoute: () => AuthenticatedAgentAgentRouteRoute,
+  } as any)
+const AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute =
+  AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport.update(
+    {
+      id: '/claim-requests/$claimRequestId/claim-request-management/',
+      path: '/claim-requests/$claimRequestId/claim-request-management/',
+      getParentRoute: () => AuthenticatedAgentAgentRouteRoute,
+    } as any
+  )
+const AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute =
+  AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport.update(
+    {
+      id: '/claim-requests/$claimRequestId/claim-request-management/',
+      path: '/claim-requests/$claimRequestId/claim-request-management/',
+      getParentRoute: () => AuthenticatedCustomerUserCustomerUserRouteRoute,
+    } as any
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/formio': typeof FormioRouteRouteWithChildren
   '/formio/claim-requests': typeof FormioClaimRequestsRouteRouteWithChildren
   '/formio/doc-types': typeof FormioDocTypesRouteRouteWithChildren
+  '/agent': typeof AuthenticatedAgentAgentRouteRouteWithChildren
+  '/customer-user': typeof AuthenticatedCustomerUserCustomerUserRouteRouteWithChildren
   '/auth/sso': typeof AuthAuthSsoRoute
   '/login/': typeof AuthLoginIndexRoute
   '/password-reset/': typeof AuthPasswordResetIndexRoute
@@ -305,15 +392,24 @@ export interface FileRoutesByFullPath {
   '/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
   '/formio/doc-types/$docTypeId/builder': typeof FormioDocTypesDocTypeIdBuilderRoute
   '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
+  '/customer-user/': typeof AuthenticatedCustomerUserCustomerUserIndexRoute
   '/doc-types/create/': typeof AuthenticatedDocTypesCreateIndexRoute
   '/formio/claim-requests/$claimRequestId/documents/$documentId': typeof FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute
+  '/agent/claim-requests/': typeof AuthenticatedAgentAgentClaimRequestsIndexRoute
+  '/customer-user/claim-requests/': typeof AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRoute
   '/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
+  '/agent/claim-requests/$claimRequestId/': typeof AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRoute
+  '/agent/claim-requests/create/': typeof AuthenticatedAgentAgentClaimRequestsCreateIndexRoute
+  '/agent/users/create/': typeof AuthenticatedAgentAgentUsersCreateIndexRoute
+  '/agent/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
+  '/customer-user/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
   '/formio': typeof FormioRouteRouteWithChildren
   '/formio/claim-requests': typeof FormioClaimRequestsRouteRouteWithChildren
   '/formio/doc-types': typeof FormioDocTypesRouteRouteWithChildren
+  '/agent': typeof AuthenticatedAgentAgentRouteRouteWithChildren
   '/auth/sso': typeof AuthAuthSsoRoute
   '/login': typeof AuthLoginIndexRoute
   '/password-reset': typeof AuthPasswordResetIndexRoute
@@ -344,18 +440,30 @@ export interface FileRoutesByTo {
   '/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
   '/formio/doc-types/$docTypeId/builder': typeof FormioDocTypesDocTypeIdBuilderRoute
   '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
+  '/customer-user': typeof AuthenticatedCustomerUserCustomerUserIndexRoute
   '/doc-types/create': typeof AuthenticatedDocTypesCreateIndexRoute
   '/formio/claim-requests/$claimRequestId/documents/$documentId': typeof FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute
+  '/agent/claim-requests': typeof AuthenticatedAgentAgentClaimRequestsIndexRoute
+  '/customer-user/claim-requests': typeof AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRoute
   '/claim-requests/$claimRequestId/claim-request-management': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
+  '/agent/claim-requests/$claimRequestId': typeof AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRoute
+  '/agent/claim-requests/create': typeof AuthenticatedAgentAgentClaimRequestsCreateIndexRoute
+  '/agent/users/create': typeof AuthenticatedAgentAgentUsersCreateIndexRoute
+  '/agent/claim-requests/$claimRequestId/claim-request-management': typeof AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
+  '/customer-user/claim-requests/$claimRequestId/claim-request-management': typeof AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/formio': typeof FormioRouteRouteWithChildren
+  '/_authenticated/_agent': typeof AuthenticatedAgentRouteRouteWithChildren
+  '/_authenticated/_customer-user': typeof AuthenticatedCustomerUserRouteRouteWithChildren
   '/formio/claim-requests': typeof FormioClaimRequestsRouteRouteWithChildren
   '/formio/doc-types': typeof FormioDocTypesRouteRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/_agent/agent': typeof AuthenticatedAgentAgentRouteRouteWithChildren
+  '/_authenticated/_customer-user/customer-user': typeof AuthenticatedCustomerUserCustomerUserRouteRouteWithChildren
   '/_auth/auth/sso': typeof AuthAuthSsoRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
   '/_auth/password-reset/': typeof AuthPasswordResetIndexRoute
@@ -386,9 +494,17 @@ export interface FileRoutesById {
   '/_authenticated/doc-types/$docTypeId/submission-example': typeof AuthenticatedDocTypesDocTypeIdSubmissionExampleRoute
   '/formio/doc-types/$docTypeId/builder': typeof FormioDocTypesDocTypeIdBuilderRoute
   '/formio/doc-types/$docTypeId/submission-example': typeof FormioDocTypesDocTypeIdSubmissionExampleRoute
+  '/_authenticated/_customer-user/customer-user/': typeof AuthenticatedCustomerUserCustomerUserIndexRoute
   '/_authenticated/doc-types/create/': typeof AuthenticatedDocTypesCreateIndexRoute
   '/formio/claim-requests/$claimRequestId/documents/$documentId': typeof FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRoute
+  '/_authenticated/_agent/agent/claim-requests/': typeof AuthenticatedAgentAgentClaimRequestsIndexRoute
+  '/_authenticated/_customer-user/customer-user/claim-requests/': typeof AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRoute
   '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
+  '/_authenticated/_agent/agent/claim-requests/$claimRequestId/': typeof AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRoute
+  '/_authenticated/_agent/agent/claim-requests/create/': typeof AuthenticatedAgentAgentClaimRequestsCreateIndexRoute
+  '/_authenticated/_agent/agent/users/create/': typeof AuthenticatedAgentAgentUsersCreateIndexRoute
+  '/_authenticated/_agent/agent/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
+  '/_authenticated/_customer-user/customer-user/claim-requests/$claimRequestId/claim-request-management/': typeof AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -397,6 +513,8 @@ export interface FileRouteTypes {
     | '/formio'
     | '/formio/claim-requests'
     | '/formio/doc-types'
+    | '/agent'
+    | '/customer-user'
     | '/auth/sso'
     | '/login/'
     | '/password-reset/'
@@ -427,15 +545,24 @@ export interface FileRouteTypes {
     | '/doc-types/$docTypeId/submission-example'
     | '/formio/doc-types/$docTypeId/builder'
     | '/formio/doc-types/$docTypeId/submission-example'
+    | '/customer-user/'
     | '/doc-types/create/'
     | '/formio/claim-requests/$claimRequestId/documents/$documentId'
+    | '/agent/claim-requests/'
+    | '/customer-user/claim-requests/'
     | '/claim-requests/$claimRequestId/claim-request-management/'
+    | '/agent/claim-requests/$claimRequestId/'
+    | '/agent/claim-requests/create/'
+    | '/agent/users/create/'
+    | '/agent/claim-requests/$claimRequestId/claim-request-management/'
+    | '/customer-user/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/formio'
     | '/formio/claim-requests'
     | '/formio/doc-types'
+    | '/agent'
     | '/auth/sso'
     | '/login'
     | '/password-reset'
@@ -466,17 +593,29 @@ export interface FileRouteTypes {
     | '/doc-types/$docTypeId/submission-example'
     | '/formio/doc-types/$docTypeId/builder'
     | '/formio/doc-types/$docTypeId/submission-example'
+    | '/customer-user'
     | '/doc-types/create'
     | '/formio/claim-requests/$claimRequestId/documents/$documentId'
+    | '/agent/claim-requests'
+    | '/customer-user/claim-requests'
     | '/claim-requests/$claimRequestId/claim-request-management'
+    | '/agent/claim-requests/$claimRequestId'
+    | '/agent/claim-requests/create'
+    | '/agent/users/create'
+    | '/agent/claim-requests/$claimRequestId/claim-request-management'
+    | '/customer-user/claim-requests/$claimRequestId/claim-request-management'
   id:
     | '__root__'
     | '/_auth'
     | '/_authenticated'
     | '/formio'
+    | '/_authenticated/_agent'
+    | '/_authenticated/_customer-user'
     | '/formio/claim-requests'
     | '/formio/doc-types'
     | '/_authenticated/'
+    | '/_authenticated/_agent/agent'
+    | '/_authenticated/_customer-user/customer-user'
     | '/_auth/auth/sso'
     | '/_auth/login/'
     | '/_auth/password-reset/'
@@ -507,9 +646,17 @@ export interface FileRouteTypes {
     | '/_authenticated/doc-types/$docTypeId/submission-example'
     | '/formio/doc-types/$docTypeId/builder'
     | '/formio/doc-types/$docTypeId/submission-example'
+    | '/_authenticated/_customer-user/customer-user/'
     | '/_authenticated/doc-types/create/'
     | '/formio/claim-requests/$claimRequestId/documents/$documentId'
+    | '/_authenticated/_agent/agent/claim-requests/'
+    | '/_authenticated/_customer-user/customer-user/claim-requests/'
     | '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
+    | '/_authenticated/_agent/agent/claim-requests/$claimRequestId/'
+    | '/_authenticated/_agent/agent/claim-requests/create/'
+    | '/_authenticated/_agent/agent/users/create/'
+    | '/_authenticated/_agent/agent/claim-requests/$claimRequestId/claim-request-management/'
+    | '/_authenticated/_customer-user/customer-user/claim-requests/$claimRequestId/claim-request-management/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -546,6 +693,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/_agent': {
+      id: '/_authenticated/_agent'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedAgentRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/_customer-user': {
+      id: '/_authenticated/_customer-user'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedCustomerUserRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/formio/claim-requests': {
@@ -589,6 +750,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/register/'
       preLoaderRoute: typeof AuthRegisterIndexRouteImport
       parentRoute: typeof AuthRouteRoute
+    }
+    '/_authenticated/_agent/agent': {
+      id: '/_authenticated/_agent/agent'
+      path: '/agent'
+      fullPath: '/agent'
+      preLoaderRoute: typeof AuthenticatedAgentAgentRouteRouteImport
+      parentRoute: typeof AuthenticatedAgentRouteRoute
+    }
+    '/_authenticated/_customer-user/customer-user': {
+      id: '/_authenticated/_customer-user/customer-user'
+      path: '/customer-user'
+      fullPath: '/customer-user'
+      preLoaderRoute: typeof AuthenticatedCustomerUserCustomerUserRouteRouteImport
+      parentRoute: typeof AuthenticatedCustomerUserRouteRoute
     }
     '/_authenticated/agreements/': {
       id: '/_authenticated/agreements/'
@@ -737,6 +912,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUserAccountIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/_customer-user/customer-user/': {
+      id: '/_authenticated/_customer-user/customer-user/'
+      path: '/'
+      fullPath: '/customer-user/'
+      preLoaderRoute: typeof AuthenticatedCustomerUserCustomerUserIndexRouteImport
+      parentRoute: typeof AuthenticatedCustomerUserCustomerUserRouteRoute
+    }
     '/_authenticated/doc-types/$docTypeId/edit': {
       id: '/_authenticated/doc-types/$docTypeId/edit'
       path: '/doc-types/$docTypeId/edit'
@@ -779,6 +961,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FormioDocTypesDocTypeIdSubmissionExampleRouteImport
       parentRoute: typeof FormioDocTypesRouteRoute
     }
+    '/_authenticated/_agent/agent/claim-requests/': {
+      id: '/_authenticated/_agent/agent/claim-requests/'
+      path: '/claim-requests'
+      fullPath: '/agent/claim-requests/'
+      preLoaderRoute: typeof AuthenticatedAgentAgentClaimRequestsIndexRouteImport
+      parentRoute: typeof AuthenticatedAgentAgentRouteRoute
+    }
+    '/_authenticated/_customer-user/customer-user/claim-requests/': {
+      id: '/_authenticated/_customer-user/customer-user/claim-requests/'
+      path: '/claim-requests'
+      fullPath: '/customer-user/claim-requests/'
+      preLoaderRoute: typeof AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRouteImport
+      parentRoute: typeof AuthenticatedCustomerUserCustomerUserRouteRoute
+    }
     '/_authenticated/claim-requests/$claimRequestId/claim-request-management/': {
       id: '/_authenticated/claim-requests/$claimRequestId/claim-request-management/'
       path: '/claim-requests/$claimRequestId/claim-request-management'
@@ -792,6 +988,41 @@ declare module '@tanstack/react-router' {
       fullPath: '/formio/claim-requests/$claimRequestId/documents/$documentId'
       preLoaderRoute: typeof FormioClaimRequestsClaimRequestIdDocumentsDocumentIdRouteImport
       parentRoute: typeof FormioClaimRequestsRouteRoute
+    }
+    '/_authenticated/_agent/agent/claim-requests/$claimRequestId/': {
+      id: '/_authenticated/_agent/agent/claim-requests/$claimRequestId/'
+      path: '/claim-requests/$claimRequestId'
+      fullPath: '/agent/claim-requests/$claimRequestId/'
+      preLoaderRoute: typeof AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRouteImport
+      parentRoute: typeof AuthenticatedAgentAgentRouteRoute
+    }
+    '/_authenticated/_agent/agent/claim-requests/create/': {
+      id: '/_authenticated/_agent/agent/claim-requests/create/'
+      path: '/claim-requests/create'
+      fullPath: '/agent/claim-requests/create/'
+      preLoaderRoute: typeof AuthenticatedAgentAgentClaimRequestsCreateIndexRouteImport
+      parentRoute: typeof AuthenticatedAgentAgentRouteRoute
+    }
+    '/_authenticated/_agent/agent/users/create/': {
+      id: '/_authenticated/_agent/agent/users/create/'
+      path: '/users/create'
+      fullPath: '/agent/users/create/'
+      preLoaderRoute: typeof AuthenticatedAgentAgentUsersCreateIndexRouteImport
+      parentRoute: typeof AuthenticatedAgentAgentRouteRoute
+    }
+    '/_authenticated/_agent/agent/claim-requests/$claimRequestId/claim-request-management/': {
+      id: '/_authenticated/_agent/agent/claim-requests/$claimRequestId/claim-request-management/'
+      path: '/claim-requests/$claimRequestId/claim-request-management'
+      fullPath: '/agent/claim-requests/$claimRequestId/claim-request-management/'
+      preLoaderRoute: typeof AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport
+      parentRoute: typeof AuthenticatedAgentAgentRouteRoute
+    }
+    '/_authenticated/_customer-user/customer-user/claim-requests/$claimRequestId/claim-request-management/': {
+      id: '/_authenticated/_customer-user/customer-user/claim-requests/$claimRequestId/claim-request-management/'
+      path: '/claim-requests/$claimRequestId/claim-request-management'
+      fullPath: '/customer-user/claim-requests/$claimRequestId/claim-request-management/'
+      preLoaderRoute: typeof AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRouteImport
+      parentRoute: typeof AuthenticatedCustomerUserCustomerUserRouteRoute
     }
   }
 }
@@ -814,7 +1045,87 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren
 )
 
+interface AuthenticatedAgentAgentRouteRouteChildren {
+  AuthenticatedAgentAgentClaimRequestsIndexRoute: typeof AuthenticatedAgentAgentClaimRequestsIndexRoute
+  AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRoute: typeof AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRoute
+  AuthenticatedAgentAgentClaimRequestsCreateIndexRoute: typeof AuthenticatedAgentAgentClaimRequestsCreateIndexRoute
+  AuthenticatedAgentAgentUsersCreateIndexRoute: typeof AuthenticatedAgentAgentUsersCreateIndexRoute
+  AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute: typeof AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
+}
+
+const AuthenticatedAgentAgentRouteRouteChildren: AuthenticatedAgentAgentRouteRouteChildren =
+  {
+    AuthenticatedAgentAgentClaimRequestsIndexRoute:
+      AuthenticatedAgentAgentClaimRequestsIndexRoute,
+    AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRoute:
+      AuthenticatedAgentAgentClaimRequestsClaimRequestIdIndexRoute,
+    AuthenticatedAgentAgentClaimRequestsCreateIndexRoute:
+      AuthenticatedAgentAgentClaimRequestsCreateIndexRoute,
+    AuthenticatedAgentAgentUsersCreateIndexRoute:
+      AuthenticatedAgentAgentUsersCreateIndexRoute,
+    AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute:
+      AuthenticatedAgentAgentClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute,
+  }
+
+const AuthenticatedAgentAgentRouteRouteWithChildren =
+  AuthenticatedAgentAgentRouteRoute._addFileChildren(
+    AuthenticatedAgentAgentRouteRouteChildren
+  )
+
+interface AuthenticatedAgentRouteRouteChildren {
+  AuthenticatedAgentAgentRouteRoute: typeof AuthenticatedAgentAgentRouteRouteWithChildren
+}
+
+const AuthenticatedAgentRouteRouteChildren: AuthenticatedAgentRouteRouteChildren =
+  {
+    AuthenticatedAgentAgentRouteRoute:
+      AuthenticatedAgentAgentRouteRouteWithChildren,
+  }
+
+const AuthenticatedAgentRouteRouteWithChildren =
+  AuthenticatedAgentRouteRoute._addFileChildren(
+    AuthenticatedAgentRouteRouteChildren
+  )
+
+interface AuthenticatedCustomerUserCustomerUserRouteRouteChildren {
+  AuthenticatedCustomerUserCustomerUserIndexRoute: typeof AuthenticatedCustomerUserCustomerUserIndexRoute
+  AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRoute: typeof AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRoute
+  AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute: typeof AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute
+}
+
+const AuthenticatedCustomerUserCustomerUserRouteRouteChildren: AuthenticatedCustomerUserCustomerUserRouteRouteChildren =
+  {
+    AuthenticatedCustomerUserCustomerUserIndexRoute:
+      AuthenticatedCustomerUserCustomerUserIndexRoute,
+    AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRoute:
+      AuthenticatedCustomerUserCustomerUserClaimRequestsIndexRoute,
+    AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute:
+      AuthenticatedCustomerUserCustomerUserClaimRequestsClaimRequestIdClaimRequestManagementIndexRoute,
+  }
+
+const AuthenticatedCustomerUserCustomerUserRouteRouteWithChildren =
+  AuthenticatedCustomerUserCustomerUserRouteRoute._addFileChildren(
+    AuthenticatedCustomerUserCustomerUserRouteRouteChildren
+  )
+
+interface AuthenticatedCustomerUserRouteRouteChildren {
+  AuthenticatedCustomerUserCustomerUserRouteRoute: typeof AuthenticatedCustomerUserCustomerUserRouteRouteWithChildren
+}
+
+const AuthenticatedCustomerUserRouteRouteChildren: AuthenticatedCustomerUserRouteRouteChildren =
+  {
+    AuthenticatedCustomerUserCustomerUserRouteRoute:
+      AuthenticatedCustomerUserCustomerUserRouteRouteWithChildren,
+  }
+
+const AuthenticatedCustomerUserRouteRouteWithChildren =
+  AuthenticatedCustomerUserRouteRoute._addFileChildren(
+    AuthenticatedCustomerUserRouteRouteChildren
+  )
+
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgentRouteRoute: typeof AuthenticatedAgentRouteRouteWithChildren
+  AuthenticatedCustomerUserRouteRoute: typeof AuthenticatedCustomerUserRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedAgreementsIndexRoute: typeof AuthenticatedAgreementsIndexRoute
   AuthenticatedAiAssessmentRulesIndexRoute: typeof AuthenticatedAiAssessmentRulesIndexRoute
@@ -845,6 +1156,9 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgentRouteRoute: AuthenticatedAgentRouteRouteWithChildren,
+  AuthenticatedCustomerUserRouteRoute:
+    AuthenticatedCustomerUserRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAgreementsIndexRoute: AuthenticatedAgreementsIndexRoute,
   AuthenticatedAiAssessmentRulesIndexRoute:

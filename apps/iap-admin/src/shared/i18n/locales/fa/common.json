@@ -2735,5 +2735,9 @@
         "showReport": "جهت نمایش گزارش کلیک کنید"
       }
     }
+  },
+  "panelPlaceholders": {
+    "claimDetails": "جزئیات درخواست",
+    "agentUserSignup": "ثبت‌نام بیمه‌شده"
   }
 }
