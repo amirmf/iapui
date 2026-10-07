@@ -20,7 +20,7 @@ import {
 
 const state = vi.hoisted(() => ({ submit: vi.fn(), toast: vi.fn() }))
 vi.mock(
-  '@features/claim-requests/services/claim-request-management-service',
+  '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service',
   () => ({ default: { submitObjection: state.submit } })
 )
 vi.mock('@shared/i18n/i18n', () => ({

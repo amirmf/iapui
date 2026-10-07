@@ -4,7 +4,7 @@ import {
   type FanhubTaminNationalCodeForm,
   fanhubTaminNationalCodeFormSchema,
   typedZodResolver,
-} from '@features/claim-requests/model/claim-request-management-forms'
+} from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import { FanhubTaminPrescriptionResponse } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/fanhub-tamin-prescription-section/fanhub-tamin-prescription-response'
 import type {
   FanhubDrugPrescriptionResponse,

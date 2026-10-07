@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 
-import type { ClaimRequest } from '@features/claim-requests/model/claim-request-management-forms'
+import type { ClaimRequest } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import { formatDateTime } from '@iap/ui'
 import { LongText } from '@iap/ui'
 import { useTranslate as useTranslation } from '@shared/i18n/i18n'

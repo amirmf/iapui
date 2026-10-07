@@ -1,4 +1,4 @@
-import { formatPrescriptionAmount as formatAmount } from '@features/claim-requests/model/claim-request-management-format'
+import { formatPrescriptionAmount as formatAmount } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-format'
 import { displayValue } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/fanhub-tamin-prescription-section/fanhub-tamin-drug-prescription/fanhub-tamin-drug-prescription-utils'
 import type { FanhubDrugPrescription } from '@iap/api-types'
 import { cn } from '@iap/ui'

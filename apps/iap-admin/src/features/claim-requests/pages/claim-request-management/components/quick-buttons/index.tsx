@@ -12,8 +12,8 @@ import {
 } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/fanhub-tamin-prescription-section/index'
 import { ReturnFromPaymentSection } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/return-from-payment-section/index'
 import { ReturnFromPaymentSendAgainSection } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/return-from-payment-send-again-section/index'
-import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'
-import { useClaimRequestManagementPermissions } from '@features/claim-requests/route-adapters/use-claim-request-management-permissions'
+import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
+import { useClaimRequestManagementPermissions } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-permissions'
 import { useAuthSession as useAuth } from '@iap/auth'
 import { Permission } from '@iap/ui'
 

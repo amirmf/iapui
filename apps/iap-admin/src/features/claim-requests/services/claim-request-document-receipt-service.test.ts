@@ -1,4 +1,4 @@
-import { exportClaimRequestDocumentReceiptFormSchema } from '@features/claim-requests/model/claim-request-document-receipt-schema'
+import { exportClaimRequestDocumentReceiptFormSchema } from '@features/claim-requests/pages/index/model/claim-request-document-receipt-schema'
 import { exportDocumentReceipt } from '@features/claim-requests/services/claim-request-document-receipt-service'
 import {
   exportClaimRequestDocumentReceiptRequestSchema,

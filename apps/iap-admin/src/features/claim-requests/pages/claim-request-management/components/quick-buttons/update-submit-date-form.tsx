@@ -3,9 +3,9 @@ import { useEffect, useMemo } from 'react'
 import {
   type UpdateSubmitDateFormValues,
   updateSubmitDateFormSchema,
-} from '@features/claim-requests/model/claim-request-management-forms'
-import { useClaimRequestManagementParams } from '@features/claim-requests/route-adapters/use-claim-request-management-params'
-import claimRequestService from '@features/claim-requests/services/claim-request-management-service'
+} from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
+import { useClaimRequestManagementParams } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-params'
+import claimRequestService from '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DatePickerField, Form, TextField } from '@iap/forms'
 import { formatLocalDateTime as format } from '@iap/shared-lib'

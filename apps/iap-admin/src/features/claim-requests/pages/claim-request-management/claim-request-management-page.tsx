@@ -14,7 +14,7 @@ import { ClaimRequestObjectionSection } from '@features/claim-requests/pages/cla
 import { ClaimRequestRegisteredByAgentSection } from '@features/claim-requests/pages/claim-request-management/components/claim-request-registered-by-agent-section'
 import { ClaimRequestReviewSwitcherSection } from '@features/claim-requests/pages/claim-request-management/components/claim-request-review-switcher-section'
 import ClaimRequestQuickButtons from '@features/claim-requests/pages/claim-request-management/components/quick-buttons'
-import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'
+import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
 import { Card, CardContent } from '@iap/ui'
 import { Main } from '@shared/components/layout/main'
 import { useParams } from '@tanstack/react-router'

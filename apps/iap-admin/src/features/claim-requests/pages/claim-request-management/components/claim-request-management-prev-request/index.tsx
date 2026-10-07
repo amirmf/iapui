@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from 'react'
 
-import { useClaimRequestManagementPrevRequestAttachments } from '@features/claim-requests/context/store/claim-request-management-prev-request-attachments-store'
+import { useClaimRequestManagementPrevRequestAttachments } from '@features/claim-requests/pages/claim-request-management/context/store/claim-request-management-prev-request-attachments-store'
 import { ClaimRequestAttachmentsDialog } from '@features/claim-requests/pages/claim-request-management/components/claim-request-attachments-dialog'
 import ClaimRequestManagementPrevRequestFilter from '@features/claim-requests/pages/claim-request-management/components/claim-request-management-prev-request/claim-request-management-prev-request-filter'
 import ClaimRequestManagementPrevRequestTableGuid from '@features/claim-requests/pages/claim-request-management/components/claim-request-management-prev-request/claim-request-management-prev-request-table-guid'
 import useClaimRequestManagementPrevRequestColumns from '@features/claim-requests/pages/claim-request-management/components/claim-request-management-prev-request/use-claim-request-management-prev-request-columns'
-import { claimRequestManagementService } from '@features/claim-requests/services/claim-request-management-service'
+import { claimRequestManagementService } from '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service'
 import { type ClaimRequest, type ClaimRequestStatus } from '@iap/api-types'
 import { cn } from '@iap/ui'
 import { Card, CardContent } from '@iap/ui'

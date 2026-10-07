@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { useClaimRequestManagementPrevRequestAttachments } from '@features/claim-requests/context/store/claim-request-management-prev-request-attachments-store'
+import { useClaimRequestManagementPrevRequestAttachments } from '@features/claim-requests/pages/claim-request-management/context/store/claim-request-management-prev-request-attachments-store'
 import {
   CLAIM_REQUEST_STATUS_TRANSLATION_KEYS,
   claimStatusColors,

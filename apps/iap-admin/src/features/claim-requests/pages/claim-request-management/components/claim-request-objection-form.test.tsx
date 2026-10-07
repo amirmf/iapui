@@ -18,7 +18,7 @@ vi.mock('@features/assessment-items', () => ({
   useAssessmentItemsData: () => ({ data: state.items }),
 }))
 vi.mock(
-  '@features/claim-requests/services/claim-request-management-service',
+  '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service',
   () => ({ claimRequestManagementService: { submitObjection: state.submit } })
 )
 vi.mock('@tanstack/react-router', () => ({ useNavigate: () => state.navigate }))

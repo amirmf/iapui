@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import { FanhubTaminPrescriptionDialog } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/fanhub-tamin-prescription-section/fanhub-tamin-prescription-dialog'
-import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'
-import fanhubTaminService from '@features/claim-requests/services/fanhub-tamin-service'
+import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
+import fanhubTaminService from '@features/claim-requests/pages/claim-request-management/services/fanhub-tamin-service'
 import { Button } from '@iap/ui'
 import { useTranslate as useTranslation } from '@shared/i18n/i18n'
 import { useMutation } from '@tanstack/react-query'

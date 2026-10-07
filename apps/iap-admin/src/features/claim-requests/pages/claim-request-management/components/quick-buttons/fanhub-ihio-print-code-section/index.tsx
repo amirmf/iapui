@@ -4,10 +4,10 @@ import {
   type FanhubIhioPrintCodeForm,
   fanhubIhioPrintCodeFormSchema,
   typedZodResolver,
-} from '@features/claim-requests/model/claim-request-management-forms'
+} from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import { IhioPrintCodeResponse } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/fanhub-ihio-print-code-section/ihio-print-code-response'
-import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'
-import fanhubTaminService from '@features/claim-requests/services/fanhub-tamin-service'
+import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
+import fanhubTaminService from '@features/claim-requests/pages/claim-request-management/services/fanhub-tamin-service'
 import { Form, TextField } from '@iap/forms'
 import { Button } from '@iap/ui'
 import {
