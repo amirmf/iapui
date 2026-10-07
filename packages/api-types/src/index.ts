@@ -52,5 +52,6 @@ export * from './repetitive-responses'
 export * from './support'
 export * from './support-ticket'
 export * from './user-account'
+export * from './pipeline'
 
 export * from './files'

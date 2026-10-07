@@ -2,14 +2,25 @@ import type { ComponentPropsWithRef, ReactNode } from 'react'
 
 import { Button, Tooltip, TooltipContent, TooltipTrigger, cn } from '@iap/ui'
 
+export type TableActionVariant =
+  | 'default'
+  | 'destructive'
+  | 'success'
+  | 'primary'
+  | 'info'
+  | 'ghost'
+  | 'outline'
+  | 'secondary'
+
 export type TableActionButtonProps = Omit<
   ComponentPropsWithRef<typeof Button>,
-  'children' | 'size'
+  'children' | 'size' | 'variant'
 > & {
   icon: ReactNode
   label: string
   tooltipText?: ReactNode
   presentation?: 'default' | 'reference'
+  variant?: TableActionVariant
 }
 
 export function TableActionButton(props: TableActionButtonProps) {
@@ -20,9 +31,21 @@ export function TableActionButton(props: TableActionButtonProps) {
     ref,
     tooltipText = label,
     presentation = 'default',
+    variant = 'default',
     ...rest
   } = props
   const isReference = presentation === 'reference'
+
+  const referenceVariantClass =
+    variant === 'destructive'
+      ? 'text-destructive hover:bg-red-100 hover:text-destructive'
+      : variant === 'info'
+        ? 'text-blue-700 hover:bg-blue-100 hover:text-blue-700'
+        : variant === 'success'
+          ? 'text-green-700 hover:bg-green-100 hover:text-green-700'
+          : variant === 'primary'
+            ? 'text-primary-700 hover:bg-primary-100 hover:text-primary-700'
+            : 'hover:bg-gray-200'
 
   return (
     <Tooltip>
@@ -33,15 +56,24 @@ export function TableActionButton(props: TableActionButtonProps) {
           aria-label={label}
           className={cn(
             'size-8 p-0',
-            isReference &&
-              (rest.variant === 'destructive'
-                ? 'text-destructive hover:bg-red-100 hover:text-destructive'
-                : 'hover:bg-gray-200'),
+            isReference
+              ? referenceVariantClass
+              : variant === 'destructive'
+                ? 'text-destructive'
+                : undefined,
             className
           )}
           ref={ref}
           size='sm'
-          variant={isReference ? 'ghost' : (rest.variant ?? 'ghost')}
+          variant={
+            isReference
+              ? 'ghost'
+              : variant === 'info' ||
+                  variant === 'primary' ||
+                  variant === 'success'
+                ? 'ghost'
+                : variant
+          }
         >
           {icon}
           <span className='sr-only'>{label}</span>

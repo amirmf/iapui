@@ -2739,5 +2739,46 @@
   "panelPlaceholders": {
     "claimDetails": "جزئیات درخواست",
     "agentUserSignup": "ثبت‌نام بیمه‌شده"
+  },
+  "pipelines": {
+    "title": "خطوط پردازش",
+    "description": "کارهای گزارش‌گیری را پایش کنید، فراداده اجرای آن‌ها را ببینید و اجراها را مدیریت کنید.",
+    "jobsTitle": "کارها",
+    "executionsTitle": "تاریخچه اجرا",
+    "executionsDescription": "اجراهای {{jobName}}",
+    "selectJob": "برای مشاهده اجراها یک کار را انتخاب کنید.",
+    "loadingJobs": "در حال دریافت کارها...",
+    "loadingExecutions": "در حال دریافت اجراها...",
+    "emptyJobs": "هیچ کار خط پردازشی در دسترس نیست.",
+    "emptyExecutions": "برای این کار اجرایی وجود ندارد.",
+    "columns": {
+      "job": "کار",
+      "executionId": "شناسه اجرا",
+      "status": "وضعیت",
+      "startedAt": "شروع",
+      "endedAt": "پایان",
+      "details": "جزئیات",
+      "actions": "عملیات"
+    },
+    "actions": {
+      "refresh": "به‌روزرسانی",
+      "start": "شروع",
+      "stop": "توقف",
+      "restart": "اجرای مجدد",
+      "viewDetails": "مشاهده جزئیات"
+    },
+    "errors": {
+      "jobs": "دریافت کارهای خط پردازش ناموفق بود.",
+      "executions": "دریافت اجراها ناموفق بود."
+    },
+    "messages": {
+      "started": "کار خط پردازش شروع شد.",
+      "stopped": "اجرای خط پردازش متوقف شد.",
+      "restarted": "اجرای خط پردازش مجدداً شروع شد."
+    },
+    "stopDialog": {
+      "title": "توقف اجرای خط پردازش",
+      "description": "آیا از توقف این اجرای خط پردازش مطمئن هستید؟"
+    }
   }
 }
