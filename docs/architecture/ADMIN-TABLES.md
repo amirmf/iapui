@@ -62,3 +62,15 @@ filter names pass through unchanged. Read URL-synced search through
 `onFiltersChange`, `onPaginationChange`, `onSortingChange`, and `resetFilters`.
 Filter changes reset the page, following the current main-branch contract.
 `resetFilters` also returns to the first page and retains the chosen page size.
+
+## Grouped filter file-placement exception
+
+The grouped URL-filter port retains its three React components directly under
+`shared/tables/filter/`, matching the existing filter capability layout. After
+reviewing the discrepancy with the general `components/` convention, the user
+explicitly requested that this placement remain unchanged. This exception is
+limited to `grouped-table-filter-query-params.tsx`,
+`grouped-table-filter-group.tsx` and `grouped-table-filter-item.tsx`; it does not
+relax the component-placement rule for future implementations. Feature consumers
+still import the public `@shared/tables` API. The table README documents usage
+and URL/reset semantics for subsequent page implementations.

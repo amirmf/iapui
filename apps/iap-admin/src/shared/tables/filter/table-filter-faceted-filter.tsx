@@ -78,10 +78,12 @@ export function TableFilterFacetedFilter(
     onValueChange: (id: string, value: string | string[] | undefined) => void
     values: TableFilterValues
     presentation?: 'default' | 'reference'
+    triggerClassName?: string
   }
 ) {
   const {
     className,
+    triggerClassName,
     presentation = 'default',
     deferSingleSelection = false,
     debounceMs = presentation === 'reference' ? 1000 : 0,
@@ -141,7 +143,10 @@ export function TableFilterFacetedFilter(
         <PopoverTrigger asChild>
           <Button
             presentation={presentation}
-            className='h-7 border-dashed px-2 focus-visible:ring-2 focus-visible:ring-ring'
+            className={cn(
+              'h-7 border-dashed px-2 focus-visible:ring-2 focus-visible:ring-ring',
+              triggerClassName
+            )}
             disabled={disabled}
             size='sm'
             variant='outline'

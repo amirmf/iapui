@@ -1,3 +1,4 @@
+export * from '@shared/tables/filter/grouped-table-filter-query-params'
 export * from '@shared/tables/filter/filter-utils'
 export * from '@shared/tables/filter/table-filter-content'
 export * from '@shared/tables/filter/table-filter-date-range-filter'

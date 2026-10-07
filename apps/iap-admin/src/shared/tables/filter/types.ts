@@ -58,3 +58,16 @@ export type TableFilterBaseProps = {
   numberRangeFilters?: readonly NumberRangeTableFilterConfig[]
   textFilters?: readonly TextTableFilterConfig[]
 }
+
+export type TableFilterGroupItem =
+  | { type: 'text'; config: TextTableFilterConfig }
+  | { type: 'numberRange'; config: NumberRangeTableFilterConfig }
+  | { type: 'dateRange'; config: DateRangeTableFilterConfig }
+  | { type: 'dateTimeRange'; config: DateRangeTableFilterConfig }
+  | { type: 'faceted'; config: FacetedTableFilterConfig }
+
+export type TableFilterGroup = {
+  id: string
+  title: string
+  filters: readonly TableFilterGroupItem[]
+}
