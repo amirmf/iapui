@@ -1,8 +1,8 @@
 import { AssessmentItemsCardList } from '@features/assessment-items/components/assessment-item-card-list'
 import { assessmentItemService } from '@features/assessment-items/services/assessment-item-service'
 import type { ClaimRequest } from '@iap/api-types'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 
 export function ReadonlyAssessmentItems(props: {
   claimRequestId?: string
@@ -10,7 +10,7 @@ export function ReadonlyAssessmentItems(props: {
   claimRequest?: ClaimRequest
 }) {
   const { claimRequestId, enabled, claimRequest } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const assessmentClaimRequestId = enabled ? claimRequestId : undefined
   const query = useQuery({
     queryKey: ['assessmentItems', { claimRequestId: assessmentClaimRequestId }],

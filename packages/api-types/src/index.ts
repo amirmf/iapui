@@ -56,3 +56,8 @@ export * from './pipeline'
 export * from './sub-user'
 
 export * from './files'
+
+export * from './document'
+export * from './claim-assessment'
+export * from './claim-request-management'
+export * from './fanhub-tamin-prescription'

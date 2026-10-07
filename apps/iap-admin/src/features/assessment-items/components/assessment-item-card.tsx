@@ -17,7 +17,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@iap/ui'
-import { useTranslation } from 'react-i18next'
+import { useTranslate } from '@shared/i18n/i18n'
 
 interface AssessmentItemCardProps {
   item: AssessmentItem
@@ -37,7 +37,7 @@ function AssessmentItemCard(props: AssessmentItemCardProps) {
     overrideInsuredPerson,
     fanavaranCalculationResult,
   } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const floatingCoverageValue =
     item.overrideInsuredPersonId == null
       ? undefined

@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { formatAssessmentAmount as formatAmount } from '@features/assessment-items/components/format-assessment-amount'
 import { cn } from '@iap/ui'
-import { useTranslation } from 'react-i18next'
+import { useTranslate } from '@shared/i18n/i18n'
 
 interface AssessmentItemCardRowDataProps {
   estimatedAmount?: number | null
@@ -28,7 +28,7 @@ function AssessmentItemCardRowData(props: AssessmentItemCardRowDataProps) {
     quantity,
     className,
   } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
 
   const rowData = useMemo(
     () => [

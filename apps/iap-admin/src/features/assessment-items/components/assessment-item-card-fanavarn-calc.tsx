@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { formatAssessmentAmount as formatAmount } from '@features/assessment-items/components/format-assessment-amount'
 import type { DmgCase } from '@iap/api-types'
 import { cn } from '@iap/ui'
-import { useTranslation } from 'react-i18next'
+import { useTranslate } from '@shared/i18n/i18n'
 
 interface AssessmentItemCardFanavarnCalcProps {
   calculationResults: DmgCase[]
@@ -13,7 +13,7 @@ function AssessmentItemCardFanavarnCalc(
   props: AssessmentItemCardFanavarnCalcProps
 ) {
   const { calculationResults } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
 
   const calculationRows = useMemo(
     () =>

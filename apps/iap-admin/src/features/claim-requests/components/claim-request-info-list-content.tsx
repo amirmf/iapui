@@ -9,8 +9,8 @@ import {
   personSpecialDiseaseService,
   specialDiseaseColors,
 } from '@modules/person-special-diseases'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 
 const defaultDisplayValue = (value: unknown): string => {
   if (value === null || value === undefined) return '-'
@@ -34,7 +34,7 @@ export function ClaimRequestInfoListContent(
   props: ClaimRequestInfoListContentProps
 ) {
   const { data, mobileNumberContent, trailingContent } = props
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslate()
   const nationalCode = data?.extNationalCode
   const personSpecialDiseaseQuery = useQuery({
     queryKey: ['person-special-disease', nationalCode],
@@ -209,7 +209,7 @@ type ClaimPersonValueProps = {
 
 function ClaimPersonValue(props: ClaimPersonValueProps) {
   const { name, nationalCode, age, relation } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const displayRelation = defaultDisplayValue(relation)
 
   return (

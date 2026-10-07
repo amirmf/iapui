@@ -13,7 +13,7 @@ import {
   TooltipTrigger,
   cn,
 } from '@iap/ui'
-import { useTranslation } from 'react-i18next'
+import { useTranslate } from '@shared/i18n/i18n'
 
 interface AssessmentItemCardAdjustmentProps {
   item: ClaimRequestAdjustment
@@ -24,7 +24,7 @@ function AssessmentItemCardAdjustment(
   props: AssessmentItemCardAdjustmentProps
 ) {
   const { item } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
 
   const claimRequestAdjustmentStatus = item?.status || 'APPROVED'
   const claimRequestAdjustmentStatusColorClass = claimRequestAdjustmentStatus
