@@ -6,9 +6,17 @@ import { afterEach, expect, it, vi } from 'vitest'
 import AssessmentItemCard from './assessment-item-card'
 import AssessmentItemCardRowData from './assessment-item-card-row-data'
 
-vi.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: (key: string) => key }),
-}))
+vi.mock('react-i18next', async () => {
+  const actual =
+    await vi.importActual<typeof import('react-i18next')>('react-i18next')
+  return {
+    ...actual,
+    useTranslation: () => ({
+      t: (key: string) => key,
+      i18n: { dir: () => 'rtl' },
+    }),
+  }
+})
 vi.mock('@iap/ui', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@iap/ui')>()),
   LongText: (props: { children: React.ReactNode }) => (

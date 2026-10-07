@@ -41,3 +41,7 @@ export * from './toast'
 export * from './tooltip'
 export { Command } from 'cmdk'
 export * from './separator'
+
+export * from './alert'
+
+export * from './scroll-area'

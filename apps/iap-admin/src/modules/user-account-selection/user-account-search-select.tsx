@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import type { PartyRole } from '@iap/api-types'
-import { Select } from '@iap/ui'
+import { SearchableSelect, Select } from '@iap/ui'
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
@@ -16,6 +16,7 @@ type UserAccountSearchSelectProps = {
   placeholder?: string
   roles?: PartyRole | null
   value?: string | null
+  presentation?: 'default' | 'reference'
   valueMode?: 'id' | 'username'
 }
 
@@ -41,6 +42,7 @@ export function UserAccountSearchSelect(props: UserAccountSearchSelectProps) {
     roles,
     value,
     valueMode = 'id',
+    presentation = 'default',
   } = props
   const { t } = useTranslation()
   const [searchValue, setSearchValue] = useState('')
@@ -98,6 +100,26 @@ export function UserAccountSearchSelect(props: UserAccountSearchSelectProps) {
         }
       : options.find((option) => option.value === value)
   }, [options, selectedUserByIdQuery.data, value, valueMode])
+
+  if (presentation === 'reference')
+    return (
+      <SearchableSelect
+        presentation='reference'
+        value={value}
+        selected={selected ?? null}
+        onChange={onChange}
+        items={options}
+        placeholder={placeholder}
+        disabled={disabled}
+        isLoading={usersQuery.isFetching}
+        onSearch={setSearchValue}
+        shouldFilter={false}
+        selectText={t('common.select')}
+        loadingText={t('common.loading')}
+        emptyText={t('common.noResults')}
+        clearText={t('common.clear')}
+      />
+    )
 
   return (
     <Select

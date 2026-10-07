@@ -785,7 +785,8 @@
         "extLocation": "موقعیت مکانی",
         "agreementTitle": "عنوان قرارداد"
       }
-    }
+    },
+    "select": "انتخاب قرارداد"
   },
   "parties": {
     "title": "مدیریت اشخاص",
@@ -1064,7 +1065,15 @@
         "amountPaid": "تایید شده",
         "toothNumbers": "شماره دندان",
         "description": "توضیحات",
-        "floatCoverage": "پوشش شناور"
+        "floatCoverage": "پوشش شناور",
+        "amountItem": "مبلغ ارزیابی",
+        "amountItemOverrideRatio": "(ضریب تعرفه:{{overrideRatio}})",
+        "damageCodeId": "کد خسارت",
+        "overrideInsuredPersonId": "انتخاب بیمه‌شده",
+        "quantity": "تعداد",
+        "selectDamageCode": "انتخاب کد خسارت",
+        "useFloatCoverage": "استفاده از پوشش شناور",
+        "withFranchise": "فرانشیز کسر گردد"
       },
       "toothAssessment": {
         "title": "پنل ارزیابی دندان",
@@ -1105,6 +1114,17 @@
         "actions": {
           "clear": "حذف انتخاب"
         }
+      },
+      "formTitle": "ایجاد مورد ارزیابی",
+      "tariff": {
+        "charitySectorTariff": "خیریه",
+        "custom": "درخواستی",
+        "governmentSectorTariff": "دولتی",
+        "privateSectorSupplementaryInsurance": "مکمل خصوصی",
+        "privateSectorTariff": "خصوصی",
+        "publicNonGovernmentSectorTariff": "غیردولتی",
+        "teethGeneralDoctor": "عمومی",
+        "teethSpecialDoctor": "تخصصی"
       }
     },
     "adjustment": {
@@ -1156,6 +1176,80 @@
       "franchize": "فرانشیز",
       "deductionAmount": "مبلغ کسورات",
       "totalAmount": "پرداختی نهایی"
+    },
+    "actions": {
+      "calculate": "استعلام و ثبت"
+    },
+    "confirm": {
+      "calculate": {
+        "description": "سقف پوشش تکمیل شده است.",
+        "title": "اتمام سقف پوشش"
+      },
+      "maxCoverage": {
+        "description": "مانده پوشش تکمیل و اعمال شد.",
+        "title": "اتمام سقف پوشش"
+      },
+      "maxPerCase": {
+        "description": "مبلغ تاییده شده بیشتر از سقف تعرفه می باشد. سقف تعرفه اعمال شد.",
+        "title": "سقف تعرفه"
+      }
+    },
+    "create": "ایجاد مورد ارزیابی",
+    "delete": {
+      "confirm": "حذف",
+      "description": "آیا از حذف این مورد ارزیابی مطمئن هستید؟",
+      "title": "حذف مورد ارزیابی"
+    },
+    "messages": {
+      "created": "مورد ارزیابی با موفقیت ایجاد شد",
+      "damageCodeRequired": "برای اعمال تعرفه باید کد خسارت مشخص باشد.",
+      "deleted": "مورد ارزیابی حذف شد",
+      "inactiveDamageCode": "کد انتخاب شده در فناوران غیرفعال است. کد جایگزین انتخاب کنید.",
+      "updated": "مورد ارزیابی با موفقیت به‌روزرسانی شد"
+    },
+    "preAuths": {
+      "button": "مشاهده معرفی نامه‌های درمانی",
+      "description": "معرفی نامه‌های درمانی مربوط به {{displayName}} را بررسی کنید.",
+      "empty": "مجوز درمانی یافت نشد.",
+      "endOfListDialog": {
+        "desc": "به انتهای فهرست معرفی نامه های درمانی رسیده‌اید.",
+        "title": "مجوز درمانی بیشتری وجود ندارد"
+      },
+      "fields": {
+        "amount": "مبلغ",
+        "franchise": "فرانشیز",
+        "desc": "توضیحات",
+        "illnessDesc": "شرح بیماری",
+        "illnessId": "شناسه بیماری",
+        "issuDate": "تاریخ صدور",
+        "receptionDate": "تاریخ پذیرش",
+        "validityBeginDate": "شروع اعتبار",
+        "validityEndDate": "پایان اعتبار",
+        "status": "وضعیت"
+      },
+      "pagination": "نمایش {{count}} مجوز درمانی",
+      "title": "معرفی نامه‌های درمانی"
+    },
+    "title": "موارد ارزیابی",
+    "validation": {
+      "adjustmentTitle": "عنوان الزامی است",
+      "adjustmentTotalSumAmount": "مبلغ تایید شده الزامی است",
+      "adjustmentTotalSumAmountGreaterThanZero": "مبلغ تایید شده باید بیشتر از صفر باشد",
+      "amountItem": "مبلغ ارزیابی الزامی است",
+      "amountItemMax": "حداکثر 10 میلیارد ریال",
+      "amountItemMin": "حداقل 10 هزار ریال",
+      "claimRequestId": "شناسه درخواست خسارت الزامی است",
+      "damageCodeId": "کد خسارت الزامی است",
+      "franchisePercentageRange": "درصد فرانشیز باید بین 0 تا 100 باشد",
+      "franchizeDeductionAmount": "فرانشیز الزامی است",
+      "overrideInsuredPersonId": "در صورت استفاده از پوشش شناور، انتخاب بیمه‌شده الزامی است",
+      "quantity": "تعداد الزامی است",
+      "quantityMax": "حداکثر 100",
+      "quantityMin": "حداقل 1",
+      "toothNumber": {
+        "max": "شماره دندان باید حداکثر 906 باشد",
+        "min": "شماره دندان باید انتخاب کنید"
+      }
     }
   },
   "agreementPartyAppls": {
@@ -1766,7 +1860,8 @@
       "latestAssignementDisplayName": "نام ارزیاب",
       "extWorkUnitName": "نام شعبه",
       "requestType": "نوع درخواست",
-      "isReturn": "عودتی"
+      "isReturn": "عودتی",
+      "damageCodes": "کدهای خسارت"
     },
     "filters": {
       "latestAssignementDisplayName": "نام ارزیاب",
@@ -1833,7 +1928,13 @@
       "paymentRejected": "رد شده در پرداخت",
       "paymentReturn": "عودت شده از پرداخت",
       "paymentReturnResend": "عودت شده از پرداخت (ارسال مجدد)",
-      "deleted": "حذف شده"
+      "deleted": "حذف شده",
+      "objections": {
+        "approved": "تأیید شده",
+        "rejected": "رد (غیر قابل پرداخت)",
+        "return": "عودت (نقص مدارک)"
+      },
+      "send_customer": "ارسال شده در انتظار پرداخت"
     },
     "requestType": {
       "main": "اصلی",
@@ -1857,7 +1958,20 @@
       "removeMyAssessment": "خارج کردن از کارتابل",
       "sendStatusChangeNotification": "ارسال اعلان تغییر وضعیت",
       "delete": "حذف",
-      "viewDetails": "مشاهده جزئیات"
+      "viewDetails": "مشاهده جزئیات",
+      "edit": "ویرایش",
+      "inquiryFanavaranGetData": "جهت فراخوانی اطلاعات بیمه شده کلیک کنید",
+      "refreshPolicyDetails": "بروزرسانی جزئیات بیمه‌نامه",
+      "returnInAssessment": "بازگرداندن به ارزیابی اولیه",
+      "reviewLater": "بعدا بررسی میکنم",
+      "selectDocType": "انتخاب نوع سند",
+      "selectedStatusChange": "انتخاب وضعیت سیستمی",
+      "startCoreAiWorkflow": "آغاز فرآیند Core AI",
+      "statusChange": "تغییر وضعیت سیستمی",
+      "updateDocType": "به‌روزرسانی نوع سند",
+      "updateDocTypeButtonTitle": "ویرایش تاریخ و نوع سند",
+      "updateSubmitDateAndAmount": "به‌روزرسانی تاریخ هزینه و مبلغ",
+      "viewDetailsAdjustment": "مشاهده متمم مرتب"
     },
     "bulk": {
       "delete": {
@@ -1878,11 +1992,30 @@
         "description": "توضیحات",
         "isCheat": "درخواست به عنوان تقلب ثبت شود.",
         "objectionStatus": "تعیین وضعیت",
-        "attachments": "پیوست‌ها"
+        "attachments": "پیوست‌ها",
+        "amount": "مبلغ",
+        "errorDescription": "توضیحات خطا",
+        "newObjectionDescription": " نتیجه بررسی",
+        "resultReasons": "نتیجه ارزیابی",
+        "sendReply": "ارسال پاسخ",
+        "sendReplyNext": "ارسال پاسخ و بعدی",
+        "status": "وضعیت",
+        "submitDate": "تاریخ انجام هزینه درمانی",
+        "submitDatePlaceholder": "تاریخ انجام هزینه درمانی را انتخاب کنید"
+      },
+      "repetitiveResponses": {
+        "empty": "هیچ پاسخی مطابق متن شما یافت نشد.",
+        "heading": "پاسخ‌های ذخیره‌شده",
+        "loading": "در حال بارگذاری پاسخ‌های ذخیره‌شده…",
+        "queryTooShort": "برای جستجو حداقل {{count}} کاراکتر وارد کنید.",
+        "search": "جستجو در پاسخ‌های ذخیره‌شده..."
       }
     },
     "validation": {
-      "status": "وضعیت الزامی است"
+      "status": "وضعیت الزامی است",
+      "amountRequired": "مبلغ الزامی است",
+      "description": "توضیحات الزامی است",
+      "submitDateRequired": "تاریخ انجام هزینه درمانی الزامی است"
     },
     "documents": {
       "title": "اسناد خسارت",
@@ -1947,7 +2080,24 @@
       "inquiryFanavaranError": "ارسال استعلام فناوران ناموفق بود.",
       "excelDownloaded": "فایل اکسل دانلود شد",
       "excelDownloadFailed": "دانلود اکسل ناموفق بود",
-      "docTypeUpdateError": "به‌روزرسانی نوع سند انجام نشد."
+      "docTypeUpdateError": "به‌روزرسانی نوع سند انجام نشد.",
+      "assignmentError": "ارجاع درخواست خسارت ناموفق بود.",
+      "assignmentSuccess": "درخواست خسارت با موفقیت ارجاع شد.",
+      "assignmentUserRequired": "لطفاً یک کاربر را برای ارجاع انتخاب کنید.",
+      "coreAiWorkflowApproved": "فرآیند Core AI با موفقیت تأیید شد.",
+      "coreAiWorkflowStarted": "جریان Core AI آغاز شد (وضعیت: {{status}}).",
+      "coreAiWorkflowStatusUnknown": "نامشخص",
+      "descriptionRequired": "توضیحات الزامی است.",
+      "docTypeUpdated": "نوع سند با موفقیت به‌روزرسانی شد.",
+      "doctorLookupFailed": "دریافت اطلاعات نظام پزشکی ناموفق بود.",
+      "medicalNumberRequired": "لطفاً شماره نظام پزشکی را وارد کنید.",
+      "objectionSubmitSuccess": "پاسخ درخواست با موفقیت ثبت شد.",
+      "policyDetailsUpdated": "جزئیات بیمه‌نامه با موفقیت همگام شد.",
+      "repetitiveResponsesLoadError": "بارگذاری پاسخ‌های ذخیره‌شده ناموفق بود.",
+      "returnInAssessmentSuccess": "درخواست خسارت به مرحله ارزیابی اولیه بازگردانده شد.",
+      "reviewLaterSuccess": "درخواست خسارت برای بررسی بعدی تنظیم شد.",
+      "statusChangeSuccess": "وضعیت سیستمی درخواست خسارت با موفقیت تغییر کرد.",
+      "submitDateAndAmountUpdated": "تاریخ هزینه و مبلغ با موفقیت به‌روزرسانی شد."
     },
     "confirmations": {
       "inquiryFanavaran": {
@@ -1961,6 +2111,34 @@
       "removeMyAssessment": {
         "title": "خارج کردن از کارتابل من",
         "description": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را از کارتابل خود خارج کنید؟"
+      },
+      "approveCoreAiWorkflow": {
+        "description": "این فرایند Core AI را برای این درخواست خسارت تأیید می‌کند.",
+        "title": "تأیید فرایند Core AI"
+      },
+      "duplicateAssessmentItems": {
+        "description": "موارد ارزیابی تکراری وجود دارد. برای ثبت ارزیابی، لطفاً موارد تکراری را حذف کنید.",
+        "title": "موارد ارزیابی تکراری"
+      },
+      "duplicates": {
+        "description": "این درخواست خسارت دارای درخواست مشابه است. آیا مطمئن هستید که می‌خواهید این درخواست را تایید کنید؟",
+        "title": "درخواست‌ تکراری"
+      },
+      "objectionPayment": {
+        "description": "مجموع مبلغ پرداخت تایید شده بیشتر از مبلغ درخواستی می باشد موارد ارزیابی را بازنگری کنید.",
+        "title": "بررسی مبلغ نهایی"
+      },
+      "refreshPolicyDetails": {
+        "description": "این گزینه جدیدترین جزئیات بیمه‌نامه را از سامانه مبدأ دریافت می‌کند.",
+        "title": "به‌روزرسانی جزئیات بیمه‌نامه"
+      },
+      "returnInAssessment": {
+        "description": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را به ارزیابی اولیه بازگردانید؟",
+        "title": "بازگرداندن به ارزیابی اولیه"
+      },
+      "startCoreAiWorkflow": {
+        "description": "این فرایند استخراج داده Core AI را برای این درخواست خسارت آغاز می‌کند.",
+        "title": "شروع فرایند Core AI"
       }
     },
     "management": {
@@ -2036,6 +2214,256 @@
       "outpatientDocAcceptanceExtId": "شماره پذیرش فناوران",
       "extPaymentDate": "تاریخ پرداخت",
       "assessmentRules": "قوانین ارزیابی"
+    },
+    "aiAssessmentResolutionTypes": {
+      "approve": "تأیید",
+      "none": "بدون نتیجه",
+      "reject": "رد",
+      "return": "عودت"
+    },
+    "aiAssessmentResultAssessTypes": {
+      "approve": "تأیید",
+      "calculation": "محاسبه",
+      "coreMismatch": "عدم تطابق هسته",
+      "dateMismatch": "عدم تطابق تاریخ",
+      "docsMismatch": "عدم تطابق مدارک",
+      "doctorMismatch": "عدم تطابق پزشک",
+      "duplication": "تکراری",
+      "expertUnusualCalculation": "محاسبه غیرعادی کارشناس",
+      "expertUnusualCalculationExceedTariff": "محاسبه غیرعادی کارشناس بیش از تعرفه",
+      "imageDigitallyEdited": "تصویر ویرایش‌شده دیجیتالی",
+      "informationMismatch": "عدم تطابق اطلاعات",
+      "medicalCenterMismatch": "عدم تطابق مرکز درمانی",
+      "nameMismatch": "عدم تطابق نام",
+      "needSecondApprove": "نیازمند تأیید دوم",
+      "noCeiling": "بدون سقف",
+      "noCoverage": "بدون پوشش",
+      "unusualApproveAmount": "مبلغ تأییدشده غیرعادی",
+      "unusualRequestAmount": "مبلغ درخواست غیرعادی"
+    },
+    "aiAssessmentResults": {
+      "amount": "مبلغ ارزیابی",
+      "quantity": "برای تعداد",
+      "title": "موارد ارزیابی هوش مصنوعی"
+    },
+    "assignment": {
+      "assignButton": "ارجاع به پزشک و ارجاعات",
+      "assignButtonDialog": "ارجاع",
+      "companyAssessment": "شرکت ارزیاب",
+      "descriptionLabel": "توضیحات",
+      "descriptionPlaceholder": "توضیحات ارجاع را وارد کنید",
+      "dialogDescription": "کاربری را برای ارجاع این درخواست انتخاب کنید.",
+      "fieldLabel": "پزشک",
+      "history": {
+        "assignedAt": "زمان ارجاع",
+        "assignedBy": "ارجاع توسط",
+        "assignedEndAt": "زمان پایان",
+        "assignedTo": "ارجاع داده شده به",
+        "description": "توضیحات",
+        "title": "تاریخچه ارجاع"
+      },
+      "label": "ارجاع به",
+      "noAssign": "ارجاع نشده",
+      "placeholder": "جستجوی کاربر...",
+      "registeredByAgent": "ثبت شده با نماینده",
+      "submitting": "در حال ارجاع...",
+      "title": "ارجاع به کاربر"
+    },
+    "doctorLookup": {
+      "button": "استعلام نظام پزشکی",
+      "emptyField": "ثبت نشده",
+      "fields": {
+        "city": "شهر",
+        "doctorFamilyName": "نام خانوادگی",
+        "doctorName": "نام",
+        "major": "تخصص",
+        "membership": "عضویت"
+      },
+      "inputPlaceholder": "شماره نظام پزشکی را وارد کنید",
+      "noData": "اطلاعاتی برای این شماره نظام پزشکی یافت نشد.",
+      "title": "اطلاعات پزشک"
+    },
+    "doctorResponses": {
+      "assignedAt": "زمان ارجاع: {{date}}",
+      "response": "پاسخ پزشک",
+      "title": "پاسخ‌های پزشک"
+    },
+    "duplicateDetails": {
+      "actions": {
+        "viewDuplicated": "درخواست مشابه",
+        "viewTarget": "جزییات"
+      },
+      "imageComparisonSummary": "درخواست فعلی {{sourceTotalCount}} تصویر و درخواست مشابه {{targetTotalCount}} تصویر دارند؛ در مجموع {{duplicateTotalCount}} تصویر تکراری یافت شده است.",
+      "imageDescription": "تصویر مشابهی در درخواست دیگری یافت شده است.",
+      "imageDialogTitle": "مقایسه تصاویر درخواست‌ها",
+      "imageUnavailable": "تصاویر قابل مقایسه در دسترس نیستند.",
+      "matchingClaimRequest": "کد ملی، تاریخ ثبت و نوع سند با درخواست دیگری مطابقت دارد",
+      "sourceImage": "تصاویر درخواست فعلی",
+      "targetImage": "تصاویر درخواست مشابه",
+      "title": "درخواست‌های مشابه"
+    },
+    "duplicateValidatorTypes": {
+      "general": "عمومی"
+    },
+    "duplicates": {
+      "actions": {
+        "picture": "تصاویر"
+      },
+      "type": {
+        "image": "تصویر",
+        "information": "اطلاعات",
+        "informationExternalCore": "اطلاعات فناوران",
+        "informationExternalFanhub": "اطلاعات فن‌هاب"
+      }
+    },
+    "history": {
+      "title": "تاریخچه درخواست‌ها"
+    },
+    "ihioPrintCode": {
+      "action": "نسخ بیمه سلامت با کد چاپ",
+      "title": "نسخ بیمه سلامت با کد چاپ",
+      "description": "کد چاپ نسخه را برای دریافت اطلاعات نسخه بیمه سلامت این درخواست وارد کنید.",
+      "submit": "استعلام",
+      "missingClaimData": "برای انجام استعلام، کد ملی درخواست خسارت لازم است.",
+      "empty": "نسخه‌ای از بیمه سلامت یافت نشد.",
+      "validation": {
+        "printCode": "کد چاپ الزامی است."
+      },
+      "fields": {
+        "printCode": "کد چاپ",
+        "name": "نام",
+        "lastName": "نام خانوادگی",
+        "nationalNumber": "کد ملی",
+        "birthDate": "تاریخ تولد",
+        "gender": "جنسیت",
+        "isCovered": "تحت پوشش",
+        "creationDate": "تاریخ ایجاد",
+        "partnerName": "نام ارائه‌دهنده",
+        "contractPartyName": "طرف قرارداد",
+        "licenseName": "نام مجوز",
+        "samadCode": "کد سماد",
+        "isActive": "وضعیت"
+      }
+    },
+    "objectionRoleTypes": {
+      "ai": "هوش مصنوعی",
+      "endUser": "کاربر",
+      "expert": "ارزیاب"
+    },
+    "replay": {
+      "button": "پاسخ به ارجاع",
+      "description": "برای بازگرداندن این درخواست خسارت ارجاع‌شده، توضیحی وارد کنید.",
+      "descriptionPlaceholder": "پاسخ خود را وارد کنید",
+      "title": "پاسخ درخواست خسارت"
+    },
+    "returnFromPayment": {
+      "actions": {
+        "button": "عودت از پرداخت",
+        "submit": "ثبت عودت از پرداخت"
+      },
+      "confirm": {
+        "confirm": "تأیید عودت",
+        "description": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را از پرداخت عودت دهید؟",
+        "title": "تأیید عودت از پرداخت"
+      },
+      "fields": {
+        "description": "توضیحات",
+        "understood": "بله انجام دادم"
+      },
+      "messages": {
+        "success": "عودت از پرداخت با موفقیت ثبت شد."
+      },
+      "temporaryDescription1": "این درخواست با شماره پذیرش",
+      "temporaryDescription2": "در سامانه فناوران در وضعیت واریز وجه می‌باشد. آیا قبل از این عملیات اطمینان دارید که وضعیت این مورد خسارت رو در سامانه فناوران ابطال کرده اید(یا مبلغش رو صفر کرده اید)؟ !این مورد خسارت ابطال می شود و دیگر جهت پرداخت ارسال نمی شود!",
+      "temporaryDescription3": " ابطال ",
+      "temporaryDescription4": "می شود و دیگر جهت پرداخت ارسال نمی شود!",
+      "title": "عودت از پرداخت",
+      "validation": {
+        "description": "توضیحات الزامی است.",
+        "understood": "تأیید این گزینه الزامی است."
+      }
+    },
+    "returnFromPaymentSendAgain": {
+      "actions": {
+        "button": "عودت از پرداخت و ارسال مجدد",
+        "submit": "ثبت عودت از پرداخت و ارسال مجدد"
+      },
+      "confirm": {
+        "confirm": "تأیید و ارسال مجدد",
+        "description": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را از پرداخت عودت داده و مجدداً ارسال کنید؟",
+        "title": "تأیید عودت از پرداخت و ارسال مجدد"
+      },
+      "fields": {
+        "description": "توضیحات",
+        "understood": "بله انجام دادم"
+      },
+      "messages": {
+        "success": "عودت از پرداخت و ارسال مجدد با موفقیت ثبت شد."
+      },
+      "temporaryDescription1": "این درخواست با شماره پذیرش",
+      "temporaryDescription2": "در سامانه فناوران در وضعیت در انتظار واریز وجه می‌باشد. آیا قبل از این عملیات اطمینان دارید که وضعیت این مورد خسارت رو در سامانه فناوران مبلغش رو صفر کرده اید؟ !این مورد خسارت",
+      "temporaryDescription3": " ابطال ",
+      "temporaryDescription4": "می شود و جهت پرداخت ارسال می گردد'",
+      "title": "عودت از پرداخت و ارسال مجدد",
+      "validation": {
+        "description": "توضیحات الزامی است.",
+        "understood": "تأیید این گزینه الزامی است."
+      }
+    },
+    "statusHistory": {
+      "description": "خط زمانی همه تغییرات وضعیت همراه با زمان به‌روزرسانی و کاربر.",
+      "systemStatus": "وضعیت",
+      "title": "تاریخچه وضعیت",
+      "user": "به‌روزرسانی توسط {{userId}}"
+    },
+    "taminPrescriptions": {
+      "description": "نتایج استعلام تأمین برای این درخواست خسارت.",
+      "missingServiceDate": "برای انجام استعلام، تاریخ هزینه درخواست خسارت لازم است.",
+      "empty": "نسخه یا خدمتی یافت نشد.",
+      "drugEmpty": "نسخه دارویی یافت نشد.",
+      "prescriptionTitle": "نسخه دارویی",
+      "usageInstruction": "دستور مصرف",
+      "drugQuantity": "تعداد دارو",
+      "financialDetails": "جزئیات مالی",
+      "financialSummary": "خلاصه مبالغ نسخه",
+      "totalPhaPrice": "جمع مبلغ داروخانه",
+      "totalPhaRequestPrice": "جمع مبلغ درخواستی داروخانه",
+      "totalInsurancePayment": "جمع پرداخت بیمه",
+      "totalSsoPayment": "جمع پرداخت تأمین",
+      "total": "{{count}} نتیجه",
+      "submit": "استعلام",
+      "validation": {
+        "nationalCodeRequired": "کد ملی الزامی است.",
+        "nationalCodeLength": "کد ملی باید ۱۰ رقم باشد."
+      },
+      "types": {
+        "drug": "نسخ دارویی تأمین",
+        "paraClinic": "نسخ پاراکلینیک تأمین",
+        "officeService": "خدمات مطب تأمین"
+      },
+      "fields": {
+        "nationalCode": "کد ملی",
+        "patientName": "نام بیمار",
+        "patientID": "شناسه بیمار",
+        "docName": "نام پزشک",
+        "specDesc": "تخصص",
+        "prescDate": "تاریخ نسخه",
+        "srvName": "نام خدمت",
+        "srvCode": "کد خدمت",
+        "srvNameMain": "نام اصلی دارو",
+        "qtyDoc": "تعداد پزشک",
+        "qtyPha": "تعداد داروخانه",
+        "drgUsg": "نحوه مصرف دارو",
+        "drgInst": "دستور مصرف دارو",
+        "druqAmt": "مقدار دارو",
+        "phaPrice": "مبلغ داروخانه",
+        "phaRequestPrice": "مبلغ درخواستی داروخانه",
+        "insurancePayment": "پرداخت بیمه",
+        "ssoPayment": "پرداخت تأمین",
+        "rvuCode": "کد RVU",
+        "tarefPrice": "تعرفه",
+        "ciamId": "شناسه CIAM"
+      }
     }
   },
   "otp": {
@@ -2357,7 +2785,8 @@
         "deleteWarning": "هشدار",
         "cannotUndo": "این عملیات این ردیف را به طور دائم از سیستم حذف می‌کند و قابل بازگشت نیست",
         "permanentWarning": "هشدار"
-      }
+      },
+      "understood": "متوجه شدم"
     },
     "showMore": "فیلترهای بیشتر",
     "close": "بستن",
@@ -2454,7 +2883,18 @@
       "imageUrl": "نشانی تصویر",
       "imageUrlPlaceholder": "https://example.com/image.png",
       "insertImage": "افزودن تصویر"
-    }
+    },
+    "errorStatus": {
+      "generic": "خطا",
+      "notFound": "اطلاعاتی یافت نشد.",
+      "serverError": "خطای سرور رخ داده است."
+    },
+    "hide": "مخفی کردن",
+    "noData": "اطلاعاتی یافت نشد.",
+    "rial": "ریال",
+    "selectAll": "انتخاب همه",
+    "selectRow": "انتخاب ردیف",
+    "submitEdit": "ثبت ویرایش"
   },
   "aiAssessmentRules": {
     "title": "قوانین ارزیابی هوشمند",
@@ -3217,6 +3657,39 @@
     "validation": {
       "key": "وارد کردن کلید الزامی است",
       "title": "وارد کردن عنوان الزامی است"
+    }
+  },
+  "errors": {
+    "general": {
+      "description": "متأسفانه مشکلی از سمت سرور رخ داده است. لطفاً دوباره تلاش کنید.",
+      "goBack": "بازگشت",
+      "heading": "مشکلی پیش آمده",
+      "home": "خانه"
+    },
+    "notFound": {
+      "description": "متأسفانه نتوانستیم صفحه‌ای که به دنبال آن می‌گردید پیدا کنیم.",
+      "goBack": "بازگشت",
+      "heading": "صفحه یافت نشد",
+      "home": "خانه"
+    }
+  },
+  "myClaimRequests": {
+    "next": "بعدی",
+    "pageIndicator": "صفحه {{page}} از {{total}}",
+    "previous": "قبلی",
+    "pagination": "نمایش {{count}} درخواست"
+  },
+  "objectionChat": {
+    "admin": "ارزیاب",
+    "user": "کاربر"
+  },
+  "myiap": {
+    "preAuths": {
+      "status": {
+        "draft": "پیش نویس",
+        "approved": "تایید شده",
+        "cancelled": "ابطالی"
+      }
     }
   }
 }

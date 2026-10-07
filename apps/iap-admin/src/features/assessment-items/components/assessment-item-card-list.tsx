@@ -9,8 +9,8 @@ import type {
   SubInsuredPersonResponse,
 } from '@iap/api-types'
 import { Card, CardContent, CardHeader, Skeleton } from '@iap/ui'
+import { useTranslate } from '@shared/i18n/i18n'
 import { useQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 
 interface AssessmentItemsCardListProps {
   items?: AssessmentItem[]
@@ -50,7 +50,7 @@ export function AssessmentItemsCardList(props: AssessmentItemsCardListProps) {
     showEmptyMessage,
     mode = 'readonly',
   } = props
-  const { t } = useTranslation()
+  const { t } = useTranslate()
   const { data: afterCalculationResults } = useQuery({
     queryKey: ['assessmentItemAfterCalculationResult', claimRequestId],
     queryFn: () =>

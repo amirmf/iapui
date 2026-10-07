@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef } from 'react'
 
+import { Slot } from '@radix-ui/react-slot'
 import { type VariantProps, cva } from 'class-variance-authority'
 
 import { cn } from './lib/cn'
@@ -24,13 +25,21 @@ export const badgeVariants = cva(
 export type BadgeProps = ComponentPropsWithoutRef<'span'> &
   VariantProps<typeof badgeVariants> & {
     presentation?: 'default' | 'reference'
+    asChild?: boolean
   }
 
 export function Badge(props: BadgeProps) {
-  const { className, variant, presentation = 'default', ...rest } = props
+  const {
+    className,
+    variant,
+    presentation = 'default',
+    asChild = false,
+    ...rest
+  } = props
+  const Comp = asChild ? Slot : 'span'
 
   return (
-    <span
+    <Comp
       className={cn(
         badgeVariants({ variant }),
         presentation === 'reference' &&
