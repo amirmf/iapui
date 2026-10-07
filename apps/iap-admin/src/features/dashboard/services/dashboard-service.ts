@@ -46,8 +46,11 @@ export const dashboardService = {
 
     return pageDocTypeSchema.parse(response.data).content
   },
-  findAgreementsWithoutMainAssessmentUser: async (signal?: AbortSignal) => {
+  findAgreementsWithoutMainAssessmentUser: async (
+    options?: { signal?: AbortSignal } | AbortSignal
+  ) => {
     agreementsWithoutMainAssessmentUserRequestSchema.parse({})
+    const signal = options instanceof AbortSignal ? options : options?.signal
     const response = await getApiClient().get(
       '/agreements/reports/without-main-assessment-user',
       { signal }
@@ -96,3 +99,5 @@ export const dashboardService = {
       assigneeStatusSumReportListSchema
     ),
 }
+
+export default dashboardService

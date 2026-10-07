@@ -31,3 +31,7 @@ export { claimRequestManagementQueryOptions } from '@features/claim-requests/pag
 export { ClaimRequestDataTableToolbar } from '@features/claim-requests/pages/index/components/claim-request-data-table-toolbar'
 export { ClaimRequestExportExcelButton } from '@features/claim-requests/pages/index/components/claim-request-export-excel-button'
 export { applyClaimRequestQuickStatusFilter } from '@features/claim-requests/utils/claim-request-quick-status-filter'
+export {
+  CLAIM_REQUEST_STATUS_TRANSLATION_KEYS,
+  getClaimRequestStatusOptions,
+} from '@features/claim-requests/model/claim-request-status'

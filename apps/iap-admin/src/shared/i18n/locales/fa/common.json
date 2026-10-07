@@ -1937,7 +1937,8 @@
         "rejected": "رد (غیر قابل پرداخت)",
         "return": "عودت (نقص مدارک)"
       },
-      "send_customer": "ارسال شده در انتظار پرداخت"
+      "send_customer": "ارسال شده در انتظار پرداخت",
+      "approvedSummery": "ارزیابی شده"
     },
     "requestType": {
       "main": "اصلی",
@@ -3316,7 +3317,9 @@
         "extContractId": "شناسه قرارداد",
         "title": "عنوان",
         "code": "کد",
-        "fromDate": "تاریخ شروع"
+        "fromDate": "تاریخ شروع",
+        "assignedUserUsername": "کدملی ارزیاب",
+        "docType": "نوع سند"
       },
       "filters": {
         "extPolicyId": "شماره بیمه‌نامه",
@@ -3338,39 +3341,25 @@
         "totalSumAmount": "مبلغ تایید شده",
         "docType": "نوع سند",
         "mainAssignedUserUsername": "کدملی ارزیاب اصلی",
-        "mainAssignedUserDisplayName": "نام ارزیاب اصلی"
-      },
-      "statuses": {
-        "SUBMITTED": "ثبت شده",
-        "IN_REVIEW": "بررسی AI",
-        "IN_ASSESSMENT": "ارزیابی اولیه",
-        "DELEGATED": "در انتظار پاسخ ارجاع",
-        "DEDICATED_TO_USER": "بررسی‌های من",
-        "APPROVED": "تأیید شده در انتظار ارسال به فناوران",
-        "REJECTED": "رد (غیرقابل پرداخت)",
-        "FAILED_FETCH_API": "خطا در دریافت از سرویس",
-        "SENT": "ارسال شده در انتظار پرداخت",
-        "SENT_FAILED": "خطا ارسال",
-        "PAID": "واریز شده",
-        "TERMINATED": "ابطال",
-        "RETURN": "عودت شده در انتظار پاسخ کاربر",
-        "PAYMENT_REJECTED": "رد شده در پرداخت",
-        "PAYMENT_RETURN": "عودت شده از پرداخت",
-        "PAYMENT_RETURN_RESEND": "عودت شده از پرداخت (ارسال مجدد)",
-        "DELETED": "حذف شده"
-      },
-      "agreementStatuses": {
-        "ACTIVE": "فعال",
-        "INACTIVE": "غیرفعال",
-        "DRAFT": "پیش‌نویس",
-        "EXPIRED": "منقضی شده",
-        "TERMINATED": "خاتمه یافته"
+        "mainAssignedUserDisplayName": "نام ارزیاب اصلی",
+        "assignedUserUsername": "کدملی ارزیاب",
+        "assignedUserDisplayName": "نام ارزیاب"
       },
       "empty": {
         "agreementsWithoutMainAssessmentUser": "همه قراردادها ارزیاب اصلی دارند."
       },
       "actions": {
         "showReport": "جهت نمایش گزارش کلیک کنید"
+      },
+      "filterGroups": {
+        "claim": "اطلاعات درخواست",
+        "assessment": "ارزیابی",
+        "policyholder": "بیمه‌گذار و بیمه‌نامه",
+        "organization": "سازمان و شعبه",
+        "financial": "مالی"
+      },
+      "errors": {
+        "agreementsWithoutMainAssessmentUser": "بارگذاری قراردادهای بدون ارزیاب اصلی ناموفق بود."
       }
     }
   },
