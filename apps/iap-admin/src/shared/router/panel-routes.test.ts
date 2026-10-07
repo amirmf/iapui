@@ -34,29 +34,27 @@ const panelCases = [
 
 function makeRouter() {
   return createRouter({
-    routeTree,
-    history: createMemoryHistory(),
     context: { auth: undefined!, queryClient: undefined! },
+    history: createMemoryHistory(),
+    routeTree,
     trailingSlash: 'always',
   })
 }
 
 describe('panel route boundaries', () => {
   it.each(panelCases)(
-    'matches %s under its authenticated panel',
+    'matches %s under its dedicated panel layout',
     (url, group, fullPath) => {
       const router = makeRouter()
       for (const pathname of [url, `${url}/`]) {
         const matches = router.matchRoutes(pathname)
         expect(matches.at(-1)?.fullPath).toBe(fullPath)
-        expect(matches.map((match) => match.routeId)).toContain(
+        expect(matches.map((match) => match.routeId)).toContain(`/${group}`)
+        expect(matches.map((match) => match.routeId)).not.toContain(
           '/_authenticated'
         )
-        expect(matches.map((match) => match.routeId)).toContain(
-          `/_authenticated/${group}`
-        )
         expect(matches.map((match) => match.routeId)).not.toContain(
-          `/_authenticated/${group === '_agent' ? '_customer-user' : '_agent'}`
+          `/${group === '_agent' ? '_customer-user' : '_agent'}`
         )
         if (url.includes('claim-123')) {
           expect(matches.at(-1)?.params).toMatchObject({
@@ -69,16 +67,12 @@ describe('panel route boundaries', () => {
 
   it('keeps the agent root layout-only and the operations branch separate', () => {
     const router = makeRouter()
-    expect(router.matchRoutes('/agent').at(-1)?.routeId).toBe(
-      '/_authenticated/_agent/agent'
-    )
+    expect(router.matchRoutes('/agent').at(-1)?.routeId).toBe('/_agent/agent')
     const matches = router.matchRoutes('/claim-requests/')
     expect(matches.at(-1)?.routeId).toBe('/_authenticated/claim-requests/')
+    expect(matches.map((match) => match.routeId)).not.toContain('/_agent')
     expect(matches.map((match) => match.routeId)).not.toContain(
-      '/_authenticated/_agent'
-    )
-    expect(matches.map((match) => match.routeId)).not.toContain(
-      '/_authenticated/_customer-user'
+      '/_customer-user'
     )
   })
 })

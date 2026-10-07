@@ -2,11 +2,13 @@ import type { AuthUser } from '@iap/api-types'
 import { Menu, UserRound } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+import { AdminBreadcrumb } from './admin-breadcrumb'
 import { AdminPanelSwitcher } from './admin-panel-switcher'
 
 type AdminHeaderProps = {
-  onOpenNavigation: () => void
+  homePageUrl?: string
   onLogout: () => void
+  onOpenNavigation: () => void
   user: AuthUser
 }
 
@@ -15,6 +17,7 @@ const formatter = new Intl.DateTimeFormat('fa-IR', {
 })
 
 export function AdminHeader({
+  homePageUrl = '/',
   onLogout,
   onOpenNavigation,
   user,
@@ -32,11 +35,13 @@ export function AdminHeader({
       >
         <Menu aria-hidden='true' className='size-5' />
       </button>
-      <p className='hidden text-sm text-muted-foreground sm:block'>
-        {formatter.format(new Date())}
-      </p>
-      <AdminPanelSwitcher />
-      <div className='mr-auto flex items-center gap-2'>
+      <div className='hidden h-6 w-px bg-border sm:block' />
+      <AdminBreadcrumb homePageUrl={homePageUrl} />
+      <div className='mr-auto flex items-center gap-2 sm:gap-3'>
+        <p className='hidden text-sm text-muted-foreground sm:block'>
+          {formatter.format(new Date())}
+        </p>
+        <AdminPanelSwitcher />
         <div className='hidden text-right sm:block'>
           <p className='text-sm font-semibold'>{name}</p>
           {user.email ? (

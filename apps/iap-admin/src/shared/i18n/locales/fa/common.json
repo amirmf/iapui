@@ -1317,6 +1317,7 @@
     "claimRequests": "درخواست‌های خسارت",
     "claimRequestsAgent": "درخواست‌های من",
     "createClaimRequests": "ثبت درخواست خسارت",
+    "createInsuredUser": "ثبت‌نام بیمه‌شده",
     "damageCodes": "کد خسارت",
     "tasks": "کار",
     "apps": "اپلیکیشن",
@@ -1711,7 +1712,9 @@
     "current": "{{panel}} — پنل فعلی",
     "panels": {
       "evaluation": "پنل ارزیابی",
-      "customer": "سامانه مشتریان"
+      "agent": "پنل نماینده ثبت",
+      "customer": "سامانه مشتریان",
+      "customerUser": "پنل بیمه‌گذار"
     }
   },
   "dataTable": {
@@ -3491,6 +3494,13 @@
     }
   },
   "breadcrumb": {
+    "home": "خانه",
+    "dashboard": "داشبورد",
+    "claim": "درخواست خسارت",
+    "claim-agent": "درخواست‌های من",
+    "claim-request-management": "مدیریت درخواست خسارت",
+    "createClaim": "ایجاد درخواست",
+    "agentUserSignup": "ثبت‌نام بیمه‌شده",
     "sub-users": "ارزیابان من"
   },
   "supportQuestions": {
@@ -3690,6 +3700,19 @@
         "approved": "تایید شده",
         "cancelled": "ابطالی"
       }
+    }
+  },
+  "customerUser": {
+    "dashboard": {
+      "title": "داشبورد بیمه‌گذار",
+      "description": "درخواست‌های خسارت در دسترس حساب خود را بررسی کنید."
+    },
+    "claimRequests": {
+      "nav": "درخواست‌های خسارت",
+      "title": "درخواست‌های خسارت",
+      "description": "درخواست‌های خسارت در دسترس خود را بررسی کنید.",
+      "view": "مشاهده جزئیات",
+      "empty": "درخواست خسارتی در دسترس نیست."
     }
   }
 }
