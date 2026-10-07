@@ -1,4 +1,4 @@
-import { formatPrescriptionAmount as formatAmount } from '@features/claim-requests/model/claim-request-management-format'
+import { formatPrescriptionAmount as formatAmount } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-format'
 import {
   type FinancialField,
   contributionFields,

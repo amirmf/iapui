@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import type { ClaimRequestStatus } from '@features/claim-requests/model/claim-request-management-forms'
+import type { ClaimRequestStatus } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import { getClaimRequestStatusOptions } from '@features/claim-requests/model/claim-request-status'
-import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'
-import { useClaimRequestManagementParams as useParams } from '@features/claim-requests/route-adapters/use-claim-request-management-params'
-import claimRequestService from '@features/claim-requests/services/claim-request-management-service'
+import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
+import { useClaimRequestManagementParams as useParams } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-params'
+import claimRequestService from '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service'
 import { Button } from '@iap/ui'
 import {
   Dialog,

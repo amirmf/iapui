@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
 import { ClaimRequestAssignDialog } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/claim-request-assignment-section/claim-request-assign-dialog'
-import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'
-import { useClaimRequestManagementParams as useParams } from '@features/claim-requests/route-adapters/use-claim-request-management-params'
-import { useIsSuperAdmin } from '@features/claim-requests/route-adapters/use-claim-request-management-permissions'
-import { useClaimRequestRolesActions } from '@features/claim-requests/route-adapters/use-claim-request-management-permissions'
-import { useClaimRequestStatusAssessment } from '@features/claim-requests/route-adapters/use-claim-request-management-permissions'
+import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
+import { useClaimRequestManagementParams as useParams } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-params'
+import { useIsSuperAdmin } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-permissions'
+import { useClaimRequestRolesActions } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-permissions'
+import { useClaimRequestStatusAssessment } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-permissions'
 import { Button } from '@iap/ui'
 import { useTranslate as useTranslation } from '@shared/i18n/i18n'
 

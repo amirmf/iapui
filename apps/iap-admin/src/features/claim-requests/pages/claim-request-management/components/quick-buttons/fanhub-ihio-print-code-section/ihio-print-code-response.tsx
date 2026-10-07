@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import fanhubTaminService from '@features/claim-requests/services/fanhub-tamin-service'
+import fanhubTaminService from '@features/claim-requests/pages/claim-request-management/services/fanhub-tamin-service'
 import type {
   FanhubIhioInsuredInfo,
   FanhubIhioPrescriptionInfo,

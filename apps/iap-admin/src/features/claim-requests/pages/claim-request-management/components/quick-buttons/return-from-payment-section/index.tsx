@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import { ReturnFromPaymentDialog } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/return-from-payment-section/return-from-payment-dialog'
-import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'
-import { useClaimRequestManagementParams as useParams } from '@features/claim-requests/route-adapters/use-claim-request-management-params'
+import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
+import { useClaimRequestManagementParams as useParams } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-params'
 import { Button } from '@iap/ui'
 import { useTranslate as useTranslation } from '@shared/i18n/i18n'
 

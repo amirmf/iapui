@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { ClaimRequestUpdateInfoDialog } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/claim-request-update-info-dialog'
-import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'
+import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
 import { Button } from '@iap/ui'
 import { useTranslate as useTranslation } from '@shared/i18n/i18n'
 

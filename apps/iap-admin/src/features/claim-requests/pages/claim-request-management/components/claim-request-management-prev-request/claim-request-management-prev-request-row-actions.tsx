@@ -1,4 +1,4 @@
-import { useClaimRequestManagementPrevRequestAttachments } from '@features/claim-requests/context/store/claim-request-management-prev-request-attachments-store'
+import { useClaimRequestManagementPrevRequestAttachments } from '@features/claim-requests/pages/claim-request-management/context/store/claim-request-management-prev-request-attachments-store'
 import { type ClaimRequestHistory } from '@iap/api-types'
 import { useTranslate as useTranslation } from '@shared/i18n/i18n'
 import { TableActionButton } from '@shared/tables'

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 
-import { useClaimRequestManagementParams as useParams } from '@features/claim-requests/route-adapters/use-claim-request-management-params'
-import claimRequestService from '@features/claim-requests/services/claim-request-management-service'
+import { useClaimRequestManagementParams as useParams } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-params'
+import claimRequestService from '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service'
 import { Button } from '@iap/ui'
 import { SearchableSelect } from '@iap/ui'
 import { useDocTypesData } from '@modules/doc-types'

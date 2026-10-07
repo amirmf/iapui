@@ -3,7 +3,7 @@ import { memo, useEffect, useMemo } from 'react'
 import {
   type ClaimRequestReplayForm as ClaimRequestReplayFormValues,
   claimRequestReplayFormSchema,
-} from '@features/claim-requests/model/claim-request-management-forms'
+} from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@iap/forms'
 import { Button } from '@iap/ui'

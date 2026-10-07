@@ -9,7 +9,7 @@ import {
   claimRequestObjectionFormSchema,
 } from '@features/claim-requests/pages/claim-request-management/model/claim-request-objection-form-schema'
 import { hasDuplicatedAssessmentItem } from '@features/claim-requests/pages/claim-request-management/model/objection-approval-guards'
-import { claimRequestManagementService } from '@features/claim-requests/services/claim-request-management-service'
+import { claimRequestManagementService } from '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service'
 import { RepetitiveResponseTextarea } from '@features/repetitive-responses'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { type ClaimRequest, type ClaimRequestStatus } from '@iap/api-types'

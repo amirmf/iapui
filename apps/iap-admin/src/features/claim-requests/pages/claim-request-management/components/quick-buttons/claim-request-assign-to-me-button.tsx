@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import useClaimRequestManagementData from '@features/claim-requests/queries/use-claim-request-management-data'
-import claimRequestService from '@features/claim-requests/services/claim-request-management-service'
+import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
+import claimRequestService from '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service'
 import { ConfirmDialog } from '@iap/dialogs'
 import { Button } from '@iap/ui'
 import { useTranslate as useTranslation } from '@shared/i18n/i18n'

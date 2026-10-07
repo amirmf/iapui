@@ -3,12 +3,12 @@ import { useMemo, useState } from 'react'
 import {
   type ReturnFromPaymentSendAgainForm,
   returnFromPaymentSendAgainFormSchema,
-} from '@features/claim-requests/model/claim-request-management-forms'
+} from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import {
   type AddObjectionRequest,
   type ClaimRequest,
-} from '@features/claim-requests/model/claim-request-management-forms'
-import claimRequestService from '@features/claim-requests/services/claim-request-management-service'
+} from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
+import claimRequestService from '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ConfirmDialog } from '@iap/dialogs'
 import { TextareaField } from '@iap/forms'

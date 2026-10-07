@@ -151,6 +151,37 @@ feature belongs under the feature's `components/`. Do not create a feature-wide
 `components/` dumping ground: a component owned by one page remains under that
 page's `components/` directory.
 
+### Ownership when adding a sibling page
+
+When a feature grows beyond its root page, review every existing folder by
+actual imports before moving files. Apply the same ownership rule to components,
+form schemas, queries, services, route adapters, and client state:
+
+- Page-exclusive code belongs under `pages/<page>/` using the existing folder
+  vocabulary. Keep its focused tests beside that owner.
+- Feature-level domain contracts, services used by multiple pages, and state
+  coordinating sibling pages remain at the feature boundary. Shared React
+  components belong in the feature's `components/`; other sibling-only helpers
+  belong in the nearest `shared/` directory.
+- Page-owned providers still belong in `context/provider/`, and page-owned
+  stores in `context/store/`, beneath the owning page. A page directory does
+  not permit providers in `components/` or stores in `model/`.
+- Inspect indirect consumers, public exports, test mocks, and file paths read
+  by tests. An export does not by itself make implementation shared; preserve
+  the public API while relocating its implementation.
+- Do not classify files solely by their names or copy shared implementations
+  into both pages. Keep backend service aggregates intact when their public
+  methods serve multiple owners.
+- Update imports and test fixtures in the same change, remove empty directories,
+  and run affected tests, typecheck, lint, and the architecture check.
+
+In admin Claim Requests, list controls and list form schemas belong to
+`pages/index/`, while management forms, queries, and management services belong
+to `pages/claim-request-management/`. The loaded-request ID store remains at
+`context/store/` because both pages consume it. Status contracts, readonly
+information components, and the shared claim-request service retain feature
+ownership. Table row class selection is a page UI helper, not a domain model.
+
 ### Feature model and context
 
 `model/` is a data-contract boundary. It contains only the feature's business
