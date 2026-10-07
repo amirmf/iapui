@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { PipelineExecutionsTable } from './pipeline-executions-table'
 
@@ -15,6 +15,20 @@ vi.mock('react-i18next', async (importOriginal) => {
 })
 
 describe('PipelineExecutionsTable', () => {
+  beforeEach(() => {
+    vi.stubGlobal(
+      'ResizeObserver',
+      class {
+        observe() {}
+        unobserve() {}
+        disconnect() {}
+      }
+    )
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
   it('renders loading state', () => {
     render(
       <PipelineExecutionsTable
