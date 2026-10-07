@@ -3,6 +3,6 @@ import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/sub-users/')({
   component: SubUsersPage,
-  loader: () => ({ crumb: 'subUsers' }),
+  loader: () => ({ crumb: 'sub-users' }),
   validateSearch: subUserRouteSearchSchema,
 })

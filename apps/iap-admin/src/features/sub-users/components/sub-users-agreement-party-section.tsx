@@ -3,13 +3,11 @@ import {
   AgreementPartyApplsContent,
 } from '@features/agreements'
 
-import { useSubUser } from '../context/store/sub-user-store'
-import { useSubUsersAgreementsStore } from '../context/store/sub-users-agreements-store'
+import { useSubUser } from '../context/sub-user-context'
+import { useSubUsersAgreements } from '../context/sub-users-agreements-context'
 
 export function SubUsersAgreementPartySection() {
-  const agreements = useSubUsersAgreementsStore(
-    (state) => state.selectedAgreement
-  )
+  const agreements = useSubUsersAgreements((state) => state.selectedAgreement)
   const userAccounts = useSubUser((state) => state.selectedUserAccount)
 
   return (

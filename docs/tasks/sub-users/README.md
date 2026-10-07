@@ -53,6 +53,8 @@ This directory defines the component-by-component implementation breakdown for `
 | **TASK-11** | [TASK-11-AGREEMENT-PARTY-SUB-SECTION.md](./TASK-11-AGREEMENT-PARTY-SUB-SECTION.md) | Bottom panel agreement party applications integration | - | Completed |
 | **TASK-12** | [TASK-12-PAGE-AND-ROUTER-INTEGRATION.md](./TASK-12-PAGE-AND-ROUTER-INTEGRATION.md) | Page composition, barrel export & route replacement | - | Completed |
 | **TASK-13** | [TASK-13-TESTING-AND-VERIFICATION.md](./TASK-13-TESTING-AND-VERIFICATION.md) | Unit tests, contract verification, lint, typecheck, build | - | Completed |
+| **AUDIT** | [PARITY-AUDIT-DISCREPANCIES.md](./PARITY-AUDIT-DISCREPANCIES.md) | Component-by-component line-by-line parity audit vs reference | - | Completed |
+| **TASK-14** | [TASK-14-COMPONENT-PARITY-REMEDIATION.md](./TASK-14-COMPONENT-PARITY-REMEDIATION.md) | Component parity remediation (resolver, context, crumb, hooks) | - | Completed |
 
 ## Dependency Graph
 

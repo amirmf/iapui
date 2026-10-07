@@ -9,7 +9,7 @@ import { IconRefresh } from '@tabler/icons-react'
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-import { useSubUsersAgreementsStore } from '../context/store/sub-users-agreements-store'
+import { useSubUsersAgreements } from '../context/sub-users-agreements-context'
 import { useSubUsersAgreementsColumns } from './sub-users-agreements-columns'
 import { SubUsersAgreementsDataTableToolbar } from './sub-users-agreements-data-table-toolbar'
 
@@ -18,11 +18,11 @@ const EMPTY_AGREEMENTS: Agreement[] = []
 export function SubUsersAgreementsSection() {
   const { t } = useTranslation()
   const columns = useSubUsersAgreementsColumns()
-  const rowSelection = useSubUsersAgreementsStore((state) => state.rowSelection)
-  const setRowSelection = useSubUsersAgreementsStore(
+  const rowSelection = useSubUsersAgreements((state) => state.rowSelection)
+  const setRowSelection = useSubUsersAgreements(
     (state) => state.setRowSelection
   )
-  const setSelectedAgreement = useSubUsersAgreementsStore(
+  const setSelectedAgreement = useSubUsersAgreements(
     (state) => state.setSelectedAgreement
   )
 
@@ -40,7 +40,6 @@ export function SubUsersAgreementsSection() {
 
   const {
     data: pageData,
-    isFetching,
     isLoading,
     refetch,
   } = useQuery({
@@ -92,13 +91,11 @@ export function SubUsersAgreementsSection() {
         </h2>
         <div className='flex items-center gap-2'>
           <Button
-            disabled={isLoading || isFetching}
+            disabled={isLoading}
             onClick={() => refetch()}
             variant='outline'
           >
-            <IconRefresh
-              className={`mr-2 size-4 ${isFetching ? 'animate-spin' : ''}`}
-            />
+            <IconRefresh className='mr-2 size-4' />
             {t('subUsers.actions.refresh')}
           </Button>
         </div>
@@ -128,3 +125,5 @@ export function SubUsersAgreementsSection() {
     </Main>
   )
 }
+
+export default SubUsersAgreementsSection

@@ -5,11 +5,12 @@ import { Button } from '@iap/ui'
 import { Main } from '@shared/components/layout/main'
 import { PaginatedDataTable } from '@shared/tables'
 import { IconPlus, IconRefresh } from '@tabler/icons-react'
+import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-import { useSubUser } from '../context/store/sub-user-store'
-import { useSubUsersPageQuery } from '../queries/use-sub-users-query'
+import { useSubUser } from '../context/sub-user-context'
 import { useSubUserTableState } from '../route-adapters/use-sub-user-table-state'
+import { subUserService } from '../services/sub-user-service'
 import { useSubUserColumns } from './sub-user-columns'
 import { SubUsersDataTableToolbar } from './sub-users-data-table-toolbar'
 
@@ -27,12 +28,17 @@ export function SubUserSection() {
 
   const {
     data: subUsersPage,
-    isFetching,
     isLoading,
     refetch,
-  } = useSubUsersPageQuery({
-    filters,
-    pagination,
+  } = useQuery({
+    queryFn: ({ signal }) =>
+      subUserService.listPage({
+        filters,
+        page: pagination.pageIndex,
+        signal,
+        size: pagination.pageSize,
+      }),
+    queryKey: ['sub-users', pagination, filters],
   })
 
   useEffect(() => {
@@ -69,6 +75,7 @@ export function SubUserSection() {
     return result
   }, [rowSelection, subUsers])
 
+  // Fill selectedUserAccount from rowSelection
   useEffect(() => {
     setSelectedUserAccount(selectedUserAccount)
   }, [selectedUserAccount, setSelectedUserAccount])
@@ -81,13 +88,11 @@ export function SubUserSection() {
         </h2>
         <div className='flex items-center gap-2'>
           <Button
-            disabled={isLoading || isFetching}
+            disabled={isLoading}
             onClick={() => refetch()}
             variant='outline'
           >
-            <IconRefresh
-              className={`mr-2 size-4 ${isFetching ? 'animate-spin' : ''}`}
-            />
+            <IconRefresh className='mr-2 size-4' />
             {t('subUsers.actions.refresh')}
           </Button>
           <Button

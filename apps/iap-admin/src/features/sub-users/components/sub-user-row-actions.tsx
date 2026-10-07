@@ -7,11 +7,13 @@ import {
   IconUser,
   IconUserOff,
 } from '@tabler/icons-react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import type { Row } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 
-import { useSubUser } from '../context/store/sub-user-store'
-import { useToggleSubUserStatus } from '../queries/use-sub-user-mutations'
+import { useSubUser } from '../context/sub-user-context'
+import { subUserService } from '../services/sub-user-service'
 
 interface SubUserRowActionsProps {
   row: Row<SubUser>
@@ -19,11 +21,18 @@ interface SubUserRowActionsProps {
 
 export function SubUserRowActions({ row }: SubUserRowActionsProps) {
   const { t } = useTranslation()
+  const queryClient = useQueryClient()
   const setOpen = useSubUser((state) => state.setOpen)
   const setCurrentRow = useSubUser((state) => state.setCurrentRow)
   const user = row.original
 
-  const { mutate: toggleUser } = useToggleSubUserStatus()
+  const { mutate: toggleUser } = useMutation({
+    mutationFn: async (target: SubUser) => subUserService.disable(target.id),
+    onSuccess: () => {
+      toast.success(t('subUsers.messages.statusUpdateSuccess'))
+      queryClient.invalidateQueries({ queryKey: ['sub-users'] })
+    },
+  })
 
   const handleView = () => {
     setCurrentRow(user)
@@ -75,7 +84,7 @@ export function SubUserRowActions({ row }: SubUserRowActionsProps) {
             : t('subUsers.actions.enable')
         }
         onClick={() => {
-          toggleUser(user.id)
+          toggleUser(user)
         }}
         tooltipText={
           user.enabled

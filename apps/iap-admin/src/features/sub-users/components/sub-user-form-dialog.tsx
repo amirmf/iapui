@@ -1,6 +1,7 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 
 import {
+  Form,
   FormControl,
   FormField,
   FormItem,
@@ -19,24 +20,23 @@ import {
   MultiSelect,
 } from '@iap/ui'
 import { useDocTypesData } from '@modules/doc-types/queries/use-doc-types-data'
-import { FormProvider, useForm } from 'react-hook-form'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 
+import { DOCTOR_USER_ROLE } from '../constants/sub-user-constant'
+import { useSubUser } from '../context/sub-user-context'
 import {
-  DOCTOR_USER_ROLE,
-  getSubUserRoleOptions,
-} from '../constants/sub-user-constant'
-import { useSubUser } from '../context/store/sub-user-store'
-import {
-  type CreateSubUserPayload,
-  type UpdateSubUserPayload,
+  type CreateSubUserPayloadType,
+  type UpdateSubUserPayloadType,
   createSubUserPayloadSchema,
   updateSubUserPayloadSchema,
 } from '../model/sub-user-form-schema'
-import { useUpsertSubUser } from '../queries/use-sub-user-mutations'
-import { useSubUserByIdQuery } from '../queries/use-sub-users-query'
+import { subUserService } from '../services/sub-user-service'
+import { typedZodResolver } from './typed-zod-resolver'
 
-const defaultValues: CreateSubUserPayload = {
+const defaultValues: CreateSubUserPayloadType = {
   branchLocations: null,
   docTypeCodes: [],
   email: '',
@@ -51,11 +51,10 @@ const defaultValues: CreateSubUserPayload = {
 
 export function SubUserFormDialog() {
   const { t } = useTranslation()
+  const queryClient = useQueryClient()
   const open = useSubUser((state) => state.open)
   const setOpen = useSubUser((state) => state.setOpen)
   const currentRow = useSubUser((state) => state.currentRow)
-  const setCurrentRow = useSubUser((state) => state.setCurrentRow)
-
   const isOpen = open === 'editor'
   const editorId = currentRow?.id
   const isEdit = Boolean(isOpen && editorId)
@@ -65,35 +64,31 @@ export function SubUserFormDialog() {
       enabled: isOpen,
     })
 
-  const { data: detailedSubUser, isLoading: isLoadingSubUser } =
-    useSubUserByIdQuery(isOpen ? editorId : null)
+  const {
+    data: detailedSubUser,
+    isLoading: isLoadingSubUser,
+    refetch,
+  } = useQuery({
+    enabled: !!editorId,
+    queryFn: () => subUserService.getById(editorId!),
+    queryKey: ['sub-user', editorId],
+  })
 
-  const roleOptions = useMemo(() => getSubUserRoleOptions(t), [t])
-
-  const form = useForm<CreateSubUserPayload | UpdateSubUserPayload>({
+  const form = useForm<CreateSubUserPayloadType>({
     defaultValues,
-    resolver: async (values) => {
-      const schema = isEdit
-        ? updateSubUserPayloadSchema(t)
-        : createSubUserPayloadSchema(t)
-      const result = schema.safeParse(values)
-      if (result.success) {
-        return { errors: {}, values: result.data }
-      }
-      const errors: Record<string, { message: string; type: string }> = {}
-      for (const issue of result.error.issues) {
-        const path = issue.path.join('.')
-        if (!errors[path]) {
-          errors[path] = { message: issue.message, type: issue.code }
-        }
-      }
-      return { errors, values: {} }
-    },
+    resolver: typedZodResolver(
+      isEdit ? updateSubUserPayloadSchema(t) : createSubUserPayloadSchema(t)
+    ),
   })
 
   useEffect(() => {
     if (!isOpen) {
       form.reset(defaultValues)
+    }
+  }, [form, isOpen])
+
+  useEffect(() => {
+    if (open !== 'editor') {
       return
     }
 
@@ -110,30 +105,75 @@ export function SubUserFormDialog() {
         roles: (detailedSubUser.roles ?? []) as never,
         username: detailedSubUser.username,
       })
-    } else if (currentRow && !isLoadingSubUser) {
+      return
+    }
+
+    if (currentRow && !isLoadingSubUser) {
       form.reset(defaultValues)
     }
-  }, [isOpen, detailedSubUser, isLoadingSubUser, currentRow, form])
+  }, [open, detailedSubUser, isLoadingSubUser, currentRow, form])
 
-  const handleClose = () => {
-    setOpen(null)
-    setCurrentRow(null)
-  }
+  const upsertMutation = useMutation({
+    mutationFn: async (
+      payload: CreateSubUserPayloadType | UpdateSubUserPayloadType
+    ) => {
+      const finalData: CreateSubUserPayloadType | UpdateSubUserPayloadType = {
+        branchLocations: payload.branchLocations ?? null,
+        docTypeCodes: payload.docTypeCodes,
+        email: null,
+        hasAccessToAllBranch: payload.hasAccessToAllBranch ?? null,
+        mobileNumber: payload.mobileNumber,
+        partyFname: payload.partyFname,
+        partyLname: payload.partyLname,
+        roles: payload.roles,
+        username: payload.username,
+      }
+      if (payload.password) {
+        finalData.password = payload.password
+      }
+      if (payload.email) {
+        finalData.email = payload.email
+      }
+      if (currentRow?.id) {
+        return subUserService.update(currentRow.id, finalData)
+      }
 
-  const upsertMutation = useUpsertSubUser({
-    editorId,
-    onSuccess: handleClose,
+      return subUserService.create(finalData as CreateSubUserPayloadType)
+    },
+    onSuccess: () => {
+      toast.success(t('subUsers.messages.saveSuccess'))
+      setOpen(null)
+      refetch()
+      queryClient.invalidateQueries({ queryKey: ['sub-users'] })
+    },
   })
 
-  const onSubmit = (values: CreateSubUserPayload | UpdateSubUserPayload) => {
+  const onSubmit = (
+    values: CreateSubUserPayloadType | UpdateSubUserPayloadType
+  ) => {
     upsertMutation.mutate(values)
   }
+
+  const roleOptions = [
+    {
+      label: t('parties.role.requestRegisteryAgent'),
+      value: 'ROLE_REQUEST_REGISTERY_AGENT',
+    },
+    {
+      label: t('parties.role.assessmentUser'),
+      value: 'ROLE_ASSESSMENT_USER',
+    },
+    {
+      label: t('parties.role.doctorUser'),
+      value: DOCTOR_USER_ROLE,
+    },
+  ]
 
   return (
     <Dialog
       onOpenChange={(nextOpen) => {
         if (!nextOpen) {
-          handleClose()
+          setOpen(null)
         }
       }}
       open={isOpen}
@@ -152,7 +192,7 @@ export function SubUserFormDialog() {
           </DialogDescription>
         </DialogHeader>
 
-        <FormProvider {...form}>
+        <Form {...form}>
           <form
             autoComplete='off'
             className='grid gap-4'
@@ -286,18 +326,11 @@ export function SubUserFormDialog() {
                         labelKey='label'
                         onValueChange={(selected) => {
                           const values = selected.map((s) => s.value)
-                          const hasDoctor = values.includes(DOCTOR_USER_ROLE)
-                          const hadDoctor =
-                            currentRoles.includes(DOCTOR_USER_ROLE)
-                          if (hasDoctor && !hadDoctor) {
-                            field.onChange([DOCTOR_USER_ROLE])
-                          } else if (hasDoctor && values.length > 1) {
-                            field.onChange(
-                              values.filter((v) => v !== DOCTOR_USER_ROLE)
-                            )
-                          } else {
-                            field.onChange(values)
-                          }
+                          field.onChange(
+                            values.includes(DOCTOR_USER_ROLE)
+                              ? [DOCTOR_USER_ROLE]
+                              : values
+                          )
                         }}
                         options={roleOptions}
                         placeholder={t(
@@ -346,7 +379,11 @@ export function SubUserFormDialog() {
             />
 
             <DialogFooter>
-              <Button onClick={handleClose} type='button' variant='outline'>
+              <Button
+                onClick={() => setOpen(null)}
+                type='button'
+                variant='outline'
+              >
                 {t('common.cancel')}
               </Button>
               <Button
@@ -357,7 +394,7 @@ export function SubUserFormDialog() {
               </Button>
             </DialogFooter>
           </form>
-        </FormProvider>
+        </Form>
       </DialogContent>
     </Dialog>
   )

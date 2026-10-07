@@ -1,14 +1,16 @@
 import { useCallback } from 'react'
 
 import { ConfirmDialog } from '@iap/dialogs'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
-import { useSubUser } from '../context/store/sub-user-store'
-import { useReleaseAssignments } from '../queries/use-sub-user-mutations'
+import { useSubUser } from '../context/sub-user-context'
+import { subUserService } from '../services/sub-user-service'
 
 export function SubUserReleaseAssignmentsDialog() {
   const { t } = useTranslation()
+  const queryClient = useQueryClient()
   const open = useSubUser((state) => state.open)
   const setOpen = useSubUser((state) => state.setOpen)
   const currentRow = useSubUser((state) => state.currentRow)
@@ -20,7 +22,15 @@ export function SubUserReleaseAssignmentsDialog() {
     setCurrentRow(null)
   }, [setCurrentRow, setOpen])
 
-  const releaseAssignmentsMutation = useReleaseAssignments(onClose)
+  const releaseAssignmentsMutation = useMutation({
+    mutationFn: (userId: string) =>
+      subUserService.releaseAssignments({ userId }),
+    onSuccess: async () => {
+      toast.success(t('subUsers.messages.releaseAssignmentsSuccess'))
+      await queryClient.invalidateQueries({ queryKey: ['sub-users'] })
+      onClose()
+    },
+  })
 
   const handleReleaseAssignments = () => {
     if (!currentRow?.id) {
@@ -28,7 +38,7 @@ export function SubUserReleaseAssignmentsDialog() {
       return
     }
 
-    releaseAssignmentsMutation.mutate({ userId: currentRow.id })
+    releaseAssignmentsMutation.mutate(currentRow.id)
   }
 
   return (

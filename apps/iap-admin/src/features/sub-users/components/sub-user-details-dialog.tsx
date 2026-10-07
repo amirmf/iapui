@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@iap/ui'
 import { ReadonlyItems } from '@shared/components/readonly-items'
 import { useTranslation } from 'react-i18next'
 
-import { useSubUser } from '../context/store/sub-user-store'
+import { useSubUser } from '../context/sub-user-context'
 
 export function SubUserDetailsDialog() {
   const { t } = useTranslation()

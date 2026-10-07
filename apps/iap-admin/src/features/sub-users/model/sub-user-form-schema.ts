@@ -60,6 +60,7 @@ export const createSubUserPayloadSchema = (t: TFunction) =>
 export type CreateSubUserPayload = z.infer<
   ReturnType<typeof createSubUserPayloadSchema>
 >
+export type CreateSubUserPayloadType = CreateSubUserPayload
 
 export const updateSubUserPayloadSchema = (t: TFunction) =>
   subUserPayloadSchemaBase(t).extend({
@@ -74,5 +75,6 @@ export const updateSubUserPayloadSchema = (t: TFunction) =>
 export type UpdateSubUserPayload = z.infer<
   ReturnType<typeof updateSubUserPayloadSchema>
 >
+export type UpdateSubUserPayloadType = UpdateSubUserPayload
 
 export type SubUserFormValues = CreateSubUserPayload | UpdateSubUserPayload
