@@ -9,18 +9,23 @@ Use this skill when implementing, extending, or maintaining routes, layouts, and
 
 ## 1. Application Boundary & URL Conventions
 
-1. **Path Prefix Absence**:
+1. **Path Prefix Absence & Full Route Matrix**:
    - In `insurance-ui`, customer pages live under `/myiap/**`.
-   - In `apps/iap-app`, the `/myiap` prefix is removed from user-facing routes:
-     - Home: `/`
-     - My Claims: `/myclaims/`
-     - Create Claim: `/myclaims/create/`
-     - Special Diseases: `/special-diseases/`
-     - Pre-Authorizations: `/pre-auths/`
+   - In `apps/iap-app`, the `/myiap` prefix is removed from user-facing routes, canonicalized with trailing slashes:
+     - Home: `/` (`_authenticated/index.tsx`, crumb: `myiap`)
+     - My Claims: `/myclaims/` (`_authenticated/myclaims/index.tsx`, crumb: `myClaims`)
+     - Create Claim: `/myclaims/create/` (`_authenticated/myclaims/create/index.tsx`, crumb: `createClaim`)
+     - Claim Details: `/myclaims/$id/` (`_authenticated/myclaims/$id.index.tsx`, crumb: `claimDetails`)
+     - Special Diseases: `/special-diseases/` (`_authenticated/special-diseases/index.tsx`, crumb: `mySpecialDiseases`)
+     - Create Special Disease: `/special-diseases/create/` (`_authenticated/special-diseases/create/index.tsx`, crumb: `createMySpecialDisease`)
+     - Special Disease Details: `/special-diseases/$id/` (`_authenticated/special-diseases/$id.index.tsx`, crumb: `mySpecialDiseaseDetails`)
+     - Pre-Authorizations: `/pre-auths/` (`_authenticated/pre-auths/index.tsx`, crumb: `preAuths`)
    - Route root lives under `apps/iap-app/src/app/router/routes/_authenticated/route.tsx` with guard `beforeLoadPublicApp`.
 
-2. **Route Files**:
+2. **Route Files & Dynamic Params**:
    - Keep route files thin: route definition, search validation, loaders, and delegation to the owning feature's public API.
+   - Static segments use dedicated directories with `index.tsx` (e.g. `myclaims/create/index.tsx`).
+   - Dynamic parameters map to flat file routes with `.index.tsx` (e.g. `myclaims/$id.index.tsx`). Verified in `apps/iap-app/src/shared/router/customer-routes.test.ts`.
 
 ## 2. Layout Architecture (`MyIapLayout` / `AppShell`)
 
@@ -73,3 +78,16 @@ MyIapLayout
 - Do not create `ui/` directories; use `components/`. Reusable cross-application primitives come from `@iap/ui`.
 - All visible strings must be localized in `apps/iap-app/src/shared/i18n/locales/fa/common.json`.
 - Follow strict typing: add all tenant variables to `apps/iap-app/src/vite-env.d.ts`.
+
+## 5. Feature Implementation Tasks & Roadmaps
+
+Detailed task breakdown for implementing each customer page lives under `docs/tasks/customer-portal-pages/`:
+- `01-my-claims-list-page.md`: My Claims list (`/myclaims/`)
+- `02-my-claims-create-page.md`: My Claims create (`/myclaims/create/`)
+- `03-my-claims-detail-page.md`: My Claims detail (`/myclaims/$id/`)
+- `04-special-diseases-list-page.md`: Special Diseases list (`/special-diseases/`)
+- `05-special-diseases-create-page.md`: Special Diseases create (`/special-diseases/create/`)
+- `06-special-diseases-detail-page.md`: Special Diseases detail (`/special-diseases/$id/`)
+- `07-pre-auths-page.md`: Pre-Authorizations list (`/pre-auths/`)
+- `DISCREPANCY-MATRIX.md`: Complete URL, backend API, and schema contract mapping
+
