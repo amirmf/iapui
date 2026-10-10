@@ -159,7 +159,8 @@
     "noResults": "نتیجه‌ای یافت نشد",
     "noResultsFound": "نتیجه‌ای یافت نشد.",
     "selectAll": "انتخاب همه",
-    "selectItems": "انتخاب موارد"
+    "selectItems": "انتخاب موارد",
+    "rial": "ریال"
   },
   "panelSwitcher": {
     "switch": "تغییر پنل: {{panel}}",
@@ -185,10 +186,6 @@
       "copyright": "© {{year}} پورتال {{company}}. تمامی حقوق محفوظ است."
     },
     "myIapPage": {
-      "createSpecialDiseaseTitle": "ثبت درخواست بیماری‌های خاص",
-      "createSpecialDiseaseDescription": "ثبت درخواست جدید برای بیماری‌های خاص",
-      "mySpecialDiseasesTitle": "درخواست‌های بیماری‌های خاص من",
-      "mySpecialDiseasesDescription": "مشاهده و پیگیری درخواست‌های بیماری‌های خاص",
       "myClaimsTitle": "پیگیری خسارت",
       "myClaimsDescription": "مشاهده و مدیریت درخواست‌های خسارت",
       "createClaimTitle": "بارگذاری مدارک درمانی",
@@ -197,16 +194,10 @@
       "welcomeTitle": "خوش آمدید، {{name}}!",
       "welcomeDescription": "به پورتال بیمه و خسارت خود خوش آمدید. این مرکز مدیریت تمامی درخواست‌های خسارت بیمه شما می‌باشد.",
       "panelIntroduction": "در اینجا می‌توانید درخواست‌های موجود خود را مشاهده کنید، وضعیت آن‌ها را پیگیری نمایید، درخواست‌های جدید ثبت کنید و به تمام مدارک لازم دسترسی داشته باشید. فرآیند ساده‌شده ما اطمینان می‌دهد که درخواست‌های شما به صورت کارآمد و شفاف پردازش شوند.",
-      "watchTutorial": "مشاهده ویدیو آموزشی",
-      "contractingPartyCenters": "مراکز طرف قرارداد",
-      "medicalReferralLetters": "معرفی نامه های درمانی",
-      "bankAccountInfo": "اطلاعات حساب بانکی",
-      "downloadPolicyPdf": "دانلود تعهدات بیمه",
-      "supportAlertTitle": "شماره پشتیبانی",
       "supportAlertDescription": "پشتیبانی مرکز خدمات حوزه عملیه: 1574"
     },
     "claimRequests": {
-      "title": "پیگیری خسارت‌های من",
+      "title": "پیگیری خسارت",
       "claimDetails": "جزئیات درخواست خسارت",
       "create": "ثبت درخواست",
       "description": "درخواست‌های خسارت ثبت شده خود را بررسی کنید.",
@@ -218,7 +209,11 @@
       "treatmentCostInfoStepEstimateBtn": "استعلام هزینه‌های درمانی",
       "treatmentCostInfoStepPrimary": "1- استعلام کد بیمه‌ شده اصلی از طریق لینک ",
       "treatmentCostInfoStepPrimaryBtn": "استعلام کد بیمه‌ شده",
-      "treatmentCostInfoTitle": "جهت اطلاع از وضعیت هزینه های درمانی اعلام شده، که در لیست زیر وجود ندارد لازم است مراحل زیر انجام شود."
+      "treatmentCostInfoTitle": "جهت اطلاع از وضعیت هزینه های درمانی اعلام شده، که در لیست زیر وجود ندارد لازم است مراحل زیر انجام شود.",
+      "form": {
+        "title": "بارگذاری مدارک درمانی",
+        "description": "جزئیات زیر را برای ایجاد درخواست خسارت جدید فراهم تکمیل کنید."
+      }
     },
     "specialDiseases": {
       "title": "بیماری‌های خاص",
@@ -249,71 +244,34 @@
         "submitDate": "تاریخ هزینه"
       }
     },
+    "createClaimPage": {
+      "submitDateAlertTitle": "لطفاً به نکته زیر توجه کنید",
+      "submitDateAlertDescription": "درخواست ها باید به تفکیک تاریخ انجام هزینه جداگانه ثبت شود.",
+      "invalidShebaTitle": "ثبت شماره شبا",
+      "invalidShebaMessage": "شماره شبا برای کاربری شما در سیستم فناوران صحیح نمی باشد. لطفا از طریق منوی ثبت شماره شبا در این سامانه به ثبت شماره شبا خود اقدام کنید.",
+      "invalidShebaConfirm": "ثبت شماره شبا"
+    },
+    "docTypeAlert": "راهنمای سند {{docType}}",
     "myBankAccount": {
       "dialog": {
         "title": "ثبت شماره شبا",
-        "description": "برای ادامه ثبت خسارت، شماره شبا خود را ثبت یا ویرایش کنید.",
-        "accountName1": "شماره شبا باید به نام",
-        "accountName2": "باشد."
+        "description": "برای ادامه ثبت خسارت، شماره شبا خود را ثبت یا ویرایش کنید."
       },
       "fields": {
-        "type": "نوع شماره حساب",
-        "typePlaceholder": "نوع شماره حساب را انتخاب کنید",
-        "bankName": "بانک",
         "number": "شماره شبا (بدون IR)",
-        "numberPlaceholder": "شماره شبا را وارد کنید"
-      },
-      "types": {
-        "IBAN": "شبا",
-        "CARD": "کارت"
+        "numberPlaceholder": "شماره شبا را وارد کنید",
+        "bankName": "بانک"
       },
       "messages": {
         "saved": "شماره شبا با موفقیت ذخیره شد.",
         "numberRequired": "شماره شبا الزامی است.",
         "numberError": "شماره شبا به صورت صحیح وارد کنید.",
-        "temporaryIbanError": "به دلیل مشکلات پیش آماده در سیستم بانکی کشور در حال حاضر شماره شبای بانک‌های ملی، صادرات و توسعه صادرات پشتیبانی نمی‌شود."
+        "temporaryIbanError": "به دلیل مشکلات پیش آمده در سیستم بانکی کشور در حال حاضر شماره شبای بانک‌های ملی، صادرات و توسعه صادرات پشتیبانی نمی‌شود."
       },
       "actions": {
         "create": "ثبت",
         "edit": "ویرایش",
         "saving": "در حال ذخیره"
-      }
-    },
-    "preAuths": {
-      "title": "معرفی نامه های درمانی",
-      "description": "سوابق معرفی نامه های درمانی بیمه خود را بررسی کنید.",
-      "refresh": "بروزرسانی",
-      "selectFilters": "برای مشاهده معرفی نامه های درمانی، بیمه‌نامه و شخص بیمه‌شده را انتخاب کنید.",
-      "empty": "مجوز درمانی یافت نشد",
-      "emptyDescription": "برای بیمه‌نامه و شخص بیمه‌شده انتخاب‌شده مجوز درمانی وجود ندارد.",
-      "pagination": "نمایش {{count}} مجوز درمانی",
-      "filters": {
-        "policy": "بیمه‌نامه",
-        "selectPolicy": "بیمه‌نامه را انتخاب کنید",
-        "insuredPerson": "شخص تحت پوشش",
-        "selectInsuredPerson": "شخص تحت پوشش را انتخاب کنید",
-        "apply": "اعمال"
-      },
-      "fields": {
-        "amount": "مبلغ",
-        "franchise": "فرانشیز",
-        "description": "توضیحات",
-        "illnessDescription": "شرح بیماری",
-        "illnessId": "شناسه بیماری",
-        "issueDate": "تاریخ ثبت",
-        "receptionDate": "تاریخ پذیرش",
-        "validityBeginDate": "تاریخ شروع اعتبار",
-        "validityEndDate": "تاریخ پایان اعتبار",
-        "status": "وضعیت"
-      },
-      "status": {
-        "draft": "پیش نویس",
-        "approved": "تایید شده",
-        "cancelled": "ابطالی"
-      },
-      "endOfListDialog": {
-        "title": "اتمام لیست معرفی نامه ها",
-        "desc": "لیست معرفی نامه درمانی شما به اتمام رسیده"
       }
     }
   },
@@ -458,7 +416,13 @@
         "insurancePolicy": "انتخاب بیمه‌نامه",
         "selectInsurancePolicy": "انتخاب بیمه‌نامه",
         "selectSubInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی",
-        "subInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی"
+        "subInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی",
+        "submitDate": "تاریخ انجام هزینه درمانی",
+        "submitDatePlaceholder": "تاریخ انجام هزینه درمانی را انتخاب کنید",
+        "amount": "مبلغ",
+        "docType": "نوع سند",
+        "selectDocType": "انتخاب نوع سند",
+        "attachments": "پیوست‌ها"
       }
     },
     "filters": {
@@ -466,6 +430,17 @@
       "createdAtTo": "تاریخ ثبت تا",
       "submitDateFrom": "تاریخ هزینه از",
       "submitDateTo": "تاریخ هزینه تا"
+    },
+    "validation": {
+      "submitDateRequired": "تاریخ انجام هزینه درمانی الزامی است",
+      "amountRequired": "مبلغ الزامی است",
+      "attachmentsRequired": "حداقل یک پیوست الزامی است",
+      "docTypeRequired": "انتخاب نوع سند الزامی است",
+      "subInsuredPersonRequired": "انتخاب شخص تحت پوشش الزامی است",
+      "insurancePolicyRequired": "انتخاب بیمه‌نامه الزامی است"
+    },
+    "messages": {
+      "created": "درخواست با موفقیت ثبت شد"
     }
   },
   "tickets": {
@@ -501,5 +476,15 @@
     "pageIndicator": "صفحه {{page}} از {{total}}",
     "pagination": "نمایش {{count}} درخواست",
     "previous": "قبلی"
+  },
+  "assessmentItems": {
+    "validation": {
+      "amountItemMin": "حداقل 10 هزار ریال",
+      "amountItemMax": "حداکثر 10 میلیارد ریال"
+    }
+  },
+  "form": {
+    "creating": "در حال ثبت",
+    "uploading": "در حال بارگذاری..."
   }
 }
