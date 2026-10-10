@@ -100,9 +100,28 @@ MyIapLayout
    - Use `lucide-react` for shared standard icons (e.g. `RotateCwIcon`, `ArrowRightIcon`).
    - Compose classes via `cn` from `@iap/ui`.
 
-## 5. Feature Implementation Tasks & Roadmaps
+## 5. Home Page (`MyIapPage`) & Bank Account Patterns
+
+1. **Single Public Export**:
+   - `apps/iap-app/src/features/home/index.ts` strictly exports `MyIapPage` (no multiple or alias exports).
+   - Route `/_authenticated/index.tsx` delegates directly to `MyIapPage` with `loader: () => ({ crumb: 'myiap' })`.
+
+2. **Iranian IBAN (Sheba) Validation Pattern**:
+   - Algorithm: ISO 7064 Mod 97-10 checksum (`isValidIranianIban`), checking Iranian bank code table (`iranianIbanBanks`) and temporarily unsupported banks (`temporarilyIgnoreIbanBankCodes`).
+   - Model: `myBankAccountFormSchema(t)` combines length, regex, checksum, and bank code restrictions with localized messages.
+   - Form description: `IbanBankNameDescription` displays bank name via `@iap/forms` `FormDescription`.
+
+3. **Policy Action Patterns**:
+   - **PDF Download**: checks policy ID against `hasPolicyPdf(id)` (`policyPdfIds = [41245888]`) and programmatically triggers anchor download for `/policy/${id}.pdf`.
+   - **Bank Account / Support Check**: `useHasHozeSupportPolicyIds` suppresses bank account action if user holds eligible Hoze support policy (`hozeSupportPolicyIds`).
+
+4. **Animated Border Action Cards**:
+   - `<Link className='no-underline'><div className='animated-border-card'><Card className='h-full cursor-pointer border-0 transition-colors duration-300 hover:bg-primary-50/30'>...`.
+
+## 6. Feature Implementation Tasks & Roadmaps
 
 Detailed task breakdown for implementing each customer page lives under `docs/tasks/`:
+- `docs/tasks/my-iap-page/`: Customer Home page (`/`, `MyIapPage`) with 100% reference parity
 - `docs/tasks/customer-pre-auths-parity/`: Pre-authorizations list (`/pre-auths/`) with 100% reference parity
 - `docs/tasks/customer-portal-pages/`:
   - `01-my-claims-list-page.md`: My Claims list (`/myclaims/`)
@@ -113,5 +132,6 @@ Detailed task breakdown for implementing each customer page lives under `docs/ta
   - `06-special-diseases-detail-page.md`: Special Diseases detail (`/special-diseases/$id/`)
   - `07-pre-auths-page.md`: Pre-Authorizations list (`/pre-auths/`)
   - `DISCREPANCY-MATRIX.md`: Complete URL, backend API, and schema contract mapping
+
 
 

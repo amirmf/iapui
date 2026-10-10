@@ -1,1 +1,1 @@
-export { HomePage } from './components/home-page'
+export { MyIapPage } from './my-iap-page'
