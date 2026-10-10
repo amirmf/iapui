@@ -1,10 +1,15 @@
 import { getApiClient } from '@iap/api-client'
 import {
   claimRequestIdSchema,
+  claimRequestSchema,
+  claimRequestRequestSchema,
   claimRequestVoidResponseSchema,
   myClaimRequestPageRequestSchema,
   pageClaimRequestSchema,
 } from '@iap/api-types'
+import type { MyClaimRequestPayload } from '@features/my-claims/model/my-claim-request-form-schema'
+import { myBankAccountRequestSchema, myBankAccountResponseSchema, type MyBankAccountRequest } from '@features/my-claims/model/my-bank-account-schema'
+import { format } from 'date-fns'
 import { transformApiFilterParams } from '@iap/shared-lib'
 import type { z } from 'zod'
 
@@ -13,6 +18,21 @@ type PageParams = z.input<typeof myClaimRequestPageRequestSchema> & {
 }
 
 export const myClaimRequestService = {
+  getMyBankAccount: async () => myBankAccountResponseSchema.parse((await getApiClient().get<unknown>('/my/iap/my-bank-account')).data),
+  addMyBankAccount: async (payload: MyBankAccountRequest) => { const body = myBankAccountRequestSchema.parse(payload); return myBankAccountResponseSchema.parse((await getApiClient().post<unknown>('/my/iap/add-my-bank-account', body)).data) },
+  editMyBankAccount: async (id: string, payload: MyBankAccountRequest) => { const body = myBankAccountRequestSchema.parse(payload); return myBankAccountResponseSchema.parse((await getApiClient().put<unknown>(`/my/iap/my-bank-account/${id}`, body)).data) },
+  create: async (data: MyClaimRequestPayload) => {
+    const payload = claimRequestRequestSchema.parse({
+      ...data,
+      amount: Number(data.amount),
+      docType: { id: data.docType.id },
+      extNationalCode: data.extNationalCode,
+      submitDate: format(data.submitDate, 'yyyy-MM-dd'),
+      attachments: data.attachments ?? [],
+    })
+    const response = await getApiClient().post<unknown>('/claim-requests', payload)
+    return claimRequestSchema.parse(response.data)
+  },
   getPage: async (params: PageParams) => {
     const { signal, ...request } = params
     const { page, size, filters } =

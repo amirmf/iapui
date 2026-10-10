@@ -159,7 +159,8 @@
     "noResults": "نتیجه‌ای یافت نشد",
     "noResultsFound": "نتیجه‌ای یافت نشد.",
     "selectAll": "انتخاب همه",
-    "selectItems": "انتخاب موارد"
+    "selectItems": "انتخاب موارد",
+    "rial": "ریال"
   },
   "panelSwitcher": {
     "switch": "تغییر پنل: {{panel}}",
@@ -208,7 +209,11 @@
       "treatmentCostInfoStepEstimateBtn": "استعلام هزینه‌های درمانی",
       "treatmentCostInfoStepPrimary": "1- استعلام کد بیمه‌ شده اصلی از طریق لینک ",
       "treatmentCostInfoStepPrimaryBtn": "استعلام کد بیمه‌ شده",
-      "treatmentCostInfoTitle": "جهت اطلاع از وضعیت هزینه های درمانی اعلام شده، که در لیست زیر وجود ندارد لازم است مراحل زیر انجام شود."
+      "treatmentCostInfoTitle": "جهت اطلاع از وضعیت هزینه های درمانی اعلام شده، که در لیست زیر وجود ندارد لازم است مراحل زیر انجام شود.",
+      "form": {
+        "title": "بارگذاری مدارک درمانی",
+        "description": "جزئیات زیر را برای ایجاد درخواست خسارت جدید فراهم تکمیل کنید."
+      }
     },
     "specialDiseases": {
       "title": "بیماری‌های خاص",
@@ -237,6 +242,36 @@
         "rejectionReasons": "نتیجه ارزیابی",
         "returnedAt": "تاریخ عودت",
         "submitDate": "تاریخ هزینه"
+      }
+    },
+    "createClaimPage": {
+      "submitDateAlertTitle": "لطفاً به نکته زیر توجه کنید",
+      "submitDateAlertDescription": "درخواست ها باید به تفکیک تاریخ انجام هزینه جداگانه ثبت شود.",
+      "invalidShebaTitle": "ثبت شماره شبا",
+      "invalidShebaMessage": "شماره شبا برای کاربری شما در سیستم فناوران صحیح نمی باشد. لطفا از طریق منوی ثبت شماره شبا در این سامانه به ثبت شماره شبا خود اقدام کنید.",
+      "invalidShebaConfirm": "ثبت شماره شبا"
+    },
+    "docTypeAlert": "راهنمای سند {{docType}}",
+    "myBankAccount": {
+      "dialog": {
+        "title": "ثبت شماره شبا",
+        "description": "برای ادامه ثبت خسارت، شماره شبا خود را ثبت یا ویرایش کنید."
+      },
+      "fields": {
+        "number": "شماره شبا (بدون IR)",
+        "numberPlaceholder": "شماره شبا را وارد کنید",
+        "bankName": "بانک"
+      },
+      "messages": {
+        "saved": "شماره شبا با موفقیت ذخیره شد.",
+        "numberRequired": "شماره شبا الزامی است.",
+        "numberError": "شماره شبا به صورت صحیح وارد کنید.",
+        "temporaryIbanError": "به دلیل مشکلات پیش آمده در سیستم بانکی کشور در حال حاضر شماره شبای بانک‌های ملی، صادرات و توسعه صادرات پشتیبانی نمی‌شود."
+      },
+      "actions": {
+        "create": "ثبت",
+        "edit": "ویرایش",
+        "saving": "در حال ذخیره"
       }
     }
   },
@@ -381,7 +416,13 @@
         "insurancePolicy": "انتخاب بیمه‌نامه",
         "selectInsurancePolicy": "انتخاب بیمه‌نامه",
         "selectSubInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی",
-        "subInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی"
+        "subInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی",
+        "submitDate": "تاریخ انجام هزینه درمانی",
+        "submitDatePlaceholder": "تاریخ انجام هزینه درمانی را انتخاب کنید",
+        "amount": "مبلغ",
+        "docType": "نوع سند",
+        "selectDocType": "انتخاب نوع سند",
+        "attachments": "پیوست‌ها"
       }
     },
     "filters": {
@@ -389,6 +430,17 @@
       "createdAtTo": "تاریخ ثبت تا",
       "submitDateFrom": "تاریخ هزینه از",
       "submitDateTo": "تاریخ هزینه تا"
+    },
+    "validation": {
+      "submitDateRequired": "تاریخ انجام هزینه درمانی الزامی است",
+      "amountRequired": "مبلغ الزامی است",
+      "attachmentsRequired": "حداقل یک پیوست الزامی است",
+      "docTypeRequired": "انتخاب نوع سند الزامی است",
+      "subInsuredPersonRequired": "انتخاب شخص تحت پوشش الزامی است",
+      "insurancePolicyRequired": "انتخاب بیمه‌نامه الزامی است"
+    },
+    "messages": {
+      "created": "درخواست با موفقیت ثبت شد"
     }
   },
   "tickets": {
@@ -424,5 +476,15 @@
     "pageIndicator": "صفحه {{page}} از {{total}}",
     "pagination": "نمایش {{count}} درخواست",
     "previous": "قبلی"
+  },
+  "assessmentItems": {
+    "validation": {
+      "amountItemMin": "حداقل 10 هزار ریال",
+      "amountItemMax": "حداکثر 10 میلیارد ریال"
+    }
+  },
+  "form": {
+    "creating": "در حال ثبت",
+    "uploading": "در حال بارگذاری..."
   }
 }
