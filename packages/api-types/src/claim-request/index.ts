@@ -490,3 +490,5 @@ export type UpdateClaimRequestDocumentsRequest = z.input<
 >
 
 export * from './document-receipt'
+
+export * from './my-claims'

@@ -151,7 +151,15 @@
       "toggle": "تغییر تم",
       "light": "روشن",
       "dark": "تیره"
-    }
+    },
+    "clear": "پاک کردن",
+    "clearAll": "پاک کردن همه",
+    "deleteSuccess": "مورد با موفقیت حذف شد",
+    "loading": "در حال بارگذاری...",
+    "noResults": "نتیجه‌ای یافت نشد",
+    "noResultsFound": "نتیجه‌ای یافت نشد.",
+    "selectAll": "انتخاب همه",
+    "selectItems": "انتخاب موارد"
   },
   "panelSwitcher": {
     "switch": "تغییر پنل: {{panel}}",
@@ -188,13 +196,48 @@
       "supportAlertDescription": "پشتیبانی مرکز خدمات حوزه عملیه: 1574"
     },
     "claimRequests": {
-      "title": "پیگیری خسارت",
-      "claimDetails": "جزئیات درخواست خسارت"
+      "title": "پیگیری خسارت‌های من",
+      "claimDetails": "جزئیات درخواست خسارت",
+      "create": "ثبت درخواست",
+      "description": "درخواست‌های خسارت ثبت شده خود را بررسی کنید.",
+      "emptyAction": "ایجاد درخواست خسارت",
+      "noResults": "درخواست خسارتی یافت نشد",
+      "noResultsDescription": "سعی کنید فیلترهای خود را تعدیل کنید تا نتایج بیشتری ببینید",
+      "refresh": "بروزرسانی",
+      "treatmentCostInfoStepEstimate": "2- استعلام هزینه‌های درمانی از طریق لینک ",
+      "treatmentCostInfoStepEstimateBtn": "استعلام هزینه‌های درمانی",
+      "treatmentCostInfoStepPrimary": "1- استعلام کد بیمه‌ شده اصلی از طریق لینک ",
+      "treatmentCostInfoStepPrimaryBtn": "استعلام کد بیمه‌ شده",
+      "treatmentCostInfoTitle": "جهت اطلاع از وضعیت هزینه های درمانی اعلام شده، که در لیست زیر وجود ندارد لازم است مراحل زیر انجام شود."
     },
     "specialDiseases": {
       "title": "بیماری‌های خاص",
       "create": "ثبت درخواست بیماری خاص",
       "details": "جزئیات درخواست بیماری خاص"
+    },
+    "claimRequest": {
+      "actions": {
+        "delete": "حذف درخواست",
+        "viewDetails": "مشاهده جزئیات"
+      },
+      "deleteDialog": {
+        "desc": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را به طور دائمی حذف کنید؟ این عمل قابل بازگشت نیست.",
+        "title": "حذف دائمی درخواست خسارت"
+      },
+      "detail": {
+        "adjustment": "متمم",
+        "amount": "مبلغ درخواستی",
+        "approvedAt": "تاریخ ارزیابی",
+        "beneficiary": "برای",
+        "businessKey": "کد پذیرش",
+        "completeAttachment": "تکمیل مدارک",
+        "createdAt": "تاریخ ثبت",
+        "extPaymentDate": "تاریخ پرداخت",
+        "paidAt": "تاریخ تایید",
+        "rejectionReasons": "نتیجه ارزیابی",
+        "returnedAt": "تاریخ عودت",
+        "submitDate": "تاریخ هزینه"
+      }
     }
   },
   "placeholder": {
@@ -329,7 +372,23 @@
       "paymentRejected": "رد شده در پرداخت",
       "sent_failed": "خطا ارسال",
       "paid": "واریز شده",
-      "inAssessment": "ارزیابی اولیه"
+      "inAssessment": "ارزیابی اولیه",
+      "sentToBank": "ارسال شده به بانک"
+    },
+    "dialog": {
+      "fields": {
+        "foreign": "اتباع",
+        "insurancePolicy": "انتخاب بیمه‌نامه",
+        "selectInsurancePolicy": "انتخاب بیمه‌نامه",
+        "selectSubInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی",
+        "subInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی"
+      }
+    },
+    "filters": {
+      "createdAtFrom": "تاریخ ثبت از",
+      "createdAtTo": "تاریخ ثبت تا",
+      "submitDateFrom": "تاریخ هزینه از",
+      "submitDateTo": "تاریخ هزینه تا"
     }
   },
   "tickets": {
@@ -341,5 +400,29 @@
       "OPEN": "باز",
       "ANSWERED": "پاسخ داده شده"
     }
+  },
+  "errors": {
+    "general": {
+      "description": "متأسفانه مشکلی از سمت سرور رخ داده است. لطفاً دوباره تلاش کنید.",
+      "heading": "مشکلی پیش آمده"
+    }
+  },
+  "myClaimRequests": {
+    "filters": {
+      "apply": "اعمال فیلترها",
+      "clear": "پاک کردن فیلترها",
+      "policyLabel": "بیمه‌نامه",
+      "policyPlaceholder": "انتخاب بیمه‌نامه",
+      "selectStatus": "انتخاب وضعیت",
+      "status": "وضعیت",
+      "subInsuredLabel": "شخص تحت پوشش",
+      "subInsuredPlaceholder": "انتخاب شخص تحت پوشش",
+      "submitDate": "تاریخ هزینه",
+      "title": "فیلترها"
+    },
+    "next": "بعدی",
+    "pageIndicator": "صفحه {{page}} از {{total}}",
+    "pagination": "نمایش {{count}} درخواست",
+    "previous": "قبلی"
   }
 }
