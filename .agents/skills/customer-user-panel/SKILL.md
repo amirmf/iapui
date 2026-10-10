@@ -82,12 +82,45 @@ The Customer User Claim Requests page lists policyholder claim requests with pag
    - **Query**: TanStack Query with key `['customerUserClaimRequests', pagination, effectiveFilters]` calling `claimRequestService.getPageLite({ page, size, filters, signal })`.
    - **Table Composition**: Renders `<ClaimRequestDataTableToolbar count={data?.totalElements ?? undefined} />` and `<PaginatedDataTable />` with `tableWrapperClassName="max-h-130"` and `emptyStateText={t('customerUser.claimRequests.empty')}`.
 
-## 4. Upcoming Sub-routes & Management (`$claimRequestId/claim-request-management`)
+## 4. Customer User Claim Request Management (`/customer-user/claim-requests/$claimRequestId/claim-request-management/`)
 
-When adding or extending `$claimRequestId/claim-request-management`:
-- Preserve route placeholder until backend evaluation contracts are scoped.
-- Route links must use `customerUserClaimRoutes.management(id)`.
-- Sibling routes under `_customer-user` must stay within the `_customer-user` directory tree.
+The Customer User Claim Request Management page provides a comprehensive detail view of a claim request for customer users:
+
+1. **Route Architecture**:
+   - Route path: `apps/iap-admin/src/app/router/routes/_customer-user/customer-user/claim-requests/$claimRequestId.claim-request-management/index.tsx`
+   - Route loader: Prefetches `customerUserClaimRequestQueryOptions(claimRequestId)` with `staleTime: 'static'` and returns `{ crumb: 'claim-request-management' }`.
+   - Pending state: `ClaimRequestManagementPanelPending` (renders panel skeleton without operator action buttons).
+   - Error state: `ClaimRequestManagementQueryError`.
+   - Imports: Always import through public feature API `@features/customer-user`.
+
+2. **Hook & Query Architecture**:
+   - Query options: `customerUserClaimRequestQueryOptions(claimRequestId)`
+   - Query key: `['customerUserClaimRequest', claimRequestId]`
+   - Service call: `claimRequestService.getById(claimRequestId, { signal })`
+   - Custom hook: `useCustomerUserClaimRequest(claimRequestId)` returning standard TanStack Query result.
+
+3. **Page Composition & Layout (`customer-user-claim-request-management-page.tsx`)**:
+   - Wrapper: `<Main className='space-y-4 bg-transparent p-0 shadow-none sm:p-0'>`
+   - Top Header Section:
+     - `ClaimRequestLastStatusSection` with `statusHistory`, `status`, `extPaymentDate`.
+     - `ClaimRequestAssignSection` with `claimRequest`.
+   - Info List:
+     - `ClaimRequestInfoList` with `data`, `refetch`, and `viewDetailsAdjustmentLink` set to `'/agent/claim-requests/$claimRequestId/claim-request-management'`.
+   - Body Grid (50/50 on md, 40/60 on lg):
+     - Left column: `<Card><CardContent className='px-4'>` hosting:
+       - `ClaimRequestAssessmentItemsSection`
+       - `ClaimRequestDoctorResponses`
+       - `ClaimRequestDuplicatedSection`
+       - `ClaimRequestManagementError`
+       - `ClaimRequestObjectionSection`
+     - Right column: `ClaimRequestAttachmentsSection`
+   - History & Documents:
+     - `ClaimRequestManagementPrevRequest` rendered conditionally when `claimRequest.createdBy` exists.
+     - `ClaimRequestDocumentsSection` with `claimRequestId` and `documents`.
+
+4. **Feature Boundaries**:
+   - Customer-user pages must never import from `@features/agent-claim-requests` or vice versa.
+   - Guarded by automated test `customer-user-import-boundary.test.ts`.
 
 ## 5. Verification Checklist
 

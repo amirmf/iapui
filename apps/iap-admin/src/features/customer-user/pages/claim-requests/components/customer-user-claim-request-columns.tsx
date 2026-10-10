@@ -4,7 +4,7 @@ import {
   aiStatusColors,
   claimStatusColors,
 } from '@features/customer-user/model/customer-user-claim-constant'
-import { customerUserClaimRoutes } from '@features/customer-user/pages/claim-requests/utils/customer-user-claim-routes'
+import { customerUserClaimRoutes } from '@features/customer-user/utils/customer-user-claim-routes'
 import type {
   ClaimRequest,
   ClaimRequestAiStatus,
