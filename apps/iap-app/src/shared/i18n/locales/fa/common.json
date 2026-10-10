@@ -183,7 +183,10 @@
       "menu": "منو"
     },
     "footer": {
-      "copyright": "© {{year}} پورتال {{company}}. تمامی حقوق محفوظ است."
+      "copyright": "© {{year}} پورتال {{company}}. تمامی حقوق محفوظ است.",
+      "help": "راهنما",
+      "terms": "شرایط استفاده",
+      "privacy": "حریم خصوصی"
     },
     "myIapPage": {
       "myClaimsTitle": "پیگیری خسارت",
@@ -194,7 +197,17 @@
       "welcomeTitle": "خوش آمدید، {{name}}!",
       "welcomeDescription": "به پورتال بیمه و خسارت خود خوش آمدید. این مرکز مدیریت تمامی درخواست‌های خسارت بیمه شما می‌باشد.",
       "panelIntroduction": "در اینجا می‌توانید درخواست‌های موجود خود را مشاهده کنید، وضعیت آن‌ها را پیگیری نمایید، درخواست‌های جدید ثبت کنید و به تمام مدارک لازم دسترسی داشته باشید. فرآیند ساده‌شده ما اطمینان می‌دهد که درخواست‌های شما به صورت کارآمد و شفاف پردازش شوند.",
-      "supportAlertDescription": "پشتیبانی مرکز خدمات حوزه عملیه: 1574"
+      "supportAlertDescription": "پشتیبانی مرکز خدمات حوزه عملیه: 1574",
+      "createSpecialDiseaseTitle": "ثبت درخواست بیماری‌های خاص",
+      "createSpecialDiseaseDescription": "ثبت درخواست جدید برای بیماری‌های خاص",
+      "mySpecialDiseasesTitle": "درخواست‌های بیماری‌های خاص من",
+      "mySpecialDiseasesDescription": "مشاهده و پیگیری درخواست‌های بیماری‌های خاص",
+      "watchTutorial": "مشاهده ویدیو آموزشی",
+      "contractingPartyCenters": "مراکز طرف قرارداد",
+      "medicalReferralLetters": "معرفی نامه های درمانی",
+      "bankAccountInfo": "اطلاعات حساب بانکی",
+      "downloadPolicyPdf": "دانلود تعهدات بیمه",
+      "supportAlertTitle": "شماره پشتیبانی"
     },
     "claimRequests": {
       "title": "پیگیری خسارت",
@@ -218,12 +231,29 @@
     "specialDiseases": {
       "title": "بیماری‌های خاص",
       "create": "ثبت درخواست بیماری خاص",
-      "details": "جزئیات درخواست بیماری خاص"
+      "details": "جزئیات درخواست بیماری خاص",
+      "latestResponse": "آخرین پاسخ بررسی‌کننده",
+      "pendingNavigation": "لطفاً تا پایان ثبت درخواست یا بارگذاری فایل صبر کنید.",
+      "description": "درخواست بیماری خاص ثبت کنید و روند بررسی آن را پیگیری کنید.",
+      "createDescription": "بیمه‌نامه و بیمه‌شده را انتخاب کنید و اطلاعات بیماری و مدارک پزشکی را وارد کنید.",
+      "empty": "هنوز درخواست بیماری خاصی ثبت نکرده‌اید.",
+      "notFound": "درخواست یافت نشد.",
+      "retry": "تلاش مجدد",
+      "allStatuses": "همه وضعیت‌ها",
+      "applyFilters": "اعمال فیلتر",
+      "clearFilters": "پاک کردن",
+      "objection": "ثبت اعتراض",
+      "objectionSuccess": "اعتراض شما ثبت شد.",
+      "noPolicies": "بیمه‌نامه‌ای در دسترس نیست.",
+      "noPeople": "بیمه‌شده‌ای برای این بیمه‌نامه در دسترس نیست.",
+      "filters": "فیلترها"
     },
     "claimRequest": {
       "actions": {
         "delete": "حذف درخواست",
-        "viewDetails": "مشاهده جزئیات"
+        "viewDetails": "مشاهده جزئیات",
+        "viewDetailsAdjustment": "مشاهده متمم مرتب",
+        "submitObjection": "ثبت اعتراض"
       },
       "deleteDialog": {
         "desc": "آیا مطمئن هستید که می‌خواهید این درخواست خسارت را به طور دائمی حذف کنید؟ این عمل قابل بازگشت نیست.",
@@ -241,7 +271,47 @@
         "paidAt": "تاریخ تایید",
         "rejectionReasons": "نتیجه ارزیابی",
         "returnedAt": "تاریخ عودت",
-        "submitDate": "تاریخ هزینه"
+        "submitDate": "تاریخ هزینه",
+        "title": "جزئیات درخواست",
+        "totalSumAmount": "مبلغ تاییده شده",
+        "viewDetails": "مشاهده جزئیات",
+        "status": "وضعیت",
+        "docType": "نوع سند",
+        "description": "توضیحات",
+        "descriptionPlaceholder": "پاسخ خود را وارد کنید...",
+        "attachments": "پیوست‌ها",
+        "uploadAttachments": "آپلود پیوست‌ها",
+        "submitForm": "ارسال پاسخ",
+        "submitCompleteDoc": "تکمیل مدارک",
+        "subInsuredPerson": "شخص بیمه‌شده اصلی",
+        "mobileNumber": "شماره موبایل",
+        "customerName": "نام مشتری",
+        "policyNumber": "بیمه نامه",
+        "extPolicyId": "شماره بیمه‌نامه",
+        "extContractId": "شماره قرارداد",
+        "extWorkUnitName": "نام شعبه",
+        "extWorkUnitCode": "کد شعبه",
+        "extWorkUnitProvinceName": "استان شعبه",
+        "extWorkUnitCityName": "شهر شعبه",
+        "seenBy": "مشاهده شده توسط",
+        "viewUserDetails": "مشاهده جزئیات کاربر",
+        "seenByDetails": "جزئیات کاربر - مشاهده شده توسط",
+        "userInformation": "اطلاعات کامل کاربری که این درخواست را مشاهده کرد",
+        "seenAt": "مشاهده شده در",
+        "completionDocument": "نقص مدارک رفع شد. جهت ارزیابی کلیک کنید.",
+        "assessedAt": "تاریخ ارزیابی"
+      },
+      "messages": {
+        "descriptionRequired": "لطفاً توضیحات را وارد کنید",
+        "attachmentsRequired": "لطفا تصویر جدید بارگذاری کنید. بدون تکمیل مدارک امکان پاسخ وجود ندارد",
+        "claimIdMissing": "شناسه درخواست وجود ندارد",
+        "formSubmitSuccess": "فرم با موفقیت ارسال شد",
+        "formSubmitError": "ارسال فرم ناموفق بود"
+      },
+      "dialog": {
+        "fields": {
+          "newObjectionDescription": "جزئیات اضافی برای اعتراض خود ارائه دهید."
+        }
       }
     },
     "createClaimPage": {
@@ -255,12 +325,16 @@
     "myBankAccount": {
       "dialog": {
         "title": "ثبت شماره شبا",
-        "description": "برای ادامه ثبت خسارت، شماره شبا خود را ثبت یا ویرایش کنید."
+        "description": "برای ادامه ثبت خسارت، شماره شبا خود را ثبت یا ویرایش کنید.",
+        "accountName1": "شماره شبا باید به نام",
+        "accountName2": "باشد."
       },
       "fields": {
         "number": "شماره شبا (بدون IR)",
         "numberPlaceholder": "شماره شبا را وارد کنید",
-        "bankName": "بانک"
+        "bankName": "بانک",
+        "type": "نوع شماره حساب",
+        "typePlaceholder": "نوع شماره حساب را انتخاب کنید"
       },
       "messages": {
         "saved": "شماره شبا با موفقیت ذخیره شد.",
@@ -272,6 +346,47 @@
         "create": "ثبت",
         "edit": "ویرایش",
         "saving": "در حال ذخیره"
+      },
+      "types": {
+        "IBAN": "شبا",
+        "CARD": "کارت"
+      }
+    },
+    "preAuths": {
+      "title": "معرفی نامه های درمانی",
+      "description": "سوابق معرفی نامه های درمانی بیمه خود را بررسی کنید.",
+      "refresh": "بروزرسانی",
+      "selectFilters": "برای مشاهده معرفی نامه های درمانی، بیمه‌نامه و شخص بیمه‌شده را انتخاب کنید.",
+      "empty": "مجوز درمانی یافت نشد",
+      "emptyDescription": "برای بیمه‌نامه و شخص بیمه‌شده انتخاب‌شده مجوز درمانی وجود ندارد.",
+      "pagination": "نمایش {{count}} مجوز درمانی",
+      "filters": {
+        "policy": "بیمه‌نامه",
+        "selectPolicy": "بیمه‌نامه را انتخاب کنید",
+        "insuredPerson": "شخص تحت پوشش",
+        "selectInsuredPerson": "شخص تحت پوشش را انتخاب کنید",
+        "apply": "اعمال"
+      },
+      "fields": {
+        "amount": "مبلغ",
+        "franchise": "فرانشیز",
+        "description": "توضیحات",
+        "illnessDescription": "شرح بیماری",
+        "illnessId": "شناسه بیماری",
+        "issueDate": "تاریخ ثبت",
+        "receptionDate": "تاریخ پذیرش",
+        "validityBeginDate": "تاریخ شروع اعتبار",
+        "validityEndDate": "تاریخ پایان اعتبار",
+        "status": "وضعیت"
+      },
+      "status": {
+        "draft": "پیش نویس",
+        "approved": "تایید شده",
+        "cancelled": "ابطالی"
+      },
+      "endOfListDialog": {
+        "title": "اتمام لیست معرفی نامه ها",
+        "desc": "لیست معرفی نامه درمانی شما به اتمام رسیده"
       }
     }
   },
