@@ -1,7 +1,9 @@
-import { PlaceholderPage } from '@features/placeholder'
+import { CustomerUserDashboardPage } from '@features/customer-user'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_customer-user/customer-user/')({
-  component: () => <PlaceholderPage titleKey='sidebar.dashboard' />,
-  loader: () => ({ crumb: 'dashboard' }),
+  component: CustomerUserDashboardPage,
+  loader: () => ({
+    crumb: 'dashboard',
+  }),
 })
