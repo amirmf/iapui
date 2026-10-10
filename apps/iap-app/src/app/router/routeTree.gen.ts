@@ -15,6 +15,7 @@ import { Route as AuthenticatedMyclaimsCreateRouteImport } from './routes/_authe
 import { Route as AuthenticatedMyclaimsIndexRouteImport } from './routes/_authenticated/myclaims/index'
 import { Route as AuthenticatedPreAuthsIndexRouteImport } from './routes/_authenticated/pre-auths/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthenticatedSpecialDiseasesIndexRouteImport } from './routes/_authenticated/special-diseases/index'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/_auth',
@@ -67,6 +68,12 @@ const AuthenticatedPreAuthsIndexRoute =
     path: '/pre-auths/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSpecialDiseasesIndexRoute =
+  AuthenticatedSpecialDiseasesIndexRouteImport.update({
+    id: '/special-diseases/',
+    path: '/special-diseases/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
@@ -77,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/register/': typeof AuthRegisterIndexRoute
   '/myclaims/': typeof AuthenticatedMyclaimsIndexRoute
   '/pre-auths/': typeof AuthenticatedPreAuthsIndexRoute
+  '/special-diseases/': typeof AuthenticatedSpecialDiseasesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
@@ -87,6 +95,7 @@ export interface FileRoutesByTo {
   '/register': typeof AuthRegisterIndexRoute
   '/myclaims': typeof AuthenticatedMyclaimsIndexRoute
   '/pre-auths': typeof AuthenticatedPreAuthsIndexRoute
+  '/special-diseases': typeof AuthenticatedSpecialDiseasesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -100,6 +109,7 @@ export interface FileRoutesById {
   '/_auth/register/': typeof AuthRegisterIndexRoute
   '/_authenticated/myclaims/': typeof AuthenticatedMyclaimsIndexRoute
   '/_authenticated/pre-auths/': typeof AuthenticatedPreAuthsIndexRoute
+  '/_authenticated/special-diseases/': typeof AuthenticatedSpecialDiseasesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -112,6 +122,7 @@ export interface FileRouteTypes {
     | '/register/'
     | '/myclaims/'
     | '/pre-auths/'
+    | '/special-diseases/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +133,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/myclaims'
     | '/pre-auths'
+    | '/special-diseases'
   id:
     | '__root__'
     | '/_auth'
@@ -134,6 +146,7 @@ export interface FileRouteTypes {
     | '/_auth/register/'
     | '/_authenticated/myclaims/'
     | '/_authenticated/pre-auths/'
+    | '/_authenticated/special-diseases/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -213,6 +226,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPreAuthsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/special-diseases/': {
+      id: '/_authenticated/special-diseases/'
+      path: '/special-diseases'
+      fullPath: '/special-diseases/'
+      preLoaderRoute: typeof AuthenticatedSpecialDiseasesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -239,6 +259,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedMyclaimsCreateRoute: typeof AuthenticatedMyclaimsCreateRoute
   AuthenticatedMyclaimsIndexRoute: typeof AuthenticatedMyclaimsIndexRoute
   AuthenticatedPreAuthsIndexRoute: typeof AuthenticatedPreAuthsIndexRoute
+  AuthenticatedSpecialDiseasesIndexRoute: typeof AuthenticatedSpecialDiseasesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -246,6 +267,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMyclaimsCreateRoute: AuthenticatedMyclaimsCreateRoute,
   AuthenticatedMyclaimsIndexRoute: AuthenticatedMyclaimsIndexRoute,
   AuthenticatedPreAuthsIndexRoute: AuthenticatedPreAuthsIndexRoute,
+  AuthenticatedSpecialDiseasesIndexRoute:
+    AuthenticatedSpecialDiseasesIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

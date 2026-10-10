@@ -3,7 +3,10 @@ import { useTranslation } from 'react-i18next'
 
 type PlaceholderPageProps = {
   titleKey:
-    'myiap.nav.myClaims' | 'myiap.nav.createClaim' | 'myiap.nav.preAuths'
+    | 'myiap.nav.myClaims'
+    | 'myiap.nav.createClaim'
+    | 'myiap.nav.preAuths'
+    | 'myiap.nav.specialDiseases'
 }
 
 export function PlaceholderPage({ titleKey }: PlaceholderPageProps) {

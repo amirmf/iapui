@@ -1,5 +1,5 @@
 import { beforeLoadPublicApp } from '@iap/auth'
-import { AppShell } from '@shared/app-shell/app-shell'
+import { MyIapLayout } from '@shared/app-shell/my-iap-layout'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated')({
@@ -11,5 +11,5 @@ export const Route = createFileRoute('/_authenticated')({
       search: location.searchStr,
     })
   },
-  component: AppShell,
+  component: MyIapLayout,
 })
