@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { useShowReport } from '@features/dashboard/context/store/report-show-report-store'
 import type { DashboardFilters } from '@iap/api-types'
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from '@iap/ui'
-import { useRouter } from '@tanstack/react-router'
+import { useLocation, useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
 import { ReportAgreementsWithoutMainAssessmentUserTable } from './report-agreements-without-main-assessment-user-table'
@@ -15,7 +15,8 @@ import { ReportSumByAssigneeTable } from './report-sum-by-assignee-table'
 export function DashboardPage() {
   const { t } = useTranslation()
   const router = useRouter()
-  const search = (router.state.location.search ?? {}) as Record<string, unknown>
+  const location = useLocation()
+  const search = (location.search ?? {}) as Record<string, unknown>
   const filters = search as DashboardFilters
   const isShowReport = useShowReport((state) => state.isShowReport)
   const toggleShowReport = useShowReport((state) => state.toggleShowReport)

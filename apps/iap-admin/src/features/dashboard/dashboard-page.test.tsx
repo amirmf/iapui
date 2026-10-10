@@ -12,6 +12,7 @@ vi.mock('react-i18next', () => ({
 }))
 
 vi.mock('@tanstack/react-router', () => ({
+  useLocation: () => ({ search: {} }),
   useRouter: () => ({
     navigate: vi.fn(),
     state: { location: { search: {} } },
