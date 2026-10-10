@@ -17,6 +17,7 @@
     "@iap/api-types": "workspace:*",
     "@iap/auth": "workspace:*",
     "@iap/design-tokens": "workspace:*",
+    "@iap/dialogs": "workspace:*",
     "@iap/forms": "workspace:*",
     "@iap/panel-switcher": "workspace:*",
     "@iap/shared-lib": "workspace:*",

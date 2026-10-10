@@ -113,6 +113,7 @@
     "loading": "در حال بررسی نشست..."
   },
   "common": {
+    "loading": "در حال بارگذاری...",
     "signOut": "خروج",
     "username": "نام کاربری",
     "displayName": "نام",
@@ -195,6 +196,43 @@
       "title": "بیماری‌های خاص",
       "create": "ثبت درخواست بیماری خاص",
       "details": "جزئیات درخواست بیماری خاص"
+    },
+    "preAuths": {
+      "title": "معرفی نامه های درمانی",
+      "description": "سوابق معرفی نامه های درمانی بیمه خود را بررسی کنید.",
+      "refresh": "بروزرسانی",
+      "selectFilters": "برای مشاهده معرفی نامه های درمانی، بیمه‌نامه و شخص بیمه‌شده را انتخاب کنید.",
+      "empty": "مجوز درمانی یافت نشد",
+      "emptyDescription": "برای بیمه‌نامه و شخص بیمه‌شده انتخاب‌شده مجوز درمانی وجود ندارد.",
+      "pagination": "نمایش {{count}} مجوز درمانی",
+      "filters": {
+        "policy": "بیمه‌نامه",
+        "selectPolicy": "بیمه‌نامه را انتخاب کنید",
+        "insuredPerson": "شخص تحت پوشش",
+        "selectInsuredPerson": "شخص تحت پوشش را انتخاب کنید",
+        "apply": "اعمال"
+      },
+      "fields": {
+        "amount": "مبلغ",
+        "franchise": "فرانشیز",
+        "description": "توضیحات",
+        "illnessDescription": "شرح بیماری",
+        "illnessId": "شناسه بیماری",
+        "issueDate": "تاریخ ثبت",
+        "receptionDate": "تاریخ پذیرش",
+        "validityBeginDate": "تاریخ شروع اعتبار",
+        "validityEndDate": "تاریخ پایان اعتبار",
+        "status": "وضعیت"
+      },
+      "status": {
+        "draft": "پیش نویس",
+        "approved": "تایید شده",
+        "cancelled": "ابطالی"
+      },
+      "endOfListDialog": {
+        "title": "اتمام لیست معرفی نامه ها",
+        "desc": "لیست معرفی نامه درمانی شما به اتمام رسیده"
+      }
     }
   },
   "placeholder": {
@@ -311,6 +349,15 @@
     }
   },
   "claimRequests": {
+    "dialog": {
+      "fields": {
+        "subInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی",
+        "foreign": "اتباع",
+        "selectSubInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی",
+        "insurancePolicy": "انتخاب بیمه‌نامه",
+        "selectInsurancePolicy": "انتخاب بیمه‌نامه"
+      }
+    },
     "status": {
       "sent": "ارسال شده در انتظار پرداخت",
       "dedicatedToUser": "بررسی‌های من",
@@ -330,6 +377,26 @@
       "sent_failed": "خطا ارسال",
       "paid": "واریز شده",
       "inAssessment": "ارزیابی اولیه"
+    }
+  },
+  "myClaimRequests": {
+    "title": "درخواست‌های خسارت من",
+    "description": "درخواست‌های خسارت ارسال‌شده خود را مشاهده کنید.",
+    "pagination": "نمایش {{count}} درخواست",
+    "pageIndicator": "صفحه {{page}} از {{total}}",
+    "previous": "قبلی",
+    "next": "بعدی",
+    "filters": {
+      "policyLabel": "بیمه‌نامه",
+      "policyPlaceholder": "انتخاب بیمه‌نامه",
+      "subInsuredLabel": "شخص تحت پوشش",
+      "subInsuredPlaceholder": "انتخاب شخص تحت پوشش"
+    }
+  },
+  "errors": {
+    "general": {
+      "heading": "مشکلی پیش آمده",
+      "description": "متأسفانه مشکلی از سمت سرور رخ داده است. لطفاً دوباره تلاش کنید."
     }
   },
   "tickets": {

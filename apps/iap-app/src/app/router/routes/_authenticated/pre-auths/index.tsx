@@ -1,7 +1,7 @@
-import { PlaceholderPage } from '@features/placeholders'
+import { PreAuthsPage } from '@features/pre-auths'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/pre-auths/')({
-  component: () => <PlaceholderPage titleKey='myiap.nav.preAuths' />,
+  component: PreAuthsPage,
   loader: () => ({ crumb: 'preAuths' }),
 })

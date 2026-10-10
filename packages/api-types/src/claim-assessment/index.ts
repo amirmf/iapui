@@ -35,15 +35,6 @@ export const externalDoctorSchema = z
 
 export type ExternalDoctor = z.infer<typeof externalDoctorSchema>
 
-export const getPreAuthsRequestSchema = z.strictObject({
-  policyId: z.number().int(),
-  nationalCode: z.string(),
-  page: z.number().int().min(0).optional(),
-  size: z.number().int().positive().optional(),
-})
-
-export type GetPreAuthsRequest = z.infer<typeof getPreAuthsRequestSchema>
-
 export const preAuthInquirySchema = z
   .object({
     id: z.number().int().nullish(),

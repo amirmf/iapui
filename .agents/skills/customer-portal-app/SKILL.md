@@ -71,23 +71,47 @@ MyIapLayout
      4. Customer-User (`customerUser`): `VITE_IAP_ADMIN_DOMAIN_URL` (`/customer-user/`)
    - Uses `tone='inverted'` for contrast against the branded header.
 
-## 4. Component Placement & Standards
+## 4. Component Placement & Feature Architecture
 
-- Layout and shell components belong in `apps/iap-app/src/shared/app-shell/`.
-- Customer feature journeys belong in `apps/iap-app/src/features/<feature>/`.
-- Do not create `ui/` directories; use `components/`. Reusable cross-application primitives come from `@iap/ui`.
-- All visible strings must be localized in `apps/iap-app/src/shared/i18n/locales/fa/common.json`.
-- Follow strict typing: add all tenant variables to `apps/iap-app/src/vite-env.d.ts`.
+1. **Single-Route vs Multi-Journey Features**:
+   - **Single-Route Features** (e.g. `pre-auths`, which have no sibling sub-pages like `create/` or `$id/`):
+     - Place the page component directly in the feature root: `src/features/<feature>/<feature>-page.tsx`.
+     - **Do NOT** create a redundant `pages/` or `pages/index/` directory.
+     - Page-exclusive components live in `src/features/<feature>/components/`.
+     - Feature public barrel `index.ts` re-exports the page component and public contracts.
+   - **Multi-Journey Features** (e.g. `myclaims`, `special-diseases` which have `create/` and `$id/` journeys):
+     - Keep page journeys in `pages/<journey>/` (e.g. `pages/index/`, `pages/create/`).
+     - Sibling-shared components live under feature `components/`.
+
+2. **Customer Filter & Form Fields Pattern**:
+   - Filter components wrap `@iap/forms` `<Form {...form}>` and compose dedicated form field components:
+     - `MyClaimMyInsurancePolicyFormField`: Renders policy `SearchableSelect`, auto-selects first policy, resets dependent national code, supports `isFilter` and optional `SupportFeatureButton`.
+     - `MyClaimMyNationalCodeFormField`: Watches `extPolicyId`, fetches dependents via `useGetMySubInsuredPeople({ policyId })`, formats labels with foreign indicator, supports `isFilter` and optional `SupportFeatureButton`.
+   - Lookup services and hooks belong in `src/modules/` (e.g. `@modules/insurance-policies`, `@modules/sub-insured-people`), enabling clean cross-feature reuse without violating feature boundaries.
+
+3. **Card Grid & Dual Pagination Pattern**:
+   - Page size: `const PAGE_SIZE = 9`.
+   - Grid layout: `-mx-2 flex flex-wrap` with item class `mb-4 w-full px-2 md:w-1/2 lg:w-1/3`.
+   - Dual pagination: placed above (`border-b pb-4`) and below (`border-t pt-4`) the card grid.
+   - End of list protection: when server returns empty content for `page > 0`, open `ConfirmDialog` to step back to `page - 1` automatically.
+   - Translations: pagination uses `myClaimRequests.previous`, `myClaimRequests.pageIndicator`, `myClaimRequests.next`, and `countTranslationKey`.
+
+4. **Icons & Styling**:
+   - Use `lucide-react` for shared standard icons (e.g. `RotateCwIcon`, `ArrowRightIcon`).
+   - Compose classes via `cn` from `@iap/ui`.
 
 ## 5. Feature Implementation Tasks & Roadmaps
 
-Detailed task breakdown for implementing each customer page lives under `docs/tasks/customer-portal-pages/`:
-- `01-my-claims-list-page.md`: My Claims list (`/myclaims/`)
-- `02-my-claims-create-page.md`: My Claims create (`/myclaims/create/`)
-- `03-my-claims-detail-page.md`: My Claims detail (`/myclaims/$id/`)
-- `04-special-diseases-list-page.md`: Special Diseases list (`/special-diseases/`)
-- `05-special-diseases-create-page.md`: Special Diseases create (`/special-diseases/create/`)
-- `06-special-diseases-detail-page.md`: Special Diseases detail (`/special-diseases/$id/`)
-- `07-pre-auths-page.md`: Pre-Authorizations list (`/pre-auths/`)
-- `DISCREPANCY-MATRIX.md`: Complete URL, backend API, and schema contract mapping
+Detailed task breakdown for implementing each customer page lives under `docs/tasks/`:
+- `docs/tasks/customer-pre-auths-parity/`: Pre-authorizations list (`/pre-auths/`) with 100% reference parity
+- `docs/tasks/customer-portal-pages/`:
+  - `01-my-claims-list-page.md`: My Claims list (`/myclaims/`)
+  - `02-my-claims-create-page.md`: My Claims create (`/myclaims/create/`)
+  - `03-my-claims-detail-page.md`: My Claims detail (`/myclaims/$id/`)
+  - `04-special-diseases-list-page.md`: Special Diseases list (`/special-diseases/`)
+  - `05-special-diseases-create-page.md`: Special Diseases create (`/special-diseases/create/`)
+  - `06-special-diseases-detail-page.md`: Special Diseases detail (`/special-diseases/$id/`)
+  - `07-pre-auths-page.md`: Pre-Authorizations list (`/pre-auths/`)
+  - `DISCREPANCY-MATRIX.md`: Complete URL, backend API, and schema contract mapping
+
 
