@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 
-import { isClaimRequestStatus } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-status'
 import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/model/claim-request-status'
 import RefreshPolicyDetailsButton from '@features/claim-requests/pages/claim-request-management/components/action-buttons/refresh-policy-details-button'
 import StartCoreAiWorkflowButton from '@features/claim-requests/pages/claim-request-management/components/action-buttons/start-core-ai-workflow-button'
+import { isClaimRequestStatus } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-status'
 import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
 import { useClaimRequestManagementParams as useParams } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-params'
 import { useIsSuperAdmin } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-permissions'

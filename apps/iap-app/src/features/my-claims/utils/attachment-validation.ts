@@ -1,3 +1,22 @@
-const signatures: Record<string, number[][]> = { png: [[0x89,0x50,0x4e,0x47]], jpg: [[0xff,0xd8,0xff]], pdf: [[0x25,0x50,0x44,0x46]], heic: [[0x00,0x00,0x00,0x18,0x66,0x74,0x79,0x70],[0x00,0x00,0x00,0x20,0x66,0x74,0x79,0x70]] }
-export async function detectClaimAttachmentType(file: File): Promise<string | undefined> { const bytes = new Uint8Array(await file.slice(0, 32).arrayBuffer()); for (const [type, patterns] of Object.entries(signatures)) if (patterns.some(pattern => pattern.every((v,i)=>bytes[i]===v))) return type; return undefined }
-export async function isAllowedClaimAttachment(file: File) { const detected = await detectClaimAttachmentType(file); return Boolean(detected) || ['image/heif','image/heic'].includes(file.type) }
+const signatures: Record<string, number[][]> = {
+  png: [[0x89, 0x50, 0x4e, 0x47]],
+  jpg: [[0xff, 0xd8, 0xff]],
+  pdf: [[0x25, 0x50, 0x44, 0x46]],
+  heic: [
+    [0x00, 0x00, 0x00, 0x18, 0x66, 0x74, 0x79, 0x70],
+    [0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70],
+  ],
+}
+export async function detectClaimAttachmentType(
+  file: File
+): Promise<string | undefined> {
+  const bytes = new Uint8Array(await file.slice(0, 32).arrayBuffer())
+  for (const [type, patterns] of Object.entries(signatures))
+    if (patterns.some((pattern) => pattern.every((v, i) => bytes[i] === v)))
+      return type
+  return undefined
+}
+export async function isAllowedClaimAttachment(file: File) {
+  const detected = await detectClaimAttachmentType(file)
+  return Boolean(detected) || ['image/heif', 'image/heic'].includes(file.type)
+}

@@ -32,13 +32,11 @@ it('national-code buttons preserve doc type and replace the opposite filter', as
       claimRequest={{ extNationalCode: 'national' } as ClaimRequest}
     />
   )
-  await userEvent
-    .setup()
-    .click(
-      screen.getByRole('button', {
-        name: 'claimRequests.filters.primaryInsured',
-      })
-    )
+  await userEvent.setup().click(
+    screen.getByRole('button', {
+      name: 'claimRequests.filters.primaryInsured',
+    })
+  )
   expect(
     update.mock.calls[0][0]([
       { id: 'docType.id', value: ['invoice'] },

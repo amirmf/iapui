@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 
+import { IhioPrintCodeResponse } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/fanhub-ihio-print-code-section/ihio-print-code-response'
 import {
   type FanhubIhioPrintCodeForm,
   fanhubIhioPrintCodeFormSchema,
   typedZodResolver,
 } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
-import { IhioPrintCodeResponse } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/fanhub-ihio-print-code-section/ihio-print-code-response'
 import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
 import fanhubTaminService from '@features/claim-requests/pages/claim-request-management/services/fanhub-tamin-service'
 import { Form, TextField } from '@iap/forms'

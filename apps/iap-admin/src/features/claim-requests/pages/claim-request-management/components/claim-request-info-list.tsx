@@ -1,6 +1,6 @@
 import { ClaimRequestInfoListContent } from '@features/claim-requests/components/claim-request-info-list-content'
-import { type ClaimRequest } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import { ClaimRequestUpdateInfoSection } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/claim-request-update-info-section'
+import { type ClaimRequest } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import { useIsSuperAdmin } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-permissions'
 import { useClaimRequestRolesActions } from '@features/claim-requests/pages/claim-request-management/route-adapters/use-claim-request-management-permissions'
 import claimRequestService from '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service'

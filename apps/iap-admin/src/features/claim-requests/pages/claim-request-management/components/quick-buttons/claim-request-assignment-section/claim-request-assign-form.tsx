@@ -1,11 +1,11 @@
 import { useEffect, useMemo } from 'react'
 
+import { ClaimRequestAssigneeFields } from '@features/claim-requests/pages/claim-request-management/components/claim-request-assignee-fields'
+import { type ClaimRequestAssignTarget } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/claim-request-assignment-section/claim-request-assign-dialog'
 import {
   type ClaimRequestAssigneeFieldsForm,
   claimRequestAssigneeFieldsFormSchema,
 } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
-import { ClaimRequestAssigneeFields } from '@features/claim-requests/pages/claim-request-management/components/claim-request-assignee-fields'
-import { type ClaimRequestAssignTarget } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/claim-request-assignment-section/claim-request-assign-dialog'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@iap/forms'
 import { Button } from '@iap/ui'

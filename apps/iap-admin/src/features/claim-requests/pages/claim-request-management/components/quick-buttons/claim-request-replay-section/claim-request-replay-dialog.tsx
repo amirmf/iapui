@@ -1,11 +1,11 @@
 import { memo } from 'react'
 
+import { ClaimRequestAssignmentHistory } from '@features/claim-requests/pages/claim-request-management/components/claim-request-assignment-history'
+import { ClaimRequestReplayForm } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/claim-request-replay-section/claim-request-replay-form'
 import {
   type ClaimRequest,
   type ClaimRequestReplayForm as ClaimRequestReplayFormValues,
 } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
-import { ClaimRequestAssignmentHistory } from '@features/claim-requests/pages/claim-request-management/components/claim-request-assignment-history'
-import { ClaimRequestReplayForm } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/claim-request-replay-section/claim-request-replay-form'
 import {
   Dialog,
   DialogContent,

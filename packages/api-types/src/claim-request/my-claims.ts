@@ -20,9 +20,13 @@ export const myClaimSubInsuredPersonSchema = z.object({
 export const subInsuredPeopleRequestSchema = z
   .object({ policyId: z.number() })
   .strict()
-export const subInsuredPeopleResponseSchema = z.array(myClaimSubInsuredPersonSchema)
+export const subInsuredPeopleResponseSchema = z.array(
+  myClaimSubInsuredPersonSchema
+)
 
 export type MyClaimRequestPageRequest = z.input<
   typeof myClaimRequestPageRequestSchema
 >
-export type MyClaimSubInsuredPerson = z.infer<typeof myClaimSubInsuredPersonSchema>
+export type MyClaimSubInsuredPerson = z.infer<
+  typeof myClaimSubInsuredPersonSchema
+>

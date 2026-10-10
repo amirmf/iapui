@@ -1,5 +1,5 @@
-import { type ClaimRequestAssigneeFieldsForm } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import { AgreementSearchSelect } from '@features/claim-requests/pages/claim-request-management/components/agreement-search-select'
+import { type ClaimRequestAssigneeFieldsForm } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import type { PartyRole } from '@iap/api-types'
 import { TextareaField } from '@iap/forms'
 import {

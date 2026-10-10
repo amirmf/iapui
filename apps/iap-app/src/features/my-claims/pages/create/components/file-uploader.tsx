@@ -1,14 +1,173 @@
 import { useEffect, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { toast } from 'sonner'
-import { Button, Input } from '@iap/ui'
-import { type Attachment } from '@iap/api-types'
+
 import { uploadClaimAttachment } from '@features/my-claims/services/file-upload-service'
 import { isAllowedClaimAttachment } from '@features/my-claims/utils/attachment-validation'
+import { type Attachment } from '@iap/api-types'
+import { Button, Input } from '@iap/ui'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 
-const allowed = new Set(['image/png','image/jpeg','application/pdf','image/heic','image/heif'])
-export function FileUploader({ value = [], onChange, onUploadingChange }: { value?: Attachment[]; onChange: (value: Attachment[]) => void; onUploadingChange?: (value: boolean) => void }) {
- const { t }=useTranslation(); const input=useRef<HTMLInputElement>(null); const [previews,setPreviews]=useState<Record<string,string>>({}); useEffect(()=>()=>Object.values(previews).forEach(URL.revokeObjectURL),[previews]); const [busy,setBusy]=useState(false); const [progress,setProgress]=useState<Record<string,number>>({}); const [dragging,setDragging]=useState(false)
- const upload=async(files: File[])=>{const checked=await Promise.all(files.map(async file=>({file,allowed:allowed.has(file.type)&&await isAllowedClaimAttachment(file)}))); const valid=checked.filter(x=>x.allowed).map(x=>x.file);if(valid.length!==files.length)toast.error(t('common.fileUploader.onlyAllowed',{defaultValue:'Only PNG, JPG, HEIC and PDF files are allowed'}));if(!valid.length)return;setBusy(true);onUploadingChange?.(true);try{const uploaded=[] as Attachment[];for(const file of valid){let uploadable=file; if(file.type==='image/heic'||file.type==='image/heif'){const {heicTo}=await import('heic-to'); const blob=await heicTo({blob:file,type:'image/jpeg',quality:1}); uploadable=new File([blob],file.name.replace(/\.(heic|heif)$/i,'.jpg'),{type:'image/jpeg'})} const attachment=await uploadClaimAttachment(uploadable,p=>setProgress(x=>({...x,[file.name]:p})));uploaded.push(attachment)}setPreviews(previous=>({...previous,...Object.fromEntries(uploaded.filter(file=>file.fileType.startsWith('image/')).map(file=>[file.filename,URL.createObjectURL(valid.find(source=>source.name===file.filename) ?? valid[0])]))}));onChange([...value,...uploaded])}catch{toast.error(t('common.fileUploader.uploadFailed',{defaultValue:'File upload failed'}))}finally{setBusy(false);onUploadingChange?.(false);setProgress({});if(input.current)input.current.value=''}}
- const remove=(index:number)=>onChange(value.filter((_,i)=>i!==index)); return <div className='space-y-3'><div className={dragging?'rounded-md border-2 border-dashed border-primary p-4':'rounded-md border-2 border-dashed p-4'} onDragOver={e=>{e.preventDefault();setDragging(true)}} onDragLeave={()=>setDragging(false)} onDrop={e=>{e.preventDefault();setDragging(false);void upload(Array.from(e.dataTransfer.files))}}><Input ref={input} type='file' accept='.png,.jpg,.jpeg,.heic,.heif,.pdf' multiple disabled={busy} onChange={e=>void upload(Array.from(e.target.files??[]))}/><p className='mt-2 text-sm text-muted-foreground'>{t('common.fileUploader.dragAndDrop',{defaultValue:'Drag files here or choose files'})}</p></div>{Object.entries(progress).map(([name,p])=><p key={name} className='text-sm'>{name}: {p}%</p>)}{value.length>0&&<ul className='space-y-1 text-sm'>{value.map((file,index)=><li className='flex items-center justify-between gap-2' key={file.minioObjectName}>{previews[file.filename]?<img src={previews[file.filename]} alt={file.filename} className='size-10 rounded object-cover'/>:null}<span>{file.filename}</span><Button type='button' variant='outline' size='sm' onClick={()=>remove(index)}>{t('common.remove',{defaultValue:'Remove'})}</Button></li>)}</ul>}</div>
+const allowed = new Set([
+  'image/png',
+  'image/jpeg',
+  'application/pdf',
+  'image/heic',
+  'image/heif',
+])
+export function FileUploader({
+  value = [],
+  onChange,
+  onUploadingChange,
+}: {
+  value?: Attachment[]
+  onChange: (value: Attachment[]) => void
+  onUploadingChange?: (value: boolean) => void
+}) {
+  const { t } = useTranslation()
+  const input = useRef<HTMLInputElement>(null)
+  const [previews, setPreviews] = useState<Record<string, string>>({})
+  useEffect(
+    () => () => Object.values(previews).forEach(URL.revokeObjectURL),
+    [previews]
+  )
+  const [busy, setBusy] = useState(false)
+  const [progress, setProgress] = useState<Record<string, number>>({})
+  const [dragging, setDragging] = useState(false)
+  const upload = async (files: File[]) => {
+    const checked = await Promise.all(
+      files.map(async (file) => ({
+        file,
+        allowed:
+          allowed.has(file.type) && (await isAllowedClaimAttachment(file)),
+      }))
+    )
+    const valid = checked.filter((x) => x.allowed).map((x) => x.file)
+    if (valid.length !== files.length)
+      toast.error(
+        t('common.fileUploader.onlyAllowed', {
+          defaultValue: 'Only PNG, JPG, HEIC and PDF files are allowed',
+        })
+      )
+    if (!valid.length) return
+    setBusy(true)
+    onUploadingChange?.(true)
+    try {
+      const uploaded = [] as Attachment[]
+      for (const file of valid) {
+        let uploadable = file
+        if (file.type === 'image/heic' || file.type === 'image/heif') {
+          const { heicTo } = await import('heic-to')
+          const blob = await heicTo({
+            blob: file,
+            type: 'image/jpeg',
+            quality: 1,
+          })
+          uploadable = new File(
+            [blob],
+            file.name.replace(/\.(heic|heif)$/i, '.jpg'),
+            { type: 'image/jpeg' }
+          )
+        }
+        const attachment = await uploadClaimAttachment(uploadable, (p) =>
+          setProgress((x) => ({ ...x, [file.name]: p }))
+        )
+        uploaded.push(attachment)
+      }
+      setPreviews((previous) => ({
+        ...previous,
+        ...Object.fromEntries(
+          uploaded
+            .filter((file) => file.fileType.startsWith('image/'))
+            .map((file) => [
+              file.filename,
+              URL.createObjectURL(
+                valid.find((source) => source.name === file.filename) ??
+                  valid[0]
+              ),
+            ])
+        ),
+      }))
+      onChange([...value, ...uploaded])
+    } catch {
+      toast.error(
+        t('common.fileUploader.uploadFailed', {
+          defaultValue: 'File upload failed',
+        })
+      )
+    } finally {
+      setBusy(false)
+      onUploadingChange?.(false)
+      setProgress({})
+      if (input.current) input.current.value = ''
+    }
+  }
+  const remove = (index: number) =>
+    onChange(value.filter((_, i) => i !== index))
+  return (
+    <div className='space-y-3'>
+      <div
+        className={
+          dragging
+            ? 'rounded-md border-2 border-dashed border-primary p-4'
+            : 'rounded-md border-2 border-dashed p-4'
+        }
+        onDragOver={(e) => {
+          e.preventDefault()
+          setDragging(true)
+        }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={(e) => {
+          e.preventDefault()
+          setDragging(false)
+          void upload(Array.from(e.dataTransfer.files))
+        }}
+      >
+        <Input
+          ref={input}
+          type='file'
+          accept='.png,.jpg,.jpeg,.heic,.heif,.pdf'
+          multiple
+          disabled={busy}
+          onChange={(e) => void upload(Array.from(e.target.files ?? []))}
+        />
+        <p className='mt-2 text-sm text-muted-foreground'>
+          {t('common.fileUploader.dragAndDrop', {
+            defaultValue: 'Drag files here or choose files',
+          })}
+        </p>
+      </div>
+      {Object.entries(progress).map(([name, p]) => (
+        <p key={name} className='text-sm'>
+          {name}: {p}%
+        </p>
+      ))}
+      {value.length > 0 && (
+        <ul className='space-y-1 text-sm'>
+          {value.map((file, index) => (
+            <li
+              className='flex items-center justify-between gap-2'
+              key={file.minioObjectName}
+            >
+              {previews[file.filename] ? (
+                <img
+                  src={previews[file.filename]}
+                  alt={file.filename}
+                  className='size-10 rounded object-cover'
+                />
+              ) : null}
+              <span>{file.filename}</span>
+              <Button
+                type='button'
+                variant='outline'
+                size='sm'
+                onClick={() => remove(index)}
+              >
+                {t('common.remove', { defaultValue: 'Remove' })}
+              </Button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
 }

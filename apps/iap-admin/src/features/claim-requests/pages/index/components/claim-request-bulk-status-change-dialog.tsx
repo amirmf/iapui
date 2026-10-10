@@ -1,11 +1,11 @@
 import { useEffect, useMemo } from 'react'
 
+import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/model/claim-request-status'
 import { useClaimRequestStore } from '@features/claim-requests/pages/index/context/store/claim-request-store'
 import {
   type ClaimRequestBulkStatusChangeForm,
   claimRequestBulkStatusChangeFormSchema,
 } from '@features/claim-requests/pages/index/model/claim-request-bulk-status-change-schema'
-import { CLAIM_REQUEST_STATUS_TRANSLATION_KEYS } from '@features/claim-requests/model/claim-request-status'
 import { claimRequestService } from '@features/claim-requests/services/claim-request-service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { ClaimRequestStatus } from '@iap/api-types'

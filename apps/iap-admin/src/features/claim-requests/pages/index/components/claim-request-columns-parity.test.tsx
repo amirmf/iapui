@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
-import { useClaimRequestColumns } from '@features/claim-requests/pages/index/components/claim-request-columns'
 import { useClaimRequestIds } from '@features/claim-requests/context/store/claim-request-ids-store'
+import { useClaimRequestColumns } from '@features/claim-requests/pages/index/components/claim-request-columns'
 import type { ClaimRequest } from '@iap/api-types'
 import {
   flexRender,

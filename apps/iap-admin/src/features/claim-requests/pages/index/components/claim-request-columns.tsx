@@ -1,7 +1,5 @@
 import { useMemo } from 'react'
 
-import { ClaimRequestRowActions } from '@features/claim-requests/pages/index/components/claim-request-row-actions'
-import { ClaimRequestSpecialDiseaseBadges } from '@features/claim-requests/pages/index/components/claim-request-special-disease-badges'
 import { useClaimRequestIds } from '@features/claim-requests/context/store/claim-request-ids-store'
 import {
   getClaimRequestDisplayStatus,
@@ -14,6 +12,8 @@ import {
   aiStatusColors,
   claimStatusColors,
 } from '@features/claim-requests/model/claim-request-status'
+import { ClaimRequestRowActions } from '@features/claim-requests/pages/index/components/claim-request-row-actions'
+import { ClaimRequestSpecialDiseaseBadges } from '@features/claim-requests/pages/index/components/claim-request-special-disease-badges'
 import type { ClaimRequest } from '@iap/api-types'
 import { Badge, cn, formatDate, formatDateTime } from '@iap/ui'
 import { TwoLineCell, TwoLineHeader } from '@shared/tables'

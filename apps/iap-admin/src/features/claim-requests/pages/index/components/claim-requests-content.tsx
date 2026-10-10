@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react'
 
+import { useClaimRequestIds } from '@features/claim-requests/context/store/claim-request-ids-store'
 import { ClaimRequestBulkCoreAiDialog } from '@features/claim-requests/pages/index/components/claim-request-bulk-core-ai-dialog'
 import { ClaimRequestBulkDeleteDialog } from '@features/claim-requests/pages/index/components/claim-request-bulk-delete-dialog'
 import { ClaimRequestBulkStatusChangeDialog } from '@features/claim-requests/pages/index/components/claim-request-bulk-status-change-dialog'
@@ -9,9 +10,8 @@ import { ClaimRequestFetchNewEmptyState } from '@features/claim-requests/pages/i
 import { ClaimRequestGenerateAndSendBulkDialog } from '@features/claim-requests/pages/index/components/claim-request-generate-and-send-bulk-dialog'
 import { ClaimRequestHeaderActions } from '@features/claim-requests/pages/index/components/claim-request-header-actions'
 import { ClaimRequestRowActionDialogs } from '@features/claim-requests/pages/index/components/claim-request-row-action-dialogs'
-import { useClaimRequestIds } from '@features/claim-requests/context/store/claim-request-ids-store'
-import { useClaimRequestStore } from '@features/claim-requests/pages/index/context/store/claim-request-store'
 import { getClaimRequestRowClassName } from '@features/claim-requests/pages/index/components/claim-request-row-class-name'
+import { useClaimRequestStore } from '@features/claim-requests/pages/index/context/store/claim-request-store'
 import { useClaimRequestsQuery } from '@features/claim-requests/pages/index/queries/use-claim-requests-query'
 import { useClaimRequestTableSearch } from '@features/claim-requests/pages/index/route-adapters/use-claim-request-table-search'
 import type { ClaimRequest } from '@iap/api-types'

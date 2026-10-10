@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 
-import { useClaimRequestManagementPrevRequestAttachments } from '@features/claim-requests/pages/claim-request-management/context/store/claim-request-management-prev-request-attachments-store'
 import {
   CLAIM_REQUEST_STATUS_TRANSLATION_KEYS,
   claimStatusColors,
 } from '@features/claim-requests/model/claim-request-status'
+import { useClaimRequestManagementPrevRequestAttachments } from '@features/claim-requests/pages/claim-request-management/context/store/claim-request-management-prev-request-attachments-store'
 import { claimRequestService } from '@features/claim-requests/services/claim-request-service'
 import type { Attachment } from '@iap/api-types'
 import { cn } from '@iap/ui'

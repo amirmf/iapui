@@ -1,6 +1,6 @@
-import type { ClaimRequestAssigneeFieldsForm } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import { ClaimRequestAssignmentHistory } from '@features/claim-requests/pages/claim-request-management/components/claim-request-assignment-history'
 import { ClaimRequestAssignForm } from '@features/claim-requests/pages/claim-request-management/components/quick-buttons/claim-request-assignment-section/claim-request-assign-form'
+import type { ClaimRequestAssigneeFieldsForm } from '@features/claim-requests/pages/claim-request-management/model/claim-request-management-forms'
 import useClaimRequestManagementData from '@features/claim-requests/pages/claim-request-management/queries/use-claim-request-management-data'
 import claimRequestService from '@features/claim-requests/pages/claim-request-management/services/claim-request-management-service'
 import { useAuthSession as useAuth } from '@iap/auth'

@@ -1,7 +1,7 @@
 const config = {
   '*.{js,jsx,ts,tsx,mjs,cjs}': (files) => [
-    'pnpm lint',
     `prettier --write ${files.join(' ')}`,
+    'pnpm lint',
   ],
   '*.{css,scss,json,md,mdx,yml,yaml}': (files) => {
     const sourceFiles = files.filter(
