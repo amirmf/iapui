@@ -46,18 +46,54 @@ The Customer User Dashboard provides high-level claim aggregation reports tailor
    - **Reactive Search Params**: Read `filters` using `useLocation().search` as `DashboardFilters` to ensure reactive tab/filter updates, and navigate tab switches with `router.navigate({ to: './', replace: true, search: ... })`.
    - **Layout Root**: Render inside a `<section>` container (avoiding duplicate `<main>` landmarks within `CustomerUserLayout`).
 
-## 3. Sibling Pages Growth (Claim Requests)
+## 3. Customer User Claim Requests (`/customer-user/claim-requests/`)
 
-When adding `/customer-user/claim-requests/**`:
-1. If the feature grows beyond the single root dashboard page, move the root page to `pages/index/` and create `pages/claim-requests/` in accordance with `APPLICATION-ARCHITECTURE.md`.
-2. Ensure endpoint calls remain scoped to customer-user permissions and never mix operations endpoints.
-3. Preserve breadcrumb sequence and panel layout ancestry in `src/shared/router/panel-routes.test.ts`.
+The Customer User Claim Requests page lists policyholder claim requests with pagination, sorting, status badges, and quick filters:
 
-## 4. Verification Checklist
+1. **Feature Structure & Placement**:
+   - Page component: `apps/iap-admin/src/features/customer-user/pages/claim-requests/customer-user-claim-requests-page.tsx`
+   - Header actions: `pages/claim-requests/components/customer-user-claim-request-header-actions.tsx`
+   - Columns: `pages/claim-requests/components/customer-user-claim-request-columns.tsx`
+   - Route adapter: `pages/claim-requests/route-adapters/use-sync-query-params-table-filter.ts`
+   - Route constants: `pages/claim-requests/utils/customer-user-claim-routes.ts` (`list`, `management(id)`)
+   - Constants & colors: `model/customer-user-claim-constant.ts`
+   - Route file: `apps/iap-admin/src/app/router/routes/_customer-user/customer-user/claim-requests/index.tsx`
+   - Route loader: `loader: () => ({ crumb: 'claim' })`
+
+2. **Reference Parity Details**:
+   - **Header Actions**: Renders `<ClaimRequestExportExcelButton filters={filters} />` and refresh button with spinning `<IconRefresh size={18} />`.
+   - **Columns (10 total)**: Two-line header and cell layout:
+     1. `extNationalCode` / `extMainNationalCode`: links to `customerUserClaimRoutes.management(id)`.
+     2. `extDisplayName` / `extCustomerName`: `longText` enabled.
+     3. `businessKey` / `extPolicyId`.
+     4. `docType.id` / `extPlanCaption`: accessor combines `docType?.docType` or `documents[*].documentType`.
+     5. `amount` / `totalSumAmount`: formatted with `toLocaleString('en-US')`.
+     6. `status` / `aiStatus`: badges styled with `claimStatusColors` and `aiStatusColors` using reference translation keys. Sorting disabled.
+     7. `submitDate` / `createdAt`: formatted with `formatDate` and `formatDateTime`.
+     8. `latestAssignementDisplayName` / `assessedAt`.
+     9. `extPolicyId` / `extContractId`.
+     10. `extWorkUnitName` / `isReturn`: translated with `common.yes` / `common.no`.
+   - **URL Synchronization**: `useSyncQueryParamsTableFilter` synchronizes `page`, `size`, `sort`, and `direction` with router search params.
+   - **Filter Logic**:
+     - Default sort: `createdAt asc` if sort param missing or empty.
+     - Fallback `quickStatus = 'IN_ASSESSMENT'`.
+     - Skip current user check: `if (!ignoreSkipCurrentUserFilter.includes(quickStatus)) draft['skipCurrentUserFilter'] = 'Y'`.
+     - Status application: calls `applyClaimRequestQuickStatusFilter(draft, quickStatus)`.
+   - **Query**: TanStack Query with key `['customerUserClaimRequests', pagination, effectiveFilters]` calling `claimRequestService.getPageLite({ page, size, filters, signal })`.
+   - **Table Composition**: Renders `<ClaimRequestDataTableToolbar count={data?.totalElements ?? undefined} />` and `<PaginatedDataTable />` with `tableWrapperClassName="max-h-130"` and `emptyStateText={t('customerUser.claimRequests.empty')}`.
+
+## 4. Upcoming Sub-routes & Management (`$claimRequestId/claim-request-management`)
+
+When adding or extending `$claimRequestId/claim-request-management`:
+- Preserve route placeholder until backend evaluation contracts are scoped.
+- Route links must use `customerUserClaimRoutes.management(id)`.
+- Sibling routes under `_customer-user` must stay within the `_customer-user` directory tree.
+
+## 5. Verification Checklist
 
 Whenever modifying customer-user panel code:
 1. `pnpm --filter iap-admin typecheck` (zero TypeScript errors)
 2. `pnpm --filter iap-admin lint` (zero ESLint errors)
 3. `pnpm architecture:check` (verifies architectural constraints)
-4. `pnpm --filter iap-admin test src/features/customer-user/customer-user-dashboard-page.test.tsx src/shared/router/panel-routes.test.ts`
+4. `pnpm --filter iap-admin test src/features/customer-user src/shared/router/panel-routes.test.ts`
 5. `pnpm --filter iap-admin build` (production build succeeds)
