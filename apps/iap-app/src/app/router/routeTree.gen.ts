@@ -11,10 +11,13 @@ import { Route as AuthPasswordResetIndexRouteImport } from './routes/_auth/passw
 import { Route as AuthRegisterIndexRouteImport } from './routes/_auth/register/index'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
-import { Route as AuthenticatedMyclaimsCreateRouteImport } from './routes/_authenticated/myclaims/create'
+import { Route as AuthenticatedMyclaimsIdIndexRouteImport } from './routes/_authenticated/myclaims/$id.index'
+import { Route as AuthenticatedMyclaimsCreateIndexRouteImport } from './routes/_authenticated/myclaims/create/index'
 import { Route as AuthenticatedMyclaimsIndexRouteImport } from './routes/_authenticated/myclaims/index'
 import { Route as AuthenticatedPreAuthsIndexRouteImport } from './routes/_authenticated/pre-auths/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthenticatedSpecialDiseasesIdIndexRouteImport } from './routes/_authenticated/special-diseases/$id.index'
+import { Route as AuthenticatedSpecialDiseasesCreateIndexRouteImport } from './routes/_authenticated/special-diseases/create/index'
 import { Route as AuthenticatedSpecialDiseasesIndexRouteImport } from './routes/_authenticated/special-diseases/index'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -56,12 +59,6 @@ const AuthenticatedMyclaimsIndexRoute =
     path: '/myclaims/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedMyclaimsCreateRoute =
-  AuthenticatedMyclaimsCreateRouteImport.update({
-    id: '/myclaims/create',
-    path: '/myclaims/create',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedPreAuthsIndexRoute =
   AuthenticatedPreAuthsIndexRouteImport.update({
     id: '/pre-auths/',
@@ -74,28 +71,58 @@ const AuthenticatedSpecialDiseasesIndexRoute =
     path: '/special-diseases/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedMyclaimsIdIndexRoute =
+  AuthenticatedMyclaimsIdIndexRouteImport.update({
+    id: '/myclaims/$id/',
+    path: '/myclaims/$id/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedMyclaimsCreateIndexRoute =
+  AuthenticatedMyclaimsCreateIndexRouteImport.update({
+    id: '/myclaims/create/',
+    path: '/myclaims/create/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSpecialDiseasesIdIndexRoute =
+  AuthenticatedSpecialDiseasesIdIndexRouteImport.update({
+    id: '/special-diseases/$id/',
+    path: '/special-diseases/$id/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSpecialDiseasesCreateIndexRoute =
+  AuthenticatedSpecialDiseasesCreateIndexRouteImport.update({
+    id: '/special-diseases/create/',
+    path: '/special-diseases/create/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/auth/sso': typeof AuthAuthSsoRoute
-  '/myclaims/create': typeof AuthenticatedMyclaimsCreateRoute
   '/login/': typeof AuthLoginIndexRoute
   '/password-reset/': typeof AuthPasswordResetIndexRoute
   '/register/': typeof AuthRegisterIndexRoute
   '/myclaims/': typeof AuthenticatedMyclaimsIndexRoute
   '/pre-auths/': typeof AuthenticatedPreAuthsIndexRoute
   '/special-diseases/': typeof AuthenticatedSpecialDiseasesIndexRoute
+  '/myclaims/$id/': typeof AuthenticatedMyclaimsIdIndexRoute
+  '/myclaims/create/': typeof AuthenticatedMyclaimsCreateIndexRoute
+  '/special-diseases/$id/': typeof AuthenticatedSpecialDiseasesIdIndexRoute
+  '/special-diseases/create/': typeof AuthenticatedSpecialDiseasesCreateIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
   '/auth/sso': typeof AuthAuthSsoRoute
-  '/myclaims/create': typeof AuthenticatedMyclaimsCreateRoute
   '/login': typeof AuthLoginIndexRoute
   '/password-reset': typeof AuthPasswordResetIndexRoute
   '/register': typeof AuthRegisterIndexRoute
   '/myclaims': typeof AuthenticatedMyclaimsIndexRoute
   '/pre-auths': typeof AuthenticatedPreAuthsIndexRoute
   '/special-diseases': typeof AuthenticatedSpecialDiseasesIndexRoute
+  '/myclaims/$id': typeof AuthenticatedMyclaimsIdIndexRoute
+  '/myclaims/create': typeof AuthenticatedMyclaimsCreateIndexRoute
+  '/special-diseases/$id': typeof AuthenticatedSpecialDiseasesIdIndexRoute
+  '/special-diseases/create': typeof AuthenticatedSpecialDiseasesCreateIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -103,50 +130,62 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_auth/auth/sso': typeof AuthAuthSsoRoute
-  '/_authenticated/myclaims/create': typeof AuthenticatedMyclaimsCreateRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
   '/_auth/password-reset/': typeof AuthPasswordResetIndexRoute
   '/_auth/register/': typeof AuthRegisterIndexRoute
   '/_authenticated/myclaims/': typeof AuthenticatedMyclaimsIndexRoute
   '/_authenticated/pre-auths/': typeof AuthenticatedPreAuthsIndexRoute
   '/_authenticated/special-diseases/': typeof AuthenticatedSpecialDiseasesIndexRoute
+  '/_authenticated/myclaims/$id/': typeof AuthenticatedMyclaimsIdIndexRoute
+  '/_authenticated/myclaims/create/': typeof AuthenticatedMyclaimsCreateIndexRoute
+  '/_authenticated/special-diseases/$id/': typeof AuthenticatedSpecialDiseasesIdIndexRoute
+  '/_authenticated/special-diseases/create/': typeof AuthenticatedSpecialDiseasesCreateIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/auth/sso'
-    | '/myclaims/create'
     | '/login/'
     | '/password-reset/'
     | '/register/'
     | '/myclaims/'
     | '/pre-auths/'
     | '/special-diseases/'
+    | '/myclaims/$id/'
+    | '/myclaims/create/'
+    | '/special-diseases/$id/'
+    | '/special-diseases/create/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth/sso'
-    | '/myclaims/create'
     | '/login'
     | '/password-reset'
     | '/register'
     | '/myclaims'
     | '/pre-auths'
     | '/special-diseases'
+    | '/myclaims/$id'
+    | '/myclaims/create'
+    | '/special-diseases/$id'
+    | '/special-diseases/create'
   id:
     | '__root__'
     | '/_auth'
     | '/_authenticated'
     | '/_authenticated/'
     | '/_auth/auth/sso'
-    | '/_authenticated/myclaims/create'
     | '/_auth/login/'
     | '/_auth/password-reset/'
     | '/_auth/register/'
     | '/_authenticated/myclaims/'
     | '/_authenticated/pre-auths/'
     | '/_authenticated/special-diseases/'
+    | '/_authenticated/myclaims/$id/'
+    | '/_authenticated/myclaims/create/'
+    | '/_authenticated/special-diseases/$id/'
+    | '/_authenticated/special-diseases/create/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -212,13 +251,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMyclaimsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/myclaims/create': {
-      id: '/_authenticated/myclaims/create'
-      path: '/myclaims/create'
-      fullPath: '/myclaims/create'
-      preLoaderRoute: typeof AuthenticatedMyclaimsCreateRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/pre-auths/': {
       id: '/_authenticated/pre-auths/'
       path: '/pre-auths'
@@ -231,6 +263,34 @@ declare module '@tanstack/react-router' {
       path: '/special-diseases'
       fullPath: '/special-diseases/'
       preLoaderRoute: typeof AuthenticatedSpecialDiseasesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/myclaims/$id/': {
+      id: '/_authenticated/myclaims/$id/'
+      path: '/myclaims/$id'
+      fullPath: '/myclaims/$id/'
+      preLoaderRoute: typeof AuthenticatedMyclaimsIdIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/myclaims/create/': {
+      id: '/_authenticated/myclaims/create/'
+      path: '/myclaims/create'
+      fullPath: '/myclaims/create/'
+      preLoaderRoute: typeof AuthenticatedMyclaimsCreateIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/special-diseases/$id/': {
+      id: '/_authenticated/special-diseases/$id/'
+      path: '/special-diseases/$id'
+      fullPath: '/special-diseases/$id/'
+      preLoaderRoute: typeof AuthenticatedSpecialDiseasesIdIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/special-diseases/create/': {
+      id: '/_authenticated/special-diseases/create/'
+      path: '/special-diseases/create'
+      fullPath: '/special-diseases/create/'
+      preLoaderRoute: typeof AuthenticatedSpecialDiseasesCreateIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
   }
@@ -256,19 +316,27 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedMyclaimsCreateRoute: typeof AuthenticatedMyclaimsCreateRoute
   AuthenticatedMyclaimsIndexRoute: typeof AuthenticatedMyclaimsIndexRoute
   AuthenticatedPreAuthsIndexRoute: typeof AuthenticatedPreAuthsIndexRoute
   AuthenticatedSpecialDiseasesIndexRoute: typeof AuthenticatedSpecialDiseasesIndexRoute
+  AuthenticatedMyclaimsIdIndexRoute: typeof AuthenticatedMyclaimsIdIndexRoute
+  AuthenticatedMyclaimsCreateIndexRoute: typeof AuthenticatedMyclaimsCreateIndexRoute
+  AuthenticatedSpecialDiseasesIdIndexRoute: typeof AuthenticatedSpecialDiseasesIdIndexRoute
+  AuthenticatedSpecialDiseasesCreateIndexRoute: typeof AuthenticatedSpecialDiseasesCreateIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedMyclaimsCreateRoute: AuthenticatedMyclaimsCreateRoute,
   AuthenticatedMyclaimsIndexRoute: AuthenticatedMyclaimsIndexRoute,
   AuthenticatedPreAuthsIndexRoute: AuthenticatedPreAuthsIndexRoute,
   AuthenticatedSpecialDiseasesIndexRoute:
     AuthenticatedSpecialDiseasesIndexRoute,
+  AuthenticatedMyclaimsIdIndexRoute: AuthenticatedMyclaimsIdIndexRoute,
+  AuthenticatedMyclaimsCreateIndexRoute: AuthenticatedMyclaimsCreateIndexRoute,
+  AuthenticatedSpecialDiseasesIdIndexRoute:
+    AuthenticatedSpecialDiseasesIdIndexRoute,
+  AuthenticatedSpecialDiseasesCreateIndexRoute:
+    AuthenticatedSpecialDiseasesCreateIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

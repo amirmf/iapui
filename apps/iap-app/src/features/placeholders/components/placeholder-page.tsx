@@ -7,6 +7,9 @@ type PlaceholderPageProps = {
     | 'myiap.nav.createClaim'
     | 'myiap.nav.preAuths'
     | 'myiap.nav.specialDiseases'
+    | 'myiap.claimRequests.claimDetails'
+    | 'myiap.specialDiseases.create'
+    | 'myiap.specialDiseases.details'
 }
 
 export function PlaceholderPage({ titleKey }: PlaceholderPageProps) {
