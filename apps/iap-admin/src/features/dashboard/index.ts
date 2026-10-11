@@ -1,5 +1,6 @@
-export * from './components/dashboard-page'
-export { default as Dashboard } from './components/dashboard-page'
+export * from './dashboard-page'
+export { default as Dashboard } from './dashboard-page'
+export * from './route-adapters/route-search-schema'
 export { useShowReport } from './context/store/report-show-report-store'
 export { DashboardReportTableHeader } from './components/dashboard-report-table-header'
 export { DashboardPivotTableToolbar } from './components/dashboard-pivot-table-toolbar'

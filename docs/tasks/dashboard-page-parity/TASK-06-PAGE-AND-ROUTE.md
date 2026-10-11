@@ -3,15 +3,19 @@
 Reference: `insurance-ui/src/routes/_authenticated/index.tsx`, `insurance-ui/src/features/dashboard/index.tsx`.
 Target owners:
 - `apps/iap-admin/src/app/router/routes/_authenticated/index.tsx`
-- `apps/iap-admin/src/features/dashboard/components/dashboard-page.tsx`
+- `apps/iap-admin/src/features/dashboard/dashboard-page.tsx`
+- `apps/iap-admin/src/features/dashboard/route-adapters/route-search-schema.ts`
 - `apps/iap-admin/src/features/dashboard/index.ts`
 
 ## Responsibilities
 
-1. Route definition:
+1. Route definition and search validation:
    - In `apps/iap-admin/src/app/router/routes/_authenticated/index.tsx`:
      ```tsx
-     import { DashboardPage } from '@features/dashboard'
+     import {
+       DashboardPage,
+       dashboardRouteSearchSchema,
+     } from '@features/dashboard'
      import { createFileRoute } from '@tanstack/react-router'
 
      export const Route = createFileRoute('/_authenticated/')({
@@ -19,9 +23,10 @@ Target owners:
        loader: () => ({
          crumb: 'dashboard',
        }),
+       validateSearch: dashboardRouteSearchSchema,
      })
      ```
-   - Route file remains thin, delegating to `DashboardPage` and declaring the `dashboard` breadcrumb.
+   - Route file remains thin, delegating to `DashboardPage`, validating search parameters with `dashboardRouteSearchSchema`, and declaring the `dashboard` breadcrumb.
 2. Root page component (`DashboardPage`):
    - Check `useShowReport((state) => state.isShowReport)` and `useShowReport((state) => state.toggleShowReport)`.
    - If `!isShowReport`:

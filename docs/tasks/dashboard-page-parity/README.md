@@ -17,8 +17,8 @@ Reference: `insurance-ui/src/routes/_authenticated/index.tsx` and `insurance-ui/
 
 | Reference component / owner | Target file / owner in iap-admin | Responsibility |
 | --- | --- | --- |
-| `src/routes/_authenticated/index.tsx` | `apps/iap-admin/src/app/router/routes/_authenticated/index.tsx` | Thin route definition with `crumb: 'dashboard'` loader |
-| `src/features/dashboard/index.tsx` | `apps/iap-admin/src/features/dashboard/components/dashboard-page.tsx` | Dashboard root page with `useShowReport` toggle and 5 tab contents |
+| `src/routes/_authenticated/index.tsx` | `apps/iap-admin/src/app/router/routes/_authenticated/index.tsx` | Thin route definition with `crumb: 'dashboard'` loader and `validateSearch: dashboardRouteSearchSchema` |
+| `src/features/dashboard/index.tsx` | `apps/iap-admin/src/features/dashboard/dashboard-page.tsx` | Dashboard root page with `useShowReport` toggle and 5 tab contents (conforming to single-root-route architecture exception) |
 | `src/features/dashboard/context/report-show-report.ts` | `apps/iap-admin/src/features/dashboard/context/store/report-show-report-store.ts` | Zustand store for `isShowReport` toggle |
 | `src/features/dashboard/services/dashboard-service.ts` | `apps/iap-admin/src/features/dashboard/services/dashboard-service.ts` | 6 reporting endpoints with Zod v4 validation and query transform |
 | `src/features/dashboard/data/dashboard-report-schema.ts` | `packages/api-types/src/dashboard/index.ts` | Shared request & response Zod v4 contracts |

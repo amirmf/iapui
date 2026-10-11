@@ -6,18 +6,19 @@ import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from '@iap/ui'
 import { useLocation, useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
-import { ReportAgreementsWithoutMainAssessmentUserTable } from './report-agreements-without-main-assessment-user-table'
-import { ReportCountByAssigneeSummaryTable } from './report-count-by-assignee-summary-table'
-import { ReportCountByAssigneeTable } from './report-count-by-assignee-table'
-import { ReportDistributionByStatusTable } from './report-distribution-by-status-table'
-import { ReportSumByAssigneeTable } from './report-sum-by-assignee-table'
+import { ReportAgreementsWithoutMainAssessmentUserTable } from './components/report-agreements-without-main-assessment-user-table'
+import { ReportCountByAssigneeSummaryTable } from './components/report-count-by-assignee-summary-table'
+import { ReportCountByAssigneeTable } from './components/report-count-by-assignee-table'
+import { ReportDistributionByStatusTable } from './components/report-distribution-by-status-table'
+import { ReportSumByAssigneeTable } from './components/report-sum-by-assignee-table'
+import type { DashboardRouteSearch } from './route-adapters/route-search-schema'
 
 export function DashboardPage() {
   const { t } = useTranslation()
   const router = useRouter()
   const location = useLocation()
-  const search = (location.search ?? {}) as Record<string, unknown>
-  const filters = search as DashboardFilters
+  const search = (location.search ?? {}) as DashboardRouteSearch
+  const filters = search as unknown as DashboardFilters
   const isShowReport = useShowReport((state) => state.isShowReport)
   const toggleShowReport = useShowReport((state) => state.toggleShowReport)
 

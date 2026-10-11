@@ -1,4 +1,4 @@
-import { DashboardPage } from '@features/dashboard'
+import { DashboardPage, dashboardRouteSearchSchema } from '@features/dashboard'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/')({
@@ -6,4 +6,5 @@ export const Route = createFileRoute('/_authenticated/')({
   loader: () => ({
     crumb: 'dashboard',
   }),
+  validateSearch: dashboardRouteSearchSchema,
 })

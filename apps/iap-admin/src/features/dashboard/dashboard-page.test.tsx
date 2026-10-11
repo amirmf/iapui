@@ -2,8 +2,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { DashboardPage } from './components/dashboard-page'
 import { useShowReport } from './context/store/report-show-report-store'
+import { DashboardPage } from './dashboard-page'
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
