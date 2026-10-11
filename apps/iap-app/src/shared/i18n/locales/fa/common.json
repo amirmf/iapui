@@ -160,7 +160,8 @@
     "noResultsFound": "نتیجه‌ای یافت نشد.",
     "selectAll": "انتخاب همه",
     "selectItems": "انتخاب موارد",
-    "rial": "ریال"
+    "rial": "ریال",
+    "toman": "تومان"
   },
   "panelSwitcher": {
     "switch": "تغییر پنل: {{panel}}",

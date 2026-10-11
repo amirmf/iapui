@@ -16,7 +16,9 @@ import {
   AlertTitle,
   Button,
   DatePicker,
-  Input,
+  InputAmount,
+  numWithComma,
+  onlyNumberValue,
 } from '@iap/ui'
 import { FileUploader } from '@modules/files'
 import { handleServerError } from '@shared/errors/handle-server-error'
@@ -159,9 +161,10 @@ export function AgentClaimRequestForm({
               </FormLabel>
               <FormControl>
                 <DatePicker
-                  value={field.value}
-                  onChange={field.onChange}
+                  selected={field.value}
+                  onSelect={field.onChange}
                   editable
+                  presentation='reference'
                   placeholder={t(
                     'claimRequests.dialog.fields.submitDatePlaceholder'
                   )}
@@ -192,7 +195,12 @@ export function AgentClaimRequestForm({
                 <span className='text-destructive'>*</span>
               </FormLabel>
               <FormControl>
-                <Input {...field} numerical numberWithComma maxLength={11} />
+                <InputAmount
+                  value={numWithComma(field.value || '')}
+                  onChange={(event) => {
+                    field.onChange(onlyNumberValue(event.target.value))
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

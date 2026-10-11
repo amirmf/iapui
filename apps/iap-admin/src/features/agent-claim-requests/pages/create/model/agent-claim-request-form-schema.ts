@@ -57,22 +57,25 @@ export type AgentClaimRequestPayload = Omit<
   extNationalCode: string
 }
 
-export const defaultAgentClaimRequestFormValues: Partial<AgentClaimRequestFormValues> =
-  {
-    inquiryNationalCode: '',
-    submitDate: undefined,
-    amount: '',
-    attachments: [] as Attachment[],
-    docType: {
-      id: '',
-      docType: '',
-      docTypeCode: '',
-      documentGuide: '',
-    },
-    extNationalCode: {
-      id: 0,
-      nationalCode: '',
-      fullName: '',
-    },
-    extPolicyId: 0,
-  }
+export type MyClaimRequestPayload = AgentClaimRequestPayload
+
+export const defaultValues: Partial<AgentClaimRequestFormValues> = {
+  inquiryNationalCode: '',
+  submitDate: undefined,
+  amount: '',
+  attachments: [] as Attachment[],
+  docType: {
+    id: '',
+    docType: '',
+    docTypeCode: '',
+    documentGuide: '',
+  },
+  extNationalCode: {
+    id: 0,
+    nationalCode: '',
+    fullName: '',
+  },
+  extPolicyId: 0,
+}
+
+export const defaultAgentClaimRequestFormValues = defaultValues

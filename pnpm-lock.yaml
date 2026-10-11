@@ -247,7 +247,7 @@ importers:
         version: 7.3.6(@types/node@20.19.43)(jiti@1.21.7)(sass@1.104.1)(yaml@2.9.1)
       vitest:
         specifier: ^3.2.7
-        version: 3.2.7(@types/debug@4.1.13)(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(sass@1.104.1)(supports-color@7.2.0)(yaml@2.9.1)
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@20.19.43)(jiti@1.21.7)(jsdom@26.1.0(supports-color@7.2.0))(sass@1.104.1)(supports-color@7.2.0)(yaml@2.9.1)
 
   apps/iap-app:
     dependencies:
@@ -416,7 +416,7 @@ importers:
         version: 7.3.6(@types/node@20.19.43)(jiti@1.21.7)(sass@1.104.1)(yaml@2.9.1)
       vitest:
         specifier: ^3.2.7
-        version: 3.2.7(@types/debug@4.1.13)(@types/node@20.19.43)(jiti@1.21.7)(jsdom@26.1.0(supports-color@7.2.0))(sass@1.104.1)(supports-color@7.2.0)(yaml@2.9.1)
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(sass@1.104.1)(supports-color@7.2.0)(yaml@2.9.1)
 
   packages/api-client:
     dependencies:
@@ -792,6 +792,9 @@ importers:
       react-date-object:
         specifier: ^2.1.9
         version: 2.1.9
+      react-i18next:
+        specifier: '>=15.0.0'
+        version: 17.0.15(i18next@26.4.2(typescript@5.9.3))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@5.9.3)
       react-multi-date-picker:
         specifier: ^4.5.2
         version: 4.5.2(react-dom@19.3.0(react@19.3.0))(react@19.3.0)

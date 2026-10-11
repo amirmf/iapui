@@ -22,20 +22,27 @@ vi.mock('@iap/dialogs', () => ({
   ConfirmDialog: (props: {
     open: boolean
     title: ReactNode
-    description: ReactNode
-    confirmLabel: ReactNode
-    footerChildren: ReactNode
-    onConfirm: () => void
+    description?: ReactNode
+    desc?: ReactNode
+    confirmLabel?: ReactNode
+    confirmText?: ReactNode
+    footerChildren?: ReactNode
+    onConfirm?: () => void
+    handleConfirm?: () => void
     onOpenChange: (open: boolean) => void
-  }) =>
-    props.open ? (
+  }) => {
+    const desc = props.desc ?? props.description
+    const confirm = props.confirmText ?? props.confirmLabel
+    const onConf = props.handleConfirm ?? props.onConfirm
+    return props.open ? (
       <div data-testid='not-found-dialog'>
         <div data-testid='dialog-title'>{props.title}</div>
-        <div data-testid='dialog-desc'>{props.description}</div>
-        <button onClick={props.onConfirm}>{props.confirmLabel}</button>
+        <div data-testid='dialog-desc'>{desc}</div>
+        <button onClick={onConf}>{confirm}</button>
         {props.footerChildren}
       </div>
-    ) : null,
+    ) : null
+  },
 }))
 
 describe('AgentClaimRequestAccountNotFoundDialog', () => {

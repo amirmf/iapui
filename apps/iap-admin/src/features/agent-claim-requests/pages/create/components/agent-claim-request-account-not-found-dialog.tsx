@@ -21,7 +21,7 @@ export function AgentClaimRequestAccountNotFoundDialog({
       onOpenChange={onOpenChange}
       presentation='reference'
       title={t('agent.claimRequests.create.accountNotFound.title')}
-      description={
+      desc={
         <>
           <span>
             {t('agent.claimRequests.create.accountNotFound.description1')}
@@ -34,7 +34,7 @@ export function AgentClaimRequestAccountNotFoundDialog({
           </span>
         </>
       }
-      confirmLabel={t('agent.claimRequests.create.accountNotFound.understood')}
+      confirmText={t('agent.claimRequests.create.accountNotFound.understood')}
       footerChildren={
         <Button
           presentation='reference'
@@ -45,7 +45,7 @@ export function AgentClaimRequestAccountNotFoundDialog({
         </Button>
       }
       hideCancelButton
-      onConfirm={() => onOpenChange(false)}
+      handleConfirm={() => onOpenChange(false)}
     />
   )
 }

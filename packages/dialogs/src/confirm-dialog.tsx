@@ -23,17 +23,21 @@ export type ConfirmDialogVariant =
   'default' | 'error' | 'warning' | 'success' | 'info'
 
 export type ConfirmDialogProps = {
+  cancelBtnText?: string
   cancelLabel?: ReactNode
   children?: ReactNode
   className?: string
   confirmLabel?: ReactNode
+  confirmText?: ReactNode
   confirmVariant?: 'default' | 'destructive'
-  description: ReactNode
+  desc?: ReactNode
+  description?: ReactNode
   disableConfirm?: boolean
   footerChildren?: ReactNode
+  handleConfirm?: () => void
   hideCancelButton?: boolean
   isLoading?: boolean
-  onConfirm: () => void
+  onConfirm?: () => void
   onOpenChange: (open: boolean) => void
   open: boolean
   title: ReactNode
@@ -60,14 +64,18 @@ const statusIconClasses: Record<
 
 export function ConfirmDialog(props: ConfirmDialogProps) {
   const {
+    cancelBtnText,
     cancelLabel,
     children,
     className,
     confirmLabel,
+    confirmText,
     confirmVariant,
+    desc,
     description,
     disableConfirm = false,
     footerChildren,
+    handleConfirm,
     hideCancelButton = false,
     isLoading = false,
     onConfirm,
@@ -78,6 +86,12 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     variant = 'default',
   } = props
   const { t } = useTranslation()
+  const resolvedDescription = description ?? desc
+  const resolvedConfirmLabel =
+    confirmText ?? confirmLabel ?? t('common.dialog.confirm')
+  const resolvedCancelLabel =
+    cancelBtnText ?? cancelLabel ?? t('common.dialog.cancel')
+  const resolvedOnConfirm = onConfirm ?? handleConfirm ?? (() => {})
   const statusVariant = variant === 'default' ? null : variant
   const StatusIcon = statusVariant ? statusIcons[statusVariant] : null
   const isReference = presentation === 'reference'
@@ -94,7 +108,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
             <>
               <AlertDialogTitle>{title}</AlertDialogTitle>
               <AlertDialogDescription asChild>
-                <div>{description}</div>
+                <div>{resolvedDescription}</div>
               </AlertDialogDescription>
             </>
           ) : (
@@ -113,7 +127,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
               <div className='min-w-0 flex-1 space-y-2'>
                 <AlertDialogTitle>{title}</AlertDialogTitle>
                 <AlertDialogDescription asChild>
-                  <div>{description}</div>
+                  <div>{resolvedDescription}</div>
                 </AlertDialogDescription>
               </div>
             </div>
@@ -124,20 +138,20 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
           {footerChildren}
           {!hideCancelButton ? (
             <AlertDialogCancel disabled={isLoading}>
-              {cancelLabel ?? t('common.dialog.cancel')}
+              {resolvedCancelLabel}
             </AlertDialogCancel>
           ) : null}
           <Button
             presentation={presentation}
             disabled={disableConfirm || isLoading}
-            onClick={onConfirm}
+            onClick={resolvedOnConfirm}
             type='button'
             variant={
               confirmVariant ??
               (variant === 'error' ? 'destructive' : 'default')
             }
           >
-            {confirmLabel ?? t('common.dialog.confirm')}
+            {resolvedConfirmLabel}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
