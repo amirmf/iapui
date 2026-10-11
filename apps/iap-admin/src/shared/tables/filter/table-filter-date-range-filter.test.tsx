@@ -80,3 +80,46 @@ describe('reference date range filter', () => {
     expect(onValueChange).not.toHaveBeenCalled()
   })
 })
+
+describe('shared date filter timing', () => {
+  it.each(['date', 'date-time'] as const)(
+    'debounces default %s controls for 500ms',
+    (mode) => {
+      vi.useFakeTimers()
+      const onValueChange = vi.fn()
+      render(
+        <TableFilterDateRangeFilter
+          id='date'
+          mode={mode}
+          values={{}}
+          onValueChange={onValueChange}
+        />
+      )
+      fireEvent.click(screen.getByRole('button', { name: 'From' }))
+      act(() => vi.advanceTimersByTime(499))
+      expect(onValueChange).not.toHaveBeenCalled()
+      act(() => vi.advanceTimersByTime(1))
+      expect(onValueChange.mock.calls.map(([key]) => key)).toEqual([
+        'dateFrom',
+        'dateTo',
+      ])
+    }
+  )
+  it('honors explicit delay instead of silently ignoring it', () => {
+    vi.useFakeTimers()
+    const onValueChange = vi.fn()
+    render(
+      <TableFilterDateRangeFilter
+        id='date'
+        values={{}}
+        debounceMs={25}
+        onValueChange={onValueChange}
+      />
+    )
+    fireEvent.click(screen.getByRole('button', { name: 'From' }))
+    act(() => vi.advanceTimersByTime(24))
+    expect(onValueChange).not.toHaveBeenCalled()
+    act(() => vi.advanceTimersByTime(1))
+    expect(onValueChange).toHaveBeenCalledTimes(2)
+  })
+})

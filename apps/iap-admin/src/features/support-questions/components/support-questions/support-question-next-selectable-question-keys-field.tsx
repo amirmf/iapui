@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import {
   FormControl,
@@ -7,6 +7,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@iap/forms'
+import { useDebouncedValue } from '@iap/react-hooks'
 import { MultiSelect } from '@iap/ui'
 import { useQuery } from '@tanstack/react-query'
 import { useFormContext, useWatch } from 'react-hook-form'
@@ -17,17 +18,7 @@ import { supportQuestionService } from '../../services'
 
 function useDebouncedTextSearch(delay = 500) {
   const [input, setInput] = useState('')
-  const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setSearch(input)
-    }, delay)
-
-    return () => {
-      clearTimeout(handler)
-    }
-  }, [input, delay])
+  const search = useDebouncedValue(input, delay)
 
   return {
     input,

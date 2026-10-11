@@ -37,6 +37,7 @@ describe('AssignementRuleDataTableToolbar', () => {
     await waitFor(() => expect(filter).toHaveBeenCalled())
 
     const props = filter.mock.lastCall?.[0] as TableFilterBaseProps
+    expect(props.presentation).toBe('reference')
     expect(props.textFilters?.map((f) => f.id)).toEqual([
       'title',
       'extPolicyId',

@@ -43,7 +43,8 @@
     "zod": "^4.6.5",
     "zustand": "^5.0.15",
     "@iap/files": "workspace:*",
-    "heic-to": "^1.6.5"
+    "heic-to": "^1.6.5",
+    "@iap/react-hooks": "workspace:*"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",

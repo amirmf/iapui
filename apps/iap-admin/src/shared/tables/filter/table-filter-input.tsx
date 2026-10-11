@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
+import { useDebouncedCallback } from '@iap/react-hooks'
 import { Input, cn } from '@iap/ui'
 import type { TextTableFilterConfig } from '@shared/tables/filter/types'
 import { X } from 'lucide-react'
@@ -14,7 +15,7 @@ export function TableFilterInput(
   const {
     className,
     presentation = 'default',
-    debounceMs = presentation === 'reference' ? 1200 : 400,
+    debounceMs = 1200,
     id,
     onValueChange,
     queryKey,
@@ -23,24 +24,22 @@ export function TableFilterInput(
     ...inputProps
   } = props
   const [text, setText] = useState(value)
-  const pending = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const publish = useDebouncedCallback(
+    (next: string) => onValueChange(queryKey ?? id, next.trim() || undefined),
+    debounceMs
+  )
 
   useEffect(() => {
-    clearTimeout(pending.current)
+    publish.cancel()
     setText(value)
-  }, [id, value])
-  useEffect(() => () => clearTimeout(pending.current), [])
+  }, [id, queryKey, value, publish])
 
   const change = (next: string) => {
     setText(next)
-    clearTimeout(pending.current)
-    pending.current = setTimeout(
-      () => onValueChange(queryKey ?? id, next.trim() || undefined),
-      debounceMs
-    )
+    publish(next)
   }
   const clear = () => {
-    clearTimeout(pending.current)
+    publish.cancel()
     setText('')
     onValueChange(queryKey ?? id, undefined)
   }

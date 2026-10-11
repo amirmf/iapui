@@ -292,6 +292,7 @@ Owns one global Sass entry point (`index.scss`) and genuinely document-level sty
 | `@iap/ui` | Presentational React primitives shared by applications. |
 | `@iap/forms` | Form composition and field adapters built on the shared UI contract. |
 | `@iap/shared-lib` | Framework-independent utilities, date/number formatting, and common types. |
+| `@iap/react-hooks` | Cross-application React lifecycle hooks over shared technical utilities. |
 | `@iap/api-client` | HTTP client configuration, interceptors, and transport helpers. |
 | `@iap/api-types` | Backend contract types and generated API types when introduced. |
 | `@iap/design-tokens` | Semantic design tokens and theme CSS. |
@@ -304,6 +305,15 @@ Owns one global Sass entry point (`index.scss`) and genuinely document-level sty
 | `@iap/typescript-config` | Shared TypeScript base configurations. |
 
 Packages expose only deliberate public entry points. Applications never reach into another package's source directory.
+
+Shared debounce timing belongs to `@iap/shared-lib`; React adapters
+`useDebouncedCallback` and `useDebouncedValue` belong to `@iap/react-hooks`.
+Both applications import these package public APIs. Keep filter-specific
+keys, formatting and timing defaults in admin table composition, and
+lookup/query semantics in the owning feature. See
+[Reference-page controls](REFERENCE-PAGE-CONTROLS.md) and the package READMEs
+for timing and cancellation contracts.
+
 
 ### API contract package organization
 

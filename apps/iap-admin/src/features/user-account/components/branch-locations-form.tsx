@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import type { BranchLocation } from '@iap/api-types'
 import {
@@ -8,6 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@iap/forms'
+import { useDebouncedValue } from '@iap/react-hooks'
 import { MultiSelect } from '@iap/ui'
 import { branchService } from '@modules/branches'
 import { useTranslate } from '@shared/i18n/i18n'
@@ -18,23 +19,12 @@ type BranchLocationsFormValues = {
   branchLocations: BranchLocation[]
 }
 
-function useDebouncedValue(value: string, delay = 700) {
-  const [debouncedValue, setDebouncedValue] = useState(value)
-
-  useEffect(() => {
-    const timeoutId = window.setTimeout(() => setDebouncedValue(value), delay)
-    return () => window.clearTimeout(timeoutId)
-  }, [delay, value])
-
-  return debouncedValue
-}
-
 export function BranchLocationsForm(props: { isOpen?: boolean }) {
   const { isOpen = true } = props
   const { t } = useTranslate()
   const { control } = useFormContext<BranchLocationsFormValues>()
   const [search, setSearch] = useState('')
-  const debouncedSearch = useDebouncedValue(search.trim())
+  const debouncedSearch = useDebouncedValue(search.trim(), 700)
   const branchesQuery = useQuery({
     enabled: isOpen,
     queryFn: ({ signal }) =>

@@ -26,6 +26,10 @@ Use this skill when a target page must match a local reference implementation.
 
 ## Implement safely
 
+For filter inputs and debounced lookup searches, use the repository
+[shared-debounce guidance](../shared-debounce/SKILL.md). It records the accepted
+all-presentation filter delays and public callback/value hook contracts.
+
 - Compare same-responsibility components file by file: loading, error, empty,
   permissions, pending controls, navigation, table state, mutation success
   sequencing, and accessibility semantics.

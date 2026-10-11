@@ -84,8 +84,9 @@ flows in `@iap/dialogs`. Import only public APIs. This supplements
 - Forward reference presentation through tooltips, popovers and nested date
   controls. DateRangePicker accepts `formatLabel` and `separator` for inspected
   source labels; DatePicker also supports `showClear` for existing callers.
-  Reference text/facet defaults are 1200/1000 ms; an explicit delay overrides
-  them. Default presentation retains its original timing.
+  Text/number, facet and date/date-time defaults are 1200, 1000 and 500 ms
+  respectively in every presentation; an explicit `debounceMs` overrides them.
+  The user requested timing parity for all filter consumers on 2026-10-11.
 
 ## Verification and examples
 

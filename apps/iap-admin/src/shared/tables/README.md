@@ -89,11 +89,31 @@ grid, while `classNameContainer` customizes the shell.
   search parameters, including ignored fields, sorting and page size, and
   cancels pending control updates. Do not use it when a page requires reset to
   preserve unrelated search state without a feature-specific adapter.
-- `presentation` defaults to `'reference'`; existing shared controls own timing
-  and formatting. Numeric ranges use the current two-input control.
+- `presentation` defaults to `'reference'`; reference numeric ranges show a
+  summary button and two inputs inside a popover. Grouped triggers fill their
+  allocated width.
 - `showReset`, `labels`, `expandButtonLabel` and `collapseButtonLabel` customize
   shell actions. Default labels use existing translated common keys.
 
 Do not mount a second filter-state owner for the same URL fields. See
 [the port evidence](../../../../../docs/tasks/grouped-table-filter-query-params.md)
 for tests, reference adaptations and the accepted file-placement exception.
+
+## Debounce and reference timing
+
+All filter controls use the shared callback hook from `@iap/react-hooks`, backed
+by the single `debounce` implementation in `@iap/shared-lib`. Text and both
+numeric bounds default to 1200ms, facets to 1000ms, and date/date-time ranges
+to 500ms in every presentation. An explicit `debounceMs` overrides these values.
+Do not debounce the toolbar's `onValueChange` again.
+
+Reference numeric ranges format committed amounts in their summary trigger.
+Each bound has independent draft text, a clear action and a cancellable timer.
+Default numeric controls retain inline geometry and legacy range keys. Clear
+applies immediately; clear, controlled-value/key changes and content remount
+on global reset discard unpublished edits. Unmount also cancels them.
+
+For lookup searches outside the table controls, use `useDebouncedValue` when a
+query consumes delayed state and `useDebouncedCallback` when explicit immediate
+clear/cancel behavior is needed. Preserve the source-specific lookup delay.
+See [the hook API](../../../../../packages/react-hooks/README.md) for examples.

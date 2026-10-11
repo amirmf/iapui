@@ -12,12 +12,16 @@ export type TextTableFilterConfig = BaseConfig & {
   asLike?: boolean
   debounceMs?: number
   inputMode?: ComponentProps<typeof Input>['inputMode']
+  numberWithComma?: boolean
   numerical?: boolean
   placeholder?: string
   queryKey?: string
 }
 
 export type NumberRangeTableFilterConfig = BaseConfig & {
+  debounceMs?: number
+  inputClassName?: string
+  popoverClassName?: string
   fromKey?: string
   fromPlaceholder?: string
   numberWithComma?: boolean

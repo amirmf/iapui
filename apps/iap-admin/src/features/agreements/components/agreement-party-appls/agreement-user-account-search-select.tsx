@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
+import { useDebouncedValue } from '@iap/react-hooks'
 import { Select } from '@iap/ui'
 import { userAccountSelectionService } from '@modules/user-account-selection'
 import { useTranslate } from '@shared/i18n/i18n'
@@ -19,12 +20,7 @@ export function AgreementUserAccountSearchSelect(
   const { value, onChange, placeholder, disabled, onlySelectedDisabled } = props
   const { t } = useTranslate()
   const [searchText, setSearchText] = useState('')
-  const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setSearch(searchText.trim()), 700)
-    return () => window.clearTimeout(timer)
-  }, [searchText])
+  const search = useDebouncedValue(searchText, 700).trim()
 
   const query = useQuery({
     queryKey: ['user-accounts', search],

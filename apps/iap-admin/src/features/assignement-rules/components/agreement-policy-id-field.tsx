@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { useAssignementRuleAgreements } from '@features/assignement-rules/queries/use-assignement-rule-agreements'
 import {
@@ -8,6 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@iap/forms'
+import { useDebouncedValue } from '@iap/react-hooks'
 import { SearchableSelect } from '@iap/ui'
 import type { Control, FieldPathByValue, FieldValues } from 'react-hook-form'
 import { useWatch } from 'react-hook-form'
@@ -22,17 +23,6 @@ interface AgreementPolicyIdFieldProps<
   placeholder: string
   enabled?: boolean
   isEdit?: boolean
-}
-
-function useDebouncedValue(value: string, delay = 500) {
-  const [debounced, setDebounced] = useState(value)
-
-  useEffect(() => {
-    const handler = setTimeout(() => setDebounced(value), delay)
-    return () => clearTimeout(handler)
-  }, [value, delay])
-
-  return debounced
 }
 
 export function AgreementPolicyIdField<
@@ -52,7 +42,7 @@ export function AgreementPolicyIdField<
     typeof value === 'string' && value !== '' ? value : undefined
 
   const [searchTerm, setSearchTerm] = useState('')
-  const debouncedSearch = useDebouncedValue(searchTerm.trim())
+  const debouncedSearch = useDebouncedValue(searchTerm.trim(), 500)
 
   const { agreementPage, isFetching, selectedAgreementPage } =
     useAssignementRuleAgreements({

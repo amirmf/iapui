@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
+import { useDebouncedCallback } from '@iap/react-hooks'
 import {
   Badge,
   Button,
@@ -86,7 +87,7 @@ export function TableFilterFacetedFilter(
     triggerClassName,
     presentation = 'default',
     deferSingleSelection = false,
-    debounceMs = presentation === 'reference' ? 1000 : 0,
+    debounceMs = 1000,
     disabled,
     id,
     multiple = true,
@@ -101,17 +102,18 @@ export function TableFilterFacetedFilter(
   const signature = JSON.stringify(externalValue ?? null)
   const [localValue, setLocalValue] = useState(externalValue)
   const [search, setSearch] = useState('')
-  const pending = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const publish = useDebouncedCallback(
+    (next: TableFilterValue) => onValueChange(id, next),
+    debounceMs
+  )
   useEffect(() => {
-    clearTimeout(pending.current)
+    publish.cancel()
     setLocalValue(JSON.parse(signature) ?? undefined)
-  }, [id, signature])
-  useEffect(() => () => clearTimeout(pending.current), [])
+  }, [id, signature, publish])
   const change = (next: TableFilterValue, immediate = false) => {
     setLocalValue(next)
-    clearTimeout(pending.current)
-    if (debounceMs > 0 && !immediate)
-      pending.current = setTimeout(() => onValueChange(id, next), debounceMs)
+    publish.cancel()
+    if (debounceMs > 0 && !immediate) publish(next)
     else onValueChange(id, next)
   }
   const selectedValues = Array.isArray(localValue)

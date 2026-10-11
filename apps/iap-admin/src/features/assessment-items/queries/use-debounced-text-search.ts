@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
+
+import { useDebouncedCallback } from '@iap/react-hooks'
 
 export default function useDebouncedTextSearch(props?: {
   time?: number
@@ -7,15 +9,16 @@ export default function useDebouncedTextSearch(props?: {
   const { time, useText } = props ?? {}
   const [search, setSearch] = useState('')
   const [text, setText] = useState('')
-  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
-  useEffect(() => () => clearTimeout(timer.current), [])
+  const publish = useDebouncedCallback(
+    (value: string) => setSearch(value.trim()),
+    time || 700
+  )
   const onSearch = useCallback(
     (value: string) => {
-      clearTimeout(timer.current)
-      timer.current = setTimeout(() => setSearch(value.trim()), time || 700)
+      publish(value)
       if (useText) setText(value)
     },
-    [time, useText]
+    [publish, useText]
   )
   return { search, text: useText ? text : '', setSearch: onSearch }
 }

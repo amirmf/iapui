@@ -196,9 +196,10 @@ describe('Grouped URL filters', () => {
         showReset={false}
       />
     )
-    fireEvent.change(screen.getByPlaceholderText('Minimum'), {
-      target: { value: '' },
-    })
+    fireEvent.click(
+      screen.getByRole('button', { name: `12 - ${i18n.t('common.to')}` })
+    )
+    fireEvent.click(screen.getByRole('button', { name: 'Clear input' }))
     expect(applyNavigation()).toEqual({})
     expect(
       screen.queryByRole('button', { name: i18n.t('common.resetFilter') })
@@ -210,12 +211,15 @@ describe('Grouped URL filters', () => {
   it('uses reference numeric suffixes without overwriting the other bound', () => {
     route.search = { amount__fromNum: '10', amount__toNum: '90' }
     render(<GroupedTableFilterQueryParams groups={groups} />)
+    fireEvent.click(screen.getByRole('button', { name: '10 - 90' }))
     expect(
       (screen.getByPlaceholderText('Minimum') as HTMLInputElement).value
     ).toBe('10')
     fireEvent.change(screen.getByPlaceholderText('Maximum'), {
       target: { value: '100' },
     })
+    expect(route.navigate).not.toHaveBeenCalled()
+    act(() => vi.advanceTimersByTime(1200))
     expect(applyNavigation()).toEqual({
       amount__fromNum: '10',
       amount__toNum: '100',

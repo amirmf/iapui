@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import {
   FormControl,
@@ -7,6 +7,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@iap/forms'
+import { useDebouncedValue } from '@iap/react-hooks'
 import { SearchableSelect } from '@iap/ui'
 import {
   type Control,
@@ -40,14 +41,7 @@ export interface AgreementFieldProps<
 
 function useDebouncedTextSearch(delay = 500) {
   const [text, setText] = useState('')
-  const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setSearch(text.trim())
-    }, delay)
-    return () => clearTimeout(handler)
-  }, [text, delay])
+  const search = useDebouncedValue(text, delay).trim()
 
   return {
     search,

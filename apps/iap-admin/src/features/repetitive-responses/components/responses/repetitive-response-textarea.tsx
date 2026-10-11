@@ -8,6 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { repetitiveResponseService } from '@features/repetitive-responses/services/repetitive-response-service'
 import type { RepetitiveResponse } from '@iap/api-types'
+import { useDebouncedValue } from '@iap/react-hooks'
 import {
   Popover,
   PopoverAnchor,
@@ -34,17 +35,6 @@ function mergeRefs<T>(...refs: Array<Ref<T> | undefined>) {
       ref.current = node
     })
   }
-}
-
-function useDebouncedValue(value: string, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState(value)
-
-  useEffect(() => {
-    const timeoutId = window.setTimeout(() => setDebouncedValue(value), delay)
-    return () => window.clearTimeout(timeoutId)
-  }, [delay, value])
-
-  return debouncedValue
 }
 
 type BaseTextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement>

@@ -201,3 +201,67 @@ describe('Reference table filter controls', () => {
     ).toBeTruthy()
   })
 })
+
+describe('shared filter debounce defaults', () => {
+  beforeAll(async () => {
+    await i18nReady
+  })
+  beforeEach(() => vi.useFakeTimers())
+  afterEach(() => {
+    cleanup()
+    vi.useRealTimers()
+  })
+
+  it.each(['default', 'reference'] as const)(
+    'uses 1200ms text timing in %s presentation',
+    (presentation) => {
+      const onValueChange = vi.fn()
+      render(
+        <TableFilterInput
+          id='title'
+          placeholder='Title'
+          presentation={presentation}
+          onValueChange={onValueChange}
+        />
+      )
+      fireEvent.change(screen.getByPlaceholderText('Title'), {
+        target: { value: 'query' },
+      })
+      act(() => vi.advanceTimersByTime(1199))
+      expect(onValueChange).not.toHaveBeenCalled()
+      act(() => vi.advanceTimersByTime(1))
+      expect(onValueChange).toHaveBeenCalledExactlyOnceWith('title', 'query')
+    }
+  )
+
+  it('uses 1000ms facet timing by default and clears without restoring pending selections', () => {
+    const onValueChange = vi.fn()
+    render(
+      <TableFilterFacetedFilter
+        id='status'
+        placeholder='Status'
+        values={{}}
+        options={[{ value: 'open', label: 'Open' }]}
+        onValueChange={onValueChange}
+      />
+    )
+    fireEvent.click(screen.getByRole('button', { name: 'Status' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Open' }))
+    act(() => vi.advanceTimersByTime(999))
+    expect(onValueChange).not.toHaveBeenCalled()
+    act(() => vi.advanceTimersByTime(1))
+    expect(onValueChange).toHaveBeenCalledExactlyOnceWith('status', ['open'])
+    fireEvent.click(screen.getByRole('button', { name: 'Open' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Open' }))
+    fireEvent.click(
+      screen.getByRole('button', {
+        name: i18n.t('dataTable.facetedFilter.clear'),
+      })
+    )
+    act(() => vi.advanceTimersByTime(1000))
+    expect(onValueChange.mock.calls).toEqual([
+      ['status', ['open']],
+      ['status', undefined],
+    ])
+  })
+})

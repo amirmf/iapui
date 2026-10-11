@@ -42,8 +42,10 @@ export function GroupedTableFilterItem(props: {
   if (filter.type === 'numberRange') {
     return (
       <TableFilterNumberRangeInput
+        presentation={presentation}
         {...filter.config}
-        className={cn(filter.config.className, 'w-full')}
+        className={cn(filter.config.className, 'w-full lg:w-full')}
+        wrapperClassName={cn(filter.config.wrapperClassName, 'w-full')}
         fromKey={
           filter.config.fromKey ?? `${filter.config.id}${fromNumberRangeKey}`
         }

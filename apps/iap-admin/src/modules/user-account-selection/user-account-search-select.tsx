@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import type { PartyRole } from '@iap/api-types'
+import { useDebouncedValue } from '@iap/react-hooks'
 import { SearchableSelect, Select } from '@iap/ui'
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
@@ -20,17 +21,6 @@ type UserAccountSearchSelectProps = {
   valueMode?: 'id' | 'username'
 }
 
-function useDebouncedValue(value: string, delay = 700) {
-  const [debouncedValue, setDebouncedValue] = useState(value)
-
-  useEffect(() => {
-    const timeoutId = window.setTimeout(() => setDebouncedValue(value), delay)
-    return () => window.clearTimeout(timeoutId)
-  }, [delay, value])
-
-  return debouncedValue
-}
-
 export function UserAccountSearchSelect(props: UserAccountSearchSelectProps) {
   const {
     branchLocationsId,
@@ -46,7 +36,7 @@ export function UserAccountSearchSelect(props: UserAccountSearchSelectProps) {
   } = props
   const { t } = useTranslation()
   const [searchValue, setSearchValue] = useState('')
-  const text = useDebouncedValue(searchValue.trim())
+  const text = useDebouncedValue(searchValue.trim(), 700)
   const usersQuery = useQuery({
     enabled: !disabled,
     queryFn: ({ signal }) =>

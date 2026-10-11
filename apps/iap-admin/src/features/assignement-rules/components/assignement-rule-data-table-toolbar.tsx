@@ -154,6 +154,7 @@ export function AssignementRuleDataTableToolbar() {
   return (
     <div className='mb-4'>
       <TableFilterQueryParams
+        presentation='reference'
         dateRangeFilters={dateRangeFilters}
         defaultVisibleFilterCount={13}
         facetedFilters={facetedFilters}

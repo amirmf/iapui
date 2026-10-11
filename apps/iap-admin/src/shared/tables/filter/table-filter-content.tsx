@@ -99,6 +99,7 @@ export function TableFilterContent(
         if (kind === 'number')
           return (
             <TableFilterNumberRangeInput
+              presentation={presentation}
               {...config}
               key={config.id}
               onValueChange={onValueChange}

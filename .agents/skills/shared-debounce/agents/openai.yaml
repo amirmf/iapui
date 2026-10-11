@@ -1,0 +1,3 @@
+interface:
+  display_name: "Shared Debounce"
+  short_description: "Use shared debounce APIs and reference filter timing"

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { agreementService } from '@features/agreements'
+import { useDebouncedValue } from '@iap/react-hooks'
 import { SearchableSelect } from '@iap/ui'
 import { useTranslate } from '@shared/i18n/i18n'
 import { useQuery } from '@tanstack/react-query'
@@ -15,14 +16,7 @@ export function AgreementSearchSelect(props: {
   const { value, onChange, placeholder, disabled, enabled = true } = props
   const { t } = useTranslate()
   const [search, setSearch] = useState('')
-  const [debouncedSearch, setDebouncedSearch] = useState('')
-  useEffect(() => {
-    const timer = window.setTimeout(
-      () => setDebouncedSearch(search.trim()),
-      700
-    )
-    return () => window.clearTimeout(timer)
-  }, [search])
+  const debouncedSearch = useDebouncedValue(search, 700).trim()
   useEffect(() => {
     if (!enabled) setSearch('')
   }, [enabled])

@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
+import { useDebouncedCallback } from '@iap/react-hooks'
 import { formatLocalDateTime } from '@iap/shared-lib'
 import { DateRangePicker, type DateRangeValue, cn } from '@iap/ui'
 import { useTranslate } from '@shared/i18n/i18n'
@@ -22,6 +23,7 @@ export function TableFilterDateRangeFilter(
 ) {
   const {
     className,
+    debounceMs = 500,
     fromPlaceholder,
     fromKey,
     id,
@@ -47,41 +49,39 @@ export function TableFilterDateRangeFilter(
     from: parseTableFilterDate(values[resolvedFromKey]),
     to: parseTableFilterDate(values[resolvedToKey]),
   }))
-  const pending = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   const isReference = presentation === 'reference'
   const fromValue = values[resolvedFromKey]
   const toValue = values[resolvedToKey]
+  const publish = (next: DateRangeValue) => {
+    onValueChange(
+      resolvedFromKey,
+      isReference && mode === 'date'
+        ? next.from
+          ? formatLocalDateTime(next.from, 'yyyy-MM-dd')
+          : undefined
+        : toTableFilterDate(next.from, mode)
+    )
+    onValueChange(
+      resolvedToKey,
+      isReference && mode === 'date'
+        ? next.to
+          ? formatLocalDateTime(next.to, 'yyyy-MM-dd')
+          : undefined
+        : toTableFilterDate(next.to, mode)
+    )
+  }
+  const debouncedPublish = useDebouncedCallback(publish, debounceMs)
   useEffect(() => {
-    clearTimeout(pending.current)
+    debouncedPublish.cancel()
     setRange({
       from: parseTableFilterDate(fromValue),
       to: parseTableFilterDate(toValue),
     })
-  }, [fromValue, toValue, resolvedFromKey, resolvedToKey])
-  useEffect(() => () => clearTimeout(pending.current), [])
+  }, [fromValue, toValue, resolvedFromKey, resolvedToKey, debouncedPublish])
   const change = (next: DateRangeValue) => {
     setRange(next)
-    clearTimeout(pending.current)
-    const publish = () => {
-      onValueChange(
-        resolvedFromKey,
-        isReference && mode === 'date'
-          ? next.from
-            ? formatLocalDateTime(next.from, 'yyyy-MM-dd')
-            : undefined
-          : toTableFilterDate(next.from, mode)
-      )
-      onValueChange(
-        resolvedToKey,
-        isReference && mode === 'date'
-          ? next.to
-            ? formatLocalDateTime(next.to, 'yyyy-MM-dd')
-            : undefined
-          : toTableFilterDate(next.to, mode)
-      )
-    }
-    if (isReference) pending.current = setTimeout(publish, 500)
-    else publish()
+    debouncedPublish.cancel()
+    debouncedPublish(next)
   }
 
   return (
