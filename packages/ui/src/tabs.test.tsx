@@ -60,3 +60,25 @@ describe('Tabs', () => {
     )
   })
 })
+
+it('scopes source focus declarations to reference triggers', () => {
+  render(
+    <Tabs defaultValue='default'>
+      <TabsList>
+        <TabsTrigger value='default'>Default focus</TabsTrigger>
+        <TabsTrigger presentation='reference' value='reference'>
+          Reference focus
+        </TabsTrigger>
+      </TabsList>
+    </Tabs>
+  )
+  expect(screen.getByRole('tab', { name: 'Default focus' })).toHaveClass(
+    'outline-none'
+  )
+  expect(screen.getByRole('tab', { name: 'Reference focus' })).not.toHaveClass(
+    'outline-none'
+  )
+  expect(screen.getByRole('tab', { name: 'Reference focus' })).toHaveClass(
+    'focus-visible:outline-ring'
+  )
+})

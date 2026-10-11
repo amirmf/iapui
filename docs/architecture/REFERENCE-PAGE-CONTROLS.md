@@ -184,3 +184,7 @@ The completed tickets parity and architecture audit is recorded in
   live under `packages/api-types/src/tickets`; other domains keep their existing
   strict request and common page-factory rules. Never extend this exception
   simply because another page also has a paginated response.
+
+## Agent User Signup scoped presentations
+
+Agent User Signup opts into CardTitle/CardDescription as=div, TabsTrigger presentation=reference (source focus outline), and TextField/FormMessage presentation=reference (source error body selection and markup). Defaults retain semantic heading/paragraph tags and alert behavior. Its CSS module owns source font fallback, mobile input size and autofill declarations. The global mutation handler accepts meta.errorPresentation=reference for source fallback/304 literals; the public error extractor accepts presentation=reference for source-specific edge acceptance. These do not change default consumers.

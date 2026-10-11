@@ -1,9 +1,7 @@
-import { PlaceholderPage } from '@features/placeholder'
+import { AgentUserSignupPage } from '@features/agent-users'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_agent/agent/users/create/')({
-  component: () => (
-    <PlaceholderPage titleKey='panelPlaceholders.agentUserSignup' />
-  ),
+  component: AgentUserSignupPage,
   loader: () => ({ crumb: 'agentUserSignup' }),
 })

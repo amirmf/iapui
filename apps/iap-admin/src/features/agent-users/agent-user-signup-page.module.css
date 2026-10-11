@@ -1,0 +1,21 @@
+.page {
+  font-family: 'Vazir', sans-serif;
+  font-synthesis: auto;
+  text-rendering: auto;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .page input {
+    font-size: 14px !important;
+  }
+}
+
+.page input:-webkit-autofill,
+.page input:-webkit-autofill:hover,
+.page input:-webkit-autofill:focus,
+.page input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+  -webkit-text-fill-color: revert !important;
+}

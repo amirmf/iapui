@@ -351,6 +351,9 @@ workspace packages → no application imports
 - The approved tickets-specific source-acceptance exception is documented in
   [TICKETS-REFERENCE-CONTRACT.md](TICKETS-REFERENCE-CONTRACT.md); it does not
   change the default strict-request or common page-factory rules for other domains.
+- The approved Agent User Signup request-stripping exception is documented in
+  [AGENT-USER-SIGNUP-REFERENCE-CONTRACT.md](AGENT-USER-SIGNUP-REFERENCE-CONTRACT.md);
+  it is scoped to that request and preserves the default strict-request rule elsewhere.
 - Every backend endpoint contract must expose Zod v4 schemas for both its request
   and response in `api-types`. API services validate outgoing requests and
   incoming responses with those schemas; TypeScript types are inferred from the

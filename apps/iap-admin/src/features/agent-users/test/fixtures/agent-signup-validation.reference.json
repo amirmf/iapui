@@ -1,0 +1,242 @@
+[
+  {
+    "input": {},
+    "issues": [
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["phoneNumber"],
+        "message": "Invalid input: expected string, received undefined"
+      },
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["nationalCode"],
+        "message": "Invalid input: expected string, received undefined"
+      },
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["password"],
+        "message": "Invalid input: expected string, received undefined"
+      },
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["confirmPassword"],
+        "message": "Invalid input: expected string, received undefined"
+      }
+    ]
+  },
+  {
+    "input": {
+      "phoneNumber": null,
+      "nationalCode": null,
+      "password": null,
+      "confirmPassword": null,
+      "nationalityType": null
+    },
+    "issues": [
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["phoneNumber"],
+        "message": "Invalid input: expected string, received null"
+      },
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["nationalCode"],
+        "message": "Invalid input: expected string, received null"
+      },
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["password"],
+        "message": "Invalid input: expected string, received null"
+      },
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["confirmPassword"],
+        "message": "Invalid input: expected string, received null"
+      },
+      {
+        "code": "invalid_value",
+        "values": ["IR", "FOREIGN"],
+        "path": ["nationalityType"],
+        "message": "Invalid option: expected one of \"IR\"|\"FOREIGN\""
+      }
+    ]
+  },
+  {
+    "input": {
+      "phoneNumber": 12,
+      "nationalCode": 12,
+      "password": 12,
+      "confirmPassword": 12,
+      "nationalityType": 12
+    },
+    "issues": [
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["phoneNumber"],
+        "message": "Invalid input: expected string, received number"
+      },
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["nationalCode"],
+        "message": "Invalid input: expected string, received number"
+      },
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["password"],
+        "message": "Invalid input: expected string, received number"
+      },
+      {
+        "expected": "string",
+        "code": "invalid_type",
+        "path": ["confirmPassword"],
+        "message": "Invalid input: expected string, received number"
+      },
+      {
+        "code": "invalid_value",
+        "values": ["IR", "FOREIGN"],
+        "path": ["nationalityType"],
+        "message": "Invalid option: expected one of \"IR\"|\"FOREIGN\""
+      }
+    ]
+  },
+  {
+    "input": {
+      "phoneNumber": "bad",
+      "nationalCode": " ",
+      "password": " ",
+      "confirmPassword": "",
+      "nationalityType": "OTHER"
+    },
+    "issues": [
+      {
+        "origin": "string",
+        "code": "invalid_format",
+        "format": "regex",
+        "pattern": "/^(\\+989\\d{9}|09\\d{9})$/",
+        "path": ["phoneNumber"],
+        "message": "agent.users.validation.phoneNumber"
+      },
+      {
+        "origin": "string",
+        "code": "too_small",
+        "minimum": 1,
+        "inclusive": true,
+        "path": ["nationalCode"],
+        "message": "agent.users.validation.nationalCodeRequired"
+      },
+      {
+        "origin": "string",
+        "code": "too_small",
+        "minimum": 6,
+        "inclusive": true,
+        "path": ["password"],
+        "message": "agent.users.validation.passwordMinLength"
+      },
+      {
+        "code": "custom",
+        "path": ["password"],
+        "message": "agent.users.validation.passwordRequired"
+      },
+      {
+        "origin": "string",
+        "code": "too_small",
+        "minimum": 1,
+        "inclusive": true,
+        "path": ["confirmPassword"],
+        "message": "agent.users.validation.confirmPasswordRequired"
+      },
+      {
+        "code": "invalid_value",
+        "values": ["IR", "FOREIGN"],
+        "path": ["nationalityType"],
+        "message": "Invalid option: expected one of \"IR\"|\"FOREIGN\""
+      }
+    ]
+  },
+  {
+    "input": {
+      "phoneNumber": "bad",
+      "nationalCode": " ",
+      "password": " ",
+      "confirmPassword": ""
+    },
+    "issues": [
+      {
+        "origin": "string",
+        "code": "invalid_format",
+        "format": "regex",
+        "pattern": "/^(\\+989\\d{9}|09\\d{9})$/",
+        "path": ["phoneNumber"],
+        "message": "agent.users.validation.phoneNumber"
+      },
+      {
+        "origin": "string",
+        "code": "too_small",
+        "minimum": 1,
+        "inclusive": true,
+        "path": ["nationalCode"],
+        "message": "agent.users.validation.nationalCodeRequired"
+      },
+      {
+        "origin": "string",
+        "code": "too_small",
+        "minimum": 6,
+        "inclusive": true,
+        "path": ["password"],
+        "message": "agent.users.validation.passwordMinLength"
+      },
+      {
+        "code": "custom",
+        "path": ["password"],
+        "message": "agent.users.validation.passwordRequired"
+      },
+      {
+        "origin": "string",
+        "code": "too_small",
+        "minimum": 1,
+        "inclusive": true,
+        "path": ["confirmPassword"],
+        "message": "agent.users.validation.confirmPasswordRequired"
+      },
+      {
+        "code": "custom",
+        "path": ["confirmPassword"],
+        "message": "agent.users.validation.passwordsMatch"
+      }
+    ]
+  },
+  {
+    "input": {
+      "phoneNumber": "09123456789",
+      "nationalCode": "id",
+      "password": "secret",
+      "confirmPassword": ""
+    },
+    "issues": [
+      {
+        "origin": "string",
+        "code": "too_small",
+        "minimum": 1,
+        "inclusive": true,
+        "path": ["confirmPassword"],
+        "message": "agent.users.validation.confirmPasswordRequired"
+      },
+      {
+        "code": "custom",
+        "path": ["confirmPassword"],
+        "message": "agent.users.validation.passwordsMatch"
+      }
+    ]
+  }
+]

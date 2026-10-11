@@ -147,10 +147,21 @@ export function FormDescription(props: ComponentPropsWithoutRef<'p'>) {
   )
 }
 
-export function FormMessage(props: ComponentPropsWithoutRef<'p'>) {
-  const { children, className, ...rest } = props
+export function FormMessage(
+  props: ComponentPropsWithoutRef<'p'> & {
+    presentation?: 'default' | 'reference'
+  }
+) {
+  const { children, className, presentation = 'default', ...rest } = props
   const { error, formMessageId, name } = useFormField()
-  const body = error?.message ? String(error.message) : children
+  const body =
+    presentation === 'reference'
+      ? error
+        ? String(error.message ?? '')
+        : children
+      : error?.message
+        ? String(error.message)
+        : children
 
   if (!body) {
     return null
@@ -162,7 +173,7 @@ export function FormMessage(props: ComponentPropsWithoutRef<'p'>) {
       data-message-error={name}
       data-slot='form-message'
       id={formMessageId}
-      role='alert'
+      role={presentation === 'reference' ? undefined : 'alert'}
       {...rest}
     >
       {body}

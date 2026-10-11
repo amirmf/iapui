@@ -7,7 +7,7 @@ import {
 } from '@iap/auth'
 import { SupportFlowWidget } from '@iap/support'
 import { cn } from '@iap/ui'
-import { Outlet } from '@tanstack/react-router'
+import { Outlet, useLocation } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
 import { AdminHeader } from './admin-header'
@@ -16,6 +16,10 @@ import { agentNavigation } from './agent-navigation'
 
 export function AgentLayout() {
   const { t } = useTranslation()
+  const isAgentUserSignup = useLocation({
+    select: (location) => /^\/agent\/users\/create\/?$/.test(location.pathname),
+  })
+  const Content = isAgentUserSignup ? 'div' : 'main'
   const { isLoading, logout, user } = useAuthSession()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
@@ -44,7 +48,8 @@ export function AgentLayout() {
       <div
         className={cn(
           'min-h-dvh p-2 transition-[margin] duration-300 motion-reduce:transition-none sm:p-4 lg:mr-72',
-          isCollapsed && 'lg:mr-20'
+          isCollapsed && 'lg:mr-20',
+          isAgentUserSignup && 'sm:px-2'
         )}
       >
         <AdminHeader
@@ -53,13 +58,16 @@ export function AgentLayout() {
           onOpenNavigation={() => setIsMobileOpen(true)}
           user={user}
         />
-        <main
-          className='mx-auto w-full max-w-[1600px] py-6'
+        <Content
+          className={cn(
+            'mx-auto w-full max-w-[1600px] py-6',
+            isAgentUserSignup && 'max-w-none pb-0 pt-6'
+          )}
           id='main-content'
           tabIndex={-1}
         >
           <Outlet />
-        </main>
+        </Content>
         <SupportFlowWidget position='admin' />
         <ForcePasswordChangeDialog />
         <AuditInformationDialog />

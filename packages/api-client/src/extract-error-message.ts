@@ -98,11 +98,12 @@ function collectMessages(
       )
 }
 
-function isCanceledError(error: unknown) {
+function isCanceledError(error: unknown, reference: boolean) {
   if (error instanceof AxiosError) {
     return (
       (error.code !== undefined && CANCELED_ERROR_CODES.has(error.code)) ||
-      error.name.toLowerCase() === 'cancelederror'
+      error.name.toLowerCase() === 'cancelederror' ||
+      (reference && /cancelled|canceled/i.test(error.message))
     )
   }
 
@@ -126,9 +127,27 @@ function isCanceledError(error: unknown) {
   )
 }
 
-export function extractErrorMessage(error: unknown): string | undefined {
-  if (isCanceledError(error)) {
+export type ErrorMessageOptions = {
+  presentation?: 'reference'
+}
+
+export function extractErrorMessage(
+  error: unknown,
+  options: ErrorMessageOptions = {}
+): string | undefined {
+  const reference = options.presentation === 'reference'
+  if (isCanceledError(error, reference)) {
     return undefined
+  }
+
+  if (
+    reference &&
+    error &&
+    typeof error === 'object' &&
+    'status' in error &&
+    Number(error.status) === 204
+  ) {
+    return 'Content not found.'
   }
 
   if (error instanceof AxiosError) {

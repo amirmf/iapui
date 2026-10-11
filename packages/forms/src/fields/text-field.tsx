@@ -20,13 +20,22 @@ export type TextFieldProps<
   description?: ReactNode
   label: ReactNode
   name: TName
+  presentation?: 'default' | 'reference'
 }
 
 export function TextField<
   TFieldValues extends FieldValues,
   TName extends FieldPath<TFieldValues>,
 >(props: TextFieldProps<TFieldValues, TName>) {
-  const { control, description, label, name, required, ...inputProps } = props
+  const {
+    control,
+    description,
+    label,
+    name,
+    presentation,
+    required,
+    ...inputProps
+  } = props
 
   return (
     <FormField
@@ -41,7 +50,7 @@ export function TextField<
           {description ? (
             <FormDescription>{description}</FormDescription>
           ) : null}
-          <FormMessage />
+          <FormMessage presentation={presentation} />
         </FormItem>
       )}
     />

@@ -32,10 +32,12 @@ export function CardHeader(props: HTMLAttributes<HTMLDivElement>) {
   )
 }
 
-export function CardTitle(props: HTMLAttributes<HTMLHeadingElement>) {
-  const { className, ...rest } = props
+export function CardTitle(
+  props: HTMLAttributes<HTMLHeadingElement> & { as?: 'h2' | 'div' }
+) {
+  const { as: Component = 'h2', className, ...rest } = props
   return (
-    <h2
+    <Component
       className={cn('leading-none font-semibold', className)}
       data-slot='card-title'
       {...rest}
@@ -43,10 +45,12 @@ export function CardTitle(props: HTMLAttributes<HTMLHeadingElement>) {
   )
 }
 
-export function CardDescription(props: HTMLAttributes<HTMLParagraphElement>) {
-  const { className, ...rest } = props
+export function CardDescription(
+  props: HTMLAttributes<HTMLParagraphElement> & { as?: 'p' | 'div' }
+) {
+  const { as: Component = 'p', className, ...rest } = props
   return (
-    <p
+    <Component
       className={cn('text-muted-foreground text-sm', className)}
       data-slot='card-description'
       {...rest}

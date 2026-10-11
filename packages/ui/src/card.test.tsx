@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
-import { Card } from './card'
+import { Card, CardDescription, CardTitle } from './card'
 
 describe('Card', () => {
   it('uses the shared card-surface styling by default', () => {
@@ -31,5 +31,22 @@ describe('Card', () => {
     render(<Card as='aside'>Content</Card>)
 
     expect(screen.getByRole('complementary')).toHaveClass('shadow-sm')
+  })
+})
+
+describe('Card title and description semantics', () => {
+  it('preserves defaults and supports reference div tags', () => {
+    render(
+      <>
+        <CardTitle>Default title</CardTitle>
+        <CardDescription>Default description</CardDescription>
+        <CardTitle as='div'>Reference title</CardTitle>
+        <CardDescription as='div'>Reference description</CardDescription>
+      </>
+    )
+    expect(screen.getByText('Default title').tagName).toBe('H2')
+    expect(screen.getByText('Default description').tagName).toBe('P')
+    expect(screen.getByText('Reference title').tagName).toBe('DIV')
+    expect(screen.getByText('Reference description').tagName).toBe('DIV')
   })
 })

@@ -113,3 +113,27 @@ My-IAP pages belong only to iap-app. Customer claim links use the configured
 customer application origin and `/myclaims/{encoded-id}` without `/myiap`;
 backend `/my/iap-ticket` paths remain unchanged. Reuse tenant deployment
 configuration instead of inventing a URL or adding an admin compatibility route.
+
+## Small form parity lessons
+
+- Compare mounted primitives and global styles as well as feature JSX. Identical
+  Tailwind classes can render differently because of base border/outline tokens,
+  mobile input rules, font-provider selectors and autofill declarations.
+- Verify the actual active font declaration and registered font-face names; do
+  not silently correct a source fallback while claiming exact visual parity.
+- Shared Card title/description support `as='div'`; TabsTrigger and
+  TextField/FormMessage support `presentation='reference'`. Use these only for
+  verified source semantics and test unchanged default consumers too.
+- Field-group components returning fragments do not add DOM wrappers. Compare
+  rendered field order and sibling spacing rather than assuming extraction
+  changes a form's layout.
+- Trace mutation failures through global handling and transport guards. A page
+  can match its success flow yet differ on forced-password cancellation,
+  fallback literals, HTTP 304 feedback or error extraction. Use scoped mutation
+  metadata instead of duplicate feature-level toast handlers.
+- Compare complete Zod issue arrays for simultaneous invalid values, not merely
+  the presence of one expected message. Keep source-derived fixture evidence
+  separate from screenshots and live-backend verification.
+- A shared layout can introduce nested main landmarks or extra padding around
+  an otherwise identical page. Scope source host corrections to the page while
+  preserving approved panel ownership and other routes' presentation.

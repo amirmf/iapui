@@ -16,11 +16,17 @@ export function createAppQueryClient(props: CreateQueryClientOptions) {
   return new QueryClient({
     defaultOptions: {
       mutations: {
-        onError: (error) => {
-          handleServerError(error)
+        onError: (error, _variables, _result, context) => {
+          const reference = context.meta?.errorPresentation === 'reference'
+          handleServerError(
+            error,
+            reference ? { presentation: 'reference' } : undefined
+          )
 
           if (error instanceof AxiosError && error.response?.status === 304) {
-            toast.error('محتوا تغییری نکرده است.')
+            toast.error(
+              reference ? 'Content not modified!' : 'محتوا تغییری نکرده است.'
+            )
           }
         },
       },

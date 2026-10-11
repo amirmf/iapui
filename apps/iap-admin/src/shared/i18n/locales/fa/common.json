@@ -3876,6 +3876,40 @@
         "completionOfDocuments": "تکمیل مدارک",
         "delete": "حذف"
       }
+    },
+    "users": {
+      "title": "ثبت‌نام بیمه‌شده",
+      "description": "برای شخص بیمه‌شده حساب کاربری ایجاد کنید.",
+      "fields": {
+        "nationalityType": "تابعیت",
+        "phoneNumber": "شماره همراه",
+        "phoneNumberPlaceholder": "09123456789",
+        "nationalCode": "کد ملی",
+        "foreignNationalCode": "کد اتباع",
+        "password": "رمز عبور",
+        "confirmPassword": "تکرار رمز عبور"
+      },
+      "nationality": {
+        "ir": "ایرانی",
+        "foreign": "اتباع خارجی"
+      },
+      "passwordHint": "حداقل از ۶ کاراکتر استفاده کنید.",
+      "actions": {
+        "create": "ثبت‌نام بیمه‌شده",
+        "creating": "در حال ثبت‌نام..."
+      },
+      "messages": {
+        "created": "بیمه‌شده با موفقیت ثبت‌نام شد."
+      },
+      "validation": {
+        "phoneNumber": "شماره همراه ایرانی معتبر وارد کنید.",
+        "nationalCodeRequired": "کد ملی الزامی است.",
+        "passwordRequired": "رمز عبور الزامی است.",
+        "passwordMinLength": "رمز عبور باید حداقل ۶ کاراکتر باشد.",
+        "passwordMaxLength": "رمز عبور نمی‌تواند بیشتر از ۲۵۵ کاراکتر باشد.",
+        "confirmPasswordRequired": "تکرار رمز عبور الزامی است.",
+        "passwordsMatch": "رمز عبور و تکرار آن باید یکسان باشند."
+      }
     }
   },
   "supportFlow": {
