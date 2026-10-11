@@ -355,6 +355,9 @@ workspace packages → no application imports
 - The approved Agent User Signup request-stripping exception is documented in
   [AGENT-USER-SIGNUP-REFERENCE-CONTRACT.md](AGENT-USER-SIGNUP-REFERENCE-CONTRACT.md);
   it is scoped to that request and preserves the default strict-request rule elsewhere.
+- The accepted Agent Claim Detail source contract and scoped presentation rules
+  are recorded in [AGENT-CLAIM-DETAIL-REFERENCE-CONTRACT.md](AGENT-CLAIM-DETAIL-REFERENCE-CONTRACT.md);
+  its loose objection-request exception does not apply to other endpoints.
 - Every backend endpoint contract must expose Zod v4 schemas for both its request
   and response in `api-types`. API services validate outgoing requests and
   incoming responses with those schemas; TypeScript types are inferred from the

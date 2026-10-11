@@ -9,7 +9,12 @@ import {
 
 import { cn } from '@iap/ui'
 import { Button } from '@iap/ui'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@iap/ui'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@iap/ui'
 import {
   Download,
   RefreshCw,
@@ -306,24 +311,26 @@ export function ImageZoomPanViewer(props: ImageZoomPanViewerProps) {
     icon: ReactNode,
     onClick: () => void
   ) => (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          presentation='reference'
-          type='button'
-          size='sm'
-          variant='outline'
-          aria-label={label}
-          onClick={onClick}
-        >
-          {icon}
-          <span className='sr-only'>{label}</span>
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent presentation='reference'>
-        <p>{label}</p>
-      </TooltipContent>
-    </Tooltip>
+    <TooltipProvider delayDuration={0}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            presentation='reference'
+            type='button'
+            size='sm'
+            variant='outline'
+            aria-label={label}
+            onClick={onClick}
+          >
+            {icon}
+            <span className='sr-only'>{label}</span>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent presentation='reference'>
+          <p>{label}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   )
 
   return (

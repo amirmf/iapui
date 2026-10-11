@@ -127,7 +127,7 @@ export const claimDocumentSchema = z
     docTypeCode: z.string().nullish(),
     documentType: z.string().nullish(),
     dataJsonSchema: z.string().nullish(),
-    extractedData: z.record(z.string(), z.unknown()).nullish(),
+    extractedData: z.record(z.string(), z.any()).nullish(),
     extractionDate: z.string().nullish(),
     extractionModel: z.string().nullish(),
   })
@@ -347,7 +347,7 @@ export const ClaimRequestBaseSchema = z.object({
   registeredByAgentDisplayName: z.string().nullish(),
   updatedBy: z.string().nullish(),
   freeOcrText: z.string().nullish(),
-  expert_info_addon: z.record(z.string(), z.unknown()).nullish(),
+  expert_info_addon: z.record(z.string(), z.any()).nullish(),
   totalSumAmount: z.number().nullish(),
   totalSumEstimatedAmount: z.number().nullish(),
   totalFranAmount: z.number().nullish(),

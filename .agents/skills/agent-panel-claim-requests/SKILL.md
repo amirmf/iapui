@@ -105,3 +105,35 @@ When building or modifying agent claim request features:
 3. `pnpm architecture:check` (verifies package/feature boundaries).
 4. `pnpm --filter iap-admin test agent-claim-requests` (all unit and integration tests passing).
 5. `pnpm --filter iap-admin build` (production build succeeds).
+
+## Standalone detail page
+
+For `/agent/claim-requests/$claimRequestId/`, start with the source
+`AgentClaimRequestsDetailPage`; this is distinct from management and has no
+child journeys. The thin route is `claim-requests/$claimRequestId.index.tsx`;
+the feature owner is `pages/detail/`. Preserve the source names
+`AgentClaimRequestDetailInfoList`, `AgentClaimRequestDetailResult`,
+`AgentClaimRequestObjectionForm` and `MyClaimRequestReadonlyItems`.
+
+Read `docs/architecture/AGENT-CLAIM-DETAIL-REFERENCE-CONTRACT.md` for the
+verified query/form contracts, scoped presentations and accepted schema
+representation differences. The recursive source audit and regression evidence
+live in `docs/tasks/agent-claim-request-detail-re-audit/`; the earlier detail
+task report is historical.
+
+Backend schemas belong to `@iap/api-types`; feature model files expose them
+without duplicating transport contracts. The detail form factory remains
+page-owned. Status translation maps/colors are canonical in claim-requests
+and re-exported by the agent feature. Preserve source record-value schemas
+where required rather than replacing them solely for style.
+
+When mounting files, test the real image toolbar outside a global tooltip
+provider. Source zero-delay tooltip composition is owned by `@iap/files`.
+For form parity, forward `presentation='reference'` through TextareaField and
+FormMessage, and select source mutation error metadata. Compare host padding,
+font fallback and bare-border defaults as well as the direct page JSX.
+Do not infer screenshot or live-backend parity from passing mocked tests.
+
+In managed worktrees, source-dependent claim regression tests require
+`INSURANCE_UI_REFERENCE_PATH` set to the actual insurance-ui checkout;
+the default sibling location may not exist.

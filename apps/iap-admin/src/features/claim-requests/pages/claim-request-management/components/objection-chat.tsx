@@ -7,10 +7,11 @@ import { cn } from '@iap/ui'
 interface ObjectionChatProps {
   objections: ClaimRequestObjection[] | null | undefined
   className?: string
+  presentation?: 'default' | 'reference'
 }
 
 function ObjectionChat(props: ObjectionChatProps) {
-  const { objections, className } = props
+  const { objections, className, presentation } = props
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -43,6 +44,7 @@ function ObjectionChat(props: ObjectionChatProps) {
         <ObjectionChatCard
           key={objection.id + '_' + index}
           objection={objection}
+          presentation={presentation}
         />
       ))}
     </div>

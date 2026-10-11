@@ -42,6 +42,29 @@ describe('agent signup host scope', () => {
       expect(container.querySelectorAll('main')).toHaveLength(1)
     }
   )
+  it.each(['/agent/claim-requests/claim-1', '/agent/claim-requests/claim-1/'])(
+    'scopes detail host spacing to %s',
+    (pathname) => {
+      state.pathname = pathname
+      const { container } = render(<AgentLayout />)
+      const host = container.querySelector('#main-content')!
+      expect(host.tagName).toBe('MAIN')
+      expect(host.className).toContain('pt-6')
+      expect(host.className).toContain('pb-0')
+      expect(host.className).not.toContain('max-w-[1600px]')
+      expect(host.parentElement!.className).toContain('sm:px-2')
+    }
+  )
+  it.each([
+    '/agent/claim-requests/create/',
+    '/agent/claim-requests/id/claim-request-management/',
+  ])('retains existing host for %s', (pathname) => {
+    state.pathname = pathname
+    const { container } = render(<AgentLayout />)
+    const host = container.querySelector('#main-content')!
+    expect(host.className).toContain('max-w-[1600px]')
+    expect(host.parentElement!.className).not.toContain('sm:px-2')
+  })
   it('retains the existing wrapper for another agent page', () => {
     state.pathname = '/agent/claim-requests/'
     const { container } = render(<AgentLayout />)

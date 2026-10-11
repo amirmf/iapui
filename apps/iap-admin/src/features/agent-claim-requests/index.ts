@@ -45,3 +45,6 @@ export {
 
 export { agentClaimRequestService } from './services/agent-claim-request-service'
 export * from './model'
+
+export { AgentClaimRequestsDetailPage } from './pages/detail/agent-claim-requests-detail-page'
+export { agentClaimRequestDetailQueryOptions } from './pages/detail/queries/use-get-agent-claim-request-by-id'

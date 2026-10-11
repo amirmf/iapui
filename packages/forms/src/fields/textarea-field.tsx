@@ -26,8 +26,15 @@ export function TextareaField<
   TFieldValues extends FieldValues,
   TName extends FieldPath<TFieldValues>,
 >(props: TextareaFieldProps<TFieldValues, TName>) {
-  const { control, description, label, name, required, ...textareaProps } =
-    props
+  const {
+    control,
+    description,
+    label,
+    name,
+    presentation,
+    required,
+    ...textareaProps
+  } = props
 
   return (
     <FormField
@@ -37,12 +44,17 @@ export function TextareaField<
         <FormItem>
           <FormLabel required={required}>{label}</FormLabel>
           <FormControl>
-            <Textarea {...field} {...textareaProps} required={required} />
+            <Textarea
+              {...field}
+              {...textareaProps}
+              presentation={presentation}
+              required={required}
+            />
           </FormControl>
           {description ? (
             <FormDescription>{description}</FormDescription>
           ) : null}
-          <FormMessage />
+          <FormMessage presentation={presentation} />
         </FormItem>
       )}
     />

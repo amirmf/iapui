@@ -33,5 +33,9 @@ export { ClaimRequestExportExcelButton } from '@features/claim-requests/pages/in
 export { applyClaimRequestQuickStatusFilter } from '@features/claim-requests/utils/claim-request-quick-status-filter'
 export {
   CLAIM_REQUEST_STATUS_TRANSLATION_KEYS,
+  claimStatusColors,
+  claimStatusBorderColors,
   getClaimRequestStatusOptions,
 } from '@features/claim-requests/model/claim-request-status'
+
+export { default as ObjectionChat } from '@features/claim-requests/pages/claim-request-management/components/objection-chat'

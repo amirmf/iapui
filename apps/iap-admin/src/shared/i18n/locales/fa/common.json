@@ -3710,6 +3710,12 @@
         "approved": "تایید شده",
         "cancelled": "ابطالی"
       }
+    },
+    "claimRequest": {
+      "messages": {
+        "descriptionRequired": "لطفاً توضیحات را وارد کنید",
+        "attachmentsRequired": "لطفا تصویر جدید بارگذاری کنید. بدون تکمیل مدارک امکان پاسخ وجود ندارد"
+      }
     }
   },
   "customerUser": {

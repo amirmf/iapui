@@ -1,0 +1,33 @@
+/* Source: insurance-ui/src/styles/_base.scss and FontProvider. */
+.page {
+  font-family: 'Vazir', sans-serif;
+  font-synthesis: auto;
+  text-rendering: auto;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+}
+
+/* Match the source base for bare borders; keep explicit control/status colors. */
+.page :where(:not([class*='border-'])) {
+  border-color: rgb(var(--color-border));
+}
+
+.page :where(*) {
+  outline-color: rgb(var(--color-ring));
+}
+
+@media screen and (max-width: 767px) {
+  .page input,
+  .page select,
+  .page textarea {
+    font-size: 14px !important;
+  }
+}
+
+.page input:-webkit-autofill,
+.page input:-webkit-autofill:hover,
+.page input:-webkit-autofill:focus,
+.page input:-webkit-autofill:active {
+  -webkit-box-shadow: revert !important;
+  -webkit-text-fill-color: revert !important;
+}

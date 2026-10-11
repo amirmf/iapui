@@ -19,6 +19,12 @@ export function AgentLayout() {
   const isAgentUserSignup = useLocation({
     select: (location) => /^\/agent\/users\/create\/?$/.test(location.pathname),
   })
+  const isAgentClaimDetail = useLocation({
+    select: (location) =>
+      /^\/agent\/claim-requests\/[^/]+\/?$/.test(location.pathname) &&
+      !['create'].includes(location.pathname.split('/')[3] ?? ''),
+  })
+  const useReferenceHost = isAgentUserSignup || isAgentClaimDetail
   const Content = isAgentUserSignup ? 'div' : 'main'
   const { isLoading, logout, user } = useAuthSession()
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -49,7 +55,7 @@ export function AgentLayout() {
         className={cn(
           'min-h-dvh p-2 transition-[margin] duration-300 motion-reduce:transition-none sm:p-4 lg:mr-72',
           isCollapsed && 'lg:mr-20',
-          isAgentUserSignup && 'sm:px-2'
+          useReferenceHost && 'sm:px-2'
         )}
       >
         <AdminHeader
@@ -61,7 +67,7 @@ export function AgentLayout() {
         <Content
           className={cn(
             'mx-auto w-full max-w-[1600px] py-6',
-            isAgentUserSignup && 'max-w-none pb-0 pt-6'
+            useReferenceHost && 'max-w-none pb-0 pt-6'
           )}
           id='main-content'
           tabIndex={-1}
