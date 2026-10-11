@@ -1,7 +1,7 @@
-import { PlaceholderPage } from '@features/placeholder'
+import { AgentClaimRequestsCreatePage } from '@features/agent-claim-requests'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_agent/agent/claim-requests/create/')({
-  component: () => <PlaceholderPage titleKey='sidebar.createClaimRequests' />,
+  component: AgentClaimRequestsCreatePage,
   loader: () => ({ crumb: 'createClaim' }),
 })

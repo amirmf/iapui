@@ -43,5 +43,18 @@ export {
   AgentClaimRequestManagementFooter,
 } from './pages/claim-request-management/components'
 
+export {
+  AgentClaimRequestsCreatePage,
+  default as AgentClaimRequestsCreatePageDefault,
+} from './pages/create/agent-claim-requests-create-page'
+export {
+  AgentClaimRequestForm,
+  AgentClaimRequestAccountNotFoundDialog,
+  AgentClaimRequestInquiryNationalCodeFormField,
+  AgentClaimRequestExtPolicyIdFormField,
+  AgentClaimRequestExtNationalCodeFormField,
+  AgentClaimRequestFormDocTypes,
+} from './pages/create/components'
+
 export { agentClaimRequestService } from './services/agent-claim-request-service'
 export * from './model'
