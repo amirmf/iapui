@@ -20,7 +20,19 @@ The Agent Claim Requests area serves registry agents managing insurance claims:
    - Features: Multi-column paginated table, quick status filter, search-params sync, Excel export, row actions (details, complete documents, refresh policy, delete).
 2. **Creation Journey** (`/agent/claim-requests/create/`):
    - Route: `apps/iap-admin/src/app/router/routes/_agent/agent/claim-requests/create/index.tsx`
-   - Creation steps, inquiry, sub-insured person selection, document upload.
+   - Page Journey: `apps/iap-admin/src/features/agent-claim-requests/pages/create/agent-claim-requests-create-page.tsx`
+   - Components: `pages/create/components/`
+     - `agent-claim-request-form.tsx`: Master form coordinating inquiry, policy, sub-insured, date, amount, doc-types, file-upload, and submission.
+     - `agent-claim-request-inquiry-national-code-form-field.tsx`: 10-digit numerical input triggering inquiry with user display & `help_nationalCode` support button.
+     - `agent-claim-request-ext-policy-id-form-field.tsx`: Select policy from inquiry data, auto-defaults first policy, clears sub-insured on change, with `help_insurancePolicy` support button.
+     - `agent-claim-request-ext-national-code-form-field.tsx`: Query sub-insured people from `/claim-request-registery-agent/sub-insured-people/{policyId}/{username}`, handles foreign label format `({code}-اتباع)`, with `help_extNationalCode` support button.
+     - `agent-claim-request-form-doc-types.tsx`: Doc-type select with `useDeferredValue` search filtering and pinned `others` option.
+     - `agent-claim-request-account-not-found-dialog.tsx`: Uses `ConfirmDialog` (`presentation="reference"`) on 404 inquiry error, directing to `/agent/users/create/`.
+   - Form Schemas & Contracts: `pages/create/model/agent-claim-request-form-schema.ts` (`agentClaimRequestFormSchema`, `AgentClaimRequestFormValues`, `MyClaimRequestPayload`, `defaultValues`).
+   - Primitives:
+     - `InputAmount` from `@iap/ui`: Numeric input with internal `rial` unit badge and footer Persian words in `toman` (`numberToPersianWords(val / 10)`).
+     - `DatePicker` from `@iap/ui`: Uses `presentation="reference"`, `selected={field.value}`, and `onSelect={field.onChange}`.
+
 3. **Claim Management / Details** (`/agent/claim-requests/$claimRequestId/claim-request-management/`):
    - Route: `apps/iap-admin/src/app/router/routes/_agent/agent/claim-requests/$claimRequestId.claim-request-management/index.tsx`
    - Page Journey: `apps/iap-admin/src/features/agent-claim-requests/pages/claim-request-management/agent-claim-request-management-page.tsx`

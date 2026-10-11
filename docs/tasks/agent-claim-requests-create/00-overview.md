@@ -44,10 +44,12 @@ This is a single stand-alone page without sub-routes. It enables registry agents
 
 ## 4. Task Index
 
-- [ ] `01-translations-and-constants.md`: Localization and enum translations parity
-- [ ] `02-form-schema-and-contracts.md`: Zod v4 form validation schema
-- [ ] `03-account-not-found-dialog.md`: 404 inquiry not found dialog
-- [ ] `04-inquiry-and-policy-fields.md`: National code inquiry & policy select fields
-- [ ] `05-sub-insured-and-doc-types-fields.md`: Sub-insured person & doc type select fields
-- [ ] `06-form-and-page-composition.md`: Form orchestration, create page & thin route
-- [ ] `07-verification-and-tests.md`: Unit tests, route tests, typecheck, lint, build
+- [x] `01-translations-and-constants.md`: Localization and enum translations parity
+- [x] `02-form-schema-and-contracts.md`: Zod v4 form validation schema
+- [x] `03-account-not-found-dialog.md`: 404 inquiry not found dialog
+- [x] `04-inquiry-and-policy-fields.md`: National code inquiry & policy select fields
+- [x] `05-sub-insured-and-doc-types-fields.md`: Sub-insured person & doc type select fields
+- [x] `06-form-and-page-composition.md`: Form orchestration, create page & thin route
+- [x] `07-verification-and-tests.md`: Unit tests, route tests, typecheck, lint, build
+- [x] `08-discrepancy-analysis-and-parity-plan.md`: Full parity audit, discrepancy resolution and verification
+
