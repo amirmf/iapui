@@ -850,6 +850,9 @@ importers:
       react-date-object:
         specifier: ^2.1.9
         version: 2.1.9
+      react-i18next:
+        specifier: '>=15.0.0'
+        version: 17.0.15(i18next@26.4.2(typescript@5.9.3))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@5.9.3)
       react-multi-date-picker:
         specifier: ^4.5.2
         version: 4.5.2(react-dom@19.3.0(react@19.3.0))(react@19.3.0)

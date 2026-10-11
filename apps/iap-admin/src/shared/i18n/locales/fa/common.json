@@ -1839,6 +1839,7 @@
     "title": "درخواست‌های خسارت",
     "description": "مدیریت درخواست‌های خسارت بیمه.",
     "refresh": "بروزرسانی",
+    "create": "ثبت درخواست",
     "columns": {
       "amount": "مبلغ درخواستی",
       "totalSumAmount": "مبلغ تایید شده",
@@ -2005,7 +2006,16 @@
         "sendReplyNext": "ارسال پاسخ و بعدی",
         "status": "وضعیت",
         "submitDate": "تاریخ انجام هزینه درمانی",
-        "submitDatePlaceholder": "تاریخ انجام هزینه درمانی را انتخاب کنید"
+        "submitDatePlaceholder": "تاریخ انجام هزینه درمانی را انتخاب کنید",
+        "subInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی",
+        "foreign": "اتباع",
+        "selectSubInsuredPerson": "انتخاب بیمه شده جهت ثبت هزینه درمانی",
+        "insurancePolicy": "انتخاب بیمه‌نامه",
+        "selectInsurancePolicy": "انتخاب بیمه‌نامه",
+        "insuranceNumber": "شماره بیمه",
+        "docType": "نوع سند",
+        "docTypes": "انواع اسناد",
+        "selectDocType": "انتخاب نوع سند"
       },
       "repetitiveResponses": {
         "empty": "هیچ پاسخی مطابق متن شما یافت نشد.",
@@ -2018,6 +2028,12 @@
     "validation": {
       "status": "وضعیت الزامی است",
       "amountRequired": "مبلغ الزامی است",
+      "amountMin": "حداقل 10 هزار ریال",
+      "amountMax": "حداکثر 10 میلیارد ریال",
+      "attachmentsRequired": "حداقل یک پیوست الزامی است",
+      "docTypeRequired": "انتخاب نوع سند الزامی است",
+      "subInsuredPersonRequired": "انتخاب شخص تحت پوشش الزامی است",
+      "insurancePolicyRequired": "انتخاب بیمه‌نامه الزامی است",
       "description": "توضیحات الزامی است",
       "submitDateRequired": "تاریخ انجام هزینه درمانی الزامی است"
     },
@@ -2076,6 +2092,7 @@
       "noSelection": "لطفاً ابتدا حداقل یک درخواست خسارت را انتخاب کنید."
     },
     "messages": {
+      "created": "درخواست خسارت با موفقیت ایجاد شد",
       "deleted": "درخواست خسارت حذف شد",
       "claimIdMissing": "شناسه درخواست وجود ندارد.",
       "removeMyAssessmentSuccess": "خارج کردن از کارتابل با موفقیت انجام شد.",
@@ -2917,6 +2934,7 @@
     "hide": "مخفی کردن",
     "noData": "اطلاعاتی یافت نشد.",
     "rial": "ریال",
+    "toman": "تومان",
     "selectAll": "انتخاب همه",
     "selectRow": "انتخاب ردیف",
     "submitEdit": "ثبت ویرایش"
@@ -3704,6 +3722,11 @@
     "user": "کاربر"
   },
   "myiap": {
+    "docTypeAlert": "راهنمای سند {{docType}}",
+    "createClaimPage": {
+      "submitDateAlertTitle": "لطفاً به نکته زیر توجه کنید",
+      "submitDateAlertDescription": "درخواست ها باید به تفکیک تاریخ انجام هزینه جداگانه ثبت شود."
+    },
     "preAuths": {
       "status": {
         "draft": "پیش نویس",

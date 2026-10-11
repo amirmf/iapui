@@ -43,10 +43,12 @@ export type DatePickerProps = {
   mode?: DatePickerMode
   name?: string
   onBlur?: () => void
-  onChange: (value: Date | undefined) => void
+  onChange?: (value: Date | undefined) => void
+  onSelect?: (value: Date | undefined) => void
   placeholder?: string
   presentation?: 'default' | 'reference'
   ref?: Ref<HTMLInputElement>
+  selected?: Date
   showClear?: boolean
   value?: Date
 }
@@ -244,12 +246,16 @@ export function DatePicker(props: DatePickerProps) {
     name,
     onBlur,
     onChange,
+    onSelect,
     placeholder,
     presentation = 'default',
     ref,
+    selected,
     showClear = true,
     value,
   } = props
+  const resolvedValue = selected ?? value
+  const resolvedOnChange = onSelect ?? onChange ?? (() => {})
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     if (presentation !== 'reference' || typeof window.matchMedia !== 'function')
@@ -262,7 +268,7 @@ export function DatePicker(props: DatePickerProps) {
   }, [presentation])
   const [isTyping, setIsTyping] = useState(false)
   const [typedValue, setTypedValue] = useState(() =>
-    formatPersianDate(value, mode)
+    formatPersianDate(resolvedValue, mode)
   )
   const isPersian = locale === 'fa'
   const canEdit = editable && isPersian && mode === 'date' && !disabled
@@ -279,19 +285,19 @@ export function DatePicker(props: DatePickerProps) {
   const inputValue = isPersian
     ? isTyping
       ? typedValue
-      : formatPersianDate(value, mode)
+      : formatPersianDate(resolvedValue, mode)
     : undefined
 
   useEffect(() => {
     if (!isTyping) {
-      setTypedValue(formatPersianDate(value, mode))
+      setTypedValue(formatPersianDate(resolvedValue, mode))
     }
-  }, [isTyping, mode, value])
+  }, [isTyping, mode, resolvedValue])
 
   const clear = () => {
     setIsTyping(false)
     setTypedValue('')
-    onChange(undefined)
+    resolvedOnChange(undefined)
   }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -301,27 +307,27 @@ export function DatePicker(props: DatePickerProps) {
     setTypedValue(nextValue)
 
     if (!nextValue) {
-      onChange(undefined)
+      resolvedOnChange(undefined)
       return
     }
 
     const parsed = parsePersianDate(nextValue)
-    if (parsed) onChange(parsed)
+    if (parsed) resolvedOnChange(parsed)
   }
 
   const handleInputBlur = (event: FocusEvent<HTMLInputElement>) => {
     if (!canEdit) return
     const parsed = parsePersianDate(event.target.value)
     setIsTyping(false)
-    setTypedValue(formatPersianDate(parsed ?? value, mode))
-    if (parsed) onChange(parsed)
+    setTypedValue(formatPersianDate(parsed ?? resolvedValue, mode))
+    if (parsed) resolvedOnChange(parsed)
   }
 
   const handleCalendarChange = (nextValue: DateObject | null) => {
     const nextDate = nextValue?.toDate()
     setIsTyping(false)
     setTypedValue(formatPersianDate(nextDate, mode))
-    onChange(nextDate)
+    resolvedOnChange(nextDate)
   }
 
   return (
@@ -336,7 +342,9 @@ export function DatePicker(props: DatePickerProps) {
       )}
       containerClassName={cn('w-full', className)}
       currentDate={
-        mode === 'date-time' && value ? new DateObject(value) : undefined
+        mode === 'date-time' && resolvedValue
+          ? new DateObject(resolvedValue)
+          : undefined
       }
       disabled={disabled}
       editable={canEdit}
@@ -368,7 +376,7 @@ export function DatePicker(props: DatePickerProps) {
           dataFormField={dataFormField}
           dataSlot={dataSlot}
           disabled={disabled}
-          hasValue={isValidDate(value)}
+          hasValue={isValidDate(resolvedValue)}
           id={id}
           inputValue={inputValue}
           name={name}
