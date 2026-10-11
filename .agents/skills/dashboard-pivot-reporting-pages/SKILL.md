@@ -13,8 +13,8 @@ A reporting dashboard should never cram multiple large queries or tables into a 
 
 ```
 src/features/<feature>/
+├── <feature>-page.tsx                      # Root page: deferred execution toggle, tabs layout, search param binding
 ├── components/
-│   ├── <feature>-page.tsx                      # Root page: deferred execution toggle, tabs layout, search param binding
 │   ├── <feature>-report-table-header.tsx        # Common header: refresh button with spin state
 │   ├── <feature>-pivot-table-toolbar.tsx       # Grouped multi-category filter toolbar
 │   ├── report-<metric-a>-table.tsx             # Focused report table A
@@ -22,6 +22,8 @@ src/features/<feature>/
 │   └── report-<entity>-table.tsx               # Simple/dense data table (e.g. TwoLineCell)
 ├── context/
 │   └── store/report-show-report-store.ts       # Zustand store for deferred report execution
+├── route-adapters/
+│   └── route-search-schema.ts                  # TanStack Router search schema validation
 ├── services/
 │   └── <feature>-service.ts                    # Typed API reporting endpoints with AbortSignal support
 └── utils/
@@ -95,11 +97,18 @@ Reporting queries are computationally expensive on the backend and database. To 
    ```
 
 3. **Thin Route Definition:**
-   Declare the route with breadcrumb metadata and delegate directly to the feature page:
+   Declare the route with breadcrumb metadata, search validation, and delegate directly to the feature page:
    ```tsx
+   import {
+     DashboardPage,
+     dashboardRouteSearchSchema,
+   } from '@features/dashboard'
+   import { createFileRoute } from '@tanstack/react-router'
+
    export const Route = createFileRoute('/_authenticated/')({
      component: DashboardPage,
      loader: () => ({ crumb: 'dashboard' }),
+     validateSearch: dashboardRouteSearchSchema,
    })
    ```
 
