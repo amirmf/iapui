@@ -70,6 +70,9 @@ importers:
       '@iap/support':
         specifier: workspace:*
         version: link:../../packages/support
+      '@iap/theme':
+        specifier: workspace:*
+        version: link:../../packages/theme
       '@iap/ui':
         specifier: workspace:*
         version: link:../../packages/ui

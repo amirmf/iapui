@@ -1342,7 +1342,8 @@
     "assignementRules": "قوانین ارجاع",
     "tickets": "تیکت‌ها",
     "supportQuestions": "سوالات پشتیبانی",
-    "medicalCenter": "مراکز درمانی"
+    "medicalCenter": "مراکز درمانی",
+    "specialDiseases": "درخواست‌های بیماری خاص"
   },
   "assessmentPrompts": {
     "title": "مدیریت قوانین ارزیابی",
@@ -1431,7 +1432,8 @@
       "submitting": "در حال ورود...",
       "title": "ورود",
       "tutorial": "مشاهده آموزش ورود / ثبت‌نام",
-      "username": "کد ملی (کد یکتا اتباع)"
+      "username": "کد ملی (کد یکتا اتباع)",
+      "loading": "در حال بررسی نشست..."
     },
     "passwordReset": {
       "backToLogin": "بازگشت به ورود",
@@ -1839,7 +1841,7 @@
     "title": "درخواست‌های خسارت",
     "description": "مدیریت درخواست‌های خسارت بیمه.",
     "refresh": "بروزرسانی",
-    "create": "ثبت درخواست",
+    "create": "درخواست خسارت جدید",
     "columns": {
       "amount": "مبلغ درخواستی",
       "totalSumAmount": "مبلغ تایید شده",
@@ -2491,7 +2493,6 @@
       "description": "آیا از حذف این درخواست خسارت مطمئن هستید؟",
       "confirm": "حذف"
     },
-    "create": "درخواست خسارت جدید",
     "bulkAssign": {
       "button": "ارجاع انتخاب‌ها",
       "title": "ارجاع درخواست‌های خسارت",
@@ -2937,7 +2938,13 @@
     "toman": "تومان",
     "selectAll": "انتخاب همه",
     "selectRow": "انتخاب ردیف",
-    "submitEdit": "ثبت ویرایش"
+    "submitEdit": "ثبت ویرایش",
+    "theme": {
+      "toggle": "تغییر تم",
+      "light": "روشن",
+      "dark": "تیره",
+      "system": "سیستم"
+    }
   },
   "aiAssessmentRules": {
     "title": "قوانین ارزیابی هوشمند",
@@ -4050,5 +4057,13 @@
         "notFound": "این تیکت پیدا نشد."
       }
     }
+  },
+  "system": {
+    "assessment": "ارزیابی"
+  },
+  "command": {
+    "placeholder": "دستور یا عبارت مورد نظر را جستجو کنید...",
+    "noResults": "نتیجه‌ای یافت نشد.",
+    "theme": "تم"
   }
 }

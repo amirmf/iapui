@@ -24,6 +24,7 @@
     "@iap/panel-switcher": "workspace:*",
     "@iap/shared-lib": "workspace:*",
     "@iap/support": "workspace:*",
+    "@iap/theme": "workspace:*",
     "@iap/ui": "workspace:*",
     "@radix-ui/react-icons": "^1.3.2",
     "@react-pdf/renderer": "^4.9.0",
