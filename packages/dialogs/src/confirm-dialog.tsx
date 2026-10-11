@@ -30,6 +30,7 @@ export type ConfirmDialogProps = {
   confirmVariant?: 'default' | 'destructive'
   description: ReactNode
   disableConfirm?: boolean
+  footerChildren?: ReactNode
   hideCancelButton?: boolean
   isLoading?: boolean
   onConfirm: () => void
@@ -66,6 +67,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     confirmVariant,
     description,
     disableConfirm = false,
+    footerChildren,
     hideCancelButton = false,
     isLoading = false,
     onConfirm,
@@ -119,6 +121,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
         </AlertDialogHeader>
         {children}
         <AlertDialogFooter>
+          {footerChildren}
           {!hideCancelButton ? (
             <AlertDialogCancel disabled={isLoading}>
               {cancelLabel ?? t('common.dialog.cancel')}
