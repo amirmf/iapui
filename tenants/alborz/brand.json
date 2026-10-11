@@ -8,7 +8,9 @@
     }
   },
   "assets": {
-    "loginLogo": "/images/logo/alborz/alborz-login-logo.svg"
+    "loginLogo": "/images/logo/alborz/alborz-login-logo.svg",
+    "sidebarLogo": "/images/logo/alborz/alborz-sidebar-logo.svg",
+    "customerAppHeaderLogo": "/images/logo/alborz/alborz-customer-app-logo.svg"
   },
   "domain_url": {
     "app": "http://localhost:5173",

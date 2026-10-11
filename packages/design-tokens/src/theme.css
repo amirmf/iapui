@@ -160,3 +160,20 @@
   --color-sidebar-border: 37, 43, 55;
   --color-sidebar-ring: 96, 165, 250;
 }
+
+/* Reference sidebar presentation, shared by desktop and mobile containers. */
+.sidebar-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--color-primary-100)),
+    rgb(var(--color-secondary-100))
+  );
+}
+
+.dark .sidebar-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--color-primary-800)),
+    rgb(var(--color-secondary-800))
+  );
+}

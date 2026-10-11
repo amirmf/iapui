@@ -8,7 +8,9 @@
     }
   },
   "assets": {
-    "loginLogo": "/images/logo/dana/dana-logo.svg"
+    "loginLogo": "/images/logo/dana/dana-logo.svg",
+    "sidebarLogo": "/images/logo/dana/dana-logo.svg",
+    "customerAppHeaderLogo": "/images/logo/dana/dana-customer-app-logo.svg"
   },
   "domain_url": {
     "app": "http://localhost:5173",

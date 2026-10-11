@@ -4,7 +4,11 @@ import { z } from 'zod'
 
 const tenantSchema = z.string().regex(/^[a-z][a-z0-9-]*$/)
 const brandSchema = z.object({
-  assets: z.object({ loginLogo: z.string().regex(/^\//) }),
+  assets: z.object({
+    loginLogo: z.string().regex(/^\//),
+    sidebarLogo: z.string().regex(/^\//),
+    customerAppHeaderLogo: z.string().regex(/^\//),
+  }),
   domain_url: z.object({
     admin: z.url(),
     app: z.url(),
@@ -78,6 +82,8 @@ export async function prepareTenant({ mode, root = process.cwd() }) {
     `VITE_IAP_APP_DOMAIN_URL=${JSON.stringify(brand.domain_url.app)}`,
     `VITE_IAP_ADMIN_DOMAIN_URL=${JSON.stringify(brand.domain_url.admin)}`,
     `VITE_LOGIN_LOGO=${JSON.stringify(brand.assets.loginLogo)}`,
+    `VITE_SIDEBAR_LOGIN_LOGO=${JSON.stringify(brand.assets.sidebarLogo)}`,
+    `VITE_CUSTOMER_APP_HEADER_LOGO=${JSON.stringify(brand.assets.customerAppHeaderLogo)}`,
     `VITE_LOGIN_TITLE=${JSON.stringify(brand.identity.loginTitle)}`,
     `VITE_MY_IAP_NAV_BACKGROUND=${JSON.stringify(brand.myIapNavigation.background)}`,
     `VITE_MY_IAP_NAV_BACKGROUND_DARK=${JSON.stringify(brand.myIapNavigation.backgroundDark)}`,
