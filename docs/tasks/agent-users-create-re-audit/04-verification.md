@@ -22,3 +22,15 @@ Corrected differences are listed individually in tasks 01–03: card tags and da
 Source/code and unit verification are distinct from browser screenshot and live-backend verification. No live registrations were performed and no viewport/autofill screenshots were captured. Existing sidebar/header width, persisted sidebar state and required session-dialog infrastructure are application-host differences; this change preserves the target's accepted panel architecture. Persian-only localization and canonical trailing-slash routes remain accepted architecture decisions. Page-specific host spacing and nested-main discrepancies are corrected.
 
 The initial task set is historical for parity evidence and links to this re-audit. No unverified rendering or backend compatibility claim is made.
+
+## Main integration and closure (2026-10-11)
+
+Integrated main commit `b3ae43f` (My Claim Detail implementation) before final
+merge. The API public-entry conflict was resolved by retaining both agent-user
+and my-claim-request-objection exports. Inspected shared public capabilities
+and preserved the updated files-package guidance from main.
+
+After integration: 57 admin signup/error/host/route tests, 14 forms tests,
+8 Card/Tabs tests and 26 new main-branch My Claim Detail tests passed. The
+commit hooks run workspace-wide typecheck, lint and architecture validation.
+No task-owned development server/listening port remained at closure.

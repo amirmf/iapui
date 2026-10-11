@@ -1,5 +1,6 @@
 import { cn } from '@iap/ui'
-import type { IDocument } from '@modules/files/hooks/use-lazy-documents.ts'
+
+import type { IDocument } from '../hooks/use-lazy-documents'
 
 interface FilePdfViewerProps {
   activeDoc: IDocument

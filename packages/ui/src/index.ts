@@ -46,4 +46,4 @@ export * from './alert'
 
 export * from './scroll-area'
 
-export { formatDate } from './format-date'
+export { formatDate, formatDateTime } from './format-date'

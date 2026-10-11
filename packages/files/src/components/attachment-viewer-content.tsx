@@ -2,18 +2,16 @@ import type { CSSProperties } from 'react'
 
 import { cn } from '@iap/ui'
 import { Button } from '@iap/ui'
-import FilePdfViewer from '@modules/files/components/file-pdf-viewer.tsx'
-import ImageZoomPanViewer from '@modules/files/components/image-zoom-pan-viewer'
+import { useTranslation } from 'react-i18next'
+
+import type { LazyDocument } from '../hooks/use-lazy-documents'
+import { FILE_MIME_TYPES, IMAGE_MIME_TYPES } from '../utils/file-types'
+import FilePdfViewer from './file-pdf-viewer'
+import ImageZoomPanViewer from './image-zoom-pan-viewer'
 import type {
   ImageTransformState,
   ImageViewState,
-} from '@modules/files/components/use-image-viewer-state'
-import type { LazyDocument } from '@modules/files/hooks/use-lazy-documents'
-import {
-  FILE_MIME_TYPES,
-  IMAGE_MIME_TYPES,
-} from '@modules/files/utils/file-types'
-import { useTranslation } from 'react-i18next'
+} from './use-image-viewer-state'
 
 interface AttachmentViewerContentProps {
   docEntry?: LazyDocument
@@ -67,20 +65,20 @@ export function AttachmentViewerContent(props: AttachmentViewerContentProps) {
     return (
       <div
         className={cn(
-          'flex h-[65vh] items-center justify-center rounded border text-sm text-muted-foreground',
+          'text-muted-foreground flex h-[65vh] items-center justify-center rounded border text-sm',
           docClassName
         )}
       >
         <div className='w-full max-w-xs space-y-3 px-4 text-center'>
           <p>{loadingMessage}</p>
           <div className='flex items-center gap-2'>
-            <div className='h-2 flex-1 overflow-hidden rounded-full bg-muted'>
+            <div className='bg-muted h-2 flex-1 overflow-hidden rounded-full'>
               <div
-                className='h-full rounded-full bg-primary transition-all'
+                className='bg-primary h-full rounded-full transition-all'
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <span className='min-w-10 text-xs text-muted-foreground'>
+            <span className='text-muted-foreground min-w-10 text-xs'>
               {t('files.viewer.progressValue', {
                 percent: progress,
               })}
@@ -99,7 +97,7 @@ export function AttachmentViewerContent(props: AttachmentViewerContentProps) {
           docClassName
         )}
       >
-        <p className='text-sm text-destructive'>
+        <p className='text-destructive text-sm'>
           {docEntry.error ?? errorMessageFallback}
         </p>
         <Button

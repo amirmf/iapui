@@ -11,11 +11,6 @@ import { cn } from '@iap/ui'
 import { Button } from '@iap/ui'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@iap/ui'
 import {
-  DEFAULT_IMAGE_VIEW_STATE,
-  type ImageTransformState,
-  type ImageViewState,
-} from '@modules/files/components/use-image-viewer-state'
-import {
   Download,
   RefreshCw,
   RotateCcw,
@@ -31,6 +26,12 @@ import {
   TransformComponent,
   TransformWrapper,
 } from 'react-zoom-pan-pinch'
+
+import {
+  DEFAULT_IMAGE_VIEW_STATE,
+  type ImageTransformState,
+  type ImageViewState,
+} from './use-image-viewer-state'
 
 interface ImageZoomPanViewerProps {
   src: string
@@ -390,7 +391,7 @@ export function ImageZoomPanViewer(props: ImageZoomPanViewerProps) {
             </div>
 
             <div
-              className={cn('rounded border bg-muted/40', viewportClassName)}
+              className={cn('bg-muted/40 rounded border', viewportClassName)}
             >
               <TransformComponent
                 wrapperClass={cn(

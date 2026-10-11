@@ -1,9 +1,7 @@
-import { PlaceholderPage } from '@features/placeholders'
+import { MyClaimRequestDetailPage } from '@features/my-claims'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/myclaims/$id/')({
-  component: () => (
-    <PlaceholderPage titleKey='myiap.claimRequests.claimDetails' />
-  ),
+  component: MyClaimRequestDetailPage,
   loader: () => ({ crumb: 'claimDetails' }),
 })

@@ -22,6 +22,14 @@ type PageParams = z.input<typeof myClaimRequestPageRequestSchema> & {
 }
 
 export const myClaimRequestService = {
+  getById: async (id: string, options?: { signal?: AbortSignal }) => {
+    const claimId = claimRequestIdSchema.parse(id)
+    const response = await getApiClient().get<unknown>(
+      `/my/iap/claim-requests/${claimId}`,
+      { signal: options?.signal }
+    )
+    return claimRequestSchema.parse(response.data)
+  },
   getMyBankAccount: async () =>
     myBankAccountResponseSchema.parse(
       (await getApiClient().get<unknown>('/my/iap/my-bank-account')).data
