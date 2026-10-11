@@ -2,11 +2,12 @@ import type { CSSProperties } from 'react'
 
 import type { Attachment } from '@iap/api-types'
 import { cn } from '@iap/ui'
-import { AttachmentPager } from '@modules/files/components/attachment-pager'
-import { AttachmentViewerContent } from '@modules/files/components/attachment-viewer-content'
-import { useImageViewerState } from '@modules/files/components/use-image-viewer-state'
-import { useLazyDocuments } from '@modules/files/hooks/use-lazy-documents'
 import { useTranslation } from 'react-i18next'
+
+import { useLazyDocuments } from '../hooks/use-lazy-documents'
+import { AttachmentPager } from './attachment-pager'
+import { AttachmentViewerContent } from './attachment-viewer-content'
+import { useImageViewerState } from './use-image-viewer-state'
 
 interface FileViewerProps {
   attachments: Attachment[]

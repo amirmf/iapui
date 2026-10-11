@@ -298,6 +298,7 @@ Owns one global Sass entry point (`index.scss`) and genuinely document-level sty
 | `@iap/theme` | Shared light/dark theme state, persistence, and icon-only switcher. |
 | `@iap/panel-switcher` | Shared panel-selection presentation for cross-application navigation. |
 | `@iap/support` | Shared support-flow UI and client capability. |
+| `@iap/files` | Shared attachment viewer, file lifecycle, MIME detection and file transport. |
 | `@iap/tailwind-config` | Shared Tailwind preset and plugin configuration. |
 | `@iap/eslint-config` | Shared lint presets. |
 | `@iap/typescript-config` | Shared TypeScript base configurations. |
@@ -410,3 +411,6 @@ providers, API-client configuration, localization, and implemented product
 features. New code must preserve the ownership and dependency rules in this
 document; `pnpm lint` includes the architecture-boundary check that enforces
 the most important folder and import constraints.
+
+Customer detail page reuse and file capability guidance is recorded in
+[CUSTOMER-DETAIL-PAGE-PARITY.md](CUSTOMER-DETAIL-PAGE-PARITY.md).

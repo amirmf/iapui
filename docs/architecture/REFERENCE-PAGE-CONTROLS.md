@@ -39,7 +39,7 @@ flows in `@iap/dialogs`. Import only public APIs. This supplements
   `deferSingleSelection=true` so its displayed selection follows the
   published URL value until the debounce completes. Other consumers retain
   their existing selection timing.
-- The reusable admin file capability is exposed by `@modules/files`; import
+- The shared file viewer is exposed by `@iap/files`; the admin `@modules/files` facade also exposes it. Import
   its public API rather than copying upload/viewer internals into features.
   File contracts belong to `@iap/api-types`. Read the Medical Center audit for
   automatic upload, HEIC, lazy download and viewer behavior evidence.

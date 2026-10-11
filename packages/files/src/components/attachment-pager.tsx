@@ -1,5 +1,6 @@
 import { Button } from '@iap/ui'
-import type { LazyDocument } from '@modules/files/hooks/use-lazy-documents'
+
+import type { LazyDocument } from '../hooks/use-lazy-documents'
 
 interface AttachmentPagerProps {
   docs: LazyDocument[]

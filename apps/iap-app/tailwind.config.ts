@@ -9,6 +9,7 @@ const config: Config = {
     '../../packages/forms/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/panel-switcher/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/ui/src/**/*.{js,ts,jsx,tsx}',
+    '../../packages/files/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/support/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/theme/src/**/*.{js,ts,jsx,tsx}',
   ],

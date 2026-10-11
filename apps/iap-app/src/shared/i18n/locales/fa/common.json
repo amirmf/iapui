@@ -160,7 +160,19 @@
     "noResultsFound": "نتیجه‌ای یافت نشد.",
     "selectAll": "انتخاب همه",
     "selectItems": "انتخاب موارد",
-    "rial": "ریال"
+    "rial": "ریال",
+    "fileUploader": {
+      "allowedTypes": "فقط تصاویر PNG، JPG، JPEG، HEIC",
+      "dragAndDrop": "فایل‌ها را بکشید و رها کنید یا برای انتخاب کلیک کنید",
+      "failed": "ناموفق",
+      "heicConversionFailed": "تبدیل {{filename}} از HEIC/HEIF به JPEG انجام نشد.",
+      "onlyAllowed": "فقط فایل‌های تصویری با فرمت PNG، JPG، JPEG، HEIC مجاز هستند",
+      "progressValue": "{{percent}}%",
+      "someSkipped": "بعضی فایل‌ها به دلیل نوع نامعتبر نادیده گرفته شدند",
+      "uploadFailed": "بارگذاری {{filename}} انجام نشد"
+    },
+    "notAvailable": "در دسترس نیست",
+    "retry": "تلاش دوباره"
   },
   "panelSwitcher": {
     "switch": "تغییر پنل: {{panel}}",
@@ -210,7 +222,7 @@
       "supportAlertTitle": "شماره پشتیبانی"
     },
     "claimRequests": {
-      "title": "پیگیری خسارت",
+      "title": "پیگیری خسارت‌های من",
       "claimDetails": "جزئیات درخواست خسارت",
       "create": "ثبت درخواست",
       "description": "درخواست‌های خسارت ثبت شده خود را بررسی کنید.",
@@ -556,6 +568,9 @@
     },
     "messages": {
       "created": "درخواست با موفقیت ثبت شد"
+    },
+    "actions": {
+      "viewDetails": "مشاهده جزئیات"
     }
   },
   "tickets": {
@@ -601,5 +616,24 @@
   "form": {
     "creating": "در حال ثبت",
     "uploading": "در حال بارگذاری..."
+  },
+  "files": {
+    "viewer": {
+      "actions": {
+        "downloadImage": "دانلود تصویر",
+        "resetView": "بازنشانی نما",
+        "rotateLeft": "چرخش به چپ",
+        "rotateRight": "چرخش به راست",
+        "zoomIn": "بزرگ‌نمایی",
+        "zoomOut": "کوچک‌نمایی"
+      },
+      "loadFailed": "بارگذاری پیوست امکان‌پذیر نبود.",
+      "loading": "در حال بارگذاری پیوست...",
+      "progressValue": "{{percent}}%"
+    }
+  },
+  "objectionChat": {
+    "admin": "ارزیاب",
+    "user": "کاربر"
   }
 }

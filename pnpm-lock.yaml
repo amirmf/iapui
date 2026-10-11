@@ -55,6 +55,9 @@ importers:
       '@iap/dialogs':
         specifier: workspace:*
         version: link:../../packages/dialogs
+      '@iap/files':
+        specifier: workspace:*
+        version: link:../../packages/files
       '@iap/forms':
         specifier: workspace:*
         version: link:../../packages/forms
@@ -247,7 +250,7 @@ importers:
         version: 7.3.6(@types/node@20.19.43)(jiti@1.21.7)(sass@1.104.1)(yaml@2.9.1)
       vitest:
         specifier: ^3.2.7
-        version: 3.2.7(@types/debug@4.1.13)(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(sass@1.104.1)(supports-color@7.2.0)(yaml@2.9.1)
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@20.19.43)(jiti@1.21.7)(jsdom@26.1.0(supports-color@7.2.0))(sass@1.104.1)(supports-color@7.2.0)(yaml@2.9.1)
 
   apps/iap-app:
     dependencies:
@@ -269,6 +272,9 @@ importers:
       '@iap/dialogs':
         specifier: workspace:*
         version: link:../../packages/dialogs
+      '@iap/files':
+        specifier: workspace:*
+        version: link:../../packages/files
       '@iap/forms':
         specifier: workspace:*
         version: link:../../packages/forms
@@ -305,6 +311,9 @@ importers:
       date-fns:
         specifier: ^4.4.0
         version: 4.4.0
+      heic-to:
+        specifier: ^1.6.5
+        version: 1.6.5
       i18next:
         specifier: ^26.4.2
         version: 26.4.2(typescript@5.9.3)
@@ -416,7 +425,7 @@ importers:
         version: 7.3.6(@types/node@20.19.43)(jiti@1.21.7)(sass@1.104.1)(yaml@2.9.1)
       vitest:
         specifier: ^3.2.7
-        version: 3.2.7(@types/debug@4.1.13)(@types/node@20.19.43)(jiti@1.21.7)(jsdom@26.1.0(supports-color@7.2.0))(sass@1.104.1)(supports-color@7.2.0)(yaml@2.9.1)
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(sass@1.104.1)(supports-color@7.2.0)(yaml@2.9.1)
 
   packages/api-client:
     dependencies:
@@ -526,6 +535,55 @@ importers:
         version: 5.9.3
 
   packages/eslint-config: {}
+
+  packages/files:
+    dependencies:
+      '@iap/api-client':
+        specifier: workspace:*
+        version: link:../api-client
+      '@iap/api-types':
+        specifier: workspace:*
+        version: link:../api-types
+      '@iap/ui':
+        specifier: workspace:*
+        version: link:../ui
+      heic-to:
+        specifier: ^1.6.5
+        version: 1.6.5
+      immer:
+        specifier: ^11.1.18
+        version: 11.1.18
+      lucide-react:
+        specifier: ^0.468.0
+        version: 0.468.0(react@19.3.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.3.0(react@19.3.0)
+      react-i18next:
+        specifier: ^17.0.0
+        version: 17.0.15(i18next@26.4.2(typescript@5.9.3))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@5.9.3)
+      react-zoom-pan-pinch:
+        specifier: ^4.2.0
+        version: 4.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+    devDependencies:
+      '@testing-library/react':
+        specifier: ^16.3.3
+        version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@types/react':
+        specifier: ^19.3.0
+        version: 19.3.0
+      jsdom:
+        specifier: ^26.1.0
+        version: 26.1.0(supports-color@7.2.0)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.7
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(sass@1.104.1)(supports-color@7.2.0)(yaml@2.9.1)
 
   packages/forms:
     dependencies:

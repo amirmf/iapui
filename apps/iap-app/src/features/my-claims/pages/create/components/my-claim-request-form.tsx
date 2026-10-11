@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { FileUploader } from '@features/my-claims/components/file-uploader'
 import {
   type MyClaimRequestForm,
   myClaimRequestFormSchema,
 } from '@features/my-claims/model/my-claim-request-form-schema'
-import { FileUploader } from '@features/my-claims/pages/create/components/file-uploader'
 import { MyBankAccountDialog } from '@features/my-claims/pages/create/components/my-bank-account-dialog'
 import { MyClaimMyInsurancePolicyFormField } from '@features/my-claims/pages/create/components/my-claim-my-insurance-policy-form-field'
 import { MyClaimMyNationalCodeFormField } from '@features/my-claims/pages/create/components/my-claim-my-national-code-form-field'

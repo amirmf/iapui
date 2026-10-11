@@ -1,22 +1,70 @@
-const signatures: Record<string, number[][]> = {
-  png: [[0x89, 0x50, 0x4e, 0x47]],
-  jpg: [[0xff, 0xd8, 0xff]],
-  pdf: [[0x25, 0x50, 0x44, 0x46]],
-  heic: [
-    [0x00, 0x00, 0x00, 0x18, 0x66, 0x74, 0x79, 0x70],
-    [0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70],
-  ],
+export async function isHeic(blob: Blob) {
+  const fileType = await detectFileTypeByHex(blob)
+  return fileType === 'heic' || fileType === 'heif'
 }
-export async function detectClaimAttachmentType(
-  file: File
-): Promise<string | undefined> {
-  const bytes = new Uint8Array(await file.slice(0, 32).arrayBuffer())
-  for (const [type, patterns] of Object.entries(signatures))
-    if (patterns.some((pattern) => pattern.every((v, i) => bytes[i] === v)))
-      return type
-  return undefined
+
+const PNG_SIGNATURE = ['89', '50', '4e', '47', '0d', '0a', '1a', '0a']
+const JPEG_SIGNATURE = ['ff', 'd8', 'ff']
+const PDF_SIGNATURE = ['25', '50', '44', '46', '2d']
+const HEIC_BRANDS = new Set(['heic', 'heix', 'hevc', 'hevx'])
+const HEIF_BRANDS = new Set(['mif1', 'msf1', 'heif'])
+
+export async function fileHeaderToHex(blob: Blob, byteLength: number) {
+  const headerBuffer = await blob.slice(0, byteLength).arrayBuffer()
+  return Array.from(new Uint8Array(headerBuffer)).map((byte) =>
+    byte.toString(16).padStart(2, '0')
+  )
 }
+
+export async function detectFileTypeByHex(blob: Blob) {
+  const headerHex = await fileHeaderToHex(blob, 32)
+  if (headerHex.length >= PNG_SIGNATURE.length) {
+    const hasPngSignature = PNG_SIGNATURE.every(
+      (hex, index) => headerHex[index] === hex
+    )
+    if (hasPngSignature) return 'png'
+  }
+
+  if (headerHex.length >= JPEG_SIGNATURE.length) {
+    const hasJpegSignature = JPEG_SIGNATURE.every(
+      (hex, index) => headerHex[index] === hex
+    )
+    if (hasJpegSignature) return 'jpeg'
+  }
+
+  if (headerHex.length >= PDF_SIGNATURE.length) {
+    const hasPdfSignature = PDF_SIGNATURE.every(
+      (hex, index) => headerHex[index] === hex
+    )
+    if (hasPdfSignature) return 'pdf'
+  }
+
+  if (headerHex.length >= 12) {
+    const brandMarker = headerHex
+      .slice(4, 8)
+      .map((hex) => String.fromCharCode(Number.parseInt(hex, 16)))
+      .join('')
+      .toLowerCase()
+    const brand = headerHex
+      .slice(8, 12)
+      .map((hex) => String.fromCharCode(Number.parseInt(hex, 16)))
+      .join('')
+      .toLowerCase()
+
+    if (brandMarker === 'ftyp') {
+      if (HEIC_BRANDS.has(brand)) return 'heic'
+      if (HEIF_BRANDS.has(brand)) return 'heif'
+    }
+  }
+
+  return null
+}
+
+export const detectClaimAttachmentType = detectFileTypeByHex
 export async function isAllowedClaimAttachment(file: File) {
-  const detected = await detectClaimAttachmentType(file)
-  return Boolean(detected) || ['image/heif', 'image/heic'].includes(file.type)
+  return Boolean(await detectFileTypeByHex(file))
+}
+export async function convertHeicToJpegBlob(blob: Blob): Promise<Blob> {
+  const { heicTo } = await import('heic-to')
+  return heicTo({ blob, type: 'image/jpeg', quality: 1 })
 }

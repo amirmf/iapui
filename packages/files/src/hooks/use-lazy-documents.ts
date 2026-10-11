@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import type { Attachment } from '@iap/api-types'
-import fileService from '@modules/files/services/file-service'
-import { convertHeicToJpeg } from '@modules/files/utils/convert-heic-to-jpeg'
+import { produce } from 'immer'
+import { useTranslation } from 'react-i18next'
+
+import fileService from '../services/file-service'
+import { convertHeicToJpeg } from '../utils/convert-heic-to-jpeg'
 import {
   EXTENSION_TO_FILE_MIME,
   detectFileTypeByHex,
   isHeic,
-} from '@modules/files/utils/file-types'
-import { produce } from 'immer'
-import { useTranslation } from 'react-i18next'
+} from '../utils/file-types'
 
 export interface IDocument {
   uri: string
@@ -293,7 +294,7 @@ export function useLazyDocuments(params: UseLazyDocumentsParams) {
               revokeObjectUrl(target.objectUrl)
             }
 
-            draft[index] = produce(draft[index], (d) => {
+            draft[index] = produce(target, (d) => {
               d.objectUrl = objectUrl
               d.document = document
               d.status = 'loaded'
@@ -331,7 +332,7 @@ export function useLazyDocuments(params: UseLazyDocumentsParams) {
               return
             }
 
-            draft[index] = produce(draft[index], (d) => {
+            draft[index] = produce(target, (d) => {
               d.status = 'error'
               d.downloadProgress = undefined
               d.error = message

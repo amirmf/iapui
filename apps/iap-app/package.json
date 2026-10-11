@@ -41,7 +41,9 @@
     "react-i18next": "^17.0.15",
     "sonner": "^2.0.8",
     "zod": "^4.6.5",
-    "zustand": "^5.0.15"
+    "zustand": "^5.0.15",
+    "@iap/files": "workspace:*",
+    "heic-to": "^1.6.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
